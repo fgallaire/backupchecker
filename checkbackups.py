@@ -17,6 +17,7 @@
 """Check the given backups"""
 
 from tarfile import is_tarfile
+import logging
 
 from checktar import CheckTar
 
@@ -30,5 +31,17 @@ class CheckBackups(object):
         _cfgsets = _confs.values()
         for _cfgvalues in _cfgsets:
             if is_tarfile(_cfgvalues['path']):
-                CheckTar(_cfgvalues)
+                print('_cfgvalues:{}'.format(_cfgvalues))
+                self.__compute_result(CheckTar(_cfgvalues).missing_files, _cfgvalues)
                 
+    def __compute_result(self, _res, _bck):
+        """Launch action depending on the result and type of the backup"""
+        if _bck['type'] == 'archive':
+            if _res:
+                _msg= 'file'
+                if len(_res) > 1:
+                    _msg = 'files'
+                _logger = logging.getLogger('brebislogger')
+                _logger.info('{} {} missing in {}: '.format(len(_res), _msg, _bck['path']))
+                for _path in _res:
+                    _logger.info('{}'.format(_path))

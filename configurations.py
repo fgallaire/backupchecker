@@ -40,7 +40,8 @@ class Configurations:
                 #currentconf['sources'] = config.get('main', 'md5')
                 _currentconf['type'] = _config.get('main', 'type')
                 _currentconf['path'] = _config.get('main', 'path')
-                _currentconf['expected_file'] = _config.get('main', 'expected_file')
+                #_currentconf['expected_files_list'] = _config.get('main', 'expected_files_list')
+                _currentconf['files_list'] = _config.get('main', 'files_list')
                 # currentconf is a project, saved in a configuration dictionary
                 self._configs[_config.get('main', 'name')] = _currentconf
                 print(self._configs)
@@ -55,7 +56,8 @@ class Configurations:
                 print('A mandatory option is missing')
                 sys.exit(1)
 
-    def return_configurations(self):
+    @property
+    def configs(self):
         """Return the different configurations parameteres"""
         return self._configs
 

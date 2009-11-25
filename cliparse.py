@@ -36,6 +36,10 @@ class CliParse:
             action="store", type="string",
             help="the filename to check",
             metavar="FILE")
+        _parser.add_option("-l", "--log", dest="logfile",
+            action="store", type="string",
+            help="the Brebis log file",
+            metavar="FILE")
         _parser.add_option("-t", "--type", dest="type",
             action="store", type="string",
             help="type of the backup",
@@ -46,6 +50,7 @@ class CliParse:
             metavar="MD5")
         self._options, _ = _parser.parse_args()
 
-    def return_options(self):
+    @property
+    def options(self):
         """Return the command line options"""
         return self._options

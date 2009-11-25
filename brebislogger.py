@@ -13,27 +13,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Brebis main
-"""Brebis main"""
+# Brebis logger
+"""Brebis logger"""
 
-import sys
+import logging
 
-from cliparse import CliParse
-from configurations import Configurations
-from checkbackups import CheckBackups
-from brebislogger import BrebisLogger
+class BrebisLogger(object):
+    """The Brebis logger"""
 
-class Main(object):
-    """The main class for Brebis"""
-
-    def __init__(self):
-        print('sys.argv:{}'.format(sys.argv))
-        self.__main()
-
-    def __main(self):
-        _options = CliParse().options
-        print(_options)
-        BrebisLogger(_options.logfile)
-        _confs = Configurations(_options.confpath)
-        CheckBackups(_confs.configs)
-
+    def __init__(self, _logfile):
+        logging.basicConfig(filename=_logfile, level=logging.INFO, filemode='w')

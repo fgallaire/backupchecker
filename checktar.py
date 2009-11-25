@@ -17,6 +17,9 @@
 """Check a tar archive"""
 
 import tarfile
+import sys
+
+from expectedfiles import ExpectedFiles
 
 class CheckTar(object):
     """Check a tar archive"""
@@ -26,16 +29,20 @@ class CheckTar(object):
 
     def __main(self, _cfgvalues):
         """Main for CheckTar"""
-        _found = False
+        _paths = []
         try:
-            _tar =  tarfile.open(_cfgvalues['path'], 'r')
+            _paths = ExpectedFiles(_cfgvalues['files_list']).paths
+            _tar = tarfile.open(_cfgvalues['path'], 'r')
             for _tarinfo in _tar:
-                if _tarinfo.name == _cfgvalues['expected_file']:
-                    _found = True
-                    print('The expected file was found')
-            if not _found:
-                print('The expected file was not found in the archive')
-        except tarfile.CompressionError as _msg:
+                for _ind, _file in enumerate(_paths):
+                    if _tarinfo.name == _file:
+                        del(_paths[_ind])
+            self._missingfiles = _paths
+        except tarfile.TarError as _msg:
             print(_msg)
         finally:
             _tar.close()
+
+    @property
+    def missing_files(self):
+        return self._missingfiles
