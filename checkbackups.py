@@ -17,9 +17,11 @@
 """Check the given backups"""
 
 from tarfile import is_tarfile
+from zipfile import is_zipfile
 import logging
 
 from checktar import CheckTar
+from checkzip import CheckZip
 
 class CheckBackups(object):
     """The main class for Brebis"""
@@ -30,9 +32,13 @@ class CheckBackups(object):
     def __main(self, _confs):
         _cfgsets = _confs.values()
         for _cfgvalues in _cfgsets:
+            # check a tar file
             if is_tarfile(_cfgvalues['path']):
                 print('_cfgvalues:{}'.format(_cfgvalues))
                 self.__compute_result(CheckTar(_cfgvalues).missing_files, _cfgvalues)
+            # check a zip file
+            if is_zipfile(_cfgvalues['path']):
+                self.__compute_result(CheckZip(_cfgvalues).missing_files, _cfgvalues)
                 
     def __compute_result(self, _res, _bck):
         """Launch action depending on the result and type of the backup"""
@@ -41,7 +47,6 @@ class CheckBackups(object):
                 _msg= 'file'
                 if len(_res) > 1:
                     _msg = 'files'
-                _logger = logging.getLogger('brebislogger')
-                _logger.info('{} {} missing in {}: '.format(len(_res), _msg, _bck['path']))
+                logging.info('{} {} missing in {}: '.format(len(_res), _msg, _bck['path']))
                 for _path in _res:
-                    _logger.info('{}'.format(_path))
+                    logging.info('{}'.format(_path))

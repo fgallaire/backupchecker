@@ -17,6 +17,11 @@
 """Retrieve the command line options"""
 
 from optparse import OptionParser
+import sys
+import os
+import logging
+
+from brebislogger import BrebisLogger
 
 class CliParse:
     """Retrieve the command line options"""
@@ -44,11 +49,31 @@ class CliParse:
             action="store", type="string",
             help="type of the backup",
             metavar="FILE")
-        _parser.add_option("-m", "--md5", dest="md5",
+        _parser.add_option("--hashfile", dest="hashfile",
             action="store", type="string",
-            help="in seconds the time between each order execution",
-            metavar="MD5")
-        self._options, _ = _parser.parse_args()
+            help="the file containing the hashes",
+            metavar="FILE")
+        _parser.add_option("--md5", dest="hashtype",
+            action="store_const", const="md5",
+            help="use the MD5 hash type")
+        _parser.add_option("--sha1", dest="hashtype",
+            action="store_const", const="sha1",
+            help="use the SHA1 hash type")
+        _options, _ = _parser.parse_args()
+        self.__verify(_options)
+
+    def __verify(self, _options):
+        """Verify options"""
+        _logdir = os.path.split(_options.logfile)[0]
+        if _logdir and not os.path.exists(_logdir):
+            print('split:{}'.format(os.path.split(_options.logfile)[0]))
+            print('The directory where to write the log file does not exist')
+            sys.exit(1)
+        BrebisLogger(_options.logfile)
+        if not os.path.exists(_options.confpath):
+            logging.info('The configuration directory does not exist')
+            sys.exit(1)
+        self._options = _options
 
     @property
     def options(self):

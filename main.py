@@ -18,22 +18,22 @@
 
 import sys
 
+from checkbackups import CheckBackups
+from checkhashes import CheckHashes
 from cliparse import CliParse
 from configurations import Configurations
-from checkbackups import CheckBackups
-from brebislogger import BrebisLogger
 
 class Main(object):
     """The main class for Brebis"""
 
     def __init__(self):
-        print('sys.argv:{}'.format(sys.argv))
         self.__main()
 
     def __main(self):
         _options = CliParse().options
-        print(_options)
-        BrebisLogger(_options.logfile)
+        print('options:{}'.format(_options))
         _confs = Configurations(_options.confpath)
-        CheckBackups(_confs.configs)
+        _hashs = CheckHashes(_options.hashfile, _options.hashtype,
+            _confs.configs)
+        CheckBackups(_hashs.confs)
 

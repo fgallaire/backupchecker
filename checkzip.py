@@ -13,35 +13,41 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Check a tar archive
-"""Check a tar archive"""
+# Check a zip archive
+"""Check a zip archive"""
 
 import sys
-import tarfile
+import zipfile
 
 from expectedfiles import ExpectedFiles
 
-class CheckTar(object):
-    """Check a tar archive"""
+class CheckZip(object):
+    """Check a zip archive"""
 
     def __init__(self, _cfgvalues):
         self.__main(_cfgvalues)
 
     def __main(self, _cfgvalues):
-        """Main for CheckTar"""
+        """Main for CheckZip"""
+        _crcerror = ''
         _paths = []
         try:
             _paths = ExpectedFiles(_cfgvalues['files_list']).paths
-            _tar = tarfile.open(_cfgvalues['path'], 'r')
-            for _tarinfo in _tar:
-                for _ind, _file in enumerate(_paths):
-                    if _tarinfo.name == _file:
-                        del(_paths[_ind])
-            self._missingfiles = _paths
-        except tarfile.TarError as _msg:
+            _zip = zipfile.ZipFile(_cfgvalues['path'], 'r')
+            _crcerror = _zip.testzip()
+            if _crcerror:
+                logging.info('{} has at least a file corrupted:{}'.format(_cfgvalues['path'], _crcerror))
+            else:
+                _zipinfo = _zip.infolist()
+                for _fileinfo in _zipinfo:
+                    for _ind, _file in enumerate(_paths):
+                        if _fileinfo.filename == _file:
+                            del(_paths[_ind])
+                self._missingfiles = _paths
+        except zipfile.BadZipfile as _msg:
             print(_msg)
         finally:
-            _tar.close()
+            _zip.close()
 
     @property
     def missing_files(self):

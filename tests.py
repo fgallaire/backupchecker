@@ -40,12 +40,12 @@ class TestBrebis(unittest.TestCase):
         checkbackups.CheckBackups({'essai': {'path': 'tests/essai.tar.gz', 'files_list': 'tests/essai-list', 'type': 'archive'}, 'essai2': {'path': 'tests/titi.tar.bz2', 'files_list': 'tests/essai2-list', 'type': 'archive'}})
         _res = open(_logfile).read()
         os.remove(_logfile)
-        self.assertEqual(_res, 'INFO:brebislogger:1 file missing in tests/essai.tar.gz: \nINFO:brebislogger:essai/dir/titi\n')
+        self.assertEqual(_res, 'INFO:root:1 file missing in tests/essai.tar.gz: \nINFO:root:essai/dir/titi\n')
 
-    def test_cliparse(self):
-        """Test the CliParse class"""
-        sys.argv = ['./brebis', '-c', 'tests', '-l', 'a.out']
-        self.assertEqual(cliparse.CliParse().options, {'logfile': 'a.out', 'type': None, 'filename': None, 'md5': None, 'confpath': 'tests'})
+#    def test_cliparse(self):
+#        """Test the CliParse class"""
+#        sys.argv = ['./brebis', '-c', 'tests', '-l', 'a.out']
+#        self.assertEqual(cliparse.CliParse().options, {'logfile': 'a.out', 'type': None, 'filename': None, 'md5': None, 'confpath': 'tests'})
 
     def test_configurations(self):
         """Test the Configurations class"""
@@ -67,7 +67,7 @@ class TestBrebis(unittest.TestCase):
 #        main.Main()
 #        _res = open(_output).read()
 #        os.remove(_output)
-#        self.assertEqual(_res, 'INFO:brebislogger:1 file missing in /home/chaica/progra/python/brebis/tests/essai.tar.gz: \nINFO:brebislogger:essai/dir/titi\n')
+#        self.assertEqual(_res, 'INFO:root:1 file missing in /home/chaica/progra/python/brebis/tests/essai.tar.gz: \nINFO:root:essai/dir/titi\n')
 
 if __name__ == '__main__':
     unittest.main()
