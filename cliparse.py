@@ -37,10 +37,6 @@ class CliParse:
             action="store", type="string",
             help="the path to the configurations",
             metavar="DIR")
-        _parser.add_option("-i", "--input", dest="filename",
-            action="store", type="string",
-            help="the filename to check",
-            metavar="FILE")
         _parser.add_option("-l", "--log", dest="logfile",
             action="store", type="string",
             help="the Brebis log file",
@@ -59,19 +55,38 @@ class CliParse:
         _parser.add_option("--sha1", dest="hashtype",
             action="store_const", const="sha1",
             help="use the SHA1 hash type")
+        _parser.add_option("--sha224", dest="hashtype",
+            action="store_const", const="sha224",
+            help="use the SHA224 hash type")
+        _parser.add_option("--sha256", dest="hashtype",
+            action="store_const", const="sha256",
+            help="use the SHA256 hash type")
+        _parser.add_option("--sha384", dest="hashtype",
+            action="store_const", const="sha384",
+            help="use the SHA384 hash type")
+        _parser.add_option("--sha512", dest="hashtype",
+            action="store_const", const="sha512",
+            help="use the SHA512 hash type")
         _options, _ = _parser.parse_args()
         self.__verify(_options)
 
     def __verify(self, _options):
         """Verify options"""
+        # Check the logfile
         _logdir = os.path.split(_options.logfile)[0]
         if _logdir and not os.path.exists(_logdir):
             print('split:{}'.format(os.path.split(_options.logfile)[0]))
             print('The directory where to write the log file does not exist')
             sys.exit(1)
+        # Configure the logger
         BrebisLogger(_options.logfile)
+        # Check the configuration directory
         if not os.path.exists(_options.confpath):
             logging.info('The configuration directory does not exist')
+            sys.exit(1)
+        # Check the hash file
+        if not os.path.exists(_options.hashfile):
+            print('The hash file does not exist')
             sys.exit(1)
         self._options = _options
 
