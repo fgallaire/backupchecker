@@ -31,8 +31,8 @@ class Main(object):
 
     def __main(self):
         _options = CliParse().options
-        print('options:{}'.format(_options))
         _confs = Configurations(_options.confpath)
+        print('confs:{}'.format(_confs.configs))
         _hashs = CheckHashes(_options.hashfile, _options.hashtype,
             _confs.configs)
         CheckBackups(_hashs.confs)
