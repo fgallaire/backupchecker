@@ -20,14 +20,17 @@ import sys
 import zipfile
 
 from expectedfiles import ExpectedFiles
+from checkarchive import CheckArchive
 
-class CheckZip(object):
+#class CheckZip(object):
+class CheckZip(CheckArchive):
     """Check a zip archive"""
 
-    def __init__(self, _cfgvalues):
-        self.__main(_cfgvalues)
+#    def __init__(self, _cfgvalues):
+#        self.__main(_cfgvalues)
 
-    def __main(self, _cfgvalues):
+#    def __main(self, _cfgvalues):
+    def _main(self, _cfgvalues):
         """Main for CheckZip"""
         _crcerror = ''
         _data = []
@@ -40,15 +43,16 @@ class CheckZip(object):
             else:
                 _zipinfo = _zip.infolist()
                 for _fileinfo in _zipinfo:
-                    for _ind, _file in enumerate(_data):
-                        if _fileinfo.filename == _file['path']:
-                            del(_data[_ind])
-                self._missingfiles = [_file['path'] for _file in _data]
+                    _data = self._check_path(_fileinfo.file_size, _fileinfo.filename, _data)
+#                    for _ind, _file in enumerate(_data):
+#                        if _fileinfo.filename == _file['path']:
+#                            del(_data[_ind])
+                self._missing_files = [_file['path'] for _file in _data]
         except zipfile.BadZipfile as _msg:
             print(_msg)
         finally:
             _zip.close()
 
-    @property
-    def missing_files(self):
-        return self._missingfiles
+#    @property
+#    def missing_files(self):
+#        return self._missingfiles

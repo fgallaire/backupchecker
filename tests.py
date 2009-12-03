@@ -55,13 +55,13 @@ class TestBrebis(unittest.TestCase):
 
     def test_checkzip(self):
         """Test the CheckZip class"""
-        _missingfiles = []
-        _missingfiles = checkzip.CheckZip({'path':
+        _missing_files = []
+        _missing_files = checkzip.CheckZip({'path':
             'tests/myzip.zip',
              'files_list':
                 'tests/myzip-list',
              'type': 'archive'}).missing_files
-        self.assertEqual(_missingfiles, ['toto/bling'])
+        self.assertEqual(_missing_files, ['toto/bling'])
 
 #    def test_cliparse(self):
 #        """Test the CliParse class"""
