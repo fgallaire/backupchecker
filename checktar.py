@@ -25,24 +25,74 @@ class CheckTar(object):
     """Check a tar archive"""
 
     def __init__(self, _cfgvalues):
+        self._missing_files = []
+        self._missing_equality = []
+        self._missing_biggerthan = []
+        self._missing_smallerthan = []
         self.__main(_cfgvalues)
 
     def __main(self, _cfgvalues):
         """Main for CheckTar"""
-        _paths = []
+        _data = []
         try:
-            _paths = ExpectedFiles(_cfgvalues['files_list']).paths
+            _data = ExpectedFiles(_cfgvalues['files_list']).data
             _tar = tarfile.open(_cfgvalues['path'], 'r')
             for _tarinfo in _tar:
-                for _ind, _file in enumerate(_paths):
-                    if _tarinfo.name == _file:
-                        del(_paths[_ind])
-            self._missingfiles = _paths
+                _data = self.__check_path(_tarinfo, _data)
+            self._missing_files = [_file['path'] for _file in _data]
         except tarfile.TarError as _msg:
             print(_msg)
         finally:
             _tar.close()
 
+    def __check_path(self, _tarinfo, _data):
+        """Check if the expected path exists in the tar file"""
+        print('_data:{}'.format(_data))
+        for _ind, _file in enumerate(_data):
+            if _tarinfo.name == _file['path']:
+                if 'equals' in _file:
+                    self.__check_equality(_tarinfo, _file)
+                elif 'biggerthan' in _file:
+                    self.__check_bigger_than(_tarinfo, _file)
+                elif 'smallerthan' in _file:
+                    self.__check_smaller_than(_tarinfo, _file)
+                del(_data[_ind])
+        return _data
+
+    def __check_equality(self, _bck, _file):
+        """Check if the file in the archive respects the expected equality"""
+        if _bck.size != _file['equals']:
+            self.missing_equality.append({'path': _bck.name,
+                'size': _bck.size, 'expected': _file['equals']})
+
+    def __check_bigger_than(self, _bck, _file):
+        """Check if the file in the archive respects the bigger than parameter"""
+        if _bck.size < _file['biggerthan']:
+            self.missing_biggerthan.append({'path': _bck.name,
+                'size': _bck.size, 'expected': _file['biggerthan']})
+
+    def __check_smaller_than(self, _bck, _file):
+        """check if the file in the archive respects the smaller than parameter"""
+        if _bck.size > _file['smallerthan']:
+            self.missing_smallerthan.append({'path': _bck.name,
+                'size': _bck.size, 'expected': _file['smallerthan']})
+
+    @property
+    def missing_equality(self):
+        """A list containing the paths of the files missing the equality parameters in the archive"""
+        return self._missing_equality
+
     @property
     def missing_files(self):
-        return self._missingfiles
+        """A list containing the paths of the missing files in the archive"""
+        return self._missing_files
+
+    @property
+    def missing_biggerthan(self):
+        """A list containing the path and the size of the files missing the bigger than parameter in the archive"""
+        return self._missing_biggerthan
+
+    @property
+    def missing_smallerthan(self):
+        """A list containing the path and the size of the files missing the smaller than parameter in the archive"""
+        return self._missing_smallerthan

@@ -33,40 +33,26 @@ class CliParse:
 
     def __define_options(self, _parser):
         """Define the options"""
-        _parser.add_option("-c", "--configpath", dest="confpath",
-            action="store", type="string",
-            help="the path to the configurations",
-            metavar="DIR")
-        _parser.add_option("-l", "--log", dest="logfile",
-            action="store", type="string",
-            help="the Brebis log file",
-            metavar="FILE")
-        _parser.add_option("-t", "--type", dest="type",
-            action="store", type="string",
-            help="type of the backup",
-            metavar="FILE")
-        _parser.add_option("--hashfile", dest="hashfile",
-            action="store", type="string",
-            help="the file containing the hashes",
-            metavar="FILE")
-        _parser.add_option("--md5", dest="hashtype",
-            action="store_const", const="md5",
-            help="use the MD5 hash type")
-        _parser.add_option("--sha1", dest="hashtype",
-            action="store_const", const="sha1",
-            help="use the SHA1 hash type")
-        _parser.add_option("--sha224", dest="hashtype",
-            action="store_const", const="sha224",
-            help="use the SHA224 hash type")
-        _parser.add_option("--sha256", dest="hashtype",
-            action="store_const", const="sha256",
-            help="use the SHA256 hash type")
-        _parser.add_option("--sha384", dest="hashtype",
-            action="store_const", const="sha384",
-            help="use the SHA384 hash type")
-        _parser.add_option("--sha512", dest="hashtype",
-            action="store_const", const="sha512",
-            help="use the SHA512 hash type")
+        _parser.add_option('-c', '--configpath', dest='confpath',
+            action='store', type='string',
+            help='the path to the configurations',
+            metavar='DIR')
+        _parser.add_option('-l', '--log', dest='logfile',
+            action='store', type='string',
+            help='the Brebis log file',
+            metavar='FILE')
+        _parser.add_option('-t', '--type', dest='type',
+            action='store', type='string',
+            help='type of the backup',
+            metavar='FILE')
+        _parser.add_option('--hashfile', dest='hashfile',
+            action='store', type='string',
+            help='the file containing the hashes',
+            metavar='FILE')
+        for _hashtype in ['md5', 'sha1', 'sha224','sha256','sha384','sha512']:
+            _parser.add_option('--{}'.format(_hashtype), dest='hashtype',
+                action='store_const', const='{}'.format(_hashtype),
+                help='use the {} hash type'.format(_hashtype))
         _options, _ = _parser.parse_args()
         self.__verify(_options)
 
@@ -84,9 +70,17 @@ class CliParse:
         if not os.path.exists(_options.confpath):
             logging.info('The configuration directory does not exist')
             sys.exit(1)
-        # Check the hash file
-        if not os.path.exists(_options.hashfile):
-            print('The hash file does not exist')
+        # Check if hashfile and hashtype are both defined
+        if _options.hashtype and _options.hashfile:
+            # Check the hash file path
+            if not os.path.exists(_options.hashfile):
+                print('The hash file does not exist')
+                sys.exit(1)
+        elif _options.hashtype and not _options.hashfile:
+            print('A hash algorithm is defined but you do not provide the file with the hash sums')
+            sys.exit(1)
+        elif _options.hashfile and not _options.hashtype:
+            print('A file with the hash sums are given but you do not provide the hash algorithm you wish to use')
             sys.exit(1)
         self._options = _options
 

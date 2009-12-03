@@ -13,30 +13,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Brebis main
-"""Brebis main"""
+# Check an archive
+"""Check an archive"""
 
-import sys
-
-from checkbackups import CheckBackups
-from checkhashes import CheckHashes
-from cliparse import CliParse
-from configurations import Configurations
-
-class Main(object):
-    """The main class for Brebis"""
-
-    def __init__(self):
-        self.__main()
-
-    def __main(self):
-        _options = CliParse().options
-        _confs = Configurations(_options.confpath)
-        print('confs:{}'.format(_confs.configs))
-        if _options.hashfile:
-            _hashs = CheckHashes(_options.hashfile, _options.hashtype,
-                _confs.configs)
-            CheckBackups(_hashs.confs)
-        else:
-            CheckBackups(_confs.configs)
-
+class CheckArchive(object):
+    """Check a tar archive"""

@@ -30,9 +30,9 @@ class CheckZip(object):
     def __main(self, _cfgvalues):
         """Main for CheckZip"""
         _crcerror = ''
-        _paths = []
+        _data = []
         try:
-            _paths = ExpectedFiles(_cfgvalues['files_list']).paths
+            _data= ExpectedFiles(_cfgvalues['files_list']).data
             _zip = zipfile.ZipFile(_cfgvalues['path'], 'r')
             _crcerror = _zip.testzip()
             if _crcerror:
@@ -40,10 +40,10 @@ class CheckZip(object):
             else:
                 _zipinfo = _zip.infolist()
                 for _fileinfo in _zipinfo:
-                    for _ind, _file in enumerate(_paths):
-                        if _fileinfo.filename == _file:
-                            del(_paths[_ind])
-                self._missingfiles = _paths
+                    for _ind, _file in enumerate(_data):
+                        if _fileinfo.filename == _file['path']:
+                            del(_data[_ind])
+                self._missingfiles = [_file['path'] for _file in _data]
         except zipfile.BadZipfile as _msg:
             print(_msg)
         finally:

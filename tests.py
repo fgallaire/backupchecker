@@ -78,8 +78,8 @@ class TestBrebis(unittest.TestCase):
         """Test the ExpectedFiles class"""
         _res = []
         _paths = 'tests/essai-list'
-        _res = expectedfiles.ExpectedFiles(_paths).paths
-        self.assertEqual([_file.rstrip() for _file in open(_paths, 'r').readlines()], _res)
+        _data = expectedfiles.ExpectedFiles(_paths).data
+        self.assertEqual([_file.rstrip() for _file in open(_paths, 'r').readlines()], [_file['path'] for _file in _data])
 
 #    def test_main(self):
 #        """Test the Main class"""

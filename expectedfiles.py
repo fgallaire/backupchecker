@@ -16,26 +16,70 @@
 # Extract the information about expected saved files
 """Extract the information about expected saved files"""
 
+import logging
+import os
 import sys
 
 class ExpectedFiles(object):
     """Extract the information about expected saved files"""
 
     def __init__(self, _path):
-        self._paths = []
+        self._data = []
         self.__main(_path)
 
     def __main(self, _path):
         """ Main of the ExpectedFiles class"""
         try:
             with open(_path, 'r') as _file:
-                self._paths = [_fpath.rstrip() for _fpath
-                    in _file.readlines()]
+                self.__retrieve_data(_file)
         except (IOError, OSError) as _err:
             print(_err)
             sys.exit(1)
 
+    def __retrieve_data(self, _file):
+        """Retrieve data from the expected files"""
+        for _line in _file.readlines():
+            _data = {}
+            _res = []
+            if _line != os.linesep:
+                print('ok')
+                _res = _line.split()
+                _data['path'] = _res[0]
+                if len(_res) >= 2:
+                    for _arg in _res[1:]:
+                        if _arg.startswith('='):
+                            _data['equals'] = self.__convert_arg(_arg)
+                        if _arg.startswith('>'):
+                            _data['biggerthan'] = self.__convert_arg(_arg)
+                        elif _arg.startswith('<'):
+                            _data['smallerthan'] = self.__convert_arg(_arg)
+            self._data.append(_data)
+
+    def __convert_arg(self, _arg):
+        "Convert the given file length to bytes"""
+        try:
+            if _arg.endswith('K'):
+                _res = int(_arg[1:-1]) * 1024
+            elif _arg.endswith('M'):
+                _res = int(_arg[1:-1]) * 1024**2
+            elif _arg.endswith('G'):
+                _res = int(_arg[1:-1]) * 1024**3
+            elif _arg.endswith('P'):
+                _res = int(_arg[1:-1]) * 1024**4
+            elif _arg.endswith('E'):
+                _res = int(_arg[1:-1]) * 1024**5
+            elif _arg.endswith('Z'):
+                _res = int(_arg[1:-1]) * 1024**6
+            elif _arg.endswith('Y'):
+                _res = int(_arg[1:-1]) * 1024**7
+            else:
+                _res = int(_arg[1:-1])
+        except ValueError as _msg:
+            logging.info(_msg)
+            _res = 0
+        return _res
+
     @property
-    def paths(self):
+    def data(self):
         """Return the paths of the expected files in the archive"""
-        return self._paths
+        return self._data
