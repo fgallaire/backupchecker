@@ -42,7 +42,6 @@ class ExpectedFiles(object):
             _data = {}
             _res = []
             if _line != os.linesep:
-                print('ok')
                 _res = _line.split()
                 _data['path'] = _res[0]
                 if len(_res) >= 2:

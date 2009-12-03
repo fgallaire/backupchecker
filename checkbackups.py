@@ -45,9 +45,7 @@ class CheckBackups(object):
         """Launch action depending on the result and type of the backup"""
         if _cfgvalues['type'] == 'archive':
             self.__missing_files(_bck.missing_files, _cfgvalues['path'])
-            self.__missing_equality(_bck.missing_equality, _cfgvalues['path'])
-            self.__smaller_than_expected_files(_bck.missing_biggerthan, _cfgvalues['path'])
-            self.__bigger_than_expected_files(_bck.missing_smallerthan, _cfgvalues['path'])
+            self.__classify_differences(_bck, _cfgvalues['path'])
 
     def __missing_files(self, _missing, _archivepath):
         """Warn about the missing files in an archive"""
@@ -59,32 +57,23 @@ class CheckBackups(object):
             for _path in _missing:
                 logging.info('{}'.format(_path))
 
-    def __smaller_than_expected_files(self, _smaller, _archivepath):
-        """Warn about the smaller than expected files in the archive"""
-        if _smaller:
-            _msg= 'file'
-            if len(_smaller) > 1:
-                _msg = 'files'
-            logging.info('{} {} smaller than expected in {}: '.format(len(_smaller), _msg, _archivepath))
-            for _file in _smaller:
-                logging.info('{} size is {}. Should have been {}.'.format(_file['path'], _file['size'], _file['expected']))
-        
-    def __bigger_than_expected_files(self, _bigger, _archivepath):
-        """Warn about the bigger than expected files in the archive"""
-        if _bigger:
-            _msg= 'file'
-            if len(_bigger) > 1:
-                _msg = 'files'
-            logging.info('{} {} bigger than expected in {}: '.format(len(_bigger), _msg, _archivepath))
-            for _file in _bigger:
-                logging.info('{} size is {}. Should have been {}.'.format(_file['path'], _file['size'], _file['expected']))
-        
-    def __missing_equality(self, _equality, _archivepath):
-        """Warn about the size equality between the expected files and the files in the archive"""
-        if _equality:
-            _msg= 'file'
-            if len(_equality) > 1:
-                _msg = 'files'
-            logging.info('{} {} with unexpected size in {}: '.format(len(_equality), _msg, _archivepath))
-            for _file in _equality:
-                logging.info('{} size is {}. Should have been {}.'.format(_file['path'], _file['size'], _file['expected']))
+    def __classify_differences(self, _bck, _archivepath):
+        """Report differences between expected files and files in the archive"""
+        if _bck.missing_equality:
+            _topic = '{} {} with unexpected size in {}: '
+            self.__log_differences(_bck.missing_equality, _archivepath, _topic)
+        if _bck.missing_smaller_than:
+            _topic = '{} {} bigger than expected in {}: '
+            self.__log_differences(_bck.missing_smaller_than, _archivepath, _topic)
+        if _bck.missing_bigger_than:
+            _topic = '{} {} smaller than expected in {}: '
+            self.__log_differences(_bck.missing_bigger_than, _archivepath, _topic)
+
+    def __log_differences(self, _files, _archivepath, _topic):
+        """Log the differences between the expected files and the files in the archive"""
+        _fileword = 'file'
+        if len(_files) > 1:
+            _fileword = 'files'
+        logging.info(_topic.format(len(_files), _fileword, _archivepath))
+        for _file in _files:
+            logging.info('{} size is {}. Should have been {}.'.format(_file['path'], _file['size'], _file['expected']))
