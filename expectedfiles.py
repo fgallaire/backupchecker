@@ -60,7 +60,7 @@ class ExpectedFiles(object):
             if __arg.endswith('K'):
                 __res = int(__arg[1:-1]) * 1024
             elif __arg.endswith('M'):
-                __res = int(_arg[1:-1]) * 1024**2
+                __res = int(__arg[1:-1]) * 1024**2
             elif __arg.endswith('G'):
                 __res = int(__arg[1:-1]) * 1024**3
             elif __arg.endswith('P'):
