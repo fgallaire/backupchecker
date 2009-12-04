@@ -36,5 +36,3 @@ class CheckTar(CheckArchive):
             self._missing_files = [_file['path'] for _file in _data]
         except tarfile.TarError as _msg:
             print(_msg)
-        finally:
-            _tar.close()
