@@ -16,10 +16,10 @@
 # Retrieve the command line options
 """Retrieve the command line options"""
 
-from optparse import OptionParser
-import sys
-import os
 import logging
+from optparse import OptionParser
+import os
+import sys
 
 from brebislogger import BrebisLogger
 
@@ -35,10 +35,12 @@ class CliParse:
         """Define the options"""
         __parser.add_option('-c', '--configpath', dest='confpath',
             action='store', type='string',
+            default=os.getcwd(),
             help='the path to the configurations',
             metavar='DIR')
         __parser.add_option('-l', '--log', dest='logfile',
             action='store', type='string',
+            default=os.path.join(os.getcwd(), 'a.out'),
             help='the Brebis log file',
             metavar='FILE')
         __parser.add_option('-t', '--type', dest='type',
