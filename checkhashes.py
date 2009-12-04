@@ -24,50 +24,50 @@ import sys
 class CheckHashes(object):
     """Check the files hashes"""
 
-    def __init__(self, _hashfile, _hashtype, _confs):
-        self._confs = _confs
-        self.__main(_hashfile, _hashtype, _confs)
+    def __init__(self, __hashfile, __hashtype, __confs):
+        self.__confs = __confs
+        self.__main(__hashfile, __hashtype, __confs)
 
-    def __main(self, _hashfile, _hashtype, _confs):
+    def __main(self, __hashfile, __hashtype, __confs):
         """Main for the CheckHashes class"""
-        _hashinfo = self.__extract_hashinfo(_hashfile)
-        self.__check_hashes(_hashtype, _confs, _hashinfo)
+        __hashinfo = self.__extract_hashinfo(__hashfile)
+        self.__check_hashes(__hashtype, __confs, __hashinfo)
 
-    def __check_hashes(self, _hashtype, _confs, _hashinfo):
+    def __check_hashes(self, __hashtype, __confs, __hashinfo):
         """check the hash of the backups"""
         try:
-            _confstoremove = []
-            for _conf in _confs:
-                _bckname = os.path.split(_confs[_conf]['path'])[-1]
-                if _bckname in _hashinfo:
-                    with open(_confs[_conf]['path'], 'rb') as _file:
-                        _res = getattr(hashlib, _hashtype)(_file.read()).hexdigest()
-                        if _res != _hashinfo[_bckname]:
-                            logging.info('The {} checksum mismatched'.format(_confs[_conf]['path']))
-                            _confstoremove.append(_conf)
-            for _conf in _confstoremove:
-                del(self._confs[_conf])
-        except (OSError, IOError) as _msg:
-            logging.info(_msg)
+            __confstoremove = []
+            for __conf in __confs:
+                __bckname = os.path.split(__confs[__conf]['path'])[-1]
+                if __bckname in __hashinfo:
+                    with open(__confs[__conf]['path'], 'rb') as __file:
+                        __res = getattr(hashlib, __hashtype)(__file.read()).hexdigest()
+                        if __res != __hashinfo[__bckname]:
+                            logging.info('The {} checksum mismatched'.format(__confs[__conf]['path']))
+                            __confstoremove.append(__conf)
+            for __conf in __confstoremove:
+                del(self.__confs[__conf])
+        except (OSError, IOError) as __msg:
+            logging.info(__msg)
 
-    def __extract_hashinfo(self, _hashfile):
+    def __extract_hashinfo(self, __hashfile):
         """Extract the info about hashed files"""
-        _hashinfo = {}
+        __hashinfo = {}
         try:
-            with open(_hashfile) as _files:
-                for _file in _files:
-                    _data = _file.split()
-                    if len(_data) != 2:
-                        logging.info('{} has not a hash file valid format - should be only two arguments by line'.format(_hashfile))
+            with open(__hashfile) as __files:
+                for __file in __files:
+                    __data = __file.split()
+                    if len(__data) != 2:
+                        logging.info('{} has not a hash file valid format - should be only two arguments by line'.format(__hashfile))
                         sys.exit(1)
                     else:
-                        _hashinfo[_data[-1]] = _data[0]
-        except (OSError, IOError) as _msg:
-            print(_msg)
+                        __hashinfo[__data[-1]] = __data[0]
+        except (OSError, IOError) as __msg:
+            print(__msg)
             sys.exit(1)
-        return _hashinfo
+        return __hashinfo
         
     @property
     def confs(self):
         """Returne the configurations minus the ones containing a corrupted file"""
-        return self._confs
+        return self.__confs

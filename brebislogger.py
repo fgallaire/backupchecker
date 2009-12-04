@@ -21,5 +21,5 @@ import logging
 class BrebisLogger(object):
     """The Brebis logger"""
 
-    def __init__(self, _logfile):
-        logging.basicConfig(filename=_logfile, level=logging.INFO, filemode='w')
+    def __init__(self, __logfile):
+        logging.basicConfig(filename=__logfile, level=logging.INFO, filemode='w')

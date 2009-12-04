@@ -30,13 +30,12 @@ class Main(object):
         self.__main()
 
     def __main(self):
-        _options = CliParse().options
-        _confs = Configurations(_options.confpath)
-        print('confs:{}'.format(_confs.configs))
-        if _options.hashfile:
-            _hashs = CheckHashes(_options.hashfile, _options.hashtype,
-                _confs.configs)
-            CheckBackups(_hashs.confs)
+        __options = CliParse().options
+        __confs = Configurations(__options.confpath)
+        print('confs:{}'.format(__confs.configs))
+        if __options.hashfile:
+            __hashs = CheckHashes(__options.hashfile, __options.hashtype,
+                __confs.configs)
+            CheckBackups(__hashs.confs)
         else:
-            CheckBackups(_confs.configs)
-
+            CheckBackups(__confs.configs)

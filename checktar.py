@@ -38,24 +38,3 @@ class CheckTar(CheckArchive):
             print(_msg)
         finally:
             _tar.close()
-
-#    def __check_path(self, _tarinfo, _data):
-#        """Check if the expected path exists in the tar file"""
-#        for _ind, _file in enumerate(_data):
-#            if _tarinfo.name == _file['path']:
-#                self.__compare_sizes(_tarinfo, _file)
-#                del(_data[_ind])
-#        return _data
-#
-#    def __compare_sizes(self, _tar, _file):
-#        """Compare the sizes of the files in the archive and the expected files"""
-#        if 'equals' in _file and _tar.size != _file['equals']:
-#            self.missing_equality.append({'path': _tar.name,
-#                'size': _tar.size, 'expected': _file['equals']})
-#        elif 'biggerthan' in _file and _tar.size < _file['biggerthan']:
-#            self.missing_bigger_than.append({'path': _tar.name,
-#                'size': _tar.size, 'expected': _file['biggerthan']})
-#        elif 'smallerthan' in _file and _tar.size > _file['smallerthan']:
-#            self.missing_smaller_than.append({'path': _tar.name,
-#                'size': _tar.size, 'expected': _file['smallerthan']})
-#        

@@ -52,7 +52,3 @@ class CheckZip(CheckArchive):
             print(_msg)
         finally:
             _zip.close()
-
-#    @property
-#    def missing_files(self):
-#        return self._missingfiles

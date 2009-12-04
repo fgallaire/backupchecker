@@ -23,62 +23,62 @@ import sys
 class ExpectedFiles(object):
     """Extract the information about expected saved files"""
 
-    def __init__(self, _path):
-        self._data = []
-        self.__main(_path)
+    def __init__(self, __path):
+        self.__data = []
+        self.__main(__path)
 
-    def __main(self, _path):
+    def __main(self, __path):
         """ Main of the ExpectedFiles class"""
         try:
-            with open(_path, 'r') as _file:
-                self.__retrieve_data(_file)
-        except (IOError, OSError) as _err:
-            print(_err)
+            with open(__path, 'r') as __file:
+                self.__retrieve_data(__file)
+        except (IOError, OSError) as __err:
+            print(__err)
             sys.exit(1)
 
-    def __retrieve_data(self, _file):
+    def __retrieve_data(self, __file):
         """Retrieve data from the expected files"""
-        for _line in _file.readlines():
-            _data = {}
-            _res = []
-            if _line != os.linesep:
-                _res = _line.split()
-                _data['path'] = _res[0]
-                if len(_res) >= 2:
-                    for _arg in _res[1:]:
-                        if _arg.startswith('='):
-                            _data['equals'] = self.__convert_arg(_arg)
-                        if _arg.startswith('>'):
-                            _data['biggerthan'] = self.__convert_arg(_arg)
-                        elif _arg.startswith('<'):
-                            _data['smallerthan'] = self.__convert_arg(_arg)
-            self._data.append(_data)
+        for __line in __file.readlines():
+            __data = {}
+            __res = []
+            if __line != os.linesep:
+                __res = __line.split()
+                __data['path'] = __res[0]
+                if len(__res) >= 2:
+                    for __arg in __res[1:]:
+                        if __arg.startswith('='):
+                            __data['equals'] = self.__convert_arg(__arg)
+                        if __arg.startswith('>'):
+                            __data['biggerthan'] = self.__convert_arg(__arg)
+                        elif __arg.startswith('<'):
+                            __data['smallerthan'] = self.__convert_arg(__arg)
+            self.__data.append(__data)
 
-    def __convert_arg(self, _arg):
+    def __convert_arg(self, __arg):
         "Convert the given file length to bytes"""
         try:
-            if _arg.endswith('K'):
-                _res = int(_arg[1:-1]) * 1024
-            elif _arg.endswith('M'):
-                _res = int(_arg[1:-1]) * 1024**2
-            elif _arg.endswith('G'):
-                _res = int(_arg[1:-1]) * 1024**3
-            elif _arg.endswith('P'):
-                _res = int(_arg[1:-1]) * 1024**4
-            elif _arg.endswith('E'):
-                _res = int(_arg[1:-1]) * 1024**5
-            elif _arg.endswith('Z'):
-                _res = int(_arg[1:-1]) * 1024**6
-            elif _arg.endswith('Y'):
-                _res = int(_arg[1:-1]) * 1024**7
+            if __arg.endswith('K'):
+                __res = int(__arg[1:-1]) * 1024
+            elif __arg.endswith('M'):
+                __res = int(_arg[1:-1]) * 1024**2
+            elif __arg.endswith('G'):
+                __res = int(__arg[1:-1]) * 1024**3
+            elif __arg.endswith('P'):
+                __res = int(__arg[1:-1]) * 1024**4
+            elif __arg.endswith('E'):
+                __res = int(__arg[1:-1]) * 1024**5
+            elif __arg.endswith('Z'):
+                __res = int(__arg[1:-1]) * 1024**6
+            elif __arg.endswith('Y'):
+                __res = int(__arg[1:-1]) * 1024**7
             else:
-                _res = int(_arg[1:-1])
-        except ValueError as _msg:
-            logging.info(_msg)
-            _res = 0
-        return _res
+                __res = int(__arg[1:-1])
+        except ValueError as __msg:
+            logging.info(__msg)
+            __res = 0
+        return __res
 
     @property
     def data(self):
         """Return the paths of the expected files in the archive"""
-        return self._data
+        return self.__data

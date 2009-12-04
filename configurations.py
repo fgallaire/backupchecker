@@ -23,41 +23,40 @@ import os
 class Configurations:
     """Retrieve the different configurations"""
 
-    def __init__(self, _confpath):
-        self._configs = {}
-        self.__parse_configurations(_confpath)
+    def __init__(self, __confpath):
+        self.__configs = {}
+        self.__parse_configurations(__confpath)
 
-    def __parse_configurations(self, _confpath):
+    def __parse_configurations(self, __confpath):
         """Parse the different configurations"""
-        _confs = [_file for _file in os.listdir(_confpath) 
-            if _file.endswith('.conf')]
-        for _conf in _confs:
-            _currentconf = {}
+        __confs = [__file for __file in os.listdir(__confpath) 
+            if __file.endswith('.conf')]
+        for __conf in __confs:
+            __currentconf = {}
             try:
-                _config = configparser.ConfigParser()
-                _config.readfp(open(os.path.join(
-                    '/'.join([_confpath, _conf])), 'r'))
-                #currentconf['sources'] = config.get('main', 'md5')
-                _currentconf['type'] = _config.get('main', 'type')
-                _currentconf['path'] = _config.get('main', 'path')
-                #_currentconf['expected_files_list'] = _config.get('main', 'expected_files_list')
-                _currentconf['files_list'] = _config.get('main', 'files_list')
-                # currentconf is a project, saved in a configuration dictionary
-                self._configs[_config.get('main', 'name')] = _currentconf
-                print(self._configs)
-            except configparser.ParsingError as _err:
-                print('Error while parsing {}'.format(_conf))
+                __config = configparser.ConfigParser()
+                __config.readfp(open(os.path.join(
+                    '/'.join([__confpath, __conf])), 'r'))
+                __currentconf['type'] = __config.get('main', 'type')
+                __currentconf['path'] = __config.get('main', 'path')
+                __currentconf['files_list'] = __config.get('main', 'files_list')
+                self.__configs[__config.get('main', 'name')] = __currentconf
+            except configparser.ParsingError as __err:
+                print('Error while parsing {}'.format(__conf))
+                print(__err)
                 sys.exit(1)
-            except configparser.NoSectionError as _err:
-                print('Error while parsing {}'.format(_conf))
+            except configparser.NoSectionError as __err:
+                print('Error while parsing {}'.format(__conf))
                 print('The mandatory [main] section is missing')
+                print(__err)
                 sys.exit(1)
-            except configparser.NoOptionError as _err:
+            except configparser.NoOptionError as __err:
                 print('A mandatory option is missing')
+                print(__err)
                 sys.exit(1)
 
     @property
     def configs(self):
         """Return the different configurations parameteres"""
-        return self._configs
+        return self.__configs
 

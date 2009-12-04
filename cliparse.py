@@ -28,63 +28,65 @@ class CliParse:
 
     def __init__(self):
         self._options = ()
-        _parser = OptionParser(version="%prog 0.1")
-        self.__define_options(_parser)
+        __parser = OptionParser(version="%prog 0.1")
+        self.__define_options(__parser)
 
-    def __define_options(self, _parser):
+    def __define_options(self, __parser):
         """Define the options"""
-        _parser.add_option('-c', '--configpath', dest='confpath',
+        __parser.add_option('-c', '--configpath', dest='confpath',
             action='store', type='string',
             help='the path to the configurations',
             metavar='DIR')
-        _parser.add_option('-l', '--log', dest='logfile',
+        __parser.add_option('-l', '--log', dest='logfile',
             action='store', type='string',
             help='the Brebis log file',
             metavar='FILE')
-        _parser.add_option('-t', '--type', dest='type',
+        __parser.add_option('-t', '--type', dest='type',
             action='store', type='string',
             help='type of the backup',
             metavar='FILE')
-        _parser.add_option('--hashfile', dest='hashfile',
+        __parser.add_option('--hashfile', dest='hashfile',
             action='store', type='string',
             help='the file containing the hashes',
             metavar='FILE')
-        for _hashtype in ['md5', 'sha1', 'sha224','sha256','sha384','sha512']:
-            _parser.add_option('--{}'.format(_hashtype), dest='hashtype',
-                action='store_const', const='{}'.format(_hashtype),
-                help='use the {} hash type'.format(_hashtype))
-        _options, _ = _parser.parse_args()
-        self.__verify(_options)
+        for __hashtype in ['md5', 'sha1', 'sha224','sha256','sha384','sha512']:
+            __parser.add_option('--{}'.format(__hashtype), dest='hashtype',
+                action='store_const', const='{}'.format(__hashtype),
+                help='use the {} hash type'.format(__hashtype))
+        __options, _ = __parser.parse_args()
+        self.__verify_options(__options)
 
-    def __verify(self, _options):
-        """Verify options"""
+    def __verify_options(self, __options):
+        """Verify the options given on the command line"""
         # Check the logfile
-        _logdir = os.path.split(_options.logfile)[0]
-        if _logdir and not os.path.exists(_logdir):
-            print('split:{}'.format(os.path.split(_options.logfile)[0]))
+        __logdir = os.path.split(_options.logfile)[0]
+        if __logdir and not os.path.exists(__logdir):
+            print('split:{}'.format(os.path.split(__options.logfile)[0]))
             print('The directory where to write the log file does not exist')
             sys.exit(1)
+        __options.logfile = os.path.abspath(__options.logfile)
         # Configure the logger
-        BrebisLogger(_options.logfile)
+        BrebisLogger(__options.logfile)
         # Check the configuration directory
-        if not os.path.exists(_options.confpath):
+        if not os.path.exists(__options.confpath):
             logging.info('The configuration directory does not exist')
             sys.exit(1)
+        __options.confpath = os.path.abspath(__options.confpath)
         # Check if hashfile and hashtype are both defined
-        if _options.hashtype and _options.hashfile:
+        if __options.hashtype and __options.hashfile:
             # Check the hash file path
-            if not os.path.exists(_options.hashfile):
+            if not os.path.exists(__options.hashfile):
                 print('The hash file does not exist')
                 sys.exit(1)
-        elif _options.hashtype and not _options.hashfile:
+        elif __options.hashtype and not __options.hashfile:
             print('A hash algorithm is defined but you do not provide the file with the hash sums')
             sys.exit(1)
-        elif _options.hashfile and not _options.hashtype:
+        elif __options.hashfile and not __options.hashtype:
             print('A file with the hash sums are given but you do not provide the hash algorithm you wish to use')
             sys.exit(1)
-        self._options = _options
+        self.__options = __options
 
     @property
     def options(self):
         """Return the command line options"""
-        return self._options
+        return self.__options
