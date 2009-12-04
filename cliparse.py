@@ -52,14 +52,14 @@ class CliParse:
         for __hashtype in ['md5', 'sha1', 'sha224','sha256','sha384','sha512']:
             __parser.add_option('--{}'.format(__hashtype), dest='hashtype',
                 action='store_const', const='{}'.format(__hashtype),
-                help='use the {} hash type'.format(__hashtype))
+                help='use the {} hash algorithm type'.format(__hashtype))
         __options, _ = __parser.parse_args()
         self.__verify_options(__options)
 
     def __verify_options(self, __options):
         """Verify the options given on the command line"""
         # Check the logfile
-        __logdir = os.path.split(_options.logfile)[0]
+        __logdir = os.path.split(__options.logfile)[0]
         if __logdir and not os.path.exists(__logdir):
             print('split:{}'.format(os.path.split(__options.logfile)[0]))
             print('The directory where to write the log file does not exist')
