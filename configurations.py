@@ -42,16 +42,12 @@ class Configurations:
                 __currentconf['files_list'] = __config.get('main', 'files_list')
                 self.__configs[__config.get('main', 'name')] = __currentconf
             except configparser.ParsingError as __err:
-                print('Error while parsing {}'.format(__conf))
                 print(__err)
                 sys.exit(1)
             except configparser.NoSectionError as __err:
-                print('Error while parsing {}'.format(__conf))
-                print('The mandatory [main] section is missing')
                 print(__err)
                 sys.exit(1)
             except configparser.NoOptionError as __err:
-                print('A mandatory option is missing')
                 print(__err)
                 sys.exit(1)
 
