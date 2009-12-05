@@ -32,7 +32,6 @@ class Main(object):
     def __main(self):
         __options = CliParse().options
         __confs = Configurations(__options.confpath)
-        print('confs:{}'.format(__confs.configs))
         if __options.hashfile:
             __hashs = CheckHashes(__options.hashfile, __options.hashtype,
                 __confs.configs)
