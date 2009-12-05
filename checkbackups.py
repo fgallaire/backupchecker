@@ -30,6 +30,7 @@ class CheckBackups(object):
         self.__main(_confs)
 
     def __main(self, _confs):
+        """Main for CheckBackups"""
         _cfgsets = _confs.values()
         for _cfgvalues in _cfgsets:
             # check a tar file
