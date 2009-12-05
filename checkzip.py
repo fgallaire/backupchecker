@@ -39,7 +39,7 @@ class CheckZip(CheckArchive):
             _zip = zipfile.ZipFile(_cfgvalues['path'], 'r')
             _crcerror = _zip.testzip()
             if _crcerror:
-                logging.info('{} has at least a file corrupted:{}'.format(_cfgvalues['path'], _crcerror))
+                logging.warn('{} has at least a file corrupted:{}'.format(_cfgvalues['path'], _crcerror))
             else:
                 _zipinfo = _zip.infolist()
                 for _fileinfo in _zipinfo:

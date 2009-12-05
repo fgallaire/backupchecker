@@ -43,12 +43,12 @@ class CheckHashes(object):
                     with open(__confs[__conf]['path'], 'rb') as __file:
                         __res = getattr(hashlib, __hashtype)(__file.read()).hexdigest()
                         if __res != __hashinfo[__bckname]:
-                            logging.info('The {} checksum mismatched'.format(__confs[__conf]['path']))
+                            logging.warn('The {} checksum mismatched'.format(__confs[__conf]['path']))
                             __confstoremove.append(__conf)
             for __conf in __confstoremove:
                 del(self.__confs[__conf])
         except (OSError, IOError) as __msg:
-            logging.info(__msg)
+            logging.warn(__msg)
 
     def __extract_hashinfo(self, __hashfile):
         """Extract the info about hashed files"""
@@ -58,7 +58,7 @@ class CheckHashes(object):
                 for __file in __files:
                     __data = __file.split()
                     if len(__data) != 2:
-                        logging.info('{} has not a hash file valid format - should be only two arguments by line'.format(__hashfile))
+                        logging.warn('{} has not a hash file valid format - should be only two arguments by line'.format(__hashfile))
                         sys.exit(1)
                     else:
                         __hashinfo[__data[-1]] = __data[0]

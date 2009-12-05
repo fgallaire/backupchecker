@@ -74,7 +74,7 @@ class ExpectedFiles(object):
             else:
                 __res = int(__arg[1:-1])
         except ValueError as __msg:
-            logging.info(__msg)
+            logging.warn(__msg)
             __res = 0
         return __res
 

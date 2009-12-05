@@ -54,9 +54,9 @@ class CheckBackups(object):
             _msg= 'file'
             if len(_missing) > 1:
                 _msg = 'files'
-            logging.info('{} {} missing in {}: '.format(len(_missing), _msg, _archivepath))
+            logging.warn('{} {} missing in {}: '.format(len(_missing), _msg, _archivepath))
             for _path in _missing:
-                logging.info('{}'.format(_path))
+                logging.warn('{}'.format(_path))
 
     def __classify_differences(self, _bck, _archivepath):
         """Report differences between expected files and files in the archive"""
@@ -75,6 +75,6 @@ class CheckBackups(object):
         _fileword = 'file'
         if len(_files) > 1:
             _fileword = 'files'
-        logging.info(_topic.format(len(_files), _fileword, _archivepath))
+        logging.warn(_topic.format(len(_files), _fileword, _archivepath))
         for _file in _files:
-            logging.info('{} size is {}. Should have been {}.'.format(_file['path'], _file['size'], _file['expected']))
+            logging.warn('{} size is {}. Should have been {}.'.format(_file['path'], _file['size'], _file['expected']))

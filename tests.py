@@ -32,7 +32,7 @@ class TestBrebis(unittest.TestCase):
         checkbackups.CheckBackups({'essai': {'path': 'tests/essai.tar.gz', 'files_list': 'tests/essai-list', 'type': 'archive'}, 'essai2': {'path': 'tests/titi.tar.bz2', 'files_list': 'tests/essai2-list', 'type': 'archive'}})
         _res = open(_logfile).read()
         os.remove(_logfile)
-        self.assertEqual(_res, 'INFO:root:1 file missing in tests/essai.tar.gz: \nINFO:root:essai/dir/titi\n')
+        self.assertEqual(_res, 'WARNING:root:1 file missing in tests/essai.tar.gz: \nWARNING:root:essai/dir/titi\n')
 
     def test_checkhashes(self):
         """Test the CheckHashes class"""
@@ -43,7 +43,7 @@ class TestBrebis(unittest.TestCase):
         _res = open('tests/corrupted_archive/a.out').read()
         self.assertEqual(_res, 'INFO:root:The /home/chaica/progra/python/brebis/tests/corrupted_archive/corrupted.tar.gz checksum mismatched\nINFO:root:1 file missing in /home/chaica/progra/python/brebis/tests/corrupted_archive/essai.tar.gz: \nINFO:root:essai/dir/titi\n')
 
-    def test_checktar(self):
+    def test_checktar_missing_files(self):
         """Test the CheckTar class"""
         _missingfiles = []
         _missingfiles = checktar.CheckTar({'path':
@@ -53,7 +53,7 @@ class TestBrebis(unittest.TestCase):
              'type': 'archive'}).missing_files
         self.assertEqual(_missingfiles, ['essai/dir/titi'])
 
-    def test_checkzip(self):
+    def test_checkzip_missing_files(self):
         """Test the CheckZip class"""
         _missing_files = []
         _missing_files = checkzip.CheckZip({'path':
@@ -62,6 +62,26 @@ class TestBrebis(unittest.TestCase):
                 'tests/myzip-list',
              'type': 'archive'}).missing_files
         self.assertEqual(_missing_files, ['toto/bling'])
+
+    def test_checktar_missing_equality(self):
+        """Test the CheckTar class"""
+        __missing_equality = []
+        __missing_equality = checktar.CheckTar({'path':
+            'tests/file_size/essai.tar.bz2',
+             'files_list':
+                'tests/file_size/essai-list',
+             'type': 'archive'}).missing_equality
+        self.assertEqual(__missing_equality[0]['path'], 'essai/dir/toto')
+
+    def test_checkzip_missing_equality(self):
+        """Test the CheckZip class"""
+        __missing_equality = []
+        __missing_equality = checkzip.CheckZip({'path':
+            'tests/file_size/myzip.zip',
+             'files_list':
+                'tests/file_size/essai-list2',
+             'type': 'archive'}).missing_equality
+        self.assertEqual(__missing_equality[0]['path'], 'myzip/titi')
 
 #    def test_cliparse(self):
 #        """Test the CliParse class"""
