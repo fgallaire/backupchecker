@@ -18,6 +18,7 @@
 
 import sys
 import configparser
+from configparser import ParsingError, NoSectionError, NoOptionError
 import os
 
 class Configurations:
@@ -40,14 +41,13 @@ class Configurations:
                 __currentconf['type'] = __config.get('main', 'type')
                 __currentconf['path'] = __config.get('main', 'path')
                 __currentconf['files_list'] = __config.get('main', 'files_list')
-                self.__configs[__config.get('main', 'name')] = __currentconf
-            except configparser.ParsingError as __err:
-                print(__err)
-                sys.exit(1)
-            except configparser.NoSectionError as __err:
-                print(__err)
-                sys.exit(1)
-            except configparser.NoOptionError as __err:
+                __bckpath = os.path.abspath(__currentconf['path'])
+                if not os.path.exists(__bckpath):
+                    print('{} does not exists.'.format(__bckpath))
+                    sys.exit(1)
+                else:
+                    self.__configs[__config.get('main', 'name')] = __currentconf
+            except (ParsingError, NoSectionError, NoOptionError) as __err:
                 print(__err)
                 sys.exit(1)
 

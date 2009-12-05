@@ -90,9 +90,9 @@ class TestBrebis(unittest.TestCase):
 
     def test_configurations(self):
         """Test the Configurations class"""
-        _path = 'tests/test_conf/'
-        _res = configurations.Configurations(_path).configs
-        self.assertEqual({'essai': {'path': 'essai.tar.gz', 'files_list': 'essai-list', 'type': 'archive'}}, _res)
+        __path = 'tests/test_conf/'
+        __res = configurations.Configurations(__path).configs
+        self.assertEqual({'essai': {'path': 'tests/essai.tar.gz', 'files_list': 'tests/essai-list', 'type': 'archive'}}, __res)
 
     def test_expectedfiles(self):
         """Test the ExpectedFiles class"""
