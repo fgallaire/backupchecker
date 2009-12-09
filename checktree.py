@@ -34,7 +34,6 @@ class CheckTree(CheckArchive):
             for __filename in __filenames:
                 __filepath = os.path.join(__dirpath, __filename)
                 __fileinfo = os.stat(__filepath)
-                print('relpath:{}'.format(os.path.relpath(__filepath, _cfgvalues['path'])))
                 _data = self._check_path(__fileinfo.st_size, os.path.relpath(
                         __filepath, __treeroot),
                             _data)
