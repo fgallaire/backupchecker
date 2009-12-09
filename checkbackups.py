@@ -21,6 +21,7 @@ from tarfile import is_tarfile
 from zipfile import is_zipfile
 
 from checktar import CheckTar
+from checktree import CheckTree
 from checkzip import CheckZip
 
 class CheckBackups(object):
@@ -33,18 +34,22 @@ class CheckBackups(object):
         """Main for CheckBackups"""
         _cfgsets = _confs.values()
         for _cfgvalues in _cfgsets:
+            # check a file tree
+            if _cfgvalues['type'] == 'tree':
+                _bck = CheckTree(_cfgvalues)
+                self.__compute_result(_bck, _cfgvalues)
             # check a tar file
-            if is_tarfile(_cfgvalues['path']):
+            elif is_tarfile(_cfgvalues['path']):
                 _bck = CheckTar(_cfgvalues)
                 self.__compute_result(_bck, _cfgvalues)
             # check a zip file
-            if is_zipfile(_cfgvalues['path']):
+            elif is_zipfile(_cfgvalues['path']):
                 _bck = CheckZip(_cfgvalues)
                 self.__compute_result(_bck, _cfgvalues)
                 
     def __compute_result(self, _bck, _cfgvalues):
         """Launch action depending on the result and type of the backup"""
-        if _cfgvalues['type'] == 'archive':
+        if _cfgvalues['type'] == 'archive' or _cfgvalues['type'] == 'tree':
             self.__missing_files(_bck.missing_files, _cfgvalues['path'])
             self.__classify_differences(_bck, _cfgvalues['path'])
 
