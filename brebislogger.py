@@ -22,4 +22,4 @@ class BrebisLogger(object):
     """The Brebis logger"""
 
     def __init__(self, __logfile):
-        logging.basicConfig(filename=__logfile, level=logging.INFO, filemode='w')
+        logging.basicConfig(filename=__logfile, level=logging.WARNING, filemode='w')
