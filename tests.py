@@ -9,6 +9,7 @@ import brebislogger
 import checkbackups
 import checkhashes
 import checktar
+import checktree
 import checkzip
 import cliparse
 import configurations
@@ -63,6 +64,16 @@ class TestBrebis(unittest.TestCase):
              'type': 'archive'}).missing_files
         self.assertEqual(_missing_files, ['toto/bling'])
 
+    def test_checktree_missing_files(self):
+        """Test the CheckTree class"""
+        _missing_files = []
+        _missing_files = checktree.CheckTree({'path':
+            'tests/filetree/foo',
+             'files_list':
+                'tests/filetree/filelist',
+             'type': 'tree'}).missing_files
+        self.assertEqual(_missing_files, ['foo/bar/toto'])
+
     def test_checktar_missing_equality(self):
         """Test the CheckTar class"""
         __missing_equality = []
@@ -82,6 +93,16 @@ class TestBrebis(unittest.TestCase):
                 'tests/file_size/essai-list2',
              'type': 'archive'}).missing_equality
         self.assertEqual(__missing_equality[0]['path'], 'myzip/titi')
+
+    def test_checktree_missing_equality(self):
+        """Test the CheckTree class"""
+        __missing_equality= []
+        __missing_equality = checktree.CheckTree({'path':
+            'tests/filetree/foo',
+             'files_list':
+                'tests/filetree/filelist',
+             'type': 'tree'}).missing_equality
+        self.assertEqual(__missing_equality[0]['path'], 'foo/foo1')
 
 #    def test_cliparse(self):
 #        """Test the CliParse class"""
