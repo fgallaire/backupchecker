@@ -35,16 +35,42 @@ class Configurations:
         for __conf in __confs:
             __currentconf = {}
             try:
-                __config = configparser.ConfigParser()
+                __config = configparser.SafeConfigParser()
                 __config.readfp(open(os.path.join(
                     '/'.join([__confpath, __conf])), 'r'))
+                # Common information for the backups
+                ### The type of the backups
                 __currentconf['type'] = __config.get('main', 'type')
-                __currentconf['path'] = __config.get('main', 'path')
-                __currentconf['files_list'] = __config.get('main', 'files_list')
-                __bckpath = os.path.abspath(__currentconf['path'])
-                if not os.path.exists(__bckpath):
-                    print('{} does not exists.'.format(__bckpath))
-                    sys.exit(1)
+                # Common information for the archives
+                ### The archive path
+                if __config.has_option('main', 'path'):
+                    __currentconf['path'] = __config.get('main', 'path')
+                else:
+                    __currentconf['path'] = __config.set('main', 'path','')
+                ### The list of the expected files in the archive
+                if __config.has_option('main', 'files_list'):
+                    __currentconf['files_list'] = __config.get('main', 'files_list')
+                else:
+                    __currentconf['files_list'] = __config.set('main', 'files_list', '')
+                # Common information for the databases
+                if __config.has_option('main', 'dbobjects'):
+                    __currentconf['dbobjects'] = __config.get('main', 'dbobjects')
+                else:
+                    __currentconf['dbobjects'] = __config.set('main', 'dbobjects', '')
+                # Sqlite3 : The path to the sqlite3 database
+                if __config.has_option('main', 'dbpath'):
+                    __currentconf['dbpath'] = __config.get('main', 'dbpath')
+                else:
+                    __currentconf['dbpath'] = __config.set('main', 'dbpath', '')
+                # Checking the information
+                __pathnames = ["__currentconf['path']", "__currentconf['dbpath']"]
+                for __pathname in __pathnames:
+                    __path = getattr(self, __pathname, None)
+                    if __path:
+                        __bckpath = os.path.abspath(__path)
+                        if not os.path.exists(__bckpath):
+                            print('{} does not exists.'.format(__bckpath))
+                            sys.exit(1)
                 else:
                     self.__configs[__config.get('main', 'name')] = __currentconf
             except (ParsingError, NoSectionError, NoOptionError) as __err:
