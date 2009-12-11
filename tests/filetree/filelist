@@ -1,3 +1,4 @@
 foo/foo1 =300G
-foo/bar/foo3
+foo/foo2 >300G
+foo/bar/foo3 <100K
 foo/bar/toto

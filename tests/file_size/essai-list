@@ -1,2 +1,4 @@
 essai/dir/toto =512M
+essai/titi >512M
 essai/dir/titi
+essai/dir/toutou <20K
