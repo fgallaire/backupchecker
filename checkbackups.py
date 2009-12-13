@@ -14,72 +14,75 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Check the given backups
-"""Check the given backups"""
+'''Check the given backups'''
 
 import logging
 from tarfile import is_tarfile
 from zipfile import is_zipfile
 
+from checkdb import CheckDb
 from checktar import CheckTar
 from checktree import CheckTree
 from checkzip import CheckZip
 
 class CheckBackups(object):
-    """The main class for Brebis"""
+    '''The backup checker class'''
 
-    def __init__(self, _confs):
-        self.__main(_confs)
+    def __init__(self, __confs):
+        self.__main(__confs)
 
-    def __main(self, _confs):
-        """Main for CheckBackups"""
-        _cfgsets = _confs.values()
-        for _cfgvalues in _cfgsets:
+    def __main(self, __confs):
+        '''Main for CheckBackups'''
+        __cfgsets = __confs.values()
+        for __cfgvalues in __cfgsets:
             # check a file tree
-            if _cfgvalues['type'] == 'tree':
-                _bck = CheckTree(_cfgvalues)
-                self.__compute_result(_bck, _cfgvalues)
+            if __cfgvalues['type'] == 'tree':
+                __bck = CheckTree(__cfgvalues)
+                self.__compute_result(__bck, __cfgvalues)
+            elif __cfgvalues['type'] == 'db':
+                CheckDb(__cfgvalues)
             # check a tar file
-            elif is_tarfile(_cfgvalues['path']):
-                _bck = CheckTar(_cfgvalues)
-                self.__compute_result(_bck, _cfgvalues)
+            elif __cfgvalues['type'] == 'archive' and is_tarfile(__cfgvalues['path']):
+                __bck = CheckTar(__cfgvalues)
+                self.__compute_result(__bck, __cfgvalues)
             # check a zip file
-            elif is_zipfile(_cfgvalues['path']):
-                _bck = CheckZip(_cfgvalues)
-                self.__compute_result(_bck, _cfgvalues)
+            elif __cfgvalues['type'] == 'archive' and is_zipfile(__cfgvalues['path']):
+                __bck = CheckZip(__cfgvalues)
+                self.__compute_result(__bck, _c_fgvalues)
                 
-    def __compute_result(self, _bck, _cfgvalues):
-        """Launch action depending on the result and type of the backup"""
-        if _cfgvalues['type'] == 'archive' or _cfgvalues['type'] == 'tree':
-            self.__missing_files(_bck.missing_files, _cfgvalues['path'])
-            self.__classify_differences(_bck, _cfgvalues['path'])
+    def __compute_result(self, __bck, __cfgvalues):
+        '''Launch action depending on the result and type of the backup'''
+        if __cfgvalues['type'] == 'archive' or __cfgvalues['type'] == 'tree':
+            self.__missing_files(__bck.missing_files, __cfgvalues['path'])
+            self.__classify_differences(__bck, __cfgvalues['path'])
 
-    def __missing_files(self, _missing, _archivepath):
-        """Warn about the missing files in an archive"""
-        if _missing:
-            _msg= 'file'
-            if len(_missing) > 1:
-                _msg = 'files'
-            logging.warn('{} {} missing in {}: '.format(len(_missing), _msg, _archivepath))
-            for _path in _missing:
-                logging.warn('{}'.format(_path))
+    def __missing_files(self, __missing, __archivepath):
+        '''Warn about the missing files in an archive'''
+        if __missing:
+            __msg= 'file'
+            if len(__missing) > 1:
+                __msg = 'files'
+            logging.warn('{} {} missing in {}: '.format(len(__missing), __msg, __archivepath))
+            for __path in __missing:
+                logging.warn('{}'.format(__path))
 
-    def __classify_differences(self, _bck, _archivepath):
-        """Report differences between expected files and files in the archive"""
-        if _bck.missing_equality:
-            _topic = '{} {} with unexpected size in {}: '
-            self.__log_differences(_bck.missing_equality, _archivepath, _topic)
-        if _bck.missing_smaller_than:
-            _topic = '{} {} bigger than expected in {}: '
-            self.__log_differences(_bck.missing_smaller_than, _archivepath, _topic)
-        if _bck.missing_bigger_than:
-            _topic = '{} {} smaller than expected in {}: '
-            self.__log_differences(_bck.missing_bigger_than, _archivepath, _topic)
+    def __classify_differences(self, __bck, __archivepath):
+        '''Report differences between expected files and files in the archive'''
+        if __bck.missing_equality:
+            __topic = '{} {} with unexpected size in {}: '
+            self.__log_differences(__bck.missing_equality, __archivepath, __topic)
+        if __bck.missing_smaller_than:
+            __topic = '{} {} bigger than expected in {}: '
+            self.__log_differences(__bck.missing_smaller_than, __archivepath, __topic)
+        if __bck.missing_bigger_than:
+            __topic = '{} {} smaller than expected in {}: '
+            self.__log_differences(__bck.missing_bigger_than, __archivepath, __topic)
 
-    def __log_differences(self, _files, _archivepath, _topic):
-        """Log the differences between the expected files and the files in the archive"""
-        _fileword = 'file'
-        if len(_files) > 1:
-            _fileword = 'files'
-        logging.warn(_topic.format(len(_files), _fileword, _archivepath))
-        for _file in _files:
-            logging.warn('{} size is {}. Should have been {}.'.format(_file['path'], _file['size'], _file['expected']))
+    def __log_differences(self, __files, __archivepath, __topic):
+        '''Log the differences between the expected files and the files in the archive'''
+        __fileword = 'file'
+        if len(__files) > 1:
+            __fileword = 'files'
+        logging.warn(__topic.format(len(__files), __fileword, __archivepath))
+        for __file in __files:
+            logging.warn('{} size is {}. Should have been {}.'.format(__file['path'], __file['size'], __file['expected']))
