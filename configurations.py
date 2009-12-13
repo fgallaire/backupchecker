@@ -14,7 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #Parse the configurations
-"""Parse the configurations"""
+'''Parse the configurations'''
 
 import sys
 import configparser
@@ -22,14 +22,14 @@ from configparser import ParsingError, NoSectionError, NoOptionError
 import os
 
 class Configurations:
-    """Retrieve the different configurations"""
+    '''Retrieve the different configurations'''
 
     def __init__(self, __confpath):
         self.__configs = {}
         self.__parse_configurations(__confpath)
 
     def __parse_configurations(self, __confpath):
-        """Parse the different configurations"""
+        '''Parse the different configurations'''
         __confs = [__file for __file in os.listdir(__confpath) 
             if __file.endswith('.conf')]
         for __conf in __confs:
@@ -43,25 +43,30 @@ class Configurations:
                 __currentconf['type'] = __config.get('main', 'type')
                 # Common information for the archives
                 ### The archive path
-                if __config.has_option('main', 'path'):
-                    __currentconf['path'] = __config.get('main', 'path')
-                else:
-                    __currentconf['path'] = __config.set('main', 'path','')
+                __confsettings = [{'main': 'path'},
                 ### The list of the expected files in the archive
-                if __config.has_option('main', 'files_list'):
-                    __currentconf['files_list'] = __config.get('main', 'files_list')
-                else:
-                    __currentconf['files_list'] = __config.set('main', 'files_list', '')
+                {'main': 'files_list'},
                 # Common information for the databases
-                if __config.has_option('main', 'dbobjects'):
-                    __currentconf['dbobjects'] = __config.get('main', 'dbobjects')
-                else:
-                    __currentconf['dbobjects'] = __config.set('main', 'dbobjects', '')
-                # Sqlite3 : The path to the sqlite3 database
-                if __config.has_option('main', 'dbpath'):
-                    __currentconf['dbpath'] = __config.get('main', 'dbpath')
-                else:
-                    __currentconf['dbpath'] = __config.set('main', 'dbpath', '')
+                ### The list of the expected objects in the database
+                {'main': 'dbobjects'},
+                ### The type of the database - should be supported by SQLAlchemy
+                {'main': 'dbtype'},
+                ### The database host
+                {'main': 'dbhost'},
+                ### The user login for the database
+                {'main': 'dbuser'},
+                ### The password for the user
+                {'main': 'dbpass'},
+                # Sqlite3
+                ### The path to the sqlite3 database
+                {'main': 'dbpath'}
+                ]
+                for __element in __confsettings:
+                    __key, __value = __element.popitem()
+                    if __config.has_option(__key, __value):
+                        __currentconf[__value] = __config.get(__key, __value)
+                    else:
+                        __currentconf[__value] = __config.set(__key, __value, '')
                 # Checking the information
                 __pathnames = ["__currentconf['path']", "__currentconf['dbpath']"]
                 for __pathname in __pathnames:
@@ -79,6 +84,6 @@ class Configurations:
 
     @property
     def configs(self):
-        """Return the different configurations parameteres"""
+        '''Return the different configurations parameteres'''
         return self.__configs
 
