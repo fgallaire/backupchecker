@@ -33,11 +33,10 @@ class CheckDb(object):
     def __main(self, __cfgvalues):
         '''The main for the CheckDb class'''
         __db_objects = ExpectedDbObjects(__cfgvalues['dbobjects']).db_objects
-        if __cfgvalues['dbtype'] == 'sqlite3':
+        if __cfgvalues['dbtype'] == 'sqlite':
             try:
-                __engine = create_engine('sqlite:///' + __cfgvalues['dbpath'])
+                __engine = create_engine(''.join([__cfgvalues['dbtype'], ':///', __cfgvalues['dbpath']]))
                 __metadata = MetaData()
-                print('__db_objects:{}'.format(__db_objects))
                 for __db_object in __db_objects:
                     __key, __value = __db_object, __db_objects[__db_object]
                     for __element in __value:
