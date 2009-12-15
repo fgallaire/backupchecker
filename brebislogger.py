@@ -14,12 +14,12 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Brebis logger
-"""Brebis logger"""
+'''Brebis logger'''
 
 import logging
 
 class BrebisLogger(object):
-    """The Brebis logger"""
+    '''The Brebis logger'''
 
     def __init__(self, __logfile):
         logging.basicConfig(filename=__logfile, level=logging.WARNING, filemode='w')
