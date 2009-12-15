@@ -14,21 +14,21 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Extract the information about expected saved files
-"""Extract the information about expected saved files"""
+'''Extract the information about expected saved files'''
 
 import logging
 import os
 import sys
 
 class ExpectedFiles(object):
-    """Extract the information about expected saved files"""
+    '''Extract the information about expected saved files'''
 
     def __init__(self, __path):
         self.__data = []
         self.__main(__path)
 
     def __main(self, __path):
-        """ Main of the ExpectedFiles class"""
+        '''Main of the ExpectedFiles class'''
         try:
             with open(__path, 'r') as __file:
                 self.__retrieve_data(__file)
@@ -37,7 +37,7 @@ class ExpectedFiles(object):
             sys.exit(1)
 
     def __retrieve_data(self, __file):
-        """Retrieve data from the expected files"""
+        '''Retrieve data from the expected files'''
         for __line in __file.readlines():
             __data = {}
             __res = []
@@ -55,7 +55,7 @@ class ExpectedFiles(object):
             self.__data.append(__data)
 
     def __convert_arg(self, __arg):
-        "Convert the given file length to bytes"""
+        '''Convert the given file length to bytes'''
         try:
             if __arg.endswith('K'):
                 __res = int(__arg[1:-1]) * 1024
@@ -80,5 +80,5 @@ class ExpectedFiles(object):
 
     @property
     def data(self):
-        """Return the paths of the expected files in the archive"""
+        '''Return the paths of the expected files in the archive'''
         return self.__data
