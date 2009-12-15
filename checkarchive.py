@@ -14,10 +14,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Check an archive
-"""Check an archive"""
+'''Check an archive'''
 
 class CheckArchive(object):
-    """Check a tar archive"""
+    '''Check a tar archive'''
 
     def __init__(self, _cfgvalues):
         self._missing_files = []
@@ -27,7 +27,7 @@ class CheckArchive(object):
         self._main(_cfgvalues)
 
     def _check_path(self, _arcsize, _arcname, _data):
-        """Check if the expected path exists in the archive"""
+        '''Check if the expected path exists in the archive'''
         for _ind, _file in enumerate(_data):
             if _arcname == _file['path']:
                 self._compare_sizes(_arcsize, _arcname, _file)
@@ -35,7 +35,7 @@ class CheckArchive(object):
         return _data
 
     def _compare_sizes(self, _arcsize, _arcname, _file):
-        """Compare the sizes of the files in the archive and the expected files"""
+        '''Compare the sizes of the files in the archive and the expected files'''
         if 'equals' in _file and _arcsize != _file['equals']:
             self.missing_equality.append({'path': _arcname,
                 'size': _arcsize, 'expected': _file['equals']})
@@ -48,20 +48,20 @@ class CheckArchive(object):
         
     @property
     def missing_equality(self):
-        """A list containing the paths of the files missing the equality parameters in the archive"""
+        '''A list containing the paths of the files missing the equality parameters in the archive'''
         return self._missing_equality
 
     @property
     def missing_files(self):
-        """A list containing the paths of the missing files in the archive"""
+        '''A list containing the paths of the missing files in the archive'''
         return self._missing_files
 
     @property
     def missing_bigger_than(self):
-        """A list containing the path and the size of the files missing the bigger than parameter in the archive"""
+        '''A list containing the path and the size of the files missing the bigger than parameter in the archive'''
         return self._missing_bigger_than
 
     @property
     def missing_smaller_than(self):
-        """A list containing the path and the size of the files missing the smaller than parameter in the archive"""
+        '''A list containing the path and the size of the files missing the smaller than parameter in the archive'''
         return self._missing_smaller_than
