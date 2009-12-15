@@ -14,7 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Check a file tree
-"""Check a file tree"""
+'''Check a file tree'''
 
 import os
 
@@ -22,10 +22,10 @@ from expectedfiles import ExpectedFiles
 from checkarchive import CheckArchive
 
 class CheckTree(CheckArchive):
-    """Check a file tree"""
+    '''Check a file tree'''
 
     def _main(self, _cfgvalues):
-        """Main for CheckTree"""
+        '''Main for CheckTree'''
         _data = []
         _data = ExpectedFiles(_cfgvalues['files_list']).data
         # Save the tree root to determine the relative path in the file tree
