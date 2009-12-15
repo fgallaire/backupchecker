@@ -14,7 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Brebis main
-"""Brebis main"""
+'''Brebis main'''
 
 import sys
 
@@ -24,12 +24,13 @@ from cliparse import CliParse
 from configurations import Configurations
 
 class Main(object):
-    """The main class for Brebis"""
+    '''The main class for Brebis'''
 
     def __init__(self):
         self.__main()
 
     def __main(self):
+        '''The main for the Main class'''
         __options = CliParse().options
         __confs = Configurations(__options.confpath)
         if __options.hashfile:
