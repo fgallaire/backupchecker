@@ -14,7 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Retrieve the command line options
-"""Retrieve the command line options"""
+'''Retrieve the command line options'''
 
 import logging
 from optparse import OptionParser
@@ -24,7 +24,7 @@ import sys
 from brebislogger import BrebisLogger
 
 class CliParse:
-    """Retrieve the command line options"""
+    '''Retrieve the command line options'''
 
     def __init__(self):
         self._options = ()
@@ -32,7 +32,7 @@ class CliParse:
         self.__define_options(__parser)
 
     def __define_options(self, __parser):
-        """Define the options"""
+        '''Define the options'''
         __parser.add_option('-c', '--configpath', dest='confpath',
             action='store', type='string',
             default=os.getcwd(),
@@ -59,7 +59,7 @@ class CliParse:
         self.__verify_options(__options)
 
     def __verify_options(self, __options):
-        """Verify the options given on the command line"""
+        '''Verify the options given on the command line'''
         # Check the logfile
         __logdir = os.path.split(__options.logfile)[0]
         if __logdir and not os.path.exists(__logdir):
@@ -90,5 +90,5 @@ class CliParse:
 
     @property
     def options(self):
-        """Return the command line options"""
+        '''Return the command line options'''
         return self.__options
