@@ -14,7 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Check a tar archive
-"""Check a tar archive"""
+'''Check a tar archive'''
 
 import sys
 import tarfile
@@ -23,10 +23,10 @@ from expectedfiles import ExpectedFiles
 from checkarchive import CheckArchive
 
 class CheckTar(CheckArchive):
-    """Check a tar archive"""
+    '''Check a tar archive'''
 
     def _main(self, _cfgvalues):
-        """Main for CheckTar"""
+        '''Main for CheckTar'''
         _data = []
         try:
             _data = ExpectedFiles(_cfgvalues['files_list']).data
