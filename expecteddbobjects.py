@@ -14,7 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Extract the information about expected database objects
-"""Extract the information about expected database objects"""
+'''Extract the information about expected database objects'''
 
 import logging
 import os
@@ -23,10 +23,10 @@ import sys
 from expectedobjects import ExpectedObjects
 
 class ExpectedDbObjects(ExpectedObjects):
-    """Extract the information about expected database objects"""
+    '''Extract the information about expected database objects'''
 
     def _retrieve_data(self, __file):
-        """Retrieve data from the expected database objects"""
+        '''Retrieve data from the expected database objects'''
         for __line in __file.readlines():
             __data = []
             __res = []
@@ -38,5 +38,5 @@ class ExpectedDbObjects(ExpectedObjects):
 
     @property
     def db_objects(self):
-        """Return the paths of the expected files in the archive"""
+        '''Return the paths of the expected files in the archive'''
         return self._db_objects
