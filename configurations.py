@@ -59,7 +59,10 @@ class Configurations:
                 {'main': 'dbpass'},
                 # Sqlite3
                 ### The path to the sqlite3 database
-                {'main': 'dbpath'}
+                {'main': 'dbpath'},
+                # Mysql 
+                ### The database name
+                {'main': 'dbname'}
                 ]
                 for __element in __confsettings:
                     __key, __value = __element.popitem()
