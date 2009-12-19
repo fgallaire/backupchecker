@@ -34,12 +34,14 @@ class CheckDb(object):
         '''The main for the CheckDb class'''
         __db_objects = ExpectedDbObjects(__cfgvalues['dbobjects']).db_objects
         if __cfgvalues['dbtype'] == 'sqlite':
-            try:
-                __engine = create_engine(''.join([__cfgvalues['dbtype'], ':///', __cfgvalues['dbpath']]))
-                __metadata = MetaData()
-                for __db_object in __db_objects:
-                    __key, __value = __db_object, __db_objects[__db_object]
-                    for __element in __value:
-                        __db_backtrace = getattr(sqlalchemy, ''.join([__key[0].upper(),__key[1:-1]]))(__element, __metadata, autoload=True, autoload_with=__engine)
-            except NoSuchTableError as __err:
-                logging.warn('The following table was not found in {}: {}'.format(__cfgvalues['dbpath'], __err))
+            __engine = create_engine(''.join([__cfgvalues['dbtype'], ':///', __cfgvalues['dbpath']]))
+        elif __cfgvalues['dbtype'] == 'mysql':
+            __engine = create_engine(''.join([__cfgvalues['dbtype'], '://', __cfgvalues['dbuser'], ':', __cfgvalues['dbpass'], '@', __cfgvalues['dbhost'], '/', __cfgvalues['dbname']]))
+        __metadata = MetaData()
+        try:
+            for __db_object in __db_objects:
+                __key, __value = __db_object, __db_objects[__db_object]
+                for __element in __value:
+                    __db_backtrace = getattr(sqlalchemy, ''.join([__key[0].upper(),__key[1:-1]]))(__element, __metadata, autoload=True, autoload_with=__engine)
+        except NoSuchTableError as __err:
+            logging.warn('The following table was not found in {}: {}'.format(__cfgvalues['dbpath'], __err))
