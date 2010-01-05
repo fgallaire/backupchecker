@@ -39,17 +39,14 @@ class CheckBackups(object):
             # check a file tree
             if __cfgvalues['type'] == 'tree':
                 __bck = CheckTree(__cfgvalues)
-                #self.__compute_result(__bck, __cfgvalues)
                 ArchiveInfoMsg(__bck, __cfgvalues)
             elif __cfgvalues['type'] == 'db':
                 CheckDb(__cfgvalues)
             # check a tar file
             elif __cfgvalues['type'] == 'archive' and is_tarfile(__cfgvalues['path']):
                 __bck = CheckTar(__cfgvalues)
-                #self.__compute_result(__bck, __cfgvalues)
                 ArchiveInfoMsg(__bck, __cfgvalues)
             # check a zip file
             elif __cfgvalues['type'] == 'archive' and is_zipfile(__cfgvalues['path']):
                 __bck = CheckZip(__cfgvalues)
-                #self.__compute_result(__bck, _c_fgvalues)
                 ArchiveInfoMsg(__bck, __cfgvalues)
