@@ -17,7 +17,7 @@
 '''Check an archive'''
 
 class CheckArchive(object):
-    '''Check a tar archive'''
+    '''Check an archive'''
 
     def __init__(self, _cfgvalues):
         self._missing_files = []
