@@ -30,10 +30,10 @@ class TestBrebis(unittest.TestCase):
         '''Test the CheckBackup class'''
         _logfile = TESTLOG
         brebislogger.BrebisLogger(_logfile)
-        checkbackups.CheckBackups({'essai': {'path': 'tests/essai.tar.gz', 'files_list': 'tests/essai-list', 'type': 'archive'}, 'essai2': {'path': 'tests/titi.tar.bz2', 'files_list': 'tests/essai2-list', 'type': 'archive'}})
+        checkbackups.CheckBackups({'essai': {'path': 'tests/tar_gz_archive_content/essai.tar.gz', 'files_list': 'tests/tar_gz_archive_content/essai-list', 'type': 'archive'}, 'essai2': {'path': 'tests/tar_bz2_archive_content/titi.tar.bz2', 'files_list': 'tests/tar_bz2_archive_content/essai2-list', 'type': 'archive'}})
         _res = open(_logfile).read()
         os.remove(_logfile)
-        self.assertEqual(_res, 'WARNING:root:1 file missing in tests/essai.tar.gz: \nWARNING:root:essai/dir/titi\n')
+        self.assertEqual(_res, 'WARNING:root:1 file missing in tests/tar_gz_archive_content/essai.tar.gz: \nWARNING:root:essai/dir/titi\n')
 
     def test_checkhashes(self):
         '''Test the CheckHashes class'''
@@ -48,9 +48,9 @@ class TestBrebis(unittest.TestCase):
         '''Check if the CheckTar class returns a missing file'''
         _missingfiles = []
         _missingfiles = checktar.CheckTar({'path':
-            'tests/essai.tar.gz',
+            'tests/tar_gz_archive_content/essai.tar.gz',
              'files_list':
-                'tests/essai-list',
+                'tests/tar_gz_archive_content/essai-list',
              'type': 'archive'}).missing_files
         self.assertEqual(_missingfiles, ['essai/dir/titi'])
 
@@ -173,7 +173,7 @@ class TestBrebis(unittest.TestCase):
     def test_expectedfiles(self):
         '''Test the ExpectedFiles class'''
         _res = []
-        _paths = 'tests/essai-list'
+        _paths = 'tests/tar_gz_archive_content/essai-list'
         _data = expectedfiles.ExpectedFiles(_paths).data
         self.assertEqual([_file.rstrip() for _file in open(_paths, 'r').readlines()], [_file['path'] for _file in _data])
 
