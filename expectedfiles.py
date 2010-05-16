@@ -57,26 +57,15 @@ class ExpectedFiles(object):
     def __convert_arg(self, __arg):
         '''Convert the given file length to bytes'''
         try:
-            if __arg.endswith('K'):
-                __res = int(__arg[1:-1]) * 1024
-            elif __arg.endswith('M'):
-                __res = int(__arg[1:-1]) * 1024**2
-            elif __arg.endswith('G'):
-                __res = int(__arg[1:-1]) * 1024**3
-            elif __arg.endswith('P'):
-                __res = int(__arg[1:-1]) * 1024**4
-            elif __arg.endswith('E'):
-                __res = int(__arg[1:-1]) * 1024**5
-            elif __arg.endswith('Z'):
-                __res = int(__arg[1:-1]) * 1024**6
-            elif __arg.endswith('Y'):
-                __res = int(__arg[1:-1]) * 1024**7
-            else:
-                __res = int(__arg[1:-1])
+            __res = int(__arg[1:-1])
+            for __value, __power in [('K', 1),('M', 2),('G', 3),('P', 4),('E', 5),('Z', 6),('Y', 7)]:
+                if __arg.endswith(__value):
+                    __res = int(__arg[1:-1]) * 1024**__power
         except ValueError as __msg:
             logging.warn(__msg)
             __res = 0
-        return __res
+        finally:
+            return __res
 
     @property
     def data(self):
