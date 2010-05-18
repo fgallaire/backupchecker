@@ -87,6 +87,6 @@ class Configurations:
 
     @property
     def configs(self):
-        '''Return the different configurations parameteres'''
+        '''Return the different configurations parameters'''
         return self.__configs
 
