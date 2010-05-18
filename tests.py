@@ -5,7 +5,7 @@ import logging
 import sys
 import unittest
 
-import brebislogger
+import applogger
 import checkbackups
 import checkhashes
 import checktar
@@ -19,17 +19,17 @@ import main
 # !! logging module uses a single logger for the whole file
 TESTLOG = 'tests/testlog'
 
-class TestBrebis(unittest.TestCase):
+class TestApp(unittest.TestCase):
 
-    def test_brebislogger(self):
-        '''Test the BrebisLogger class'''
-        brebislogger.BrebisLogger(TESTLOG)
-        self.assertEqual(True, str(logging.getLogger('brebislogger')).startswith('<logging.Logger object at'))
+    def test_applogger(self):
+        '''Test the AppLoggerclass'''
+        applogger.AppLogger(TESTLOG)
+        self.assertEqual(True, str(logging.getLogger('applogger')).startswith('<logging.Logger object at'))
         
     def test_checkbackup(self):
         '''Test the CheckBackup class'''
         _logfile = TESTLOG
-        brebislogger.BrebisLogger(_logfile)
+        applogger.AppLogger(_logfile)
         checkbackups.CheckBackups({'essai': {'path': 'tests/tar_gz_archive_content/essai.tar.gz', 'files_list': 'tests/tar_gz_archive_content/essai-list', 'type': 'archive'}, 'essai2': {'path': 'tests/tar_bz2_archive_content/titi.tar.bz2', 'files_list': 'tests/tar_bz2_archive_content/essai2-list', 'type': 'archive'}})
         _res = open(_logfile).read()
         os.remove(_logfile)
@@ -42,7 +42,7 @@ class TestBrebis(unittest.TestCase):
         _confs = {'essai': {'path': 'tests/corrupted_archive/essai.tar.gz', 'files_list': 'tests/corrupted_archive/essai-list', 'type': 'archive'}, 'corrupted': {'path': 'tests/corrupted_archive/corrupted.tar.gz', 'files_list': 'tests/corrupted_archive/essai-list', 'type': 'archive'}}
         checkhashes.CheckHashes(_hashfile, _hashtype, _confs)
         _res = open('tests/corrupted_archive/a.out').read()
-        self.assertEqual(_res, 'INFO:root:The /home/chaica/progra/python/brebis/tests/corrupted_archive/corrupted.tar.gz checksum mismatched\nINFO:root:1 file missing in /home/chaica/progra/python/brebis/tests/corrupted_archive/essai.tar.gz: \nINFO:root:essai/dir/titi\n')
+        self.assertEqual(_res, 'INFO:root:The {}/tests/corrupted_archive/corrupted.tar.gz checksum mismatched\nINFO:root:1 file missing in {}/tests/corrupted_archive/essai.tar.gz: \nINFO:root:essai/dir/titi\n'.format(os.getcwd(), os.getcwd()))
 
     def test_checktar_missing_files(self):
         '''Check if the CheckTar class returns a missing file'''
@@ -176,15 +176,6 @@ class TestBrebis(unittest.TestCase):
         _paths = 'tests/tar_gz_archive_content/essai-list'
         _data = expectedfiles.ExpectedFiles(_paths).data
         self.assertEqual([_file.rstrip() for _file in open(_paths, 'r').readlines()], [_file['path'] for _file in _data])
-
-#    def test_main(self):
-#        """Test the Main class"""
-#        _output = TESTLOG
-#        sys.argv = ['./brebis', '-c', 'tests/', '-l', _output]
-#        main.Main()
-#        _res = open(_output).read()
-#        os.remove(_output)
-#        self.assertEqual(_res, 'INFO:root:1 file missing in /home/chaica/progra/python/brebis/tests/essai.tar.gz: \nINFO:root:essai/dir/titi\n')
 
 if __name__ == '__main__':
     unittest.main()

@@ -13,8 +13,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Brebis main
-'''Brebis main'''
+# The application main
+'''The application main'''
 
 import sys
 
@@ -24,7 +24,7 @@ from cliparse import CliParse
 from configurations import Configurations
 
 class Main(object):
-    '''The main class for Brebis'''
+    '''The main class'''
 
     def __init__(self):
         self.__main()

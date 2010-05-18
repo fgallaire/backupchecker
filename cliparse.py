@@ -21,7 +21,7 @@ from optparse import OptionParser
 import os
 import sys
 
-from brebislogger import BrebisLogger
+from applogger import AppLogger
 
 class CliParse:
     '''Retrieve the command line options'''
@@ -41,7 +41,7 @@ class CliParse:
         __parser.add_option('-l', '--log', dest='logfile',
             action='store', type='string',
             default=os.path.join(os.getcwd(), 'a.out'),
-            help='the Brebis log file',
+            help='the log file',
             metavar='FILE')
         __parser.add_option('-t', '--type', dest='type',
             action='store', type='string',
@@ -68,7 +68,7 @@ class CliParse:
             sys.exit(1)
         __options.logfile = os.path.abspath(__options.logfile)
         # Configure the logger
-        BrebisLogger(__options.logfile)
+        AppLogger(__options.logfile)
         # Check the configuration directory
         if not os.path.exists(__options.confpath):
             logging.info('The configuration directory does not exist')

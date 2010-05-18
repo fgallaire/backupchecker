@@ -13,13 +13,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Brebis logger
-'''Brebis logger'''
+# Application logger
+'''Application logger'''
 
 import logging
 
-class BrebisLogger(object):
-    '''The Brebis logger'''
+class AppLogger(object):
+    '''The application logger'''
 
     def __init__(self, __logfile):
         logging.basicConfig(filename=__logfile, level=logging.WARNING, filemode='w')
