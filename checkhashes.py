@@ -14,7 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Check the files hashes
-"""Check the files hashes"""
+'''Check the files hashes'''
 
 import hashlib
 import logging
@@ -22,19 +22,19 @@ import os.path
 import sys
 
 class CheckHashes(object):
-    """Check the files hashes"""
+    '''Check the files hashes'''
 
     def __init__(self, __hashfile, __hashtype, __confs):
         self.__confs = __confs
         self.__main(__hashfile, __hashtype, __confs)
 
     def __main(self, __hashfile, __hashtype, __confs):
-        """Main for the CheckHashes class"""
+        '''Main for the CheckHashes class'''
         __hashinfo = self.__extract_hashinfo(__hashfile)
         self.__check_hashes(__hashtype, __confs, __hashinfo)
 
     def __check_hashes(self, __hashtype, __confs, __hashinfo):
-        """check the hash of the backups"""
+        '''check the hash of the backups'''
         try:
             __confstoremove = []
             for __conf in __confs:
@@ -51,7 +51,7 @@ class CheckHashes(object):
             logging.warn(__msg)
 
     def __extract_hashinfo(self, __hashfile):
-        """Extract the info about hashed files"""
+        '''Extract the info about hashed files'''
         __hashinfo = {}
         try:
             with open(__hashfile) as __files:
@@ -69,5 +69,5 @@ class CheckHashes(object):
         
     @property
     def confs(self):
-        """Returne the configurations minus the ones containing a corrupted file"""
+        '''Return the configurations minus the ones containing a corrupted file'''
         return self.__confs
