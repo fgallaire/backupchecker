@@ -35,8 +35,8 @@ class CheckDb(object):
         __db_objects = ExpectedDbObjects(__cfgvalues['dbobjects']).db_objects
         if __cfgvalues['dbtype'] == 'sqlite':
             __engine = create_engine(''.join([__cfgvalues['dbtype'], ':///', __cfgvalues['dbpath']]))
-        elif __cfgvalues['dbtype'] == 'mysql':
-            __engine = create_engine(''.join([__cfgvalues['dbtype'], '://', __cfgvalues['dbuser'], ':', __cfgvalues['dbpass'], '@', __cfgvalues['dbhost'], '/', __cfgvalues['dbname']]))
+        #elif __cfgvalues['dbtype'] == 'mysql':
+        #    __engine = create_engine(''.join([__cfgvalues['dbtype'], '://', __cfgvalues['dbuser'], ':', __cfgvalues['dbpass'], '@', __cfgvalues['dbhost'], '/', __cfgvalues['dbname']]))
         __metadata = MetaData()
         try:
             for __db_object in __db_objects:
