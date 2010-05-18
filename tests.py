@@ -128,9 +128,9 @@ class TestBrebis(unittest.TestCase):
         '''Check if the CheckZip class returns a missing file'''
         _missing_files = []
         _missing_files = checkzip.CheckZip({'path':
-            'tests/myzip.zip',
+            'tests/zip_content/myzip.zip',
              'files_list':
-                'tests/myzip-list',
+                'tests/zip_content/myzip-list',
              'type': 'archive'}).missing_files
         self.assertEqual(_missing_files, ['toto/bling'])
 
