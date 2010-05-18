@@ -39,7 +39,7 @@ class TestBrebis(unittest.TestCase):
         '''Test the CheckHashes class'''
         _hashfile = 'tests/corrupted_archive/MD5SUMS'
         _hashtype = 'md5'
-        _confs = {'essai': {'path': '/home/chaica/progra/python/brebis/tests/corrupted_archive/essai.tar.gz', 'files_list': '/home/chaica/progra/python/brebis/tests/corrupted_archive/essai-list', 'type': 'archive'}, 'corrupted': {'path': '/home/chaica/progra/python/brebis/tests/corrupted_archive/corrupted.tar.gz', 'files_list': '/home/chaica/progra/python/brebis/tests/corrupted_archive/essai-list', 'type': 'archive'}}
+        _confs = {'essai': {'path': 'tests/corrupted_archive/essai.tar.gz', 'files_list': 'tests/corrupted_archive/essai-list', 'type': 'archive'}, 'corrupted': {'path': 'tests/corrupted_archive/corrupted.tar.gz', 'files_list': 'tests/corrupted_archive/essai-list', 'type': 'archive'}}
         checkhashes.CheckHashes(_hashfile, _hashtype, _confs)
         _res = open('tests/corrupted_archive/a.out').read()
         self.assertEqual(_res, 'INFO:root:The /home/chaica/progra/python/brebis/tests/corrupted_archive/corrupted.tar.gz checksum mismatched\nINFO:root:1 file missing in /home/chaica/progra/python/brebis/tests/corrupted_archive/essai.tar.gz: \nINFO:root:essai/dir/titi\n')
