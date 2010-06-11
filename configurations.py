@@ -71,7 +71,8 @@ class Configurations:
                     else:
                         __currentconf[__value] = __config.set(__key, __value, '')
                 # Checking the information
-                __pathnames = ["__currentconf['path']", "__currentconf['dbpath']"]
+                ### Check the paths in the configuration
+                __pathnames = ["__currentconf['path']", "__currentconf['dbpath']", "__currentconf['dbobjects']"]
                 for __pathname in __pathnames:
                     __path = getattr(self, __pathname, None)
                     if __path:
@@ -79,8 +80,11 @@ class Configurations:
                         if not os.path.exists(__bckpath):
                             print('{} does not exists.'.format(__bckpath))
                             sys.exit(1)
-                else:
-                    self.__configs[__config.get('main', 'name')] = __currentconf
+                ### Checking if the database type is supported
+                if __currentconf['dbtype'] not in ('sqlite', 'mysql', 'postgresql'):
+                    print('The given database is not supported : {}'.format(__currentconf['dbtype'))
+                    sys.exit(1)
+                self.__configs[__config.get('main', 'name')] = __currentconf
             except (ParsingError, NoSectionError, NoOptionError) as __err:
                 print(__err)
                 sys.exit(1)
