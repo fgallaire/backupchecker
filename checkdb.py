@@ -51,4 +51,7 @@ class CheckDb(object):
         except (OperationalError, ProgrammingError) as __err:
             logging.warn('The following error occured: {}'.format(__err))
         except NoSuchTableError as __err:
-            logging.warn('The following table was not found in {}: {}'.format(__cfgvalues['dbpath'], __err))
+            if __cfgvalues['dbtype'] == 'sqlite':
+                logging.warn('The following table was not found in {}: {}'.format(__cfgvalues['dbpath'], __err))
+            else:
+                logging.warn('The following table was not found in the {} database: {}'.format(__cfgvalues['dbname'], __err))
