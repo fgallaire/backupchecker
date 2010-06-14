@@ -81,8 +81,9 @@ class Configurations:
                             print('{} does not exists.'.format(__bckpath))
                             sys.exit(1)
                 ### Checking if the database type is supported
-                if __currentconf['dbtype'] not in ('sqlite', 'mysql', 'postgresql'):
-                    print('The given database is not supported : {}'.format(__currentconf['dbtype'))
+                __dbtype = __currentconf['dbtype'].lower()
+                if  __dbtype not in set(['sqlite', 'mysql', 'postgresql']):
+                    print('The given database is not supported : {}'.format(__dbtype))
                     sys.exit(1)
                 self.__configs[__config.get('main', 'name')] = __currentconf
             except (ParsingError, NoSectionError, NoOptionError) as __err:
