@@ -85,6 +85,9 @@ class Configurations:
                 if  __dbtype not in set(['sqlite', 'mysql', 'postgresql']):
                     print('The given database is not supported : {}'.format(__dbtype))
                     sys.exit(1)
+                ### If dbhost is not specified, use 127.0.0.1
+                if not __currentconf['dbhost']:
+                    __currentconf['dbhost'] = '127.0.0.1'
                 self.__configs[__config.get('main', 'name')] = __currentconf
             except (ParsingError, NoSectionError, NoOptionError) as __err:
                 print(__err)
