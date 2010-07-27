@@ -78,16 +78,17 @@ class Configurations:
                     if __path:
                         __bckpath = os.path.abspath(__path)
                         if not os.path.exists(__bckpath):
-                            print('{} does not exists.'.format(__bckpath))
+                            print('{} does not exist.'.format(__bckpath))
                             sys.exit(1)
                 ### Checking if the database type is supported
-                __dbtype = __currentconf['dbtype'].lower()
-                if  __dbtype not in set(['sqlite', 'mysql', 'postgresql']):
-                    print('The given database is not supported : {}'.format(__dbtype))
-                    sys.exit(1)
-                ### If dbhost is not specified, use 127.0.0.1
-                if not __currentconf['dbhost']:
-                    __currentconf['dbhost'] = '127.0.0.1'
+                if __currentconf['dbtype']:
+                    __dbtype = __currentconf['dbtype'].lower()
+                    if  __dbtype not in set(['sqlite', 'mysql', 'postgresql']):
+                        print('The given database is not supported : {}'.format(__dbtype))
+                        sys.exit(1)
+                    ### If dbhost is not specified, use 127.0.0.1
+                    if not __currentconf['dbhost']:
+                        __currentconf['dbhost'] = '127.0.0.1'
                 self.__configs[__config.get('main', 'name')] = __currentconf
             except (ParsingError, NoSectionError, NoOptionError) as __err:
                 print(__err)
