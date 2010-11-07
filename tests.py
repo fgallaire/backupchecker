@@ -170,12 +170,5 @@ class TestApp(unittest.TestCase):
         __res = configurations.Configurations(__path).configs
         self.assertEqual({'essai': {'path': 'tests/essai.tar.gz', 'files_list': 'tests/essai-list', 'type': 'archive', 'dbobjects': None, 'dbname': None, 'dbpath': None, 'dbhost': None, 'dbpass': None, 'dbuser': None, 'dbtype': None}}, __res)
 
-    def test_expectedfiles(self):
-        '''Test the ExpectedFiles class'''
-        _res = []
-        _paths = 'tests/tar_gz_archive_content/essai-list'
-        _data = expectedfiles.ExpectedFiles(_paths).data
-        self.assertEqual([_file.rstrip() for _file in open(_paths, 'r').readlines()], [_file['path'] for _file in _data])
-
 if __name__ == '__main__':
     unittest.main()

@@ -1,4 +1,9 @@
-essai/dir/toto =512M
-essai/titi >512M
-essai/dir/titi
-essai/dir/toutou <20K
+[files]
+# mandatory for test_checktar_missing_equality() in tests.py
+essai/dir/toto: =512M
+# mandatory for test_checktar_missing_bigger_than() in tests.py
+essai/titi: >512M
+# mandatory for test_checktar_missing_equality() in tests.py
+essai/dir/toutou: <20K
+# checking if missing files are identified
+essai/dir/zozo:
