@@ -19,6 +19,8 @@
 import logging
 import os
 import sys
+import configparser
+from configparser import ParsingError, NoSectionError, NoOptionError
 
 class ExpectedFiles(object):
     '''Extract the information about expected saved files'''
@@ -38,20 +40,19 @@ class ExpectedFiles(object):
 
     def __retrieve_data(self, __file):
         '''Retrieve data from the expected files'''
-        for __line in __file.readlines():
+        __config = configparser.ConfigParser()
+        __config.readfp(__file)
+        __filesizes = __config.items('files')
+        for __filesize in __filesizes:
             __data = {}
-            __res = []
-            if __line != os.linesep:
-                __res = __line.split()
-                __data['path'] = __res[0]
-                if len(__res) >= 2:
-                    for __arg in __res[1:]:
-                        if __arg.startswith('='):
-                            __data['equals'] = self.__convert_arg(__arg)
-                        if __arg.startswith('>'):
-                            __data['biggerthan'] = self.__convert_arg(__arg)
-                        elif __arg.startswith('<'):
-                            __data['smallerthan'] = self.__convert_arg(__arg)
+            __path, __size = __filesize
+            __data['path'] = __path
+            if __size.startswith('='):
+                __data['equals'] = self.__convert_arg(__size)
+            if __size.startswith('>'):
+                __data['biggerthan'] = self.__convert_arg(__size)
+            elif __size.startswith('<'):
+                __data['smallerthan'] = self.__convert_arg(__size)
             self.__data.append(__data)
 
     def __convert_arg(self, __arg):
@@ -62,6 +63,7 @@ class ExpectedFiles(object):
                 if __arg.endswith(__value):
                     __res = int(__arg[1:-1]) * 1024**__power
         except ValueError as __msg:
+            print(__msg)
             logging.warn(__msg)
             __res = 0
         finally:

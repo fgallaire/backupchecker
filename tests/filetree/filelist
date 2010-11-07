@@ -1,4 +1,9 @@
-foo/foo1 =300G
-foo/foo2 >300G
-foo/bar/foo3 <100K
-foo/bar/toto
+[files]
+# mandatory for test_checktree_missing_equality() in tests.py
+foo/foo1: =300G
+# mandatory for test_checktree_missing_bigger_than() in tests.py
+foo/foo2: >300G
+# mandatory for test_checktree_missing_smaller_than() in tests.py
+foo/bar/foo3: <100K
+# checkinf if missing files are identified
+foo/bar/toto:

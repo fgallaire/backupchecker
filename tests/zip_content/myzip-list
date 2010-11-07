@@ -1,2 +1,3 @@
-myzip/bar1
-toto/bling
+[files]
+myzip/bar1:
+toto/bling:
