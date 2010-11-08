@@ -35,14 +35,53 @@ class TestApp(unittest.TestCase):
         os.remove(_logfile)
         self.assertEqual(_res, 'WARNING:root:1 file missing in tests/tar_gz_archive_content/essai.tar.gz: \nWARNING:root:essai/dir/titi\n')
 
-    def test_checkhashes(self):
-        '''Test the CheckHashes class'''
-        _hashfile = 'tests/corrupted_archive/MD5SUMS'
+    def test_checkhashes_md5(self):
+        '''Test the CheckHashes class with MD5'''
+        _hashfile = 'tests/corrupted_archives/MD5SUMS'
         _hashtype = 'md5'
-        _confs = {'essai': {'path': 'tests/corrupted_archive/essai.tar.gz', 'files_list': 'tests/corrupted_archive/essai-list', 'type': 'archive'}, 'corrupted': {'path': 'tests/corrupted_archive/corrupted.tar.gz', 'files_list': 'tests/corrupted_archive/essai-list', 'type': 'archive'}}
-        checkhashes.CheckHashes(_hashfile, _hashtype, _confs)
-        _res = open('tests/corrupted_archive/a.out').read()
-        self.assertEqual(_res, 'INFO:root:The {}/tests/corrupted_archive/corrupted.tar.gz checksum mismatched\nINFO:root:1 file missing in {}/tests/corrupted_archive/essai.tar.gz: \nINFO:root:essai/dir/titi\n'.format(os.getcwd(), os.getcwd()))
+        _confs = {'corrupted': {'path': 'tests/corrupted_archives/md5-corrupted.tar.gz', 'type': 'archive'}}
+        __checker = checkhashes.CheckHashes(_hashfile, _hashtype, _confs)
+        self.assertEqual(0, len(__checker.confs))
+
+    def test_checkhashes_sha1(self):
+        '''Test the CheckHashes class with SHA1'''
+        _hashfile = 'tests/corrupted_archives/SHA1SUMS'
+        _hashtype = 'sha1'
+        _confs = {'corrupted': {'path': 'tests/corrupted_archives/sha1-corrupted.tar.gz', 'type': 'archive'}}
+        __checker = checkhashes.CheckHashes(_hashfile, _hashtype, _confs)
+        self.assertEqual(0, len(__checker.confs))
+
+    def test_checkhashes_sha224(self):
+        '''Test the CheckHashes class with SHA224'''
+        _hashfile = 'tests/corrupted_archives/SHA224SUMS'
+        _hashtype = 'sha224'
+        _confs = {'corrupted': {'path': 'tests/corrupted_archives/sha224-corrupted.tar.bz2', 'type': 'archive'}}
+        __checker = checkhashes.CheckHashes(_hashfile, _hashtype, _confs)
+        self.assertEqual(0, len(__checker.confs))
+
+    def test_checkhashes_sha256(self):
+        '''Test the CheckHashes class with SHA256'''
+        _hashfile = 'tests/corrupted_archives/SHA256SUMS'
+        _hashtype = 'sha256'
+        _confs = {'corrupted': {'path': 'tests/corrupted_archives/sha256-corrupted.tar.gz', 'type': 'archive'}}
+        __checker = checkhashes.CheckHashes(_hashfile, _hashtype, _confs)
+        self.assertEqual(0, len(__checker.confs))
+
+    def test_checkhashes_sha384(self):
+        '''Test the CheckHashes class with SHA384'''
+        _hashfile = 'tests/corrupted_archives/SHA384SUMS'
+        _hashtype = 'sha384'
+        _confs = {'corrupted': {'path': 'tests/corrupted_archives/sha384-corrupted.tar.bz2', 'type': 'archive'}}
+        __checker = checkhashes.CheckHashes(_hashfile, _hashtype, _confs)
+        self.assertEqual(0, len(__checker.confs))
+
+    def test_checkhashes_sha512(self):
+        '''Test the CheckHashes class with SHA512'''
+        _hashfile = 'tests/corrupted_archives/SHA512SUMS'
+        _hashtype = 'sha512'
+        _confs = {'corrupted': {'path': 'tests/corrupted_archives/sha512-corrupted.tar.gz', 'type': 'archive'}}
+        __checker = checkhashes.CheckHashes(_hashfile, _hashtype, _confs)
+        self.assertEqual(0, len(__checker.confs))
 
     def test_checktar_missing_files(self):
         '''Check if the CheckTar class returns a missing file'''
