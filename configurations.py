@@ -49,7 +49,7 @@ class Configurations:
                 # Common information for the databases
                 ### The list of the expected objects in the database
                 {'main': 'dbobjects'},
-                ### The type of the database - should be supported by SQLAlchemy
+                ### The type of the database, should be supported by SQLAlchemy
                 {'main': 'dbtype'},
                 ### The database host
                 {'main': 'dbhost'},
@@ -67,12 +67,16 @@ class Configurations:
                 for __element in __confsettings:
                     __key, __value = __element.popitem()
                     if __config.has_option(__key, __value):
-                        __currentconf[__value] = __config.get(__key, __value)
+                        __currentconf[__value] = __config.get(
+                                                    __key, __value)
                     else:
-                        __currentconf[__value] = __config.set(__key, __value, '')
+                        __currentconf[__value] = __config.set(
+                                                    __key, __value, '')
                 # Checking the information
                 ### Check the paths in the configuration
-                __pathnames = ["__currentconf['path']", "__currentconf['dbpath']", "__currentconf['dbobjects']"]
+                __pathnames = ["__currentconf['path']",
+                                "__currentconf['dbpath']",
+                                "__currentconf['dbobjects']"]
                 for __pathname in __pathnames:
                     __path = getattr(self, __pathname, None)
                     if __path:
@@ -84,7 +88,8 @@ class Configurations:
                 if __currentconf['dbtype']:
                     __dbtype = __currentconf['dbtype'].lower()
                     if  __dbtype not in set(['sqlite', 'mysql', 'postgresql']):
-                        print('The given database is not supported : {}'.format(__dbtype))
+                        __warning = 'The given database is not supported : {}'
+                        print(__warning.format(__dbtype))
                         sys.exit(1)
                     ### If dbhost is not specified, use 127.0.0.1
                     if not __currentconf['dbhost']:
@@ -98,4 +103,3 @@ class Configurations:
     def configs(self):
         '''Return the different configurations parameters'''
         return self.__configs
-

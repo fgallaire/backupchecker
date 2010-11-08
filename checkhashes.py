@@ -41,9 +41,11 @@ class CheckHashes(object):
                 __bckname = os.path.split(__confs[__conf]['path'])[-1]
                 if __bckname in __hashinfo:
                     with open(__confs[__conf]['path'], 'rb') as __file:
-                        __res = getattr(hashlib, __hashtype)(__file.read()).hexdigest()
+                        __res = getattr(hashlib, __hashtype)(
+                            __file.read()).hexdigest()
                         if __res != __hashinfo[__bckname]:
-                            logging.warn('The {} checksum mismatched'.format(__confs[__conf]['path']))
+                            logging.warn('The {} checksum mismatched'.format(
+                                __confs[__conf]['path']))
                             __confstoremove.append(__conf)
             for __conf in __confstoremove:
                 del(self.__confs[__conf])
@@ -58,7 +60,8 @@ class CheckHashes(object):
                 for __file in __files:
                     __data = __file.split()
                     if len(__data) != 2:
-                        logging.warn('{} has not a hash file valid format - should be only two arguments by line'.format(__hashfile))
+                        __warning = '{}: invalid hash format file'
+                        logging.warn(__warning.format(__hashfile))
                         sys.exit(1)
                     else:
                         __hashinfo[__data[-1]] = __data[0]
@@ -69,5 +72,7 @@ class CheckHashes(object):
         
     @property
     def confs(self):
-        '''Return the configurations minus the ones containing a corrupted file'''
+        '''Return the configurations minus the ones containing a 
+        corrupted file
+        '''
         return self.__confs

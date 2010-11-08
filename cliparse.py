@@ -80,11 +80,12 @@ class CliParse:
             if not os.path.exists(__options.hashfile):
                 print('The hash file does not exist')
                 sys.exit(1)
+        __hashwarning = 'You should provide both hash type and hash file'
         elif __options.hashtype and not __options.hashfile:
-            print('A hash algorithm is defined but you do not provide the file with the hash sums')
+            print(__hashwarning)
             sys.exit(1)
         elif __options.hashfile and not __options.hashtype:
-            print('A file with the hash sums are given but you do not provide the hash algorithm you wish to use')
+            print(__hashwarning)
             sys.exit(1)
         self.__options = __options
 

@@ -59,7 +59,8 @@ class ExpectedFiles(object):
         '''Convert the given file length to bytes'''
         try:
             __res = int(__arg[1:-1])
-            for __value, __power in [('K', 1),('M', 2),('G', 3),('P', 4),('E', 5),('Z', 6),('Y', 7)]:
+            for __value, __power in [('K', 1),('M', 2),('G', 3),('P', 4),
+                                        ('E', 5),('Z', 6),('Y', 7)]:
                 if __arg.endswith(__value):
                     __res = int(__arg[1:-1]) * 1024**__power
         except ValueError as __msg:

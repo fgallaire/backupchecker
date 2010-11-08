@@ -42,7 +42,9 @@ class ArchiveInfoMsg(object):
                 logging.warn('{}'.format(__path))
 
     def __classify_differences(self, __bck, __archivepath):
-        '''Report differences between expected files and files in the archive'''
+        '''Report differences between expected files and files in the
+        archive
+        '''
         if __bck.missing_equality:
             __topic = '{} {} with unexpected size in {}: '
             self.__log_differences(
@@ -50,14 +52,18 @@ class ArchiveInfoMsg(object):
         if __bck.missing_smaller_than:
             __topic = '{} {} bigger than expected in {}: '
             self.__log_differences(
-                __bck.missing_smaller_than, __archivepath, __topic, 'smaller than')
+                __bck.missing_smaller_than, __archivepath,
+                    __topic, 'smaller than')
         if __bck.missing_bigger_than:
             __topic = '{} {} smaller than expected in {}: '
             self.__log_differences(
-                __bck.missing_bigger_than, __archivepath, __topic, 'bigger than')
+                __bck.missing_bigger_than, __archivepath,
+                    __topic, 'bigger than')
 
     def __log_differences(self, __files, __archivepath, __topic, __qty=''):
-        '''Log the differences between the expected files and the files in the archive'''
+        '''Log the differences between the expected files and the files
+        in the archive
+        '''
         __fileword = 'file'
         if len(__files) > 1:
             __fileword = 'files'
