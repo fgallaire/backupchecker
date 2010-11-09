@@ -42,17 +42,17 @@ class ExpectedFiles(object):
         '''Retrieve data from the expected files'''
         __config = configparser.ConfigParser()
         __config.readfp(__file)
-        __filesizes = __config.items('files')
-        for __filesize in __filesizes:
+        __files = __config.items('files')
+        for __fileitems in __files:
             __data = {}
-            __path, __size = __filesize
-            __data['path'] = __path
-            if __size.startswith('='):
-                __data['equals'] = self.__convert_arg(__size)
-            if __size.startswith('>'):
-                __data['biggerthan'] = self.__convert_arg(__size)
-            elif __size.startswith('<'):
-                __data['smallerthan'] = self.__convert_arg(__size)
+            __data['path'] = __fileitems[0]
+            for __item in __fileitems:
+                if __item.startswith('='):
+                    __data['equals'] = self.__convert_arg(__item)
+                if __item.startswith('>'):
+                    __data['biggerthan'] = self.__convert_arg(__item)
+                elif __item.startswith('<'):
+                    __data['smallerthan'] = self.__convert_arg(__item)
             self.__data.append(__data)
 
     def __convert_arg(self, __arg):
