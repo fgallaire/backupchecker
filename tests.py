@@ -13,7 +13,7 @@ import checktree
 import checkzip
 import cliparse
 import configurations
-import expectedfiles
+from expectedfiles import ExpectedFiles
 import main
 
 # !! logging module uses a single logger for the whole file
@@ -208,6 +208,14 @@ class TestApp(unittest.TestCase):
         __path = 'tests/test_conf/'
         __res = configurations.Configurations(__path).configs
         self.assertEqual({'essai': {'path': 'tests/essai.tar.gz', 'files_list': 'tests/essai-list', 'type': 'archive', 'dbobjects': None, 'dbname': None, 'dbpath': None, 'dbhost': None, 'dbpass': None, 'dbuser': None, 'dbtype': None}}, __res)
+
+    def test_expected_files(self):
+        '''Check the ExpectedFiles class'''
+        __data = ExpectedFiles('tests/file_size/essai-list').data
+        self.assertEqual([{'path':'essai/dir/toto', 'equals':536870912},
+            {'path':'essai/titi','biggerthan':536870912},
+            {'path':'essai/dir/toutou','smallerthan':20480},
+            {'path':'essai/dir/zozo'}], __data)
 
 if __name__ == '__main__':
     unittest.main()
