@@ -75,12 +75,12 @@ class CliParse:
             sys.exit(1)
         __options.confpath = os.path.abspath(__options.confpath)
         # Check if hashfile and hashtype are both defined
+        __hashwarning = 'You should provide both hash type and hash file'
         if __options.hashtype and __options.hashfile:
             # Check the hash file path
             if not os.path.exists(__options.hashfile):
                 print('The hash file does not exist')
                 sys.exit(1)
-        __hashwarning = 'You should provide both hash type and hash file'
         elif __options.hashtype and not __options.hashfile:
             print(__hashwarning)
             sys.exit(1)
