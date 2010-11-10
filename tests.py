@@ -217,5 +217,11 @@ class TestApp(unittest.TestCase):
             {'path':'essai/dir/toutou','smallerthan':20480},
             {'path':'essai/dir/zozo'}], __data)
 
+    def test_unexpected_files(self):
+        '''Check if an unexpected file is identified'''
+        __data = ExpectedFiles('tests/unexpected_files/files-list').data
+        self.assertEqual([{'path':'foo/foo1'},{'path':'foo/foo2'},
+            {'path':'foo/bar','unexpected':True}], __data)
+
 if __name__ == '__main__':
     unittest.main()

@@ -28,6 +28,7 @@ class ArchiveInfoMsg(object):
         '''The main for the ArchiveInfoMsg class'''
         if __cfgvalues['type'] == 'archive' or __cfgvalues['type'] == 'tree':
             self.__missing_files(__bck.missing_files, __cfgvalues['path'])
+            self.__unexpected_files(__bck.unexpected_files, __cfgvalues['path'])
             self.__classify_differences(__bck, __cfgvalues['path'])
 
     def __missing_files(self, __missing, __archivepath):
@@ -39,6 +40,17 @@ class ArchiveInfoMsg(object):
             logging.warn('{} {} missing in {}: '.format(
                 len(__missing), __msg, __archivepath))
             for __path in __missing:
+                logging.warn('{}'.format(__path))
+
+    def __unexpected_files(self, __unexpected, __archivepath):
+        '''Warn about the unexpected files in the archive'''
+        if __unexpected:
+            __msg= 'file'
+            if len(__unexpected) > 1:
+                __msg = 'files'
+            logging.warn('{} unexpected {} in {}: '.format(
+                len(__unexpected), __msg, __archivepath))
+            for __path in __unexpected:
                 logging.warn('{}'.format(__path))
 
     def __classify_differences(self, __bck, __archivepath):

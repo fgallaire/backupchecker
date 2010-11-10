@@ -24,6 +24,7 @@ class CheckArchive(object):
         self._missing_equality = []
         self._missing_bigger_than = []
         self._missing_smaller_than = []
+        self._unexpected_files = []
         self._main(_cfgvalues)
 
     def _check_path(self, _arcsize, _arcname, _data):
@@ -31,6 +32,7 @@ class CheckArchive(object):
         for _ind, _file in enumerate(_data):
             if _arcname == _file['path']:
                 self._compare_sizes(_arcsize, _arcname, _file)
+                self._check_unexpected_files(_arcname, _file)
                 del(_data[_ind])
         return _data
 
@@ -47,7 +49,12 @@ class CheckArchive(object):
         elif 'smallerthan' in _file and _arcsize > _file['smallerthan']:
             self.missing_smaller_than.append({'path': _arcname,
                 'size': _arcsize, 'expected': _file['smallerthan']})
-        
+
+    def _check_unexpected_files(self, _arcname, _file):
+        '''Check if an unexpected file exists in the archive'''
+        if 'unexpected' in _file:
+            self.unexpected_files.append(_arcname)
+
     @property
     def missing_equality(self):
         '''A list containing the paths of the files missing the
@@ -75,3 +82,8 @@ class CheckArchive(object):
         missing the smaller than parameter in the archive
         '''
         return self._missing_smaller_than
+
+    @property
+    def unexpected_files(self):
+        ''' A list containing the unexpected files in the archive'''
+        return self._unexpected_files

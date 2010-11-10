@@ -47,9 +47,12 @@ class ExpectedFiles(object):
             __data = {}
             __data['path'] = __fileitems[0]
             for __item in __fileitems:
-                if __item.startswith('='):
+                # testing the items for an expected file
+                if __item == 'unexpected':
+                    __data['unexpected'] = True
+                elif __item.startswith('='):
                     __data['equals'] = self.__convert_arg(__item)
-                if __item.startswith('>'):
+                elif __item.startswith('>'):
                     __data['biggerthan'] = self.__convert_arg(__item)
                 elif __item.startswith('<'):
                     __data['smallerthan'] = self.__convert_arg(__item)
