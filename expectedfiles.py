@@ -46,16 +46,27 @@ class ExpectedFiles(object):
         for __fileitems in __files:
             __data = {}
             __data['path'] = __fileitems[0]
-            for __item in __fileitems:
-                # testing the items for an expected file
-                if __item == 'unexpected':
-                    __data['unexpected'] = True
-                elif __item.startswith('='):
-                    __data['equals'] = self.__convert_arg(__item)
-                elif __item.startswith('>'):
-                    __data['biggerthan'] = self.__convert_arg(__item)
-                elif __item.startswith('<'):
-                    __data['smallerthan'] = self.__convert_arg(__item)
+            if len(__fileitems) == 2:
+                for __item in __fileitems[1].split(' '):
+                    # Testing the items for an expected file
+                    if __item == 'unexpected':
+                        __data['unexpected'] = True
+                    # The uid of the expected file
+                    elif __item.startswith('uid:'):
+                        __data['uid'] = int(__item.split(':')[-1])
+                    # The gid of the expected file
+                    elif __item.startswith('gid:'):
+                        __data['gid'] = int(__item.split(':')[-1])
+                    # Testing the size of the file
+                    ### Test if the equality is required
+                    elif __item.startswith('='):
+                        __data['equals'] = self.__convert_arg(__item)
+                    ### Test if bigger than is required
+                    elif __item.startswith('>'):
+                        __data['biggerthan'] = self.__convert_arg(__item)
+                    ### Test if smaller than is required
+                    elif __item.startswith('<'):
+                        __data['smallerthan'] = self.__convert_arg(__item)
             self.__data.append(__data)
 
     def __convert_arg(self, __arg):

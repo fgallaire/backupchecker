@@ -30,6 +30,7 @@ class ArchiveInfoMsg(object):
             self.__missing_files(__bck.missing_files, __cfgvalues['path'])
             self.__unexpected_files(__bck.unexpected_files, __cfgvalues['path'])
             self.__classify_differences(__bck, __cfgvalues['path'])
+            self.__uid_gid_mismatches(__bck, __cfgvalues['path'])
 
     def __missing_files(self, __missing, __archivepath):
         '''Warn about the missing files in an archive'''
@@ -88,3 +89,28 @@ class ArchiveInfoMsg(object):
             for __file in __files:
                 logging.warn('{} size is {}. Should have been {}.'.format(
                     __file['path'], __file['size'], __file['expected']))
+
+    def __uid_gid_mismatches(self, __bck, __archivepath):
+        '''Log the uids and gids mismatches'''
+        # Uid
+        if __bck.mismatched_uids:
+            __errnb = len(__bck.mismatched_uids)
+            __fileword = 'file'
+            __uidword = 'uid'
+            if __errnb > 1:
+                __fileword = 'files'
+                __uidword = 'uids'
+            logging.warn('{} contains {} {} with unexpected {}:'.format(__archivepath, __errnb, __fileword, __uidword))
+            for __file in __bck.mismatched_uids:
+                logging.warn('{} uid is {!s}. Should have been {!s}.'.format(__file['path'], __file['uid'], __file['expecteduid']))
+        # Gid
+        if __bck.mismatched_gids:
+            __errnb = len(__bck.mismatched_gids)
+            __fileword = 'file'
+            __gidword = 'gid'
+            if __errnb > 1:
+                __fileword = 'files'
+                __gidword = 'gids'
+            logging.warn('{} contains {} {} with unexpected {}:'.format(__archivepath, __errnb, __fileword, __gidword))
+            for __file in __bck.mismatched_gids:
+                logging.warn('{} gid is {!s}. Should have been {!s}.'.format(__file['path'], __file['gid'], __file['expectedgid']))

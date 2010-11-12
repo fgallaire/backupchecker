@@ -32,7 +32,9 @@ class CheckTar(CheckArchive):
             _data = ExpectedFiles(_cfgvalues['files_list']).data
             _tar = tarfile.open(_cfgvalues['path'], 'r')
             for _tarinfo in _tar:
-                _data = self._check_path(_tarinfo.size, _tarinfo.name, _data)
+                __arcinfo = {'path':_tarinfo.name, 'size':_tarinfo.size, 
+                                'uid':_tarinfo.uid, 'gid':_tarinfo.gid}
+                _data = self._check_path(__arcinfo, _data)
             self._missing_files = [_file['path'] for _file in _data]
         except tarfile.TarError as _msg:
             print(_msg)

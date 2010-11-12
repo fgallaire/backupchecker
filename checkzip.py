@@ -38,7 +38,8 @@ class CheckZip(CheckArchive):
             else:
                 _zipinfo = _zip.infolist()
                 for _fileinfo in _zipinfo:
-                    _data = self._check_path(_fileinfo.file_size, _fileinfo.filename, _data)
+                    __arcinfo = {'path': _fileinfo.filename, 'size': _fileinfo.file_size}
+                    _data = self._check_path(__arcinfo, _data)
                 self._missing_files = [_file['path'] for _file in _data]
         except zipfile.BadZipfile as _msg:
             print(_msg)

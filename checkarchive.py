@@ -25,14 +25,28 @@ class CheckArchive(object):
         self._missing_bigger_than = []
         self._missing_smaller_than = []
         self._unexpected_files = []
+        self._mismatched_uids = []
+        self._mismatched_gids = []
         self._main(_cfgvalues)
 
-    def _check_path(self, _arcsize, _arcname, _data):
+    def _check_path(self, __arcinfo, _data):
         '''Check if the expected path exists in the archive'''
         for _ind, _file in enumerate(_data):
-            if _arcname == _file['path']:
-                self._compare_sizes(_arcsize, _arcname, _file)
-                self._check_unexpected_files(_arcname, _file)
+            if __arcinfo['path'] == _file['path']:
+                # Tests of files in the archive and expected ones
+                ### Compare the sizes of the file in the archive and the
+                ### expected file
+                self._compare_sizes(__arcinfo['size'], __arcinfo['path'], _file)
+                ### Check if an unexpected file is in the archive
+                self._check_unexpected_files(__arcinfo['path'], _file)
+                ### Compare the uid of the file in the archive and the
+                ### expected one
+                if 'uid' in __arcinfo and 'uid' in _file:
+                    self._check_uid(__arcinfo['uid'], _file)
+                ### Compare the gid of the file in the archive and the
+                ### expected one
+                if 'gid' in __arcinfo and 'gid' in _file:
+                    self._check_gid(__arcinfo['gid'], _file)
                 del(_data[_ind])
         return _data
 
@@ -50,10 +64,24 @@ class CheckArchive(object):
             self.missing_smaller_than.append({'path': _arcname,
                 'size': _arcsize, 'expected': _file['smallerthan']})
 
-    def _check_unexpected_files(self, _arcname, _file):
+    def _check_unexpected_files(self, __arcname, __file):
         '''Check if an unexpected file exists in the archive'''
-        if 'unexpected' in _file:
-            self.unexpected_files.append(_arcname)
+        if 'unexpected' in __file:
+            self.unexpected_files.append(__arcname)
+
+    def _check_uid(self, __arcuid, __file):
+        '''Check if the file uid in the archive matches the expected
+        one
+        '''
+        if __file['uid'] != __arcuid:
+            self.mismatched_uids.append({'path':__file['path'], 'expecteduid':__file['uid'],'uid':__arcuid})
+
+    def _check_gid(self, __arcgid, __file):
+        '''Check if the file gid in the archive matches the expected
+        one
+        '''
+        if __file['gid'] != __arcgid:
+            self.mismatched_gids.append({'path':__file['path'], 'expectedgid':__file['gid'],'gid':__arcgid})
 
     @property
     def missing_equality(self):
@@ -87,3 +115,17 @@ class CheckArchive(object):
     def unexpected_files(self):
         ''' A list containing the unexpected files in the archive'''
         return self._unexpected_files
+
+    @property
+    def mismatched_uids(self):
+        '''A list containing the paths of the files in the archive with
+        an unexpected uid
+        '''
+        return self._mismatched_uids
+
+    @property
+    def mismatched_gids(self):
+        '''A list containing the paths of the files in the archive with
+        an unexpected gid
+        '''
+        return self._mismatched_gids

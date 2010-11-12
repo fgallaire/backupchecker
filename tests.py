@@ -167,9 +167,9 @@ class TestApp(unittest.TestCase):
         '''Check if the CheckZip class returns a missing file'''
         _missing_files = []
         _missing_files = checkzip.CheckZip({'path':
-            'tests/zip_content/myzip.zip',
+            'tests/zip/myzip.zip',
              'files_list':
-                'tests/zip_content/myzip-list',
+                'tests/zip/myzip-list',
              'type': 'archive'}).missing_files
         self.assertEqual(_missing_files, ['toto/bling'])
 
@@ -222,6 +222,28 @@ class TestApp(unittest.TestCase):
         __data = ExpectedFiles('tests/unexpected_files/files-list').data
         self.assertEqual([{'path':'foo/foo1'},{'path':'foo/foo2'},
             {'path':'foo/bar','unexpected':True}], __data)
+
+    def test_extract_expected_uid_gid(self):
+        '''Check the uid and gid of an expected file''' 
+        __data = ExpectedFiles('tests/expected_uid_gid/files-list').data
+        self.assertEqual([{'path':'foo/foo1', 'uid':1001, 'gid':1001}], __data)
+
+    def test_compare_uid_gid(self):
+        '''Compare the uid and the gid of a file in the archive
+        and the expected one
+        '''
+        __uids = []
+        __gids = []
+        __myobj = checktar.CheckTar({'path':
+            'tests/expected_uid_gid/foo.tar.gz',
+             'files_list':
+                'tests/expected_uid_gid/files-list',
+             'type': 'archive'})
+        __uids = __myobj.mismatched_uids
+        __gids = __myobj.mismatched_gids
+        self.assertEqual((__uids[0],__gids[0]), (
+        {'path':'foo/foo1','expecteduid':1001,'uid':1000},
+        {'path':'foo/foo1','expectedgid':1001,'gid':1000}))
 
 if __name__ == '__main__':
     unittest.main()
