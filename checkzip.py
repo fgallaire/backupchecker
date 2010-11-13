@@ -31,7 +31,7 @@ class CheckZip(CheckArchive):
         _data = []
         try:
             _data= ExpectedFiles(_cfgvalues['files_list']).data
-            _zip = zipfile.ZipFile(_cfgvalues['path'], 'r')
+            _zip = zipfile.ZipFile(_cfgvalues['path'], 'r', allowZip64=True)
             _crcerror = _zip.testzip()
             if _crcerror:
                 logging.warn('{} has at least a file corrupted:{}'.format(_cfgvalues['path'], _crcerror))
