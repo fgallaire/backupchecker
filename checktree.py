@@ -34,6 +34,6 @@ class CheckTree(CheckArchive):
             for __filename in __filenames:
                 __filepath = os.path.join(__dirpath, __filename)
                 __fileinfo = os.stat(__filepath)
-                __arcinfo = {'path': os.path.relpath(__filepath, __treeroot), 'size': __fileinfo.st_size}
+                __arcinfo = {'path': os.path.relpath(__filepath, __treeroot), 'size': __fileinfo.st_size, 'uid': __fileinfo.st_uid, 'gid': __fileinfo.st_gid}
                 _data = self._check_path(__arcinfo, _data)
         self._missing_files = [_file['path'] for _file in _data]

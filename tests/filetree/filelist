@@ -4,6 +4,6 @@ foo/foo1: =300G
 # mandatory for test_checktree_missing_bigger_than() in tests.py
 foo/foo2: >300G
 # mandatory for test_checktree_missing_smaller_than() in tests.py
-foo/bar/foo3: <100K
+foo/bar/foo3: <1K
 # checkinf if missing files are identified
 foo/bar/toto:
