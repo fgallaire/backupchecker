@@ -31,6 +31,7 @@ class ArchiveInfoMsg(object):
             self.__unexpected_files(__bck.unexpected_files, __cfgvalues['path'])
             self.__classify_differences(__bck, __cfgvalues['path'])
             self.__uid_gid_mismatches(__bck, __cfgvalues['path'])
+            self.__mode_mismatches(__bck, __cfgvalues['path'])
 
     def __missing_files(self, __missing, __archivepath):
         '''Warn about the missing files in an archive'''
@@ -114,3 +115,17 @@ class ArchiveInfoMsg(object):
             logging.warn('{} contains {} {} with unexpected {}:'.format(__archivepath, __errnb, __fileword, __gidword))
             for __file in __bck.mismatched_gids:
                 logging.warn('{} gid is {!s}. Should have been {!s}.'.format(__file['path'], __file['gid'], __file['expectedgid']))
+
+    def __mode_mismatches(self, __bck, __archivepath):
+        '''Log the file mode mismatches'''
+        if __bck.mismatched_modes:
+            __errnb = len(__bck.mismatched_modes)
+            __fileword = 'file'
+            __modeword = 'mode'
+            if __errnb > 1:
+                __fileword = 'files'
+                __modeword = 'modes'
+            logging.warn('{} contains {} {} with unexpected {}:'.format(__archivepath, __errnb, __fileword, __modeword))
+            for __file in __bck.mismatched_modes:
+                logging.warn('{} mode is {}. Should have been {}.'.format(__file['path'], __file['mode'], __file['expectedmode']))
+        

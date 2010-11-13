@@ -33,7 +33,8 @@ class CheckTar(CheckArchive):
             _tar = tarfile.open(_cfgvalues['path'], 'r')
             for _tarinfo in _tar:
                 __arcinfo = {'path':_tarinfo.name, 'size':_tarinfo.size, 
-                                'uid':_tarinfo.uid, 'gid':_tarinfo.gid}
+                                'uid':_tarinfo.uid, 'gid':_tarinfo.gid,
+                                'mode':_tarinfo.mode}
                 _data = self._check_path(__arcinfo, _data)
             self._missing_files = [_file['path'] for _file in _data]
         except tarfile.TarError as _msg:

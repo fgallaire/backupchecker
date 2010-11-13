@@ -245,5 +245,29 @@ class TestApp(unittest.TestCase):
         {'path':'foo/foo1','expecteduid':1001,'uid':1000},
         {'path':'foo/foo1','expectedgid':1001,'gid':1000}))
 
+    def test_extract_modes(self):
+        '''Extract the expected file modes'''
+        __data = ExpectedFiles('tests/expected_mode/files-list').data
+        self.assertEqual([{'path':'foos/foo1', 'mode': '644'},
+            {'path':'foos/foo2', 'mode': '755'},
+            {'path':'foos/bar/foo3', 'mode': '4644'},
+            {'path':'foos/bar', 'mode': '754'}], __data)
+
+    def test_compare_mode(self):
+        '''Compare the mode of a file in the archive and the
+        expected one
+        '''
+        __myobj = checktar.CheckTar({'path':
+            'tests/expected_mode/foos.tar.gz',
+             'files_list':
+                'tests/expected_mode/files-list',
+             'type': 'archive'})
+        __modes = __myobj.mismatched_modes
+        self.assertEqual(__modes, [
+        {'path':'foos/foo2','expectedmode':'755','mode':'754'},
+        {'path':'foos/bar','expectedmode':'754','mode':'755'},
+        {'path':'foos/bar/foo3','expectedmode':'4644','mode':'4600'},
+        {'path':'foos/foo1','expectedmode':'644','mode':'744'}])
+
 if __name__ == '__main__':
     unittest.main()

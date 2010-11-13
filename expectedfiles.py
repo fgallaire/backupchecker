@@ -58,6 +58,13 @@ class ExpectedFiles(object):
                         # The gid of the expected file
                         elif __item.startswith('gid:'):
                             __data['gid'] = int(__item.split(':')[-1])
+                        # The mode of the expected file
+                        elif __item.startswith('mode'):
+                            __mode =__item.split(':')[-1]
+                            if len(__mode) < 3 or len(__mode) > 4:
+                                logging.warn('{}: Wrong format for the mode.'.format(__data['path']))
+                            else:
+                                __data['mode'] = __mode
                         # Testing the size of the file
                         ### Test if the equality is required
                         elif __item.startswith('='):
