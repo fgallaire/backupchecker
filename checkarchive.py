@@ -27,6 +27,7 @@ class CheckArchive(object):
         self._unexpected_files = []
         self._mismatched_uids = []
         self._mismatched_gids = []
+        self._mismatched_modes = []
         self._main(_cfgvalues)
 
     def _check_path(self, __arcinfo, _data):
@@ -47,6 +48,9 @@ class CheckArchive(object):
                 ### expected one
                 if 'gid' in __arcinfo and 'gid' in _file:
                     self._check_gid(__arcinfo['gid'], _file)
+                # Compare the filemode and the mode of the expected file
+                if 'mode' in __arcinfo and 'mode' in _file:
+                    self._check_mode(__arcinfo['mode'], _file)
                 del(_data[_ind])
         return _data
 
@@ -74,14 +78,22 @@ class CheckArchive(object):
         one
         '''
         if __file['uid'] != __arcuid:
-            self.mismatched_uids.append({'path':__file['path'], 'expecteduid':__file['uid'],'uid':__arcuid})
+            self.mismatched_uids.append({'path':__file['path'], 'expecteduid':__file['uid'], 'uid':__arcuid})
 
     def _check_gid(self, __arcgid, __file):
         '''Check if the file gid in the archive matches the expected
         one
         '''
         if __file['gid'] != __arcgid:
-            self.mismatched_gids.append({'path':__file['path'], 'expectedgid':__file['gid'],'gid':__arcgid})
+            self.mismatched_gids.append({'path':__file['path'], 'expectedgid':__file['gid'], 'gid':__arcgid})
+
+    def _check_mode(self, __arcmode, __file):
+        '''Check if the file mode in the archive matches the expected
+        one
+        '''
+        __arcmode = oct(__arcmode).split('o')[-1]
+        if __file['mode'] != __arcmode:
+            self.mismatched_modes.append({'path': __file['path'], 'expectedmode': __file['mode'], 'mode': __arcmode})
 
     @property
     def missing_equality(self):
@@ -118,14 +130,21 @@ class CheckArchive(object):
 
     @property
     def mismatched_uids(self):
-        '''A list containing the paths of the files in the archive with
+        '''A list containing a {path,uid,expecteduid} of the files in the archive with
         an unexpected uid
         '''
         return self._mismatched_uids
 
     @property
     def mismatched_gids(self):
-        '''A list containing the paths of the files in the archive with
+        '''A list containing a {path,gid,expectedgid} of the files in the archive with
         an unexpected gid
         '''
         return self._mismatched_gids
+
+    @property
+    def mismatched_modes(self):
+        '''A list containing {path,mode,expectedmode} of the files in the archive with
+        an unexpected mode
+        '''
+        return self._mismatched_modes
