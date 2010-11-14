@@ -253,7 +253,7 @@ class TestApp(unittest.TestCase):
             {'path':'foos/bar/foo3', 'mode': '4644'},
             {'path':'foos/bar', 'mode': '754'}], __data)
 
-    def test_compare_mode(self):
+    def test_archive_compare_mode(self):
         '''Compare the mode of a file in the archive and the
         expected one
         '''
@@ -268,6 +268,20 @@ class TestApp(unittest.TestCase):
         {'path':'foos/bar','expectedmode':'754','mode':'755'},
         {'path':'foos/bar/foo3','expectedmode':'4644','mode':'4600'},
         {'path':'foos/foo1','expectedmode':'644','mode':'744'}])
+
+    def test_filetree_compare_mode(self):
+        '''Compare the mode of a file in the filetree and the
+        expected one
+        '''
+        __myobj = checktree.CheckTree({'path':
+            'tests/expected_mode/foo',
+             'files_list':
+                'tests/expected_mode/treefiles-list',
+             'type': 'tree'})
+        __modes = __myobj.mismatched_modes
+        self.assertEqual(__modes, [
+        {'path':'foo/foo1','expectedmode':'664','mode':'644'},
+        {'path':'foo/bar','expectedmode':'754','mode':'755'}])
 
 if __name__ == '__main__':
     unittest.main()
