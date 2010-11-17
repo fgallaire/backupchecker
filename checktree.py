@@ -34,16 +34,37 @@ class CheckTree(CheckArchive):
         for __dirpath, __dirnames, __filenames, in os.walk(_cfgvalues['path']):
             __dirinfo = os.stat(__dirpath)
             __dirmode = stat.S_IMODE(__dirinfo.st_mode)
+            __type = self.__translate_type(__dirinfo.st_mode)
             __arcinfo = {'path': os.path.relpath(__dirpath, __treeroot),
                         'size': __dirinfo.st_size, 'uid': __dirinfo.st_uid,
-                        'gid': __dirinfo.st_gid, 'mode': __dirmode}
+                        'gid': __dirinfo.st_gid, 'mode': __dirmode,
+                        'type': __type}
             _data = self._check_path(__arcinfo, _data)
             for __filename in __filenames:
                 __filepath = os.path.join(__dirpath, __filename)
                 __fileinfo = os.stat(__filepath)
                 __filemode = stat.S_IMODE(__fileinfo.st_mode)
+                __type = self.__translate_type(__fileinfo.st_mode)
                 __arcinfo = {'path': os.path.relpath(__filepath, __treeroot),
                             'size': __fileinfo.st_size, 'uid': __fileinfo.st_uid,
-                            'gid': __fileinfo.st_gid, 'mode': __filemode}
+                            'gid': __fileinfo.st_gid, 'mode': __filemode,
+                            'type': __type}
                 _data = self._check_path(__arcinfo, _data)
         self._missing_files = [_file['path'] for _file in _data]
+
+    def __translate_type(self, __mode):
+        '''Translate the type of the file to a generic name'''
+        if stat.S_ISREG(__mode):
+            return 'f'
+        elif stat.S_ISDIR(__mode):
+            return 'd'
+        elif stat.S_ISCHR(__mode):
+            return 'c'
+        elif stat.S_ISLNK(__mode):
+            return 's' 
+        elif stat.S_BLK(__mode):
+            return 'b'
+        elif stat.S_ISSOCK(__mode):
+            return 'k'
+        elif stat.S_ISFIFO(__mode):
+            return 'o'

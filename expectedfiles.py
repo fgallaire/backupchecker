@@ -65,6 +65,17 @@ class ExpectedFiles(object):
                                 logging.warn('{}: Wrong format for the mode.'.format(__data['path']))
                             else:
                                 __data['mode'] = __mode
+                        # Testing the type of the file
+                        elif __item.startswith('type'):
+                            __type =__item.split(':')[-1]
+                            ### f for file, c for character, d for directory
+                            ### s for symbolink link, b for block, o for fifo,
+                            ### k for socket
+                            __types = ('f','c','d','s','b','o','k')
+                            if __type not in __types:
+                                logging.warn('{}: Unknown type {} for file parameter'.format(__data['path'], __type))
+                            else:
+                                __data['type'] = __type
                         # Testing the size of the file
                         ### Test if the equality is required
                         elif __item.startswith('='):

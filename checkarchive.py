@@ -28,6 +28,7 @@ class CheckArchive(object):
         self._mismatched_uids = []
         self._mismatched_gids = []
         self._mismatched_modes = []
+        self._mismatched_types = []
         self._main(_cfgvalues)
 
     def _check_path(self, __arcinfo, _data):
@@ -48,9 +49,12 @@ class CheckArchive(object):
                 ### expected one
                 if 'gid' in __arcinfo and 'gid' in _file:
                     self._check_gid(__arcinfo['gid'], _file)
-                # Compare the filemode and the mode of the expected file
+                ### Compare the filemode and the mode of the expected file
                 if 'mode' in __arcinfo and 'mode' in _file:
                     self._check_mode(__arcinfo['mode'], _file)
+                ### Compare the file type and the type of the expected file 
+                if 'type' in __arcinfo and 'type' in _file:
+                    self._check_type(__arcinfo['type'], _file)
                 del(_data[_ind])
         return _data
 
@@ -94,6 +98,13 @@ class CheckArchive(object):
         __arcmode = oct(__arcmode).split('o')[-1]
         if __file['mode'] != __arcmode:
             self.mismatched_modes.append({'path': __file['path'], 'expectedmode': __file['mode'], 'mode': __arcmode})
+
+    def _check_type(self, __arctype, __file):
+        '''Check if the file type in the archive matches the unexpected
+        one
+        '''
+        if __file['type'] != __arctype:
+            self.mismatched_types.append({'path': __file['path'], 'expectedtype': __file['type'], 'type': __arctype})
 
     @property
     def missing_equality(self):
@@ -148,3 +159,10 @@ class CheckArchive(object):
         an unexpected mode
         '''
         return self._mismatched_modes
+
+    @property
+    def mismatched_types(self):
+        '''A list containing {path,type,expectedtype} of the files in the archive with
+        an unexpected type
+        '''
+        return self._mismatched_types

@@ -32,10 +32,22 @@ class CheckTar(CheckArchive):
             _data = ExpectedFiles(_cfgvalues['files_list']).data
             _tar = tarfile.open(_cfgvalues['path'], 'r')
             for _tarinfo in _tar:
+                __type = self.__translate_type(_tarinfo.type)
                 __arcinfo = {'path':_tarinfo.name, 'size':_tarinfo.size, 
                                 'uid':_tarinfo.uid, 'gid':_tarinfo.gid,
-                                'mode':_tarinfo.mode}
+                                'mode':_tarinfo.mode, 'type': __type}
                 _data = self._check_path(__arcinfo, _data)
             self._missing_files = [_file['path'] for _file in _data]
         except tarfile.TarError as _msg:
             print(_msg)
+
+    def __translate_type(self, __arctype):
+        '''Translate the type of the file inside the tar by a generic
+        name'''
+        __types = {tarfile.REGTYPE: 'f',
+            tarfile.CHRTYPE: 'c',
+            tarfile.DIRTYPE: 'd',
+            tarfile.SYMTYPE: 's',
+            tarfile.BLKTYPE: 'b',
+            tarfile.FIFOTYPE: 'o'}
+        return __types[__arctype]

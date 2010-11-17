@@ -283,5 +283,55 @@ class TestApp(unittest.TestCase):
         {'path':'foo/foo1','expectedmode':'664','mode':'644'},
         {'path':'foo/bar','expectedmode':'754','mode':'755'}])
 
+    def test_extract_types(self):
+        '''Extract the expected file types'''
+        __data = ExpectedFiles('tests/expected_type/files-list').data
+        self.assertEqual([{'path':'foos/foo1', 'type': 'f'},
+            {'path':'foos/foo2', 'type': 'c'},
+            {'path':'foos/foo3', 'type': 'd'},
+            {'path':'foos/foo4', 'type': 's'},
+            {'path':'foos/foo5', 'type': 'b'},
+            {'path':'foos/foo6', 'type': 'k'},
+            {'path':'foos/foo7', 'type': 'o'}], __data)
+
+    def test_archive_compare_type(self):
+        '''Compare the type of a file in the archive and the
+        expected one
+        '''
+        __myobj = checktar.CheckTar({'path':
+            'tests/expected_type/foos.tar.gz',
+             'files_list':
+                'tests/expected_type/files-list',
+             'type': 'archive'})
+        __modes = __myobj.mismatched_types
+        self.assertEqual(__modes, [
+        {'path':'foos/foo3','expectedtype':'d','type':'f'},
+        {'path':'foos/foo2','expectedtype':'c','type':'f'},
+        {'path':'foos/foo4','expectedtype':'s','type':'f'},
+        {'path':'foos/foo6','expectedtype':'k','type':'f'},
+        {'path':'foos/foo1','expectedtype':'f','type':'d'},
+        {'path':'foos/foo5','expectedtype':'b','type':'f'},
+        {'path':'foos/foo7','expectedtype':'o','type':'f'}])
+
+    def test_filetree_compare_type(self):
+        '''Compare the type of a file in the filetree and the
+        expected one
+        '''
+        __myobj = checktree.CheckTree({'path':
+            'tests/expected_type/foos',
+             'files_list':
+                'tests/expected_type/filetree-list',
+             'type': 'tree'})
+        __modes = __myobj.mismatched_types
+        self.assertEqual(__modes, [
+        {'path':'foos/foo2','expectedtype':'c','type':'f'},
+        {'path':'foos/foo1','expectedtype':'d','type':'f'},
+        {'path':'foos/foo3','expectedtype':'d','type':'f'},
+        {'path':'foos/foo4','expectedtype':'s','type':'f'},
+        {'path':'foos/foo6','expectedtype':'k','type':'f'},
+        {'path':'foos/foo5','expectedtype':'b','type':'f'},
+        {'path':'foos/bar','expectedtype':'f','type':'d'},
+        {'path':'foos/bar/bar1','expectedtype':'o','type':'f'}])
+
 if __name__ == '__main__':
     unittest.main()
