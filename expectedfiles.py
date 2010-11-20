@@ -59,7 +59,7 @@ class ExpectedFiles(object):
                         elif __item.startswith('gid:'):
                             __data['gid'] = int(__item.split(':')[-1])
                         # The mode of the expected file
-                        elif __item.startswith('mode'):
+                        elif __item.startswith('mode:'):
                             __mode =__item.split(':')[-1]
                             if len(__mode) < 3 or len(__mode) > 4:
                                 logging.warn('{}: Wrong format for the mode.'.format(__data['path']))
