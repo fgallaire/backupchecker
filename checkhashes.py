@@ -22,7 +22,7 @@ import os.path
 import sys
 
 class CheckHashes(object):
-    '''Check the files hashes'''
+    '''Check the files hashes of the backups'''
 
     def __init__(self, __hashfile, __hashtype, __confs):
         self.__confs = __confs
@@ -76,3 +76,9 @@ class CheckHashes(object):
         corrupted file
         '''
         return self.__confs
+
+def get_hash(__arcfile, __hashtype):
+    '''return the hash of a file'''
+    __res = getattr(hashlib, __hashtype)(__arcfile.read()).hexdigest()
+    return __res
+    

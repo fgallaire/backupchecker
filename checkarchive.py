@@ -16,6 +16,8 @@
 # Check an archive
 '''Check an archive'''
 
+import checkhashes
+
 class CheckArchive(object):
     '''Check an archive'''
 
@@ -29,6 +31,7 @@ class CheckArchive(object):
         self._mismatched_gids = []
         self._mismatched_modes = []
         self._mismatched_types = []
+        self._mismatched_hashes = []
         self._main(_cfgvalues)
 
     def _check_path(self, __arcinfo, _data):
@@ -55,6 +58,10 @@ class CheckArchive(object):
                 ### Compare the file type and the type of the expected file 
                 if 'type' in __arcinfo and 'type' in _file:
                     self._check_type(__arcinfo['type'], _file)
+                ### Compare the hash of the file and the one of the expected file
+                if 'hash' in _file:
+                        self._check_hash(__arcinfo['path'], _file)
+                # We reduce the number of files to work with
                 del(_data[_ind])
         return _data
 
@@ -100,11 +107,21 @@ class CheckArchive(object):
             self.mismatched_modes.append({'path': __file['path'], 'expectedmode': __file['mode'], 'mode': __arcmode})
 
     def _check_type(self, __arctype, __file):
-        '''Check if the file type in the archive matches the unexpected
+        '''Check if the file type in the archive matches the expected
         one
         '''
         if __file['type'] != __arctype:
             self.mismatched_types.append({'path': __file['path'], 'expectedtype': __file['type'], 'type': __arctype})
+
+    def _check_hash(self, __arcpath, __file):
+        '''Check if the file hash in the archive matches the expected
+        one
+        '''
+        __arcfile = self._extract_stored_file(__arcpath)
+        __arcfilehash = checkhashes.get_hash(__arcfile, __file['hash']['hashtype'])
+        if __file['hash']['hashvalue'] != __arcfilehash:
+            self.mismatched_hashes.append({'path': __file['path'],
+                'expectedhash': __file['hash']['hashvalue'], 'hash': __arcfilehash})
 
     @property
     def missing_equality(self):
@@ -166,3 +183,10 @@ class CheckArchive(object):
         an unexpected type
         '''
         return self._mismatched_types
+
+    @property
+    def mismatched_hashes(self):
+        '''A list containing {path,hash,expectedhash} of the files in the archive with
+        an unexpected hash
+        '''
+        return self._mismatched_hashes

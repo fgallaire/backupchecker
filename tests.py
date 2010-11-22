@@ -303,8 +303,8 @@ class TestApp(unittest.TestCase):
              'files_list':
                 'tests/expected_type/files-list',
              'type': 'archive'})
-        __modes = __myobj.mismatched_types
-        self.assertEqual(__modes, [
+        __types = __myobj.mismatched_types
+        self.assertEqual(__types, [
         {'path':'foos/foo3','expectedtype':'d','type':'f'},
         {'path':'foos/foo2','expectedtype':'c','type':'f'},
         {'path':'foos/foo4','expectedtype':'s','type':'f'},
@@ -322,8 +322,8 @@ class TestApp(unittest.TestCase):
              'files_list':
                 'tests/expected_type/filetree-list',
              'type': 'tree'})
-        __modes = __myobj.mismatched_types
-        self.assertEqual(__modes, [
+        __types = __myobj.mismatched_types
+        self.assertEqual(__types, [
         {'path':'foos/foo2','expectedtype':'c','type':'f'},
         {'path':'foos/foo1','expectedtype':'d','type':'f'},
         {'path':'foos/foo3','expectedtype':'d','type':'f'},
@@ -332,6 +332,119 @@ class TestApp(unittest.TestCase):
         {'path':'foos/foo5','expectedtype':'b','type':'f'},
         {'path':'foos/bar','expectedtype':'f','type':'d'},
         {'path':'foos/bar/bar1','expectedtype':'o','type':'f'}])
+
+    def test_extract_hashes(self):
+        '''Extract the expected file hashes'''
+        __data = ExpectedFiles('tests/expected_hash/files-list').data
+        self.assertEqual([{'hash': {'hashtype': 'md5', 
+            'hashvalue': '3718422a0bf93f7fc46cff6b5e660ff8'},
+            'path': 'foos/foo1'},
+            {'hash': {'hashtype': 'sha1',
+            'hashvalue': 'e0f58dcc57caad2182f701eb63f0c81f347d3fe5'},
+            'path': 'foos/foo2'},
+            {'hash': {'hashtype': 'sha224',
+            'hashvalue': 'g3c1d88024b6e2e333cbf8bed96182a62fbafaf2aea6dd8b17639552'},
+            'path': 'foos/foo3'},
+            {'hash': {'hashtype': 'sha256',
+            'hashvalue': '35a670af482f46a76f8033e05cca7a53a58456fa42ef47ea56ffd2b16e408863'},
+            'path': 'foos/foo4'},
+            {'hash': {'hashtype': 'sha384',
+            'hashvalue': '744e19f5c4258a573400b5059747d88797b150c08456e406e6473bd777332c5f66afe66c5bf77820906b97961c124810'},
+            'path': 'foos/foo5'},
+            {'hash': {'hashtype': 'sha512',
+            'hashvalue': 'c46dcb0f5124bd681cb5b91c812d2982efce703806026b1f9ffdeadf45c4128cd3e61fa939a0bc89af317e70d0d6c74b666edff9bd7ad9052cb8e7f42c8f7644'},
+            'path': 'foos/foo6'}], 
+            __data)
+
+    def test_archive_tar_compare_hash(self):
+        '''Compare the hash of a file in the tar archive and the
+        expected one
+        '''
+        __myobj = checktar.CheckTar({'path':
+            'tests/expected_hash/foos.tar.gz',
+             'files_list':
+                'tests/expected_hash/files-list',
+             'type': 'archive'})
+        __hashes = __myobj.mismatched_hashes
+        self.assertEqual(__hashes, [
+            {'path': 'foos/foo3', 
+            'expectedhash': 'g3c1d88024b6e2e333cbf8bed96182a62fbafaf2aea6dd8b17639552',
+            'hash':'f3c1d88024b6e2e333cbf8bed96182a62fbafaf2aea6dd8b17639552'},
+            {'path': 'foos/foo2',
+            'expectedhash': 'e0f58dcc57caad2182f701eb63f0c81f347d3fe5',
+            'hash': 'd0f58dcc57caad2182f701eb63f0c81f347d3fe5'},
+            {'path': 'foos/foo4',
+            'expectedhash': '35a670af482f46a76f8033e05cca7a53a58456fa42ef47ea56ffd2b16e408863',
+            'hash': '25a670af482f46a76f8033e05cca7a53a58456fa42ef47ea56ffd2b16e408863'},
+            {'path': 'foos/foo6',
+            'expectedhash': 'c46dcb0f5124bd681cb5b91c812d2982efce703806026b1f9ffdeadf45c4128cd3e61fa939a0bc89af317e70d0d6c74b666edff9bd7ad9052cb8e7f42c8f7644',
+            'hash': 'b46dcb0f5124bd681cb5b91c812d2982efce703806026b1f9ffdeadf45c4128cd3e61fa939a0bc89af317e70d0d6c74b666edff9bd7ad9052cb8e7f42c8f7644'},
+            {'path': 'foos/foo1',
+            'expectedhash': '3718422a0bf93f7fc46cff6b5e660ff8',
+            'hash': '2718422a0bf93f7fc46cff6b5e660ff8'},
+            {'path': 'foos/foo5',
+            'expectedhash': '744e19f5c4258a573400b5059747d88797b150c08456e406e6473bd777332c5f66afe66c5bf77820906b97961c124810',
+            'hash': '644e19f5c4258a573400b5059747d88797b150c08456e406e6473bd777332c5f66afe66c5bf77820906b97961c124810'}])
+
+    def test_filetree_compare_hash(self):
+        '''Compare the hash of a file in the file tree and the
+        expected one
+        '''
+        __myobj = checktree.CheckTree({'path':
+            'tests/expected_hash/bar',
+             'files_list':
+                'tests/expected_hash/filetree-list',
+             'type': 'tree'})
+        __hashes = __myobj.mismatched_hashes
+        self.assertEqual(__hashes, [
+            {'path': 'bar/bar5', 
+            'expectedhash': '65305af91a511f6d091237f97e5dbccd1427c6f48bcd509acd0a71938bfe9d708cfb93c3d163f96b328f6cabb80b0860',
+            'hash':'55305af91a511f6d091237f97e5dbccd1427c6f48bcd509acd0a71938bfe9d708cfb93c3d163f96b328f6cabb80b0860'},
+            {'path': 'bar/bar4',
+            'expectedhash': 'd67f2596a1ef0893f176b0b68d6e1445a9acd5fda2f5a073f1318ff4b75e5b84',
+            'hash': 'c67f2596a1ef0893f176b0b68d6e1445a9acd5fda2f5a073f1318ff4b75e5b84'},
+            {'path': 'bar/bar6',
+            'expectedhash': 'g0fc5b14ab8b242e4c6462deee58a0a10fabdb4bc792174fdeec92cd12df8d5a7a8fed9545e2c109b3cecd345d970afaea0183ea0dd19371913cb55b23b9fc2e',
+            'hash': 'f0fc5b14ab8b242e4c6462deee58a0a10fabdb4bc792174fdeec92cd12df8d5a7a8fed9545e2c109b3cecd345d970afaea0183ea0dd19371913cb55b23b9fc2e'},
+            {'path': 'bar/bar3',
+            'expectedhash': '33975be818906ec2228074d2a4438ef8f78ec33792aac4d037ad8f95',
+            'hash': '23975be818906ec2228074d2a4438ef8f78ec33792aac4d037ad8f95'},
+            {'path': 'bar/bar1',
+            'expectedhash': '9151b18e6dd21a734890b56b5a15d24b',
+            'hash': '8151b18e6dd21a734890b56b5a15d24b'},
+            {'path': 'bar/bar2',
+            'expectedhash': '3676c9d706eb6f6b02eb5d67ba86a9b3e855c13d',
+            'hash': '2676c9d706eb6f6b02eb5d67ba86a9b3e855c13d'}])
+
+    def test_zip_compare_hash(self):
+        '''Compare the hash of a file in the zip archive and the
+        expected one
+        '''
+        __myobj = checkzip.CheckZip({'path':
+            'tests/expected_hash/bar.zip',
+             'files_list':
+                'tests/expected_hash/zip-list',
+             'type': 'archive'})
+        __hashes = __myobj.mismatched_hashes
+        self.assertEqual(__hashes, [
+            {'path': 'bar/bar5', 
+            'expectedhash': '65305af91a511f6d091237f97e5dbccd1427c6f48bcd509acd0a71938bfe9d708cfb93c3d163f96b328f6cabb80b0860',
+            'hash':'55305af91a511f6d091237f97e5dbccd1427c6f48bcd509acd0a71938bfe9d708cfb93c3d163f96b328f6cabb80b0860'},
+            {'path': 'bar/bar4',
+            'expectedhash': 'd67f2596a1ef0893f176b0b68d6e1445a9acd5fda2f5a073f1318ff4b75e5b84',
+            'hash': 'c67f2596a1ef0893f176b0b68d6e1445a9acd5fda2f5a073f1318ff4b75e5b84'},
+            {'path': 'bar/bar6',
+            'expectedhash': 'g0fc5b14ab8b242e4c6462deee58a0a10fabdb4bc792174fdeec92cd12df8d5a7a8fed9545e2c109b3cecd345d970afaea0183ea0dd19371913cb55b23b9fc2e',
+            'hash': 'f0fc5b14ab8b242e4c6462deee58a0a10fabdb4bc792174fdeec92cd12df8d5a7a8fed9545e2c109b3cecd345d970afaea0183ea0dd19371913cb55b23b9fc2e'},
+            {'path': 'bar/bar3',
+            'expectedhash': '33975be818906ec2228074d2a4438ef8f78ec33792aac4d037ad8f95',
+            'hash': '23975be818906ec2228074d2a4438ef8f78ec33792aac4d037ad8f95'},
+            {'path': 'bar/bar1',
+            'expectedhash': '9151b18e6dd21a734890b56b5a15d24b',
+            'hash': '8151b18e6dd21a734890b56b5a15d24b'},
+            {'path': 'bar/bar2',
+            'expectedhash': '3676c9d706eb6f6b02eb5d67ba86a9b3e855c13d',
+            'hash': '2676c9d706eb6f6b02eb5d67ba86a9b3e855c13d'}])
 
 if __name__ == '__main__':
     unittest.main()

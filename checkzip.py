@@ -31,12 +31,12 @@ class CheckZip(CheckArchive):
         _data = []
         try:
             _data= ExpectedFiles(_cfgvalues['files_list']).data
-            _zip = zipfile.ZipFile(_cfgvalues['path'], 'r', allowZip64=True)
-            _crcerror = _zip.testzip()
+            self._zip = zipfile.ZipFile(_cfgvalues['path'], 'r', allowZip64=True)
+            _crcerror = self._zip.testzip()
             if _crcerror:
                 logging.warn('{} has at least a file corrupted:{}'.format(_cfgvalues['path'], _crcerror))
             else:
-                _zipinfo = _zip.infolist()
+                _zipinfo = self._zip.infolist()
                 for _fileinfo in _zipinfo:
                     __arcinfo = {'path': _fileinfo.filename, 'size': _fileinfo.file_size}
                     _data = self._check_path(__arcinfo, _data)
@@ -44,4 +44,9 @@ class CheckZip(CheckArchive):
         except zipfile.BadZipfile as _msg:
             print(_msg)
         finally:
-            _zip.close()
+            self._zip.close()
+
+    def _extract_stored_file(self, __arcfilepath):
+        '''Extract a file from the archive and return a file object'''
+        __file = self._zip.open(__arcfilepath, 'r')
+        return __file

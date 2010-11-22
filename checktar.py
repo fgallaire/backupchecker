@@ -30,8 +30,8 @@ class CheckTar(CheckArchive):
         _data = []
         try:
             _data = ExpectedFiles(_cfgvalues['files_list']).data
-            _tar = tarfile.open(_cfgvalues['path'], 'r')
-            for _tarinfo in _tar:
+            self._tar = tarfile.open(_cfgvalues['path'], 'r')
+            for _tarinfo in self._tar:
                 __type = self.__translate_type(_tarinfo.type)
                 __arcinfo = {'path':_tarinfo.name, 'size':_tarinfo.size, 
                                 'uid':_tarinfo.uid, 'gid':_tarinfo.gid,
@@ -43,7 +43,8 @@ class CheckTar(CheckArchive):
 
     def __translate_type(self, __arctype):
         '''Translate the type of the file inside the tar by a generic
-        name'''
+        name
+        '''
         __types = {tarfile.REGTYPE: 'f',
             tarfile.CHRTYPE: 'c',
             tarfile.DIRTYPE: 'd',
@@ -51,3 +52,8 @@ class CheckTar(CheckArchive):
             tarfile.BLKTYPE: 'b',
             tarfile.FIFOTYPE: 'o'}
         return __types[__arctype]
+
+    def _extract_stored_file(self, __arcfilepath):
+        '''Extract a file from the archive and return a file object'''
+        __file = self._tar.extractfile(__arcfilepath)
+        return __file
