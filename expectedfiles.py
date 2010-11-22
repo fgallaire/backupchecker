@@ -40,6 +40,7 @@ class ExpectedFiles(object):
 
     def __retrieve_data(self, __file):
         '''Retrieve data from the expected files'''
+        __hashtypes = ['md5', 'sha1', 'sha224','sha256','sha384','sha512']
         __config = configparser.ConfigParser()
         __config.readfp(__file)
         __files = __config.items('files')
@@ -66,7 +67,7 @@ class ExpectedFiles(object):
                             else:
                                 __data['mode'] = __mode
                         # Testing the type of the file
-                        elif __item.startswith('type'):
+                        elif __item.startswith('type:'):
                             __type =__item.split(':')[-1]
                             ### f for file, c for character, d for directory
                             ### s for symbolink link, b for block, o for fifo,
@@ -86,6 +87,11 @@ class ExpectedFiles(object):
                         ### Test if smaller than is required
                         elif __item.startswith('<'):
                             __data['smallerthan'] = self.__convert_arg(__item)
+                        # Test if a hash is provided for this file
+                        for __hash in __hashtypes:
+                            if __item.startswith('{}{}'.format(__hash, ':')):
+                                __hashtype, __hashvalue = __item.split(':')
+                                __data['hash'] = {'hashtype':__hashtype, 'hashvalue':__hashvalue}
                     except ValueError as __msg:
                         logging.warn(__msg)
             self.__data.append(__data)

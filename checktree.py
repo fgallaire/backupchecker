@@ -28,6 +28,7 @@ class CheckTree(CheckArchive):
     def _main(self, _cfgvalues):
         '''Main for CheckTree'''
         _data = []
+        self.__treepath = _cfgvalues['path']
         _data = ExpectedFiles(_cfgvalues['files_list']).data
         # Save the tree root to determine the relative path in the file tree
         __treeroot = os.path.split(_cfgvalues['path'])[0]
@@ -68,3 +69,12 @@ class CheckTree(CheckArchive):
             return 'k'
         elif stat.S_ISFIFO(__mode):
             return 'o'
+
+    def _extract_stored_file(self, __arcfilepath):
+        '''extract a file from the tree and return a file object'''
+        if os.path.isabs(__arcfilepath):
+            __file = open(__arcfilepath, 'rb')
+        else:
+            __fullpath = os.path.normpath(os.path.join(os.path.split(self.__treepath)[0], __arcfilepath))
+            __file = open(__fullpath, 'rb')
+        return __file
