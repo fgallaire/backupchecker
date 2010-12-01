@@ -39,8 +39,9 @@ class CheckBackups(object):
             # check a file tree
             if __cfgvalues['type'] == 'tree':
                 __bck = CheckTree(__cfgvalues)
+            # check a database
             elif __cfgvalues['type'] == 'db':
-                CheckDb(__cfgvalues)
+                __bck = CheckDb(__cfgvalues)
             # check a tar file
             elif __cfgvalues['type'] == 'archive' and is_tarfile(__cfgvalues['path']):
                 __bck = CheckTar(__cfgvalues)
