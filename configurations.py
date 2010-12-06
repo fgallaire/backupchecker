@@ -45,24 +45,7 @@ class Configurations:
                 ### The archive path
                 __confsettings = [{'main': 'path'},
                 ### The list of the expected files in the archive
-                {'main': 'files_list'},
-                # Common information for the databases
-                ### The list of the expected objects in the database
-                {'main': 'dbobjects'},
-                ### The type of the database, should be supported by SQLAlchemy
-                {'main': 'dbtype'},
-                ### The database host
-                {'main': 'dbhost'},
-                ### The user login for the database
-                {'main': 'dbuser'},
-                ### The password for the user
-                {'main': 'dbpass'},
-                # Sqlite3
-                ### The path to the sqlite3 database
-                {'main': 'dbpath'},
-                # Mysql 
-                ### The database name
-                {'main': 'dbname'}
+                {'main': 'files_list'}
                 ]
                 for __element in __confsettings:
                     __key, __value = __element.popitem()
@@ -74,9 +57,7 @@ class Configurations:
                                                     __key, __value, '')
                 # Checking the information
                 ### Check the paths in the configuration
-                __pathnames = ["__currentconf['path']",
-                                "__currentconf['dbpath']",
-                                "__currentconf['dbobjects']"]
+                __pathnames = ("__currentconf['path']")
                 for __pathname in __pathnames:
                     __path = getattr(self, __pathname, None)
                     if __path:
@@ -84,16 +65,6 @@ class Configurations:
                         if not os.path.exists(__bckpath):
                             print('{} does not exist.'.format(__bckpath))
                             sys.exit(1)
-                ### Checking if the database type is supported
-                if __currentconf['dbtype']:
-                    __dbtype = __currentconf['dbtype'].lower()
-                    if  __dbtype not in set(['sqlite', 'mysql', 'postgresql']):
-                        __warning = 'The given database is not supported : {}'
-                        print(__warning.format(__dbtype))
-                        sys.exit(1)
-                    ### If dbhost is not specified, use 127.0.0.1
-                    if not __currentconf['dbhost']:
-                        __currentconf['dbhost'] = '127.0.0.1'
                 self.__configs[__config.get('main', 'name')] = __currentconf
             except (ParsingError, NoSectionError, NoOptionError) as __err:
                 print(__err)

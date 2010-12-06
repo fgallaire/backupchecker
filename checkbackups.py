@@ -21,7 +21,6 @@ from tarfile import is_tarfile
 from zipfile import is_zipfile
 
 from archiveinfomsg import ArchiveInfoMsg
-from checkdb import CheckDb
 from checktar import CheckTar
 from checktree import CheckTree
 from checkzip import CheckZip
@@ -39,9 +38,6 @@ class CheckBackups(object):
             # check a file tree
             if __cfgvalues['type'] == 'tree':
                 __bck = CheckTree(__cfgvalues)
-            # check a database
-            elif __cfgvalues['type'] == 'db':
-                __bck = CheckDb(__cfgvalues)
             # check a tar file
             elif __cfgvalues['type'] == 'archive' and is_tarfile(__cfgvalues['path']):
                 __bck = CheckTar(__cfgvalues)

@@ -22,7 +22,6 @@ class ExpectedObjects(object):
     '''Extract the information about expected objects'''
 
     def __init__(self, __path):
-        self._db_objects = {}
         self._main(__path)
 
     def _main(self, __path):

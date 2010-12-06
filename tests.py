@@ -207,7 +207,7 @@ class TestApp(unittest.TestCase):
         '''Test the Configurations class'''
         __path = 'tests/test_conf/'
         __res = configurations.Configurations(__path).configs
-        self.assertEqual({'essai': {'path': 'tests/essai.tar.gz', 'files_list': 'tests/essai-list', 'type': 'archive', 'dbobjects': None, 'dbname': None, 'dbpath': None, 'dbhost': None, 'dbpass': None, 'dbuser': None, 'dbtype': None}}, __res)
+        self.assertEqual({'essai': {'path': 'tests/essai.tar.gz', 'files_list': 'tests/essai-list', 'type': 'archive'}}, __res)
 
     def test_expected_files(self):
         '''Check the ExpectedFiles class'''
