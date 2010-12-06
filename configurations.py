@@ -25,6 +25,11 @@ class Configurations:
     '''Retrieve the different configurations'''
 
     def __init__(self, __confpath):
+        '''The constructor of the Configurations class.
+
+        __confpath -- the path to the directory with the configuration files
+
+        '''
         self.__configs = {}
         self.__parse_configurations(__confpath)
 

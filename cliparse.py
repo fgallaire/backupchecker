@@ -27,6 +27,7 @@ class CliParse:
     '''Retrieve the command line options'''
 
     def __init__(self):
+        '''The constructor for the CliParse class.'''
         self._options = ()
         __parser = OptionParser(version="%prog 0.1")
         self.__define_options(__parser)
@@ -43,15 +44,11 @@ class CliParse:
             default=os.path.join(os.getcwd(), 'a.out'),
             help='the log file',
             metavar='FILE')
-        __parser.add_option('-t', '--type', dest='type',
-            action='store', type='string',
-            help='type of the backup',
-            metavar='FILE')
         __parser.add_option('--hashfile', dest='hashfile',
             action='store', type='string',
             help='the file containing the hashes',
             metavar='FILE')
-        for __hashtype in ['md5', 'sha1', 'sha224','sha256','sha384','sha512']:
+        for __hashtype in ('md5', 'sha1', 'sha224','sha256','sha384','sha512'):
             __parser.add_option('--{}'.format(__hashtype), dest='hashtype',
                 action='store_const', const='{}'.format(__hashtype),
                 help='use the {} hash algorithm type'.format(__hashtype))

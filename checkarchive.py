@@ -22,6 +22,11 @@ class CheckArchive(object):
     '''Check an archive'''
 
     def __init__(self, _cfgvalues):
+        '''The constructor of the CheckArchive class.
+
+        _cfgvalues -- the expected values for the archive
+
+        '''
         self._missing_files = []
         self._missing_equality = []
         self._missing_bigger_than = []

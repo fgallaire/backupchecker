@@ -27,6 +27,7 @@ class Main(object):
     '''The main class'''
 
     def __init__(self):
+        '''The constructor of the Main class.'''
         self.__main()
 
     def __main(self):

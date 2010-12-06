@@ -25,16 +25,24 @@ class CheckHashes(object):
     '''Check the files hashes of the backups'''
 
     def __init__(self, __hashfile, __hashtype, __confs):
+        '''Constructor for the CheckHashes class.
+        
+        Keywork arguments:
+        __hashfile -- the hashfile path
+        __hashtype -- the type of the hash sum
+        __confs -- a configuration object with the different archive paths        
+        
+        '''
         self.__confs = __confs
         self.__main(__hashfile, __hashtype, __confs)
 
     def __main(self, __hashfile, __hashtype, __confs):
-        '''Main for the CheckHashes class'''
+        '''Main for the CheckHashes class.'''
         __hashinfo = self.__extract_hashinfo(__hashfile)
         self.__check_hashes(__hashtype, __confs, __hashinfo)
 
     def __check_hashes(self, __hashtype, __confs, __hashinfo):
-        '''check the hash of the backups'''
+        '''check the hash of the backups.'''
         try:
             __confstoremove = []
             for __conf in __confs:
@@ -53,7 +61,7 @@ class CheckHashes(object):
             logging.warn(__msg)
 
     def __extract_hashinfo(self, __hashfile):
-        '''Extract the info about hashed files'''
+        '''Extract the info about hash sums.'''
         __hashinfo = {}
         try:
             with open(__hashfile) as __files:
@@ -73,12 +81,12 @@ class CheckHashes(object):
     @property
     def confs(self):
         '''Return the configurations minus the ones containing a 
-        corrupted file
+        corrupted file.
         '''
         return self.__confs
 
 def get_hash(__arcfile, __hashtype):
-    '''return the hash of a file'''
+    '''return the hash of a file.'''
     __res = getattr(hashlib, __hashtype)(__arcfile.read()).hexdigest()
     return __res
     

@@ -29,6 +29,11 @@ class CheckBackups(object):
     '''The backup checker class'''
 
     def __init__(self, __confs):
+        '''The constructor for the Checkbackups class.
+
+        __confs -- the different configurations of the backups
+
+        '''
         self.__main(__confs)
 
     def __main(self, __confs):

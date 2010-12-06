@@ -22,6 +22,12 @@ class ArchiveInfoMsg(object):
     '''Generate the information message about an archive'''
 
     def __init__(self, __bck, __cfgvalues):
+        '''The constructor for the ArchiveInfoMsg class.
+
+        __bck -- the retrieved value for the archive
+        __cfgvalues -- the expected values for the archive
+
+        '''
         self.__main(__bck, __cfgvalues)
 
     def __main(self, __bck, __cfgvalues):

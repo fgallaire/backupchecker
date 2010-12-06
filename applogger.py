@@ -22,5 +22,11 @@ class AppLogger(object):
     '''The application logger'''
 
     def __init__(self, __logfile):
+        '''The constructor for the AppLogger class.
+
+        Keyword arguments:
+        __logfile -- the path of the log
+
+        '''
         logging.basicConfig(filename=__logfile,
             level=logging.WARNING, filemode='w')

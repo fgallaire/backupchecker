@@ -26,6 +26,11 @@ class ExpectedFiles(object):
     '''Extract the information about expected saved files'''
 
     def __init__(self, __path):
+        '''The constructor of the ExpectedFiles class.
+
+        __path -- the path to the description of the expected attributes of the files
+
+        '''
         self.__data = []
         self.__main(__path)
 
