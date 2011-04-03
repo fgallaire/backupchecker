@@ -19,7 +19,7 @@
 import sys
 import tarfile
 
-from expectedfiles import ExpectedFiles
+from expectedvalues import ExpectedValues
 from checkarchive import CheckArchive
 
 class CheckTar(CheckArchive):
@@ -29,7 +29,7 @@ class CheckTar(CheckArchive):
         '''Main for CheckTar'''
         _data = []
         try:
-            _data = ExpectedFiles(_cfgvalues['files_list']).data
+            _data = ExpectedValues(_cfgvalues['files_list']).data
             self._tar = tarfile.open(_cfgvalues['path'], 'r')
             for _tarinfo in self._tar:
                 __type = self.__translate_type(_tarinfo.type)

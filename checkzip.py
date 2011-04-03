@@ -19,7 +19,7 @@
 import sys
 import zipfile
 
-from expectedfiles import ExpectedFiles
+from expectedvalues import ExpectedValues
 from checkarchive import CheckArchive
 
 class CheckZip(CheckArchive):
@@ -30,7 +30,7 @@ class CheckZip(CheckArchive):
         _crcerror = ''
         _data = []
         try:
-            _data= ExpectedFiles(_cfgvalues['files_list']).data
+            _data= ExpectedValues(_cfgvalues['files_list']).data
             self._zip = zipfile.ZipFile(_cfgvalues['path'], 'r', allowZip64=True)
             _crcerror = self._zip.testzip()
             if _crcerror:
