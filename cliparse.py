@@ -20,6 +20,7 @@ import logging
 from optparse import OptionParser
 import os
 import sys
+from hashlib import algorithms_guaranteed
 
 from applogger import AppLogger
 
@@ -48,7 +49,8 @@ class CliParse:
             action='store', type='string',
             help='the file containing the hashes',
             metavar='FILE')
-        for __hashtype in ('md5', 'sha1', 'sha224','sha256','sha384','sha512'):
+        #for __hashtype in ('md5', 'sha1', 'sha224','sha256','sha384','sha512'):
+        for __hashtype in algorithms_guaranteed:
             __parser.add_option('--{}'.format(__hashtype), dest='hashtype',
                 action='store_const', const='{}'.format(__hashtype),
                 help='use the {} hash algorithm type'.format(__hashtype))
