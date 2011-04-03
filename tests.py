@@ -13,7 +13,7 @@ import checktree
 import checkzip
 import cliparse
 import configurations
-from expectedfiles import ExpectedFiles
+from expectedvalues import ExpectedValues
 import main
 
 # !! logging module uses a single logger for the whole file
@@ -210,8 +210,8 @@ class TestApp(unittest.TestCase):
         self.assertEqual({'essai': {'path': 'tests/essai.tar.gz', 'files_list': 'tests/essai-list', 'type': 'archive'}}, __res)
 
     def test_expected_files(self):
-        '''Check the ExpectedFiles class'''
-        __data = ExpectedFiles('tests/file_size/essai-list').data
+        '''Check the ExpectedValues class'''
+        __data = ExpectedValues('tests/file_size/essai-list').data
         self.assertEqual([{'path':'essai/dir/toto', 'equals':536870912},
             {'path':'essai/titi','biggerthan':536870912},
             {'path':'essai/dir/toutou','smallerthan':20480},
@@ -219,13 +219,13 @@ class TestApp(unittest.TestCase):
 
     def test_unexpected_files(self):
         '''Check if an unexpected file is identified'''
-        __data = ExpectedFiles('tests/unexpected_files/files-list').data
+        __data = ExpectedValues('tests/unexpected_files/files-list').data
         self.assertEqual([{'path':'foo/foo1'},{'path':'foo/foo2'},
             {'path':'foo/bar','unexpected':True}], __data)
 
     def test_extract_expected_uid_gid(self):
         '''Check the uid and gid of an expected file''' 
-        __data = ExpectedFiles('tests/expected_uid_gid/files-list').data
+        __data = ExpectedValues('tests/expected_uid_gid/files-list').data
         self.assertEqual([{'path':'foo/foo1', 'uid':1001, 'gid':1001}], __data)
 
     def test_compare_uid_gid(self):
@@ -247,7 +247,7 @@ class TestApp(unittest.TestCase):
 
     def test_extract_modes(self):
         '''Extract the expected file modes'''
-        __data = ExpectedFiles('tests/expected_mode/files-list').data
+        __data = ExpectedValues('tests/expected_mode/files-list').data
         self.assertEqual([{'path':'foos/foo1', 'mode': '644'},
             {'path':'foos/foo2', 'mode': '755'},
             {'path':'foos/bar/foo3', 'mode': '4644'},
@@ -285,7 +285,7 @@ class TestApp(unittest.TestCase):
 
     def test_extract_types(self):
         '''Extract the expected file types'''
-        __data = ExpectedFiles('tests/expected_type/files-list').data
+        __data = ExpectedValues('tests/expected_type/files-list').data
         self.assertEqual([{'path':'foos/foo1', 'type': 'f'},
             {'path':'foos/foo2', 'type': 'c'},
             {'path':'foos/foo3', 'type': 'd'},
@@ -335,7 +335,7 @@ class TestApp(unittest.TestCase):
 
     def test_extract_hashes(self):
         '''Extract the expected file hashes'''
-        __data = ExpectedFiles('tests/expected_hash/files-list').data
+        __data = ExpectedValues('tests/expected_hash/files-list').data
         self.assertEqual([{'hash': {'hashtype': 'md5', 
             'hashvalue': '3718422a0bf93f7fc46cff6b5e660ff8'},
             'path': 'foos/foo1'},
