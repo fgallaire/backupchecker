@@ -17,7 +17,7 @@
 '''Parse the configurations'''
 
 import sys
-import configparser
+from configparser import ConfigParser
 from configparser import ParsingError, NoSectionError, NoOptionError
 import os
 
@@ -40,9 +40,10 @@ class Configurations:
         for __conf in __confs:
             __currentconf = {}
             try:
-                __config = configparser.SafeConfigParser()
-                __config.readfp(open(os.path.join(
-                    '/'.join([__confpath, __conf])), 'r'))
+                __config = ConfigParser()
+                with open(os.path.join(
+                    '/'.join([__confpath, __conf])), 'r') as __file:
+                    __config.read_file(__file)
                 # Common information for the backups
                 ### The type of the backups
                 __currentconf['type'] = __config.get('main', 'type')
