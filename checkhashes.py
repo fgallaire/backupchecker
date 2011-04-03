@@ -88,5 +88,6 @@ class CheckHashes(object):
 def get_hash(__arcfile, __hashtype):
     '''return the hash of a file.'''
     __res = getattr(hashlib, __hashtype)(__arcfile.read()).hexdigest()
+    __arcfile.close()
     return __res
     
