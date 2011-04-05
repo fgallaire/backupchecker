@@ -58,7 +58,7 @@ class ArchiveInfoMsg(object):
             __msg= 'file'
             if len(__unexpected) > 1:
                 __msg = 'files'
-            logging.warn('{} unexpected {} in {}: '.format(
+            logging.warn('{} unexpected {} checking {}: '.format(
                 len(__unexpected), __msg, __archivepath))
             for __path in __unexpected:
                 logging.warn('{}'.format(__path))
@@ -68,16 +68,16 @@ class ArchiveInfoMsg(object):
         archive
         '''
         if __bck.missing_equality:
-            __topic = '{} {} with unexpected size in {}: '
+            __topic = '{} {} with unexpected size checking {}: '
             self.__log_differences(
                 __bck.missing_equality, __archivepath, __topic)
         if __bck.missing_smaller_than:
-            __topic = '{} {} bigger than expected in {}: '
+            __topic = '{} {} bigger than expected checking {}: '
             self.__log_differences(
                 __bck.missing_smaller_than, __archivepath,
                     __topic, 'smaller than')
         if __bck.missing_bigger_than:
-            __topic = '{} {} smaller than expected in {}: '
+            __topic = '{} {} smaller than expected checking {}: '
             self.__log_differences(
                 __bck.missing_bigger_than, __archivepath,
                     __topic, 'bigger than')
