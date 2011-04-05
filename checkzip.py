@@ -29,22 +29,33 @@ class CheckZip(CheckArchive):
         '''Main for CheckZip'''
         _crcerror = ''
         _data = []
-        try:
-            _data= ExpectedValues(_cfgvalues['files_list']).data
-            self._zip = zipfile.ZipFile(_cfgvalues['path'], 'r', allowZip64=True)
-            _crcerror = self._zip.testzip()
-            if _crcerror:
-                logging.warn('{} has at least a file corrupted:{}'.format(_cfgvalues['path'], _crcerror))
-            else:
-                _zipinfo = self._zip.infolist()
-                for _fileinfo in _zipinfo:
-                    __arcinfo = {'path': _fileinfo.filename, 'size': _fileinfo.file_size}
-                    _data = self._check_path(__arcinfo, _data)
-                self._missing_files = [_file['path'] for _file in _data]
-        except zipfile.BadZipfile as _msg:
-            print(_msg)
-        finally:
-            self._zip.close()
+        _data, __arcdata = ExpectedValues(_cfgvalues['files_list']).data
+        #########################
+        # Test the archive itself
+        #########################
+        if __arcdata:
+            if 'equals' in __arcdata or 'biggerthan' in __arcdata or 'smallerthan' in __arcdata:
+                __arcsize = self._find_archive_size(_cfgvalues['path'])
+                self._compare_sizes(__arcsize, _cfgvalues['path'], __arcdata)
+        ###############################
+        # Test the files in the archive
+        ###############################
+        if _data:
+            try:
+                self._zip = zipfile.ZipFile(_cfgvalues['path'], 'r', allowZip64=True)
+                _crcerror = self._zip.testzip()
+                if _crcerror:
+                    logging.warn('{} has at least a file corrupted:{}'.format(_cfgvalues['path'], _crcerror))
+                else:
+                    _zipinfo = self._zip.infolist()
+                    for _fileinfo in _zipinfo:
+                        __arcinfo = {'path': _fileinfo.filename, 'size': _fileinfo.file_size}
+                        _data = self._check_path(__arcinfo, _data)
+                    self._missing_files = [_file['path'] for _file in _data]
+            except zipfile.BadZipfile as _msg:
+                print(_msg)
+            finally:
+                self._zip.close()
 
     def _extract_stored_file(self, __arcfilepath):
         '''Extract a file from the archive and return a file object'''

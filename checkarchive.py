@@ -16,6 +16,9 @@
 # Check an archive
 '''Check an archive'''
 
+from os import stat
+from logging import warn
+
 import checkhashes
 
 class CheckArchive(object):
@@ -69,6 +72,14 @@ class CheckArchive(object):
                 # We reduce the number of files to work with
                 del(_data[_ind])
         return _data
+
+    def _find_archive_size(self, __arcpath):
+        '''Compare the expecte size and the current size of the archive'''
+        try:
+            __fileinfo = stat(__arcpath)
+            return __fileinfo.st_size
+        except (OSError, IOError) as __msg:
+            warn(__msg)
 
     def _compare_sizes(self, _arcsize, _arcname, _file):
         '''Compare the sizes of the files in the archive and the expected

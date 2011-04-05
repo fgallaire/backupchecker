@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python3.2
 
 import os
 import logging
@@ -31,9 +31,9 @@ class TestApp(unittest.TestCase):
         _logfile = TESTLOG
         applogger.AppLogger(_logfile)
         checkbackups.CheckBackups({'essai': {'path': 'tests/tar_gz_archive_content/essai.tar.gz', 'files_list': 'tests/tar_gz_archive_content/essai-list', 'type': 'archive'}, 'essai2': {'path': 'tests/tar_bz2_archive_content/titi.tar.bz2', 'files_list': 'tests/tar_bz2_archive_content/essai2-list', 'type': 'archive'}})
-        _res = open(_logfile).read()
+        with open(_logfile) as _res:
+            self.assertEqual(_res.read(), 'WARNING:root:1 file missing in tests/tar_gz_archive_content/essai.tar.gz: \nWARNING:root:essai/dir/titi\n')
         os.remove(_logfile)
-        self.assertEqual(_res, 'WARNING:root:1 file missing in tests/tar_gz_archive_content/essai.tar.gz: \nWARNING:root:essai/dir/titi\n')
 
     def test_checkhashes_md5(self):
         '''Test the CheckHashes class with MD5'''
@@ -209,23 +209,23 @@ class TestApp(unittest.TestCase):
         __res = configurations.Configurations(__path).configs
         self.assertEqual({'essai': {'path': 'tests/essai.tar.gz', 'files_list': 'tests/essai-list', 'type': 'archive'}}, __res)
 
-    def test_expected_files(self):
+    def test_expected_values(self):
         '''Check the ExpectedValues class'''
-        __data = ExpectedValues('tests/file_size/essai-list').data
+        __data, _ = ExpectedValues('tests/file_size/essai-list').data
         self.assertEqual([{'path':'essai/dir/toto', 'equals':536870912},
             {'path':'essai/titi','biggerthan':536870912},
-            {'path':'essai/dir/toutou','smallerthan':20480},
+            {'path':'essai/dir/toutou','smallerthan':19},
             {'path':'essai/dir/zozo'}], __data)
 
     def test_unexpected_files(self):
         '''Check if an unexpected file is identified'''
-        __data = ExpectedValues('tests/unexpected_files/files-list').data
+        __data, _ = ExpectedValues('tests/unexpected_files/files-list').data
         self.assertEqual([{'path':'foo/foo1'},{'path':'foo/foo2'},
             {'path':'foo/bar','unexpected':True}], __data)
 
     def test_extract_expected_uid_gid(self):
         '''Check the uid and gid of an expected file''' 
-        __data = ExpectedValues('tests/expected_uid_gid/files-list').data
+        __data, _ = ExpectedValues('tests/expected_uid_gid/files-list').data
         self.assertEqual([{'path':'foo/foo1', 'uid':1001, 'gid':1001}], __data)
 
     def test_compare_uid_gid(self):
@@ -247,7 +247,7 @@ class TestApp(unittest.TestCase):
 
     def test_extract_modes(self):
         '''Extract the expected file modes'''
-        __data = ExpectedValues('tests/expected_mode/files-list').data
+        __data, _ = ExpectedValues('tests/expected_mode/files-list').data
         self.assertEqual([{'path':'foos/foo1', 'mode': '644'},
             {'path':'foos/foo2', 'mode': '755'},
             {'path':'foos/bar/foo3', 'mode': '4644'},
@@ -285,7 +285,7 @@ class TestApp(unittest.TestCase):
 
     def test_extract_types(self):
         '''Extract the expected file types'''
-        __data = ExpectedValues('tests/expected_type/files-list').data
+        __data, _ = ExpectedValues('tests/expected_type/files-list').data
         self.assertEqual([{'path':'foos/foo1', 'type': 'f'},
             {'path':'foos/foo2', 'type': 'c'},
             {'path':'foos/foo3', 'type': 'd'},
@@ -335,7 +335,7 @@ class TestApp(unittest.TestCase):
 
     def test_extract_hashes(self):
         '''Extract the expected file hashes'''
-        __data = ExpectedValues('tests/expected_hash/files-list').data
+        __data, _ = ExpectedValues('tests/expected_hash/files-list').data
         self.assertEqual([{'hash': {'hashtype': 'md5', 
             'hashvalue': '3718422a0bf93f7fc46cff6b5e660ff8'},
             'path': 'foos/foo1'},
@@ -445,6 +445,84 @@ class TestApp(unittest.TestCase):
             {'path': 'bar/bar2',
             'expectedhash': '3676c9d706eb6f6b02eb5d67ba86a9b3e855c13d',
             'hash': '2676c9d706eb6f6b02eb5d67ba86a9b3e855c13d'}])
+
+    def test_checktar_archive_equal_size(self):
+        '''Check if the CheckTar class returns a dictionary with the
+           archive itself file whose size should have been equal
+           to the expected size.
+        '''
+        __missing_equality = []
+        __missing_equality = checktar.CheckTar({'path':
+            'tests/file_size/essai.tar.bz2',
+             'files_list':
+                'tests/file_size/arcsize/equaltararcsize-list',
+             'type': 'archive'}).missing_equality
+        self.assertEqual(__missing_equality[0]['path'], 'tests/file_size/essai.tar.bz2')
+        
+    def test_checktar_archive_missing_smaller_than(self):
+        '''Check if the CheckTar class returns a dictionary with the
+           archive itself whose size should have been smaller 
+           than the expected size.
+        '''
+        __missing_smaller_than = []
+        __missing_smaller_than = checktar.CheckTar({'path':
+            'tests/file_size/essai.tar.bz2',
+             'files_list':
+                'tests/file_size/arcsize/biggerthantararcsize-list',
+             'type': 'archive'}).missing_smaller_than
+        self.assertEqual(__missing_smaller_than[0]['path'], 'tests/file_size/essai.tar.bz2')
+
+    def test_checktar_archive_missing_bigger_than(self):
+        '''Check if the CheckTar class returns a dictionary with the
+           archive itself whose size should have been bigger 
+           than the expected size.
+        '''
+        __missing_bigger_than = []
+        __missing_bigger_than = checktar.CheckTar({'path':
+            'tests/file_size/essai.tar.bz2',
+             'files_list':
+                'tests/file_size/arcsize/smallerthantararcsize-list',
+             'type': 'archive'}).missing_bigger_than
+        self.assertEqual(__missing_bigger_than[0]['path'], 'tests/file_size/essai.tar.bz2')
+
+    def test_checkzip_archive_equal_size(self):
+        '''Check if the CheckZip class returns a dictionary with the
+           archive itself file whose size should have been equal
+           to the expected size.
+        '''
+        __missing_equality = []
+        __missing_equality = checkzip.CheckZip({'path':
+            'tests/file_size/myzip.zip',
+             'files_list':
+                'tests/file_size/arcsize/equalziparcsize-list',
+             'type': 'archive'}).missing_equality
+        self.assertEqual(__missing_equality[0]['path'], 'tests/file_size/myzip.zip')
+        
+    def test_checkzip_archive_missing_smaller_than(self):
+        '''Check if the CheckZip class returns a dictionary with the
+           archive itself whose size should have been smaller 
+           than the expected size.
+        '''
+        __missing_smaller_than = []
+        __missing_smaller_than = checkzip.CheckZip({'path':
+            'tests/file_size/myzip.zip',
+             'files_list':
+                'tests/file_size/arcsize/biggerthanziparcsize-list',
+             'type': 'archive'}).missing_smaller_than
+        self.assertEqual(__missing_smaller_than[0]['path'], 'tests/file_size/myzip.zip')
+
+    def test_checkzip_archive_missing_bigger_than(self):
+        '''Check if the CheckZip class returns a dictionary with the
+           archive itself whose size should have been bigger 
+           than the expected size.
+        '''
+        __missing_bigger_than = []
+        __missing_bigger_than = checkzip.CheckZip({'path':
+            'tests/file_size/myzip.zip',
+             'files_list':
+                'tests/file_size/arcsize/smallerthanziparcsize-list',
+             'type': 'archive'}).missing_bigger_than
+        self.assertEqual(__missing_bigger_than[0]['path'], 'tests/file_size/myzip.zip')
 
 if __name__ == '__main__':
     unittest.main()

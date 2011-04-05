@@ -28,18 +28,29 @@ class CheckTar(CheckArchive):
     def _main(self, _cfgvalues):
         '''Main for CheckTar'''
         _data = []
-        try:
-            _data = ExpectedValues(_cfgvalues['files_list']).data
-            self._tar = tarfile.open(_cfgvalues['path'], 'r')
-            for _tarinfo in self._tar:
-                __type = self.__translate_type(_tarinfo.type)
-                __arcinfo = {'path':_tarinfo.name, 'size':_tarinfo.size, 
-                                'uid':_tarinfo.uid, 'gid':_tarinfo.gid,
-                                'mode':_tarinfo.mode, 'type': __type}
-                _data = self._check_path(__arcinfo, _data)
-            self._missing_files = [_file['path'] for _file in _data]
-        except tarfile.TarError as _msg:
-            print(_msg)
+        _data, __arcdata = ExpectedValues(_cfgvalues['files_list']).data
+        #########################
+        # Test the archive itself
+        #########################
+        if __arcdata:
+            if 'equals' in __arcdata or 'biggerthan' in __arcdata or 'smallerthan' in __arcdata:
+                __arcsize = self._find_archive_size(_cfgvalues['path'])
+                self._compare_sizes(__arcsize, _cfgvalues['path'], __arcdata)
+        ###############################
+        # Test the files in the archive
+        ###############################
+        if _data:
+            try:
+                self._tar = tarfile.open(_cfgvalues['path'], 'r')
+                for _tarinfo in self._tar:
+                    __type = self.__translate_type(_tarinfo.type)
+                    __arcinfo = {'path':_tarinfo.name, 'size':_tarinfo.size, 
+                                    'uid':_tarinfo.uid, 'gid':_tarinfo.gid,
+                                    'mode':_tarinfo.mode, 'type': __type}
+                    _data = self._check_path(__arcinfo, _data)
+                self._missing_files = [_file['path'] for _file in _data]
+            except tarfile.TarError as _msg:
+                print(_msg)
 
     def __translate_type(self, __arctype):
         '''Translate the type of the file inside the tar by a generic
