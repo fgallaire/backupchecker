@@ -49,8 +49,6 @@ class ExpectedValues(object):
 
     def __retrieve_data(self, __file):
         '''Retrieve data from the expected files'''
-        #__hashtypes = ['md5', 'sha1', 'sha224','sha256','sha384','sha512']
-        __hashtypes = algorithms_guaranteed
         __config = configparser.ConfigParser()
         __config.read_file(__file)
         #########################
@@ -60,20 +58,23 @@ class ExpectedValues(object):
             __archive = __config.items('archive')
             # Testing the size of the archive
             if 'size' in __config['archive']:
-                try:
-                    # Testing the items for the expected archive
-                    # Testing the size of the archive
-                    ### Test if the equality is required
-                    if __config['archive']['size'].startswith('='):
-                        self.__arcdata['equals'] = self.__convert_arg(__config['archive']['size'])
-                    ### Test if bigger than is required
-                    elif __config['archive']['size'].startswith('>'):
-                        self.__arcdata['biggerthan'] = self.__convert_arg(__config['archive']['size'])
-                    ### Test if smaller than is required
-                    elif __config['archive']['size'].startswith('<'):
-                        self.__arcdata['smallerthan'] = self.__convert_arg(__config['archive']['size'])
-                except ValueError as __msg:
-                    logging.warn(__msg)
+                # Testing the items for the expected archive
+                # Testing the size of the archive
+                ### Test if the equality is required
+                if __config['archive']['size'].startswith('='):
+                    self.__arcdata['equals'] = self.__convert_arg(__config['archive']['size'])
+                ### Test if bigger than is required
+                elif __config['archive']['size'].startswith('>'):
+                    self.__arcdata['biggerthan'] = self.__convert_arg(__config['archive']['size'])
+                ### Test if smaller than is required
+                elif __config['archive']['size'].startswith('<'):
+                    self.__arcdata['smallerthan'] = self.__convert_arg(__config['archive']['size'])
+            # Testing the hash of the archive
+            if 'hash' in __config['archive']:
+                for __hash in algorithms_guaranteed:
+                    if __config['archive']['hash'].startswith('{}{}'.format(__hash, ':')):
+                        __hashtype, __hashvalue = __config['archive']['hash'].split(':')
+                        self.__arcdata['hash'] = {'hashtype':__hashtype, 'hashvalue':__hashvalue}
         ##################
         # Test saved files
         ##################
@@ -123,7 +124,7 @@ class ExpectedValues(object):
                             elif __item.startswith('<'):
                                 __data['smallerthan'] = self.__convert_arg(__item)
                             # Test if a hash is provided for this file
-                            for __hash in __hashtypes:
+                            for __hash in algorithms_guaranteed:
                                 if __item.startswith('{}{}'.format(__hash, ':')):
                                     __hashtype, __hashvalue = __item.split(':')
                                     __data['hash'] = {'hashtype':__hashtype, 'hashvalue':__hashvalue}

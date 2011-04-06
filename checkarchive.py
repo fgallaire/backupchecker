@@ -135,9 +135,14 @@ class CheckArchive(object):
         '''
         __arcfile = self._extract_stored_file(__arcpath)
         __arcfilehash = checkhashes.get_hash(__arcfile, __file['hash']['hashtype'])
-        if __file['hash']['hashvalue'] != __arcfilehash:
-            self.mismatched_hashes.append({'path': __file['path'],
-                'expectedhash': __file['hash']['hashvalue'], 'hash': __arcfilehash})
+        self._report_hash(__file['path'], __file['hash']['hashvalue'],
+            __arcfilehash)
+
+    def _report_hash(self, __arcpath, __expectedhash, __archash):
+        '''Check if the hashes are different and report the fact'''   
+        if __expectedhash != __archash:
+            self._mismatched_hashes.append({'path': __arcpath,
+                'expectedhash': __expectedhash, 'hash': __archash})
 
     @property
     def missing_equality(self):

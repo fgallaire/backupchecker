@@ -1,0 +1,3 @@
+[archive]
+# hash test for a tar.gz archive - good value is aa01a55142a04de52cebba3797ca25054e51c33a5fbfdc4dd0cc2f01f6252c6a62cb87f35405d9d8b07a506eefacfd10
+hash: sha384:aa01a55142a04de52cebba3797ca25054e51c33a5fbfdc4dd0cc2f01f6252c6a62cb87f35405d9d8b07a506eefacfd11

@@ -21,6 +21,7 @@ import tarfile
 
 from expectedvalues import ExpectedValues
 from checkarchive import CheckArchive
+import checkhashes
 
 class CheckTar(CheckArchive):
     '''Check a tar archive'''
@@ -33,9 +34,15 @@ class CheckTar(CheckArchive):
         # Test the archive itself
         #########################
         if __arcdata:
+            # archive size
             if 'equals' in __arcdata or 'biggerthan' in __arcdata or 'smallerthan' in __arcdata:
                 __arcsize = self._find_archive_size(_cfgvalues['path'])
                 self._compare_sizes(__arcsize, _cfgvalues['path'], __arcdata)
+            # archive hash
+            if 'hash' in __arcdata:
+                with open(_cfgvalues['path'], 'rb') as __archive:
+                    __archash = checkhashes.get_hash(__archive, __arcdata['hash']['hashtype'])
+                    self._report_hash(_cfgvalues['path'], __arcdata['hash']['hashvalue'], __archash)
         ###############################
         # Test the files in the archive
         ###############################

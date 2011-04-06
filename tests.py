@@ -524,5 +524,137 @@ class TestApp(unittest.TestCase):
              'type': 'archive'}).missing_bigger_than
         self.assertEqual(__missing_bigger_than[0]['path'], 'tests/file_size/myzip.zip')
 
+    def test_checktar_md5_hash_archive(self):
+        '''Check the md5 hash of the tar archive itself using CheckTar class'''
+        __mismatchedhashes = checktar.CheckTar({'path':
+        'tests/expected_hash/archash/mytar.tar.gz',
+         'files_list':
+            'tests/expected_hash/archash/md5hashtararchive-list',
+         'type': 'archive'}).mismatched_hashes
+        self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/mytar.tar.gz',
+            'expectedhash': '47907de120577e6ba3b9dd8821374937',
+            'hash': '47907de120577e6ba3b9dd8821374936'})
+
+    def test_checktar_sha1_hash_archive(self):
+        '''Check the sha1 hash of the tar archive itself using CheckTar class'''
+        __mismatchedhashes = checktar.CheckTar({'path':
+        'tests/expected_hash/archash/mytar.tar.gz',
+         'files_list':
+            'tests/expected_hash/archash/sha1hashtararchive-list',
+         'type': 'archive'}).mismatched_hashes
+        self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/mytar.tar.gz',
+            'expectedhash': '84db203e2902fa5ea51e6d46ea365c7bfc5524b9',
+            'hash': '84db203e2902fa5ea51e6d46ea365c7bfc5524b8'})
+
+    def test_checktar_sha224_hash_archive(self):
+        '''Check the sha224 hash of the tar archive itself using CheckTar class'''
+        __mismatchedhashes = checktar.CheckTar({'path':
+        'tests/expected_hash/archash/mytar.tar.gz',
+         'files_list':
+            'tests/expected_hash/archash/sha224hashtararchive-list',
+         'type': 'archive'}).mismatched_hashes
+        self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/mytar.tar.gz',
+            'expectedhash': 'e25621dfdd2b2cfca451c735f4e676653e8628187e2b7ddc14402c1e',
+            'hash': 'e25621dfdd2b2cfca451c735f4e676653e8628187e2b7ddc14402c1d'})
+
+    def test_checktar_sha256_hash_archive(self):
+        '''Check the sha256 hash of the tar archive itself using CheckTar class'''
+        __mismatchedhashes = checktar.CheckTar({'path':
+        'tests/expected_hash/archash/mytar.tar.gz',
+         'files_list':
+            'tests/expected_hash/archash/sha256hashtararchive-list',
+         'type': 'archive'}).mismatched_hashes
+        self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/mytar.tar.gz',
+            'expectedhash': '7090d29295216e95ab4a190d489aa405d141cac978567c227f17ee78eb3f5fd5',
+            'hash': '7090d29295216e95ab4a190d489aa405d141cac978567c227f17ee78eb3f5fd4'})
+
+    def test_checktar_sha384_hash_archive(self):
+        '''Check the sha384 hash of the tar archive itself using CheckTar class'''
+        __mismatchedhashes = checktar.CheckTar({'path':
+        'tests/expected_hash/archash/mytar.tar.gz',
+         'files_list':
+            'tests/expected_hash/archash/sha384hashtararchive-list',
+         'type': 'archive'}).mismatched_hashes
+        self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/mytar.tar.gz',
+            'expectedhash': 'aa01a55142a04de52cebba3797ca25054e51c33a5fbfdc4dd0cc2f01f6252c6a62cb87f35405d9d8b07a506eefacfd11',
+            'hash': 'aa01a55142a04de52cebba3797ca25054e51c33a5fbfdc4dd0cc2f01f6252c6a62cb87f35405d9d8b07a506eefacfd10'})
+
+    def test_checktar_sha512_hash_archive(self):
+        '''Check the sha512 hash of the tar archive itself using CheckTar class'''
+        __mismatchedhashes = checktar.CheckTar({'path':
+        'tests/expected_hash/archash/mytar.tar.gz',
+         'files_list':
+            'tests/expected_hash/archash/sha512hashtararchive-list',
+         'type': 'archive'}).mismatched_hashes
+        self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/mytar.tar.gz',
+            'expectedhash': 'd72eef1d9c42615f6b2a92848e8fa65ffd4276d91d9976fa8c644b41c15d91441ae42f897b30a2403795a876b14ae6ed8addca4a74f24839f6506a29e662e588',
+            'hash': 'd72eef1d9c42615f6b2a92848e8fa65ffd4276d91d9976fa8c644b41c15d91441ae42f897b30a2403795a876b14ae6ed8addca4a74f24839f6506a29e662e587'})
+
+    def test_checkzip_md5_hash_archive(self):
+        '''Check the md5 hash of the zip archive itself using CheckTar class'''
+        __mismatchedhashes = checkzip.CheckZip({'path':
+        'tests/expected_hash/archash/myzip.zip',
+         'files_list':
+            'tests/expected_hash/archash/md5hashziparchive-list',
+         'type': 'archive'}).mismatched_hashes
+        self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/myzip.zip',
+            'expectedhash': 'e48e1ce2fbe0db616632ba8030ac2c9e',
+            'hash': 'e48e1ce2fbe0db616632ba8030ac2c9f'})
+
+    def test_checkzip_sha1_hash_archive(self):
+        '''Check the sha1 hash of the zip archive itself using CheckTar class'''
+        __mismatchedhashes = checkzip.CheckZip({'path':
+        'tests/expected_hash/archash/myzip.zip',
+         'files_list':
+            'tests/expected_hash/archash/sha1hashziparchive-list',
+         'type': 'archive'}).mismatched_hashes
+        self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/myzip.zip',
+            'expectedhash': '4cd5933d78603d8b4ba484ef8e45d2b6bc9fd5ce',
+            'hash': '4cd5933d78603d8b4ba484ef8e45d2b6bc9fd5cf'})
+
+    def test_checkzip_sha224_hash_archive(self):
+        '''Check the sha224 hash of the zip archive itself using CheckTar class'''
+        __mismatchedhashes = checkzip.CheckZip({'path':
+        'tests/expected_hash/archash/myzip.zip',
+         'files_list':
+            'tests/expected_hash/archash/sha224hashziparchive-list',
+         'type': 'archive'}).mismatched_hashes
+        self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/myzip.zip',
+            'expectedhash': '6e0838302f48cc7863a160f197a23492833b59862d89cabc46c2a1c4',
+            'hash': '6e0838302f48cc7863a160f197a23492833b59862d89cabc46c2a1c3'})
+
+    def test_checkzip_sha256_hash_archive(self):
+        '''Check the sha256 hash of the zip archive itself using CheckZip class'''
+        __mismatchedhashes = checkzip.CheckZip({'path':
+        'tests/expected_hash/archash/myzip.zip',
+         'files_list':
+            'tests/expected_hash/archash/sha256hashziparchive-list',
+         'type': 'archive'}).mismatched_hashes
+        self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/myzip.zip',
+            'expectedhash': '358bae9af3f9f510095b2e2a245a5e49ab27d7de862cd22f0dd4f212e25fb139',
+            'hash': '358bae9af3f9f510095b2e2a245a5e49ab27d7de862cd22f0dd4f212e25fb138'})
+
+    def test_checkzip_sha384_hash_archive(self):
+        '''Check the sha384 hash of the zip archive itself using CheckZip class'''
+        __mismatchedhashes = checkzip.CheckZip({'path':
+        'tests/expected_hash/archash/myzip.zip',
+         'files_list':
+            'tests/expected_hash/archash/sha384hashziparchive-list',
+         'type': 'archive'}).mismatched_hashes
+        self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/myzip.zip',
+            'expectedhash': '6a372e2867442826b64d1e3bca4b35e18d12d5df25e89decff214023d45f7f85d07ee79e6522f53961626e525ee29988',
+            'hash': '6a372e2867442826b64d1e3bca4b35e18d12d5df25e89decff214023d45f7f85d07ee79e6522f53961626e525ee29989'})
+
+    def test_checkzip_sha512_hash_archive(self):
+        '''Check the sha512 hash of the zip archive itself using CheckZip class'''
+        __mismatchedhashes = checkzip.CheckZip({'path':
+        'tests/expected_hash/archash/myzip.zip',
+         'files_list':
+            'tests/expected_hash/archash/sha512hashziparchive-list',
+         'type': 'archive'}).mismatched_hashes
+        self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/myzip.zip',
+            'expectedhash': 'c177ca5b618ca613f27c44991eabb922d589691000fa602a0d2767ba84b317c653e6ed541f5922d201d2e65158eee4cfb7d87665bbe1d31c07f636bb25dac7b2',
+            'hash': 'c177ca5b618ca613f27c44991eabb922d589691000fa602a0d2767ba84b317c653e6ed541f5922d201d2e65158eee4cfb7d87665bbe1d31c07f636bb25dac7b3'})
+
 if __name__ == '__main__':
     unittest.main()
