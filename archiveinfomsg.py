@@ -68,16 +68,16 @@ class ArchiveInfoMsg(object):
         archive
         '''
         if __bck.missing_equality:
-            __topic = '{} {} with unexpected size checking {}: '
+            __topic = '{} {} with unexpected size while checking {}: '
             self.__log_differences(
                 __bck.missing_equality, __archivepath, __topic)
         if __bck.missing_smaller_than:
-            __topic = '{} {} bigger than expected checking {}: '
+            __topic = '{} {} bigger than expected while checking {}: '
             self.__log_differences(
                 __bck.missing_smaller_than, __archivepath,
                     __topic, 'smaller than')
         if __bck.missing_bigger_than:
-            __topic = '{} {} smaller than expected checking {}: '
+            __topic = '{} {} smaller than expected while checking {}: '
             self.__log_differences(
                 __bck.missing_bigger_than, __archivepath,
                     __topic, 'bigger than')
@@ -166,6 +166,6 @@ class ArchiveInfoMsg(object):
             if __errnb > 1:
                 __fileword = 'files'
                 __hashword = 'hashes'
-            logging.warn('{} contains {} {} with unexpected {}:'.format(__archivepath, __errnb, __fileword, __hashword))
+            logging.warn('{} {} with unexpected {} while checking {}:'.format(__errnb, __fileword, __hashword, __archivepath))
             for __file in __bck.mismatched_hashes:
                 logging.warn('{} hash is {}. Should have been {}.'.format(__file['path'], __file['hash'], __file['expectedhash']))
