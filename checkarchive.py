@@ -144,6 +144,19 @@ class CheckArchive(object):
             self._mismatched_hashes.append({'path': __arcpath,
                 'expectedhash': __expectedhash, 'hash': __archash})
 
+    def _archive_checks(self, __path, __arcdata):
+        '''Launch the checks for the archive itself'''
+        if __arcdata:
+            # archive size
+            if 'equals' in __arcdata or 'biggerthan' in __arcdata or 'smallerthan' in __arcdata:
+                __arcsize = self._find_archive_size(__path)
+                self._compare_sizes(__arcsize, __path, __arcdata)
+            # archive hash
+            if 'hash' in __arcdata:
+                with open(__path, 'rb') as __archive:
+                    __archash = checkhashes.get_hash(__archive, __arcdata['hash']['hashtype'])
+                    self._report_hash(__path, __arcdata['hash']['hashvalue'], __archash)
+
     @property
     def missing_equality(self):
         '''A list containing the paths of the files missing the
