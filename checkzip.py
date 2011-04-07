@@ -34,16 +34,7 @@ class CheckZip(CheckArchive):
         #########################
         # Test the archive itself
         #########################
-        self._archive_checks(_cfgvalues['path'], __arcdata)
-        #if __arcdata:
-        #    if 'equals' in __arcdata or 'biggerthan' in __arcdata or 'smallerthan' in __arcdata:
-        #        __arcsize = self._find_archive_size(_cfgvalues['path'])
-        #        self._compare_sizes(__arcsize, _cfgvalues['path'], __arcdata)
-        #    # archive hash
-        #    if 'hash' in __arcdata:
-        #        with open(_cfgvalues['path'], 'rb') as __archive:
-        #            __archash = checkhashes.get_hash(__archive, __arcdata['hash']['hashtype'])
-        #            self._report_hash(_cfgvalues['path'], __arcdata['hash']['hashvalue'], __archash)
+        self._archive_checks(__arcdata, _cfgvalues['path'])
         ###############################
         # Test the files in the archive
         ###############################

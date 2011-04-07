@@ -16,7 +16,8 @@
 # Check an archive
 '''Check an archive'''
 
-from os import stat
+import os
+import stat
 from logging import warn
 
 import checkhashes
@@ -74,10 +75,19 @@ class CheckArchive(object):
         return _data
 
     def _find_archive_size(self, __arcpath):
-        '''Compare the expecte size and the current size of the archive'''
+        '''Find the size of the archive'''
         try:
-            __fileinfo = stat(__arcpath)
+            __fileinfo = os.stat(__arcpath)
             return __fileinfo.st_size
+        except (OSError, IOError) as __msg:
+            warn(__msg)
+
+    def _find_archive_mode(self, __arcpath):
+        '''Find the mode of the archive'''
+        try:
+            __fileinfo = os.stat(__arcpath)
+            __mode= stat.S_IMODE(__fileinfo.st_mode)
+            return __mode
         except (OSError, IOError) as __msg:
             warn(__msg)
 
@@ -144,18 +154,24 @@ class CheckArchive(object):
             self._mismatched_hashes.append({'path': __arcpath,
                 'expectedhash': __expectedhash, 'hash': __archash})
 
-    def _archive_checks(self, __path, __arcdata):
+    def _archive_checks(self, __arcdata, __arcpath):
         '''Launch the checks for the archive itself'''
         if __arcdata:
+            # Store the path into archive data
+            __arcdata['path'] = __arcpath
             # archive size
             if 'equals' in __arcdata or 'biggerthan' in __arcdata or 'smallerthan' in __arcdata:
-                __arcsize = self._find_archive_size(__path)
-                self._compare_sizes(__arcsize, __path, __arcdata)
+                __arcsize = self._find_archive_size(__arcdata['path'])
+                self._compare_sizes(__arcsize, __arcdata['path'], __arcdata)
             # archive hash
             if 'hash' in __arcdata:
-                with open(__path, 'rb') as __archive:
+                with open(__arcdata['path'], 'rb') as __archive:
                     __archash = checkhashes.get_hash(__archive, __arcdata['hash']['hashtype'])
-                    self._report_hash(__path, __arcdata['hash']['hashvalue'], __archash)
+                    self._report_hash(__arcdata['path'], __arcdata['hash']['hashvalue'], __archash)
+            # archive mode
+            if 'mode' in __arcdata:
+                __arcmode = self._find_archive_mode(__arcdata['path'])
+                self._check_mode(__arcmode, __arcdata)
 
     @property
     def missing_equality(self):

@@ -42,12 +42,12 @@ class ExpectedValues(object):
         '''Main of the ExpectedValues class'''
         try:
             with open(__path, 'r') as __file:
-                self.__retrieve_data(__file)
+                self.__retrieve_data(__file, __path)
         except (IOError, OSError) as __err:
             print(__err)
             sys.exit(1)
 
-    def __retrieve_data(self, __file):
+    def __retrieve_data(self, __file, __path):
         '''Retrieve data from the expected files'''
         __config = configparser.ConfigParser()
         __config.read_file(__file)
@@ -58,8 +58,6 @@ class ExpectedValues(object):
             __archive = __config.items('archive')
             # Testing the size of the archive
             if 'size' in __config['archive']:
-                # Testing the items for the expected archive
-                # Testing the size of the archive
                 ### Test if the equality is required
                 if __config['archive']['size'].startswith('='):
                     self.__arcdata['equals'] = self.__convert_arg(__config['archive']['size'])
@@ -69,6 +67,12 @@ class ExpectedValues(object):
                 ### Test if smaller than is required
                 elif __config['archive']['size'].startswith('<'):
                     self.__arcdata['smallerthan'] = self.__convert_arg(__config['archive']['size'])
+            # Test the mode of the archive
+            if 'mode' in __config['archive']:
+                if len(__config['archive']['mode']) < 3 or len(__config['archive']['mode']) > 4:
+                    logging.warn('{}: Wrong format for the mode.'.format(__path))
+                else:
+                    self.__arcdata['mode'] = __config['archive']['mode']
             # Testing the hash of the archive
             if 'hash' in __config['archive']:
                 for __hash in algorithms_guaranteed:

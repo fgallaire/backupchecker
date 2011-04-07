@@ -133,7 +133,7 @@ class ArchiveInfoMsg(object):
             if __errnb > 1:
                 __fileword = 'files'
                 __modeword = 'modes'
-            logging.warn('{} contains {} {} with unexpected {}:'.format(__archivepath, __errnb, __fileword, __modeword))
+            logging.warn('{} {} with unexpected {} while checking {}:'.format( __errnb, __fileword, __modeword, __archivepath, ))
             for __file in __bck.mismatched_modes:
                 logging.warn('{} mode is {}. Should have been {}.'.format(__file['path'], __file['mode'], __file['expectedmode']))
         

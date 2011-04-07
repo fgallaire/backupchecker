@@ -1,0 +1,3 @@
+[archive]
+# testing mode, good mode is 755
+mode: 750

@@ -656,5 +656,83 @@ class TestApp(unittest.TestCase):
             'expectedhash': 'c177ca5b618ca613f27c44991eabb922d589691000fa602a0d2767ba84b317c653e6ed541f5922d201d2e65158eee4cfb7d87665bbe1d31c07f636bb25dac7b2',
             'hash': 'c177ca5b618ca613f27c44991eabb922d589691000fa602a0d2767ba84b317c653e6ed541f5922d201d2e65158eee4cfb7d87665bbe1d31c07f636bb25dac7b3'})
 
+    def test_tar_archive_compare_644_mode(self):
+        '''Compare the 644 mode of the tar archive and the
+        expected one
+        '''
+        __myobj = checktar.CheckTar({'path':
+            'tests/expected_mode/arcmode/mode644.tar.gz',
+             'files_list':
+                'tests/expected_mode/arcmode/tarmode644-list',
+             'type': 'archive'})
+        __modes = __myobj.mismatched_modes
+        self.assertEqual(__modes, [
+        {'path':'tests/expected_mode/arcmode/mode644.tar.gz','expectedmode':'654','mode':'644'}])
+
+    def test_tar_archive_compare_755_mode(self):
+        '''Compare the 755 mode of the tar archive and the
+        expected one
+        '''
+        __myobj = checktar.CheckTar({'path':
+            'tests/expected_mode/arcmode/mode755.tar.gz',
+             'files_list':
+                'tests/expected_mode/arcmode/tarmode755-list',
+             'type': 'archive'})
+        __modes = __myobj.mismatched_modes
+        self.assertEqual(__modes, [
+        {'path':'tests/expected_mode/arcmode/mode755.tar.gz','expectedmode':'750','mode':'755'}])
+
+    def test_tar_archive_compare_4644_mode(self):
+        '''Compare the 4644 mode of the tar archive and the
+        expected one
+        '''
+        __myobj = checktar.CheckTar({'path':
+            'tests/expected_mode/arcmode/mode4644.tar.gz',
+             'files_list':
+                'tests/expected_mode/arcmode/tarmode4644-list',
+             'type': 'archive'})
+        __modes = __myobj.mismatched_modes
+        self.assertEqual(__modes, [
+        {'path':'tests/expected_mode/arcmode/mode4644.tar.gz','expectedmode':'4600','mode':'4644'}])
+
+    def test_zip_archive_compare_644_mode(self):
+        '''Compare the 644 mode of the zip archive and the
+        expected one
+        '''
+        __myobj = checkzip.CheckZip({'path':
+            'tests/expected_mode/arcmode/mode644.zip',
+             'files_list':
+                'tests/expected_mode/arcmode/zipmode644-list',
+             'type': 'archive'})
+        __modes = __myobj.mismatched_modes
+        self.assertEqual(__modes, [
+        {'path':'tests/expected_mode/arcmode/mode644.zip','expectedmode':'654','mode':'644'}])
+
+    def test_zip_archive_compare_755_mode(self):
+        '''Compare the 755 mode of the zip archive and the
+        expected one
+        '''
+        __myobj = checkzip.CheckZip({'path':
+            'tests/expected_mode/arcmode/mode755.zip',
+             'files_list':
+                'tests/expected_mode/arcmode/zipmode755-list',
+             'type': 'archive'})
+        __modes = __myobj.mismatched_modes
+        self.assertEqual(__modes, [
+        {'path':'tests/expected_mode/arcmode/mode755.zip','expectedmode':'750','mode':'755'}])
+
+    def test_zip_archive_compare_4644_mode(self):
+        '''Compare the 4644 mode of the zip archive and the
+        expected one
+        '''
+        __myobj = checkzip.CheckZip({'path':
+            'tests/expected_mode/arcmode/mode4644.zip',
+             'files_list':
+                'tests/expected_mode/arcmode/zipmode4644-list',
+             'type': 'archive'})
+        __modes = __myobj.mismatched_modes
+        self.assertEqual(__modes, [
+        {'path':'tests/expected_mode/arcmode/mode4644.zip','expectedmode':'4600','mode':'4644'}])
+
 if __name__ == '__main__':
     unittest.main()
