@@ -734,5 +734,39 @@ class TestApp(unittest.TestCase):
         self.assertEqual(__modes, [
         {'path':'tests/expected_mode/arcmode/mode4644.zip','expectedmode':'4600','mode':'4644'}])
 
+    def test_compare_tar_archive_uid_gid(self):
+        '''Compare the uid and the gid of the tar archive itself
+        and the expected one
+        '''
+        __uids = []
+        __gids = []
+        __myobj = checktar.CheckTar({'path':
+            'tests/expected_uid_gid/arc_uid_gid/uid-gid.tar.gz',
+             'files_list':
+                'tests/expected_uid_gid/arc_uid_gid/tar-uid-gid-list',
+             'type': 'archive'})
+        __uids = __myobj.mismatched_uids
+        __gids = __myobj.mismatched_gids
+        self.assertEqual((__uids[0],__gids[0]), (
+        {'path':'tests/expected_uid_gid/arc_uid_gid/uid-gid.tar.gz','expecteduid':5,'uid':1000},
+        {'path':'tests/expected_uid_gid/arc_uid_gid/uid-gid.tar.gz','expectedgid':6,'gid':1000}))
+
+    def test_compare_zip_archive_uid_gid(self):
+        '''Compare the uid and the gid of the zip archive itself
+        and the expected one
+        '''
+        __uids = []
+        __gids = []
+        __myobj = checkzip.CheckZip({'path':
+            'tests/expected_uid_gid/arc_uid_gid/uid-gid.zip',
+             'files_list':
+                'tests/expected_uid_gid/arc_uid_gid/zip-uid-gid-list',
+             'type': 'archive'})
+        __uids = __myobj.mismatched_uids
+        __gids = __myobj.mismatched_gids
+        self.assertEqual((__uids[0],__gids[0]), (
+        {'path':'tests/expected_uid_gid/arc_uid_gid/uid-gid.zip','expecteduid':5,'uid':1000},
+        {'path':'tests/expected_uid_gid/arc_uid_gid/uid-gid.zip','expectedgid':6,'gid':1000}))
+
 if __name__ == '__main__':
     unittest.main()

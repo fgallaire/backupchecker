@@ -109,7 +109,7 @@ class ArchiveInfoMsg(object):
             if __errnb > 1:
                 __fileword = 'files'
                 __uidword = 'uids'
-            logging.warn('{} contains {} {} with unexpected {}:'.format(__archivepath, __errnb, __fileword, __uidword))
+            logging.warn('{} {} with unexpected {} while checking {}:'.format(__errnb, __fileword, __uidword, __archivepath))
             for __file in __bck.mismatched_uids:
                 logging.warn('{} uid is {!s}. Should have been {!s}.'.format(__file['path'], __file['uid'], __file['expecteduid']))
         # Gid
@@ -120,7 +120,7 @@ class ArchiveInfoMsg(object):
             if __errnb > 1:
                 __fileword = 'files'
                 __gidword = 'gids'
-            logging.warn('{} contains {} {} with unexpected {}:'.format(__archivepath, __errnb, __fileword, __gidword))
+            logging.warn('{} {} with unexpected {} while checking {}:'.format(__errnb, __fileword, __gidword, __archivepath))
             for __file in __bck.mismatched_gids:
                 logging.warn('{} gid is {!s}. Should have been {!s}.'.format(__file['path'], __file['gid'], __file['expectedgid']))
 

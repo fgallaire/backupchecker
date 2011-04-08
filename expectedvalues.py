@@ -73,6 +73,15 @@ class ExpectedValues(object):
                     logging.warn('{}: Wrong format for the mode.'.format(__path))
                 else:
                     self.__arcdata['mode'] = __config['archive']['mode']
+            try:
+                # Testing the uid of the archive
+                if 'uid' in __config['archive']:
+                    self.__arcdata['uid'] = int(__config['archive']['uid'])
+                # Testing the gid of the archive
+                if 'gid' in __config['archive']:
+                    self.__arcdata['gid'] = int(__config['archive']['gid'])
+            except ValueError as __msg:
+                logging.warn(__msg)
             # Testing the hash of the archive
             if 'hash' in __config['archive']:
                 for __hash in algorithms_guaranteed:

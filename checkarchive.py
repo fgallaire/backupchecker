@@ -41,6 +41,7 @@ class CheckArchive(object):
         self._mismatched_modes = []
         self._mismatched_types = []
         self._mismatched_hashes = []
+        self.__fileinfo = False
         self._main(_cfgvalues)
 
     def _check_path(self, __arcinfo, _data):
@@ -56,11 +57,11 @@ class CheckArchive(object):
                 ### Compare the uid of the file in the archive and the
                 ### expected one
                 if 'uid' in __arcinfo and 'uid' in _file:
-                    self._check_uid(__arcinfo['uid'], _file)
+                    self.__check_uid(__arcinfo['uid'], _file)
                 ### Compare the gid of the file in the archive and the
                 ### expected one
                 if 'gid' in __arcinfo and 'gid' in _file:
-                    self._check_gid(__arcinfo['gid'], _file)
+                    self.__check_gid(__arcinfo['gid'], _file)
                 ### Compare the filemode and the mode of the expected file
                 if 'mode' in __arcinfo and 'mode' in _file:
                     self._check_mode(__arcinfo['mode'], _file)
@@ -74,22 +75,30 @@ class CheckArchive(object):
                 del(_data[_ind])
         return _data
 
-    def _find_archive_size(self, __arcpath):
-        '''Find the size of the archive'''
-        try:
-            __fileinfo = os.stat(__arcpath)
-            return __fileinfo.st_size
-        except (OSError, IOError) as __msg:
-            warn(__msg)
+    def __extract_archive_info(self, __arcpath):
+        '''Extract the archive file system information'''
+        if not self.__fileinfo:
+            try:
+                self.__fileinfo = os.stat(__arcpath)
+            except (OSError, IOError) as __msg:
+                logging.warn(__msg)
+        return self.__fileinfo
 
-    def _find_archive_mode(self, __arcpath):
+    def __find_archive_size(self, __arcpath):
+        '''Find the size of the archive'''
+        __fileinfo = self.__extract_archive_info(__arcpath)
+        return __fileinfo.st_size
+
+    def __find_archive_mode(self, __arcpath):
         '''Find the mode of the archive'''
-        try:
-            __fileinfo = os.stat(__arcpath)
-            __mode= stat.S_IMODE(__fileinfo.st_mode)
-            return __mode
-        except (OSError, IOError) as __msg:
-            warn(__msg)
+        __fileinfo = self.__extract_archive_info(__arcpath)
+        __mode= stat.S_IMODE(__fileinfo.st_mode)
+        return __mode
+
+    def __find_archive_uid_gid(self, __arcpath):
+        '''Find the uid of the archive'''
+        __fileinfo = self.__extract_archive_info(__arcpath)
+        return __fileinfo.st_uid, __fileinfo.st_gid
 
     def _compare_sizes(self, _arcsize, _arcname, _file):
         '''Compare the sizes of the files in the archive and the expected
@@ -110,14 +119,14 @@ class CheckArchive(object):
         if 'unexpected' in __file:
             self.unexpected_files.append(__arcname)
 
-    def _check_uid(self, __arcuid, __file):
+    def __check_uid(self, __arcuid, __file):
         '''Check if the file uid in the archive matches the expected
         one
         '''
         if __file['uid'] != __arcuid:
             self.mismatched_uids.append({'path':__file['path'], 'expecteduid':__file['uid'], 'uid':__arcuid})
 
-    def _check_gid(self, __arcgid, __file):
+    def __check_gid(self, __arcgid, __file):
         '''Check if the file gid in the archive matches the expected
         one
         '''
@@ -161,7 +170,7 @@ class CheckArchive(object):
             __arcdata['path'] = __arcpath
             # archive size
             if 'equals' in __arcdata or 'biggerthan' in __arcdata or 'smallerthan' in __arcdata:
-                __arcsize = self._find_archive_size(__arcdata['path'])
+                __arcsize = self.__find_archive_size(__arcdata['path'])
                 self._compare_sizes(__arcsize, __arcdata['path'], __arcdata)
             # archive hash
             if 'hash' in __arcdata:
@@ -170,8 +179,15 @@ class CheckArchive(object):
                     self._report_hash(__arcdata['path'], __arcdata['hash']['hashvalue'], __archash)
             # archive mode
             if 'mode' in __arcdata:
-                __arcmode = self._find_archive_mode(__arcdata['path'])
+                __arcmode = self.__find_archive_mode(__arcdata['path'])
                 self._check_mode(__arcmode, __arcdata)
+            # archive uid and gid
+            if 'uid' in __arcdata:
+                __arcuid, _ = self.__find_archive_uid_gid(__arcdata['path'])
+                self.__check_uid(__arcuid, __arcdata)
+            if 'gid' in __arcdata:
+                _, __arcgid = self.__find_archive_uid_gid(__arcdata['path'])
+                self.__check_gid(__arcgid, __arcdata)
 
     @property
     def missing_equality(self):
