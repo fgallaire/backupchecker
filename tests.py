@@ -1,6 +1,7 @@
 #!/usr/bin/python3.2
 
 import os
+import stat
 import logging
 import sys
 import unittest
@@ -13,6 +14,7 @@ import checktree
 import checkzip
 import cliparse
 import configurations
+import checkarchive
 from expectedvalues import ExpectedValues
 import main
 
@@ -767,6 +769,58 @@ class TestApp(unittest.TestCase):
         self.assertEqual((__uids[0],__gids[0]), (
         {'path':'tests/expected_uid_gid/arc_uid_gid/uid-gid.zip','expecteduid':5,'uid':1000},
         {'path':'tests/expected_uid_gid/arc_uid_gid/uid-gid.zip','expectedgid':6,'gid':1000}))
+
+###########################################################
+#
+# Testing the private method from checkarchive.CheckArchive
+#
+###########################################################
+
+    def test_extract_archive_info(self):
+        '''test the extract_archive_info private method from CheckArchive'''
+        __myobj = checktar.CheckTar({'path':
+            'tests/checkarchive_private_methods/mytar.tar.gz',
+             'files_list':
+                'tests/checkarchive_private_methods/tar-list',
+             'type': 'archive'})
+        __file = 'tests/checkarchive_private_methods/mytar.tar.gz'
+        __fileinfo = __myobj._CheckArchive__extract_archive_info(__file)
+        self.assertEqual(type(os.stat(__file)), type(__fileinfo))
+
+    def test_find_archive_size(self):
+        '''test the find_archive_size private method from CheckArchive'''
+        __myobj = checktar.CheckTar({'path':
+            'tests/checkarchive_private_methods/mytar.tar.gz',
+             'files_list':
+                'tests/checkarchive_private_methods/tar-list',
+             'type': 'archive'})
+        __file = 'tests/checkarchive_private_methods/mytar.tar.gz'
+        __filesize = __myobj._CheckArchive__find_archive_size(__file)
+        self.assertEqual(os.stat(__file).st_size, __filesize)
+
+    def test_find_archive_mode(self):
+        '''test the find_archive_mode private method from CheckArchive'''
+        __myobj = checktar.CheckTar({'path':
+            'tests/checkarchive_private_methods/mytar.tar.gz',
+             'files_list':
+                'tests/checkarchive_private_methods/tar-list',
+             'type': 'archive'})
+        __file = 'tests/checkarchive_private_methods/mytar.tar.gz'
+        __filemode = __myobj._CheckArchive__find_archive_mode(__file)
+        self.assertEqual(stat.S_IMODE(os.stat(__file).st_mode), __filemode)
+
+    def test_find_archive_uid_gid(self):
+        '''test the find_archive_uid_gid private method from CheckArchive'''
+        __myobj = checktar.CheckTar({'path':
+            'tests/checkarchive_private_methods/mytar.tar.gz',
+             'files_list':
+                'tests/checkarchive_private_methods/tar-list',
+             'type': 'archive'})
+        __file = 'tests/checkarchive_private_methods/mytar.tar.gz'
+        __arcuid, __arcgid = __myobj._CheckArchive__find_archive_uid_gid(__file)
+        __fileinfo = os.stat(__file)
+        __fileuid, __filegid = __fileinfo.st_uid, __fileinfo.st_gid
+        self.assertEqual((__arcuid, __arcgid), (__fileuid, __filegid))
 
 if __name__ == '__main__':
     unittest.main()
