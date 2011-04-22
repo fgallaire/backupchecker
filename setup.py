@@ -37,5 +37,5 @@ setup(name = 'brebis',
     url = 'http://www.brebis-project.org',
     download_url = 'http://www.brebis-project.org',
     packages = ['brebis'],
-    scripts = ['brebis']
+    scripts = ['scripts/brebis']
 )
