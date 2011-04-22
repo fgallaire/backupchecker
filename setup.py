@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from setuptools import setup
+from distutils.core import setup
 
 CLASSIFIERS = [
     'Intended Audience :: System Administrators',
@@ -37,6 +37,5 @@ setup(name = 'brebis',
     url = 'http://www.brebis-project.org',
     download_url = 'http://www.brebis-project.org',
     packages = ['brebis'],
-    entry_points=dict(console_scripts=['brebis=brebis:main']),
-    install_requires=['distribute']
+    scripts = ['brebis']
 )
