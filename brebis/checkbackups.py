@@ -20,10 +20,10 @@ import logging
 from tarfile import is_tarfile
 from zipfile import is_zipfile
 
-from archiveinfomsg import ArchiveInfoMsg
-from checktar import CheckTar
-from checktree import CheckTree
-from checkzip import CheckZip
+from brebis.archiveinfomsg import ArchiveInfoMsg
+from brebis.checktar import CheckTar
+from brebis.checktree import CheckTree
+from brebis.checkzip import CheckZip
 
 class CheckBackups(object):
     '''The backup checker class'''

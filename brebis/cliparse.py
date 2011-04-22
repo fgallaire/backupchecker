@@ -22,7 +22,7 @@ import os
 import sys
 from hashlib import algorithms_guaranteed
 
-from applogger import AppLogger
+from brebis.applogger import AppLogger
 
 class CliParse:
     '''Retrieve the command line options'''

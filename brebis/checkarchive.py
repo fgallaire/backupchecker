@@ -20,7 +20,7 @@ import os
 import stat
 from logging import warn
 
-import checkhashes
+import brebis.checkhashes
 
 class CheckArchive(object):
     '''Check an archive'''
@@ -153,7 +153,7 @@ class CheckArchive(object):
         one
         '''
         __arcfile = self._extract_stored_file(__arcpath)
-        __arcfilehash = checkhashes.get_hash(__arcfile, __file['hash']['hashtype'])
+        __arcfilehash = brebis.checkhashes.get_hash(__arcfile, __file['hash']['hashtype'])
         self._report_hash(__file['path'], __file['hash']['hashvalue'],
             __arcfilehash)
 
@@ -175,7 +175,7 @@ class CheckArchive(object):
             # archive hash
             if 'hash' in __arcdata:
                 with open(__arcdata['path'], 'rb') as __archive:
-                    __archash = checkhashes.get_hash(__archive, __arcdata['hash']['hashtype'])
+                    __archash = brebis.checkhashes.get_hash(__archive, __arcdata['hash']['hashtype'])
                     self._report_hash(__arcdata['path'], __arcdata['hash']['hashvalue'], __archash)
             # archive mode
             if 'mode' in __arcdata:

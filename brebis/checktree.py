@@ -19,8 +19,8 @@
 import os
 import stat
 
-from expectedvalues import ExpectedValues
-from checkarchive import CheckArchive
+from brebis.expectedvalues import ExpectedValues
+from brebis.checkarchive import CheckArchive
 
 class CheckTree(CheckArchive):
     '''Check a file tree'''

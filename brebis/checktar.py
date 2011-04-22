@@ -19,9 +19,9 @@
 import sys
 import tarfile
 
-from expectedvalues import ExpectedValues
-from checkarchive import CheckArchive
-import checkhashes
+from brebis.expectedvalues import ExpectedValues
+from brebis.checkarchive import CheckArchive
+import brebis.checkhashes
 
 class CheckTar(CheckArchive):
     '''Check a tar archive'''

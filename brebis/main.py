@@ -18,10 +18,10 @@
 
 import sys
 
-from checkbackups import CheckBackups
-from checkhashes import CheckHashes
-from cliparse import CliParse
-from configurations import Configurations
+from brebis.checkbackups import CheckBackups
+from brebis.checkhashes import CheckHashes
+from brebis.cliparse import CliParse
+from brebis.configurations import Configurations
 
 class Main(object):
     '''The main class'''
