@@ -39,6 +39,4 @@ setup(name = 'brebis',
     packages = ['brebis'],
     entry_points=dict(console_scripts=['brebis=brebis:main']),
     install_requires=['distribute']
-    )
 )
-
