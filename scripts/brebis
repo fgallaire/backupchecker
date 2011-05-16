@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from main import Main
+from brebis.main import Main
 
 if __name__ == '__main__':
     Main()
