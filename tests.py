@@ -223,7 +223,7 @@ class TestApp(unittest.TestCase):
         '''Test the Configurations class'''
         __path = 'tests/test_conf/'
         __res = brebis.configurations.Configurations(__path).configs
-        self.assertEqual({'essai': {'path': 'tests/essai.tar.gz', 'files_list': 'tests/essai-list', 'type': 'archive'}}, __res)
+        self.assertEqual({'essai': {'path': 'tests/test_conf/essai.tar.gz', 'files_list': 'essai-list', 'type': 'archive'}}, __res)
 
     def test_expected_values(self):
         '''Check the ExpectedValues class'''
