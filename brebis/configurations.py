@@ -41,8 +41,8 @@ class Configurations:
             __currentconf = {}
             try:
                 __config = ConfigParser()
-                with open(os.path.join(
-                    '/'.join([__confpath, __conf])), 'r') as __file:
+                __fullconfpath = os.path.join('/'.join([__confpath, __conf]))
+                with open(__fullconfpath, 'r') as __file:
                     __config.read_file(__file)
                 # Common information for the backups
                 ### The type of the backups
@@ -71,7 +71,12 @@ class Configurations:
                         if not os.path.exists(__bckpath):
                             print('{} does not exist.'.format(__bckpath))
                             sys.exit(1)
-                self.__configs[__config.get('main', 'name')] = __currentconf
+                # check if the name of the conf does not exist yet
+                if __config.get('main', 'name') in self.__configs:
+                    print('The configuration name in {} already exists. Please rename it.'.format(__fullconfpath))
+                    sys.exit(1)
+                else:
+                    self.__configs[__config.get('main', 'name')] = __currentconf
             except (ParsingError, NoSectionError, NoOptionError) as __err:
                 print(__err)
                 sys.exit(1)
