@@ -63,17 +63,15 @@ class Configurations:
                                                 __key, __value, '')
             # Checking the information
             ### Check the paths in the configuration
-            print("__currentconf['path'] {}".format(__currentconf['path']))
-            print("__currentconf['files_list'] {}".format(__currentconf['files_list']))
-            __pathnames = ("__currentconf['path']", "__currentconf['files_list']")
-            for __pathname in __pathnames:
-                __path = getattr(self, __pathname, None)
-                print("__path {}".format(__path))
+            __confkeys= ('path', 'files_list')
+            for __confkey in __confkeys:
+                __path = __currentconf[__confkey]
                 if not __path:
                     print('A path is missing in {}.'.format(__config.get('main', 'name')))
                     sys.exit(1)
                 if not os.path.isabs(__path):
-                    __path = os.path.normpath(os.path.join(__confpath, __path))
+                    __path = os.path.normpath(os.path.join(os.path.abspath(__confpath), __path))
+                    __currentconf[__confkey] = __path
                 if not os.path.exists(__path):
                     print('{} does not exist.'.format(__path))
                     sys.exit(1)

@@ -15,6 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import os.path
 import stat
 import logging
 import sys
@@ -221,9 +222,15 @@ class TestApp(unittest.TestCase):
 
     def test_configurations(self):
         '''Test the Configurations class'''
-        __path = 'tests/test_conf/'
+        __path = os.path.abspath('tests/test_conf/')
         __res = brebis.configurations.Configurations(__path).configs
-        self.assertEqual({'essai': {'path': 'tests/test_conf/essai.tar.gz', 'files_list': 'essai-list', 'type': 'archive'}}, __res)
+        self.assertEqual({'essai': {'path': os.path.normpath(os.path.join(__path,'essai.tar.gz')), 'files_list': os.path.normpath(os.path.join(__path,'essai-list')), 'type': 'archive'}}, __res)
+
+    def test_configurations_with_subdir(self):
+        '''Test the Configurations class with a subdirectory'''
+        __path = os.path.abspath('tests/test_conf/subdir/')
+        __res = brebis.configurations.Configurations(__path).configs
+        self.assertEqual({'essai2': {'path': os.path.normpath(os.path.join(__path, 'toto/essai.tar.gz')), 'files_list': os.path.normpath(os.path.join(__path, 'toto/essai-list')), 'type': 'archive'}}, __res)
 
     def test_expected_values(self):
         '''Check the ExpectedValues class'''
