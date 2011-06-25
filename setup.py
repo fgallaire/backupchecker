@@ -14,6 +14,13 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 from distutils.core import setup
+import platform
+import sys
+
+# Warn the user about the supported Python versions
+if float(platform.python_version()[0:3]) < 3.2:
+    print('You need at least Python 3.2 to use Brebis')
+    sys.exit(1)
 
 CLASSIFIERS = [
     'Intended Audience :: System Administrators',
@@ -23,8 +30,6 @@ CLASSIFIERS = [
     'Operating System :: POSIX :: Linux',
     'Programming Language :: Python :: 3.2'
 ]
-
-
 
 setup(name = 'brebis',
     version = '0.1',
