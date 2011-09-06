@@ -83,11 +83,9 @@ class ExpectedValues(object):
             except ValueError as __msg:
                 logging.warn(__msg)
             # Testing the hash of the archive
-            if 'hash' in __config['archive']:
-                for __hash in algorithms_guaranteed:
-                    if __config['archive']['hash'].startswith('{}{}'.format(__hash, ':')):
-                        __hashtype, __hashvalue = __config['archive']['hash'].split(':')
-                        self.__arcdata['hash'] = {'hashtype':__hashtype, 'hashvalue':__hashvalue}
+            for __hash in algorithms_guaranteed:
+                if __hash in __config['archive']:
+                        self.__arcdata['hash'] = {'hashtype':__hash, 'hashvalue':__config['archive'][__hash]}
         ##################
         # Test saved files
         ##################
