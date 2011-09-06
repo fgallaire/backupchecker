@@ -18,6 +18,7 @@
 
 import sys
 import zipfile
+import logging
 
 from brebis.expectedvalues import ExpectedValues
 from brebis.checkarchive import CheckArchive
@@ -35,25 +36,23 @@ class CheckZip(CheckArchive):
         # Test the archive itself
         #########################
         self._archive_checks(__arcdata, _cfgvalues['path'])
-        ###############################
-        # Test the files in the archive
-        ###############################
-        if _data:
-            try:
-                self._zip = zipfile.ZipFile(_cfgvalues['path'], 'r', allowZip64=True)
+        try:
+            self._zip = zipfile.ZipFile(_cfgvalues['path'], 'r', allowZip64=True)
+            ###############################
+            # Test the files in the archive
+            ###############################
+            if _data:
                 _crcerror = self._zip.testzip()
                 if _crcerror:
-                    logging.warn('{} has at least a file corrupted:{}'.format(_cfgvalues['path'], _crcerror))
+                    logging.warn('{} has at least one file corrupted:{}'.format(_cfgvalues['path'], _crcerror))
                 else:
                     _zipinfo = self._zip.infolist()
                     for _fileinfo in _zipinfo:
                         __arcinfo = {'path': _fileinfo.filename, 'size': _fileinfo.file_size}
                         _data = self._check_path(__arcinfo, _data)
                     self._missing_files = [_file['path'] for _file in _data]
-            except zipfile.BadZipfile as _msg:
-                print(_msg)
-            finally:
-                self._zip.close()
+        except zipfile.BadZipfile as _msg:
+            logging.warn('{} {}'.format(_cfgvalues['path'],_msg))
 
     def _extract_stored_file(self, __arcfilepath):
         '''Extract a file from the archive and return a file object'''

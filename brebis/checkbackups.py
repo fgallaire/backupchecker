@@ -47,6 +47,6 @@ class CheckBackups(object):
             elif __cfgvalues['type'] == 'archive' and is_tarfile(__cfgvalues['path']):
                 __bck = CheckTar(__cfgvalues)
             # check a zip file
-            elif __cfgvalues['type'] == 'archive' and is_zipfile(__cfgvalues['path']):
+            elif __cfgvalues['type'] == 'archive':
                 __bck = CheckZip(__cfgvalues)
             ArchiveInfoMsg(__bck, __cfgvalues)
