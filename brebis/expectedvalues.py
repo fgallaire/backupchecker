@@ -19,7 +19,7 @@
 import logging
 import os
 import sys
-import configparser
+from configparser import ConfigParser
 from configparser import ParsingError, NoSectionError, NoOptionError
 from hashlib import algorithms_guaranteed
 
@@ -43,13 +43,13 @@ class ExpectedValues(object):
         try:
             with open(__path, 'r') as __file:
                 self.__retrieve_data(__file, __path)
-        except (IOError, OSError) as __err:
+        except (ParsingError, NoSectionError, NoOptionError, IOError, OSError) as __err:
             print(__err)
             sys.exit(1)
 
     def __retrieve_data(self, __file, __path):
         '''Retrieve data from the expected files'''
-        __config = configparser.ConfigParser()
+        __config = ConfigParser()
         __config.read_file(__file)
         #########################
         # Test the archive itself
