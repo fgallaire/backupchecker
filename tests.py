@@ -148,7 +148,7 @@ class TestApp(unittest.TestCase):
              'files_list':
                 'tests/filetree/filelist',
              'type': 'tree'}).missing_files
-        self.assertEqual(__missing_files, ['foo/bar/toto'])
+        self.assertEqual(__missing_files, ['bar/toto'])
 
     def test_checktree_missing_equality(self):
         '''Check if the CheckTree class returns a dictionary with a file whose size should have been equal with the expected size'''
@@ -158,7 +158,7 @@ class TestApp(unittest.TestCase):
              'files_list':
                 'tests/filetree/filelist',
              'type': 'tree'}).missing_equality
-        self.assertEqual(__missing_equality[0]['path'], 'foo/foo1')
+        self.assertEqual(__missing_equality[0]['path'], 'foo1')
 
     def test_checktree_missing_bigger_than(self):
         '''Check if the CheckTree class returns a dictionary with a file whose size should have been bigger than the expected size'''
@@ -168,7 +168,7 @@ class TestApp(unittest.TestCase):
              'files_list':
                 'tests/filetree/filelist',
              'type': 'tree'}).missing_bigger_than
-        self.assertEqual(__missing_bigger_than[0]['path'], 'foo/foo2')
+        self.assertEqual(__missing_bigger_than[0]['path'], 'foo2')
 
     def test_checktree_missing_smaller_than(self):
         '''Check if the CheckTree class returns a dictionary with a file whose size should have been smaller than the expected size'''
@@ -178,7 +178,7 @@ class TestApp(unittest.TestCase):
              'files_list':
                 'tests/filetree/filelist',
              'type': 'tree'}).missing_smaller_than
-        self.assertEqual(__missing_smaller_than[0]['path'], 'foo/bar/foo3')
+        self.assertEqual(__missing_smaller_than[0]['path'], 'bar/foo3')
 
     def test_checkzip_missing_files(self):
         '''Check if the CheckZip class returns a missing file'''
@@ -303,8 +303,8 @@ class TestApp(unittest.TestCase):
              'type': 'tree'})
         __modes = __myobj.mismatched_modes
         self.assertEqual(__modes, [
-        {'path':'foo/foo1','expectedmode':'664','mode':'644'},
-        {'path':'foo/bar','expectedmode':'754','mode':'755'}])
+        {'path':'foo1','expectedmode':'664','mode':'644'},
+        {'path':'bar','expectedmode':'754','mode':'755'}])
 
     def test_extract_types(self):
         '''Extract the expected file types'''
