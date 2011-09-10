@@ -203,6 +203,60 @@ class Test10_wrong_zip_archive_uid:
                 else:
                     print('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
 
+class Test11_wrong_tar_gz_archive_gid:
+    def __init__(self):
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/wrong-tar-gz-archive-gid'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            print('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file with unexpected gid' in __file.read():
+                    print('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    print('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test12_wrong_tar_bz2_archive_gid:
+    def __init__(self):
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/wrong-tar-bz2-archive-gid'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            print('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file with unexpected gid' in __file.read():
+                    print('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    print('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test13_wrong_zip_archive_gid:
+    def __init__(self):
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/wrong-zip-archive-gid'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            print('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file with unexpected gid' in __file.read():
+                    print('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    print('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
 if __name__ == '__main__':
     Test1_file_missing_in_tar_gz()
     Test2_file_missing_in_tar_bz2()
@@ -214,3 +268,6 @@ if __name__ == '__main__':
     Test8_wrong_tar_gz_archive_uid()
     Test9_wrong_tar_bz2_archive_uid()
     Test10_wrong_zip_archive_uid()
+    Test11_wrong_tar_gz_archive_gid()
+    Test12_wrong_tar_bz2_archive_gid()
+    Test13_wrong_zip_archive_gid()
