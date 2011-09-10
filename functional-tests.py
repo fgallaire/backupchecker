@@ -95,9 +95,84 @@ class Test4_file_missing_in_tree:
                 else:
                     print('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
 
+class Test5_wrong_tar_gz_archive_mode:
+    def __init__(self):
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/wrong-tar-gz-archive-mode'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            print('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file with unexpected mode' in __file.read():
+                    print('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    print('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test6_wrong_tar_bz2_archive_mode:
+    def __init__(self):
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/wrong-tar-bz2-archive-mode'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            print('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file with unexpected mode' in __file.read():
+                    print('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    print('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test7_wrong_zip_archive_mode:
+    def __init__(self):
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/wrong-zip-archive-mode'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            print('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file with unexpected mode' in __file.read():
+                    print('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    print('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+#class Test6_wrong_tar_gz_archive_uid:
+#    def __init__(self):
+#        self.__testname = self.__class__.__name__
+#        self.__testdir = 'functional-tests/wrong-tar-gz-archive-uid'
+#        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+#        self.__main()
+#
+#    def __main(self):
+#        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+#        if retcode != 0:
+#            print('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+#        else:
+#            with open(self.__resultfile, 'r') as __file:
+#                if '1 file with unexpected uid' in __file.read():
+#                    print('{} - {}'.format(self.__testname, OKMSG))
+#                else:
+#                    print('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
 
 if __name__ == '__main__':
     Test1_file_missing_in_tar_gz()
     Test2_file_missing_in_tar_bz2()
     Test3_file_missing_in_zip()
     Test4_file_missing_in_tree()
+    Test5_wrong_tar_gz_archive_mode()
+    Test6_wrong_tar_bz2_archive_mode()
+    Test7_wrong_zip_archive_mode()
