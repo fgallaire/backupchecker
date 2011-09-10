@@ -18,6 +18,8 @@ from multiprocessing import Process
 import subprocess
 import os.path
 
+import functionaltests
+
 EXE = './zozo'
 OPTCONFIG = '-c'
 OPTLOG = '-l'
@@ -583,34 +585,6 @@ class Test31_wrong_zip_archive_sha512_hash:
                     print('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
 
 if __name__ == '__main__':
-    Process(target=Test1_file_missing_in_tar_gz).start()
-    Process(target=Test2_file_missing_in_tar_bz2).start()
-    Process(target=Test3_file_missing_in_zip).start()
-    Process(target=Test4_file_missing_in_tree).start()
-    Process(target=Test5_wrong_tar_gz_archive_mode).start()
-    Process(target=Test6_wrong_tar_bz2_archive_mode).start()
-    Process(target=Test7_wrong_zip_archive_mode).start()
-    Process(target=Test8_wrong_tar_gz_archive_uid).start()
-    Process(target=Test9_wrong_tar_bz2_archive_uid).start()
-    Process(target=Test10_wrong_zip_archive_uid).start()
-    Process(target=Test11_wrong_tar_gz_archive_gid).start()
-    Process(target=Test12_wrong_tar_bz2_archive_gid).start()
-    Process(target=Test13_wrong_zip_archive_gid).start()
-    Process(target=Test14_wrong_tar_gz_archive_md5_hash).start()
-    Process(target=Test15_wrong_tar_gz_archive_sha1_hash).start()
-    Process(target=Test16_wrong_tar_gz_archive_sha224_hash).start()
-    Process(target=Test17_wrong_tar_gz_archive_sha256_hash).start()
-    Process(target=Test18_wrong_tar_gz_archive_sha384_hash).start()
-    Process(target=Test19_wrong_tar_gz_archive_sha512_hash).start()
-    Process(target=Test20_wrong_tar_bz2_archive_md5_hash).start()
-    Process(target=Test21_wrong_tar_bz2_archive_sha1_hash).start()
-    Process(target=Test22_wrong_tar_bz2_archive_sha224_hash).start()
-    Process(target=Test23_wrong_tar_bz2_archive_sha256_hash).start()
-    Process(target=Test24_wrong_tar_bz2_archive_sha384_hash).start()
-    Process(target=Test25_wrong_tar_bz2_archive_sha512_hash).start()
-    Process(target=Test26_wrong_zip_archive_md5_hash).start()
-    Process(target=Test27_wrong_zip_archive_sha1_hash).start()
-    Process(target=Test28_wrong_zip_archive_sha224_hash).start()
-    Process(target=Test29_wrong_zip_archive_sha256_hash).start()
-    Process(target=Test30_wrong_zip_archive_sha384_hash).start()
-    Process(target=Test31_wrong_zip_archive_sha512_hash).start()
+    for element in dir(functionaltests):
+        if 'Test' in element:
+            Process(target=getattr(functionaltests, element)).start()
