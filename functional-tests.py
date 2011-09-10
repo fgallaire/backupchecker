@@ -17,6 +17,12 @@
 import subprocess
 import os.path
 
+EXE = './zozo'
+OPTCONFIG = '-c'
+OPTLOG = '-l'
+OKMSG = 'OK'
+KOMSG = 'KO - '
+
 class Test1_file_missing_in_tar_gz:
     def __init__(self):
         self.__testname = self.__class__.__name__
@@ -25,15 +31,15 @@ class Test1_file_missing_in_tar_gz:
         self.__main()
 
     def __main(self):
-        retcode = subprocess.call(['./zozo', '-c', self.__testdir, '-l', self.__resultfile])
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
         if retcode != 0:
-            print('{} KO - return code:{}'.format(self.__testname, str(retcode)))
+            print('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
         else:
             with open(self.__resultfile, 'r') as __file:
                 if '1 file missing in' in __file.read():
-                    print('{} OK'.format(self.__testname))
+                    print('{} - {}'.format(self.__testname, OKMSG))
                 else:
-                    print('{} KO - value in result file not expected'.format(self.__testname))
+                    print('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
 
 class Test2_file_missing_in_tar_bz2:
     def __init__(self):
@@ -43,15 +49,15 @@ class Test2_file_missing_in_tar_bz2:
         self.__main()
 
     def __main(self):
-        retcode = subprocess.call(['./zozo', '-c', self.__testdir, '-l', self.__resultfile])
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
         if retcode != 0:
-            print('{} KO - return code:{}'.format(self.__testname, str(retcode)))
+            print('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
         else:
             with open(self.__resultfile, 'r') as __file:
                 if '1 file missing in' in __file.read():
-                    print('{} OK'.format(self.__testname))
+                    print('{} - {}'.format(self.__testname, OKMSG))
                 else:
-                    print('{} KO - value in result file not expected'.format(self.__testname))
+                    print('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
 
 class Test3_file_missing_in_zip:
     def __init__(self):
@@ -61,18 +67,37 @@ class Test3_file_missing_in_zip:
         self.__main()
 
     def __main(self):
-        retcode = subprocess.call(['./zozo', '-c', self.__testdir, '-l', self.__resultfile])
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
         if retcode != 0:
-            print('{} KO - return code:{}'.format(self.__testname, str(retcode)))
+            print('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
         else:
             with open(self.__resultfile, 'r') as __file:
                 if '1 file missing in' in __file.read():
-                    print('{} OK'.format(self.__testname))
+                    print('{} - {}'.format(self.__testname, OKMSG))
                 else:
-                    print('{} KO - value in result file not expected'.format(self.__testname))
+                    print('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test4_file_missing_in_tree:
+    def __init__(self):
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/file-missing-in-tree'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            print('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file missing in' in __file.read():
+                    print('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    print('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
 
 
 if __name__ == '__main__':
     Test1_file_missing_in_tar_gz()
     Test2_file_missing_in_tar_bz2()
     Test3_file_missing_in_zip()
+    Test4_file_missing_in_tree()
