@@ -1,0 +1,2 @@
+[files]
+file-missing-in-tar-gz/bar: gid:1234
