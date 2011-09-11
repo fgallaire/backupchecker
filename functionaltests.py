@@ -174,6 +174,8 @@ class Test8_wrong_tar_gz_archive_uid:
         else:
             with open(self.__resultfile, 'r') as __file:
                 if '1 file with unexpected uid' in __file.read():
+                    self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+                else:
                     self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
 
 class Test9_wrong_tar_bz2_archive_uid:
@@ -651,7 +653,26 @@ class Test33_wrong_file_uid_in_tar_bz2_archive:
                 else:
                     self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
 
-class Test34_wrong_file_gid_in_tar_gz_archive:
+class Test34_wrong_file_uid_in_tree:
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/wrong-file-uid-in-tree'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file with unexpected uid' in __file.read():
+                    self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test35_wrong_file_gid_in_tar_gz_archive:
     def __init__(self, q):
         self.__queue = q
         self.__testname = self.__class__.__name__
@@ -670,7 +691,7 @@ class Test34_wrong_file_gid_in_tar_gz_archive:
                 else:
                     self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
 
-class Test35_wrong_file_gid_in_tar_bz2_archive:
+class Test36_wrong_file_gid_in_tar_bz2_archive:
     def __init__(self, q):
         self.__queue = q
         self.__testname = self.__class__.__name__
@@ -685,6 +706,101 @@ class Test35_wrong_file_gid_in_tar_bz2_archive:
         else:
             with open(self.__resultfile, 'r') as __file:
                 if '1 file with unexpected gid' in __file.read():
+                    self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test37_wrong_file_gid_in_tree:
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/wrong-file-gid-in-tree'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file with unexpected gid' in __file.read():
+                    self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test38_unexpected_file_in_tar_gz_archive:
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/unexpected-file-in-tar-gz-archive'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 unexpected file' in __file.read():
+                    self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test39_unexpected_file_in_tar_bz2_archive:
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/unexpected-file-in-tar-bz2-archive'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 unexpected file' in __file.read():
+                    self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test40_unexpected_file_in_zip_archive:
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/unexpected-file-in-zip-archive'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 unexpected file' in __file.read():
+                    self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test41_unexpected_file_in_tree:
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/unexpected-file-in-tree'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 unexpected file' in __file.read():
                     self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
                 else:
                     self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
