@@ -16,6 +16,7 @@
 
 from multiprocessing import Process, Queue
 import subprocess
+from os import linesep
 import os.path
 
 import functionaltests
@@ -805,13 +806,248 @@ class Test41_unexpected_file_in_tree:
                 else:
                     self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
 
+class Test42_wrong_file_md5_hash_in_tar_gz_archive:
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/wrong-file-md5-hash-in-tar-gz-archive'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file with unexpected hash' in __file.read():
+                    self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test43_wrong_file_sha1_hash_in_tar_gz_archive:
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/wrong-file-sha1-hash-in-tar-gz-archive'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file with unexpected hash' in __file.read():
+                    self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test44_wrong_file_sha224_hash_in_tar_gz_archive:
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/wrong-file-sha224-hash-in-tar-gz-archive'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file with unexpected hash' in __file.read():
+                    self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test45_wrong_file_sha256_hash_in_tar_gz_archive:
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/wrong-file-sha256-hash-in-tar-gz-archive'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file with unexpected hash' in __file.read():
+                    self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test46_wrong_file_sha384_hash_in_tar_gz_archive:
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/wrong-file-sha384-hash-in-tar-gz-archive'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file with unexpected hash' in __file.read():
+                    self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test47_wrong_file_sha512_hash_in_tar_gz_archive:
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/wrong-file-sha512-hash-in-tar-gz-archive'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file with unexpected hash' in __file.read():
+                    self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test48_wrong_file_md5_hash_in_tar_bz2_archive:
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/wrong-file-md5-hash-in-tar-bz2-archive'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file with unexpected hash' in __file.read():
+                    self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test49_wrong_file_sha1_hash_in_tar_bz2_archive:
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/wrong-file-sha1-hash-in-tar-bz2-archive'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file with unexpected hash' in __file.read():
+                    self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test50_wrong_file_sha224_hash_in_tar_bz2_archive:
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/wrong-file-sha224-hash-in-tar-bz2-archive'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file with unexpected hash' in __file.read():
+                    self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test51_wrong_file_sha256_hash_in_tar_bz2_archive:
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/wrong-file-sha256-hash-in-tar-bz2-archive'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file with unexpected hash' in __file.read():
+                    self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test52_wrong_file_sha384_hash_in_tar_bz2_archive:
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/wrong-file-sha384-hash-in-tar-bz2-archive'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file with unexpected hash' in __file.read():
+                    self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test53_wrong_file_sha512_hash_in_tar_bz2_archive:
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/wrong-file-sha512-hash-in-tar-bz2-archive'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file with unexpected hash' in __file.read():
+                    self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+def extract_key(key):
+    return int(key.split('_')[0][4:])
+
 if __name__ == '__main__':
     processes = []
+    results = []
     q = Queue()
+
     for element in dir(functionaltests):
         if 'Test' in element:
             processes.append(Process(target=getattr(functionaltests, element), args=(q,)))
             processes[-1].start()
     for p in processes:
-        print(q.get())
+        results.append(q.get())
         p.join()
+    # Only one print is beautiful
+    print(linesep.join(sorted(results,key=functionaltests.extract_key)))
