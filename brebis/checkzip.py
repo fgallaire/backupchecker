@@ -19,6 +19,7 @@
 import sys
 import zipfile
 import logging
+import stat
 
 from brebis.expectedvalues import ExpectedValues
 from brebis.checkarchive import CheckArchive
@@ -48,7 +49,8 @@ class CheckZip(CheckArchive):
                 else:
                     _zipinfo = self._zip.infolist()
                     for _fileinfo in _zipinfo:
-                        __arcinfo = {'path': _fileinfo.filename, 'size': _fileinfo.file_size}
+                        __arcinfo = {'path': _fileinfo.filename, 'size': _fileinfo.file_size,
+                                        'mode': stat.S_IMODE((_fileinfo.external_attr >> 16))}
                         _data = self._check_path(__arcinfo, _data)
                     self._missing_files = [_file['path'] for _file in _data]
         except zipfile.BadZipfile as _msg:
