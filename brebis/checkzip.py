@@ -49,6 +49,7 @@ class CheckZip(CheckArchive):
                 else:
                     _zipinfo = self._zip.infolist()
                     for _fileinfo in _zipinfo:
+                        _fileinfo.filename = self._normalize_path(_fileinfo.filename)
                         __uid, __gid = self.__extract_uid_gid(_fileinfo)
                         __type = self.__translate_type(_fileinfo.external_attr >> 16)
                         __arcinfo = {'path': _fileinfo.filename, 'size': _fileinfo.file_size,

@@ -45,6 +45,7 @@ class CheckTree(CheckArchive):
             _data = self._check_path(__arcinfo, _data)
             for __filename in __filenames:
                 __filepath = os.path.join(__dirpath, __filename)
+                __filepath = self._normalize_path(__filepath)
                 __fileinfo = os.stat(__filepath)
                 __filemode = stat.S_IMODE(__fileinfo.st_mode)
                 __type = self.__translate_type(__fileinfo.st_mode)

@@ -114,6 +114,13 @@ class CheckArchive(object):
             self.missing_smaller_than.append({'path': _arcname,
                 'size': _arcsize, 'expected': _file['smallerthan']})
 
+    def _normalize_path(self, __path):
+        '''Remove last slash of a directory path if present'''
+        if __path.endswith('/'):
+            return __path[:-1]
+        else:
+            return __path
+
     def _check_unexpected_files(self, __arcname, __file):
         '''Check if an unexpected file exists in the archive'''
         if 'unexpected' in __file:

@@ -86,14 +86,16 @@ class ExpectedValues(object):
             for __hash in algorithms_guaranteed:
                 if __hash in __config['archive']:
                         self.__arcdata['hash'] = {'hashtype':__hash, 'hashvalue':__config['archive'][__hash]}
-        ##################
-        # Test saved files
-        ##################
+        ######################
+        # Test expected  files
+        ######################
         if __config.has_section('files'):
             __files = __config.items('files')
             for __fileitems in __files:
                 __data = {}
                 __data['path'] = __fileitems[0]
+                if __data['path'].endswith('/'):
+                    __data['path'] = __data['path'][:-1]
                 if len(__fileitems) == 2:
                     for __item in __fileitems[1].split(' '):
                         try:

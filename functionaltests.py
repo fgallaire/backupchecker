@@ -1414,7 +1414,7 @@ class Test71_wrong_file_type_f_in_tar_bz2_archive:
                 else:
                     self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
 
-lass Test72_wrong_file_type_f_in_zip_archive:
+class Test72_wrong_file_type_f_in_zip_archive:
    def __init__(self, q):
        self.__queue = q
        self.__testname = self.__class__.__name__
@@ -1490,7 +1490,7 @@ class Test74_wrong_file_type_d_in_tar_bz2_archive:
                 else:
                     self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
 
-lass Test75_wrong_file_type_d_in_zip_archive:
+class Test75_wrong_file_type_d_in_zip_archive:
    def __init__(self, q):
        self.__queue = q
        self.__testname = self.__class__.__name__

@@ -41,6 +41,7 @@ class CheckTar(CheckArchive):
             try:
                 self._tar = tarfile.open(_cfgvalues['path'], 'r')
                 for _tarinfo in self._tar:
+                    _tarinfo.name = self._normalize_path(_tarinfo.name)
                     __type = self.__translate_type(_tarinfo.type)
                     __arcinfo = {'path':_tarinfo.name, 'size':_tarinfo.size, 
                                     'uid':_tarinfo.uid, 'gid':_tarinfo.gid,
