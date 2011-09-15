@@ -654,6 +654,25 @@ class Test33_wrong_file_uid_in_tar_bz2_archive:
                 else:
                     self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
 
+class Test33_wrong_file_uid_in_zip_archive:
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/wrong-file-uid-in-zip-archive'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file with unexpected uid' in __file.read():
+                    self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
 class Test34_wrong_file_uid_in_tree:
     def __init__(self, q):
         self.__queue = q
@@ -697,6 +716,25 @@ class Test36_wrong_file_gid_in_tar_bz2_archive:
         self.__queue = q
         self.__testname = self.__class__.__name__
         self.__testdir = 'functional-tests/wrong-file-gid-in-tar-bz2-archive'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        self.__main()
+
+    def __main(self):
+        retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if retcode != 0:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+        else:
+            with open(self.__resultfile, 'r') as __file:
+                if '1 file with unexpected gid' in __file.read():
+                    self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+                else:
+                    self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test37_wrong_file_gid_in_zip_archive:
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/wrong-file-gid-in-zip-archive'
         self.__resultfile = os.path.join(self.__testdir, 'a.out')
         self.__main()
 
@@ -1376,6 +1414,25 @@ class Test71_wrong_file_type_f_in_tar_bz2_archive:
                 else:
                     self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
 
+lass Test72_wrong_file_type_f_in_zip_archive:
+   def __init__(self, q):
+       self.__queue = q
+       self.__testname = self.__class__.__name__
+       self.__testdir = 'functional-tests/wrong-file-type-f-in-zip-archive'
+       self.__resultfile = os.path.join(self.__testdir, 'a.out')
+       self.__main()
+
+   def __main(self):
+       retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+       if retcode != 0:
+           self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+       else:
+           with open(self.__resultfile, 'r') as __file:
+               if '1 file with unexpected type' in __file.read():
+                   self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+               else:
+                   self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
 class Test72_wrong_file_type_f_in_tree:
     def __init__(self, q):
         self.__queue = q
@@ -1433,7 +1490,26 @@ class Test74_wrong_file_type_d_in_tar_bz2_archive:
                 else:
                     self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
 
-class Test75_wrong_file_type_d_in_tree:
+lass Test75_wrong_file_type_d_in_zip_archive:
+   def __init__(self, q):
+       self.__queue = q
+       self.__testname = self.__class__.__name__
+       self.__testdir = 'functional-tests/wrong-file-type-d-in-zip-archive'
+       self.__resultfile = os.path.join(self.__testdir, 'a.out')
+       self.__main()
+
+   def __main(self):
+       retcode = subprocess.call([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+       if retcode != 0:
+           self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(retcode)))
+       else:
+           with open(self.__resultfile, 'r') as __file:
+               if '1 file with unexpected type' in __file.read():
+                   self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+               else:
+                   self.__queue.put('{} - {}value in result file not expected'.format(self.__testname, KOMSG))
+
+class Test76_wrong_file_type_d_in_tree:
     def __init__(self, q):
         self.__queue = q
         self.__testname = self.__class__.__name__

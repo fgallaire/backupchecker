@@ -49,8 +49,11 @@ class CheckZip(CheckArchive):
                 else:
                     _zipinfo = self._zip.infolist()
                     for _fileinfo in _zipinfo:
+                        __uid, __gid = self.__extract_uid_gid(_fileinfo)
+                        __type = self.__translate_type(_fileinfo.external_attr >> 16)
                         __arcinfo = {'path': _fileinfo.filename, 'size': _fileinfo.file_size,
-                                        'mode': stat.S_IMODE((_fileinfo.external_attr >> 16))}
+                                        'mode': stat.S_IMODE((_fileinfo.external_attr >> 16)),
+                                        'uid': __uid, 'gid': __gid, 'type': __type}
                         _data = self._check_path(__arcinfo, _data)
                     self._missing_files = [_file['path'] for _file in _data]
         except zipfile.BadZipfile as _msg:
@@ -60,3 +63,16 @@ class CheckZip(CheckArchive):
         '''Extract a file from the archive and return a file object'''
         __file = self._zip.open(__arcfilepath, 'r')
         return __file
+
+    def __extract_uid_gid(self, __binary):
+        '''Extract uid and gid from a zipinfo.extra object (platform dependant)'''
+        __uid, __gid = int.from_bytes(__binary.extra[15:17], 'little'), \
+                            int.from_bytes(__binary.extra[20:22], 'little')
+        return (__uid, __gid)
+
+    def __translate_type(self, __mode):
+        '''Translate the type of the file to a generic name'''
+        if stat.S_ISREG(__mode):
+            return 'f'
+        elif stat.S_ISDIR(__mode):
+            return 'd'
