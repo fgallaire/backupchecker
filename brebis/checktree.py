@@ -33,7 +33,7 @@ class CheckTree(CheckArchive):
         # Save the tree root to determine the relative path in the file tree
         self.__treepath = self.__treepath
         for __dirpath, __dirnames, __filenames, in os.walk(_cfgvalues['path']):
-            __dirinfo = os.stat(__dirpath)
+            __dirinfo = os.lstat(__dirpath)
             __dirmode = stat.S_IMODE(__dirinfo.st_mode)
             # Translate file type in brebis intern file type
             __type = self.__translate_type(__dirinfo.st_mode)
@@ -46,7 +46,7 @@ class CheckTree(CheckArchive):
             for __filename in __filenames:
                 __filepath = os.path.join(__dirpath, __filename)
                 __filepath = self._normalize_path(__filepath)
-                __fileinfo = os.stat(__filepath)
+                __fileinfo = os.lstat(__filepath)
                 __filemode = stat.S_IMODE(__fileinfo.st_mode)
                 __type = self.__translate_type(__fileinfo.st_mode)
                 __arcinfo = {'path': os.path.relpath(__filepath, self.__treepath),
