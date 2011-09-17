@@ -18,6 +18,7 @@
 
 import sys
 import tarfile
+import logging
 
 from brebis.expectedvalues import ExpectedValues
 from brebis.checkarchive import CheckArchive
@@ -49,7 +50,8 @@ class CheckTar(CheckArchive):
                     _data = self._check_path(__arcinfo, _data)
                 self._missing_files = [_file['path'] for _file in _data]
             except tarfile.TarError as _msg:
-                print(_msg)
+                __warn = '. You should investigate for a data corruption.'
+                logging.warn('{}: {}{}'.format(_cfgvalues['path'], str(_msg), __warn))
 
     def __translate_type(self, __arctype):
         '''Translate the type of the file inside the tar by a generic
