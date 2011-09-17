@@ -45,15 +45,6 @@ class CliParse:
             default=os.path.join(os.getcwd(), 'a.out'),
             help='the log file',
             metavar='FILE')
-        __parser.add_option('--hashfile', dest='hashfile',
-            action='store', type='string',
-            help='the file containing the hashes',
-            metavar='FILE')
-        #for __hashtype in ('md5', 'sha1', 'sha224','sha256','sha384','sha512'):
-        for __hashtype in algorithms_guaranteed:
-            __parser.add_option('--{}'.format(__hashtype), dest='hashtype',
-                action='store_const', const='{}'.format(__hashtype),
-                help='use the {} hash algorithm type'.format(__hashtype))
         __options, _ = __parser.parse_args()
         self.__verify_options(__options)
 
@@ -73,19 +64,6 @@ class CliParse:
             logging.info('The configuration directory does not exist')
             sys.exit(1)
         __options.confpath = os.path.abspath(__options.confpath)
-        # Check if hashfile and hashtype are both defined
-        __hashwarning = 'You should provide both hash type and hash file'
-        if __options.hashtype and __options.hashfile:
-            # Check the hash file path
-            if not os.path.exists(__options.hashfile):
-                print('The hash file does not exist')
-                sys.exit(1)
-        elif __options.hashtype and not __options.hashfile:
-            print(__hashwarning)
-            sys.exit(1)
-        elif __options.hashfile and not __options.hashtype:
-            print(__hashwarning)
-            sys.exit(1)
         self.__options = __options
 
     @property

@@ -22,7 +22,6 @@ import logging
 
 from brebis.expectedvalues import ExpectedValues
 from brebis.checkarchive import CheckArchive
-import brebis.checkhashes
 
 class CheckTar(CheckArchive):
     '''Check a tar archive'''
