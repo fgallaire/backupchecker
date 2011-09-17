@@ -58,7 +58,8 @@ class CheckZip(CheckArchive):
                         _data = self._check_path(__arcinfo, _data)
                     self._missing_files = [_file['path'] for _file in _data]
         except zipfile.BadZipfile as _msg:
-            logging.warn('{} {}'.format(_cfgvalues['path'],_msg))
+            __warn = '. You should investigate for a data corruption.'
+            logging.warn('{}: {}{}'.format(_cfgvalues['path'], str(_msg), __warn))
 
     def _extract_stored_file(self, __arcfilepath):
         '''Extract a file from the archive and return a file object'''
