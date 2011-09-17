@@ -854,6 +854,19 @@ class TestApp(unittest.TestCase):
 #
 ###########################################################
 
+    def test_extract_uid_gid(self):
+        '''test the __extract_uid_gid private method from CheckZip'''
+        __myobj = brebis.checkzip.CheckZip({'path':
+            'tests/checkzip_private_methods/myzip.zip',
+             'files_list':
+                'tests/checkzip_private_methods/myzip-list',
+             'type': 'archive'})
+        __file = 'tests/checkzip_private_methods/myzip.zip'
+        __myz = zipfile.ZipFile(__file,'r')
+        __myinfo = __myz.infolist()
+        __result = __myobj._CheckZip__extract_uid_gid(__myinfo[-1])
+        self.assertEqual((1000,1000), __result)
+
     def test_translate_type_directory(self):
         '''test the __translate_type private method from CheckZip - expecting file'''
         __myobj = brebis.checkzip.CheckZip({'path':
