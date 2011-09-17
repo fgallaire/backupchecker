@@ -685,6 +685,14 @@ class Test77_corrupted_tar_gz_archive(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('data corruption')
 
+class Test78_corrupted_tar_bz2_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = 'functional-tests/corrupted-tar-bz2-archive'
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('data corruption')
+
 def extract_key(key):
     return int(key.split('_')[0][4:])
 
