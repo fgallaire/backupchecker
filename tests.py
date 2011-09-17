@@ -960,31 +960,70 @@ class TestApp(unittest.TestCase):
         __result = __myobj._CheckTar__translate_type(self._tar.getmembers()[1].type)
         self.assertEqual('s', __result)
 
-#    def test_translate_type_directory(self):
-#        '''test the __translate_type private method from checkzip.CheckZip - expecting file'''
-#        __myobj = brebis.checkzip.CheckZip({'path':
-#            'tests/checkzip_private_methods/myzip.zip',
-#             'files_list':
-#                'tests/checkzip_private_methods/myzip-list',
-#             'type': 'archive'})
-#        __file = 'tests/checkzip_private_methods/myzip.zip'
-#        __myz = zipfile.ZipFile(__file,'r')
-#        __myinfo = __myz.infolist()
-#        __result = __myobj._CheckZip__translate_type(__myinfo[-1].external_attr >> 16)
-#        self.assertEqual('f', __result)
+################################################################
 #
-#    def test_translate_type_file(self):
-#        '''test the __translate_type private method from checkzip.CheckZip - expecting directory'''
-#        __myobj = brebis.checkzip.CheckZip({'path':
-#            'tests/checkzip_private_methods/myzip.zip',
-#             'files_list':
-#                'tests/checkzip_private_methods/myzip-list',
-#             'type': 'archive'})
-#        __file = 'tests/checkzip_private_methods/myzip.zip'
-#        __myz = zipfile.ZipFile(__file,'r')
-#        __myinfo = __myz.infolist()
-#        __result = __myobj._CheckZip__translate_type(__myinfo[0].external_attr >> 16)
-#        self.assertEqual('d', __result)
+# Testing the private/protected methods from checktree.CheckTree
+#
+################################################################
+
+    def test_tree_extract_stored_file(self):
+        '''test the _extract_stored_file protected method from checktree.CheckTree'''
+        __myobj = brebis.checktree.CheckTree({'path':
+            'tests/checktree_private_methods/mytree',
+             'files_list':
+                'tests/checktree_private_methods/mytree-list',
+             'type': 'tree'})
+        __file = 'tests/checktree_private_methods/mytree'
+        __result = __myobj._extract_stored_file('hello')
+        with open(os.path.join(__file, 'hello'), 'rb') as self.__desc:
+            self.assertEqual(type(__result), type(self.__desc))
+            __result.close()
+
+    def test_tree_extract_stored_file(self):
+        '''test the _extract_stored_file protected method from checktree.CheckTree'''
+        __myobj = brebis.checktree.CheckTree({'path':
+            'tests/checktree_private_methods/mytree',
+             'files_list':
+                'tests/checktree_private_methods/mytree-list',
+             'type': 'tree'})
+        __file = 'tests/checktree_private_methods/mytree'
+        __result = __myobj._extract_stored_file('hello')
+        with open(os.path.join(__file, 'hello'), 'rb') as self.__desc:
+            self.assertEqual(type(__result), type(self.__desc))
+            __result.close()
+
+    def test_tree_translate_type_file(self):
+        '''test the __translate_type private method from checktree.CheckTree - expecting file'''
+        __myobj = brebis.checktree.CheckTree({'path':
+            'tests/checktree_private_methods/mytree',
+             'files_list':
+                'tests/checktree_private_methods/mytree-list',
+             'type': 'tree'})
+        __file = 'tests/checktree_private_methods/mytree/hello'
+        __result = __myobj._CheckTree__translate_type(os.stat(__file).st_mode)
+        self.assertEqual('f', __result)
+
+    def test_tree_translate_type_directory(self):
+        '''test the __translate_type private method from checktree.CheckTree - expecting directory'''
+        __myobj = brebis.checktree.CheckTree({'path':
+            'tests/checktree_private_methods/mytree',
+             'files_list':
+                'tests/checktree_private_methods/mytree-list',
+             'type': 'tree'})
+        __file = 'tests/checktree_private_methods/mytree'
+        __result = __myobj._CheckTree__translate_type(os.stat(__file).st_mode)
+        self.assertEqual('d', __result)
+
+    def test_tree_translate_type_symbolic_link(self):
+        '''test the __translate_type private method from checktree.CheckTree - expecting symbolic link'''
+        __myobj = brebis.checktree.CheckTree({'path':
+            'tests/checktree_private_methods/mytree',
+             'files_list':
+                'tests/checktree_private_methods/mytree-list',
+             'type': 'tree'})
+        __file = 'tests/checktree_private_methods/mytree/riri'
+        __result = __myobj._CheckTree__translate_type(os.lstat(__file).st_mode)
+        self.assertEqual('s', __result)
 
 if __name__ == '__main__':
     unittest.main()
