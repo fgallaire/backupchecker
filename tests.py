@@ -19,6 +19,7 @@ import os.path
 import stat
 import logging
 import sys
+import tarfile
 import unittest
 import zipfile
 
@@ -848,13 +849,13 @@ class TestApp(unittest.TestCase):
         __fileuid, __filegid = __fileinfo.st_uid, __fileinfo.st_gid
         self.assertEqual((__arcuid, __arcgid), (__fileuid, __filegid))
 
-###########################################################
+##############################################################
 #
-# Testing the private methods from checkzip.CheckZip 
+# Testing the private/protected methods from checkzip.CheckZip 
 #
-###########################################################
+##############################################################
 
-    def test_extract_stored_file(self):
+    def test_zip_extract_stored_file(self):
         '''test the _extract_stored_file protected method from checkzip.CheckZip'''
         __myobj = brebis.checkzip.CheckZip({'path':
             'tests/checkzip_private_methods/myzip.zip',
@@ -866,7 +867,7 @@ class TestApp(unittest.TestCase):
         __result = __myobj._extract_stored_file('file-missing-in-zip/foo')
         self.assertEqual(type(__result), type(self._zip.open('file-missing-in-zip/foo')))
 
-    def test_extract_uid_gid(self):
+    def test_zip_extract_uid_gid(self):
         '''test the __extract_uid_gid private method from checkzip.CheckZip'''
         __myobj = brebis.checkzip.CheckZip({'path':
             'tests/checkzip_private_methods/myzip.zip',
@@ -879,7 +880,7 @@ class TestApp(unittest.TestCase):
         __result = __myobj._CheckZip__extract_uid_gid(__myinfo[-1])
         self.assertEqual((1000,1000), __result)
 
-    def test_translate_type_directory(self):
+    def test_zip_translate_type_file(self):
         '''test the __translate_type private method from checkzip.CheckZip - expecting file'''
         __myobj = brebis.checkzip.CheckZip({'path':
             'tests/checkzip_private_methods/myzip.zip',
@@ -892,7 +893,7 @@ class TestApp(unittest.TestCase):
         __result = __myobj._CheckZip__translate_type(__myinfo[-1].external_attr >> 16)
         self.assertEqual('f', __result)
 
-    def test_translate_type_file(self):
+    def test_zip_translate_type_directory(self):
         '''test the __translate_type private method from checkzip.CheckZip - expecting directory'''
         __myobj = brebis.checkzip.CheckZip({'path':
             'tests/checkzip_private_methods/myzip.zip',
@@ -904,6 +905,86 @@ class TestApp(unittest.TestCase):
         __myinfo = __myz.infolist()
         __result = __myobj._CheckZip__translate_type(__myinfo[0].external_attr >> 16)
         self.assertEqual('d', __result)
+
+##############################################################
+#
+# Testing the private/protected methods from checktar.CheckTar 
+#
+##############################################################
+
+    def test_tar_extract_stored_file(self):
+        '''test the _extract_stored_file protected method from checktar.CheckTar'''
+        __myobj = brebis.checktar.CheckTar({'path':
+            'tests/checktar_private_methods/mytargz/mytargz.tar.gz',
+             'files_list':
+                'tests/checktar_private_methods/mytargz/mytargz-list',
+             'type': 'archive'})
+        __file = 'tests/checktar_private_methods/mytargz/mytargz.tar.gz'
+        self._tar = tarfile.open(__file)
+        __result = __myobj._extract_stored_file('mytargz/hello')
+        self.assertEqual(type(__result), type(self._tar.extractfile('mytargz/hello')))
+
+    def test_tar_translate_type_file(self):
+        '''test the __translate_type private method from checktar.CheckTar - expecting file'''
+        __myobj = brebis.checktar.CheckTar({'path':
+            'tests/checktar_private_methods/mytargz/mytargz.tar.gz',
+             'files_list':
+                'tests/checktar_private_methods/mytargz/mytargz-list',
+             'type': 'archive'})
+        __file = 'tests/checktar_private_methods/mytargz/mytargz.tar.gz'
+        self._tar = tarfile.open(__file)
+        __result = __myobj._CheckTar__translate_type(self._tar.getmembers()[2].type)
+        self.assertEqual('f', __result)
+
+    def test_tar_translate_type_directory(self):
+        '''test the __translate_type private method from checktar.CheckTar - expecting directory'''
+        __myobj = brebis.checktar.CheckTar({'path':
+            'tests/checktar_private_methods/mytargz/mytargz.tar.gz',
+             'files_list':
+                'tests/checktar_private_methods/mytargz/mytargz-list',
+             'type': 'archive'})
+        __file = 'tests/checktar_private_methods/mytargz/mytargz.tar.gz'
+        self._tar = tarfile.open(__file)
+        __result = __myobj._CheckTar__translate_type(self._tar.getmembers()[0].type)
+        self.assertEqual('d', __result)
+
+    def test_tar_translate_type_symbolic_link(self):
+        '''test the __translate_type private method from checktar.CheckTar - expecting symbolic link'''
+        __myobj = brebis.checktar.CheckTar({'path':
+            'tests/checktar_private_methods/mytargz/mytargz.tar.gz',
+             'files_list':
+                'tests/checktar_private_methods/mytargz/mytargz-list',
+             'type': 'archive'})
+        __file = 'tests/checktar_private_methods/mytargz/mytargz.tar.gz'
+        self._tar = tarfile.open(__file)
+        __result = __myobj._CheckTar__translate_type(self._tar.getmembers()[1].type)
+        self.assertEqual('s', __result)
+
+#    def test_translate_type_directory(self):
+#        '''test the __translate_type private method from checkzip.CheckZip - expecting file'''
+#        __myobj = brebis.checkzip.CheckZip({'path':
+#            'tests/checkzip_private_methods/myzip.zip',
+#             'files_list':
+#                'tests/checkzip_private_methods/myzip-list',
+#             'type': 'archive'})
+#        __file = 'tests/checkzip_private_methods/myzip.zip'
+#        __myz = zipfile.ZipFile(__file,'r')
+#        __myinfo = __myz.infolist()
+#        __result = __myobj._CheckZip__translate_type(__myinfo[-1].external_attr >> 16)
+#        self.assertEqual('f', __result)
+#
+#    def test_translate_type_file(self):
+#        '''test the __translate_type private method from checkzip.CheckZip - expecting directory'''
+#        __myobj = brebis.checkzip.CheckZip({'path':
+#            'tests/checkzip_private_methods/myzip.zip',
+#             'files_list':
+#                'tests/checkzip_private_methods/myzip-list',
+#             'type': 'archive'})
+#        __file = 'tests/checkzip_private_methods/myzip.zip'
+#        __myz = zipfile.ZipFile(__file,'r')
+#        __myinfo = __myz.infolist()
+#        __result = __myobj._CheckZip__translate_type(__myinfo[0].external_attr >> 16)
+#        self.assertEqual('d', __result)
 
 if __name__ == '__main__':
     unittest.main()
