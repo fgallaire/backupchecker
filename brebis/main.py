@@ -19,7 +19,6 @@
 import sys
 
 from brebis.checkbackups import CheckBackups
-from brebis.checkhashes import CheckHashes
 from brebis.cliparse import CliParse
 from brebis.configurations import Configurations
 
@@ -34,9 +33,4 @@ class Main(object):
         '''The main for the Main class'''
         __options = CliParse().options
         __confs = Configurations(__options.confpath)
-        if __options.hashfile:
-            __hashs = CheckHashes(__options.hashfile, __options.hashtype,
-                __confs.configs)
-            CheckBackups(__hashs.confs)
-        else:
-            CheckBackups(__confs.configs)
+        CheckBackups(__confs.configs)

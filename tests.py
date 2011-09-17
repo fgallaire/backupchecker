@@ -54,54 +54,6 @@ class TestApp(unittest.TestCase):
             self.assertEqual(_res.read(), 'WARNING:root:1 file missing in tests/tar_gz_archive_content/essai.tar.gz: \nWARNING:root:essai/dir/titi\n')
         os.remove(_logfile)
 
-    def test_checkhashes_md5(self):
-        '''Test the CheckHashes class with MD5'''
-        _hashfile = 'tests/corrupted_archives/MD5SUMS'
-        _hashtype = 'md5'
-        _confs = {'corrupted': {'path': 'tests/corrupted_archives/md5-corrupted.tar.gz', 'type': 'archive'}}
-        __checker = brebis.checkhashes.CheckHashes(_hashfile, _hashtype, _confs)
-        self.assertEqual(0, len(__checker.confs))
-
-    def test_checkhashes_sha1(self):
-        '''Test the CheckHashes class with SHA1'''
-        _hashfile = 'tests/corrupted_archives/SHA1SUMS'
-        _hashtype = 'sha1'
-        _confs = {'corrupted': {'path': 'tests/corrupted_archives/sha1-corrupted.tar.gz', 'type': 'archive'}}
-        __checker = brebis.checkhashes.CheckHashes(_hashfile, _hashtype, _confs)
-        self.assertEqual(0, len(__checker.confs))
-
-    def test_checkhashes_sha224(self):
-        '''Test the CheckHashes class with SHA224'''
-        _hashfile = 'tests/corrupted_archives/SHA224SUMS'
-        _hashtype = 'sha224'
-        _confs = {'corrupted': {'path': 'tests/corrupted_archives/sha224-corrupted.tar.bz2', 'type': 'archive'}}
-        __checker = brebis.checkhashes.CheckHashes(_hashfile, _hashtype, _confs)
-        self.assertEqual(0, len(__checker.confs))
-
-    def test_checkhashes_sha256(self):
-        '''Test the CheckHashes class with SHA256'''
-        _hashfile = 'tests/corrupted_archives/SHA256SUMS'
-        _hashtype = 'sha256'
-        _confs = {'corrupted': {'path': 'tests/corrupted_archives/sha256-corrupted.tar.gz', 'type': 'archive'}}
-        __checker = brebis.checkhashes.CheckHashes(_hashfile, _hashtype, _confs)
-        self.assertEqual(0, len(__checker.confs))
-
-    def test_checkhashes_sha384(self):
-        '''Test the CheckHashes class with SHA384'''
-        _hashfile = 'tests/corrupted_archives/SHA384SUMS'
-        _hashtype = 'sha384'
-        _confs = {'corrupted': {'path': 'tests/corrupted_archives/sha384-corrupted.tar.bz2', 'type': 'archive'}}
-        __checker = brebis.checkhashes.CheckHashes(_hashfile, _hashtype, _confs)
-        self.assertEqual(0, len(__checker.confs))
-
-    def test_checkhashes_sha512(self):
-        '''Test the CheckHashes class with SHA512'''
-        _hashfile = 'tests/corrupted_archives/SHA512SUMS'
-        _hashtype = 'sha512'
-        _confs = {'corrupted': {'path': 'tests/corrupted_archives/sha512-corrupted.tar.gz', 'type': 'archive'}}
-        __checker = brebis.checkhashes.CheckHashes(_hashfile, _hashtype, _confs)
-        self.assertEqual(0, len(__checker.confs))
-
     def test_checktar_missing_files(self):
         '''Check if the CheckTar class returns a missing file'''
         _missingfiles = []

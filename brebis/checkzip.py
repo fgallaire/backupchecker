@@ -23,7 +23,6 @@ import stat
 
 from brebis.expectedvalues import ExpectedValues
 from brebis.checkarchive import CheckArchive
-import brebis.checkhashes
 
 class CheckZip(CheckArchive):
     '''Check a zip archive'''
