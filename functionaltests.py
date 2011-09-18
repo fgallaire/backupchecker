@@ -41,6 +41,7 @@ class Main:
                     self._queue.put('{} - {}value in result file not expected'.format(self._testname, KOMSG))
 
 class Test1_file_missing_in_tar_gz(Main):
+    '''Test if a file is missing in a tar.gz archive'''
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
