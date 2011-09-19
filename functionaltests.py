@@ -15,9 +15,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from multiprocessing import Process, Queue
-import subprocess
 from os import linesep
+import subprocess
 import os.path
+import sys
 
 import functionaltests
 
@@ -722,6 +723,7 @@ def extract_key(key):
 if __name__ == '__main__':
     processes = []
     results = []
+    koresults = []
     q = Queue()
 
     for element in dir(functionaltests):
@@ -731,5 +733,12 @@ if __name__ == '__main__':
     for p in processes:
         results.append(q.get())
         p.join()
-    # Only one print is beautiful
-    print(linesep.join(sorted(results,key=functionaltests.extract_key)))
+    # Establishing list of KOs
+    for result in results:
+        if KOMSG in result:
+            koresults.append(result)
+    if len(koresults) != 0:
+        print(linesep.join(sorted(koresults,key=functionaltests.extract_key)))
+        sys.exit(1)
+    else:
+        print(linesep.join(sorted(results,key=functionaltests.extract_key)))
