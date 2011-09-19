@@ -17,6 +17,7 @@
 '''Application logger'''
 
 import logging
+import sys
 
 class AppLogger(object):
     '''The application logger'''
@@ -28,5 +29,9 @@ class AppLogger(object):
         __logfile -- the path of the log
 
         '''
-        logging.basicConfig(filename=__logfile,
-            level=logging.WARNING, filemode='w')
+        try:
+            logging.basicConfig(filename=__logfile,
+                level=logging.WARNING, filemode='w')
+        except (IOError,OSError) as __msg:
+            print('Brebis output file could not be created: {}'.format(__msg))
+            sys.exit(1)
