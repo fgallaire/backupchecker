@@ -22,7 +22,7 @@ import sys
 
 import functionaltests
 
-EXE = './zozo'
+EXE = './brebis.py'
 OPTCONFIG = '-c'
 OPTLOG = '-l'
 OKMSG = 'ok'
