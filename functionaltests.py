@@ -702,6 +702,20 @@ class Test79_corrupted_zip_archive(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('data corruption')
 
+class Test80_two_confs_with_the_same_name(Main):
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = 'functional-tests/two_confs_with_the_same_name'
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        __command = ' '.join([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        __result = subprocess.getstatusoutput(__command)
+        if __result[0] != 0 and 'Please rename it.' in __result[1]:
+            self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+        else:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(__result[0])))
+            
+
 def extract_key(key):
     return int(key.split('_')[0][4:])
 
