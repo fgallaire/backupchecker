@@ -1,0 +1,125 @@
+How to install Brebis 
+---------------------
+
+* You need at least Python 3.2.
+* Untar the tarball and go to the source directory with the following commands:
+
+$ tar zxvf brebis-0.1.tar.gz && cd brebis/
+
+To install Brebis on your computer, type the following command with the root user:
+
+# python3.2 setup.py install
+or
+# python3.2 setup.py install --install-scripts=/usr/bin
+
+Now the /usr/local/bin/brebis command or /usr/bin/brebis command should trigger the following output:
+$ /usr/local/bin/brebis -h
+
+Usage: brebis [options]
+
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -c DIR, --configpath=DIR
+                        the path to the configurations
+  -l FILE, --log=FILE   the log file
+
+Brebis is now installed on your system.
+
+How to configure and use Brebis
+-------------------------------
+
+You need two files in order to use Brebis.
+
+Configuration of the backup checking session
+============================================
+The first one contains general information about the backup checking session. Here is an example with all the currently supported parameters:
+
+-----8<-----
+[main] 
+name=mybackup-checking-session
+type=archive 
+path=tests/expected_mode/foos.tar.gz
+files_list=tests/expected_mode/files-list
+-----8<-----
+
+[main] is mandatory.
+- name is the name of your backup checking session. If you have several backup checking sessions, they MUST use a different name.
+- type is the type of your backup. Currently you only have archive (tar, tar.gz, tar.bz2, zip files) and tree for a tree of directories and files.
+- path is the path to the archive or the top directory of your files tree. Relative or absolute paths are accepted.
+- files_list is the path to the file containing the information about the archive, the tree or the files inside your backups. Relative or absolute paths are accepted.
+
+Archive checking setup
+======================
+- The second file you need is the list containing the information about the archive, the tree or the files inside your backups. Here is an example with the full list of the parameters available for now:
+
+-----8<-----
+[archive]
+mode: 755
+uid: 5000
+gid: 5001
+md5: 3718422a0bf93f7fc46cff6b5e660ff8
+sha1: e0f58dcc57caad2182f701eb63f0c81f347d3fe5
+sha224: g3c1d88024b6e2e333cbf8bed96182a62fbafaf2aea6dd8b17639552
+sha256: 35a670af482f46a76f8033e05cca7a53a58456fa42ef47ea56ffd2b16e408863
+sha384: 744e19f5c4258a573400b5059747d88797b150c08456e406e6473bd777332c5f66afe66c5bf77820906b97961c124810
+sha512: c46dcb0f5124bd681cb5b91c812d2982efce703806026b1f9ffdeadf45c4128cd3e61fa939a0bc89af317e70d0d6c74b666edff9bd7ad9052cb8e7f42c8f7644
+
+[files]
+foos/foo:
+foos/foo1: type:f
+foos/foo1: mode:755
+foos/foo1: uid:5022
+foos/foo1: gid:5023
+foo/bar: unexpected
+foos/foo1: md5:3718422a0bf93f7fc46cff6b5e660ff8
+foos/foo1: sha1:e0f58dcc57caad2182f701eb63f0c81f347d3fe5
+foos/foo1: sha224:g3c1d88024b6e2e333cbf8bed96182a62fbafaf2aea6dd8b17639552
+foos/foo1: sha256:35a670af482f46a76f8033e05cca7a53a58456fa42ef47ea56ffd2b16e408863
+foos/foo1: sha384:744e19f5c4258a573400b5059747d88797b150c08456e406e6473bd777332c5f66afe66c5bf77820906b97961c124810
+foos/foo1: sha512:c46dcb0f5124bd681cb5b91c812d2982efce703806026b1f9ffdeadf45c4128cd3e61fa939a0bc89af317e70d0d6c74b666edff9bd7ad9052cb8e7f42c8f7644
+-----8<-----
+
+- The [archive] section hosts the parameter for the archive itself. This section is not mandatory if you do not need it.
+- foos/foo: means this file has to exist in the backup, whatever it is.
+- mode is for the expected mode of the archive.
+- uid is for the expected uid of the archive.
+- gid is for the expected gid of the archive.
+- md5 is for the expected md5 hash sum of the archive.
+- sha1 is for the expected sha1 hash sum of the archive.
+- sha224 is for the expected sha224 hash sum of the archive.
+- sha256 is for the expected sha256 hash sum of the archive.
+- sha384 is for the expected sha384 hash sum of the archive.
+- sha512 is for the expected sha512 hash sum of the archive.
+- The [files] section stands for the files inside the archive or the tree of directories and files. This section is not mandatory if you do not need it.
+
+foos/foo1: type:f means the file foos/foo1 is expected to be of type f. Several types are allowed : f for files, d for directory, s for symbolic link, k for socket, b for block, c for character.
+foos/foo1: mode:755 means the file foos/foo1 is expected to have the mode 755 (meaning read, write and execute for the owner, read and execute for the group owner, read and execute for the others). All values respecting this octal representation (including values with setuid bit on four digits) is allowed.
+foos/foo1: uid:5022 means the file foos/foo1 is expected to have a uid of 5022.
+foos/foo1: gid:5023 means the file foos/foo1 is expected to have a gid of 5023.
+foo/bar: unexpected means that foo/bar is unexpected in this archive of tree of directories and files and that an alert should be launched about it.
+foos/foo1: md5:hashsum means the file foos/foo1 is expected to have a md5 hash sum of "hashsum".
+foos/foo1: sha1:hashsum means the file foos/foo1 is expected to have a sha1 hash sum of "hashsum".
+foos/foo1: sha224:hashsum means the file foos/foo1 is expected to have a sha224 hash sum of "hashsum".
+foos/foo1: sha256:hashsum means the file foos/foo1 is expected to have a sha256 hash sum of "hashsum".
+foos/foo1: sha384:hashsum means the file foos/foo1 is expected to have a sha384 hash sum of "hashsum".
+foos/foo1: sha512:hashsum means the file foos/foo1 is expected to have a sha512 hash value of "hashsum".
+
+Launching Brebis
+----------------
+You launch Brebis from the command line:
+$ brebis -c myconfs/
+
+The parameter -c or --configpath specifies a path to a directory where your Brebis configurations are stored. If any alert is triggered, it will appear in the your current working directory in a file named a.out. Relative or absolute paths are accepted.
+
+You can also specify your own output file: 
+$ brebis -c myconfs/ -l output/brebis.log
+
+The option -l or --log specifies your own output file.
+
+If you do not specify any option, the current directory will be scanned to find  your configuration file and and the output file will be created there.
+
+Links:
+------
+How to install Brebis: http://brebisproject.org/projects/brebis/wiki/How_to_install_Brebis_from_the_official_tarball_(targz_file)
+How to configure and use Brebis: http://brebisproject.org/projects/brebis/wiki/How_to_configure_and_use_Brebis
