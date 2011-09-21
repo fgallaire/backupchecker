@@ -30,6 +30,7 @@ KOMSG = 'ko - '
 PYTHONEXE =''
 ABSPATH = ''
 
+# To correctly use the tests with buildbot
 if 'PYTHONEXE' in environ:
     PYTHONEXE = environ['PYTHONEXE']
     ABSPATH = environ['PWD']
@@ -61,6 +62,7 @@ class Test1_file_missing_in_tar_gz(Main):
 
 
 class Test2_file_missing_in_tar_bz2(Main):
+    '''Test if a file is missing in a tar.bz2 archive'''
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
