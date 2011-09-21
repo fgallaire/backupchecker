@@ -76,9 +76,16 @@ class Configurations:
                         print('{} does not exist.'.format(__path))
                         sys.exit(1)
 
+                # If the backup type is archive, path must not be a directory
+                if __currentconf['type'] == 'archive' and os.path.isdir(__currentconf['path']):
+                    __errmsg = '{} is a directory but appears as an archive in configuration {}.'
+                    print(__errmsg.format(__currentconf['path'], 
+                        __config.get('main', 'name')))
+                    sys.exit(1)
                 # check if the name of the conf does not exist yet
                 if __config.get('main', 'name') in self.__configs:
-                    print('The configuration name in {} already exists. Please rename it.'.format(__fullconfpath))
+                    __errmsg = 'The configuration name in {} already exists. Please rename it.'
+                    print(__errmsg.format(__fullconfpath))
                     sys.exit(1)
                 else:
                     self.__configs[__config.get('main', 'name')] = __currentconf

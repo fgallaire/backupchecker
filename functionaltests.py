@@ -826,6 +826,22 @@ class Test92_expected_file_not_equals_file_in_tree(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected size')
             
+class Test93_mixing_dir_path_and_archive_type_in_conf(Main):
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = os.path.join(ABSPATH, 'functional-tests/mixing-dir-path-and-archive-type-in-conf')
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __command = ' '.join([PYTHONEXE, EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        else:
+            __command = ' '.join([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        __result = subprocess.getstatusoutput(__command)
+        if __result[0] != 0 and 'is a directory but appears as an archive' in __result[1]:
+            self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+        else:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(__result[0])))
+
 
 def extract_key(key):
     return int(key.split('_')[0][4:])
