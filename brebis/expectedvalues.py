@@ -19,8 +19,8 @@
 import logging
 import os
 import sys
+import configparser
 from configparser import ConfigParser
-from configparser import ParsingError, NoSectionError, NoOptionError
 from hashlib import algorithms_guaranteed
 
 class ExpectedValues(object):
@@ -43,7 +43,7 @@ class ExpectedValues(object):
         try:
             with open(__path, 'r') as __file:
                 self.__retrieve_data(__file, __path)
-        except (ParsingError, NoSectionError, NoOptionError, IOError, OSError) as __err:
+        except (configparser.Error, IOError, OSError) as __err:
             print(__err)
             sys.exit(1)
 
