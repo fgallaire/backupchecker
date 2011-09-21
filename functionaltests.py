@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from multiprocessing import Process, Queue
-from os import linesep
+from os import linesep, environ
 import subprocess
 import os.path
 import sys
@@ -27,11 +27,20 @@ OPTCONFIG = '-c'
 OPTLOG = '-l'
 OKMSG = 'ok'
 KOMSG = 'ko - '
+PYTHONEXE =''
+ABSPATH = ''
+
+if 'PYTHONEXE' in environ:
+    PYTHONEXE = environ['PYTHONEXE']
+    ABSPATH = environ['PWD']
 
 class Main:
     '''Main of all the Test* classes'''
     def _main(self, __condition):
-        __retcode = subprocess.call([EXE, OPTCONFIG, self._testdir, OPTLOG, self._resultfile])
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTCONFIG, self._testdir, OPTLOG, self._resultfile])
+        else:
+            __retcode = subprocess.call([EXE, OPTCONFIG, self._testdir, OPTLOG, self._resultfile])
         if __retcode != 0:
             self._queue.put('{} - {}return code:{}'.format(self._testname, KOMSG, str(__retcode)))
         else:
@@ -46,7 +55,7 @@ class Test1_file_missing_in_tar_gz(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/file-missing-in-tar-gz'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/file-missing-in-tar-gz')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file missing in')
 
@@ -55,7 +64,7 @@ class Test2_file_missing_in_tar_bz2(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/file-missing-in-tar-bz2'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/file-missing-in-tar-bz2')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file missing in')
 
@@ -63,7 +72,7 @@ class Test3_file_missing_in_zip(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/file-missing-in-zip'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/file-missing-in-zip')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file missing in')
 
@@ -71,7 +80,7 @@ class Test4_file_missing_in_tree(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/file-missing-in-tree'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/file-missing-in-tree')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file missing in')
 
@@ -79,7 +88,7 @@ class Test5_wrong_tar_gz_archive_mode(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-tar-gz-archive-mode'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-tar-gz-archive-mode')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected mode')
 
@@ -87,7 +96,7 @@ class Test6_wrong_tar_bz2_archive_mode(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-tar-bz2-archive-mode'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-tar-bz2-archive-mode')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected mode')
 
@@ -95,7 +104,7 @@ class Test7_wrong_zip_archive_mode(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-zip-archive-mode'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-zip-archive-mode')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected mode')
 
@@ -103,7 +112,7 @@ class Test8_wrong_tar_gz_archive_uid(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-tar-gz-archive-uid'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-tar-gz-archive-uid')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected uid')
 
@@ -111,7 +120,7 @@ class Test9_wrong_tar_bz2_archive_uid(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-tar-bz2-archive-uid'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-tar-bz2-archive-uid')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected uid')
 
@@ -119,7 +128,7 @@ class Test10_wrong_zip_archive_uid(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-zip-archive-uid'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-zip-archive-uid')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected uid')
 
@@ -127,7 +136,7 @@ class Test11_wrong_tar_gz_archive_gid(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-tar-gz-archive-gid'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-tar-gz-archive-gid')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected gid')
 
@@ -135,7 +144,7 @@ class Test12_wrong_tar_bz2_archive_gid(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-tar-bz2-archive-gid'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-tar-bz2-archive-gid')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected gid')
 
@@ -143,7 +152,7 @@ class Test13_wrong_zip_archive_gid(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-zip-archive-gid'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-zip-archive-gid')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected gid')
 
@@ -151,7 +160,7 @@ class Test14_wrong_tar_gz_archive_md5_hash(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-tar-gz-archive-md5-hash'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-tar-gz-archive-md5-hash')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -159,7 +168,7 @@ class Test15_wrong_tar_gz_archive_sha1_hash(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-tar-gz-archive-sha1-hash'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-tar-gz-archive-sha1-hash')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -167,7 +176,7 @@ class Test16_wrong_tar_gz_archive_sha224_hash(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-tar-gz-archive-sha224-hash'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-tar-gz-archive-sha224-hash')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -175,7 +184,7 @@ class Test17_wrong_tar_gz_archive_sha256_hash(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-tar-gz-archive-sha256-hash'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-tar-gz-archive-sha256-hash')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -183,7 +192,7 @@ class Test18_wrong_tar_gz_archive_sha384_hash(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-tar-gz-archive-sha384-hash'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-tar-gz-archive-sha384-hash')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -191,7 +200,7 @@ class Test19_wrong_tar_gz_archive_sha512_hash(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-tar-gz-archive-sha512-hash'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-tar-gz-archive-sha512-hash')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -199,7 +208,7 @@ class Test20_wrong_tar_bz2_archive_md5_hash(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-tar-bz2-archive-md5-hash'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-tar-bz2-archive-md5-hash')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -207,7 +216,7 @@ class Test21_wrong_tar_bz2_archive_sha1_hash(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-tar-bz2-archive-sha1-hash'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-tar-bz2-archive-sha1-hash')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -215,7 +224,7 @@ class Test22_wrong_tar_bz2_archive_sha224_hash(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-tar-bz2-archive-sha224-hash'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-tar-bz2-archive-sha224-hash')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -223,7 +232,7 @@ class Test23_wrong_tar_bz2_archive_sha256_hash(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-tar-bz2-archive-sha256-hash'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-tar-bz2-archive-sha256-hash')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -231,7 +240,7 @@ class Test24_wrong_tar_bz2_archive_sha384_hash(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-tar-bz2-archive-sha384-hash'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-tar-bz2-archive-sha384-hash')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -239,7 +248,7 @@ class Test25_wrong_tar_bz2_archive_sha512_hash(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-tar-bz2-archive-sha512-hash'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-tar-bz2-archive-sha512-hash')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -247,7 +256,7 @@ class Test26_wrong_zip_archive_md5_hash(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-zip-archive-md5-hash'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-zip-archive-md5-hash')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -255,7 +264,7 @@ class Test27_wrong_zip_archive_sha1_hash(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-zip-archive-sha1-hash'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-zip-archive-sha1-hash')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -263,7 +272,7 @@ class Test28_wrong_zip_archive_sha224_hash(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-zip-archive-sha224-hash'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-zip-archive-sha224-hash')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -271,7 +280,7 @@ class Test29_wrong_zip_archive_sha256_hash(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-zip-archive-sha256-hash'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-zip-archive-sha256-hash')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -279,7 +288,7 @@ class Test30_wrong_zip_archive_sha384_hash(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-zip-archive-sha384-hash'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-zip-archive-sha384-hash')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -287,7 +296,7 @@ class Test31_wrong_zip_archive_sha512_hash(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-zip-archive-sha512-hash'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-zip-archive-sha512-hash')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -295,7 +304,7 @@ class Test32_wrong_file_uid_in_tar_gz_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-uid-in-tar-gz-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-uid-in-tar-gz-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected uid')
 
@@ -303,7 +312,7 @@ class Test33_wrong_file_uid_in_tar_bz2_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-uid-in-tar-bz2-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-uid-in-tar-bz2-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected uid')
 
@@ -312,7 +321,7 @@ class Test33_wrong_file_uid_in_zip_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-uid-in-zip-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-uid-in-zip-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected uid')
 
@@ -320,7 +329,7 @@ class Test34_wrong_file_uid_in_tree(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-uid-in-tree'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-uid-in-tree')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected uid')
 
@@ -328,7 +337,7 @@ class Test35_wrong_file_gid_in_tar_gz_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-gid-in-tar-gz-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-gid-in-tar-gz-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected gid')
 
@@ -336,7 +345,7 @@ class Test36_wrong_file_gid_in_tar_bz2_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-gid-in-tar-bz2-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-gid-in-tar-bz2-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected gid')
 
@@ -344,7 +353,7 @@ class Test37_wrong_file_gid_in_zip_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-gid-in-zip-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-gid-in-zip-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected gid')
 
@@ -352,7 +361,7 @@ class Test37_wrong_file_gid_in_tree(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-gid-in-tree'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-gid-in-tree')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected gid')
 
@@ -360,7 +369,7 @@ class Test38_unexpected_file_in_tar_gz_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/unexpected-file-in-tar-gz-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/unexpected-file-in-tar-gz-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 unexpected file')
 
@@ -368,7 +377,7 @@ class Test39_unexpected_file_in_tar_bz2_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/unexpected-file-in-tar-bz2-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/unexpected-file-in-tar-bz2-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 unexpected file')
 
@@ -376,7 +385,7 @@ class Test40_unexpected_file_in_zip_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/unexpected-file-in-zip-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/unexpected-file-in-zip-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 unexpected file')
 
@@ -384,7 +393,7 @@ class Test41_unexpected_file_in_tree(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/unexpected-file-in-tree'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/unexpected-file-in-tree')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 unexpected file')
 
@@ -392,7 +401,7 @@ class Test42_wrong_file_md5_hash_in_tar_gz_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-md5-hash-in-tar-gz-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-md5-hash-in-tar-gz-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -401,7 +410,7 @@ class Test43_wrong_file_sha1_hash_in_tar_gz_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-sha1-hash-in-tar-gz-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha1-hash-in-tar-gz-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -409,7 +418,7 @@ class Test44_wrong_file_sha224_hash_in_tar_gz_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-sha224-hash-in-tar-gz-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha224-hash-in-tar-gz-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -417,7 +426,7 @@ class Test45_wrong_file_sha256_hash_in_tar_gz_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-sha256-hash-in-tar-gz-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha256-hash-in-tar-gz-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -425,7 +434,7 @@ class Test46_wrong_file_sha384_hash_in_tar_gz_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-sha384-hash-in-tar-gz-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha384-hash-in-tar-gz-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -433,7 +442,7 @@ class Test47_wrong_file_sha512_hash_in_tar_gz_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-sha512-hash-in-tar-gz-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha512-hash-in-tar-gz-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -441,7 +450,7 @@ class Test48_wrong_file_md5_hash_in_tar_bz2_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-md5-hash-in-tar-bz2-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-md5-hash-in-tar-bz2-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -449,7 +458,7 @@ class Test49_wrong_file_sha1_hash_in_tar_bz2_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-sha1-hash-in-tar-bz2-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha1-hash-in-tar-bz2-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -457,7 +466,7 @@ class Test50_wrong_file_sha224_hash_in_tar_bz2_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-sha224-hash-in-tar-bz2-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha224-hash-in-tar-bz2-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -465,7 +474,7 @@ class Test51_wrong_file_sha256_hash_in_tar_bz2_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-sha256-hash-in-tar-bz2-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha256-hash-in-tar-bz2-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -473,7 +482,7 @@ class Test52_wrong_file_sha384_hash_in_tar_bz2_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-sha384-hash-in-tar-bz2-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha384-hash-in-tar-bz2-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -481,7 +490,7 @@ class Test53_wrong_file_sha512_hash_in_tar_bz2_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-sha512-hash-in-tar-bz2-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha512-hash-in-tar-bz2-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -489,7 +498,7 @@ class Test54_wrong_file_md5_hash_in_zip_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-md5-hash-in-zip-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-md5-hash-in-zip-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -497,7 +506,7 @@ class Test55_wrong_file_sha1_hash_in_zip_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-sha1-hash-in-zip-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha1-hash-in-zip-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -505,7 +514,7 @@ class Test56_wrong_file_sha224_hash_in_zip_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-sha224-hash-in-zip-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha224-hash-in-zip-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -513,7 +522,7 @@ class Test57_wrong_file_sha256_hash_in_zip_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-sha256-hash-in-zip-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha256-hash-in-zip-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -521,7 +530,7 @@ class Test58_wrong_file_sha384_hash_in_zip_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-sha384-hash-in-zip-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha384-hash-in-zip-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -530,7 +539,7 @@ class Test59_wrong_file_sha512_hash_in_zip_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-sha512-hash-in-zip-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha512-hash-in-zip-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -538,7 +547,7 @@ class Test60_wrong_file_md5_hash_in_tree(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-md5-hash-in-tree'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-md5-hash-in-tree')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -546,7 +555,7 @@ class Test61_wrong_file_sha1_hash_in_tree(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-sha1-hash-in-tree'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha1-hash-in-tree')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -554,7 +563,7 @@ class Test62_wrong_file_sha224_hash_in_tree(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-sha224-hash-in-tree'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha224-hash-in-tree')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -562,7 +571,7 @@ class Test63_wrong_file_sha256_hash_in_tree(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-sha256-hash-in-tree'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha256-hash-in-tree')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -570,7 +579,7 @@ class Test64_wrong_file_sha384_hash_in_tree(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-sha384-hash-in-tree'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha384-hash-in-tree')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -578,7 +587,7 @@ class Test65_wrong_file_sha512_hash_in_tree(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-sha512-hash-in-tree'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha512-hash-in-tree')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
@@ -586,7 +595,7 @@ class Test66_wrong_file_mode_in_tar_gz_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-mode-in-tar-gz-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-mode-in-tar-gz-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected mode')
 
@@ -594,7 +603,7 @@ class Test67_wrong_file_mode_in_tar_bz2_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-mode-in-tar-bz2-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-mode-in-tar-bz2-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected mode')
 
@@ -602,7 +611,7 @@ class Test68_wrong_file_mode_in_zip_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-mode-in-zip-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-mode-in-zip-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected mode')
 
@@ -610,7 +619,7 @@ class Test69_wrong_file_mode_in_tree(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-mode-in-tree'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-mode-in-tree')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected mode')
 
@@ -618,7 +627,7 @@ class Test70_wrong_file_type_f_in_tar_gz_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-type-f-in-tar-gz-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-f-in-tar-gz-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected type')
 
@@ -626,7 +635,7 @@ class Test71_wrong_file_type_f_in_tar_bz2_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-type-f-in-tar-bz2-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-f-in-tar-bz2-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected type')
 
@@ -634,7 +643,7 @@ class Test72_wrong_file_type_f_in_zip_archive(Main):
    def __init__(self, q):
        self._queue = q
        self._testname = self.__class__.__name__
-       self._testdir = 'functional-tests/wrong-file-type-f-in-zip-archive'
+       self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-f-in-zip-archive')
        self._resultfile = os.path.join(self._testdir, 'a.out')
        self._main('1 file with unexpected type')
 
@@ -643,7 +652,7 @@ class Test72_wrong_file_type_f_in_tree(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-type-f-in-tree'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-f-in-tree')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected type')
 
@@ -651,7 +660,7 @@ class Test73_wrong_file_type_d_in_tar_gz_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-type-d-in-tar-gz-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-d-in-tar-gz-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected type')
 
@@ -659,7 +668,7 @@ class Test74_wrong_file_type_d_in_tar_bz2_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-type-d-in-tar-bz2-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-d-in-tar-bz2-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected type')
 
@@ -667,7 +676,7 @@ class Test75_wrong_file_type_d_in_zip_archive(Main):
    def __init__(self, q):
        self._queue = q
        self._testname = self.__class__.__name__
-       self._testdir = 'functional-tests/wrong-file-type-d-in-zip-archive'
+       self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-d-in-zip-archive')
        self._resultfile = os.path.join(self._testdir, 'a.out')
        self._main('1 file with unexpected type')
 
@@ -675,7 +684,7 @@ class Test76_wrong_file_type_d_in_tree(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/wrong-file-type-d-in-tree'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-d-in-tree')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected type')
 
@@ -683,7 +692,7 @@ class Test77_corrupted_tar_gz_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/corrupted-tar-gz-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/corrupted-tar-gz-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('data corruption')
 
@@ -691,7 +700,7 @@ class Test78_corrupted_tar_bz2_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/corrupted-tar-bz2-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/corrupted-tar-bz2-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('data corruption')
 
@@ -699,7 +708,7 @@ class Test79_corrupted_zip_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = 'functional-tests/corrupted-zip-archive'
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/corrupted-zip-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('data corruption')
 
@@ -707,9 +716,12 @@ class Test80_two_confs_with_the_same_name(Main):
     def __init__(self, q):
         self.__queue = q
         self.__testname = self.__class__.__name__
-        self.__testdir = 'functional-tests/two_confs_with_the_same_name'
+        self.__testdir = os.path.join(ABSPATH, 'functional-tests/two_confs_with_the_same_name')
         self.__resultfile = os.path.join(self.__testdir, 'a.out')
-        __command = ' '.join([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        if 'PYTHONEXE' in environ:
+            __command = ' '.join([PYTHONEXE, EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        else:
+            __command = ' '.join([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
         __result = subprocess.getstatusoutput(__command)
         if __result[0] != 0 and 'Please rename it.' in __result[1]:
             self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
