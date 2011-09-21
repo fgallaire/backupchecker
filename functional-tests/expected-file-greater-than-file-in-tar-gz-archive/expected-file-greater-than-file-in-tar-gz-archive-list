@@ -1,0 +1,2 @@
+[files]
+expected-file-greater-than-file-in-tar-gz-archive/toto: >17K

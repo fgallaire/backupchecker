@@ -1,0 +1,2 @@
+[files]
+expected-file-greater-than-file-in-zip-archive/toto: =10K
