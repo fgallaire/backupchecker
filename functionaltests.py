@@ -827,6 +827,9 @@ class Test92_expected_file_not_equals_file_in_tree(Main):
         self._main('1 file with unexpected size')
             
 class Test93_mixing_dir_path_and_archive_type_in_conf(Main):
+    '''Check if the configuration path indicates a directory while
+       the type of the backup is an archive
+    '''
     def __init__(self, q):
         self.__queue = q
         self.__testname = self.__class__.__name__
@@ -841,6 +844,41 @@ class Test93_mixing_dir_path_and_archive_type_in_conf(Main):
             self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
         else:
             self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(__result[0])))
+
+class Test94_full_criteria_multiple_backups:
+    '''Check all the itemps for a tar.gz, tar.bz2, zip and tree'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/full-criteria-multiple-backups')
+        __resultfile = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTCONFIG, __testdir, OPTLOG, __resultfile])
+        else:
+            __retcode = subprocess.call([EXE, OPTCONFIG, __testdir, OPTLOG, __resultfile])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            with open(__resultfile, 'r') as __file:
+                __conditions = {'file missing in': 0,
+                'file with unexpected mode': 0,
+                'with unexpected uid': 0,
+                'with unexpected gid': 0,
+                'file with unexpected type': 0,
+                'file bigger than': 0,
+                }
+                for __line in __file.readlines():
+                    for __condition in __conditions:
+                        if __condition in __line: 
+                            __conditions[__condition] += 1
+                for __condition in __conditions:
+                    if __conditions[__condition] != 4:
+                        __res = False
+                if __res:
+                    __queue.put('{} - {}'.format(__testname, OKMSG))
+                else:
+                    __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
 
 
 def extract_key(key):

@@ -1,0 +1,14 @@
+[archive]
+mode: 644
+uid: 1
+gid: 1
+md5: 1
+sha1: 1
+sha224: 1
+sha256: 1
+sha384: 1
+sha512: 1
+
+[files]
+doesnotexist:
+full-criteria-multiple-backups-zip/bar/foo: type:d mode:755 uid:1 gid:1 md5:1 <10K
