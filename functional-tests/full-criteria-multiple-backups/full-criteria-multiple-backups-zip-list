@@ -1,5 +1,5 @@
 [archive]
-mode: 644
+mode: 777
 uid: 1
 gid: 1
 md5: 1
@@ -11,4 +11,4 @@ sha512: 1
 
 [files]
 doesnotexist:
-full-criteria-multiple-backups-zip/bar/foo: type:d mode:755 uid:1 gid:1 md5:1 <10K
+full-criteria-multiple-backups-zip/bar/foo: type:d mode:777 uid:1 gid:1 md5:1 <10K

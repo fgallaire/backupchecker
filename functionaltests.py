@@ -862,16 +862,17 @@ class Test94_full_criteria_multiple_backups:
         else:
             with open(__resultfile, 'r') as __file:
                 __conditions = {'file missing in': 0,
-                'file with unexpected mode': 0,
+                'with unexpected mode': 0,
                 'with unexpected uid': 0,
                 'with unexpected gid': 0,
-                'file with unexpected type': 0,
-                'file bigger than': 0,
+                'with unexpected type': 0,
+                'bigger than': 0,
                 }
                 for __line in __file.readlines():
                     for __condition in __conditions:
                         if __condition in __line: 
                             __conditions[__condition] += 1
+                print(__conditions)
                 for __condition in __conditions:
                     if __conditions[__condition] != 4:
                         __res = False
