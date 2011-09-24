@@ -38,9 +38,9 @@ setup(name = 'brebis',
     long_description = 'Brebis is a fully automated backup checker.',
     classifiers = CLASSIFIERS,
     author = 'Carl Chenet',
-    author_email = 'chaica@brebis-project.org',
-    url = 'http://www.brebis-project.org',
-    download_url = 'http://www.brebis-project.org',
+    author_email = 'chaica@brebisproject.org',
+    url = 'http://www.brebisproject.org',
+    download_url = 'http://www.brebisproject.org',
     packages = ['brebis'],
     scripts = ['scripts/brebis']
 )

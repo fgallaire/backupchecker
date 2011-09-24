@@ -1,9 +1,9 @@
 [files]
-foos/foo1: type:d
-foos/foo2: type:c
-foos/foo3: type:d
-foos/foo4: type:s
-foos/foo5: type:b
-foos/foo6: type:k
-foos/bar: type:f
-foos/bar/bar1: type:o
+foo1: type:d
+foo2: type:c
+foo3: type:d
+foo4: type:s
+foo5: type:b
+foo6: type:k
+bar: type:f
+bar/bar1: type:o

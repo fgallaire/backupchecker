@@ -40,48 +40,55 @@ class Configurations:
                 if __file.endswith('.conf')]
             for __conf in __confs:
                 __currentconf = {}
-            __config = ConfigParser()
-            __fullconfpath = os.path.join('/'.join([__confpath, __conf]))
-            with open(__fullconfpath, 'r') as __file:
-                __config.read_file(__file)
-            # Common information for the backups
-            ### The type of the backups
-            __currentconf['type'] = __config.get('main', 'type')
-            # Common information for the archives
-            ### The archive path
-            __confsettings = [{'main': 'path'},
-            ### The list of the expected files in the archive
-            {'main': 'files_list'}
-            ]
-            for __element in __confsettings:
-                __key, __value = __element.popitem()
-                if __config.has_option(__key, __value):
-                    __currentconf[__value] = __config.get(
-                                                __key, __value)
-                else:
-                    __currentconf[__value] = __config.set(
-                                                __key, __value, '')
-            # Checking the information
-            ### Check the paths in the configuration
-            __confkeys= ('path', 'files_list')
-            for __confkey in __confkeys:
-                __path = __currentconf[__confkey]
-                if not __path:
-                    print('A path is missing in {}.'.format(__config.get('main', 'name')))
-                    sys.exit(1)
-                if not os.path.isabs(__path):
-                    __path = os.path.normpath(os.path.join(os.path.abspath(__confpath), __path))
-                    __currentconf[__confkey] = __path
-                if not os.path.exists(__path):
-                    print('{} does not exist.'.format(__path))
-                    sys.exit(1)
+                __config = ConfigParser()
+                __fullconfpath = os.path.join('/'.join([__confpath, __conf]))
+                with open(__fullconfpath, 'r') as __file:
+                    __config.read_file(__file)
+                # Common information for the backups
+                ### The type of the backups
+                __currentconf['type'] = __config.get('main', 'type')
+                # Common information for the archives
+                ### The archive path
+                __confsettings = [{'main': 'path'},
+                ### The list of the expected files in the archive
+                {'main': 'files_list'}
+                ]
+                for __element in __confsettings:
+                    __key, __value = __element.popitem()
+                    if __config.has_option(__key, __value):
+                        __currentconf[__value] = __config.get(
+                                                    __key, __value)
+                    else:
+                        __currentconf[__value] = __config.set(
+                                                    __key, __value, '')
+                # Checking the information
+                ### Check the paths in the configuration
+                __confkeys= ('path', 'files_list')
+                for __confkey in __confkeys:
+                    __path = __currentconf[__confkey]
+                    if not __path:
+                        print('A path is missing in {}.'.format(__config.get('main', 'name')))
+                        sys.exit(1)
+                    if not os.path.isabs(__path):
+                        __path = os.path.normpath(os.path.join(os.path.abspath(__confpath), __path))
+                        __currentconf[__confkey] = __path
+                    if not os.path.exists(__path):
+                        print('{} does not exist.'.format(__path))
+                        sys.exit(1)
 
-            # check if the name of the conf does not exist yet
-            if __config.get('main', 'name') in self.__configs:
-                print('The configuration name in {} already exists. Please rename it.'.format(__fullconfpath))
-                sys.exit(1)
-            else:
-                self.__configs[__config.get('main', 'name')] = __currentconf
+                # If the backup type is archive, path must not be a directory
+                if __currentconf['type'] == 'archive' and os.path.isdir(__currentconf['path']):
+                    __errmsg = '{} is a directory but appears as an archive in configuration {}.'
+                    print(__errmsg.format(__currentconf['path'], 
+                        __config.get('main', 'name')))
+                    sys.exit(1)
+                # check if the name of the conf does not exist yet
+                if __config.get('main', 'name') in self.__configs:
+                    __errmsg = 'The configuration name in {} already exists. Please rename it.'
+                    print(__errmsg.format(__fullconfpath))
+                    sys.exit(1)
+                else:
+                    self.__configs[__config.get('main', 'name')] = __currentconf
         except (ParsingError, NoSectionError, NoOptionError, OSError, IOError) as __err:
             print(__err)
             sys.exit(1)

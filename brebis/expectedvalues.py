@@ -20,7 +20,7 @@ import logging
 import os
 import sys
 import configparser
-from configparser import ParsingError, NoSectionError, NoOptionError
+from configparser import ConfigParser
 from hashlib import algorithms_guaranteed
 
 class ExpectedValues(object):
@@ -43,13 +43,13 @@ class ExpectedValues(object):
         try:
             with open(__path, 'r') as __file:
                 self.__retrieve_data(__file, __path)
-        except (IOError, OSError) as __err:
+        except (configparser.Error, IOError, OSError) as __err:
             print(__err)
             sys.exit(1)
 
     def __retrieve_data(self, __file, __path):
         '''Retrieve data from the expected files'''
-        __config = configparser.ConfigParser()
+        __config = ConfigParser()
         __config.read_file(__file)
         #########################
         # Test the archive itself
@@ -83,19 +83,19 @@ class ExpectedValues(object):
             except ValueError as __msg:
                 logging.warn(__msg)
             # Testing the hash of the archive
-            if 'hash' in __config['archive']:
-                for __hash in algorithms_guaranteed:
-                    if __config['archive']['hash'].startswith('{}{}'.format(__hash, ':')):
-                        __hashtype, __hashvalue = __config['archive']['hash'].split(':')
-                        self.__arcdata['hash'] = {'hashtype':__hashtype, 'hashvalue':__hashvalue}
-        ##################
-        # Test saved files
-        ##################
+            for __hash in algorithms_guaranteed:
+                if __hash in __config['archive']:
+                        self.__arcdata['hash'] = {'hashtype':__hash, 'hashvalue':__config['archive'][__hash]}
+        ######################
+        # Test expected  files
+        ######################
         if __config.has_section('files'):
             __files = __config.items('files')
             for __fileitems in __files:
                 __data = {}
                 __data['path'] = __fileitems[0]
+                if __data['path'].endswith('/'):
+                    __data['path'] = __data['path'][:-1]
                 if len(__fileitems) == 2:
                     for __item in __fileitems[1].split(' '):
                         try:

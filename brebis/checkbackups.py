@@ -43,10 +43,10 @@ class CheckBackups(object):
             # check a file tree
             if __cfgvalues['type'] == 'tree':
                 __bck = CheckTree(__cfgvalues)
-            # check a tar file
-            elif __cfgvalues['type'] == 'archive' and is_tarfile(__cfgvalues['path']):
+            # check a tar file, by name
+            elif __cfgvalues['type'] == 'archive' and (__cfgvalues['path'].lower().endswith('.tar.gz') or __cfgvalues['path'].lower().endswith('.tar.bz2') or __cfgvalues['path'].lower().endswith('.tgz')):# and is_tarfile(__cfgvalues['path']):
                 __bck = CheckTar(__cfgvalues)
-            # check a zip file
-            elif __cfgvalues['type'] == 'archive' and is_zipfile(__cfgvalues['path']):
+            # check a zip file, by name
+            elif __cfgvalues['type'] == 'archive' and __cfgvalues['path'].lower().endswith('.zip'):
                 __bck = CheckZip(__cfgvalues)
             ArchiveInfoMsg(__bck, __cfgvalues)

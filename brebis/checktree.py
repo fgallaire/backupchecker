@@ -31,22 +31,25 @@ class CheckTree(CheckArchive):
         self.__treepath = _cfgvalues['path']
         _data, __arcdata = ExpectedValues(_cfgvalues['files_list']).data
         # Save the tree root to determine the relative path in the file tree
-        __treeroot = os.path.split(_cfgvalues['path'])[0]
+        self.__treepath = self.__treepath
         for __dirpath, __dirnames, __filenames, in os.walk(_cfgvalues['path']):
-            __dirinfo = os.stat(__dirpath)
+            __dirinfo = os.lstat(__dirpath)
             __dirmode = stat.S_IMODE(__dirinfo.st_mode)
+            # Translate file type in brebis intern file type
             __type = self.__translate_type(__dirinfo.st_mode)
-            __arcinfo = {'path': os.path.relpath(__dirpath, __treeroot),
+            # Extract file data
+            __arcinfo = {'path': os.path.relpath(__dirpath, self.__treepath),
                         'size': __dirinfo.st_size, 'uid': __dirinfo.st_uid,
                         'gid': __dirinfo.st_gid, 'mode': __dirmode,
                         'type': __type}
             _data = self._check_path(__arcinfo, _data)
             for __filename in __filenames:
                 __filepath = os.path.join(__dirpath, __filename)
-                __fileinfo = os.stat(__filepath)
+                __filepath = self._normalize_path(__filepath)
+                __fileinfo = os.lstat(__filepath)
                 __filemode = stat.S_IMODE(__fileinfo.st_mode)
                 __type = self.__translate_type(__fileinfo.st_mode)
-                __arcinfo = {'path': os.path.relpath(__filepath, __treeroot),
+                __arcinfo = {'path': os.path.relpath(__filepath, self.__treepath),
                             'size': __fileinfo.st_size, 'uid': __fileinfo.st_uid,
                             'gid': __fileinfo.st_gid, 'mode': __filemode,
                             'type': __type}
@@ -75,6 +78,6 @@ class CheckTree(CheckArchive):
         if os.path.isabs(__arcfilepath):
             __file = open(__arcfilepath, 'rb')
         else:
-            __fullpath = os.path.normpath(os.path.join(os.path.split(self.__treepath)[0], __arcfilepath))
+            __fullpath = os.path.normpath(os.path.join(self.__treepath, __arcfilepath))
             __file = open(__fullpath, 'rb')
         return __file

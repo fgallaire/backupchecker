@@ -1,0 +1,68 @@
+WARNING:root:1 file missing in /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/tree: 
+WARNING:root:doesnotexist
+WARNING:root:1 file bigger than expected while checking /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/tree: 
+WARNING:root:bar/foo size is 15360. Should have been smaller than 10240.
+WARNING:root:1 file with unexpected uid while checking /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/tree:
+WARNING:root:bar/foo uid is 1000. Should have been 1.
+WARNING:root:1 file with unexpected gid while checking /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/tree:
+WARNING:root:bar/foo gid is 1000. Should have been 1.
+WARNING:root:1 file with unexpected mode while checking /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/tree:
+WARNING:root:bar/foo mode is 644. Should have been 777.
+WARNING:root:/home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/tree contains 1 file with unexpected type:
+WARNING:root:bar/foo is a regular file. Should have been a directory.
+WARNING:root:1 file with unexpected hash while checking /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/tree:
+WARNING:root:bar/foo hash is c911a195060b81c9af5252726a42ccf7. Should have been 1.
+WARNING:root:1 file missing in /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-zip.zip: 
+WARNING:root:doesnotexist
+WARNING:root:1 file bigger than expected while checking /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-zip.zip: 
+WARNING:root:full-criteria-multiple-backups-zip/bar/foo size is 15360. Should have been smaller than 10240.
+WARNING:root:2 files with unexpected uids while checking /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-zip.zip:
+WARNING:root:/home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-zip.zip uid is 1000. Should have been 1.
+WARNING:root:full-criteria-multiple-backups-zip/bar/foo uid is 1000. Should have been 1.
+WARNING:root:2 files with unexpected gids while checking /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-zip.zip:
+WARNING:root:/home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-zip.zip gid is 1000. Should have been 1.
+WARNING:root:full-criteria-multiple-backups-zip/bar/foo gid is 1000. Should have been 1.
+WARNING:root:2 files with unexpected modes while checking /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-zip.zip:
+WARNING:root:/home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-zip.zip mode is 644. Should have been 777.
+WARNING:root:full-criteria-multiple-backups-zip/bar/foo mode is 644. Should have been 777.
+WARNING:root:/home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-zip.zip contains 1 file with unexpected type:
+WARNING:root:full-criteria-multiple-backups-zip/bar/foo is a regular file. Should have been a directory.
+WARNING:root:2 files with unexpected hashes while checking /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-zip.zip:
+WARNING:root:/home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-zip.zip hash is a2a02ffe9aefc094af2d34316ef20a04. Should have been 1.
+WARNING:root:full-criteria-multiple-backups-zip/bar/foo hash is c911a195060b81c9af5252726a42ccf7. Should have been 1.
+WARNING:root:1 file missing in /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-tar-bz2.tar.bz2: 
+WARNING:root:doesnotexist
+WARNING:root:1 file bigger than expected while checking /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-tar-bz2.tar.bz2: 
+WARNING:root:full-criteria-multiple-backups-tar-bz2/bar/foo size is 15360. Should have been smaller than 10240.
+WARNING:root:2 files with unexpected uids while checking /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-tar-bz2.tar.bz2:
+WARNING:root:/home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-tar-bz2.tar.bz2 uid is 1000. Should have been 1.
+WARNING:root:full-criteria-multiple-backups-tar-bz2/bar/foo uid is 1000. Should have been 1.
+WARNING:root:2 files with unexpected gids while checking /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-tar-bz2.tar.bz2:
+WARNING:root:/home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-tar-bz2.tar.bz2 gid is 1000. Should have been 1.
+WARNING:root:full-criteria-multiple-backups-tar-bz2/bar/foo gid is 1000. Should have been 1.
+WARNING:root:2 files with unexpected modes while checking /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-tar-bz2.tar.bz2:
+WARNING:root:/home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-tar-bz2.tar.bz2 mode is 644. Should have been 777.
+WARNING:root:full-criteria-multiple-backups-tar-bz2/bar/foo mode is 644. Should have been 777.
+WARNING:root:/home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-tar-bz2.tar.bz2 contains 1 file with unexpected type:
+WARNING:root:full-criteria-multiple-backups-tar-bz2/bar/foo is a regular file. Should have been a directory.
+WARNING:root:2 files with unexpected hashes while checking /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-tar-bz2.tar.bz2:
+WARNING:root:/home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-tar-bz2.tar.bz2 hash is bd64abd3db137e603e451a63620f5c6b. Should have been 1.
+WARNING:root:full-criteria-multiple-backups-tar-bz2/bar/foo hash is c911a195060b81c9af5252726a42ccf7. Should have been 1.
+WARNING:root:1 file missing in /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-tar-gz.tar.gz: 
+WARNING:root:doesnotexist
+WARNING:root:1 file bigger than expected while checking /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-tar-gz.tar.gz: 
+WARNING:root:full-criteria-multiple-backups-tar-gz/bar/foo size is 15360. Should have been smaller than 10240.
+WARNING:root:2 files with unexpected uids while checking /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-tar-gz.tar.gz:
+WARNING:root:/home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-tar-gz.tar.gz uid is 1000. Should have been 1.
+WARNING:root:full-criteria-multiple-backups-tar-gz/bar/foo uid is 1000. Should have been 1.
+WARNING:root:2 files with unexpected gids while checking /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-tar-gz.tar.gz:
+WARNING:root:/home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-tar-gz.tar.gz gid is 1000. Should have been 1.
+WARNING:root:full-criteria-multiple-backups-tar-gz/bar/foo gid is 1000. Should have been 1.
+WARNING:root:2 files with unexpected modes while checking /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-tar-gz.tar.gz:
+WARNING:root:/home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-tar-gz.tar.gz mode is 644. Should have been 777.
+WARNING:root:full-criteria-multiple-backups-tar-gz/bar/foo mode is 644. Should have been 777.
+WARNING:root:/home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-tar-gz.tar.gz contains 1 file with unexpected type:
+WARNING:root:full-criteria-multiple-backups-tar-gz/bar/foo is a regular file. Should have been a directory.
+WARNING:root:2 files with unexpected hashes while checking /home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-tar-gz.tar.gz:
+WARNING:root:/home/chaica/progra/python/brebis/functional-tests/full-criteria-multiple-backups/full-criteria-multiple-backups-tar-gz.tar.gz hash is dcb234a1b9cc8b56013be34b5cb52bd1. Should have been 1.
+WARNING:root:full-criteria-multiple-backups-tar-gz/bar/foo hash is c911a195060b81c9af5252726a42ccf7. Should have been 1.
