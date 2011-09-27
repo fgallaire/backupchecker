@@ -18,7 +18,7 @@
 
 import sys
 import logging
-import gzip
+import os.path
 
 from brebis.checkarchive import CheckArchive
 from brebis.expectedvalues import ExpectedValues
@@ -35,8 +35,17 @@ class CheckGzip(CheckArchive):
         #########################
         self._archive_checks(__arcdata, _cfgvalues['path'])
         ###############################
-        # Test the files in the archive
+        # Test the file in the archive
         ###############################
         if _data:
-            self._gzip = gzip.open(_cfgvalues['path'], 'r')
-            #__arcinfo = {'path': os.path.split(_cfgvalues['path'])[-1],}
+            self._gzip = open(_cfgvalues['path'], 'rb')
+            __filesize = self.__extract_size(self._gzip)
+            __arcinfo = {'path': os.path.split(_cfgvalues['path'])[-1].rstrip('.gz'),
+                            'size': __filesize}
+            _data = self._check_path(__arcinfo, _data)
+
+    def __extract_size(self, __binary):
+        '''Extract the size of the uncompressed file inside the archive -
+        4 last bytes of the archive
+        '''
+        return int.from_bytes(__binary.read(__binary.seek(-4, 2)), 'little')
