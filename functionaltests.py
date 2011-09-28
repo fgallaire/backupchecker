@@ -818,6 +818,14 @@ class Test82_expected_file_greater_than_file_in_tar_bz2_archive(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file smaller than expected')
             
+class Test82_expected_file_greater_than_file_in_gzip_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/expected-file-greater-than-file-in-gz-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file smaller than expected')
+            
 class Test83_expected_file_greater_than_file_in_zip_archive(Main):
     def __init__(self, q):
         self._queue = q
@@ -847,6 +855,14 @@ class Test86_expected_file_smaller_than_file_in_tar_bz2_archive(Main):
         self._queue = q
         self._testname = self.__class__.__name__
         self._testdir = os.path.join(ABSPATH, 'functional-tests/expected-file-smaller-than-file-in-tar-bz2-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file bigger than expected')
+            
+class Test86_expected_file_smaller_than_file_in_gzip_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/expected-file-smaller-than-file-in-gz-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file bigger than expected')
             

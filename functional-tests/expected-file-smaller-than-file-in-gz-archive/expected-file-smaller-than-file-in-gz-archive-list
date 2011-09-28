@@ -1,0 +1,2 @@
+[files]
+expected-file-smaller-than-file-in-gz-archive: <10
