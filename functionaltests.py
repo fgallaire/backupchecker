@@ -976,6 +976,14 @@ class Test94_full_criteria_multiple_backups:
                 else:
                     __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
 
+class Test95_name_in_gzip_and_gzip_archive_are_not_the_same(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/name-in-gzip-and-gzip-archive-are-not-the-same')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('unexpected file checking')
+            
 
 def extract_key(key):
     return int(key.split('_')[0][4:])

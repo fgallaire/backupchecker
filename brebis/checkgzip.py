@@ -40,12 +40,44 @@ class CheckGzip(CheckArchive):
         if _data:
             self._gzip = open(_cfgvalues['path'], 'rb')
             __filesize = self.__extract_size(self._gzip)
-            __arcinfo = {'path': os.path.split(_cfgvalues['path'])[-1].rstrip('.gz'),
-                            'size': __filesize}
+            __name = self.__extract_initial_filename(self._gzip,
+                        os.path.split(_cfgvalues['path'])[-1].rstrip('.gz'))
+            __arcinfo = {'path': __name, 'size': __filesize}
             _data = self._check_path(__arcinfo, _data)
+            self._missing_files = [_file['path'] for _file in _data]
 
     def __extract_size(self, __binary):
         '''Extract the size of the uncompressed file inside the archive -
         4 last bytes of the archive
         '''
-        return int.from_bytes(__binary.read(__binary.seek(-4, 2)), 'little')
+        __binary.seek(-4, 2)
+        return int.from_bytes(__binary.read(), 'little')
+
+    def __extract_initial_filename(self, __binary, __arcname):
+        '''Extract initial filename of the uncompressed file'''
+        # We move the cursor on the 4th byte
+        __binary.seek(3,0)
+        # Read a byte
+        __flag = __binary.read(1)
+        # Store flag byte
+        __intflag = int.from_bytes(__flag,'little')
+        # If the extra field flag is on, extract the size of its data field
+        __extralen = 0
+        if __intflag & 4 != 0:
+            __binary.seek(9,0)
+            __extralenbyte = __binary.read(2)
+            __extralen = int.from_byte(__extralenbyte,'little') + 2
+        # If the flag "name" is on, skip to it and read the associated content
+        __binaryname = b''
+        if __intflag & 8 != 0:
+            __binary.seek(10 + __extralen)
+            # until zero byte is found, read the initial filename in bytes
+            while True:
+                __newbyte = __binary.read(1)
+                if __newbyte != b'\x00':
+                    __binaryname += __newbyte
+                else:
+                    break
+            return __binaryname.decode('latin1')
+        else:
+            return __arcname
