@@ -1006,7 +1006,7 @@ class Test93_mixing_dir_path_and_archive_type_in_conf(Main):
             self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(__result[0])))
 
 class Test94_full_criteria_multiple_backups:
-    '''Check all the itemps for a tar.gz, tar.bz2, zip and tree'''
+    '''Check all the itemps for a tar.gz, tar.bz2, gzip, zip and tree'''
     def __init__(self, q):
         __queue = q
         __res = True
@@ -1025,7 +1025,7 @@ class Test94_full_criteria_multiple_backups:
                 'with unexpected mode': 0,
                 'with unexpected uid': 0,
                 'with unexpected gid': 0,
-                'with unexpected type': 0,
+                'with unexpected hash while checking': 0,
                 'bigger than': 0,
                 }
                 for __line in __file.readlines():
@@ -1033,7 +1033,7 @@ class Test94_full_criteria_multiple_backups:
                         if __condition in __line: 
                             __conditions[__condition] += 1
                 for __condition in __conditions:
-                    if __conditions[__condition] != 4:
+                    if __conditions[__condition] != 5:
                         __res = False
                 if __res:
                     __queue.put('{} - {}'.format(__testname, OKMSG))
