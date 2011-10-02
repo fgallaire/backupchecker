@@ -463,7 +463,15 @@ class Test39_unexpected_file_in_tar_bz2_archive(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 unexpected file')
 
-class Test40_unexpected_file_in_zip_archive(Main):
+class Test40_unexpected_file_in_gzip_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/unexpected-file-in-gz-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 unexpected file')
+
+class Test41_unexpected_file_in_zip_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
