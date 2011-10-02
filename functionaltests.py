@@ -70,7 +70,15 @@ class Test2_file_missing_in_tar_bz2(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file missing in')
 
-class Test3_file_missing_in_zip(Main):
+class Test3_file_missing_in_gzip(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/file-missing-in-gzip')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file missing in')
+
+class Test4_file_missing_in_zip(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
