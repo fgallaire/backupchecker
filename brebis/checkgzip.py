@@ -19,6 +19,7 @@
 import sys
 import logging
 import os.path
+import gzip
 
 from brebis.checkarchive import CheckArchive
 from brebis.expectedvalues import ExpectedValues
@@ -30,6 +31,7 @@ class CheckGzip(CheckArchive):
         '''Main for Checkgzip'''
         _data = []
         _data, __arcdata = ExpectedValues(_cfgvalues['files_list']).data
+        self.__arcpath = _cfgvalues['path']
         #########################
         # Test the archive itself
         #########################
@@ -81,3 +83,8 @@ class CheckGzip(CheckArchive):
             return __binaryname.decode('latin1')
         else:
             return __arcname
+
+    def _extract_stored_file(self, __arcfilepath):
+        '''Extract a file from the archive and return a file object'''
+        __file = gzip.open(self.__arcpath, 'rb')
+        return __file
