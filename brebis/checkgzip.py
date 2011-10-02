@@ -40,13 +40,13 @@ class CheckGzip(CheckArchive):
         # Test the file in the archive
         ###############################
         if _data:
-            self._gzip = open(_cfgvalues['path'], 'rb')
-            __filesize = self.__extract_size(self._gzip)
-            __name = self.__extract_initial_filename(self._gzip,
-                        os.path.split(_cfgvalues['path'])[-1].rstrip('.gz'))
-            __arcinfo = {'path': __name, 'size': __filesize}
-            _data = self._check_path(__arcinfo, _data)
-            self._missing_files = [_file['path'] for _file in _data]
+            with open(_cfgvalues['path'], 'rb') as self._gzip:
+                __filesize = self.__extract_size(self._gzip)
+                __name = self.__extract_initial_filename(self._gzip,
+                            os.path.split(_cfgvalues['path'])[-1].rstrip('.gz'))
+                __arcinfo = {'path': __name, 'size': __filesize}
+                _data = self._check_path(__arcinfo, _data)
+                self._missing_files = [_file['path'] for _file in _data]
 
     def __extract_size(self, __binary):
         '''Extract the size of the uncompressed file inside the archive -
@@ -86,5 +86,5 @@ class CheckGzip(CheckArchive):
 
     def _extract_stored_file(self, __arcfilepath):
         '''Extract a file from the archive and return a file object'''
-        __file = gzip.open(self.__arcpath, 'rb')
-        return __file
+        __fileobj = gzip.open(self.__arcpath, 'rb')
+        return __fileobj
