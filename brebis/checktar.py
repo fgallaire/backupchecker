@@ -57,10 +57,14 @@ class CheckTar(CheckArchive):
         name
         '''
         __types = {tarfile.REGTYPE: 'f',
+            tarfile.AREGTYPE: 'a',
             tarfile.CHRTYPE: 'c',
             tarfile.DIRTYPE: 'd',
+            tarfile.LNKTYPE: 'l',
             tarfile.SYMTYPE: 's',
+            tarfile.CONTTYPE: 'n',
             tarfile.BLKTYPE: 'b',
+            tarfile.GNUTYPE_SPARSE: 'g',
             tarfile.FIFOTYPE: 'o'}
         return __types[__arctype]
 

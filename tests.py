@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import gzip
 import os
 import os.path
 import stat
@@ -133,6 +134,46 @@ class TestApp(unittest.TestCase):
                 'tests/filetree/filelist',
              'type': 'tree'}).missing_smaller_than
         self.assertEqual(__missing_smaller_than[0]['path'], 'bar/foo3')
+
+    def test_checkgzip_missing_files(self):
+        '''Check if the CheckGzip class returns a missing file'''
+        _missing_files = []
+        _missing_files = brebis.checkgzip.CheckGzip({'path':
+            'tests/gzip/mygzip.gz',
+             'files_list':
+                'tests/gzip/mygzip-list',
+             'type': 'archive'}).missing_files
+        self.assertEqual(_missing_files, ['foo'])
+
+    def test_checkgzip_missing_equality(self):
+        '''Check if the CheckGzip class returns a dictionary with a file whose size should have been equal with the expected size'''
+        __missing_equality = []
+        __missing_equality = brebis.checkgzip.CheckGzip({'path':
+            'tests/file_size/mygzip.gz',
+             'files_list':
+                'tests/file_size/mygzip-list',
+             'type': 'archive'}).missing_equality
+        self.assertEqual(__missing_equality[0]['path'], 'mygzip')
+
+    def test_checkgzip_missing_bigger_than(self):
+        '''Check if the CheckGzip class returns a dictionary with a file whose size should have been bigger than the expected size'''
+        __missing_bigger_than= []
+        __missing_bigger_than = brebis.checkgzip.CheckGzip({'path':
+            'tests/file_size/missing-bigger-than/mygzip.gz',
+             'files_list':
+                'tests/file_size/missing-bigger-than/mygzip-list',
+             'type': 'archive'}).missing_bigger_than
+        self.assertEqual(__missing_bigger_than[0]['path'], 'mygzip')
+
+    def test_checkgzip_missing_smaller_than(self):
+        '''Check if the CheckGzip class returns a dictionary with a file whose size should have been smaller than the expected size'''
+        __missing_smaller_than= []
+        __missing_smaller_than = brebis.checkgzip.CheckGzip({'path':
+            'tests/file_size/missing-smaller-than/mygzip.gz',
+             'files_list':
+                'tests/file_size/missing-smaller-than/mygzip-list',
+             'type': 'archive'}).missing_smaller_than
+        self.assertEqual(__missing_smaller_than[0]['path'], 'mygzip')
 
     def test_checkzip_missing_files(self):
         '''Check if the CheckZip class returns a missing file'''
@@ -936,19 +977,6 @@ class TestApp(unittest.TestCase):
             self.assertEqual(type(__result), type(self.__desc))
             __result.close()
 
-    def test_tree_extract_stored_file(self):
-        '''test the _extract_stored_file protected method from checktree.CheckTree'''
-        __myobj = brebis.checktree.CheckTree({'path':
-            'tests/checktree_private_methods/mytree',
-             'files_list':
-                'tests/checktree_private_methods/mytree-list',
-             'type': 'tree'})
-        __file = 'tests/checktree_private_methods/mytree'
-        __result = __myobj._extract_stored_file('hello')
-        with open(os.path.join(__file, 'hello'), 'rb') as self.__desc:
-            self.assertEqual(type(__result), type(self.__desc))
-            __result.close()
-
     def test_tree_translate_type_file(self):
         '''test the __translate_type private method from checktree.CheckTree - expecting file'''
         __myobj = brebis.checktree.CheckTree({'path':
@@ -982,5 +1010,51 @@ class TestApp(unittest.TestCase):
         __result = __myobj._CheckTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('s', __result)
 
+################################################################
+#
+# Testing the private/protected methods from checkgzip.CheckGzip
+#
+################################################################
+
+    def test_gzip_extract_stored_file(self):
+        '''test the _extract_stored_file protected method from checkgzip.CheckGzip'''
+        __myobj = brebis.checkgzip.CheckGzip({'path':
+            'tests/checkgzip_private_methods/mygzip.gz',
+             'files_list':
+                'tests/checkgzip_private_methods/mygzip-list',
+             'type': 'archive'})
+        __file = 'tests/checkgzip_private_methods/mygzip.gz'
+        __result = __myobj._extract_stored_file('mygzip')
+        with gzip.open(__file, 'rb') as self.__desc:
+            self.assertEqual(type(__result), type(self.__desc))
+            __result.close()
+
+    def test_extract_size_from_gzip_archive(self):
+        '''test the extraction of a gzip uncompressed file in the gzip archive'''
+        __arcpath = 'tests/checkgzip_private_methods/mygzip.gz'
+        __myobj = brebis.checkgzip.CheckGzip({'path':
+            __arcpath,
+             'files_list':
+                'tests/checkgzip_private_methods/mygzip-list',
+             'type': 'archive'})
+        with open(__arcpath, 'rb') as __myf:
+            self.assertEqual(23, __myobj._CheckGzip__extract_size(__myf))
+
+    def test_extract_initial_filename_from_gzip_archive(self):
+        '''test the extraction of the initial name of an uncompressed file'''
+        __arcpath = 'tests/checkgzip_private_methods/mygzip.gz'
+        __myobj = brebis.checkgzip.CheckGzip({'path':
+            __arcpath,
+             'files_list':
+                'tests/checkgzip_private_methods/mygzip-list',
+             'type': 'archive'})
+        with open(__arcpath, 'rb') as __myf:
+            self.assertEqual('mygzip', __myobj._CheckGzip__extract_initial_filename(__myf, 'mygzip'))
+
+################################################################
+#
+# End of the unit tests
+#
+################################################################
 if __name__ == '__main__':
     unittest.main()
