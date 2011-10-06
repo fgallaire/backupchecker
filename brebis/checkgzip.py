@@ -86,5 +86,9 @@ class CheckGzip(CheckArchive):
 
     def _extract_stored_file(self, __arcfilepath):
         '''Extract a file from the archive and return a file object'''
-        __fileobj = gzip.open(self.__arcpath, 'rb')
+        try:
+            __fileobj = gzip.open(self.__arcpath, 'rb')
+        except IOError as __msg:
+            __warn = '. You should investigate for a data corruption.'
+            logging.warn('{}: {}{}'.format(self.__arcpath, str(_msg), __warn))
         return __fileobj
