@@ -842,6 +842,14 @@ class Test78_corrupted_tar_bz2_archive(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('data corruption')
 
+class Test78_corrupted_gzip_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/corrupted-gz-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('data corruption')
+
 class Test79_corrupted_zip_archive(Main):
     def __init__(self, q):
         self._queue = q
