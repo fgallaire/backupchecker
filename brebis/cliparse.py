@@ -30,7 +30,7 @@ class CliParse:
     def __init__(self):
         '''The constructor for the CliParse class.'''
         self._options = ()
-        __parser = OptionParser(version="%prog 0.1")
+        __parser = OptionParser(version="%prog 0.2")
         self.__define_options(__parser)
 
     def __define_options(self, __parser):
