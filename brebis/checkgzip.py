@@ -25,10 +25,10 @@ from brebis.checkarchive import CheckArchive
 from brebis.expectedvalues import ExpectedValues
 
 class CheckGzip(CheckArchive):
-    '''Check a tar archive'''
+    '''Check a bzip2 archive'''
 
     def _main(self, _cfgvalues):
-        '''Main for Checkgzip'''
+        '''Main for CheckGzip'''
         _data = []
         _data, __arcdata = ExpectedValues(_cfgvalues['files_list']).data
         self.__arcpath = _cfgvalues['path']
