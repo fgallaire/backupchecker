@@ -25,7 +25,7 @@ from brebis.checkarchive import CheckArchive
 from brebis.expectedvalues import ExpectedValues
 
 class CheckGzip(CheckArchive):
-    '''Check a bzip2 archive'''
+    '''Check a gzip archive'''
 
     def _main(self, _cfgvalues):
         '''Main for CheckGzip'''
