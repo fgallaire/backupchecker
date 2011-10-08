@@ -23,6 +23,7 @@ from zipfile import is_zipfile
 from brebis.archiveinfomsg import ArchiveInfoMsg
 from brebis.checktar import CheckTar
 from brebis.checkgzip import CheckGzip
+from brebis.checkbzip2 import CheckBzip2
 from brebis.checkzip import CheckZip
 from brebis.checktree import CheckTree
 
@@ -50,6 +51,9 @@ class CheckBackups(object):
             # check a gzip file, by name
             elif __cfgvalues['type'] == 'archive' and __cfgvalues['path'].lower().endswith('.gz'):
                 __bck = CheckGzip(__cfgvalues)
+            # check a bzip2 file, by name
+            elif __cfgvalues['type'] == 'archive' and __cfgvalues['path'].lower().endswith('.bz2'):
+                __bck = CheckBzip2(__cfgvalues)
             # check a zip file, by name
             elif __cfgvalues['type'] == 'archive' and __cfgvalues['path'].lower().endswith('.zip'):
                 __bck = CheckZip(__cfgvalues)
