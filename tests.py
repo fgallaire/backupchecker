@@ -14,11 +14,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import bz2
 import gzip
+import logging
 import os
 import os.path
 import stat
-import logging
 import sys
 import tarfile
 import unittest
@@ -26,13 +27,14 @@ import zipfile
 
 import brebis.applogger
 import brebis.checkbackups
+import brebis.checkbzip2
 import brebis.checkhashes
 import brebis.checktar
 import brebis.checktree
 import brebis.checkzip
+import brebis.checkarchive
 import brebis.cliparse
 import brebis.configurations
-import brebis.checkarchive
 from brebis.expectedvalues import ExpectedValues
 import brebis.main
 
@@ -1050,6 +1052,25 @@ class TestApp(unittest.TestCase):
              'type': 'archive'})
         with open(__arcpath, 'rb') as __myf:
             self.assertEqual('mygzip', __myobj._CheckGzip__extract_initial_filename(__myf, 'mygzip'))
+
+##################################################################
+#
+# Testing the private/protected methods from checkbzip2.CheckBzip2
+#
+##################################################################
+
+    def test_bzip2_extract_stored_file(self):
+        '''test the _extract_stored_file protected method from checkbzip2.CheckBzip2'''
+        __myobj = brebis.checkbzip2.CheckBzip2({'path':
+            'tests/checkbzip2_private_methods/mybz2.bz2',
+             'files_list':
+                'tests/checkbzip2_private_methods/mybzip2-list',
+             'type': 'archive'})
+        __file = 'tests/checkbzip2_private_methods/mybz2.bz2'
+        __result = __myobj._extract_stored_file('mygzip')
+        with bz2.BZ2File(__file, 'r') as self.__desc:
+            self.assertEqual(type(__result), type(self.__desc))
+            __result.close()
 
 ################################################################
 #

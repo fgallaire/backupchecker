@@ -45,18 +45,19 @@ class CheckBzip2(CheckArchive):
             # Have to read the whole archive to check CRC
             ##############################################
             try:
-                with bz2.BZ2File(_cfgvalues['path'], 'r') as __bz:
-                    __bz.read()
+                with bz2.BZ2File(_cfgvalues['path'], 'r') as __bz2:
+                    __bz2.read()
             except IOError as __msg:
                 __warn = '. You should investigate for a data corruption.'
                 logging.warn('{}: {}{}'.format(_cfgvalues['path'], str(__msg), __warn))
             else:
-                __name = os.path.split(_cfgvalues['path'])[-1].rstrip('.bz2')
-                __arcinfo = {'path': __name}
+                __name = os.path.split(_cfgvalues['path'])[-1].split('.')[0]
+                # Bzip2 does not allow to know the compressed file size, default to 0
+                __arcinfo = {'path': __name, 'size': 0}
                 _data = self._check_path(__arcinfo, _data)
                 self._missing_files = [_file['path'] for _file in _data]
 
-    def _extract_stored_file(self, __arcfilepath):
+    def _extract_stored_file(self, __nouse):
         '''Extract a file from the archive and return a file object'''
         __fileobj = bz2.BZ2File(self.__arcpath, 'r')
         return __fileobj
