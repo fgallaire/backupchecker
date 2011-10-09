@@ -469,6 +469,36 @@ class TestApp(unittest.TestCase):
             'expectedhash': '3676c9d706eb6f6b02eb5d67ba86a9b3e855c13d',
             'hash': '2676c9d706eb6f6b02eb5d67ba86a9b3e855c13d'}])
 
+    def test_gzip_compare_hash(self):
+        '''Compare the hash of a file in the gzip archive and the
+        expected one
+        '''
+        __myobj = brebis.checkgzip.CheckGzip({'path':
+            'tests/expected_hash/bar.gz',
+             'files_list':
+                'tests/expected_hash/gzip-list',
+             'type': 'archive'})
+        __hashes = __myobj.mismatched_hashes
+        self.assertEqual(__hashes, [
+            {'path': 'bar',
+            'expectedhash': 'ede',
+            'hash': 'ede69eff9660689e65c5e47bb849f152'}])
+
+    def test_bzip2_compare_hash(self):
+        '''Compare the hash of a file in the bzip2 archive and the
+        expected one
+        '''
+        __myobj = brebis.checkbzip2.CheckBzip2({'path':
+            'tests/expected_hash/bar.bz2',
+             'files_list':
+                'tests/expected_hash/bzip2-list',
+             'type': 'archive'})
+        __hashes = __myobj.mismatched_hashes
+        self.assertEqual(__hashes, [
+            {'path': 'bar',
+            'expectedhash': '768',
+            'hash': '768d0a4cdfde46a468b6d9ba01a19a2a'}])
+
     def test_checktar_archive_equal_size(self):
         '''Check if the CheckTar class returns a dictionary with the
            archive itself file whose size should have been equal
