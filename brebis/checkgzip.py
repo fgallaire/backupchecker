@@ -23,6 +23,7 @@ import gzip
 
 from brebis.checkarchive import CheckArchive
 from brebis.expectedvalues import ExpectedValues
+from brebis.identifylimitations import IdentifyLimitations
 
 class CheckGzip(CheckArchive):
     '''Check a tar archive'''
@@ -40,6 +41,8 @@ class CheckGzip(CheckArchive):
         # Test the file in the archive
         ###############################
         if _data:
+            # Identify limitations given the features asked by the user
+            IdentifyLimitations(_cfgvalues['path'], 'gz', _data[0].keys())
             ##############################################
             # Looking for data corruption
             # Have to read the whole archive to check CRC
@@ -58,7 +61,7 @@ class CheckGzip(CheckArchive):
                     __filesize = self.__extract_size(__gzip)
                     __name = self.__extract_initial_filename(__gzip,
                                 os.path.split(_cfgvalues['path'])[-1].rstrip('.gz'))
-                    __arcinfo = {'path': __name, 'size': __filesize}
+                    __arcinfo = {'path': __name, 'size': __filesize, 'type': 'f'}
                     _data = self._check_path(__arcinfo, _data)
                     self._missing_files = [_file['path'] for _file in _data]
 
