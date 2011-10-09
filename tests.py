@@ -14,11 +14,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import bz2
 import gzip
+import logging
 import os
 import os.path
 import stat
-import logging
 import sys
 import tarfile
 import unittest
@@ -26,13 +27,14 @@ import zipfile
 
 import brebis.applogger
 import brebis.checkbackups
+import brebis.checkbzip2
 import brebis.checkhashes
 import brebis.checktar
 import brebis.checktree
 import brebis.checkzip
+import brebis.checkarchive
 import brebis.cliparse
 import brebis.configurations
-import brebis.checkarchive
 from brebis.expectedvalues import ExpectedValues
 import brebis.main
 
@@ -466,6 +468,36 @@ class TestApp(unittest.TestCase):
             {'path': 'bar/bar2',
             'expectedhash': '3676c9d706eb6f6b02eb5d67ba86a9b3e855c13d',
             'hash': '2676c9d706eb6f6b02eb5d67ba86a9b3e855c13d'}])
+
+    def test_gzip_compare_hash(self):
+        '''Compare the hash of a file in the gzip archive and the
+        expected one
+        '''
+        __myobj = brebis.checkgzip.CheckGzip({'path':
+            'tests/expected_hash/bar.gz',
+             'files_list':
+                'tests/expected_hash/gzip-list',
+             'type': 'archive'})
+        __hashes = __myobj.mismatched_hashes
+        self.assertEqual(__hashes, [
+            {'path': 'bar',
+            'expectedhash': 'ede',
+            'hash': 'ede69eff9660689e65c5e47bb849f152'}])
+
+    def test_bzip2_compare_hash(self):
+        '''Compare the hash of a file in the bzip2 archive and the
+        expected one
+        '''
+        __myobj = brebis.checkbzip2.CheckBzip2({'path':
+            'tests/expected_hash/bar.bz2',
+             'files_list':
+                'tests/expected_hash/bzip2-list',
+             'type': 'archive'})
+        __hashes = __myobj.mismatched_hashes
+        self.assertEqual(__hashes, [
+            {'path': 'bar',
+            'expectedhash': '768',
+            'hash': '768d0a4cdfde46a468b6d9ba01a19a2a'}])
 
     def test_checktar_archive_equal_size(self):
         '''Check if the CheckTar class returns a dictionary with the
@@ -1050,6 +1082,25 @@ class TestApp(unittest.TestCase):
              'type': 'archive'})
         with open(__arcpath, 'rb') as __myf:
             self.assertEqual('mygzip', __myobj._CheckGzip__extract_initial_filename(__myf, 'mygzip'))
+
+##################################################################
+#
+# Testing the private/protected methods from checkbzip2.CheckBzip2
+#
+##################################################################
+
+    def test_bzip2_extract_stored_file(self):
+        '''test the _extract_stored_file protected method from checkbzip2.CheckBzip2'''
+        __myobj = brebis.checkbzip2.CheckBzip2({'path':
+            'tests/checkbzip2_private_methods/mybz2.bz2',
+             'files_list':
+                'tests/checkbzip2_private_methods/mybzip2-list',
+             'type': 'archive'})
+        __file = 'tests/checkbzip2_private_methods/mybz2.bz2'
+        __result = __myobj._extract_stored_file('mygzip')
+        with bz2.BZ2File(__file, 'r') as self.__desc:
+            self.assertEqual(type(__result), type(self.__desc))
+            __result.close()
 
 ################################################################
 #
