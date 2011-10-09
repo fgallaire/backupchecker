@@ -53,7 +53,7 @@ class CheckBzip2(CheckArchive):
             else:
                 __name = os.path.split(_cfgvalues['path'])[-1].split('.')[0]
                 # Bzip2 does not allow to know the compressed file size, default to 0
-                __arcinfo = {'path': __name, 'size': 0}
+                __arcinfo = {'path': __name, 'type': 'f', 'size': 0}
                 _data = self._check_path(__arcinfo, _data)
                 self._missing_files = [_file['path'] for _file in _data]
 
