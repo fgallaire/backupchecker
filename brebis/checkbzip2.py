@@ -23,6 +23,7 @@ import bz2
 
 from brebis.checkarchive import CheckArchive
 from brebis.expectedvalues import ExpectedValues
+from brebis.identifylimitations import IdentifyLimitations
 
 class CheckBzip2(CheckArchive):
     '''Check a bzip2 archive'''
@@ -40,6 +41,8 @@ class CheckBzip2(CheckArchive):
         # Test the file in the archive
         ###############################
         if _data:
+            # Identify limitations given the features asked by the user
+            IdentifyLimitations(_cfgvalues['path'], 'bz2', _data[0].keys())
             ##############################################
             # Looking for data corruption
             # Have to read the whole archive to check CRC
