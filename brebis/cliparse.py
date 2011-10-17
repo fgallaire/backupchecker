@@ -17,7 +17,7 @@
 '''Retrieve the command line options'''
 
 import logging
-from optparse import OptionParser
+from argparse import ArgumentParser
 import os
 import sys
 from hashlib import algorithms_guaranteed
@@ -30,26 +30,48 @@ class CliParse:
     def __init__(self):
         '''The constructor for the CliParse class.'''
         self._options = ()
-        __parser = OptionParser(version="%prog 0.3")
+        brebisversion = '%prog 0.3'
+        brebisdescription = 'Fully automated backup checker'
+        brebisepilog = 'For more information: http://www.brebisproject.org'
+        __parser = ArgumentParser(version=brebisversion,
+                                    description=brebisdescription,
+                                    epilog=brebisepilog)
         self.__define_options(__parser)
 
     def __define_options(self, __parser):
         '''Define the options'''
-        __parser.add_option('-c', '--configpath', dest='confpath',
-            action='store', type='string',
+        # define mutually exclusive arguments
+        __group = __parser.add_mutually_exclusive_group(required=True)
+        __group.add_argument('-c', '--configpath', dest='confpath',
+            action='store',
             default=os.getcwd(),
             help='the path to the configurations',
             metavar='DIR')
-        __parser.add_option('-l', '--log', dest='logfile',
-            action='store', type='string',
+        __parser.add_argument('-l', '--log', dest='logfile',
+            action='store',
             default=os.path.join(os.getcwd(), 'a.out'),
             help='the log file',
             metavar='FILE')
-        __options, _ = __parser.parse_args()
-        self.__verify_options(__options)
+        __group.add_argument('-g', '--gen-list', dest='genlist',
+            action='store_true')
+        __parser.add_argument('archives', nargs='*',
+            help='archives to check')
+        __args = __parser.parse_args()
+        self.__verify_options(__args)
 
     def __verify_options(self, __options):
         '''Verify the options given on the command line'''
+        # check if the archives exist
+        for __path in __options.archives:
+            if not os.path.exists(__path):
+                print('{} : no file or directory at this path. Exiting.'.format(__path))
+                sys.exit(1)
+            else:
+            # if the path exists, check if it is a regular file, a link or
+            # a directory otherwise exits
+                if not os.path.isfile__path() or not os.path.isdir(__path):
+                    print('{}: not a file or a directory. Exiting.'.format(__path))
+                    sys.exit(1)
         # Check the logfile
         __logdir = os.path.split(__options.logfile)[0]
         if __logdir and not os.path.exists(__logdir):
@@ -59,11 +81,13 @@ class CliParse:
         __options.logfile = os.path.abspath(__options.logfile)
         # Configure the logger
         AppLogger(__options.logfile)
-        # Check the configuration directory
-        if not os.path.exists(__options.confpath):
-            logging.info('The configuration directory does not exist')
-            sys.exit(1)
-        __options.confpath = os.path.abspath(__options.confpath)
+        # Verify if --gen-list option is not invoked before calling configuration path control
+        if not __options.genlist:
+            # Check the configuration directory
+            if not os.path.exists(__options.confpath):
+                logging.info('The configuration directory does not exist')
+                sys.exit(1)
+            __options.confpath = os.path.abspath(__options.confpath)
         self.__options = __options
 
     @property
