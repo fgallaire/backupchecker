@@ -41,10 +41,10 @@ class GenerateList(object):
             if os.path.isdir(__arcpath):
                 __bck = GenerateListForTree(__arcpath)
             # generate a list of files for a tar.gz/bz2 archive
-            elif __arcpath.lower().endswith('.tar') or
-                    __arcpath.lower().endswith('.tar.gz') or
-                    __arcpath.lower().endswith('.tar.bz2') or
-                    __arcpath.lower().endswith('.tgz') or
+            elif __arcpath.lower().endswith('.tar') or\
+                    __arcpath.lower().endswith('.tar.gz') or\
+                    __arcpath.lower().endswith('.tar.bz2') or\
+                    __arcpath.lower().endswith('.tgz') or\
                     __arcpath.lower().endswith('.tbz2'):
                 __bck = GenerateListForTar(__arcpath)
             # generate a list of files for a gzip archive
@@ -57,3 +57,9 @@ class GenerateList(object):
             elif __arcpath.lower().endswith('.zip'):
                 __bck = GenerateListForZip(__path)
             # A MESSAGE RESUMING OPERATION FOR GENERATING THE LIST OF FILES IS MISSING HERE
+
+    def _generate_list(self, __arcpath, __listoffiles):
+        '''Generate a list of files inside the archive'''
+        with open(__arcname, 'w') as __arc:
+            __arc.writelines(__listoffiles)
+

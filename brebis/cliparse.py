@@ -62,22 +62,27 @@ class CliParse:
     def __verify_options(self, __options):
         '''Verify the options given on the command line'''
         # check if the archives exist
-        for __path in __options.archives:
+        for __i, __path in __options.archives:
             if not os.path.exists(__path):
                 print('{} : no file or directory at this path. Exiting.'.format(__path))
                 sys.exit(1)
             else:
-            # if the path exists, check if it is a regular file, a link or
-            # a directory otherwise exits
+                # using absolute path in order to be consistent
+                __path = os.path.abspath(__path)
+                # if the path exists, check if it is a regular file, a link or
+                # a directory otherwise exits
                 if not os.path.isfile__path() or not os.path.isdir(__path):
                     print('{}: not a file or a directory. Exiting.'.format(__path))
                     sys.exit(1)
+                else:
+                    __options.archives[__i] = __path
         # Check the logfile
         __logdir = os.path.split(__options.logfile)[0]
         if __logdir and not os.path.exists(__logdir):
             print('split:{}'.format(os.path.split(__options.logfile)[0]))
             print('The directory where to write the log file does not exist')
             sys.exit(1)
+        # using absolute path in order to be consistent
         __options.logfile = os.path.abspath(__options.logfile)
         # Configure the logger
         AppLogger(__options.logfile)
