@@ -35,19 +35,20 @@ class GenerateListForTar(GenerateList):
 
     def __main(self, __tar):
         '''Main for the GenerateListForTar class'''
-        __arcinfos = ['[files]']
+        __arcinfos = ['[files]\n']
         __listoffiles = []
         __oneline = '{}: size:{} uid:{} gid:{} mode:{} type:{}\n'
         for __tarinfo in __tar:
             __tarinfo.name = self.__normalize_path(__tarinfo.name)
-            __type = self.__translate_type(_tarinfo.type)
+            __type = self.__translate_type(__tarinfo.type)
+            __mode = oct(__tarinfo.mode).split('o')[-1]
             __listoffiles.append(__oneline.format(__tarinfo.name,
                                                     str(__tarinfo.size),
                                                     str(__tarinfo.uid),
                                                     str(__tarinfo.gid),
-                                                    str(__tarinfo.mode),
-                                                    __tarinfo.type))
-        if __arcpath.lower().endswith('.tar'):
+                                                    __mode,
+                                                    __type))
+        if self.__arcpath.lower().endswith('.tar'):
             self.__arcpath = ''.join([self.__arcpath[-3], 'list'])
         elif self.__arcpath.lower().endswith('.tar.gz'): 
             self.__arcpath = ''.join([self.__arcpath[-6], 'list'])

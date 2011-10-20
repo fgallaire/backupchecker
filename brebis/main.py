@@ -21,7 +21,7 @@ import sys
 from brebis.checkbackups import CheckBackups
 from brebis.cliparse import CliParse
 from brebis.configurations import Configurations
-from brebis.generatelist import GenerateList
+from brebis.listtype import ListType
 
 class Main(object):
     '''The main class'''
@@ -38,5 +38,5 @@ class Main(object):
             __confs = Configurations(__options.confpath)
             CheckBackups(__confs.configs)
         else:
-        # generation list mode
-            GenerateList(__options.archives)
+        # Analyze the type of the list to produce
+            ListType(__options.archives)

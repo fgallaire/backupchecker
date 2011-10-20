@@ -62,16 +62,17 @@ class CliParse:
     def __verify_options(self, __options):
         '''Verify the options given on the command line'''
         # check if the archives exist
-        for __i, __path in __options.archives:
+        for __i, __path in enumerate(__options.archives):
             if not os.path.exists(__path):
                 print('{} : no file or directory at this path. Exiting.'.format(__path))
                 sys.exit(1)
             else:
                 # using absolute path in order to be consistent
                 __path = os.path.abspath(__path)
+                print('path:{}'.format(__path))
                 # if the path exists, check if it is a regular file, a link or
                 # a directory otherwise exits
-                if not os.path.isfile__path() or not os.path.isdir(__path):
+                if not os.path.isfile(__path) and not os.path.isdir(__path):
                     print('{}: not a file or a directory. Exiting.'.format(__path))
                     sys.exit(1)
                 else:
