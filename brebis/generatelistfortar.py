@@ -35,8 +35,7 @@ class GenerateListForTar(GenerateList):
 
     def __main(self, __tar):
         '''Main for the GenerateListForTar class'''
-        __arcinfos = ['[files]\n']
-        __listoffiles = []
+        __listoffiles = ['[files]\n']
         __oneline = '{}: size:{} uid:{} gid:{} mode:{} type:{}\n'
         for __tarinfo in __tar:
             __tarinfo.name = self.__normalize_path(__tarinfo.name)
@@ -49,15 +48,15 @@ class GenerateListForTar(GenerateList):
                                                     __mode,
                                                     __type))
         if self.__arcpath.lower().endswith('.tar'):
-            self.__arcpath = ''.join([self.__arcpath[-3], 'list'])
+            self.__arcpath = ''.join([self.__arcpath[:-3], 'list'])
         elif self.__arcpath.lower().endswith('.tar.gz'): 
-            self.__arcpath = ''.join([self.__arcpath[-6], 'list'])
+            self.__arcpath = ''.join([self.__arcpath[:-6], 'list'])
         elif self.__arcpath.lower().endswith('.tar.bz2'):
-            self.__arcpath = ''.join([self.__arcpath[-7], 'list'])
+            self.__arcpath = ''.join([self.__arcpath[:-7], 'list'])
         elif self.__arcpath.lower().endswith('.tgz'):
-            self.__arcpath = ''.join([self.__arcpath[-3], 'list'])
+            self.__arcpath = ''.join([self.__arcpath[:-3], 'list'])
         elif __arcpath.lower().endswith('.tbz2'):
-            self.__arcpath = ''.join([self.__arcpath[-4], 'list'])
+            self.__arcpath = ''.join([self.__arcpath[:-4], 'list'])
         self._generate_list(self.__arcpath, __listoffiles)
 
     def __normalize_path(self, __path):
