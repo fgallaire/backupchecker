@@ -1,0 +1,7 @@
+[files]
+generate-list-from-zip-archive: size:0 uid:1000 gid:1000 mode:755 type:d
+generate-list-from-zip-archive/hello: size:37 uid:1000 gid:1000 mode:644 type:f
+generate-list-from-zip-archive/bar: size:0 uid:1000 gid:1000 mode:755 type:d
+generate-list-from-zip-archive/bar/rab: size:81 uid:1000 gid:1000 mode:644 type:f
+generate-list-from-zip-archive/bar/oof: size:50 uid:1000 gid:1000 mode:644 type:f
+generate-list-from-zip-archive/foo: size:34 uid:1000 gid:1000 mode:644 type:f

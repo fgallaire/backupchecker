@@ -69,7 +69,6 @@ class CliParse:
             else:
                 # using absolute path in order to be consistent
                 __path = os.path.abspath(__path)
-                print('path:{}'.format(__path))
                 # if the path exists, check if it is a regular file, a link or
                 # a directory otherwise exits
                 if not os.path.isfile(__path) and not os.path.isdir(__path):

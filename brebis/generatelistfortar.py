@@ -38,7 +38,8 @@ class GenerateListForTar(GenerateList):
         __listoffiles = ['[files]\n']
         __oneline = '{}: size:{} uid:{} gid:{} mode:{} type:{}\n'
         for __tarinfo in __tar:
-            __tarinfo.name = self.__normalize_path(__tarinfo.name)
+            # Pick up tar information
+            __tarinfo.name = self._normalize_path(__tarinfo.name)
             __type = self.__translate_type(__tarinfo.type)
             __mode = oct(__tarinfo.mode).split('o')[-1]
             __listoffiles.append(__oneline.format(__tarinfo.name,
@@ -47,6 +48,7 @@ class GenerateListForTar(GenerateList):
                                                     str(__tarinfo.gid),
                                                     __mode,
                                                     __type))
+        # Compose the name of the generated list
         if self.__arcpath.lower().endswith('.tar'):
             self.__arcpath = ''.join([self.__arcpath[:-3], 'list'])
         elif self.__arcpath.lower().endswith('.tar.gz'): 
@@ -57,14 +59,8 @@ class GenerateListForTar(GenerateList):
             self.__arcpath = ''.join([self.__arcpath[:-3], 'list'])
         elif __arcpath.lower().endswith('.tbz2'):
             self.__arcpath = ''.join([self.__arcpath[:-4], 'list'])
+        # call the method to write information in a file
         self._generate_list(self.__arcpath, __listoffiles)
-
-    def __normalize_path(self, __path):
-        '''Remove last slash of a directory path if present'''
-        if __path.endswith('/'):
-            return __path[:-1]
-        else:
-            return __path
 
     def __translate_type(self, __arctype):
         '''Translate the type of the file inside the tar by a generic

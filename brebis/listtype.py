@@ -22,8 +22,8 @@ import os.path
 #from brebis.generatelistforbzip2 import GenerateListForBzip2
 #from brebis.generatelistforgzip import GenerateListForGzip
 from brebis.generatelistfortar import GenerateListForTar
-#from brebis.generatelistforTree import GenerateListForTree
-#from brebis.generatelistforzip import GenerateListForZip
+from brebis.generatelistfortree import GenerateListForTree
+from brebis.generatelistforzip import GenerateListForZip
 
 class ListType(object):
     '''The ListType class'''
@@ -53,7 +53,7 @@ class ListType(object):
             #elif __arcpath.lower().endswith('.bz2'):
             #    __bck = GenerateListForBzip2(__arcpath)
             # generate a list of files for a zip archive
-            #elif __arcpath.lower().endswith('.zip'):
-            #    __bck = GenerateListForZip(__path)
+            elif __arcpath.lower().endswith('.zip'):
+                __bck = GenerateListForZip(__arcpath)
             # A MESSAGE RESUMING OPERATION FOR GENERATING THE LIST OF FILES IS MISSING HERE
 

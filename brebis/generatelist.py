@@ -18,13 +18,23 @@
 
 import logging
 import os.path
-
+import sys
 
 class GenerateList(object):
     '''The GenerateList class'''
 
     def _generate_list(self, __arcpath, __listoffiles):
-        '''Generate a list of files inside the archive'''
-        with open(__arcpath, 'w') as __arc:
-            __arc.writelines(__listoffiles)
+        '''Write the list of file information inside the archive in a file'''
+        try:
+            with open(__arcpath, 'w') as __arc:
+                __arc.writelines(__listoffiles)
+        except (OSError, IOError) as __msg:
+            print(__msg)
+            sys.exit(1)
 
+    def _normalize_path(self, __path):
+        '''Remove last slash of a directory path if present'''
+        if __path.endswith('/'):
+            return __path[:-1]
+        else:
+            return __path

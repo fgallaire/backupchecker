@@ -1,0 +1,7 @@
+[files]
+generate-list-from-tar-archive: size:0 uid:1000 gid:1000 mode:755 type:d
+generate-list-from-tar-archive/toto: size:23 uid:1000 gid:1000 mode:644 type:f
+generate-list-from-tar-archive/titi: size:14 uid:1000 gid:1000 mode:644 type:f
+generate-list-from-tar-archive/foo: size:0 uid:1000 gid:1000 mode:755 type:d
+generate-list-from-tar-archive/foo/oof: size:11 uid:1000 gid:1000 mode:644 type:f
+generate-list-from-tar-archive/foo/bar: size:14 uid:1000 gid:1000 mode:644 type:f

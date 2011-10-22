@@ -16,9 +16,59 @@
 # Generate a list of files from a zip archive
 '''Generate a list of files from a zip archive'''
 
-class GenerateListForZip:
+import logging
+import stat
+import zipfile
+
+from brebis.generatelist import GenerateList
+
+class GenerateListForZip(GenerateList):
     '''Generate a list of files from a zip archive'''
 
     def __init__(self, __arcpath):
         '''The constructor for the GenerateListForZip class'''
-        pass
+        self.__arcpath = __arcpath
+        try:
+            __zip = zipfile.ZipFile(self.__arcpath, 'r', allowZip64=True)
+            self.__main(__zip)
+        except zipfile.BadZipfile as _msg:
+            __warn = '. You should investigate for a data corruption.'
+            logging.warn('{}: {}{}'.format(__self.arcpath, str(__msg), __warn))
+
+    def __main(self, __zip):
+        '''Main of the GenerateListForZip class'''
+        __listoffiles = ['[files]\n']
+        __oneline = '{}: size:{} uid:{} gid:{} mode:{} type:{}\n'
+        __crcerror = __zip.testzip()
+        if __crcerror:
+            logging.warn('{} has at least one file corrupted:{}'.format(self.__arcpath, __crcerror))
+        else:
+            __zipinfo = __zip.infolist()
+            for __fileinfo in __zipinfo:
+                __fileinfo.filename = self._normalize_path(__fileinfo.filename)
+                __uid, __gid = self.__extract_uid_gid(__fileinfo)
+                __type = self.__translate_type(__fileinfo.external_attr >> 16)
+                __mode = oct(stat.S_IMODE((__fileinfo.external_attr >> 16))).split('o')[-1]
+                __listoffiles.append(__oneline.format(__fileinfo.filename,
+                                                        str(__fileinfo.file_size),
+                                                        str(__uid),
+                                                        str(__gid),
+                                                        __mode,
+                                                        __type))
+        # Compose the name of the generated list
+        self.__arcpath = ''.join([self.__arcpath[:-3], 'list'])
+        # call the method to write information in a file
+        self._generate_list(self.__arcpath, __listoffiles)
+
+    def __extract_uid_gid(self, __binary):
+        '''Extract uid and gid from a zipinfo.extra object (platform dependant)'''
+        __uid, __gid = int.from_bytes(__binary.extra[15:17], 'little'), \
+                            int.from_bytes(__binary.extra[20:22], 'little')
+        return (__uid, __gid)
+
+    def __translate_type(self, __mode):
+        '''Translate the type of the file to a generic name'''
+        if stat.S_ISREG(__mode):
+            return 'f'
+        elif stat.S_ISDIR(__mode):
+            return 'd'
