@@ -26,8 +26,8 @@ class GenerateList(object):
     def _generate_list(self, __arcpath, __listoffiles):
         '''Write the list of file information inside the archive in a file'''
         try:
-            with open(__arcpath, 'w') as __arc:
-                __arc.writelines(__listoffiles)
+            with open(__arcpath, 'w') as __file:
+                __file.writelines(__listoffiles)
         except (OSError, IOError) as __msg:
             print(__msg)
             sys.exit(1)

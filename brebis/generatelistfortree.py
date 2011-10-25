@@ -13,7 +13,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
+import os
+import os.path
+import stat
 
 from brebis.generatelist import GenerateList
 
@@ -29,32 +31,38 @@ class GenerateListForTree(GenerateList):
         __oneline = '{}: size:{} uid:{} gid:{} mode:{} type:{}\n'
         
         for __dirpath, __dirnames, __filenames, in os.walk(__arcpath):
-            __dirinfo = os.lstat(__dirpath)
-            __dirmode = stat.S_IMODE(__dirinfo.st_mode)
-            # Translate file type in brebis intern file type
-            __type = self.__translate_type(__dirinfo.st_mode)
-            # Extract file data
-            __listoffiles.append(__oneline.format(os.path.relpath(__dirpath, __arcpath),
-                                                    str(__dirinfo.st_size),
-                                                    str(__dirinfo.st_uid),
-                                                    str(__dirinfo.st_gid),
-                                                    __dirmode,
-                                                    __type))
+            # ignoring the uppest directory
+            if os.path.relpath(__dirpath, __arcpath) != '.':
+                # studying directories
+                __dirinfo = os.lstat(__dirpath)
+                __dirmode = oct(stat.S_IMODE(__dirinfo.st_mode)).split('o')[-1]
+                # translate file type in brebis intern file type
+                __type = self.__translate_type(__dirinfo.st_mode)
+                # extract file data
+                __listoffiles.append(__oneline.format(
+                                        os.path.relpath(__dirpath, __arcpath),
+                                        str(__dirinfo.st_size),
+                                        str(__dirinfo.st_uid),
+                                        str(__dirinfo.st_gid),
+                                        __dirmode,
+                                        __type))
+            # studying files
             for __filename in __filenames:
                 __filepath = os.path.join(__dirpath, __filename)
                 __filepath = self._normalize_path(__filepath)
                 __fileinfo = os.lstat(__filepath)
-                __filemode = stat.S_IMODE(__fileinfo.st_mode)
+                __filemode = oct(stat.S_IMODE(__fileinfo.st_mode)).split('o')[-1]
                 __type = self.__translate_type(__fileinfo.st_mode)
-            # Extract file data
-            __listoffiles.append(__oneline.format(os.path.relpath(__filepath, __arcpath),
-                                                    str(__fileinfo.st_size),
-                                                    str(__fileinfo.st_uid),
-                                                    str(__fileinfo.st_gid),
-                                                    __filemode,
-                                                    __type))
+                # extract file data
+                __listoffiles.append(__oneline.format(
+                                        os.path.relpath(__filepath, __arcpath),
+                                        str(__fileinfo.st_size),
+                                        str(__fileinfo.st_uid),
+                                        str(__fileinfo.st_gid),
+                                        __filemode,
+                                        __type))
         # call the method to write information in a file
-        self._generate_list(__arcpath, __listoffiles)
+        self._generate_list(''.join([__arcpath, '.list']), __listoffiles)
 
     def __translate_type(self, __mode):
         '''Translate the type of the file to a generic name'''
