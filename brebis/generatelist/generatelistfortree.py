@@ -17,7 +17,8 @@ import os
 import os.path
 import stat
 
-from brebis.generatelist import GenerateList
+from brebis.generatelist.generatelist import GenerateList
+from brebis.checkhashes import get_hash
 
 # Generate a list of files from a tree
 '''Generate a list of files from a tree'''
@@ -29,6 +30,7 @@ class GenerateListForTree(GenerateList):
         '''The constructor for the GenerateListForTree class'''
         __listoffiles = ['[files]\n']
         __oneline = '{}: size:{} uid:{} gid:{} mode:{} type:{}\n'
+        __onelinewithhash = '{}: size:{} uid:{} gid:{} mode:{} type:{} md5:{}\n'
         
         for __dirpath, __dirnames, __filenames, in os.walk(__arcpath):
             # ignoring the uppest directory
@@ -53,14 +55,28 @@ class GenerateListForTree(GenerateList):
                 __fileinfo = os.lstat(__filepath)
                 __filemode = oct(stat.S_IMODE(__fileinfo.st_mode)).split('o')[-1]
                 __type = self.__translate_type(__fileinfo.st_mode)
-                # extract file data
-                __listoffiles.append(__oneline.format(
-                                        os.path.relpath(__filepath, __arcpath),
-                                        str(__fileinfo.st_size),
-                                        str(__fileinfo.st_uid),
-                                        str(__fileinfo.st_gid),
-                                        __filemode,
-                                        __type))
+                if __type == 'f': 
+                    # extract hash sum of the file inside the archive
+                    __hash = get_hash(open(__filepath, 'rb'), 'md5')
+                    # extract file data and prepare data
+                    __listoffiles.append(__onelinewithhash.format(
+                                            os.path.relpath(__filepath, __arcpath),
+                                            str(__fileinfo.st_size),
+                                            str(__fileinfo.st_uid),
+                                            str(__fileinfo.st_gid),
+                                            __filemode,
+                                            __type,
+                                            __hash))
+                else:
+                    # if file is not regular file, ignoring its hash sum
+                    __listoffiles.append(__oneline.format(
+                                            os.path.relpath(__filepath, __arcpath),
+                                            str(__fileinfo.st_size),
+                                            str(__fileinfo.st_uid),
+                                            str(__fileinfo.st_gid),
+                                            __filemode,
+                                            __type))
+                                            
         # call the method to write information in a file
         self._generate_list(''.join([__arcpath, '.list']), __listoffiles)
 

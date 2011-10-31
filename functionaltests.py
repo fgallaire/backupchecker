@@ -1243,7 +1243,8 @@ class Test94_generate_list_for_tar_archive:
                     'uid': 0, 
                     'gid': 0, 
                     'type': 0, 
-                    'mode': 0 
+                    'mode': 0,
+                    'md5': 2
                 }
                 for __line in __file.readlines():
                     for __condition in __conditions:

@@ -21,9 +21,9 @@ import os.path
 
 #from brebis.generatelistforbzip2 import GenerateListForBzip2
 #from brebis.generatelistforgzip import GenerateListForGzip
-from brebis.generatelistfortar import GenerateListForTar
-from brebis.generatelistfortree import GenerateListForTree
-from brebis.generatelistforzip import GenerateListForZip
+from brebis.generatelist.generatelistfortar import GenerateListForTar
+from brebis.generatelist.generatelistfortree import GenerateListForTree
+from brebis.generatelist.generatelistforzip import GenerateListForZip
 
 class ListType(object):
     '''The ListType class'''

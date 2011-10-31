@@ -20,7 +20,8 @@ import logging
 import stat
 import zipfile
 
-from brebis.generatelist import GenerateList
+from brebis.checkhashes import get_hash
+from brebis.generatelist.generatelist import GenerateList
 
 class GenerateListForZip(GenerateList):
     '''Generate a list of files from a zip archive'''
@@ -39,6 +40,7 @@ class GenerateListForZip(GenerateList):
         '''Main of the GenerateListForZip class'''
         __listoffiles = ['[files]\n']
         __oneline = '{}: size:{} uid:{} gid:{} mode:{} type:{}\n'
+        __onelinewithhash = '{}: size:{} uid:{} gid:{} mode:{} type:{} md5:{}\n'
         __crcerror = __zip.testzip()
         if __crcerror:
             logging.warn('{} has at least one file corrupted:{}'.format(self.__arcpath, __crcerror))
@@ -49,12 +51,22 @@ class GenerateListForZip(GenerateList):
                 __uid, __gid = self.__extract_uid_gid(__fileinfo)
                 __type = self.__translate_type(__fileinfo.external_attr >> 16)
                 __mode = oct(stat.S_IMODE((__fileinfo.external_attr >> 16))).split('o')[-1]
-                __listoffiles.append(__oneline.format(__fileinfo.filename,
-                                                        str(__fileinfo.file_size),
-                                                        str(__uid),
-                                                        str(__gid),
-                                                        __mode,
-                                                        __type))
+                if __type == 'f':
+                    __hash = get_hash(__zip.open(__fileinfo.filename, 'r'), 'md5')
+                    __listoffiles.append(__onelinewithhash.format(__fileinfo.filename,
+                                                            str(__fileinfo.file_size),
+                                                            str(__uid),
+                                                            str(__gid),
+                                                            __mode,
+                                                            __type,
+                                                            __hash))
+                else:
+                    __listoffiles.append(__oneline.format(__fileinfo.filename,
+                                                            str(__fileinfo.file_size),
+                                                            str(__uid),
+                                                            str(__gid),
+                                                            __mode,
+                                                            __type))
         # Compose the name of the generated list
         self.__arcpath = ''.join([self.__arcpath[:-3], 'list'])
         # call the method to write information in a file

@@ -13,13 +13,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Generate a list of files from a bzip2 archive
-'''Generate a list of files from a bzip2 archive'''
+from brebis.generatelist.generatelist import GenerateList
 
-class GenerateListForBzip2:
-    '''Generate a list of files from a bzip2 archive'''
+# Generate a list of files from a gzip archive
+'''Generate a list of files from a gzip archive'''
+
+class GenerateListForGzip(GenerateList):
+    '''Generate a list of files from a gzip archive'''
 
     def __init__(self, __arcpath):
-        '''The constructor for the GenerateListForBzip2 class'''
+        '''The constructor for the GenerateListForGzip class'''
         pass
-

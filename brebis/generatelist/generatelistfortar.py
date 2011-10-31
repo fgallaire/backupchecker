@@ -18,7 +18,9 @@
 
 import logging
 import tarfile
-from brebis.generatelist import GenerateList
+
+from brebis.checkhashes import get_hash
+from brebis.generatelist.generatelist import GenerateList
 
 class GenerateListForTar(GenerateList):
     '''Generate a list of files from a tar archive'''
@@ -31,23 +33,37 @@ class GenerateListForTar(GenerateList):
             self.__main(__tar)
         except tarfile.TarError as _msg:
             __warn = '. You should investigate for a data corruption.'
-            logging.warn('{}: {}{}'.format(_cfgvalues['path'], str(_msg), __warn))
+            logging.warn('{}: {}{}'.format(self.__arcpath, str(_msg), __warn))
 
     def __main(self, __tar):
         '''Main for the GenerateListForTar class'''
         __listoffiles = ['[files]\n']
         __oneline = '{}: size:{} uid:{} gid:{} mode:{} type:{}\n'
+        __onelinewithhash = '{}: size:{} uid:{} gid:{} mode:{} type:{} md5:{}\n'
         for __tarinfo in __tar:
             # Pick up tar information
             __tarinfo.name = self._normalize_path(__tarinfo.name)
             __type = self.__translate_type(__tarinfo.type)
             __mode = oct(__tarinfo.mode).split('o')[-1]
-            __listoffiles.append(__oneline.format(__tarinfo.name,
-                                                    str(__tarinfo.size),
-                                                    str(__tarinfo.uid),
-                                                    str(__tarinfo.gid),
-                                                    __mode,
-                                                    __type))
+            if __type == 'f':
+                # extract hash sum of the file inside the archive
+                __hash = get_hash(__tar.extractfile(__tarinfo.name), 'md5')
+                # format the retrieved information
+                __listoffiles.append(__onelinewithhash.format(__tarinfo.name,
+                                                        str(__tarinfo.size),
+                                                        str(__tarinfo.uid),
+                                                        str(__tarinfo.gid),
+                                                        __mode,
+                                                        __type,
+                                                        __hash))
+            else:
+                # if file is not regular file, ignoring its hash sum
+                __listoffiles.append(__oneline.format(__tarinfo.name,
+                                                        str(__tarinfo.size),
+                                                        str(__tarinfo.uid),
+                                                        str(__tarinfo.gid),
+                                                        __mode,
+                                                        __type))
         # Compose the name of the generated list
         if self.__arcpath.lower().endswith('.tar'):
             self.__arcpath = ''.join([self.__arcpath[:-3], 'list'])
