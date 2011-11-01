@@ -2,3 +2,18 @@ syntax: glob
 
 *.pyc
 a.out
+functional-tests/expected-generated-list-for-bzip2-archive/expected-generated-list-for-bzip2-archive.list
+functional-tests/expected-generated-list-for-gzip-archive/expected-generated-list-for-gzip-archive.list
+functional-tests/expected-generated-list-for-tar-archive/expected-generated-list-for-tar-archive.list
+functional-tests/expected-generated-list-for-tree/expected-generated-list-for-tree.list
+functional-tests/expected-generated-list-for-zip-archive/expected-generated-list-for-zip-archive.list
+functional-tests/generate-list-and-parse-bzip2-archive/generate-list-and-parse-bzip2-archive.list
+functional-tests/generate-list-and-parse-gzip-archive/generate-list-and-parse-gzip-archive.list
+functional-tests/generate-list-and-parse-tar-archive/generate-list-and-parse-tar-archive.list
+functional-tests/generate-list-and-parse-tree/generate-list-and-parse-tree.list
+functional-tests/generate-list-and-parse-zip-archive/generate-list-and-parse-zip-archive.list
+functional-tests/generate-list-from-bzip2-archive/generate-list-from-bzip2-archive.list
+functional-tests/generate-list-from-gzip-archive/generate-list-from-gzip-archive.list
+functional-tests/generate-list-from-tar-archive/generate-list-from-tar-archive.list
+functional-tests/generate-list-from-tree/generate-list-from-tree.list
+functional-tests/generate-list-from-zip-archive/generate-list-from-zip-archive.list

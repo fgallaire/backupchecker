@@ -53,6 +53,22 @@ class Main:
                 else:
                     self._queue.put('{} - {}value in result file not expected'.format(self._testname, KOMSG))
 
+class MainGenerateParse:
+    '''Main of all the Test*GenerateParse classes'''
+    def _main(self, __condition):
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTCONFIG, self._testdir, OPTLOG, self._resultfile])
+        else:
+            __retcode = subprocess.call([EXE, OPTCONFIG, self._testdir, OPTLOG, self._resultfile])
+        if __retcode != 0:
+            self._queue.put('{} - {}return code:{}'.format(self._testname, KOMSG, str(__retcode)))
+        else:
+            with open(self._resultfile, 'r') as __file:
+                if '' == __file.read():
+                    self._queue.put('{} - {}'.format(self._testname, OKMSG))
+                else:
+                    self._queue.put('{} - {}value in result file not expected'.format(self._testname, KOMSG))
+
 class Test1_file_missing_in_tar_gz(Main):
     '''Test if a file is missing in a tar.gz archive'''
     def __init__(self, q):
@@ -1493,6 +1509,116 @@ class Test94_expected_generated_list_for_bzip2_archive:
                 __queue.put('{} - {}'.format(__testname, OKMSG))
             else:
                 __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+
+class Test94_generate_list_and_parse_tar_archive(MainGenerateParse):
+    '''Generate a list of files inside the tar archive and parse this one right after'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-list-and-parse-tar-archive')
+        __archive = os.path.join(__testdir, 'generate-list-and-parse-tar-archive.tar.gz')
+        __resultfile = os.path.join(__testdir, 'generate-list-and-parse-tar-archive.list')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            self._queue = q
+            self._testname = __testname
+            self._testdir = __testdir
+            self._resultfile = os.path.join(self._testdir, 'a.out')
+            self._main('')
+
+class Test94_generate_list_and_parse_zip_archive(MainGenerateParse):
+    '''Generate a list of files inside the zip archive and parse this one right after'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-list-and-parse-zip-archive')
+        __archive = os.path.join(__testdir, 'generate-list-and-parse-zip-archive.zip')
+        __resultfile = os.path.join(__testdir, 'generate-list-and-parse-zip-archive.list')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            self._queue = q
+            self._testname = __testname
+            self._testdir = __testdir
+            self._resultfile = os.path.join(self._testdir, 'a.out')
+            self._main('')
+
+class Test94_generate_list_and_parse_tree(MainGenerateParse):
+    '''Generate a list of files inside a tree of files and parse this one right after'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-list-and-parse-tree')
+        __archive = os.path.join(__testdir, 'generate-list-and-parse-tree')
+        __resultfile = os.path.join(__testdir, 'generate-list-and-parse-tree.list')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            self._queue = q
+            self._testname = __testname
+            self._testdir = __testdir
+            self._resultfile = os.path.join(self._testdir, 'a.out')
+            self._main('')
+
+class Test94_generate_list_and_parse_gzip_archive(MainGenerateParse):
+    '''Generate a list of files inside a gzip archive and parse this one right after'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-list-and-parse-gzip-archive')
+        __archive = os.path.join(__testdir, 'generate-list-and-parse-gzip-archive.gz')
+        __resultfile = os.path.join(__testdir, 'generate-list-and-parse-gzip-archive.list')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            self._queue = q
+            self._testname = __testname
+            self._testdir = __testdir
+            self._resultfile = os.path.join(self._testdir, 'a.out')
+            self._main('')
+
+class Test94_generate_list_and_parse_bzip2_archive(MainGenerateParse):
+    '''Generate a list of files inside a bzip2 archive and parse this one right after'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-list-and-parse-bzip2-archive')
+        __archive = os.path.join(__testdir, 'generate-list-and-parse-bzip2-archive.bz2')
+        __resultfile = os.path.join(__testdir, 'generate-list-and-parse-bzip2-archive.list')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            self._queue = q
+            self._testname = __testname
+            self._testdir = __testdir
+            self._resultfile = os.path.join(self._testdir, 'a.out')
+            self._main('')
 
 def extract_key(key):
     return int(key.split('_')[0][4:])
