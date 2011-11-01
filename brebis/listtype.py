@@ -19,8 +19,8 @@
 import logging
 import os.path
 
-#from brebis.generatelistforbzip2 import GenerateListForBzip2
-#from brebis.generatelistforgzip import GenerateListForGzip
+from brebis.generatelist.generatelistforbzip2 import GenerateListForBzip2
+from brebis.generatelist.generatelistforgzip import GenerateListForGzip
 from brebis.generatelist.generatelistfortar import GenerateListForTar
 from brebis.generatelist.generatelistfortree import GenerateListForTree
 from brebis.generatelist.generatelistforzip import GenerateListForZip
@@ -47,11 +47,11 @@ class ListType(object):
                     __arcpath.lower().endswith('.tbz2'):
                 __bck = GenerateListForTar(__arcpath)
             # generate a list of files for a gzip archive
-            #elif __arcpath.lower().endswith('.gz'):
-            #    __bck = GenerateListForGzip(__arcpath)
+            elif __arcpath.lower().endswith('.gz'):
+                __bck = GenerateListForGzip(__arcpath)
             # generate a list of files for a bzip2 archive
-            #elif __arcpath.lower().endswith('.bz2'):
-            #    __bck = GenerateListForBzip2(__arcpath)
+            elif __arcpath.lower().endswith('.bz2'):
+                __bck = GenerateListForBzip2(__arcpath)
             # generate a list of files for a zip archive
             elif __arcpath.lower().endswith('.zip'):
                 __bck = GenerateListForZip(__arcpath)

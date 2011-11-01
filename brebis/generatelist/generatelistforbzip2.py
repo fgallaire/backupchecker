@@ -13,6 +13,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import bz2
+import os
+import os.path
+import stat
+
+from brebis.checkhashes import get_hash
 from brebis.generatelist.generatelist import GenerateList
 
 # Generate a list of files from a bzip2 archive
@@ -23,5 +29,13 @@ class GenerateListForBzip2(GenerateList):
 
     def __init__(self, __arcpath):
         '''The constructor for the GenerateListForBzip2 class'''
-        pass
-
+        __listoffiles = ['[files]\n']
+        __filetype = 'f'
+        __filehash = get_hash(bz2.BZ2File(__arcpath, 'r'), 'md5')
+        __onelinewithhash = '{}: type:{} md5:{}\n'
+        __listoffiles.append(__onelinewithhash.format(
+                                os.path.split(__arcpath)[-1][:-4],
+                                __filetype,
+                                __filehash))
+        # call the method to write information in a file
+        self._generate_list(''.join([__arcpath[:-3], 'list']), __listoffiles)

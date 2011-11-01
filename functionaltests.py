@@ -1328,6 +1328,71 @@ class Test94_generate_list_for_tree:
                 else:
                     __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
 
+class Test94_generate_list_for_bzip2:
+    '''Check the expected result for list of files generated from a bzip2 archive'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-list-from-bzip2-archive')
+        __archive = os.path.join(__testdir, 'generate-list-from-bzip2-archive.bz2')
+        __resultfile = os.path.join(__testdir, 'generate-list-from-bzip2-archive.list')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            with open(__resultfile, 'r') as __file:
+                __conditions = {'type': 0, 
+                    'md5':0 
+                }
+                for __line in __file.readlines():
+                    for __condition in __conditions:
+                        if __condition in __line: 
+                            __conditions[__condition] += 1
+                for __condition in __conditions:
+                    if __conditions[__condition] != 1:
+                        __res = False
+                if __res:
+                    __queue.put('{} - {}'.format(__testname, OKMSG))
+                else:
+                    __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+
+class Test94_generate_list_for_gzip:
+    '''Check the expected result for list of files generated from a gzip archive'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-list-from-gzip-archive')
+        __archive = os.path.join(__testdir, 'generate-list-from-gzip-archive.gz')
+        __resultfile = os.path.join(__testdir, 'generate-list-from-gzip-archive.list')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            with open(__resultfile, 'r') as __file:
+                __conditions = {'size:': 0,
+                    'type': 0, 
+                    'md5':0 
+                }
+                for __line in __file.readlines():
+                    for __condition in __conditions:
+                        if __condition in __line: 
+                            __conditions[__condition] += 1
+                for __condition in __conditions:
+                    if __conditions[__condition] != 1:
+                        __res = False
+                if __res:
+                    __queue.put('{} - {}'.format(__testname, OKMSG))
+                else:
+                    __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+
 def extract_key(key):
     return int(key.split('_')[0][4:])
 
