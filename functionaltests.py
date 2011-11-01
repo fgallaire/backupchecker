@@ -1444,31 +1444,6 @@ class Test94_expected_generated_list_for_zip_archive:
             else:
                 __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
 
-class Test94_expected_generated_list_for_tree:
-    '''Compare the generated list and the expected list for a tree of files'''
-    def __init__(self, q):
-        __queue = q
-        __res = True
-        __testname = self.__class__.__name__
-        __testdir = os.path.join(ABSPATH, 'functional-tests/expected-generated-list-for-tree')
-        __archive = os.path.join(__testdir, 'expected-generated-list-for-tree')
-        __resultfile = os.path.join(__testdir, 'expected-generated-list-for-tree.list')
-        if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
-        else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
-        if __retcode != 0:
-            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
-        else:
-            if hashlib.md5(open(__resultfile, 'rb').read()).hexdigest() != hashlib.md5(open(os.path.join(__testdir, 'expectedlist.list'), 'rb').read()).hexdigest():
-                __res = False
-            else:
-                __res = True
-            if __res:
-                __queue.put('{} - {}'.format(__testname, OKMSG))
-            else:
-                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
-
 class Test94_expected_generated_list_for_gzip_archive:
     '''Compare the generated list and the expected list for a gzip archive'''
     def __init__(self, q):

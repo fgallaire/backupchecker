@@ -1,6 +1,0 @@
-[files]
-foo: size:46 uid:1000 gid:1000 mode:644 type:f md5:0ee9a1866cfb3d33d958f65506d813b5
-hello: size:22 uid:1000 gid:1000 mode:644 type:f md5:66846628a2d715b7d479b051a7082720
-bar: size:4096 uid:1000 gid:1000 mode:755 type:d
-bar/oof: size:22 uid:1000 gid:1000 mode:644 type:f md5:24aa7d69bd1dacf6b3bca6021daaa4a4
-bar/rab: size:30 uid:1000 gid:1000 mode:644 type:f md5:093ac11e1b03de45fd8554b67ca1186c
