@@ -18,7 +18,7 @@
 
 import sys
 
-from brebis.checkbackups import CheckBackups
+from brebis.checkbackups.checkbackups import CheckBackups
 from brebis.cliparse import CliParse
 from brebis.configurations import Configurations
 from brebis.listtype import ListType

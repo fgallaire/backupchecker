@@ -20,7 +20,7 @@ import os
 import stat
 
 from brebis.expectedvalues import ExpectedValues
-from brebis.checkarchive import CheckArchive
+from brebis.checkbackups.checkarchive import CheckArchive
 
 class CheckTree(CheckArchive):
     '''Check a file tree'''

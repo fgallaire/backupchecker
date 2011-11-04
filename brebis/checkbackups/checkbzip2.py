@@ -21,7 +21,7 @@ import logging
 import os.path
 import bz2
 
-from brebis.checkarchive import CheckArchive
+from brebis.checkbackups.checkarchive import CheckArchive
 from brebis.expectedvalues import ExpectedValues
 from brebis.identifylimitations import IdentifyLimitations
 
