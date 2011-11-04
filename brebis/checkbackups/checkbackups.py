@@ -21,11 +21,11 @@ from tarfile import is_tarfile
 from zipfile import is_zipfile
 
 from brebis.archiveinfomsg import ArchiveInfoMsg
-from brebis.checktar import CheckTar
-from brebis.checkgzip import CheckGzip
-from brebis.checkbzip2 import CheckBzip2
-from brebis.checkzip import CheckZip
-from brebis.checktree import CheckTree
+from brebis.checkbackups.checktar import CheckTar
+from brebis.checkbackups.checkgzip import CheckGzip
+from brebis.checkbackups.checkbzip2 import CheckBzip2
+from brebis.checkbackups.checkzip import CheckZip
+from brebis.checkbackups.checktree import CheckTree
 
 class CheckBackups(object):
     '''The backup checker class'''

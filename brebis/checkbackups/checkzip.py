@@ -22,7 +22,7 @@ import logging
 import stat
 
 from brebis.expectedvalues import ExpectedValues
-from brebis.checkarchive import CheckArchive
+from brebis.checkbackups.checkarchive import CheckArchive
 
 class CheckZip(CheckArchive):
     '''Check a zip archive'''
