@@ -30,7 +30,7 @@ class CliParse:
     def __init__(self):
         '''The constructor for the CliParse class.'''
         self._options = ()
-        brebisversion = '%prog 0.3'
+        brebisversion = '%prog 0.4'
         brebisdescription = 'Fully automated backup checker'
         brebisepilog = 'For more information: http://www.brebisproject.org'
         __parser = ArgumentParser(version=brebisversion,
