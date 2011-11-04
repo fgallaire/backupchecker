@@ -21,6 +21,7 @@ import sys
 from brebis.checkbackups import CheckBackups
 from brebis.cliparse import CliParse
 from brebis.configurations import Configurations
+from brebis.listtype import ListType
 
 class Main(object):
     '''The main class'''
@@ -32,5 +33,10 @@ class Main(object):
     def __main(self):
         '''The main for the Main class'''
         __options = CliParse().options
-        __confs = Configurations(__options.confpath)
-        CheckBackups(__confs.configs)
+        # no list generation mode, check backups 
+        if not __options.genlist:
+            __confs = Configurations(__options.confpath)
+            CheckBackups(__confs.configs)
+        else:
+        # Analyze the type of the list to produce
+            ListType(__options.archives)
