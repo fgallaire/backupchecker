@@ -20,7 +20,7 @@ import logging
 import os.path
 import sys
 
-class GenerateList(object):
+class GenerateList:
     '''The GenerateList class'''
 
     def _generate_list(self, __arcpath, __listoffiles):

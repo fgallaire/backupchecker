@@ -37,6 +37,7 @@ import brebis.checkbackups.checkzip
 import brebis.cliparse
 import brebis.configurations
 from brebis.expectedvalues import ExpectedValues
+import brebis.generatelist.generatelistfortar
 import brebis.main
 
 # !! logging module uses a single logger for the whole file
@@ -843,7 +844,7 @@ class TestApp(unittest.TestCase):
              'type': 'archive'})
         __file = 'tests/checkarchive_private_methods/mytar.tar.gz'
         __fileinfo = __myobj._CheckArchive__extract_archive_info(__file)
-        self.assertEqual(type(os.stat(__file)), type(__fileinfo))
+        self.assertEqual(type(os.lstat(__file)), type(__fileinfo))
 
     def test_find_archive_size(self):
         '''test the find_archive_size private method from CheckArchive'''
@@ -854,7 +855,7 @@ class TestApp(unittest.TestCase):
              'type': 'archive'})
         __file = 'tests/checkarchive_private_methods/mytar.tar.gz'
         __filesize = __myobj._CheckArchive__find_archive_size(__file)
-        self.assertEqual(os.stat(__file).st_size, __filesize)
+        self.assertEqual(os.lstat(__file).st_size, __filesize)
 
     def test_find_archive_mode(self):
         '''test the find_archive_mode private method from CheckArchive'''
@@ -865,7 +866,7 @@ class TestApp(unittest.TestCase):
              'type': 'archive'})
         __file = 'tests/checkarchive_private_methods/mytar.tar.gz'
         __filemode = __myobj._CheckArchive__find_archive_mode(__file)
-        self.assertEqual(stat.S_IMODE(os.stat(__file).st_mode), __filemode)
+        self.assertEqual(stat.S_IMODE(os.lstat(__file).st_mode), __filemode)
 
     def test_find_archive_uid_gid(self):
         '''test the find_archive_uid_gid private method from CheckArchive'''
@@ -876,7 +877,7 @@ class TestApp(unittest.TestCase):
              'type': 'archive'})
         __file = 'tests/checkarchive_private_methods/mytar.tar.gz'
         __arcuid, __arcgid = __myobj._CheckArchive__find_archive_uid_gid(__file)
-        __fileinfo = os.stat(__file)
+        __fileinfo = os.lstat(__file)
         __fileuid, __filegid = __fileinfo.st_uid, __fileinfo.st_gid
         self.assertEqual((__arcuid, __arcgid), (__fileuid, __filegid))
 
@@ -1018,7 +1019,7 @@ class TestApp(unittest.TestCase):
                 'tests/checktree_private_methods/mytree-list',
              'type': 'tree'})
         __file = 'tests/checktree_private_methods/mytree/hello'
-        __result = __myobj._CheckTree__translate_type(os.stat(__file).st_mode)
+        __result = __myobj._CheckTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('f', __result)
 
     def test_tree_translate_type_directory(self):
@@ -1029,7 +1030,7 @@ class TestApp(unittest.TestCase):
                 'tests/checktree_private_methods/mytree-list',
              'type': 'tree'})
         __file = 'tests/checktree_private_methods/mytree'
-        __result = __myobj._CheckTree__translate_type(os.stat(__file).st_mode)
+        __result = __myobj._CheckTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('d', __result)
 
     def test_tree_translate_type_symbolic_link(self):
@@ -1102,6 +1103,133 @@ class TestApp(unittest.TestCase):
         with bz2.BZ2File(__file, 'r') as self.__desc:
             self.assertEqual(type(__result), type(self.__desc))
             __result.close()
+
+###############################################################################################
+#
+# Testing the private/protected methods from generatelist.generatelist.GenerateList 
+#
+###############################################################################################
+
+    def test_generatelist_generate_list(self):
+        '''test the _generate_list protected method from GenerateList'''
+        __file = 'tests/generatelist_private_methods/mytar.list'
+        __myobj = brebis.generatelist.generatelist.GenerateList()
+        __content = ['[files]\n', 'foo:\n']
+        __myobj._generate_list(__file, __content)
+        with open(__file, 'r') as __f:
+            self.assertEqual(__f.readlines(), __content)
+
+###############################################################################################
+#
+# Testing the private/protected methods from generatelist.generatelistfortar.GenerateListForTar 
+#
+###############################################################################################
+
+    def test_listfortar_translate_type_file(self):
+        '''test the __translate_type private method from GenerateListForTar - expecting file'''
+        __file = 'tests/generatelistfortar_private_methods/mytar.tar.gz'
+        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar(__file)
+        self.__tar = tarfile.open(__file)
+        __result = __myobj._GenerateListForTar__translate_type(self.__tar.getmembers()[3].type)
+        self.assertEqual('f', __result)
+
+    def test_listfortar_translate_type_directory(self):
+        '''test the __translate_type private method from GenerateListForTar - expecting directory'''
+        __file = 'tests/generatelistfortar_private_methods/mytar.tar.gz'
+        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar(__file)
+        self.__tar = tarfile.open(__file)
+        __result = __myobj._GenerateListForTar__translate_type(self.__tar.getmembers()[1].type)
+        self.assertEqual('d', __result)
+
+    def test_listfortar_translate_type_symbolic_link(self):
+        '''test the __translate_type private method from GenerateListForTar - expecting symbolic link'''
+        __file = 'tests/generatelistfortar_private_methods/mytar.tar.gz'
+        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar(__file)
+        self.__tar = tarfile.open(__file)
+        __result = __myobj._GenerateListForTar__translate_type(self.__tar.getmembers()[2].type)
+        self.assertEqual('s', __result)
+
+###############################################################################################
+#
+# Testing the private/protected methods from generatelist.generatelistforzip.GenerateListForZip 
+#
+###############################################################################################
+
+    def test_listforzip_translate_type_file(self):
+        '''test the __translate_type private method from GenerateListForZip - expecting file'''
+        __file = 'tests/generatelistforzip_private_methods/myzip.zip'
+        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip(__file)
+        __myz = zipfile.ZipFile(__file,'r')
+        __myinfo = __myz.infolist()
+        __result = __myobj._GenerateListForZip__translate_type(__myinfo[-1].external_attr >> 16)
+        self.assertEqual('f', __result)
+
+    def test_listforzip_translate_type_directory(self):
+        '''test the __translate_type private method from GenerateListForZip - expecting directory'''
+        __file = 'tests/generatelistforzip_private_methods/myzip.zip'
+        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip(__file)
+        __myz = zipfile.ZipFile(__file,'r')
+        __myinfo = __myz.infolist()
+        __result = __myobj._GenerateListForZip__translate_type(__myinfo[0].external_attr >> 16)
+        self.assertEqual('d', __result)
+
+    def test_listforzip_extract_uid_gid(self):
+        '''test the __extract_uid_gid private method from GenerateListForZip'''
+        __file = 'tests/generatelistforzip_private_methods/myzip.zip'
+        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip(__file)
+        __myz = zipfile.ZipFile(__file,'r')
+        __myinfo = __myz.infolist()
+        __result = __myobj._GenerateListForZip__extract_uid_gid(__myinfo[-1])
+        self.assertEqual((1000,1000), __result)
+
+#################################################################################################
+#
+# Testing the private/protected methods from generatelist.generatelistfortree.GenerateListForTree 
+#
+#################################################################################################
+
+    def test_listfortree_translate_type_file(self):
+        '''test the __translate_type private method from GenerateListForTree - expecting file'''
+        __dir = 'tests/generatelistfortree_private_methods/mydir'
+        __file = os.path.join(__dir, 'foo')
+        __myobj = brebis.generatelist.generatelistfortree.GenerateListForTree(__dir)
+        __result = __myobj._GenerateListForTree__translate_type(os.lstat(__file).st_mode)
+        self.assertEqual('f', __result)
+
+    def test_listfortree_translate_type_directory(self):
+        '''test the __translate_type private method from GenerateListForTree - expecting directory'''
+        __dir = 'tests/generatelistfortree_private_methods/mydir'
+        __file = os.path.join(__dir, 'bar')
+        __myobj = brebis.generatelist.generatelistfortree.GenerateListForTree(__dir)
+        __result = __myobj._GenerateListForTree__translate_type(os.lstat(__file).st_mode)
+        self.assertEqual('d', __result)
+
+    def test_listfortree_translate_type_symbolic_link(self):
+        '''test the __translate_type private method from GenerateListForTree - expecting symbolic link'''
+        __dir = 'tests/generatelistfortree_private_methods/mydir'
+        __file = os.path.join(__dir, 'oof')
+        __myobj = brebis.generatelist.generatelistfortree.GenerateListForTree(__dir)
+        __result = __myobj._GenerateListForTree__translate_type(os.lstat(__file).st_mode)
+        self.assertEqual('s', __result)
+
+#################################################################################################
+#
+# Testing the private/protected methods from generatelist.generatelistfortree.GenerateListForTree 
+#
+#################################################################################################
+
+    def test_listforgzip_extract_size_from_gzip_archive(self):
+        '''test the extraction of a gzip uncompressed file in the gzip archive'''
+        __file = 'tests/generatelistforgzip_private_methods/mygzip.gz'
+        __myobj = brebis.generatelist.generatelistforgzip.GenerateListForGzip(__file)
+        with open(__file, 'rb') as __myf:
+            self.assertEqual(15, __myobj._GenerateListForGzip__extract_size(__myf))
+
+    def test_listforgzip_extract_initial_filename_from_gzip_archive(self):
+        __file = 'tests/generatelistforgzip_private_methods/mygzip.gz'
+        __myobj = brebis.generatelist.generatelistforgzip.GenerateListForGzip(__file)
+        with open(__file, 'rb') as __myf:
+            self.assertEqual('mygzip', __myobj._GenerateListForGzip__extract_initial_filename(__myf, 'mygzip'))
 
 ################################################################
 #
