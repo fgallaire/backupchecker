@@ -1,2 +1,2 @@
 [files]
-expected-file-greater-than-file-in-tar-bz2-archive/toto: <10K
+expected-file-greater-than-file-in-tar-bz2-archive/toto| <10K

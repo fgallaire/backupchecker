@@ -1,2 +1,2 @@
 [files]
-file-missing-in-zip/foo2/bar2: uid:10
+file-missing-in-zip/foo2/bar2| uid|10

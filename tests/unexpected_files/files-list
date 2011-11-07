@@ -1,4 +1,4 @@
 [files]
-foo/foo1:
-foo/foo2:
-foo/bar: unexpected
+foo/foo1|
+foo/foo2|
+foo/bar| unexpected

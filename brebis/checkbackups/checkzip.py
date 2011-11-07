@@ -31,7 +31,7 @@ class CheckZip(CheckArchive):
         '''Main for CheckZip'''
         _crcerror = ''
         _data = []
-        _data, __arcdata = ExpectedValues(_cfgvalues['files_list']).data
+        _data, __arcdata = ExpectedValues(_cfgvalues).data
         #########################
         # Test the archive itself
         #########################

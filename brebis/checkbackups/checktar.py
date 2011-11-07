@@ -29,7 +29,7 @@ class CheckTar(CheckArchive):
     def _main(self, _cfgvalues):
         '''Main for CheckTar'''
         _data = []
-        _data, __arcdata = ExpectedValues(_cfgvalues['files_list']).data
+        _data, __arcdata = ExpectedValues(_cfgvalues).data
         #########################
         # Test the archive itself
         #########################

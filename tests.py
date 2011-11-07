@@ -223,13 +223,13 @@ class TestApp(unittest.TestCase):
         '''Test the Configurations class'''
         __path = os.path.abspath('tests/test_conf/')
         __res = brebis.configurations.Configurations(__path).configs
-        self.assertEqual({'essai': {'path': os.path.normpath(os.path.join(__path,'essai.tar.gz')), 'files_list': os.path.normpath(os.path.join(__path,'essai-list')), 'type': 'archive'}}, __res)
+        self.assertEqual({'essai': {'path': os.path.normpath(os.path.join(__path,'essai.tar.gz')), 'files_list': os.path.normpath(os.path.join(__path,'essai-list')), 'type': 'archive', 'delimiter': ''}}, __res)
 
     def test_configurations_with_subdir(self):
         '''Test the Configurations class with a subdirectory'''
         __path = os.path.abspath('tests/test_conf/subdir/')
         __res = brebis.configurations.Configurations(__path).configs
-        self.assertEqual({'essai2': {'path': os.path.normpath(os.path.join(__path, 'toto/essai.tar.gz')), 'files_list': os.path.normpath(os.path.join(__path, 'toto/essai-list')), 'type': 'archive'}}, __res)
+        self.assertEqual({'essai2': {'path': os.path.normpath(os.path.join(__path, 'toto/essai.tar.gz')), 'files_list': os.path.normpath(os.path.join(__path, 'toto/essai-list')), 'type': 'archive', 'delimiter': ''}}, __res)
 
     def test_expected_values(self):
         '''Check the ExpectedValues class'''

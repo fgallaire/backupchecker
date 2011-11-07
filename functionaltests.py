@@ -1265,7 +1265,7 @@ class Test94_generate_list_for_tar_archive:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
             with open(__resultfile, 'r') as __file:
-                __conditions = {'size:': 0,
+                __conditions = {'size': 0,
                     'uid': 0, 
                     'gid': 0, 
                     'type': 0, 
@@ -1301,7 +1301,7 @@ class Test94_generate_list_for_zip_archive:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
             with open(__resultfile, 'r') as __file:
-                __conditions = {'size:': 0,
+                __conditions = {'size': 0,
                     'uid': 0, 
                     'gid': 0, 
                     'type': 0, 
@@ -1336,7 +1336,7 @@ class Test94_generate_list_for_tree:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
             with open(__resultfile, 'r') as __file:
-                __conditions = {'size:': 0,
+                __conditions = {'size': 0,
                     'uid': 0, 
                     'gid': 0, 
                     'type': 0, 
@@ -1403,7 +1403,7 @@ class Test94_generate_list_for_gzip:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
             with open(__resultfile, 'r') as __file:
-                __conditions = {'size:': 0,
+                __conditions = {'size': 0,
                     'type': 0, 
                     'md5':0 
                 }

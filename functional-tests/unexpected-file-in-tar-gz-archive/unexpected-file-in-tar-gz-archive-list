@@ -1,2 +1,2 @@
 [files]
-file-missing-in-tar-gz/bar: unexpected
+file-missing-in-tar-gz/bar| unexpected

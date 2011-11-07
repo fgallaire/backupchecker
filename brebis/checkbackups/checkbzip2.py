@@ -31,7 +31,7 @@ class CheckBzip2(CheckArchive):
     def _main(self, _cfgvalues):
         '''Main for CheckBzip2'''
         _data = []
-        _data, __arcdata = ExpectedValues(_cfgvalues['files_list']).data
+        _data, __arcdata = ExpectedValues(_cfgvalues).data
         self.__arcpath = _cfgvalues['path']
         #########################
         # Test the archive itself

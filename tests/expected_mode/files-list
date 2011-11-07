@@ -1,5 +1,5 @@
 [files]
-foos/foo1: mode:644
-foos/foo2: mode:755
-foos/bar/foo3: mode:4644
-foos/bar: mode:754
+foos/foo1| mode:644
+foos/foo2| mode:755
+foos/bar/foo3| mode:4644
+foos/bar| mode:754

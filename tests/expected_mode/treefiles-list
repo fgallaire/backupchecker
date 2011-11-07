@@ -1,3 +1,3 @@
 [files]
-foo1: mode:664
-bar: mode:754
+foo1| mode:664
+bar| mode:754

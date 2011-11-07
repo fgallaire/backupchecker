@@ -1,2 +1,2 @@
 [files]
-file-missing-in-tar-gz/bar: md5:c1
+file-missing-in-tar-gz/bar| md5|c1

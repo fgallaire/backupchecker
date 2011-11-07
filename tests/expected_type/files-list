@@ -1,8 +1,8 @@
 [files]
-foos/foo1: type:f
-foos/foo2: type:c
-foos/foo3: type:d
-foos/foo4: type:s
-foos/foo5: type:b
-foos/foo6: type:k
-foos/foo7: type:o
+foos/foo1| type:f
+foos/foo2| type:c
+foos/foo3| type:d
+foos/foo4| type:s
+foos/foo5| type:b
+foos/foo6| type:k
+foos/foo7| type:o

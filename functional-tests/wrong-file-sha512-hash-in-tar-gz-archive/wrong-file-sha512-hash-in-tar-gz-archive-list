@@ -1,2 +1,2 @@
 [files]
-file-missing-in-tar-gz/bar: sha512:cc06
+file-missing-in-tar-gz/bar| sha512|cc06

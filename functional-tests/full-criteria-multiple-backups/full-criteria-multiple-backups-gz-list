@@ -1,9 +1,9 @@
 [archive]
-mode: 777
-uid: 1
-gid: 1
-md5: 1
+mode| 777
+uid| 1
+gid| 1
+md5| 1
 
 [files]
-doesnotexist:
-full-criteria-multiple-backups-gz: type:d mode:777 uid:1 gid:1 >10K
+doesnotexist|
+full-criteria-multiple-backups-gz| type|d mode|777 uid|1 gid|1 >10K

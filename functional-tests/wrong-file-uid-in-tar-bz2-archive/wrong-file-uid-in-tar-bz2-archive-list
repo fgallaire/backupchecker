@@ -1,2 +1,2 @@
 [files]
-file-missing-in-tar-bz2/bar: uid:1234
+file-missing-in-tar-bz2/bar| uid|1234

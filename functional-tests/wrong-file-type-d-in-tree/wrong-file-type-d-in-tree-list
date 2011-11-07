@@ -1,2 +1,2 @@
 [files]
-dir/foo2: type:d
+dir/foo2| type|d

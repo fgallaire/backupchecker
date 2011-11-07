@@ -1,2 +1,2 @@
 [files]
-file-missing-in-tar-gz/bar: mode:755
+file-missing-in-tar-gz/bar| mode|755
