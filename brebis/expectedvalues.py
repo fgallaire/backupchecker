@@ -34,8 +34,11 @@ class ExpectedValues(object):
         self.__bckfiles= []
         self.__arcdata = {}
         __path = __bckconf['files_list']
-        __delimiter = __bckconf['delimiter']
-        print('delimiter:{}'.format(__delimiter))
+        # Define delimiter value
+        if not __bckconf['delimiter']:
+            __delimiter = '|'
+        else:
+            __delimiter = __bckconf['delimiter']
         self.__main(__path, __delimiter)
 
     def __main(self, __path, __delimiter):
@@ -50,10 +53,7 @@ class ExpectedValues(object):
     def __retrieve_data(self, __file, __path, __delimiter):
         '''Retrieve data from the expected files'''
         # Using default delimiter
-        if not __delimiter:
-            __delimiter = '|'
-        # Using user-defined delimiter
-            __config = ConfigParser(delimiters=(__delimiter))
+        __config = ConfigParser(delimiters=(__delimiter))
         __config.optionxform = str
         __config.read_file(__file)
         #########################
@@ -91,7 +91,6 @@ class ExpectedValues(object):
             for __hash in algorithms_guaranteed:
                 if __hash in __config['archive']:
                         self.__arcdata['hash'] = {'hashtype':__hash, 'hashvalue':__config['archive'][__hash]}
-        print(self.__arcdata)
         ######################
         # Test expected  files
         ######################
@@ -150,7 +149,6 @@ class ExpectedValues(object):
                         except ValueError as __msg:
                             logging.warn(__msg)
                 self.__bckfiles.append(__data)
-        print(self.__bckfiles)
 
     def __convert_arg(self, __arg):
         '''Convert the given file length to bytes'''
