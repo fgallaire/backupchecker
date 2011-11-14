@@ -1,0 +1,2 @@
+WARNING:root:1 file with unexpected hash while checking /home/chaica/progra/python/brebis/functional-tests/wrong-file-md5-hash-in-gz-archive/wrong-file-md5-hash-in-gz-archive.gz:
+WARNING:root:wrong-file-md5-hash-in-gz-archive hash is f1e60db75b2ca8581e5165d54dbfed88. Should have been f1e.

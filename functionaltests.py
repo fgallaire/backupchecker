@@ -665,6 +665,54 @@ class Test_unexpected_file_in_tree(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 unexpected file')
 
+class Test_wrong_file_md5_hash_in_tar_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-md5-hash-in-tar-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected hash')
+
+class Test_wrong_file_sha1_hash_in_tar_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha1-hash-in-tar-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected hash')
+
+class Test_wrong_file_sha224_hash_in_tar_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha224-hash-in-tar-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected hash')
+
+class Test_wrong_file_sha256_hash_in_tar_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha256-hash-in-tar-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected hash')
+
+class Test_wrong_file_sha384_hash_in_tar_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha384-hash-in-tar-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected hash')
+
+class Test_wrong_file_sha512_hash_in_tar_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha512-hash-in-tar-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected hash')
+
 class Test_wrong_file_md5_hash_in_tar_gz_archive(Main):
     def __init__(self, q):
         self._queue = q
@@ -672,7 +720,6 @@ class Test_wrong_file_md5_hash_in_tar_gz_archive(Main):
         self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-md5-hash-in-tar-gz-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
-
 
 class Test_wrong_file_sha1_hash_in_tar_gz_archive(Main):
     def __init__(self, q):
@@ -1100,6 +1147,14 @@ class Test_two_confs_with_the_same_name(Main):
         else:
             self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(__result[0])))
 
+class Test_expected_file_greater_than_file_in_tar_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/expected-file-greater-than-file-in-tar-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file smaller than expected')
+            
 class Test_expected_file_greater_than_file_in_tar_gz_archive(Main):
     def __init__(self, q):
         self._queue = q
@@ -1140,6 +1195,14 @@ class Test_expected_file_greater_than_file_in_tree(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file smaller than expected')
             
+class Test_expected_file_smaller_than_file_in_tar_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/expected-file-smaller-than-file-in-tar-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file bigger than expected')
+            
 class Test_expected_file_smaller_than_file_in_tar_gz_archive(Main):
     def __init__(self, q):
         self._queue = q
@@ -1179,6 +1242,14 @@ class Test_expected_file_smaller_than_file_in_tree(Main):
         self._testdir = os.path.join(ABSPATH, 'functional-tests/expected-file-smaller-than-file-in-tree')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file bigger than expected')
+            
+class Test_expected_file_not_equals_file_in_tar_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/expected-file-not-equals-file-in-tar-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected size')
             
 class Test_expected_file_not_equals_file_in_tar_gz_archive(Main):
     def __init__(self, q):
