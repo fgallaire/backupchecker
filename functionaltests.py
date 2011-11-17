@@ -87,7 +87,6 @@ class Test_file_missing_in_tar_gz(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file missing in')
 
-
 class Test_file_missing_in_tar_bz2(Main):
     '''Test if a file is missing in a tar.bz2 archive'''
     def __init__(self, q):
@@ -1804,6 +1803,150 @@ class Test_user_specified_delimiter(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file missing in')
 
+class Test_tar_archive_size_not_equals_expected_size(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/tar-archive-size-not-equals-expected-size')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected size')
+            
+class Test_tar_gz_archive_size_not_equals_expected_size(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/tar-gz-archive-size-not-equals-expected-size')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected size')
+            
+class Test_tar_bz2_archive_size_not_equals_expected_size(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/tar-bz2-archive-size-not-equals-expected-size')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected size')
+            
+class Test_gzip_archive_size_not_equals_expected_size(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/gzip-archive-size-not-equals-expected-size')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected size')
+            
+class Test_bzip2_archive_size_not_equals_expected_size(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/bzip2-archive-size-not-equals-expected-size')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected size')
+            
+class Test_zip_archive_size_not_equals_expected_size(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/zip-archive-size-not-equals-expected-size')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected size')
+
+class Test_tar_archive_size_bigger_than_expected_size(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/tar-archive-size-bigger-than-expected-size')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file bigger than')
+            
+class Test_tar_gz_archive_size_bigger_than_expected_size(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/tar-gz-archive-size-bigger-than-expected-size')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file bigger than')
+            
+class Test_tar_bz2_archive_size_bigger_than_expected_size(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/tar-bz2-archive-size-bigger-than-expected-size')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file bigger than')
+            
+class Test_gzip_archive_size_bigger_than_expected_size(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/gzip-archive-size-bigger-than-expected-size')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file bigger than')
+            
+class Test_bzip2_archive_size_bigger_than_expected_size(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/bzip2-archive-size-bigger-than-expected-size')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file bigger than')
+            
+class Test_zip_archive_size_bigger_than_expected_size(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/zip-archive-size-bigger-than-expected-size')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file bigger than')
+
+class Test_tar_archive_size_smaller_than_expected_size(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/tar-archive-size-smaller-than-expected-size')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file smaller than')
+            
+class Test_tar_gz_archive_size_smaller_than_expected_size(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/tar-gz-archive-size-smaller-than-expected-size')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file smaller than')
+            
+class Test_tar_bz2_archive_size_smaller_than_expected_size(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/tar-bz2-archive-size-smaller-than-expected-size')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file smaller than')
+            
+class Test_zip_archive_size_smaller_than_expected_size(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/zip-archive-size-smaller-than-expected-size')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file smaller than')
+            
+class Test_gzip_archive_size_smaller_than_expected_size(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/gzip-archive-size-smaller-than-expected-size')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file smaller than')
+            
+class Test_bzip2_archive_size_smaller_than_expected_size(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/bzip2-archive-size-smaller-than-expected-size')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file smaller than')
+            
 if __name__ == '__main__':
     processes = []
     results = []
