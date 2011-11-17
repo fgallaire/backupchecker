@@ -1,2 +1,2 @@
 [files]
-dir/foo2: mode:755
+dir/foo2| mode|755

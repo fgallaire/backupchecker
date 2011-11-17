@@ -1,2 +1,2 @@
 [files]
-file-missing-in-tar-gz/bar: type:d
+file-missing-in-tar-gz/bar| type|d

@@ -2,4 +2,4 @@
 # initiate a CheckTar object
 
 [files]
-mytargz/hello:
+mytargz/hello|

@@ -1,4 +1,4 @@
 [archive]
-# Test the uid and gid of the file : good value for both is 1000
-uid: 5
-gid: 6
+# Test the uid and gid of the file | good value for both is 1000
+uid| 5
+gid| 6

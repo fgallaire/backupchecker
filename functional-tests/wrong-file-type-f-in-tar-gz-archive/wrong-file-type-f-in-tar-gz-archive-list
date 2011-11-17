@@ -1,2 +1,2 @@
 [files]
-file-missing-in-tar-gz: type:f
+file-missing-in-tar-gz| type|f

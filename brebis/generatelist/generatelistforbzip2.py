@@ -32,7 +32,7 @@ class GenerateListForBzip2(GenerateList):
         __listoffiles = ['[files]\n']
         __filetype = 'f'
         __filehash = get_hash(bz2.BZ2File(__arcpath, 'r'), 'md5')
-        __onelinewithhash = '{}: type:{} md5:{}\n'
+        __onelinewithhash = '{}| type|{} md5|{}\n'
         __listoffiles.append(__onelinewithhash.format(
                                 os.path.split(__arcpath)[-1][:-4],
                                 __filetype,

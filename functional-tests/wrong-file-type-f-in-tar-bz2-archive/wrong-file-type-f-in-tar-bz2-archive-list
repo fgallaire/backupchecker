@@ -1,2 +1,2 @@
 [files]
-file-missing-in-tar-bz2: type:f
+file-missing-in-tar-bz2| type|f

@@ -1,2 +1,2 @@
 [files]
-wrong-file-sha256-hash-in-bzip2-archive: sha256:a8d4
+wrong-file-sha256-hash-in-bzip2-archive| sha256|a8d4

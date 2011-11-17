@@ -30,10 +30,9 @@ class CliParse:
     def __init__(self):
         '''The constructor for the CliParse class.'''
         self._options = ()
-        brebisversion = '%prog 0.4'
         brebisdescription = 'Fully automated backup checker'
         brebisepilog = 'For more information: http://www.brebisproject.org'
-        __parser = ArgumentParser(version=brebisversion,
+        __parser = ArgumentParser(prog='brebis',
                                     description=brebisdescription,
                                     epilog=brebisepilog)
         self.__define_options(__parser)
@@ -47,13 +46,18 @@ class CliParse:
             default=os.getcwd(),
             help='the path to the configurations',
             metavar='DIR')
+        __parser.add_argument('-v', '--version',
+            action='version',
+            version='%(prog)s 0.4',
+            help='print the version of this program and exit')
         __parser.add_argument('-l', '--log', dest='logfile',
             action='store',
             default=os.path.join(os.getcwd(), 'a.out'),
             help='the log file',
             metavar='FILE')
         __group.add_argument('-g', '--gen-list', dest='genlist',
-            action='store_true')
+            action='store_true',
+            help='generate a list of files inside a backup')
         __parser.add_argument('archives', nargs='*',
             help='archives to check')
         __args = __parser.parse_args()

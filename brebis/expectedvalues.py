@@ -28,28 +28,33 @@ class ExpectedValues(object):
     and expected saved files.
     '''
 
-    def __init__(self, __path):
+    def __init__(self, __bckconf):
         '''The constructor of the ExpectedValues class.
-
-        __path -- the path to the description of the expected attributes of the files
-
         '''
         self.__bckfiles= []
         self.__arcdata = {}
-        self.__main(__path)
+        __path = __bckconf['files_list']
+        # Define delimiter value
+        if not __bckconf['delimiter']:
+            __delimiter = '|'
+        else:
+            __delimiter = __bckconf['delimiter']
+        self.__main(__path, __delimiter)
 
-    def __main(self, __path):
+    def __main(self, __path, __delimiter):
         '''Main of the ExpectedValues class'''
         try:
             with open(__path, 'r') as __file:
-                self.__retrieve_data(__file, __path)
+                self.__retrieve_data(__file, __path, __delimiter)
         except (configparser.Error, IOError, OSError) as __err:
             print(__err)
             sys.exit(1)
 
-    def __retrieve_data(self, __file, __path):
+    def __retrieve_data(self, __file, __path, __delimiter):
         '''Retrieve data from the expected files'''
-        __config = ConfigParser()
+        # Using default delimiter
+        __config = ConfigParser(delimiters=(__delimiter))
+        __config.optionxform = str
         __config.read_file(__file)
         #########################
         # Test the archive itself
@@ -103,21 +108,21 @@ class ExpectedValues(object):
                             if __item == 'unexpected':
                                 __data['unexpected'] = True
                             # The uid of the expected file
-                            elif __item.startswith('uid:'):
-                                __data['uid'] = int(__item.split(':')[-1])
+                            elif __item.startswith('uid{}'.format(__delimiter)):
+                                __data['uid'] = int(__item.split(__delimiter)[-1])
                             # The gid of the expected file
-                            elif __item.startswith('gid:'):
-                                __data['gid'] = int(__item.split(':')[-1])
+                            elif __item.startswith('gid{}'.format(__delimiter)):
+                                __data['gid'] = int(__item.split(__delimiter)[-1])
                             # The mode of the expected file
-                            elif __item.startswith('mode:'):
-                                __mode =__item.split(':')[-1]
+                            elif __item.startswith('mode{}'.format(__delimiter)):
+                                __mode =__item.split(__delimiter)[-1]
                                 if len(__mode) < 3 or len(__mode) > 4:
                                     logging.warn('{}: Wrong format for the mode.'.format(__data['path']))
                                 else:
                                     __data['mode'] = __mode
                             # Testing the type of the file
-                            elif __item.startswith('type:'):
-                                __type =__item.split(':')[-1]
+                            elif __item.startswith('type{}'.format(__delimiter)):
+                                __type =__item.split(__delimiter)[-1]
                                 ### f for file, c for character, d for directory
                                 ### s for symbolink link, b for block, o for fifo,
                                 ### k for socket
@@ -138,8 +143,8 @@ class ExpectedValues(object):
                                 __data['smallerthan'] = self.__convert_arg(__item)
                             # Test if a hash is provided for this file
                             for __hash in algorithms_guaranteed:
-                                if __item.startswith('{}{}'.format(__hash, ':')):
-                                    __hashtype, __hashvalue = __item.split(':')
+                                if __item.startswith('{}{}'.format(__hash, __delimiter)):
+                                    __hashtype, __hashvalue = __item.split(__delimiter)
                                     __data['hash'] = {'hashtype':__hashtype, 'hashvalue':__hashvalue}
                         except ValueError as __msg:
                             logging.warn(__msg)

@@ -51,7 +51,9 @@ class Configurations:
                 ### The archive path
                 __confsettings = [{'main': 'path'},
                 ### The list of the expected files in the archive
-                {'main': 'files_list'}
+                {'main': 'files_list'},
+                ### The delimiter to use in the list of files
+                {'main': 'delimiter'}
                 ]
                 for __element in __confsettings:
                     __key, __value = __element.popitem()

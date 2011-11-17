@@ -29,7 +29,7 @@ class CheckTree(CheckArchive):
         '''Main for CheckTree'''
         _data = []
         self.__treepath = _cfgvalues['path']
-        _data, __arcdata = ExpectedValues(_cfgvalues['files_list']).data
+        _data, __arcdata = ExpectedValues(_cfgvalues).data
         # Save the tree root to determine the relative path in the file tree
         self.__treepath = self.__treepath
         for __dirpath, __dirnames, __filenames, in os.walk(_cfgvalues['path']):

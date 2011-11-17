@@ -1,2 +1,2 @@
 [files]
-file-missing-in-zip/foo2/bar2: sha1:55ca
+file-missing-in-zip/foo2/bar2| sha1|55ca

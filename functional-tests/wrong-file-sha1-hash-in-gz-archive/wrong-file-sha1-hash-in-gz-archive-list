@@ -1,2 +1,2 @@
 [files]
-wrong-file-md5-hash-in-gz-archive: sha1:889c
+wrong-file-md5-hash-in-gz-archive| sha1|889c

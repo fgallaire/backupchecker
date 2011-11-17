@@ -1,2 +1,2 @@
 [files]
-wrong-file-sha1-hash-in-bzip2-archive: sha1:81c3
+wrong-file-sha1-hash-in-bzip2-archive| sha1|81c3

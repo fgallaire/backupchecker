@@ -1,2 +1,2 @@
 [files]
-wrong-file-md5-hash-in-gz-archive: sha224:37c1e3c4
+wrong-file-md5-hash-in-gz-archive| sha224|37c1e3c4

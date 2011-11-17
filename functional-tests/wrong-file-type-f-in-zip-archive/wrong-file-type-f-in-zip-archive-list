@@ -1,2 +1,2 @@
 [files]
-file-missing-in-zip/foo2/: type:f
+file-missing-in-zip/foo2/| type|f

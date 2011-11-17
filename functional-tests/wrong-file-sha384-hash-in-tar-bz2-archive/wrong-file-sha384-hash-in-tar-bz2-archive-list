@@ -1,2 +1,2 @@
 [files]
-file-missing-in-tar-bz2/bar: sha384:93ae
+file-missing-in-tar-bz2/bar| sha384|93ae

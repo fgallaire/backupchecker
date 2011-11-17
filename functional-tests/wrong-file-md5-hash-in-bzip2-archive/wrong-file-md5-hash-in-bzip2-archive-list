@@ -1,2 +1,2 @@
 [files]
-wrong-file-md5-hash-in-bzip2-archive: md5:ede
+wrong-file-md5-hash-in-bzip2-archive| md5|ede
