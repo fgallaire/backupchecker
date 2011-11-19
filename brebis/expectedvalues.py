@@ -153,9 +153,10 @@ class ExpectedValues(object):
     def __convert_arg(self, __arg):
         '''Convert the given file length to bytes'''
         __res = 0
+        __arg = ''.join([__arg[:-1], __arg[-1].lower()])
         try:
-            for __value, __power in [('K', 1),('M', 2),('G', 3),('P', 4),
-                                        ('E', 5),('Z', 6),('Y', 7)]:
+            for __value, __power in [('k', 1),('m', 2),('g', 3),('p', 4),
+                                        ('e', 5),('z', 6),('y', 7)]:
                 if __arg.endswith(__value):
                     __res = int(__arg[1:-1]) * 1024**__power
             if __res == 0:
