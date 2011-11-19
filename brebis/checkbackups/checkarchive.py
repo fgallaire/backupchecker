@@ -145,6 +145,9 @@ class CheckArchive(object):
         one
         '''
         __arcmode = oct(__arcmode).split('o')[-1]
+        # if the file has no right, need to manipulate the output - solving #15
+        if __arcmode == '0':
+            __arcmode = '000'
         if __file['mode'] != __arcmode:
             self.mismatched_modes.append({'path': __file['path'], 'expectedmode': __file['mode'], 'mode': __arcmode})
 
