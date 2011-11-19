@@ -38,8 +38,8 @@ class GenerateListForTar(GenerateList):
     def __main(self, __tar):
         '''Main for the GenerateListForTar class'''
         __listoffiles = ['[files]\n']
-        __oneline = '{}| size|{} uid|{} gid|{} mode|{} type|{}\n'
-        __onelinewithhash = '{}| size|{} uid|{} gid|{} mode|{} type|{} md5|{}\n'
+        __oneline = '{}| ={} uid|{} gid|{} mode|{} type|{}\n'
+        __onelinewithhash = '{}| ={} uid|{} gid|{} mode|{} type|{} md5|{}\n'
         for __tarinfo in __tar:
             # Pick up tar information
             __tarinfo.name = self._normalize_path(__tarinfo.name)

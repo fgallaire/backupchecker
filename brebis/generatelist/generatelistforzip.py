@@ -39,8 +39,8 @@ class GenerateListForZip(GenerateList):
     def __main(self, __zip):
         '''Main of the GenerateListForZip class'''
         __listoffiles = ['[files]\n']
-        __oneline = '{}| size|{} uid|{} gid|{} mode|{} type|{}\n'
-        __onelinewithhash = '{}| size|{} uid|{} gid|{} mode|{} type|{} md5|{}\n'
+        __oneline = '{}| ={} uid|{} gid|{} mode|{} type|{}\n'
+        __onelinewithhash = '{}| ={} uid|{} gid|{} mode|{} type|{} md5|{}\n'
         __crcerror = __zip.testzip()
         if __crcerror:
             logging.warn('{} has at least one file corrupted:{}'.format(self.__arcpath, __crcerror))

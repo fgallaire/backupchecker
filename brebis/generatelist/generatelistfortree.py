@@ -29,8 +29,8 @@ class GenerateListForTree(GenerateList):
     def __init__(self, __arcpath):
         '''The constructor for the GenerateListForTree class'''
         __listoffiles = ['[files]\n']
-        __oneline = '{}| size|{} uid|{} gid|{} mode|{} type|{}\n'
-        __onelinewithhash = '{}| size|{} uid|{} gid|{} mode|{} type|{} md5|{}\n'
+        __oneline = '{}| ={} uid|{} gid|{} mode|{} type|{}\n'
+        __onelinewithhash = '{}| ={} uid|{} gid|{} mode|{} type|{} md5|{}\n'
         
         for __dirpath, __dirnames, __filenames, in os.walk(__arcpath):
             # ignoring the uppest directory
