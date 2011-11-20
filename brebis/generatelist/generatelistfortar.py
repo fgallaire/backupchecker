@@ -45,6 +45,9 @@ class GenerateListForTar(GenerateList):
             __tarinfo.name = self._normalize_path(__tarinfo.name)
             __type = self.__translate_type(__tarinfo.type)
             __mode = oct(__tarinfo.mode).split('o')[-1]
+            # if the file has no right, need to manipulate the output - solving #15
+            if __mode == '0':
+                __mode = '000'
             if __type == 'f':
                 # extract hash sum of the file inside the archive
                 __hash = get_hash(__tar.extractfile(__tarinfo.name), 'md5')
