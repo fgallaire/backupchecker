@@ -41,6 +41,6 @@ setup(name = 'brebis',
     author_email = 'chaica@brebisproject.org',
     url = 'http://www.brebisproject.org',
     download_url = 'http://www.brebisproject.org',
-    packages = ['brebis'],
+    packages = ['brebis', 'brebis.checkbackups', 'brebis.generatelist'],
     scripts = ['scripts/brebis']
 )
