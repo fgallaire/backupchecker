@@ -1,0 +1,2 @@
+version=3
+http://brebisproject.org/projects/brebis/files /attachment/download/([\d]\.*)/brebis-([\d]\.*).tar.gz
