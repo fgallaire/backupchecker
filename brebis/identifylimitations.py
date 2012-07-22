@@ -46,6 +46,13 @@ class IdentifyLimitations:
             if __param in __unsupported_gz:
                 self.__warn(__param)
 
+    def __study_lzma(self):
+        '''Study the required checks for the lzma archive type'''
+        __unsupported_gz = {'uid', 'gid', 'mode', 'equals', 'biggerthan', 'smallerthan'}
+        for __param in self.__data:
+            if __param in __unsupported_gz:
+                self.__warn(__param)
+
     def __warn(self, __param):
         '''Warn the user that parameter is not supported by message in logging''' 
         logging.warn('{}: The required parameter {} is not supported by this type of archive. Ignoring it.'.format(self.__arcpath, __param))
