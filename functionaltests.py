@@ -1,4 +1,4 @@
-#/home/chaica/progra/python/Python-3.3.0b1/python
+#!/home/chaica/progra/python/Python-3.3.0b1/python
 # -*- coding: utf-8 -*-
 # Copyright © 2011 Carl Chenet <chaica@ohmytux.com>
 # This program is free software: you can redistribute it and/or modify
@@ -93,6 +93,15 @@ class Test_file_missing_in_tar_bz2(Main):
         self._queue = q
         self._testname = self.__class__.__name__
         self._testdir = os.path.join(ABSPATH, 'functional-tests/file-missing-in-tar-bz2')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file missing in')
+
+class Test_file_missing_in_tar_xz(Main):
+    '''Test if a file is missing in a tar.xz archive'''
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/file-missing-in-tar-xz')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file missing in')
 
@@ -1528,6 +1537,38 @@ class Test_generate_list_for_bzip2:
         __testdir = os.path.join(ABSPATH, 'functional-tests/generate-list-from-bzip2-archive')
         __archive = os.path.join(__testdir, 'generate-list-from-bzip2-archive.bz2')
         __resultfile = os.path.join(__testdir, 'generate-list-from-bzip2-archive.list')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            with open(__resultfile, 'r') as __file:
+                __conditions = {'type': 0, 
+                    'md5':0 
+                }
+                for __line in __file.readlines():
+                    for __condition in __conditions:
+                        if __condition in __line: 
+                            __conditions[__condition] += 1
+                for __condition in __conditions:
+                    if __conditions[__condition] != 1:
+                        __res = False
+                if __res:
+                    __queue.put('{} - {}'.format(__testname, OKMSG))
+                else:
+                    __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+
+class Test_generate_list_for_xz:
+    '''Check the expected result for list of files generated from a xz archive'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-list-from-xz-archive')
+        __archive = os.path.join(__testdir, 'generate-list-from-xz-archive.xz')
+        __resultfile = os.path.join(__testdir, 'generate-list-from-xz-archive.list')
         if 'PYTHONEXE' in environ:
             __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
         else:

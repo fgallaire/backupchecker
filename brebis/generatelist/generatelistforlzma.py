@@ -38,4 +38,4 @@ class GenerateListForLzma(GenerateList):
                                 __filetype,
                                 __filehash))
         # call the method to write information in a file
-        self._generate_list(''.join([__arcpath[:-3], 'list']), __listoffiles)
+        self._generate_list(''.join([__arcpath[:-2], 'list']), __listoffiles)
