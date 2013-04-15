@@ -529,6 +529,14 @@ class Test_wrong_gzip_archive_sha224_hash(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
+class Test_wrong_xz_archive_sha224_hash(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-xz-archive-sha224-hash')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected hash')
+
 class Test_wrong_gzip_archive_sha256_hash(Main):
     def __init__(self, q):
         self._queue = q
