@@ -169,6 +169,14 @@ class Test_wrong_gzip_archive_mode(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected mode')
 
+class Test_wrong_xz_archive_mode(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-xz-archive-mode')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected mode')
+
 class Test_wrong_zip_archive_mode(Main):
     def __init__(self, q):
         self._queue = q
