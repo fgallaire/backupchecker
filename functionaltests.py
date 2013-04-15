@@ -233,6 +233,14 @@ class Test_wrong_gz_archive_uid(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected uid')
 
+class Test_wrong_bzip2_archive_uid(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-bz2-archive-uid')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected uid')
+
 class Test_wrong_xz_archive_uid(Main):
     def __init__(self, q):
         self._queue = q
