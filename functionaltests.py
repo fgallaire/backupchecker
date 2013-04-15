@@ -289,6 +289,14 @@ class Test_wrong_gzip_archive_gid(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected gid')
 
+class Test_wrong_bzip2_archive_gid(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-bz2-archive-gid')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected gid')
+
 class Test_wrong_xz_archive_gid(Main):
     def __init__(self, q):
         self._queue = q
