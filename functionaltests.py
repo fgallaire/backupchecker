@@ -777,6 +777,14 @@ class Test_wrong_file_gid_in_tar_bz2_archive(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected gid')
 
+class Test_wrong_file_gid_in_tar_xz_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-gid-in-tar-xz-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected gid')
+
 class Test_wrong_file_gid_in_zip_archive(Main):
     def __init__(self, q):
         self._queue = q
