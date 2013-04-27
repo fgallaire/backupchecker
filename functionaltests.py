@@ -1033,6 +1033,14 @@ class Test_wrong_file_sha384_hash_in_tar_xz_archive(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected hash')
 
+class Test_wrong_file_sha512_hash_in_tar_xz_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-sha512-hash-in-tar-xz-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected hash')
+
 class Test_wrong_file_md5_hash_in_gzip_archive(Main):
     def __init__(self, q):
         self._queue = q
