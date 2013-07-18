@@ -1,0 +1,4 @@
+WARNING:root:/home/chaica/progra/python/brebis/functional-tests/unsupported-parameters-xz-archive/unsupported-parameters-xz-archive.xz: The required parameter mode is not supported by this type of archive. Ignoring it.
+WARNING:root:/home/chaica/progra/python/brebis/functional-tests/unsupported-parameters-xz-archive/unsupported-parameters-xz-archive.xz: The required parameter gid is not supported by this type of archive. Ignoring it.
+WARNING:root:/home/chaica/progra/python/brebis/functional-tests/unsupported-parameters-xz-archive/unsupported-parameters-xz-archive.xz: The required parameter smallerthan is not supported by this type of archive. Ignoring it.
+WARNING:root:/home/chaica/progra/python/brebis/functional-tests/unsupported-parameters-xz-archive/unsupported-parameters-xz-archive.xz: The required parameter uid is not supported by this type of archive. Ignoring it.
