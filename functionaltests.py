@@ -113,6 +113,14 @@ class Test_file_missing_in_gzip(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file missing in')
 
+class Test_file_missing_in_xz(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/file-missing-in-xz')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file missing in')
+
 class Test_file_missing_in_zip(Main):
     def __init__(self, q):
         self._queue = q
