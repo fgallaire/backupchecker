@@ -48,6 +48,7 @@ class IdentifyLimitations:
 
     def __study_lzma(self):
         '''Study the required checks for the lzma archive type'''
+        # seems pretty hard to get xz/lzma archive size - maybe in another release
         __unsupported_gz = {'uid', 'gid', 'mode', 'equals', 'biggerthan', 'smallerthan'}
         for __param in self.__data:
             if __param in __unsupported_gz:
