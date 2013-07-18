@@ -34,7 +34,7 @@ class GenerateListForLzma(GenerateList):
         __filehash = get_hash(lzma.LZMAFile(__arcpath, 'r'), 'md5')
         __onelinewithhash = '{}| type|{} md5|{}\n'
         __listoffiles.append(__onelinewithhash.format(
-                                os.path.split(__arcpath)[-1][:-4],
+                                os.path.split(__arcpath)[-1][:-3],
                                 __filetype,
                                 __filehash))
         # call the method to write information in a file

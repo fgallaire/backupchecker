@@ -2217,6 +2217,28 @@ class Test_generate_list_and_parse_bzip2_archive(MainGenerateParse):
             self._resultfile = os.path.join(self._testdir, 'a.out')
             self._main('')
 
+class Test_generate_list_and_parse_xz_archive(MainGenerateParse):
+    '''Generate a list of files inside a xz archive and parse this one right after'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-list-and-parse-xz-archive')
+        __archive = os.path.join(__testdir, 'generate-list-and-parse-xz-archive.xz')
+        __resultfile = os.path.join(__testdir, 'generate-list-and-parse-xz-archive.list')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            self._queue = q
+            self._testname = __testname
+            self._testdir = __testdir
+            self._resultfile = os.path.join(self._testdir, 'a.out')
+            self._main('')
+
 class Test_user_specified_delimiter(Main):
     '''Test if a file is missing in a tar archive with a user-specified delimiter in the file of filenames'''
     def __init__(self, q):
