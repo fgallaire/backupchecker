@@ -50,7 +50,7 @@ class CheckLzma(CheckArchive):
             try:
                 with lzma.LZMAFile(_cfgvalues['path'], 'r') as __lzma:
                     __lzma.read()
-            except IOError as __msg:
+            except (lzma.LZMAError, IOError) as __msg:
                 __warn = '. You should investigate for a data corruption.'
                 logging.warn('{}: {}{}'.format(_cfgvalues['path'], str(__msg), __warn))
             else:
