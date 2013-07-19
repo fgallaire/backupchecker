@@ -24,6 +24,7 @@ from brebis.archiveinfomsg import ArchiveInfoMsg
 from brebis.checkbackups.checktar import CheckTar
 from brebis.checkbackups.checkgzip import CheckGzip
 from brebis.checkbackups.checkbzip2 import CheckBzip2
+from brebis.checkbackups.checklzma import CheckLzma
 from brebis.checkbackups.checkzip import CheckZip
 from brebis.checkbackups.checktree import CheckTree
 
@@ -49,6 +50,7 @@ class CheckBackups(object):
             elif __cfgvalues['type'] == 'archive' and (__cfgvalues['path'].lower().endswith('.tar') \
                 or __cfgvalues['path'].lower().endswith('.tar.gz') \
                 or __cfgvalues['path'].lower().endswith('.tar.bz2') \
+                or __cfgvalues['path'].lower().endswith('.tar.xz') \
                 or __cfgvalues['path'].lower().endswith('.tgz')):
                 __bck = CheckTar(__cfgvalues)
             # check a gzip file, by name
@@ -57,6 +59,9 @@ class CheckBackups(object):
             # check a bzip2 file, by name
             elif __cfgvalues['type'] == 'archive' and __cfgvalues['path'].lower().endswith('.bz2'):
                 __bck = CheckBzip2(__cfgvalues)
+            # check a xz file, by name
+            elif __cfgvalues['type'] == 'archive' and __cfgvalues['path'].lower().endswith('.xz'):
+                __bck = CheckLzma(__cfgvalues)
             # check a zip file, by name
             elif __cfgvalues['type'] == 'archive' and __cfgvalues['path'].lower().endswith('.zip'):
                 __bck = CheckZip(__cfgvalues)

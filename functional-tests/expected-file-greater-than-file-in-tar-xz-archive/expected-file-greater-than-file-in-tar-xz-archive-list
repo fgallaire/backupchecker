@@ -1,0 +1,2 @@
+[files]
+expected-file-greater-than-file-in-tar-xz-archive/foo| >17K
