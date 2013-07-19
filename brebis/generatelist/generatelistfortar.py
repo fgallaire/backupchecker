@@ -74,6 +74,8 @@ class GenerateListForTar(GenerateList):
             self.__arcpath = ''.join([self.__arcpath[:-6], 'list'])
         elif self.__arcpath.lower().endswith('.tar.bz2'):
             self.__arcpath = ''.join([self.__arcpath[:-7], 'list'])
+        elif self.__arcpath.lower().endswith('.tar.xz'):
+            self.__arcpath = ''.join([self.__arcpath[:-6], 'list'])
         elif self.__arcpath.lower().endswith('.tgz'):
             self.__arcpath = ''.join([self.__arcpath[:-3], 'list'])
         elif __arcpath.lower().endswith('.tbz2'):

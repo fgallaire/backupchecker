@@ -17,6 +17,8 @@ functional-tests/generate-list-from-gzip-archive/generate-list-from-gzip-archive
 functional-tests/generate-list-from-tar-archive/generate-list-from-tar-archive.list
 functional-tests/generate-list-from-tree/generate-list-from-tree.list
 functional-tests/generate-list-from-zip-archive/generate-list-from-zip-archive.list
+functional-tests/generate-list-from-xz-archive/generate-list-from-xz-archive.list
+functional-tests/generate-list-and-parse-xz-archive/generate-list-and-parse-xz-archive.list
 tests/generatelistforgzip_private_methods/mygzip.list
 tests/generatelistfortar_private_methods/mytar.list
 tests/generatelistfortree_private_methods/mydir.list
