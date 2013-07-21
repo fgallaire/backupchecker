@@ -1,15 +1,24 @@
 #!/usr/bin/make -f
 
+PYTHON3=$(shell py3versions -vr)
+
 %:
 	dh $@ --with python3
 
-override_dh_auto_clean:
-	python3 setup.py clean -a
-
 override_dh_auto_build:
-	python3 setup.py build
+	set -ex; for py in $(PYTHON3) ; do \
+		python$$py setup.py build; \
+	done
 
 override_dh_auto_install:
-	python3 setup.py install --root=$(CURDIR)/debian/tmp --install-layout=deb \
-	--install-lib=/usr/share/pyshared --install-scripts=/usr/bin
+	set -ex; for py in $(PYTHON3) ; do \
+		python$$py setup.py install --skip-build \
+		                            --root=$(CURDIR)/debian/tmp \
+		                            --install-layout=deb; \
+	done
+
+override_dh_auto_clean:
+	rm -rf build
+	rm -rf *.egg-info
+
 
