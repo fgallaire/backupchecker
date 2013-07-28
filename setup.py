@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2011 Carl Chenet <chaica@ohmytux.com>
+# Copyright © 2013 Carl Chenet <chaica@ohmytux.com>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -14,6 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 from distutils.core import setup
+import os.path
 import platform
 import sys
 
@@ -42,5 +43,6 @@ setup(name = 'brebis',
     url = 'http://www.brebisproject.org',
     download_url = 'http://www.brebisproject.org',
     packages = ['brebis', 'brebis.checkbackups', 'brebis.generatelist'],
+    data_files=[(os.path.join('share','man','man1'), ['man/brebis.1'])],
     scripts = ['scripts/brebis']
 )
