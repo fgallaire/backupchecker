@@ -33,7 +33,7 @@ class GenerateListForTar(GenerateList):
             self.__main(__tar)
         except tarfile.TarError as _msg:
             __warn = '. You should investigate for a data corruption.'
-            logging.warn('{}: {}{}'.format(self.__arcpath, str(_msg), __warn))
+            logging.warning('{}: {}{}'.format(self.__arcpath, str(_msg), __warn))
 
     def __main(self, __tar):
         '''Main for the GenerateListForTar class'''

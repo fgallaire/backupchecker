@@ -52,7 +52,7 @@ class CheckBzip2(CheckArchive):
                     __bz2.read()
             except IOError as __msg:
                 __warn = '. You should investigate for a data corruption.'
-                logging.warn('{}: {}{}'.format(_cfgvalues['path'], str(__msg), __warn))
+                logging.warning('{}: {}{}'.format(_cfgvalues['path'], str(__msg), __warn))
             else:
                 __name = os.path.split(_cfgvalues['path'])[-1].split('.')[0]
                 # Bzip2 does not allow to know the compressed file size, default to 0
