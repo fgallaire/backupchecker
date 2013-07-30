@@ -5,11 +5,11 @@ It was downloaded from http://www.brebisproject.org
 
 Upstream Author: 
 
-    Chenet Carl <chaica@ohmytux.com>
+    Chenet Carl <chaica@brebisproject.org>
 
 Copyright: 
 
-    Copyright © 2012 Carl Chenet <chaica@ohmytux.com>
+    Copyright © 2013 Carl Chenet <chaica@brebisproject.org>
 
 License:
 
@@ -30,7 +30,7 @@ License:
 On Debian systems, the complete text of the GNU General
 Public License can be found in `/usr/share/common-licenses/GPL-3'.
 
-The Debian packaging is © 2012, Chenet Carl <chaica@ohmytux.com> and
+The Debian packaging is © 2013, Chenet Carl <chaica@ohmytux.com> and
 is licensed under the GPL-3 or any later version, see above.
 
 
