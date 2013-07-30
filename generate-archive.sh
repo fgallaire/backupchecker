@@ -1,5 +1,4 @@
-#!/usr/bin/python3.3
-# -*- coding: utf-8 -*-
+#!/bin/bash
 # Copyright © 2013 Carl Chenet <chaica@ohmytux.com>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -12,9 +11,7 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-from brebis.main import Main
-
-if __name__ == '__main__':
-    Main()
+VERSION=`grep "version = " setup.py |cut -d"'" -f2`
+hg archive -X ".hg*" -X "generate-archive.sh" brebis-$VERSION.tar.gz

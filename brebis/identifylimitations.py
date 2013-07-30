@@ -56,4 +56,4 @@ class IdentifyLimitations:
 
     def __warn(self, __param):
         '''Warn the user that parameter is not supported by message in logging''' 
-        logging.warn('{}: The required parameter {} is not supported by this type of archive. Ignoring it.'.format(self.__arcpath, __param))
+        logging.warning('{}: The required parameter {} is not supported by this type of archive. Ignoring it.'.format(self.__arcpath, __param))

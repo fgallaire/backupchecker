@@ -14,12 +14,13 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 from distutils.core import setup
+import os.path
 import platform
 import sys
 
 # Warn the user about the supported Python versions
-if float(platform.python_version()[0:3]) < 3.2:
-    print('You need at least Python 3.2 to use Brebis')
+if float(platform.python_version()[0:3]) < 3.3:
+    print('You need at least Python 3.3 to use Brebis')
     sys.exit(1)
 
 CLASSIFIERS = [
@@ -28,11 +29,11 @@ CLASSIFIERS = [
     'Environment :: Console',
     'License :: OSI Approved :: GNU General Public License (GPL)',
     'Operating System :: POSIX :: Linux',
-    'Programming Language :: Python :: 3.2'
+    'Programming Language :: Python :: 3.3'
 ]
 
 setup(name = 'brebis',
-    version = '0.4',
+    version = '0.5',
     license = 'GNU GPL v3',
     description = 'automated backup checker',
     long_description = 'Brebis is a fully automated backup checker.',
@@ -42,5 +43,6 @@ setup(name = 'brebis',
     url = 'http://www.brebisproject.org',
     download_url = 'http://www.brebisproject.org',
     packages = ['brebis', 'brebis.checkbackups', 'brebis.generatelist'],
+    data_files=[(os.path.join('share','man','man1'), ['man/brebis.1'])],
     scripts = ['scripts/brebis']
 )

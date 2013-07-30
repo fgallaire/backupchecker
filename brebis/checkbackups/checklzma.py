@@ -52,7 +52,7 @@ class CheckLzma(CheckArchive):
                     __lzma.read()
             except (lzma.LZMAError, IOError) as __msg:
                 __warn = '. You should investigate for a data corruption.'
-                logging.warn('{}: {}{}'.format(_cfgvalues['path'], str(__msg), __warn))
+                logging.warning('{}: {}{}'.format(_cfgvalues['path'], str(__msg), __warn))
             else:
                 __name = os.path.split(_cfgvalues['path'])[-1].split('.')[0]
                 # lzma does not allow to know the compressed file size, default to 0

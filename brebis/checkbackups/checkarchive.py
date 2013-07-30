@@ -81,7 +81,7 @@ class CheckArchive(object):
             try:
                 self.__fileinfo = os.stat(__arcpath)
             except (OSError, IOError) as __msg:
-                logging.warn(__msg)
+                logging.warning(__msg)
         return self.__fileinfo
 
     def __find_archive_size(self, __arcpath):

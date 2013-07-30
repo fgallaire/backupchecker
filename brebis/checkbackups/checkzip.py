@@ -44,7 +44,7 @@ class CheckZip(CheckArchive):
             if _data:
                 _crcerror = self._zip.testzip()
                 if _crcerror:
-                    logging.warn('{} has at least one file corrupted:{}'.format(_cfgvalues['path'], _crcerror))
+                    logging.warning('{} has at least one file corrupted:{}'.format(_cfgvalues['path'], _crcerror))
                 else:
                     _zipinfo = self._zip.infolist()
                     for _fileinfo in _zipinfo:
@@ -58,7 +58,7 @@ class CheckZip(CheckArchive):
                     self._missing_files = [_file['path'] for _file in _data]
         except zipfile.BadZipfile as _msg:
             __warn = '. You should investigate for a data corruption.'
-            logging.warn('{}: {}{}'.format(_cfgvalues['path'], str(_msg), __warn))
+            logging.warning('{}: {}{}'.format(_cfgvalues['path'], str(_msg), __warn))
 
     def _extract_stored_file(self, __arcfilepath):
         '''Extract a file from the archive and return a file object'''

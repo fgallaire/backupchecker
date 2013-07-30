@@ -50,7 +50,7 @@ class CheckTar(CheckArchive):
                 self._missing_files = [_file['path'] for _file in _data]
             except tarfile.TarError as _msg:
                 __warn = '. You should investigate for a data corruption.'
-                logging.warn('{}: {}{}'.format(_cfgvalues['path'], str(_msg), __warn))
+                logging.warning('{}: {}{}'.format(_cfgvalues['path'], str(_msg), __warn))
 
     def __translate_type(self, __arctype):
         '''Translate the type of the file inside the tar by a generic

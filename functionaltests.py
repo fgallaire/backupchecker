@@ -1,4 +1,4 @@
-#!/home/chaica/progra/python/Python-3.3.0b1/python
+#!/usr/bin/python3.3
 # -*- coding: utf-8 -*-
 # Copyright © 2013 Carl Chenet <chaica@ohmytux.com>
 # This program is free software: you can redistribute it and/or modify

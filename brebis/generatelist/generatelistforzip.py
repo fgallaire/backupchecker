@@ -34,7 +34,7 @@ class GenerateListForZip(GenerateList):
             self.__main(__zip)
         except zipfile.BadZipfile as _msg:
             __warn = '. You should investigate for a data corruption.'
-            logging.warn('{}: {}{}'.format(__self.arcpath, str(__msg), __warn))
+            logging.warning('{}: {}{}'.format(__self.arcpath, str(__msg), __warn))
 
     def __main(self, __zip):
         '''Main of the GenerateListForZip class'''
@@ -43,7 +43,7 @@ class GenerateListForZip(GenerateList):
         __onelinewithhash = '{}| ={} uid|{} gid|{} mode|{} type|{} md5|{}\n'
         __crcerror = __zip.testzip()
         if __crcerror:
-            logging.warn('{} has at least one file corrupted:{}'.format(self.__arcpath, __crcerror))
+            logging.warning('{} has at least one file corrupted:{}'.format(self.__arcpath, __crcerror))
         else:
             __zipinfo = __zip.infolist()
             for __fileinfo in __zipinfo:

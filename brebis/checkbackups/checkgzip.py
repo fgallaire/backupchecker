@@ -52,7 +52,7 @@ class CheckGzip(CheckArchive):
                     __gzip.read()
             except IOError as __msg:
                 __warn = '. You should investigate for a data corruption.'
-                logging.warn('{}: {}{}'.format(_cfgvalues['path'], str(__msg), __warn))
+                logging.warning('{}: {}{}'.format(_cfgvalues['path'], str(__msg), __warn))
             else:
                 ########################################
                 # No corruption, extracting information

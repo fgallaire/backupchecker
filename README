@@ -1,16 +1,16 @@
 How to install Brebis 
 ---------------------
 
-* You need at least Python 3.2.
+* You need at least Python 3.3.
 * Untar the tarball and go to the source directory with the following commands:
 
-$ tar zxvf brebis-0.4.tar.gz && cd brebis/
+$ tar zxvf brebis-0.5.tar.gz && cd brebis/
 
 To install Brebis on your computer, type the following command with the root user:
 
-# python3.2 setup.py install
+# python3.3 setup.py install
 or
-# python3.2 setup.py install --install-scripts=/usr/bin
+# python3.3 setup.py install --install-scripts=/usr/bin
 
 Now the /usr/local/bin/brebis command or /usr/bin/brebis command should trigger the following output:
 $ /usr/local/bin/brebis -h
@@ -41,7 +41,7 @@ You need two files in order to use Brebis.
 Configuration of the backup checking session
 ============================================
 
-The first one contains general information about the backup checking session. Here is an example with all the currently supported parameters: 
+The first one contains general information about the backup checking session. It is mandatory your configuration file uses the .conf extension. Here is an example with all the currently supported parameters: 
 
 [main]  
 name=mybackup-checking-session
@@ -56,6 +56,7 @@ type is the type of your backup. Currently you only have archive (tar, tar.gz, t
 path is the path to the archive or the top directory of your files tree. Relative or absolute paths are accepted.
 files_list is the path to the file containing the information about the archive, the tree or the files inside your backups. Relative or absolute paths are accepted.
 delimiter (optional field) is the string to use in the list of files to mark the end of the key and the beginning of the value. Default is | (pipe).
+
 
 Archive checking setup
 ======================
@@ -98,7 +99,7 @@ foos/foo1| md5|hashsum means the file foos/foo1 is expected to have a md5 hash s
 Generate a list of files within a backup
 ========================================
 
-Starting from 0.4, Brebis is able to generate a list of files within a backup. You only have to reuse this file later, including it in your configuration file.
+Starting from 0.5, Brebis is able to generate a list of files within a backup. You only have to reuse this file later, including it in your configuration file.
 
 Use the following command to generate the list of files:
 
