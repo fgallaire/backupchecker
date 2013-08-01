@@ -51,7 +51,8 @@ class CheckBackups(object):
                 or __cfgvalues['path'].lower().endswith('.tar.gz') \
                 or __cfgvalues['path'].lower().endswith('.tar.bz2') \
                 or __cfgvalues['path'].lower().endswith('.tar.xz') \
-                or __cfgvalues['path'].lower().endswith('.tgz')):
+                or __cfgvalues['path'].lower().endswith('.tgz') \
+                or __cfgvalues['path'].lower().endswith('.tbz2')):
                 __bck = CheckTar(__cfgvalues)
             # check a gzip file, by name
             elif __cfgvalues['type'] == 'archive' and __cfgvalues['path'].lower().endswith('.gz'):
