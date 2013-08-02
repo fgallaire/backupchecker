@@ -43,6 +43,8 @@ class GenerateListForTar(GenerateList):
         for __tarinfo in __tar:
             # Pick up tar information
             __tarinfo.name = self._normalize_path(__tarinfo.name)
+            # need to escape the default separator of the list of files
+            __tarinfo.name = self._escape_separator(__tarinfo.name)
             __type = self.__translate_type(__tarinfo.type)
             __mode = oct(__tarinfo.mode).split('o')[-1]
             # if the file has no right, need to manipulate the output - solving #15

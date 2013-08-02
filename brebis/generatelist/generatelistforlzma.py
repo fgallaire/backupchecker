@@ -29,12 +29,15 @@ class GenerateListForLzma(GenerateList):
 
     def __init__(self, __arcpath):
         '''The constructor for the GenerateListForlzma class'''
+        __filename = os.path.split(__arcpath)[-1][:-3]
+        # need to escape the default separator of the list of files
+        __filename = self._escape_separator(__filename)
         __listoffiles = ['[files]\n']
         __filetype = 'f'
         __filehash = get_hash(lzma.LZMAFile(__arcpath, 'r'), 'md5')
         __onelinewithhash = '{}| type|{} md5|{}\n'
         __listoffiles.append(__onelinewithhash.format(
-                                os.path.split(__arcpath)[-1][:-3],
+                                __filename,
                                 __filetype,
                                 __filehash))
         # call the method to write information in a file

@@ -17,6 +17,7 @@
 '''Generate a list of files in a backup'''
 
 import logging
+import os
 import os.path
 import sys
 
@@ -38,3 +39,17 @@ class GenerateList:
             return __path[:-1]
         else:
             return __path
+
+    def _escape_separator(self, __filename):
+        '''Escape the separator of the list of files
+           Today the default espaced caracter is '|' 
+        '''
+        listofresult = []
+        # have to treat every piece of the path individually
+        for __component in __filename.split(os.sep):
+            if '|' in __component:
+                __escapedfilename = __component.replace('|', '||', 1)
+                listofresult.append(__escapedfilename)
+            else:
+                listofresult.append(__component)
+        return os.sep.join(listofresult)

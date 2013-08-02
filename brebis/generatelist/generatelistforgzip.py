@@ -37,6 +37,8 @@ class GenerateListForGzip(GenerateList):
             __filesize = self.__extract_size(__gzip)
             __filename = self.__extract_initial_filename(__gzip,
                         os.path.split(__arcpath)[-1][:-2])
+            # need to escape the default separator of the list of files
+            __filename = self._escape_separator(__filename)
         __onelinewithhash = '{}| ={} type|{} md5|{}\n'
         __listoffiles.append(__onelinewithhash.format(
                                 __filename,

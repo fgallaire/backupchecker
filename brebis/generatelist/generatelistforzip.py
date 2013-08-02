@@ -48,6 +48,8 @@ class GenerateListForZip(GenerateList):
             __zipinfo = __zip.infolist()
             for __fileinfo in __zipinfo:
                 __fileinfo.filename = self._normalize_path(__fileinfo.filename)
+                # need to escape the default separator of the list of files
+                __fileinfo.filename = self._escape_separator(__fileinfo.filename)
                 __uid, __gid = self.__extract_uid_gid(__fileinfo)
                 __type = self.__translate_type(__fileinfo.external_attr >> 16)
                 __mode = oct(stat.S_IMODE((__fileinfo.external_attr >> 16))).split('o')[-1]

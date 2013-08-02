@@ -40,9 +40,12 @@ class GenerateListForTree(GenerateList):
                 __dirmode = oct(stat.S_IMODE(__dirinfo.st_mode)).split('o')[-1]
                 # translate file type in brebis intern file type
                 __type = self.__translate_type(__dirinfo.st_mode)
+                __fn = os.path.relpath(__dirpath, __arcpath)
+                # need to escape the default separator of the list of files
+                __fn = self._escape_separator(__fn)
                 # extract file data
                 __listoffiles.append(__oneline.format(
-                                        os.path.relpath(__dirpath, __arcpath),
+                                        __fn,
                                         str(__dirinfo.st_size),
                                         str(__dirinfo.st_uid),
                                         str(__dirinfo.st_gid),

@@ -30,11 +30,14 @@ class GenerateListForBzip2(GenerateList):
     def __init__(self, __arcpath):
         '''The constructor for the GenerateListForBzip2 class'''
         __listoffiles = ['[files]\n']
+        __filename = os.path.split(__arcpath)[-1][:-4]
+        # need to escape the default separator of the list of files
+        __filename = self._escape_separator(__filename)
         __filetype = 'f'
         __filehash = get_hash(bz2.BZ2File(__arcpath, 'r'), 'md5')
         __onelinewithhash = '{}| type|{} md5|{}\n'
         __listoffiles.append(__onelinewithhash.format(
-                                os.path.split(__arcpath)[-1][:-4],
+                                __filename,
                                 __filetype,
                                 __filehash))
         # call the method to write information in a file
