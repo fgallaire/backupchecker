@@ -2440,6 +2440,37 @@ class Test_bzip2_archive_size_smaller_than_expected_size(Main):
         self._testdir = os.path.join(ABSPATH, 'functional-tests/bzip2-archive-size-smaller-than-expected-size')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file smaller than')
+
+class Test_checkarchive_supported_types_equals_listtype_supported_types:
+    '''Test if the supported types in checkarchives.py equals those in
+       listtype.py
+       This is not exactly a functional test but it triggered bug #24 so
+       it needs to be tested  
+    '''
+    def __init__(self, q):
+        # extract supported extensions from the code
+        # store them in sets and compare them
+        __queue = q
+        __testname = self.__class__.__name__
+        with open('brebis/checkbackups/checkbackups.py') as __f1:
+            __checkarchivescode = __f1.readlines()
+        with open('brebis/listtype.py') as __f2:
+            __listtypecode = __f2.readlines()
+        __checkarchivestypes = set()
+        __listtypetypes = set()
+        for __line in __checkarchivescode:
+            if 'endswith' in __line:
+                __checkarchivestypes.add(__line.split(".endswith('")[1].split("'")[0])
+        for __line in __listtypecode:
+            if 'endswith' in __line:
+                __listtypetypes.add(__line.split(".endswith('")[1].split("'")[0])
+        # symmetrical differences of the two sets
+        __unsupportedtypes = __checkarchivestypes ^ __listtypetypes
+        if not __unsupportedtypes:
+            __queue.put('{} - {}'.format(__testname, OKMSG))
+        else:
+            __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+            
             
 if __name__ == '__main__':
     processes = []
