@@ -2471,6 +2471,32 @@ class Test_checkarchive_supported_types_equals_listtype_supported_types:
         else:
             __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
             
+class Test_expected_generated_list_for_archive_with_path_using_default_separator:
+    '''Generate a list of files from a tar.gz archive with a file using the default separator on its name'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/expected-generated-list-for-archive-with-path-using-default-separator')
+        __archive = os.path.join(__testdir, 'expected-generated-list-for-archive-with-path-using-default-separator.tar.gz')
+        __resultfile = os.path.join(__testdir, 'expected-generated-list-for-archive-with-path-using-default-separator.list')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            with open(__resultfile) as __resultfilecontent:
+                if '\ntest/test||test| ' in __resultfilecontent.read():
+                    __res = True
+                else:
+                    __res = False
+                if __res:
+                    __queue.put('{} - {}'.format(__testname, OKMSG))
+                else:
+                    __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+
             
 if __name__ == '__main__':
     processes = []
