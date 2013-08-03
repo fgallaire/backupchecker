@@ -98,7 +98,7 @@ class ExpectedValues(object):
             __files = __config.items('files')
             for __fileitems in __files:
                 __data = {}
-                __data['path'] = __fileitems[0]
+                __data['path'] = self.__unescape_separator(__fileitems[0])
                 if __data['path'].endswith('/'):
                     __data['path'] = __data['path'][:-1]
                 if len(__fileitems) == 2:
@@ -167,6 +167,18 @@ class ExpectedValues(object):
             __res = 0
         finally:
             return __res
+
+    def __unescape_separator(self, __path, __delimiter):
+        '''Unescape the escaped separator(s) used in a path'''
+        listofresult = []
+        # have to treat every piece of the path individually
+        for __component in __path.split(os.sep):
+            if __delimiter*2 in __component:
+                __filename = __component.replace(__delimiter*2, __delimiter, 1)
+                listofresult.append(__filename)
+            else:
+                listofresult.append(__component)
+        return os.sep.join(listofresult)
 
     @property
     def data(self):
