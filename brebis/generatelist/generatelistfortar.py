@@ -25,9 +25,10 @@ from brebis.generatelist.generatelist import GenerateList
 class GenerateListForTar(GenerateList):
     '''Generate a list of files from a tar archive'''
 
-    def __init__(self, __arcpath):
+    def __init__(self, __arcpath, __delimiter):
         '''The constructor for the GenerateListForTar class'''
         self.__arcpath = __arcpath
+        self.__delimiter = __delimiter
         try:
             __tar = tarfile.open(self.__arcpath, 'r')
             self.__main(__tar)
@@ -38,8 +39,8 @@ class GenerateListForTar(GenerateList):
     def __main(self, __tar):
         '''Main for the GenerateListForTar class'''
         __listoffiles = ['[files]\n']
-        __oneline = '{}| ={} uid|{} gid|{} mode|{} type|{}\n'
-        __onelinewithhash = '{}| ={} uid|{} gid|{} mode|{} type|{} md5|{}\n'
+        __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
+        __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
         for __tarinfo in __tar:
             # Pick up tar information
             __tarinfo.name = self._normalize_path(__tarinfo.name)

@@ -28,7 +28,7 @@ class ExpectedValues(object):
     and expected saved files.
     '''
 
-    def __init__(self, __bckconf):
+    def __init__(self, __bckconf, __options):
         '''The constructor of the ExpectedValues class.
         '''
         self.__bckfiles= []
@@ -36,7 +36,7 @@ class ExpectedValues(object):
         __path = __bckconf['files_list']
         # Define delimiter value
         if not __bckconf['delimiter']:
-            __delimiter = '|'
+            __delimiter = __options.delimiter
         else:
             __delimiter = __bckconf['delimiter']
         self.__main(__path, __delimiter)

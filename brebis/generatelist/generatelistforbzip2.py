@@ -27,12 +27,12 @@ from brebis.generatelist.generatelist import GenerateList
 class GenerateListForBzip2(GenerateList):
     '''Generate a list of files from a bzip2 archive'''
 
-    def __init__(self, __arcpath):
+    def __init__(self, __arcpath, __delimiter):
         '''The constructor for the GenerateListForBzip2 class'''
         __listoffiles = ['[files]\n']
         __filetype = 'f'
         __filehash = get_hash(bz2.BZ2File(__arcpath, 'r'), 'md5')
-        __onelinewithhash = '{}| type|{} md5|{}\n'
+        __onelinewithhash = '{value}{delimiter} type{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
         __listoffiles.append(__onelinewithhash.format(
                                 os.path.split(__arcpath)[-1][:-4],
                                 __filetype,

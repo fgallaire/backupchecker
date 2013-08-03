@@ -26,11 +26,11 @@ from brebis.checkhashes import get_hash
 class GenerateListForTree(GenerateList):
     '''Generate a list of files from a tree'''
 
-    def __init__(self, __arcpath):
+    def __init__(self, __arcpath, __delimiter):
         '''The constructor for the GenerateListForTree class'''
         __listoffiles = ['[files]\n']
-        __oneline = '{}| ={} uid|{} gid|{} mode|{} type|{}\n'
-        __onelinewithhash = '{}| ={} uid|{} gid|{} mode|{} type|{} md5|{}\n'
+        __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+        __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
         
         for __dirpath, __dirnames, __filenames, in os.walk(__arcpath):
             # ignoring the uppest directory

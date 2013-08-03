@@ -36,7 +36,7 @@ class Main(object):
         # no list generation mode, check backups 
         if not __options.genlist:
             __confs = Configurations(__options.confpath)
-            CheckBackups(__confs.configs)
+            CheckBackups(__confs.configs, __options)
         else:
         # Analyze the type of the list to produce
-            ListType(__options.archives)
+            ListType(__options)
