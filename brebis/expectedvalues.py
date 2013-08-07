@@ -126,7 +126,7 @@ class ExpectedValues(object):
                                 ### f for file, c for character, d for directory
                                 ### s for symbolink link, b for block, o for fifo,
                                 ### k for socket
-                                __types = ('f','c','d','s','b','o','k')
+                                __types = ('f','c','d','s','b','o','k', 'l')
                                 if __type not in __types:
                                     logging.warning('{}: Unknown type {} for file parameter'.format(__data['path'], __type))
                                 else:
