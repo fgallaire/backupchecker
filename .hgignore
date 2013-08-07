@@ -30,3 +30,4 @@ functional-tests/generate-list-changing-default-separator/tar.gz/generate-list-c
 functional-tests/generate-list-changing-default-separator/tar.xz/generate-list-changing-default-separator-for-tar-xz.list
 functional-tests/generate-list-changing-default-separator/tree/generate-list-changing-default-separator-for-tree.list
 functional-tests/generate-list-changing-default-separator/zip/generate-list-changing-default-separator-for-zip.list
+functional-tests/generate-list-and-parse-tbz-archive/generate-list-and-parse-tbz-archive.list
