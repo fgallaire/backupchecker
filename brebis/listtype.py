@@ -48,6 +48,7 @@ class ListType(object):
                     __arcpath.lower().endswith('.tar.bz2') or\
                     __arcpath.lower().endswith('.tar.xz') or\
                     __arcpath.lower().endswith('.tgz') or\
+                    __arcpath.lower().endswith('.tbz') or\
                     __arcpath.lower().endswith('.tbz2'):
                 __bck = GenerateListForTar(__arcpath, __delimiter)
             # generate a list of files for a gzip archive

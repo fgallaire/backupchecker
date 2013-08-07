@@ -79,6 +79,8 @@ class GenerateListForTar(GenerateList):
             self.__arcpath = ''.join([self.__arcpath[:-6], 'list'])
         elif self.__arcpath.lower().endswith('.tgz'):
             self.__arcpath = ''.join([self.__arcpath[:-3], 'list'])
+        elif self.__arcpath.lower().endswith('.tbz'):
+            self.__arcpath = ''.join([self.__arcpath[:-3], 'list'])
         elif __arcpath.lower().endswith('.tbz2'):
             self.__arcpath = ''.join([self.__arcpath[:-4], 'list'])
         # call the method to write information in a file
