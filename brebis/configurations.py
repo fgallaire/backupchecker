@@ -38,6 +38,12 @@ class Configurations:
         try:
             __confs = [__file for __file in os.listdir(__confpath) 
                 if __file.endswith('.conf')]
+            # check if at least one configuration file is availabe
+            if not __confs:
+                __errmsg = 'Could not find any .conf file in {}'
+                print(__errmsg.format(__confpath))
+                sys.exit(1)
+            # parse the configuration files
             for __conf in __confs:
                 __currentconf = {}
                 __config = ConfigParser()
