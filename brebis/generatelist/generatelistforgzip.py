@@ -27,7 +27,7 @@ from brebis.generatelist.generatelist import GenerateList
 class GenerateListForGzip(GenerateList):
     '''Generate a list of files from a gzip archive'''
 
-    def __init__(self, __arcpath):
+    def __init__(self, __arcpath, __delimiter):
         '''The constructor for the GenerateListForGzip class'''
         __listoffiles = ['[files]\n']
         __fileinfo = os.lstat(__arcpath)
@@ -37,7 +37,7 @@ class GenerateListForGzip(GenerateList):
             __filesize = self.__extract_size(__gzip)
             __filename = self.__extract_initial_filename(__gzip,
                         os.path.split(__arcpath)[-1][:-2])
-        __onelinewithhash = '{}| ={} type|{} md5|{}\n'
+        __onelinewithhash = '{value}{delimiter} ={value} type{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
         __listoffiles.append(__onelinewithhash.format(
                                 __filename,
                                 str(__filesize),

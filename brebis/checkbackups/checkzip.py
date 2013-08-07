@@ -27,11 +27,11 @@ from brebis.checkbackups.checkarchive import CheckArchive
 class CheckZip(CheckArchive):
     '''Check a zip archive'''
 
-    def _main(self, _cfgvalues):
+    def _main(self, _cfgvalues, _options):
         '''Main for CheckZip'''
         _crcerror = ''
         _data = []
-        _data, __arcdata = ExpectedValues(_cfgvalues).data
+        _data, __arcdata = ExpectedValues(_cfgvalues, _options).data
         #########################
         # Test the archive itself
         #########################

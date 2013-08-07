@@ -25,11 +25,11 @@ from brebis.checkbackups.checkarchive import CheckArchive
 class CheckTree(CheckArchive):
     '''Check a file tree'''
 
-    def _main(self, _cfgvalues):
+    def _main(self, _cfgvalues, _options):
         '''Main for CheckTree'''
         _data = []
         self.__treepath = _cfgvalues['path']
-        _data, __arcdata = ExpectedValues(_cfgvalues).data
+        _data, __arcdata = ExpectedValues(_cfgvalues, _options).data
         # Save the tree root to determine the relative path in the file tree
         self.__treepath = self.__treepath
         for __dirpath, __dirnames, __filenames, in os.walk(_cfgvalues['path']):

@@ -58,6 +58,11 @@ class CliParse:
         __group.add_argument('-g', '--gen-list', dest='genlist',
             action='store_true',
             help='generate a list of files inside a backup')
+        __parser.add_argument('-d', '--delimiter', dest='delimiter',
+            action='store',
+            default='|',
+            help='delimiter of the fields for the list of files',
+            metavar='DELIMITER')
         __parser.add_argument('archives', nargs='*',
             help='archives to check')
         __args = __parser.parse_args()

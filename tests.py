@@ -42,6 +42,13 @@ import brebis.main
 
 # !! logging module uses a single logger for the whole file
 TESTLOG = 'tests/testlog'
+DEFAULTDELIMITER = '|'
+
+# mock the object produced by argparse, useful for lots of tests below
+class Options:
+    '''Mock the object produced by argparse, useful for lots of unittests'''
+    def __init__(self):
+        self.delimiter = DEFAULTDELIMITER
 
 class TestApp(unittest.TestCase):
 
@@ -54,7 +61,7 @@ class TestApp(unittest.TestCase):
         '''Test the CheckBackup class'''
         _logfile = TESTLOG
         brebis.applogger.AppLogger(_logfile)
-        brebis.checkbackups.checkbackups.CheckBackups({'essai': {'path': 'tests/tar_gz_archive_content/essai.tar.gz', 'files_list': 'tests/tar_gz_archive_content/essai-list', 'type': 'archive','delimiter':''}, 'essai2': {'path': 'tests/tar_bz2_archive_content/titi.tar.bz2', 'files_list': 'tests/tar_bz2_archive_content/essai2-list', 'type': 'archive','delimiter':''}})
+        brebis.checkbackups.checkbackups.CheckBackups({'essai': {'path': 'tests/tar_gz_archive_content/essai.tar.gz', 'files_list': 'tests/tar_gz_archive_content/essai-list', 'type': 'archive','delimiter':''}, 'essai2': {'path': 'tests/tar_bz2_archive_content/titi.tar.bz2', 'files_list': 'tests/tar_bz2_archive_content/essai2-list', 'type': 'archive','delimiter':''}}, Options())
         with open(_logfile) as _res:
             self.assertEqual(_res.read(), 'WARNING:root:1 file missing in tests/tar_gz_archive_content/essai.tar.gz: \nWARNING:root:essai/dir/titi\n')
         os.remove(_logfile)
@@ -66,7 +73,7 @@ class TestApp(unittest.TestCase):
             'tests/tar_gz_archive_content/essai.tar.gz',
              'files_list':
                 'tests/tar_gz_archive_content/essai-list',
-             'type': 'archive', 'delimiter': ''}).missing_files
+             'type': 'archive', 'delimiter': ''}, Options()).missing_files
         self.assertEqual(_missingfiles, ['essai/dir/titi'])
 
     def test_checktar_missing_equality(self):
@@ -76,7 +83,7 @@ class TestApp(unittest.TestCase):
             'tests/file_size/essai.tar.bz2',
              'files_list':
                 'tests/file_size/essai-list',
-             'type': 'archive', 'delimiter': ''}).missing_equality
+             'type': 'archive', 'delimiter': ''}, Options()).missing_equality
         self.assertEqual(__missing_equality[0]['path'], 'essai/dir/toto')
 
     def test_checktar_missing_bigger_than(self):
@@ -86,7 +93,7 @@ class TestApp(unittest.TestCase):
             'tests/file_size/essai.tar.bz2',
              'files_list':
                 'tests/file_size/essai-list',
-             'type': 'archive', 'delimiter': ''}).missing_bigger_than
+             'type': 'archive', 'delimiter': ''}, Options()).missing_bigger_than
         self.assertEqual(__missing_bigger_than[0]['path'], 'essai/titi')
 
     def test_checktar_missing_smaller_than(self):
@@ -96,7 +103,7 @@ class TestApp(unittest.TestCase):
             'tests/file_size/essai.tar.bz2',
              'files_list':
                 'tests/file_size/essai-list',
-             'type': 'archive', 'delimiter': ''}).missing_smaller_than
+             'type': 'archive', 'delimiter': ''}, Options()).missing_smaller_than
         self.assertEqual(__missing_smaller_than[0]['path'], 'essai/dir/toutou')
 
     def test_checktree_missing_files(self):
@@ -106,7 +113,7 @@ class TestApp(unittest.TestCase):
             'tests/filetree/foo',
              'files_list':
                 'tests/filetree/filelist',
-             'type': 'tree', 'delimiter': ''}).missing_files
+             'type': 'tree', 'delimiter': ''}, Options()).missing_files
         self.assertEqual(__missing_files, ['bar/toto'])
 
     def test_checktree_missing_equality(self):
@@ -116,7 +123,7 @@ class TestApp(unittest.TestCase):
             'tests/filetree/foo',
              'files_list':
                 'tests/filetree/filelist',
-             'type': 'tree', 'delimiter': ''}).missing_equality
+             'type': 'tree', 'delimiter': ''}, Options()).missing_equality
         self.assertEqual(__missing_equality[0]['path'], 'foo1')
 
     def test_checktree_missing_bigger_than(self):
@@ -126,7 +133,7 @@ class TestApp(unittest.TestCase):
             'tests/filetree/foo',
              'files_list':
                 'tests/filetree/filelist',
-             'type': 'tree', 'delimiter': ''}).missing_bigger_than
+             'type': 'tree', 'delimiter': ''}, Options()).missing_bigger_than
         self.assertEqual(__missing_bigger_than[0]['path'], 'foo2')
 
     def test_checktree_missing_smaller_than(self):
@@ -136,7 +143,7 @@ class TestApp(unittest.TestCase):
             'tests/filetree/foo',
              'files_list':
                 'tests/filetree/filelist',
-             'type': 'tree', 'delimiter': ''}).missing_smaller_than
+             'type': 'tree', 'delimiter': ''}, Options()).missing_smaller_than
         self.assertEqual(__missing_smaller_than[0]['path'], 'bar/foo3')
 
     def test_checkgzip_missing_files(self):
@@ -146,7 +153,7 @@ class TestApp(unittest.TestCase):
             'tests/gzip/mygzip.gz',
              'files_list':
                 'tests/gzip/mygzip-list',
-             'type': 'archive', 'delimiter': ''}).missing_files
+             'type': 'archive', 'delimiter': ''}, Options()).missing_files
         self.assertEqual(_missing_files, ['foo'])
 
     def test_checkgzip_missing_equality(self):
@@ -156,7 +163,7 @@ class TestApp(unittest.TestCase):
             'tests/file_size/mygzip.gz',
              'files_list':
                 'tests/file_size/mygzip-list',
-             'type': 'archive', 'delimiter': ''}).missing_equality
+             'type': 'archive', 'delimiter': ''}, Options()).missing_equality
         self.assertEqual(__missing_equality[0]['path'], 'mygzip')
 
     def test_checkgzip_missing_bigger_than(self):
@@ -166,7 +173,7 @@ class TestApp(unittest.TestCase):
             'tests/file_size/missing-bigger-than/mygzip.gz',
              'files_list':
                 'tests/file_size/missing-bigger-than/mygzip-list',
-             'type': 'archive', 'delimiter': ''}).missing_bigger_than
+             'type': 'archive', 'delimiter': ''}, Options()).missing_bigger_than
         self.assertEqual(__missing_bigger_than[0]['path'], 'mygzip')
 
     def test_checkgzip_missing_smaller_than(self):
@@ -176,7 +183,7 @@ class TestApp(unittest.TestCase):
             'tests/file_size/missing-smaller-than/mygzip.gz',
              'files_list':
                 'tests/file_size/missing-smaller-than/mygzip-list',
-             'type': 'archive', 'delimiter': ''}).missing_smaller_than
+             'type': 'archive', 'delimiter': ''}, Options()).missing_smaller_than
         self.assertEqual(__missing_smaller_than[0]['path'], 'mygzip')
 
     def test_checkzip_missing_files(self):
@@ -186,7 +193,7 @@ class TestApp(unittest.TestCase):
             'tests/zip/myzip.zip',
              'files_list':
                 'tests/zip/myzip-list',
-             'type': 'archive', 'delimiter': ''}).missing_files
+             'type': 'archive', 'delimiter': ''}, Options()).missing_files
         self.assertEqual(_missing_files, ['toto/bling'])
 
     def test_checkzip_missing_equality(self):
@@ -196,7 +203,7 @@ class TestApp(unittest.TestCase):
             'tests/file_size/myzip.zip',
              'files_list':
                 'tests/file_size/essai-list2',
-             'type': 'archive', 'delimiter': ''}).missing_equality
+             'type': 'archive', 'delimiter': ''}, Options()).missing_equality
         self.assertEqual(__missing_equality[0]['path'], 'myzip/titi')
 
     def test_checkzip_missing_bigger_than(self):
@@ -206,7 +213,7 @@ class TestApp(unittest.TestCase):
             'tests/file_size/myzip.zip',
              'files_list':
                 'tests/file_size/essai-list2',
-             'type': 'archive', 'delimiter': ''}).missing_bigger_than
+             'type': 'archive', 'delimiter': ''}, Options()).missing_bigger_than
         self.assertEqual(__missing_bigger_than[0]['path'], 'myzip/foo/toto')
 
     def test_checkzip_missing_smaller_than(self):
@@ -216,7 +223,7 @@ class TestApp(unittest.TestCase):
             'tests/file_size/myzip.zip',
              'files_list':
                 'tests/file_size/essai-list2',
-             'type': 'archive', 'delimiter': ''}).missing_smaller_than
+             'type': 'archive', 'delimiter': ''}, Options()).missing_smaller_than
         self.assertEqual(__missing_smaller_than[0]['path'], 'myzip/toutou')
 
 ##    def test_configurations(self):
@@ -233,7 +240,7 @@ class TestApp(unittest.TestCase):
 ##
     def test_expected_values(self):
         '''Check the ExpectedValues class'''
-        __data, _ = ExpectedValues({'files_list':'tests/file_size/essai-list','delimiter':''}).data
+        __data, _ = ExpectedValues({'files_list':'tests/file_size/essai-list','delimiter':''}, Options()).data
         self.assertEqual([{'path':'essai/dir/toto', 'equals':536870912},
             {'path':'essai/titi','biggerthan':536870912},
             {'path':'essai/dir/toutou','smallerthan':19},
@@ -241,13 +248,13 @@ class TestApp(unittest.TestCase):
 
     def test_unexpected_files(self):
         '''Check if an unexpected file is identified'''
-        __data, _ = ExpectedValues({'files_list':'tests/unexpected_files/files-list','delimiter':''}).data
+        __data, _ = ExpectedValues({'files_list':'tests/unexpected_files/files-list','delimiter':''}, Options()).data
         self.assertEqual([{'path':'foo/foo1'},{'path':'foo/foo2'},
             {'path':'foo/bar','unexpected':True}], __data)
 
     def test_extract_expected_uid_gid(self):
         '''Check the uid and gid of an expected file''' 
-        __data, _ = ExpectedValues({'files_list':'tests/expected_uid_gid/files-list','delimiter':''}).data
+        __data, _ = ExpectedValues({'files_list':'tests/expected_uid_gid/files-list','delimiter':''}, Options()).data
         self.assertEqual([{'path':'foo/foo1', 'uid':1001, 'gid':1001}], __data)
 
     def test_compare_uid_gid(self):
@@ -260,7 +267,7 @@ class TestApp(unittest.TestCase):
             'tests/expected_uid_gid/foo.tar.gz',
              'files_list':
                 'tests/expected_uid_gid/files-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __uids = __myobj.mismatched_uids
         __gids = __myobj.mismatched_gids
         self.assertEqual((__uids[0],__gids[0]), (
@@ -269,7 +276,7 @@ class TestApp(unittest.TestCase):
 
     def test_extract_modes(self):
         '''Extract the expected file modes'''
-        __data, _ = ExpectedValues({'files_list':'tests/expected_mode/files-list','delimiter':''}).data
+        __data, _ = ExpectedValues({'files_list':'tests/expected_mode/files-list','delimiter':''}, Options()).data
         self.assertEqual([{'path':'foos/foo1', 'mode': '644'},
             {'path':'foos/foo2', 'mode': '755'},
             {'path':'foos/bar/foo3', 'mode': '4644'},
@@ -283,7 +290,7 @@ class TestApp(unittest.TestCase):
             'tests/expected_mode/foos.tar.gz',
              'files_list':
                 'tests/expected_mode/files-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __modes = __myobj.mismatched_modes
         self.assertEqual(__modes, [
         {'path':'foos/foo2','expectedmode':'755','mode':'754'},
@@ -300,7 +307,7 @@ class TestApp(unittest.TestCase):
             'tests/expected_mode/foo',
              'files_list':
                 'tests/expected_mode/treefiles-list',
-             'type': 'tree', 'delimiter': ''})
+             'type': 'tree', 'delimiter': ''}, Options())
         __modes = __myobj.mismatched_modes
         self.assertEqual(__modes, [
         {'path':'foo1','expectedmode':'664','mode':'644'},
@@ -308,7 +315,7 @@ class TestApp(unittest.TestCase):
 
     def test_extract_types(self):
         '''Extract the expected file types'''
-        __data, _ = ExpectedValues({'files_list':'tests/expected_type/files-list','delimiter':''}).data
+        __data, _ = ExpectedValues({'files_list':'tests/expected_type/files-list','delimiter':''}, Options()).data
         self.assertEqual([{'path':'foos/foo1', 'type': 'f'},
             {'path':'foos/foo2', 'type': 'c'},
             {'path':'foos/foo3', 'type': 'd'},
@@ -325,7 +332,7 @@ class TestApp(unittest.TestCase):
             'tests/expected_type/foos.tar.gz',
              'files_list':
                 'tests/expected_type/files-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __types = __myobj.mismatched_types
         self.assertEqual(__types, [
         {'path':'foos/foo3','expectedtype':'d','type':'f'},
@@ -345,7 +352,7 @@ class TestApp(unittest.TestCase):
             'tests/expected_type/foos',
              'files_list':
                 'tests/expected_type/filetree-list',
-             'type': 'tree', 'delimiter': ''})
+             'type': 'tree', 'delimiter': ''}, Options())
         __types = __myobj.mismatched_types
         self.assertEqual(__types, [
         {'path':'foos/foo2','expectedtype':'c','type':'f'},
@@ -359,7 +366,7 @@ class TestApp(unittest.TestCase):
 
     def test_extract_hashes(self):
         '''Extract the expected file hashes'''
-        __data, _ = ExpectedValues({'files_list':'tests/expected_hash/files-list','delimiter':''}).data
+        __data, _ = ExpectedValues({'files_list':'tests/expected_hash/files-list','delimiter':''}, Options()).data
         self.assertEqual([{'hash': {'hashtype': 'md5', 
             'hashvalue': '3718422a0bf93f7fc46cff6b5e660ff8'},
             'path': 'foos/foo1'},
@@ -388,7 +395,7 @@ class TestApp(unittest.TestCase):
             'tests/expected_hash/foos.tar.gz',
              'files_list':
                 'tests/expected_hash/files-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __hashes = __myobj.mismatched_hashes
         self.assertEqual(__hashes, [
             {'path': 'foos/foo3', 
@@ -419,7 +426,7 @@ class TestApp(unittest.TestCase):
             'tests/expected_hash/bar',
              'files_list':
                 'tests/expected_hash/filetree-list',
-             'type': 'tree', 'delimiter': ''})
+             'type': 'tree', 'delimiter': ''}, Options())
         __hashes = __myobj.mismatched_hashes
         self.assertEqual(__hashes, [
             {'path': 'bar/bar5', 
@@ -449,7 +456,7 @@ class TestApp(unittest.TestCase):
             'tests/expected_hash/bar.zip',
              'files_list':
                 'tests/expected_hash/zip-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __hashes = __myobj.mismatched_hashes
         self.assertEqual(__hashes, [
             {'path': 'bar/bar5', 
@@ -479,7 +486,7 @@ class TestApp(unittest.TestCase):
             'tests/expected_hash/bar.gz',
              'files_list':
                 'tests/expected_hash/gzip-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __hashes = __myobj.mismatched_hashes
         self.assertEqual(__hashes, [
             {'path': 'bar',
@@ -494,7 +501,7 @@ class TestApp(unittest.TestCase):
             'tests/expected_hash/bar.bz2',
              'files_list':
                 'tests/expected_hash/bzip2-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __hashes = __myobj.mismatched_hashes
         self.assertEqual(__hashes, [
             {'path': 'bar',
@@ -511,7 +518,7 @@ class TestApp(unittest.TestCase):
             'tests/file_size/essai.tar.bz2',
              'files_list':
                 'tests/file_size/arcsize/equaltararcsize-list',
-             'type': 'archive', 'delimiter': ''}).missing_equality
+             'type': 'archive', 'delimiter': ''}, Options()).missing_equality
         self.assertEqual(__missing_equality[0]['path'], 'tests/file_size/essai.tar.bz2')
         
     def test_checktar_archive_missing_smaller_than(self):
@@ -524,7 +531,7 @@ class TestApp(unittest.TestCase):
             'tests/file_size/essai.tar.bz2',
              'files_list':
                 'tests/file_size/arcsize/biggerthantararcsize-list',
-             'type': 'archive', 'delimiter': ''}).missing_smaller_than
+             'type': 'archive', 'delimiter': ''}, Options()).missing_smaller_than
         self.assertEqual(__missing_smaller_than[0]['path'], 'tests/file_size/essai.tar.bz2')
 
     def test_checktar_archive_missing_bigger_than(self):
@@ -537,7 +544,7 @@ class TestApp(unittest.TestCase):
             'tests/file_size/essai.tar.bz2',
              'files_list':
                 'tests/file_size/arcsize/smallerthantararcsize-list',
-             'type': 'archive', 'delimiter': ''}).missing_bigger_than
+             'type': 'archive', 'delimiter': ''}, Options()).missing_bigger_than
         self.assertEqual(__missing_bigger_than[0]['path'], 'tests/file_size/essai.tar.bz2')
 
     def test_checkzip_archive_equal_size(self):
@@ -550,7 +557,7 @@ class TestApp(unittest.TestCase):
             'tests/file_size/myzip.zip',
              'files_list':
                 'tests/file_size/arcsize/equalziparcsize-list',
-             'type': 'archive', 'delimiter': ''}).missing_equality
+             'type': 'archive', 'delimiter': ''}, Options()).missing_equality
         self.assertEqual(__missing_equality[0]['path'], 'tests/file_size/myzip.zip')
         
     def test_checkzip_archive_missing_smaller_than(self):
@@ -563,7 +570,7 @@ class TestApp(unittest.TestCase):
             'tests/file_size/myzip.zip',
              'files_list':
                 'tests/file_size/arcsize/biggerthanziparcsize-list',
-             'type': 'archive', 'delimiter': ''}).missing_smaller_than
+             'type': 'archive', 'delimiter': ''}, Options()).missing_smaller_than
         self.assertEqual(__missing_smaller_than[0]['path'], 'tests/file_size/myzip.zip')
 
     def test_checkzip_archive_missing_bigger_than(self):
@@ -576,7 +583,7 @@ class TestApp(unittest.TestCase):
             'tests/file_size/myzip.zip',
              'files_list':
                 'tests/file_size/arcsize/smallerthanziparcsize-list',
-             'type': 'archive', 'delimiter': ''}).missing_bigger_than
+             'type': 'archive', 'delimiter': ''}, Options()).missing_bigger_than
         self.assertEqual(__missing_bigger_than[0]['path'], 'tests/file_size/myzip.zip')
 
     def test_checktar_md5_hash_archive(self):
@@ -585,7 +592,7 @@ class TestApp(unittest.TestCase):
         'tests/expected_hash/archash/mytar.tar.gz',
          'files_list':
             'tests/expected_hash/archash/md5hashtararchive-list',
-         'type': 'archive', 'delimiter': ''}).mismatched_hashes
+         'type': 'archive', 'delimiter': ''}, Options()).mismatched_hashes
         self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/mytar.tar.gz',
             'expectedhash': '47907de120577e6ba3b9dd8821374937',
             'hash': '47907de120577e6ba3b9dd8821374936'})
@@ -596,7 +603,7 @@ class TestApp(unittest.TestCase):
         'tests/expected_hash/archash/mytar.tar.gz',
          'files_list':
             'tests/expected_hash/archash/sha1hashtararchive-list',
-         'type': 'archive', 'delimiter': ''}).mismatched_hashes
+         'type': 'archive', 'delimiter': ''}, Options()).mismatched_hashes
         self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/mytar.tar.gz',
             'expectedhash': '84db203e2902fa5ea51e6d46ea365c7bfc5524b9',
             'hash': '84db203e2902fa5ea51e6d46ea365c7bfc5524b8'})
@@ -607,7 +614,7 @@ class TestApp(unittest.TestCase):
         'tests/expected_hash/archash/mytar.tar.gz',
          'files_list':
             'tests/expected_hash/archash/sha224hashtararchive-list',
-         'type': 'archive', 'delimiter': ''}).mismatched_hashes
+         'type': 'archive', 'delimiter': ''}, Options()).mismatched_hashes
         self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/mytar.tar.gz',
             'expectedhash': 'e25621dfdd2b2cfca451c735f4e676653e8628187e2b7ddc14402c1e',
             'hash': 'e25621dfdd2b2cfca451c735f4e676653e8628187e2b7ddc14402c1d'})
@@ -618,7 +625,7 @@ class TestApp(unittest.TestCase):
         'tests/expected_hash/archash/mytar.tar.gz',
          'files_list':
             'tests/expected_hash/archash/sha256hashtararchive-list',
-         'type': 'archive', 'delimiter': ''}).mismatched_hashes
+         'type': 'archive', 'delimiter': ''}, Options()).mismatched_hashes
         self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/mytar.tar.gz',
             'expectedhash': '7090d29295216e95ab4a190d489aa405d141cac978567c227f17ee78eb3f5fd5',
             'hash': '7090d29295216e95ab4a190d489aa405d141cac978567c227f17ee78eb3f5fd4'})
@@ -629,7 +636,7 @@ class TestApp(unittest.TestCase):
         'tests/expected_hash/archash/mytar.tar.gz',
          'files_list':
             'tests/expected_hash/archash/sha384hashtararchive-list',
-         'type': 'archive', 'delimiter': ''}).mismatched_hashes
+         'type': 'archive', 'delimiter': ''}, Options()).mismatched_hashes
         self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/mytar.tar.gz',
             'expectedhash': 'aa01a55142a04de52cebba3797ca25054e51c33a5fbfdc4dd0cc2f01f6252c6a62cb87f35405d9d8b07a506eefacfd11',
             'hash': 'aa01a55142a04de52cebba3797ca25054e51c33a5fbfdc4dd0cc2f01f6252c6a62cb87f35405d9d8b07a506eefacfd10'})
@@ -640,7 +647,7 @@ class TestApp(unittest.TestCase):
         'tests/expected_hash/archash/mytar.tar.gz',
          'files_list':
             'tests/expected_hash/archash/sha512hashtararchive-list',
-         'type': 'archive', 'delimiter': ''}).mismatched_hashes
+         'type': 'archive', 'delimiter': ''}, Options()).mismatched_hashes
         self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/mytar.tar.gz',
             'expectedhash': 'd72eef1d9c42615f6b2a92848e8fa65ffd4276d91d9976fa8c644b41c15d91441ae42f897b30a2403795a876b14ae6ed8addca4a74f24839f6506a29e662e588',
             'hash': 'd72eef1d9c42615f6b2a92848e8fa65ffd4276d91d9976fa8c644b41c15d91441ae42f897b30a2403795a876b14ae6ed8addca4a74f24839f6506a29e662e587'})
@@ -651,7 +658,7 @@ class TestApp(unittest.TestCase):
         'tests/expected_hash/archash/myzip.zip',
          'files_list':
             'tests/expected_hash/archash/md5hashziparchive-list',
-         'type': 'archive', 'delimiter': ''}).mismatched_hashes
+         'type': 'archive', 'delimiter': ''}, Options()).mismatched_hashes
         self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/myzip.zip',
             'expectedhash': 'e48e1ce2fbe0db616632ba8030ac2c9e',
             'hash': 'e48e1ce2fbe0db616632ba8030ac2c9f'})
@@ -662,7 +669,7 @@ class TestApp(unittest.TestCase):
         'tests/expected_hash/archash/myzip.zip',
          'files_list':
             'tests/expected_hash/archash/sha1hashziparchive-list',
-         'type': 'archive', 'delimiter': ''}).mismatched_hashes
+         'type': 'archive', 'delimiter': ''}, Options()).mismatched_hashes
         self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/myzip.zip',
             'expectedhash': '4cd5933d78603d8b4ba484ef8e45d2b6bc9fd5ce',
             'hash': '4cd5933d78603d8b4ba484ef8e45d2b6bc9fd5cf'})
@@ -673,7 +680,7 @@ class TestApp(unittest.TestCase):
         'tests/expected_hash/archash/myzip.zip',
          'files_list':
             'tests/expected_hash/archash/sha224hashziparchive-list',
-         'type': 'archive', 'delimiter': ''}).mismatched_hashes
+         'type': 'archive', 'delimiter': ''}, Options()).mismatched_hashes
         self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/myzip.zip',
             'expectedhash': '6e0838302f48cc7863a160f197a23492833b59862d89cabc46c2a1c4',
             'hash': '6e0838302f48cc7863a160f197a23492833b59862d89cabc46c2a1c3'})
@@ -684,7 +691,7 @@ class TestApp(unittest.TestCase):
         'tests/expected_hash/archash/myzip.zip',
          'files_list':
             'tests/expected_hash/archash/sha256hashziparchive-list',
-         'type': 'archive', 'delimiter': ''}).mismatched_hashes
+         'type': 'archive', 'delimiter': ''}, Options()).mismatched_hashes
         self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/myzip.zip',
             'expectedhash': '358bae9af3f9f510095b2e2a245a5e49ab27d7de862cd22f0dd4f212e25fb139',
             'hash': '358bae9af3f9f510095b2e2a245a5e49ab27d7de862cd22f0dd4f212e25fb138'})
@@ -695,7 +702,7 @@ class TestApp(unittest.TestCase):
         'tests/expected_hash/archash/myzip.zip',
          'files_list':
             'tests/expected_hash/archash/sha384hashziparchive-list',
-         'type': 'archive', 'delimiter': ''}).mismatched_hashes
+         'type': 'archive', 'delimiter': ''}, Options()).mismatched_hashes
         self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/myzip.zip',
             'expectedhash': '6a372e2867442826b64d1e3bca4b35e18d12d5df25e89decff214023d45f7f85d07ee79e6522f53961626e525ee29988',
             'hash': '6a372e2867442826b64d1e3bca4b35e18d12d5df25e89decff214023d45f7f85d07ee79e6522f53961626e525ee29989'})
@@ -706,7 +713,7 @@ class TestApp(unittest.TestCase):
         'tests/expected_hash/archash/myzip.zip',
          'files_list':
             'tests/expected_hash/archash/sha512hashziparchive-list',
-         'type': 'archive', 'delimiter': ''}).mismatched_hashes
+         'type': 'archive', 'delimiter': ''}, Options()).mismatched_hashes
         self.assertEqual(__mismatchedhashes[0], {'path': 'tests/expected_hash/archash/myzip.zip',
             'expectedhash': 'c177ca5b618ca613f27c44991eabb922d589691000fa602a0d2767ba84b317c653e6ed541f5922d201d2e65158eee4cfb7d87665bbe1d31c07f636bb25dac7b2',
             'hash': 'c177ca5b618ca613f27c44991eabb922d589691000fa602a0d2767ba84b317c653e6ed541f5922d201d2e65158eee4cfb7d87665bbe1d31c07f636bb25dac7b3'})
@@ -720,7 +727,7 @@ class TestApp(unittest.TestCase):
             'tests/expected_mode/arcmode/mode644.tar.gz',
              'files_list':
                 'tests/expected_mode/arcmode/tarmode644-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __modes = __myobj.mismatched_modes
         self.assertEqual(__modes, [
         {'path':'tests/expected_mode/arcmode/mode644.tar.gz','expectedmode':'654','mode':'644'}])
@@ -734,7 +741,7 @@ class TestApp(unittest.TestCase):
             'tests/expected_mode/arcmode/mode755.tar.gz',
              'files_list':
                 'tests/expected_mode/arcmode/tarmode755-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __modes = __myobj.mismatched_modes
         self.assertEqual(__modes, [
         {'path':'tests/expected_mode/arcmode/mode755.tar.gz','expectedmode':'750','mode':'755'}])
@@ -748,7 +755,7 @@ class TestApp(unittest.TestCase):
             'tests/expected_mode/arcmode/mode4644.tar.gz',
              'files_list':
                 'tests/expected_mode/arcmode/tarmode4644-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __modes = __myobj.mismatched_modes
         self.assertEqual(__modes, [
         {'path':'tests/expected_mode/arcmode/mode4644.tar.gz','expectedmode':'4600','mode':'4644'}])
@@ -762,7 +769,7 @@ class TestApp(unittest.TestCase):
             'tests/expected_mode/arcmode/mode644.zip',
              'files_list':
                 'tests/expected_mode/arcmode/zipmode644-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __modes = __myobj.mismatched_modes
         self.assertEqual(__modes, [
         {'path':'tests/expected_mode/arcmode/mode644.zip','expectedmode':'654','mode':'644'}])
@@ -776,7 +783,7 @@ class TestApp(unittest.TestCase):
             'tests/expected_mode/arcmode/mode755.zip',
              'files_list':
                 'tests/expected_mode/arcmode/zipmode755-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __modes = __myobj.mismatched_modes
         self.assertEqual(__modes, [
         {'path':'tests/expected_mode/arcmode/mode755.zip','expectedmode':'750','mode':'755'}])
@@ -790,7 +797,7 @@ class TestApp(unittest.TestCase):
             'tests/expected_mode/arcmode/mode4644.zip',
              'files_list':
                 'tests/expected_mode/arcmode/zipmode4644-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __modes = __myobj.mismatched_modes
         self.assertEqual(__modes, [
         {'path':'tests/expected_mode/arcmode/mode4644.zip','expectedmode':'4600','mode':'4644'}])
@@ -805,7 +812,7 @@ class TestApp(unittest.TestCase):
             'tests/expected_uid_gid/arc_uid_gid/uid-gid.tar.gz',
              'files_list':
                 'tests/expected_uid_gid/arc_uid_gid/tar-uid-gid-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __uids = __myobj.mismatched_uids
         __gids = __myobj.mismatched_gids
         self.assertEqual((__uids[0],__gids[0]), (
@@ -822,7 +829,7 @@ class TestApp(unittest.TestCase):
             'tests/expected_uid_gid/arc_uid_gid/uid-gid.zip',
              'files_list':
                 'tests/expected_uid_gid/arc_uid_gid/zip-uid-gid-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __uids = __myobj.mismatched_uids
         __gids = __myobj.mismatched_gids
         self.assertEqual((__uids[0],__gids[0]), (
@@ -841,7 +848,7 @@ class TestApp(unittest.TestCase):
             'tests/checkarchive_private_methods/mytar.tar.gz',
              'files_list':
                 'tests/checkarchive_private_methods/tar-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __file = 'tests/checkarchive_private_methods/mytar.tar.gz'
         __fileinfo = __myobj._CheckArchive__extract_archive_info(__file)
         self.assertEqual(type(os.lstat(__file)), type(__fileinfo))
@@ -852,7 +859,7 @@ class TestApp(unittest.TestCase):
             'tests/checkarchive_private_methods/mytar.tar.gz',
              'files_list':
                 'tests/checkarchive_private_methods/tar-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __file = 'tests/checkarchive_private_methods/mytar.tar.gz'
         __filesize = __myobj._CheckArchive__find_archive_size(__file)
         self.assertEqual(os.lstat(__file).st_size, __filesize)
@@ -863,7 +870,7 @@ class TestApp(unittest.TestCase):
             'tests/checkarchive_private_methods/mytar.tar.gz',
              'files_list':
                 'tests/checkarchive_private_methods/tar-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __file = 'tests/checkarchive_private_methods/mytar.tar.gz'
         __filemode = __myobj._CheckArchive__find_archive_mode(__file)
         self.assertEqual(stat.S_IMODE(os.lstat(__file).st_mode), __filemode)
@@ -874,7 +881,7 @@ class TestApp(unittest.TestCase):
             'tests/checkarchive_private_methods/mytar.tar.gz',
              'files_list':
                 'tests/checkarchive_private_methods/tar-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __file = 'tests/checkarchive_private_methods/mytar.tar.gz'
         __arcuid, __arcgid = __myobj._CheckArchive__find_archive_uid_gid(__file)
         __fileinfo = os.lstat(__file)
@@ -893,7 +900,7 @@ class TestApp(unittest.TestCase):
             'tests/checkzip_private_methods/myzip.zip',
              'files_list':
                 'tests/checkzip_private_methods/myzip-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __file = 'tests/checkzip_private_methods/myzip.zip'
         self._zip = zipfile.ZipFile(__file,'r')
         __result = __myobj._extract_stored_file('file-missing-in-zip/foo')
@@ -905,7 +912,7 @@ class TestApp(unittest.TestCase):
             'tests/checkzip_private_methods/myzip.zip',
              'files_list':
                 'tests/checkzip_private_methods/myzip-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __file = 'tests/checkzip_private_methods/myzip.zip'
         __myz = zipfile.ZipFile(__file,'r')
         __myinfo = __myz.infolist()
@@ -918,7 +925,7 @@ class TestApp(unittest.TestCase):
             'tests/checkzip_private_methods/myzip.zip',
              'files_list':
                 'tests/checkzip_private_methods/myzip-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __file = 'tests/checkzip_private_methods/myzip.zip'
         __myz = zipfile.ZipFile(__file,'r')
         __myinfo = __myz.infolist()
@@ -931,7 +938,7 @@ class TestApp(unittest.TestCase):
             'tests/checkzip_private_methods/myzip.zip',
              'files_list':
                 'tests/checkzip_private_methods/myzip-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __file = 'tests/checkzip_private_methods/myzip.zip'
         __myz = zipfile.ZipFile(__file,'r')
         __myinfo = __myz.infolist()
@@ -950,7 +957,7 @@ class TestApp(unittest.TestCase):
             'tests/checktar_private_methods/mytargz/mytargz.tar.gz',
              'files_list':
                 'tests/checktar_private_methods/mytargz/mytargz-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __file = 'tests/checktar_private_methods/mytargz/mytargz.tar.gz'
         self._tar = tarfile.open(__file)
         __result = __myobj._extract_stored_file('mytargz/hello')
@@ -962,7 +969,7 @@ class TestApp(unittest.TestCase):
             'tests/checktar_private_methods/mytargz/mytargz.tar.gz',
              'files_list':
                 'tests/checktar_private_methods/mytargz/mytargz-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __file = 'tests/checktar_private_methods/mytargz/mytargz.tar.gz'
         self._tar = tarfile.open(__file)
         __result = __myobj._CheckTar__translate_type(self._tar.getmembers()[2].type)
@@ -974,7 +981,7 @@ class TestApp(unittest.TestCase):
             'tests/checktar_private_methods/mytargz/mytargz.tar.gz',
              'files_list':
                 'tests/checktar_private_methods/mytargz/mytargz-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __file = 'tests/checktar_private_methods/mytargz/mytargz.tar.gz'
         self._tar = tarfile.open(__file)
         __result = __myobj._CheckTar__translate_type(self._tar.getmembers()[0].type)
@@ -986,7 +993,7 @@ class TestApp(unittest.TestCase):
             'tests/checktar_private_methods/mytargz/mytargz.tar.gz',
              'files_list':
                 'tests/checktar_private_methods/mytargz/mytargz-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __file = 'tests/checktar_private_methods/mytargz/mytargz.tar.gz'
         self._tar = tarfile.open(__file)
         __result = __myobj._CheckTar__translate_type(self._tar.getmembers()[1].type)
@@ -1004,7 +1011,7 @@ class TestApp(unittest.TestCase):
             'tests/checktree_private_methods/mytree',
              'files_list':
                 'tests/checktree_private_methods/mytree-list',
-             'type': 'tree', 'delimiter': ''})
+             'type': 'tree', 'delimiter': ''}, Options())
         __file = 'tests/checktree_private_methods/mytree'
         __result = __myobj._extract_stored_file('hello')
         with open(os.path.join(__file, 'hello'), 'rb') as self.__desc:
@@ -1017,7 +1024,7 @@ class TestApp(unittest.TestCase):
             'tests/checktree_private_methods/mytree',
              'files_list':
                 'tests/checktree_private_methods/mytree-list',
-             'type': 'tree', 'delimiter': ''})
+             'type': 'tree', 'delimiter': ''}, Options())
         __file = 'tests/checktree_private_methods/mytree/hello'
         __result = __myobj._CheckTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('f', __result)
@@ -1028,7 +1035,7 @@ class TestApp(unittest.TestCase):
             'tests/checktree_private_methods/mytree',
              'files_list':
                 'tests/checktree_private_methods/mytree-list',
-             'type': 'tree', 'delimiter': ''})
+             'type': 'tree', 'delimiter': ''}, Options())
         __file = 'tests/checktree_private_methods/mytree'
         __result = __myobj._CheckTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('d', __result)
@@ -1039,7 +1046,7 @@ class TestApp(unittest.TestCase):
             'tests/checktree_private_methods/mytree',
              'files_list':
                 'tests/checktree_private_methods/mytree-list',
-             'type': 'tree', 'delimiter': ''})
+             'type': 'tree', 'delimiter': ''}, Options())
         __file = 'tests/checktree_private_methods/mytree/riri'
         __result = __myobj._CheckTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('s', __result)
@@ -1056,7 +1063,7 @@ class TestApp(unittest.TestCase):
             'tests/checkgzip_private_methods/mygzip.gz',
              'files_list':
                 'tests/checkgzip_private_methods/mygzip-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __file = 'tests/checkgzip_private_methods/mygzip.gz'
         __result = __myobj._extract_stored_file('mygzip')
         with gzip.open(__file, 'rb') as self.__desc:
@@ -1070,7 +1077,7 @@ class TestApp(unittest.TestCase):
             __arcpath,
              'files_list':
                 'tests/checkgzip_private_methods/mygzip-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         with open(__arcpath, 'rb') as __myf:
             self.assertEqual(23, __myobj._CheckGzip__extract_size(__myf))
 
@@ -1081,7 +1088,7 @@ class TestApp(unittest.TestCase):
             __arcpath,
              'files_list':
                 'tests/checkgzip_private_methods/mygzip-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         with open(__arcpath, 'rb') as __myf:
             self.assertEqual('mygzip', __myobj._CheckGzip__extract_initial_filename(__myf, 'mygzip'))
 
@@ -1097,7 +1104,7 @@ class TestApp(unittest.TestCase):
             'tests/checkbzip2_private_methods/mybz2.bz2',
              'files_list':
                 'tests/checkbzip2_private_methods/mybzip2-list',
-             'type': 'archive', 'delimiter': ''})
+             'type': 'archive', 'delimiter': ''}, Options())
         __file = 'tests/checkbzip2_private_methods/mybz2.bz2'
         __result = __myobj._extract_stored_file('mygzip')
         with bz2.BZ2File(__file, 'r') as self.__desc:
@@ -1128,7 +1135,7 @@ class TestApp(unittest.TestCase):
     def test_listfortar_translate_type_file(self):
         '''test the __translate_type private method from GenerateListForTar - expecting file'''
         __file = 'tests/generatelistfortar_private_methods/mytar.tar.gz'
-        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar(__file)
+        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar(__file, DEFAULTDELIMITER)
         self.__tar = tarfile.open(__file)
         __result = __myobj._GenerateListForTar__translate_type(self.__tar.getmembers()[3].type)
         self.assertEqual('f', __result)
@@ -1136,7 +1143,7 @@ class TestApp(unittest.TestCase):
     def test_listfortar_translate_type_directory(self):
         '''test the __translate_type private method from GenerateListForTar - expecting directory'''
         __file = 'tests/generatelistfortar_private_methods/mytar.tar.gz'
-        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar(__file)
+        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar(__file, DEFAULTDELIMITER)
         self.__tar = tarfile.open(__file)
         __result = __myobj._GenerateListForTar__translate_type(self.__tar.getmembers()[1].type)
         self.assertEqual('d', __result)
@@ -1144,7 +1151,7 @@ class TestApp(unittest.TestCase):
     def test_listfortar_translate_type_symbolic_link(self):
         '''test the __translate_type private method from GenerateListForTar - expecting symbolic link'''
         __file = 'tests/generatelistfortar_private_methods/mytar.tar.gz'
-        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar(__file)
+        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar(__file, DEFAULTDELIMITER)
         self.__tar = tarfile.open(__file)
         __result = __myobj._GenerateListForTar__translate_type(self.__tar.getmembers()[2].type)
         self.assertEqual('s', __result)
@@ -1158,7 +1165,7 @@ class TestApp(unittest.TestCase):
     def test_listforzip_translate_type_file(self):
         '''test the __translate_type private method from GenerateListForZip - expecting file'''
         __file = 'tests/generatelistforzip_private_methods/myzip.zip'
-        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip(__file)
+        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip(__file, DEFAULTDELIMITER)
         __myz = zipfile.ZipFile(__file,'r')
         __myinfo = __myz.infolist()
         __result = __myobj._GenerateListForZip__translate_type(__myinfo[-1].external_attr >> 16)
@@ -1167,7 +1174,7 @@ class TestApp(unittest.TestCase):
     def test_listforzip_translate_type_directory(self):
         '''test the __translate_type private method from GenerateListForZip - expecting directory'''
         __file = 'tests/generatelistforzip_private_methods/myzip.zip'
-        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip(__file)
+        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip(__file, DEFAULTDELIMITER)
         __myz = zipfile.ZipFile(__file,'r')
         __myinfo = __myz.infolist()
         __result = __myobj._GenerateListForZip__translate_type(__myinfo[0].external_attr >> 16)
@@ -1176,7 +1183,7 @@ class TestApp(unittest.TestCase):
     def test_listforzip_extract_uid_gid(self):
         '''test the __extract_uid_gid private method from GenerateListForZip'''
         __file = 'tests/generatelistforzip_private_methods/myzip.zip'
-        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip(__file)
+        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip(__file, DEFAULTDELIMITER)
         __myz = zipfile.ZipFile(__file,'r')
         __myinfo = __myz.infolist()
         __result = __myobj._GenerateListForZip__extract_uid_gid(__myinfo[-1])
@@ -1192,7 +1199,7 @@ class TestApp(unittest.TestCase):
         '''test the __translate_type private method from GenerateListForTree - expecting file'''
         __dir = 'tests/generatelistfortree_private_methods/mydir'
         __file = os.path.join(__dir, 'foo')
-        __myobj = brebis.generatelist.generatelistfortree.GenerateListForTree(__dir)
+        __myobj = brebis.generatelist.generatelistfortree.GenerateListForTree(__dir, DEFAULTDELIMITER)
         __result = __myobj._GenerateListForTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('f', __result)
 
@@ -1200,7 +1207,7 @@ class TestApp(unittest.TestCase):
         '''test the __translate_type private method from GenerateListForTree - expecting directory'''
         __dir = 'tests/generatelistfortree_private_methods/mydir'
         __file = os.path.join(__dir, 'bar')
-        __myobj = brebis.generatelist.generatelistfortree.GenerateListForTree(__dir)
+        __myobj = brebis.generatelist.generatelistfortree.GenerateListForTree(__dir, DEFAULTDELIMITER)
         __result = __myobj._GenerateListForTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('d', __result)
 
@@ -1208,7 +1215,7 @@ class TestApp(unittest.TestCase):
         '''test the __translate_type private method from GenerateListForTree - expecting symbolic link'''
         __dir = 'tests/generatelistfortree_private_methods/mydir'
         __file = os.path.join(__dir, 'oof')
-        __myobj = brebis.generatelist.generatelistfortree.GenerateListForTree(__dir)
+        __myobj = brebis.generatelist.generatelistfortree.GenerateListForTree(__dir, DEFAULTDELIMITER)
         __result = __myobj._GenerateListForTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('s', __result)
 
@@ -1221,13 +1228,13 @@ class TestApp(unittest.TestCase):
     def test_listforgzip_extract_size_from_gzip_archive(self):
         '''test the extraction of a gzip uncompressed file in the gzip archive'''
         __file = 'tests/generatelistforgzip_private_methods/mygzip.gz'
-        __myobj = brebis.generatelist.generatelistforgzip.GenerateListForGzip(__file)
+        __myobj = brebis.generatelist.generatelistforgzip.GenerateListForGzip(__file, DEFAULTDELIMITER)
         with open(__file, 'rb') as __myf:
             self.assertEqual(15, __myobj._GenerateListForGzip__extract_size(__myf))
 
     def test_listforgzip_extract_initial_filename_from_gzip_archive(self):
         __file = 'tests/generatelistforgzip_private_methods/mygzip.gz'
-        __myobj = brebis.generatelist.generatelistforgzip.GenerateListForGzip(__file)
+        __myobj = brebis.generatelist.generatelistforgzip.GenerateListForGzip(__file, DEFAULTDELIMITER)
         with open(__file, 'rb') as __myf:
             self.assertEqual('mygzip', __myobj._GenerateListForGzip__extract_initial_filename(__myf, 'mygzip'))
 

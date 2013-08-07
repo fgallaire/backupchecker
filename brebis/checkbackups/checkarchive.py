@@ -25,7 +25,7 @@ import brebis.checkhashes
 class CheckArchive(object):
     '''Check an archive'''
 
-    def __init__(self, _cfgvalues):
+    def __init__(self, _cfgvalues, _options):
         '''The constructor of the CheckArchive class.
 
         _cfgvalues -- the expected values for the archive
@@ -42,7 +42,7 @@ class CheckArchive(object):
         self._mismatched_types = []
         self._mismatched_hashes = []
         self.__fileinfo = False
-        self._main(_cfgvalues)
+        self._main(_cfgvalues, _options)
 
     def _check_path(self, __arcinfo, _data):
         '''Check if the expected path exists in the archive'''
