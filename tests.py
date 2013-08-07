@@ -1238,6 +1238,30 @@ class TestApp(unittest.TestCase):
         with open(__file, 'rb') as __myf:
             self.assertEqual('mygzip', __myobj._GenerateListForGzip__extract_initial_filename(__myf, 'mygzip'))
 
+#######################################################################################
+#
+# Testing the consistent given version of the software both in setup.py and cliparse.py
+#
+#######################################################################################
+
+    def test_version_consistency_in_setup_py_and_cliparse_py(self):
+        '''test the consistency of the version of the software
+           in both setup.py and cliparse.py
+        '''
+        with open('setup.py') as __setuppy:
+            __setuppycode = __setuppy.readlines()
+        with open('brebis/cliparse.py') as __cliparsepy:
+            __cliparsepycode = __cliparsepy.readlines()
+        for line in __setuppycode:
+            if 'version = ' in line:
+                setuppyversion = line.split("'")[1]
+                break
+        for line in __cliparsepycode:
+            if 'version=' in line:
+                cliparsepyversion = line.split('s ')[1].split("'")[0]
+                break
+        self.assertEqual(setuppyversion, cliparsepyversion)
+
 ################################################################
 #
 # End of the unit tests
