@@ -2712,6 +2712,16 @@ class Test_generate_list_changing_default_separator_for_tree:
                     else:
                         __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
 
+class Test_expecting_hard_link_for_tar_gz(Main):
+    '''Test if an expecting hard link in a tar.gz archive fails on a regular file'''
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/expecting-hard-link-for-tar-gz')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('is a regular file. Should have been a hard link')
+
+
 if __name__ == '__main__':
     processes = []
     results = []
