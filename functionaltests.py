@@ -16,7 +16,7 @@
 
 import hashlib
 from multiprocessing import Process, Queue
-from os import linesep, environ
+from os import linesep, environ, link
 import subprocess
 import os.path
 import sys
@@ -1485,6 +1485,15 @@ class Test_wrong_file_type_l_in_tree(Main):
         self._queue = q
         self._testname = self.__class__.__name__
         self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-l-in-tree')
+        __testsubdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-l-in-tree/wrong-file-type-l-in-tree')
+        __mockfile = os.path.join(__testsubdir, 'foo')
+        __mocklink = os.path.join(__testsubdir, 'bar')
+        if os.path.exists(__mockfile):
+            os.remove(__mockfile)
+        if os.path.exists(__mocklink):
+            os.remove(__mocklink)
+        open(__mockfile, 'w')
+        link(__mockfile, __mocklink)
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected type')
 
