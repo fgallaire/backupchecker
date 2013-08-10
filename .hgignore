@@ -31,3 +31,5 @@ functional-tests/generate-list-changing-default-separator/tar.xz/generate-list-c
 functional-tests/generate-list-changing-default-separator/tree/generate-list-changing-default-separator-for-tree.list
 functional-tests/generate-list-changing-default-separator/zip/generate-list-changing-default-separator-for-zip.list
 functional-tests/generate-list-and-parse-tbz-archive/generate-list-and-parse-tbz-archive.list
+functional-tests/wrong-file-type-l-in-tree/wrong-file-type-l-in-tree/bar
+functional-tests/wrong-file-type-l-in-tree/wrong-file-type-l-in-tree/foo
