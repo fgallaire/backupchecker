@@ -1422,6 +1422,72 @@ class Test_wrong_file_type_d_in_tree(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected type')
 
+class Test_wrong_file_type_s_in_tar_gz_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-s-in-tar-gz-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected type')
+
+class Test_wrong_file_type_s_in_tar_bz2_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-s-in-tar-bz2-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected type')
+
+class Test_wrong_file_type_s_in_tar_xz_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-s-in-tar-xz-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected type')
+
+
+class Test_wrong_file_type_s_in_tree(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-s-in-tree')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected type')
+
+class Test_wrong_file_type_l_in_tar_gz_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-l-in-tar-gz-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected type')
+
+class Test_wrong_file_type_l_in_tar_bz2_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-l-in-tar-bz2-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected type')
+
+class Test_wrong_file_type_l_in_tar_xz_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-l-in-tar-xz-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected type')
+
+
+class Test_wrong_file_type_l_in_tree(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-l-in-tree')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected type')
+
 class Test_corrupted_tar_gz_archive(Main):
     def __init__(self, q):
         self._queue = q
