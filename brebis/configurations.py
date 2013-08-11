@@ -36,14 +36,21 @@ class Configurations:
     def __parse_configurations(self, __confpath):
         '''Parse the different configurations'''
         try:
-            __confs = [__file for __file in os.listdir(__confpath) 
-                if __file.endswith('.conf')]
+            # check if the path to the confs is a directory or a file
+            if os.path.isdir(__confpath):
+                __confs = [__file for __file in os.listdir(__confpath)
+                    if __file.endswith('.conf')]
+            else:
+                __confpath, __conft = os.path.split(__confpath)
+                __confs = [__conft]
+
             # check if at least one configuration file is availabe
             if not __confs:
                 __errmsg = 'Could not find any .conf file in {}'
                 print(__errmsg.format(__confpath))
                 sys.exit(1)
             # parse the configuration files
+                
             for __conf in __confs:
                 __currentconf = {}
                 __config = ConfigParser()
