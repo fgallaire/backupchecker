@@ -97,9 +97,9 @@ class CliParse:
         AppLogger(__options.logfile)
         # Verify if --gen-list option is not invoked before calling configuration path control
         if not __options.genlist:
-            # Check the configuration directory
+            # Check the configuration directory or file
             if not os.path.exists(__options.confpath):
-                logging.info('The configuration directory does not exist')
+                print('The configuration directory or file does not exist: {}'.format(__options.confpath))
                 sys.exit(1)
             __options.confpath = os.path.abspath(__options.confpath)
         self.__options = __options
