@@ -26,10 +26,10 @@ from brebis.checkbackups.checkarchive import CheckArchive
 class CheckTar(CheckArchive):
     '''Check a tar archive'''
 
-    def _main(self, _cfgvalues):
+    def _main(self, _cfgvalues, _options):
         '''Main for CheckTar'''
         _data = []
-        _data, __arcdata = ExpectedValues(_cfgvalues).data
+        _data, __arcdata = ExpectedValues(_cfgvalues, _options).data
         #########################
         # Test the archive itself
         #########################

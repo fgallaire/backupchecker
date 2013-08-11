@@ -143,6 +143,7 @@ class ArchiveInfoMsg(object):
                     'c': 'character',
                     'd': 'directory',
                     's': 'symbolic link',
+                    'l': 'hard link',
                     'b': 'block',
                     'o': 'fifo',
                     'k': 'socket'}

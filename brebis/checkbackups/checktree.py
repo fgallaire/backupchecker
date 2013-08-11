@@ -25,11 +25,11 @@ from brebis.checkbackups.checkarchive import CheckArchive
 class CheckTree(CheckArchive):
     '''Check a file tree'''
 
-    def _main(self, _cfgvalues):
+    def _main(self, _cfgvalues, _options):
         '''Main for CheckTree'''
         _data = []
         self.__treepath = _cfgvalues['path']
-        _data, __arcdata = ExpectedValues(_cfgvalues).data
+        _data, __arcdata = ExpectedValues(_cfgvalues, _options).data
         # Save the tree root to determine the relative path in the file tree
         self.__treepath = self.__treepath
         for __dirpath, __dirnames, __filenames, in os.walk(_cfgvalues['path']):
@@ -46,12 +46,12 @@ class CheckTree(CheckArchive):
             for __filename in __filenames:
                 __filepath = os.path.join(__dirpath, __filename)
                 __filepath = self._normalize_path(__filepath)
-                __fileinfo = os.lstat(__filepath)
-                __filemode = stat.S_IMODE(__fileinfo.st_mode)
-                __type = self.__translate_type(__fileinfo.st_mode)
+                self.fileinfo = os.lstat(__filepath)
+                __filemode = stat.S_IMODE(self.fileinfo.st_mode)
+                __type = self.__translate_type(self.fileinfo.st_mode)
                 __arcinfo = {'path': os.path.relpath(__filepath, self.__treepath),
-                            'size': __fileinfo.st_size, 'uid': __fileinfo.st_uid,
-                            'gid': __fileinfo.st_gid, 'mode': __filemode,
+                            'size': self.fileinfo.st_size, 'uid': self.fileinfo.st_uid,
+                            'gid': self.fileinfo.st_gid, 'mode': __filemode,
                             'type': __type}
                 _data = self._check_path(__arcinfo, _data)
         self._missing_files = [_file['path'] for _file in _data]
@@ -59,7 +59,10 @@ class CheckTree(CheckArchive):
     def __translate_type(self, __mode):
         '''Translate the type of the file to a generic name'''
         if stat.S_ISREG(__mode):
-            return 'f'
+            if self.fileinfo[stat.ST_NLINK] > 1:
+                return 'l'
+            else:
+                return 'f'
         elif stat.S_ISDIR(__mode):
             return 'd'
         elif stat.S_ISCHR(__mode):

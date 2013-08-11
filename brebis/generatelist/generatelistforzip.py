@@ -26,9 +26,10 @@ from brebis.generatelist.generatelist import GenerateList
 class GenerateListForZip(GenerateList):
     '''Generate a list of files from a zip archive'''
 
-    def __init__(self, __arcpath):
+    def __init__(self, __arcpath, __delimiter):
         '''The constructor for the GenerateListForZip class'''
         self.__arcpath = __arcpath
+        self.__delimiter = __delimiter
         try:
             __zip = zipfile.ZipFile(self.__arcpath, 'r', allowZip64=True)
             self.__main(__zip)
@@ -39,8 +40,8 @@ class GenerateListForZip(GenerateList):
     def __main(self, __zip):
         '''Main of the GenerateListForZip class'''
         __listoffiles = ['[files]\n']
-        __oneline = '{}| ={} uid|{} gid|{} mode|{} type|{}\n'
-        __onelinewithhash = '{}| ={} uid|{} gid|{} mode|{} type|{} md5|{}\n'
+        __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
+        __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
         __crcerror = __zip.testzip()
         if __crcerror:
             logging.warning('{} has at least one file corrupted:{}'.format(self.__arcpath, __crcerror))

@@ -31,38 +31,41 @@ from brebis.checkbackups.checktree import CheckTree
 class CheckBackups(object):
     '''The backup checker class'''
 
-    def __init__(self, __confs):
+    def __init__(self, __confs, __options):
         '''The constructor for the Checkbackups class.
 
         __confs -- the different configurations of the backups
+        __options -- global options from the command line
 
         '''
-        self.__main(__confs)
+        self.__main(__confs, __options)
 
-    def __main(self, __confs):
+    def __main(self, __confs, __options):
         '''Main for CheckBackups'''
         __cfgsets = __confs.values()
         for __cfgvalues in __cfgsets:
             # check a file tree
             if __cfgvalues['type'] == 'tree':
-                __bck = CheckTree(__cfgvalues)
+                __bck = CheckTree(__cfgvalues, __options)
             # check a tar file, by name
             elif __cfgvalues['type'] == 'archive' and (__cfgvalues['path'].lower().endswith('.tar') \
                 or __cfgvalues['path'].lower().endswith('.tar.gz') \
                 or __cfgvalues['path'].lower().endswith('.tar.bz2') \
                 or __cfgvalues['path'].lower().endswith('.tar.xz') \
-                or __cfgvalues['path'].lower().endswith('.tgz')):
-                __bck = CheckTar(__cfgvalues)
+                or __cfgvalues['path'].lower().endswith('.tgz') \
+                or __cfgvalues['path'].lower().endswith('.tbz') \
+                or __cfgvalues['path'].lower().endswith('.tbz2')):
+                __bck = CheckTar(__cfgvalues, __options)
             # check a gzip file, by name
             elif __cfgvalues['type'] == 'archive' and __cfgvalues['path'].lower().endswith('.gz'):
-                __bck = CheckGzip(__cfgvalues)
+                __bck = CheckGzip(__cfgvalues, __options)
             # check a bzip2 file, by name
             elif __cfgvalues['type'] == 'archive' and __cfgvalues['path'].lower().endswith('.bz2'):
-                __bck = CheckBzip2(__cfgvalues)
+                __bck = CheckBzip2(__cfgvalues, __options)
             # check a xz file, by name
             elif __cfgvalues['type'] == 'archive' and __cfgvalues['path'].lower().endswith('.xz'):
-                __bck = CheckLzma(__cfgvalues)
+                __bck = CheckLzma(__cfgvalues, __options)
             # check a zip file, by name
             elif __cfgvalues['type'] == 'archive' and __cfgvalues['path'].lower().endswith('.zip'):
-                __bck = CheckZip(__cfgvalues)
+                __bck = CheckZip(__cfgvalues, __options)
             ArchiveInfoMsg(__bck, __cfgvalues)

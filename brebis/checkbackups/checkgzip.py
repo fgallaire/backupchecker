@@ -28,10 +28,10 @@ from brebis.identifylimitations import IdentifyLimitations
 class CheckGzip(CheckArchive):
     '''Check a gzip archive'''
 
-    def _main(self, _cfgvalues):
+    def _main(self, _cfgvalues, _options):
         '''Main for CheckGzip'''
         _data = []
-        _data, __arcdata = ExpectedValues(_cfgvalues).data
+        _data, __arcdata = ExpectedValues(_cfgvalues, _options).data
         self.__arcpath = _cfgvalues['path']
         #########################
         # Test the archive itself

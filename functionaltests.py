@@ -16,9 +16,10 @@
 
 import hashlib
 from multiprocessing import Process, Queue
-from os import linesep, environ
+from os import linesep, environ, link
 import subprocess
 import os.path
+import shutil
 import sys
 
 import functionaltests
@@ -27,10 +28,12 @@ EXE = './brebis.py'
 OPTCONFIG = '-c'
 OPTLOG = '-l'
 OPTGEN = '-g'
+OPTDEL = '-d'
 OKMSG = 'ok'
 KOMSG = 'ko - '
 PYTHONEXE =''
 ABSPATH = ''
+ALTERNATEDELIMITER = '('
 
 # To correctly use the tests with buildbot
 if 'PYTHONEXE' in environ:
@@ -1420,6 +1423,82 @@ class Test_wrong_file_type_d_in_tree(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected type')
 
+class Test_wrong_file_type_s_in_tar_gz_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-s-in-tar-gz-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected type')
+
+class Test_wrong_file_type_s_in_tar_bz2_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-s-in-tar-bz2-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected type')
+
+class Test_wrong_file_type_s_in_tar_xz_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-s-in-tar-xz-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected type')
+
+
+class Test_wrong_file_type_s_in_tree(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-s-in-tree')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected type')
+
+class Test_wrong_file_type_l_in_tar_gz_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-l-in-tar-gz-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected type')
+
+class Test_wrong_file_type_l_in_tar_bz2_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-l-in-tar-bz2-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected type')
+
+class Test_wrong_file_type_l_in_tar_xz_archive(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-l-in-tar-xz-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected type')
+
+
+class Test_wrong_file_type_l_in_tree(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-l-in-tree')
+        __testsubdir = os.path.join(ABSPATH, 'functional-tests/wrong-file-type-l-in-tree/wrong-file-type-l-in-tree')
+        __mockfile = os.path.join(__testsubdir, 'foo')
+        __mocklink = os.path.join(__testsubdir, 'bar')
+        if os.path.exists(__testsubdir):
+            shutil.rmtree(__testsubdir)
+            os.mkdir(__testsubdir)
+        else:
+            os.mkdir(__testsubdir)
+        open(__mockfile, 'w')
+        link(__mockfile, __mocklink)
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('1 file with unexpected type')
+
 class Test_corrupted_tar_gz_archive(Main):
     def __init__(self, q):
         self._queue = q
@@ -2154,6 +2233,28 @@ class Test_generate_list_and_parse_tar_archive(MainGenerateParse):
             self._resultfile = os.path.join(self._testdir, 'a.out')
             self._main('')
 
+class Test_generate_list_and_parse_tbz_archive(MainGenerateParse):
+    '''Generate a list of files inside the tbz (same as tar.bz2) archive and parse this one right after'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-list-and-parse-tbz-archive')
+        __archive = os.path.join(__testdir, 'generate-list-and-parse-tbz-archive.tbz')
+        __resultfile = os.path.join(__testdir, 'generate-list-and-parse-tbz-archive.list')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            self._queue = q
+            self._testname = __testname
+            self._testdir = __testdir
+            self._resultfile = os.path.join(self._testdir, 'a.out')
+            self._main('')
+
 class Test_generate_list_and_parse_zip_archive(MainGenerateParse):
     '''Generate a list of files inside the zip archive and parse this one right after'''
     def __init__(self, q):
@@ -2440,7 +2541,264 @@ class Test_bzip2_archive_size_smaller_than_expected_size(Main):
         self._testdir = os.path.join(ABSPATH, 'functional-tests/bzip2-archive-size-smaller-than-expected-size')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file smaller than')
+
+class Test_checkarchive_supported_types_equals_listtype_supported_types:
+    '''Test if the supported types in checkarchives.py equals those in
+       listtype.py
+       This is not exactly a functional test but it triggered bug #24 so
+       it needs to be tested  
+    '''
+    def __init__(self, q):
+        # extract supported extensions from the code
+        # store them in sets and compare them
+        __queue = q
+        __testname = self.__class__.__name__
+        with open('brebis/checkbackups/checkbackups.py') as __f1:
+            __checkarchivescode = __f1.readlines()
+        with open('brebis/listtype.py') as __f2:
+            __listtypecode = __f2.readlines()
+        __checkarchivestypes = set()
+        __listtypetypes = set()
+        for __line in __checkarchivescode:
+            if 'endswith' in __line:
+                __checkarchivestypes.add(__line.split(".endswith('")[1].split("'")[0])
+        for __line in __listtypecode:
+            if 'endswith' in __line:
+                __listtypetypes.add(__line.split(".endswith('")[1].split("'")[0])
+        # symmetrical differences of the two sets
+        __unsupportedtypes = __checkarchivestypes ^ __listtypetypes
+        if not __unsupportedtypes:
+            __queue.put('{} - {}'.format(__testname, OKMSG))
+        else:
+            __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
             
+class Test_generate_list_changing_default_separator_for_tar_gz:
+    '''Generate a list of files changing the default separator for tar gz archive'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-list-changing-default-separator/tar.gz')
+        __archive = os.path.join(__testdir, 'generate-list-changing-default-separator-for-tar-gz.tar.gz')
+        __resultfile = os.path.join(__testdir, 'generate-list-changing-default-separator-for-tar-gz.list')
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            # check now the newly modified list of files with the new delimiter
+            if 'PYTHONEXE' in environ:
+                __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTCONFIG, __testdir, OPTLOG, __output])
+            else:
+                __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTCONFIG, __testdir, OPTLOG, __output])
+            if __retcode != 0:
+                __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+            else:
+                with open(__output, 'r') as __file:
+                    if '' in __file.read():
+                        __queue.put('{} - {}'.format(__testname, OKMSG))
+                    else:
+                        __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+            
+class Test_generate_list_changing_default_separator_for_tar_bz2:
+    '''Generate a list of files changing the default separator for tar bz2 archive'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-list-changing-default-separator/tar.bz2')
+        __archive = os.path.join(__testdir, 'generate-list-changing-default-separator-for-tar-bz2.tar.bz2')
+        __resultfile = os.path.join(__testdir, 'generate-list-changing-default-separator-for-tar-bz2.list')
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            # check now the newly modified list of files with the new delimiter
+            if 'PYTHONEXE' in environ:
+                __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTCONFIG, __testdir, OPTLOG, __output])
+            else:
+                __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTCONFIG, __testdir, OPTLOG, __output])
+            if __retcode != 0:
+                __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+            else:
+                with open(__output, 'r') as __file:
+                    if '' in __file.read():
+                        __queue.put('{} - {}'.format(__testname, OKMSG))
+                    else:
+                        __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+            
+class Test_generate_list_changing_default_separator_for_tar_xz:
+    '''Generate a list of files changing the default separator for tar xz archive'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-list-changing-default-separator/tar.xz')
+        __archive = os.path.join(__testdir, 'generate-list-changing-default-separator-for-tar-xz.tar.xz')
+        __resultfile = os.path.join(__testdir, 'generate-list-changing-default-separator-for-tar-xz.list')
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            # check now the newly modified list of files with the new delimiter
+            if 'PYTHONEXE' in environ:
+                __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTCONFIG, __testdir, OPTLOG, __output])
+            else:
+                __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTCONFIG, __testdir, OPTLOG, __output])
+            if __retcode != 0:
+                __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+            else:
+                with open(__output, 'r') as __file:
+                    if '' in __file.read():
+                        __queue.put('{} - {}'.format(__testname, OKMSG))
+                    else:
+                        __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+        
+class Test_generate_list_changing_default_separator_for_gzip:
+    '''Generate a list of files changing the default separator for gzip archive'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-list-changing-default-separator/gzip')
+        __archive = os.path.join(__testdir, 'generate-list-changing-default-separator-for-gzip.gz')
+        __resultfile = os.path.join(__testdir, 'generate-list-changing-default-separator-for-gzip.list')
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            # check now the newly modified list of files with the new delimiter
+            if 'PYTHONEXE' in environ:
+                __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTCONFIG, __testdir, OPTLOG, __output])
+            else:
+                __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTCONFIG, __testdir, OPTLOG, __output])
+            if __retcode != 0:
+                __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+            else:
+                with open(__output, 'r') as __file:
+                    if '' in __file.read():
+                        __queue.put('{} - {}'.format(__testname, OKMSG))
+                    else:
+                        __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+            
+class Test_generate_list_changing_default_separator_for_bzip2:
+    '''Generate a list of files changing the default separator for bzip2 archive'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-list-changing-default-separator/bzip2')
+        __archive = os.path.join(__testdir, 'generate-list-changing-default-separator-for-bzip2.bz2')
+        __resultfile = os.path.join(__testdir, 'generate-list-changing-default-separator-for-bzip2.list')
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            # check now the newly modified list of files with the new delimiter
+            if 'PYTHONEXE' in environ:
+                __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTCONFIG, __testdir, OPTLOG, __output])
+            else:
+                __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTCONFIG, __testdir, OPTLOG, __output])
+            if __retcode != 0:
+                __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+            else:
+                with open(__output, 'r') as __file:
+                    if '' in __file.read():
+                        __queue.put('{} - {}'.format(__testname, OKMSG))
+                    else:
+                        __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+
+class Test_generate_list_changing_default_separator_for_zip:
+    '''Generate a list of files changing the default separator for zip archive'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-list-changing-default-separator/zip')
+        __archive = os.path.join(__testdir, 'generate-list-changing-default-separator-for-zip.zip')
+        __resultfile = os.path.join(__testdir, 'generate-list-changing-default-separator-for-zip.list')
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            # check now the newly modified list of files with the new delimiter
+            if 'PYTHONEXE' in environ:
+                __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTCONFIG, __testdir, OPTLOG, __output])
+            else:
+                __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTCONFIG, __testdir, OPTLOG, __output])
+            if __retcode != 0:
+                __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+            else:
+                with open(__output, 'r') as __file:
+                    if '' in __file.read():
+                        __queue.put('{} - {}'.format(__testname, OKMSG))
+                    else:
+                        __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+
+class Test_generate_list_changing_default_separator_for_tree:
+    '''Generate a list of files changing the default separator for a tree of files'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-list-changing-default-separator/tree')
+        __archive = os.path.join(__testdir, 'generate-list-changing-default-separator-for-tree')
+        __resultfile = os.path.join(__testdir, 'generate-list-changing-default-separator-for-tree.list')
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            # check now the newly modified list of files with the new delimiter
+            if 'PYTHONEXE' in environ:
+                __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTCONFIG, __testdir, OPTLOG, __output])
+            else:
+                __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTCONFIG, __testdir, OPTLOG, __output])
+            if __retcode != 0:
+                __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+            else:
+                with open(__output, 'r') as __file:
+                    if '' in __file.read():
+                        __queue.put('{} - {}'.format(__testname, OKMSG))
+                    else:
+                        __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+
+class Test_expecting_hard_link_for_tar_gz(Main):
+    '''Test if an expecting hard link in a tar.gz archive fails on a regular file'''
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/expecting-hard-link-for-tar-gz')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('is a regular file. Should have been a hard link')
+
+
 if __name__ == '__main__':
     processes = []
     results = []

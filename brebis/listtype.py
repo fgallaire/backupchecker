@@ -29,36 +29,39 @@ from brebis.generatelist.generatelistforzip import GenerateListForZip
 class ListType(object):
     '''The ListType class'''
 
-    def __init__(self, __arcpaths):
+    def __init__(self, __options):
         '''The constructor for the ListType class.
         '''
-        self.__main(__arcpaths)
+        self.__main(__options)
 
-    def __main(self, __arcpaths):
+    def __main(self, __options):
         '''Main for ListType class'''
+        __arcpaths = __options.archives
+        __delimiter = __options.delimiter
         for __arcpath in __arcpaths:
             # generate a list of files for a tree
             if os.path.isdir(__arcpath):
-                __bck = GenerateListForTree(__arcpath)
+                __bck = GenerateListForTree(__arcpath, __delimiter)
             # generate a list of files for a tar.gz/bz2 archive
             elif __arcpath.lower().endswith('.tar') or\
                     __arcpath.lower().endswith('.tar.gz') or\
                     __arcpath.lower().endswith('.tar.bz2') or\
                     __arcpath.lower().endswith('.tar.xz') or\
                     __arcpath.lower().endswith('.tgz') or\
+                    __arcpath.lower().endswith('.tbz') or\
                     __arcpath.lower().endswith('.tbz2'):
-                __bck = GenerateListForTar(__arcpath)
+                __bck = GenerateListForTar(__arcpath, __delimiter)
             # generate a list of files for a gzip archive
             elif __arcpath.lower().endswith('.gz'):
-                __bck = GenerateListForGzip(__arcpath)
+                __bck = GenerateListForGzip(__arcpath, __delimiter)
             # generate a list of files for a bzip2 archive
             elif __arcpath.lower().endswith('.bz2'):
-                __bck = GenerateListForBzip2(__arcpath)
+                __bck = GenerateListForBzip2(__arcpath, __delimiter)
             # generate a list of files for a lzma archive
             elif __arcpath.lower().endswith('.xz'):
-                __bck = GenerateListForLzma(__arcpath)
+                __bck = GenerateListForLzma(__arcpath, __delimiter)
             # generate a list of files for a zip archive
             elif __arcpath.lower().endswith('.zip'):
-                __bck = GenerateListForZip(__arcpath)
+                __bck = GenerateListForZip(__arcpath, __delimiter)
             # A MESSAGE RESUMING OPERATION FOR GENERATING THE LIST OF FILES IS MISSING HERE
 
