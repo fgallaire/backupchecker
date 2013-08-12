@@ -2233,6 +2233,28 @@ class Test_generate_list_and_parse_tar_archive(MainGenerateParse):
             self._resultfile = os.path.join(self._testdir, 'a.out')
             self._main('')
 
+class Test_generate_list_and_parse_tgz_archive(MainGenerateParse):
+    '''Generate a list of files inside the tgz (same as tar.gz) archive and parse this one right after'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-list-and-parse-tgz-archive')
+        __archive = os.path.join(__testdir, 'generate-list-and-parse-tgz-archive.tgz')
+        __resultfile = os.path.join(__testdir, 'generate-list-and-parse-tgz-archive.list')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            self._queue = q
+            self._testname = __testname
+            self._testdir = __testdir
+            self._resultfile = os.path.join(self._testdir, 'a.out')
+            self._main('')
+
 class Test_generate_list_and_parse_tbz_archive(MainGenerateParse):
     '''Generate a list of files inside the tbz (same as tar.bz2) archive and parse this one right after'''
     def __init__(self, q):
@@ -2242,6 +2264,28 @@ class Test_generate_list_and_parse_tbz_archive(MainGenerateParse):
         __testdir = os.path.join(ABSPATH, 'functional-tests/generate-list-and-parse-tbz-archive')
         __archive = os.path.join(__testdir, 'generate-list-and-parse-tbz-archive.tbz')
         __resultfile = os.path.join(__testdir, 'generate-list-and-parse-tbz-archive.list')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            self._queue = q
+            self._testname = __testname
+            self._testdir = __testdir
+            self._resultfile = os.path.join(self._testdir, 'a.out')
+            self._main('')
+
+class Test_generate_list_and_parse_tbz2_archive(MainGenerateParse):
+    '''Generate a list of files inside the tbz2 (same as tar.bz2) archive and parse this one right after'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-list-and-parse-tbz2-archive')
+        __archive = os.path.join(__testdir, 'generate-list-and-parse-tbz2-archive.tbz2')
+        __resultfile = os.path.join(__testdir, 'generate-list-and-parse-tbz2-archive.list')
         if 'PYTHONEXE' in environ:
             __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
         else:
