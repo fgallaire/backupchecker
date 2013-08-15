@@ -1,8 +1,12 @@
 2013-08-16  Carl Chenet  <chaica@ohmytux.com>
 
+	* README, changelog:
+	update the README for the version 0.6
+	[e2f6739dda3b] [tip]
+
 	* brebis/cliparse.py, setup.py:
 	bump version to 0.6
-	[d8564da2454d] [tip]
+	[d8564da2454d]
 
 2013-08-15  Carl Chenet  <chaica@ohmytux.com>
 
