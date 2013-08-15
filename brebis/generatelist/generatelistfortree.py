@@ -90,7 +90,7 @@ class GenerateListForTree(GenerateList):
             return 'c'
         elif stat.S_ISLNK(__mode):
             return 's' 
-        elif stat.S_BLK(__mode):
+        elif stat.S_ISBLK(__mode):
             return 'b'
         elif stat.S_ISSOCK(__mode):
             return 'k'
