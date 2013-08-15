@@ -33,7 +33,7 @@ CLASSIFIERS = [
 ]
 
 setup(name = 'brebis',
-    version = '0.5',
+    version = '0.6',
     license = 'GNU GPL v3',
     description = 'automated backup checker',
     long_description = 'Brebis is a fully automated backup checker.',
