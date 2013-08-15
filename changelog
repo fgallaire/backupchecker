@@ -1,9 +1,326 @@
+2013-08-16  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/cliparse.py, setup.py:
+	bump version to 0.6
+	[d8564da2454d] [tip]
+
+2013-08-15  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/generatelist/generatelistfortree.py:
+	give the good name to a (rather unused) stat module function
+	S_ISBLK. fixes #28
+	[0db0fc6ccd3e]
+
+	* catch EOFError exception triggered while generating/checking a (big)
+	tar archive. fixes #36
+	[930679aa1b85]
+
+	* brebis/checkbackups/checktar.py:
+	catch EOFError while checking tar file because it is a sign of
+	corruption of the file
+	[e9d4ccf7e267] <uncatched-exception-related-to-archive-corruption-36>
+
+	* brebis/generatelist/generatelistfortar.py:
+	catch EOFError while manipulating tar file because it is a sign of
+	corruption of the file
+	[530aeab6b84e] <uncatched-exception-related-to-archive-corruption-36>
+
+	* brebis.py:
+	update shebang with debian python3.3
+	[9d688bba150c]
+
+2013-08-13  Carl Chenet  <chaica@ohmytux.com>
+
+	* .hgignore, functional-tests/generate-list-and-parse-tbz2-archive
+	/generate-list-and-parse-tbz2-archive.conf, functional-tests
+	/generate-list-and-parse-tbz2-archive/generate-list-and-parse-
+	tbz2-archive.tbz2, functional-tests/generate-list-and-parse-tgz-
+	archive/generate-list-and-parse-tgz-archive.conf, functional-tests
+	/generate-list-and-parse-tgz-archive/generate-list-and-parse-tgz-
+	archive.tgz, functionaltests.py:
+	add generate list and parse tgz and tbz2 archive tests. fixes #31
+	[cb312c17bc0a]
+
+	* brebis/generatelist/generatelistfortar.py:
+	fix code error about support for tbz2
+	[e47e51b36a00]
+
+2013-08-11  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/cliparse.py, brebis/configurations.py:
+	check if configuration paths exist. fixes #34
+	[fe980e6b5de2]
+
+	* provide only one configuration file on the cli. fixes #21
+	[acd7acce000a]
+
+	* brebis/configurations.py:
+	merge to check if only one conf file feature works with latest
+	version in head
+	[2ff4690b5da6] <conf-option-takes-one-conf-file>
+
+2013-08-10  Carl Chenet  <chaica@ohmytux.com>
+
+	* .hgignore, functionaltests.py:
+	create the need directory for wrong file type (hard link) in tree
+	test
+	[80e54b3dfa6a]
+
+	* functional-tests/wrong-file-type-l-in-tree/wrong-file-type-l-in-
+	tree.list, functional-tests/wrong-file-type-l-in-tree/wrong-file-
+	type-l-in-tree/bar, functional-tests/wrong-file-type-l-in-tree
+	/wrong-file-type-l-in-tree/foo, functionaltests.py:
+	update to wrong file type (hard link) to generate the needed hard
+	link itself
+	[f74fb1351d99]
+
+	* detect hard link with stat. fixes #33
+	[34decdc22d4c]
+
+	* functional-tests/wrong-file-type-l-in-tree/wrong-file-type-l-in-
+	tree.list:
+	activate wrong file type hard link in tree test
+	[1eb2e4f05ff0] <detect-hard-link-with-stat>
+
+	* brebis/checkbackups/checktree.py:
+	detect hard link for uncompressed tree of files
+	[c890198c8588] <detect-hard-link-with-stat>
+
+	* functional-tests/wrong-file-type-l-in-tree/wrong-file-type-l-in-
+	tree.conf, functional-tests/wrong-file-type-l-in-tree/wrong-file-
+	type-l-in-tree.list, functional-tests/wrong-file-type-l-in-tree
+	/wrong-file-type-l-in-tree/bar, functional-tests/wrong-file-type-l
+	-in-tree/wrong-file-type-l-in-tree/foo:
+	add wrong file type hard link in tree - test is useless for now,
+	need #33 to be solved
+	[04ae3ce63d6e]
+
+	* functional-tests/wrong-file-type-l-in-tar-bz2-archive/wrong-file-
+	type-l-in-tar-bz2-archive.conf, functional-tests/wrong-file-type-l
+	-in-tar-bz2-archive/wrong-file-type-l-in-tar-bz2-archive.list,
+	functional-tests/wrong-file-type-l-in-tar-bz2-archive/wrong-file-
+	type-l-in-tar-bz2-archive.tar.bz2, functional-tests/wrong-file-
+	type-l-in-tar-gz-archive/wrong-file-type-l-in-tar-gz-archive.conf,
+	functional-tests/wrong-file-type-l-in-tar-gz-archive/wrong-file-
+	type-l-in-tar-gz-archive.list, functional-tests/wrong-file-type-l
+	-in-tar-gz-archive/wrong-file-type-l-in-tar-gz-archive.tar.gz,
+	functional-tests/wrong-file-type-l-in-tar-xz-archive/wrong-file-
+	type-l-in-tar-xz-archive.conf, functional-tests/wrong-file-type-l
+	-in-tar-xz-archive/wrong-file-type-l-in-tar-xz-archive.list,
+	functional-tests/wrong-file-type-l-in-tar-xz-archive/wrong-file-
+	type-l-in-tar-xz-archive.tar.xz, functional-tests/wrong-file-type-s
+	-in-tar-bz2-archive/wrong-file-type-s-in-tar-bz2-archive.conf,
+	functional-tests/wrong-file-type-s-in-tar-bz2-archive/wrong-file-
+	type-s-in-tar-bz2-archive.list, functional-tests/wrong-file-type-s
+	-in-tar-bz2-archive/wrong-file-type-s-in-tar-bz2-archive.tar.bz2,
+	functional-tests/wrong-file-type-s-in-tar-gz-archive/wrong-file-
+	type-s-in-tar-gz-archive.conf, functional-tests/wrong-file-type-s
+	-in-tar-gz-archive/wrong-file-type-s-in-tar-gz-archive.list,
+	functional-tests/wrong-file-type-s-in-tar-gz-archive/wrong-file-
+	type-s-in-tar-gz-archive.tar.gz, functional-tests/wrong-file-type-s
+	-in-tar-xz-archive/wrong-file-type-s-in-tar-xz-archive.conf,
+	functional-tests/wrong-file-type-s-in-tar-xz-archive/wrong-file-
+	type-s-in-tar-xz-archive.list, functional-tests/wrong-file-type-s
+	-in-tar-xz-archive/wrong-file-type-s-in-tar-xz-archive.tar.xz,
+	functional-tests/wrong-file-type-s-in-tree/wrong-file-type-s-in-
+	tree.conf, functional-tests/wrong-file-type-s-in-tree/wrong-file-
+	type-s-in-tree.list, functional-tests/wrong-file-type-s-in-tree
+	/wrong-file-type-s-in-tree/bar, functional-tests/wrong-file-type-s
+	-in-tree/wrong-file-type-s-in-tree/foo, functionaltests.py:
+	add wrong file type (hard link and symbolic link) detection tests in
+	tar.gz, tar.bz2, tar.xe and tree of files
+	[48c0fcddd1d4]
+
+2013-08-09  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/expecting-hard-link-for-tar-gz/expecting-hard-link-
+	for-tar-gz.conf, functional-tests/expecting-hard-link-for-tar-gz
+	/expecting-hard-link-for-tar-gz.list, functional-tests/expecting-
+	hard-link-for-tar-gz/expecting-hard-link-for-tar-gz.tar.gz,
+	functionaltests.py:
+	add expecting hard link for tar gz archive functional test
+	[5bcd6ff974a2]
+
+	* brebis/archiveinfomsg.py:
+	add hard link type support for the error message. fixes #32
+	[12b43f07b4df]
+
+2013-08-08  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/expectedvalues.py:
+	add type l for hard link. fixes #29
+	[be47033ae68b]
+
+	* merge support for tbz archive. fixes #25
+	[9035cb947333]
+
+	* .hgignore, functional-tests/generate-list-and-parse-tbz-archive
+	/generate-list-and-parse-tbz-archive.conf, functional-tests
+	/generate-list-and-parse-tbz-archive/generate-list-and-parse-tbz-
+	archive.tbz, functionaltests.py:
+	add generate list and parse tbz archive functional test
+	[3448660d6e6c] <support-for-tbz-archive>
+
+	* brebis/checkbackups/checkbackups.py,
+	brebis/generatelist/generatelistfortar.py, brebis/listtype.py:
+	add support for tbz archive
+	[781123901dae] <support-for-tbz-archive>
+
+	* brebis/cliparse.py:
+	bump to good current version in cli help message
+	[9fd289298b41]
+
+	* tests.py:
+	add a test for version consistency in setup.py and cliparse.py.
+	fixes #26
+	[c2fec04f1fbd]
+
+	* merge alert-message-for-no-conf-files branch to check if
+	configuration files exist at the user-specified path. fixes #27
+	[fac205eee4fc]
+
+	* brebis/configurations.py:
+	check if configuration files exist at the user-specified path. fixes
+	#27
+	[49007100a873] <alert-message-for-no-conf-files>
+
+2013-08-07  Carl Chenet  <chaica@ohmytux.com>
+
+	* add new option to globally switch the default delimiter to a user-
+	defined delimiter to generate the list of files of an archive/path
+	and to check an archive/patch. fixes #22
+	[38664bce0f74]
+
+2013-08-05  Carl Chenet  <chaica@ohmytux.com>
+
+	* man/brebis.1:
+	update the manual page
+	[b2c24310faac] <escape-unescape-separator>
+
+2013-08-03  Carl Chenet  <chaica@ohmytux.com>
+
+	* .hgignore, functional-tests/generate-list-changing-default-
+	separator/bzip2/generate-list-changing-default-separator-for-
+	bzip2.bz2, functional-tests/generate-list-changing-default-
+	separator/bzip2/generate-list-changing-default-separator-for-
+	bzip2.conf, functional-tests/generate-list-changing-default-
+	separator/gzip/generate-list-changing-default-separator-for-
+	gzip.conf, functional-tests/generate-list-changing-default-
+	separator/gzip/generate-list-changing-default-separator-for-gzip.gz,
+	functional-tests/generate-list-changing-default-separator/tar.bz2
+	/generate-list-changing-default-separator-for-tar-bz2.conf,
+	functional-tests/generate-list-changing-default-separator/tar.bz2
+	/generate-list-changing-default-separator-for-tar-bz2.tar.bz2,
+	functional-tests/generate-list-changing-default-separator/tar.gz
+	/generate-list-changing-default-separator-for-tar-gz.conf,
+	functional-tests/generate-list-changing-default-separator/tar.gz
+	/generate-list-changing-default-separator-for-tar-gz.tar.gz,
+	functional-tests/generate-list-changing-default-separator/tar.xz
+	/generate-list-changing-default-separator-for-tar-xz.conf,
+	functional-tests/generate-list-changing-default-separator/tar.xz
+	/generate-list-changing-default-separator-for-tar-xz.tar.xz,
+	functional-tests/generate-list-changing-default-separator/tree
+	/generate-list-changing-default-separator-for-tree.conf, functional-
+	tests/generate-list-changing-default-separator/tree/generate-list-
+	changing-default-separator-for-tree/foo, functional-tests/generate-
+	list-changing-default-separator/zip/generate-list-changing-default-
+	separator-for-zip.conf, functional-tests/generate-list-changing-
+	default-separator/zip/generate-list-changing-default-separator-for-
+	zip.zip, functionaltests.py:
+	add generate list changing default separator for
+	{tar.gz,tar.bz2,tar.xz,gzip,bz2,zip,tree} tests
+	[c936c80a003e] <escape-unescape-separator>
+
+	* tests.py:
+	fix broken tests by the changes for adding the option to swith the
+	delimiter
+	[37981c869489] <escape-unescape-separator>
+
+	* brebis/checkbackups/checkarchive.py,
+	brebis/checkbackups/checkbackups.py,
+	brebis/checkbackups/checkbzip2.py, brebis/checkbackups/checkgzip.py,
+	brebis/checkbackups/checklzma.py, brebis/checkbackups/checktar.py,
+	brebis/checkbackups/checktree.py, brebis/checkbackups/checkzip.py,
+	brebis/cliparse.py, brebis/expectedvalues.py,
+	brebis/generatelist/generatelistforbzip2.py,
+	brebis/generatelist/generatelistforgzip.py,
+	brebis/generatelist/generatelistforlzma.py,
+	brebis/generatelist/generatelistfortar.py,
+	brebis/generatelist/generatelistfortree.py,
+	brebis/generatelist/generatelistforzip.py, brebis/listtype.py,
+	brebis/main.py:
+	add delimiter option to replace default delimiter in the list of
+	files, both working to generate lists and check backups
+	[1794e768849b] <escape-unescape-separator>
+
+	* brebis/expectedvalues.py:
+	saving the current wip, going another way
+	[19d87c89a871] <escape-separator>
+
+2013-08-02  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/expected-generated-list-for-archive-with-path-
+	using-default-separator/expected-generated-list-for-archive-with-
+	path-using-default-separator.list, functional-tests/expected-
+	generated-list-for-archive-with-path-using-default-separator
+	/expected-generated-list-for-archive-with-path-using-default-
+	separator.tar.gz, functionaltests.py:
+	expected generated list for archive with path using default
+	separator test
+	[62d2d7cd39c8] <escape-separator>
+
+	* brebis/generatelist/generatelist.py,
+	brebis/generatelist/generatelistforbzip2.py,
+	brebis/generatelist/generatelistforgzip.py,
+	brebis/generatelist/generatelistforlzma.py,
+	brebis/generatelist/generatelistfortar.py,
+	brebis/generatelist/generatelistfortree.py,
+	brebis/generatelist/generatelistforzip.py:
+	escape the default separator when it appears in the name of a file
+	in an archive or a treefile
+	[2e67a26a20f1] <escape-separator>
+
+	* check if supported archives in listtype.py and checkbackups.py are
+	consistent.fixes #24
+	[ba90e8ca4959]
+
+2013-08-01  Carl Chenet  <chaica@ohmytux.com>
+
+	* functionaltests.py:
+	add a test to detect missing archive types between listtype.py and
+	checkbackups.py
+	[9518468cdeba] <listtype-checklist-bug24>
+
+	* brebis/checkbackups/checkbackups.py:
+	add missing support for tbz2
+	[421b5ed1e816] <listtype-checklist-bug24>
+
 2013-07-30  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/configurations.py:
+	-c option now manages a single configuration file
+	[d642b5a62a69] <conf-option-takes-one-conf-file>
+
+	* debian/copyright:
+	update the copyright
+	[0ee26bef09ac] <debian>
+
+	* setup.py:
+	merge with default branch
+	[7b0bdd53b1bc] <debian>
+
+	* .hgtags:
+	Added tag 0.5 for changeset 1616effdc58d
+	[f71f6bd25d81]
+
+	* changelog:
+	add the brebis changelog
+	[1616effdc58d] [0.5]
 
 	* generate-archive.sh:
 	add a small script to generate archive given the current version in
 	setup.py
-	[012eb591b54c] [tip]
+	[012eb591b54c]
 
 2013-07-29  Carl Chenet  <chaica@ohmytux.com>
 
@@ -44,6 +361,29 @@
 	bump the date of the copyright to 2013
 	[b79d117a249f]
 
+	* brebis.py, brebis/applogger.py, brebis/archiveinfomsg.py,
+	brebis/checkbackups/checkarchive.py,
+	brebis/checkbackups/checkbackups.py,
+	brebis/checkbackups/checkbzip2.py, brebis/checkbackups/checkgzip.py,
+	brebis/checkbackups/checklzma.py, brebis/checkbackups/checktar.py,
+	brebis/checkbackups/checktree.py, brebis/checkbackups/checkzip.py,
+	brebis/checkhashes.py, brebis/cliparse.py, brebis/configurations.py,
+	brebis/expectedvalues.py, brebis/generatelist/generatelist.py,
+	brebis/generatelist/generatelistforbzip2.py,
+	brebis/generatelist/generatelistforgzip.py,
+	brebis/generatelist/generatelistforlzma.py,
+	brebis/generatelist/generatelistfortar.py,
+	brebis/generatelist/generatelistfortree.py,
+	brebis/generatelist/generatelistforzip.py,
+	brebis/identifylimitations.py, brebis/listtype.py, brebis/main.py,
+	functionaltests.py, setup.py, tests.py:
+	bump to 2013 the date of the copyright
+	[9e967f038496] <debian>
+
+	* debian/manpage:
+	add support of the manual page for the debian package of Brebis
+	[9b4177cec4b7] <debian>
+
 	* man/brebis.1, setup.py:
 	add a manual page for brebis. fixes #23
 	[e9ae6bb524b3]
@@ -67,11 +407,512 @@
 	update to python 3.3 and brebis 0.5
 	[db5f5dc17542]
 
+	* debian/changelog, debian/control, debian/install, debian/rules:
+	upgrade to python 3.3 and brebis 0.5
+	[a02c4973299d] <debian>
+
 2013-07-19  Carl Chenet  <chaica@ohmytux.com>
+
+	* debian/changelog, debian/compat, debian/control:
+	update debian files
+	[607af167aabb] <debian>
+
+	* functional-tests/full-criteria-multiple-backups/a.out:
+	merge the debian branch with the new default branch
+	[6c5c96687064] <debian>
 
 	* functional-tests/full-criteria-multiple-backups/a.out:
 	merge support for lzma in the default branch
 	[88268374a9aa]
+
+	* .hgignore, functional-tests/expected-generated-list-for-xz-archive
+	/expected-generated-list-for-xz-archive.list, functional-tests
+	/expected-generated-list-for-xz-archive/expected-generated-list-for-
+	xz-archive.xz, functional-tests/expected-generated-list-for-xz-
+	archive/expectedlist.list, functionaltests.py:
+	add expected generated list for xz archive test
+	[97f04c8ee099] <support-for-lzma>
+
+	* brebis/generatelist/generatelistforlzma.py, functional-tests
+	/generate-list-and-parse-xz-archive/a.out, functional-tests
+	/generate-list-and-parse-xz-archive/generate-list-and-parse-xz-
+	archive-list, functional-tests/generate-list-and-parse-xz-archive
+	/generate-list-and-parse-xz-archive.conf, functional-tests/generate-
+	list-and-parse-xz-archive/generate-list-and-parse-xz-archive.xz,
+	functional-tests/unsupported-parameters-xz-archive/a.out,
+	functionaltests.py:
+	fix bug with the filename in the .list of a xz generated archive &
+	add generate liste and parse parameters xz archive test
+	[f66d16cdb36d] <support-for-lzma>
+
+2013-07-18  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/unsupported-parameters-xz-archive/a.out,
+	functional-tests/unsupported-parameters-xz-archive/unsupported-
+	parameters-xz-archive-list, functional-tests/unsupported-parameters-
+	xz-archive/unsupported-parameters-xz-archive.conf, functional-tests
+	/unsupported-parameters-xz-archive/unsupported-parameters-xz-
+	archive.xz, functionaltests.py:
+	add unsupported parameters xz archive test
+	[1ded157b6cef] <support-for-lzma>
+
+	* functional-tests/file-missing-in-xz/a.out, functional-tests/file-
+	missing-in-xz/file-missing-in-xz-list, functional-tests/file-
+	missing-in-xz/file-missing-in-xz.conf, functional-tests/file-
+	missing-in-xz/file-missing-in-xz.xz, functionaltests.py:
+	add file missing in xz test
+	[e86a4b65689b] <support-for-lzma>
+
+	* brebis/identifylimitations.py:
+	not easily possible to get lzma/xz uncompressed file size - maybe
+	later
+	[1f998d4a0954] <support-for-lzma>
+
+	* brebis/checkbackups/checklzma.py, functional-tests/corrupted-xz-
+	archive/a.out, functional-tests/corrupted-xz-archive/corrupted-xz-
+	archive-list, functional-tests/corrupted-xz-archive/corrupted-xz-
+	archive.conf, functional-tests/corrupted-xz-archive/corrupted-xz-
+	archive.xz, functionaltests.py:
+	add corrupted xz archive test
+	[ffc71ac8142b] <support-for-lzma>
+
+	* functional-tests/expected-file-smaller-than-file-in-tar-xz-
+	archive/a.out, functional-tests/expected-file-smaller-than-file-in-
+	tar-xz-archive/expected-file-smaller-than-file-in-tar-xz-archive-
+	list, functional-tests/expected-file-smaller-than-file-in-tar-xz-
+	archive/expected-file-smaller-than-file-in-tar-xz-archive.conf,
+	functional-tests/expected-file-smaller-than-file-in-tar-xz-archive
+	/expected-file-smaller-than-file-in-tar-xz-archive.tar.xz,
+	functionaltests.py:
+	add expected file smaller than file in tar xz archive test
+	[c4a8385e6fe4] <support-for-lzma>
+
+	* functional-tests/expected-file-not-equals-file-in-tar-xz-
+	archive/a.out, functional-tests/expected-file-not-equals-file-in-
+	tar-xz-archive/expected-file-not-equals-file-in-tar-xz-archive-list,
+	functional-tests/expected-file-not-equals-file-in-tar-xz-archive
+	/expected-file-not-equals-file-in-tar-xz-archive.conf, functional-
+	tests/expected-file-not-equals-file-in-tar-xz-archive/expected-file-
+	not-equals-file-in-tar-xz-archive.tar.xz, functionaltests.py:
+	add expected file not equals file in tar xz archive test
+	[f245cd1fef6c] <support-for-lzma>
+
+	* functional-tests/expected-file-greater-than-file-in-tar-xz-
+	archive/a.out, functional-tests/expected-file-greater-than-file-in-
+	tar-xz-archive/expected-file-greater-than-file-in-tar-xz-archive-
+	list, functional-tests/expected-file-greater-than-file-in-tar-xz-
+	archive/expected-file-greater-than-file-in-tar-xz-archive.conf,
+	functional-tests/expected-file-greater-than-file-in-tar-xz-archive
+	/expected-file-greater-than-file-in-tar-xz-archive.tar.xz,
+	functionaltests.py:
+	add expected file greater than file in tar xz archive test
+	[94585a5ab762] <support-for-lzma>
+
+	* functional-tests/corrupted-tar-xz-archive/a.out, functional-tests
+	/corrupted-tar-xz-archive/corrupted-tar-xz-archive-list, functional-
+	tests/corrupted-tar-xz-archive/corrupted-tar-xz-archive.conf,
+	functional-tests/corrupted-tar-xz-archive/corrupted-tar-xz-
+	archive.tar.xz, functionaltests.py:
+	add corrupted tar xz archive test
+	[ba7f21e27363] <support-for-lzma>
+
+	* functional-tests/unexpected-file-in-tar-xz-archive/a.out,
+	functional-tests/unexpected-file-in-tar-xz-archive/unexpected-file-
+	in-tar-xz-archive-list, functional-tests/unexpected-file-in-tar-xz-
+	archive/unexpected-file-in-tar-xz-archive.conf, functional-tests
+	/unexpected-file-in-tar-xz-archive/unexpected-file-in-tar-xz-
+	archive.tar.xz, functionaltests.py:
+	add unexpected file in tar xz archive test
+	[8711a8fc3db5] <support-for-lzma>
+
+2013-04-27  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/wrong-file-sha512-hash-in-xz-archive/wrong-file-
+	sha512-hash-in-xz-archive-list, functional-tests/wrong-file-sha512
+	-hash-in-xz-archive/wrong-file-sha512-hash-in-xz-archive.conf,
+	functional-tests/wrong-file-sha512-hash-in-xz-archive/wrong-file-
+	sha512-hash-in-xz-archive.xz, functionaltests.py:
+	add wrong file sha512 in xz archive test
+	[e1db3dda42c1] <support-for-lzma>
+
+	* functional-tests/wrong-file-sha384-hash-in-xz-archive/wrong-file-
+	sha384-hash-in-xz-archive-list, functional-tests/wrong-file-sha384
+	-hash-in-xz-archive/wrong-file-sha384-hash-in-xz-archive.conf,
+	functional-tests/wrong-file-sha384-hash-in-xz-archive/wrong-file-
+	sha384-hash-in-xz-archive.xz, functionaltests.py:
+	add wrong file sha384 hash in xz archive test
+	[e7aa654019e2] <support-for-lzma>
+
+	* functional-tests/wrong-file-sha256-hash-in-xz-archive/wrong-file-
+	sha256-hash-in-xz-archive-list, functional-tests/wrong-file-sha256
+	-hash-in-xz-archive/wrong-file-sha256-hash-in-xz-archive.conf,
+	functional-tests/wrong-file-sha256-hash-in-xz-archive/wrong-file-
+	sha256-hash-in-xz-archive.xz, functionaltests.py:
+	add wrong file sha256 hash in xz archive test
+	[b39e8eeb73c4] <support-for-lzma>
+
+	* functional-tests/wrong-file-sha224-hash-in-xz-archive/wrong-file-
+	sha224-hash-in-xz-archive-list, functional-tests/wrong-file-sha224
+	-hash-in-xz-archive/wrong-file-sha224-hash-in-xz-archive.conf,
+	functional-tests/wrong-file-sha224-hash-in-xz-archive/wrong-file-
+	sha224-hash-in-xz-archive.xz, functionaltests.py:
+	add wrong file sha224 in xz archive test
+	[56c92b70e96a] <support-for-lzma>
+
+	* functional-tests/wrong-file-sha1-hash-in-xz-archive/wrong-file-sha1
+	-hash-in-xz-archive-list, functional-tests/wrong-file-sha1-hash-in-
+	xz-archive/wrong-file-sha1-hash-in-xz-archive.conf, functional-tests
+	/wrong-file-sha1-hash-in-xz-archive/wrong-file-sha1-hash-in-xz-
+	archive.xz, functionaltests.py:
+	add wrong file sha1 in xz archive test
+	[53dd4c5a0812] <support-for-lzma>
+
+	* functional-tests/wrong-file-md5-hash-in-xz-archive/wrong-file-md5
+	-hash-in-xz-archive-list, functional-tests/wrong-file-md5-hash-in-
+	xz-archive/wrong-file-md5-hash-in-xz-archive.conf, functional-tests
+	/wrong-file-md5-hash-in-xz-archive/wrong-file-md5-hash-in-xz-
+	archive.xz, functionaltests.py:
+	add wrong file md5 hash in xz archive test
+	[4b6c11c3df41] <support-for-lzma>
+
+	* functional-tests/wrong-file-sha512-hash-in-tar-xz-archive/wrong-
+	file-sha512-hash-in-tar-xz-archive-list, functional-tests/wrong-
+	file-sha512-hash-in-tar-xz-archive/wrong-file-sha512-hash-in-tar-xz-
+	archive.conf, functional-tests/wrong-file-sha512-hash-in-tar-xz-
+	archive/wrong-file-sha512-hash-in-tar-xz-archive.tar.xz,
+	functionaltests.py:
+	add wrong file sha512 hash in tar xz archive test
+	[de1d62379a14] <support-for-lzma>
+
+	* functional-tests/wrong-file-sha384-hash-in-tar-xz-archive/wrong-
+	file-sha384-hash-in-tar-xz-archive-list, functional-tests/wrong-
+	file-sha384-hash-in-tar-xz-archive/wrong-file-sha384-hash-in-tar-xz-
+	archive.conf, functional-tests/wrong-file-sha384-hash-in-tar-xz-
+	archive/wrong-file-sha384-hash-in-tar-xz-archive.tar.xz,
+	functionaltests.py:
+	add wrong file sha384 hash in tar xz archive test
+	[58153e37817f] <support-for-lzma>
+
+	* functional-tests/wrong-file-sha256-hash-in-tar-xz-archive/wrong-
+	file-sha256-hash-in-tar-xz-archive-list, functional-tests/wrong-
+	file-sha256-hash-in-tar-xz-archive/wrong-file-sha256-hash-in-tar-xz-
+	archive.conf, functional-tests/wrong-file-sha256-hash-in-tar-xz-
+	archive/wrong-file-sha256-hash-in-tar-xz-archive.tar.xz,
+	functionaltests.py:
+	add wrong file sha256 hash in tar xz archive test
+	[553a1a95c54a] <support-for-lzma>
+
+2013-04-26  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/wrong-file-sha224-hash-in-tar-xz-archive/wrong-
+	file-sha224-hash-in-tar-xz-archive-list, functional-tests/wrong-
+	file-sha224-hash-in-tar-xz-archive/wrong-file-sha224-hash-in-tar-xz-
+	archive.conf, functional-tests/wrong-file-sha224-hash-in-tar-xz-
+	archive/wrong-file-sha224-hash-in-tar-xz-archive.tar.xz,
+	functionaltests.py:
+	add wrong file sha224 hash in tar xz archive test
+	[756f357d22a2] <support-for-lzma>
+
+	* functional-tests/wrong-file-sha1-hash-in-tar-xz-archive/wrong-file-
+	sha1-hash-in-tar-xz-archive-list, functional-tests/wrong-file-sha1
+	-hash-in-tar-xz-archive/wrong-file-sha1-hash-in-tar-xz-archive.conf,
+	functional-tests/wrong-file-sha1-hash-in-tar-xz-archive/wrong-file-
+	sha1-hash-in-tar-xz-archive.tar.xz, functionaltests.py:
+	add wrong file sha1 hash in tar xz archive test
+	[c4496117a84f] <support-for-lzma>
+
+	* functional-tests/wrong-file-md5-hash-in-tar-xz-archive/wrong-file-
+	md5-hash-in-tar-xz-archive-list, functional-tests/wrong-file-md5
+	-hash-in-tar-xz-archive/wrong-file-md5-hash-in-tar-xz-archive.conf,
+	functional-tests/wrong-file-md5-hash-in-tar-xz-archive/wrong-file-
+	md5-hash-in-tar-xz-archive.tar.xz, functionaltests.py:
+	add wrong file md5 hash in tar xz archive test
+	[118c21d77df4] <support-for-lzma>
+
+	* functional-tests/wrong-file-type-f-in-tar-xz-archive/wrong-file-
+	type-f-in-tar-xz-archive-list, functional-tests/wrong-file-type-f
+	-in-tar-xz-archive/wrong-file-type-f-in-tar-xz-archive.conf,
+	functional-tests/wrong-file-type-f-in-tar-xz-archive/wrong-file-
+	type-f-in-tar-xz-archive.tar.xz, functionaltests.py:
+	add wrong file type f in tar xz archive test
+	[42e0e28f1b5d] <support-for-lzma>
+
+	* functional-tests/wrong-file-type-d-in-tar-xz-archive/wrong-file-
+	type-d-in-tar-xz-archive-list, functional-tests/wrong-file-type-d
+	-in-tar-xz-archive/wrong-file-type-d-in-tar-xz-archive.conf,
+	functional-tests/wrong-file-type-d-in-tar-xz-archive/wrong-file-
+	type-d-in-tar-xz-archive.tar.xz, functionaltests.py:
+	add wrong file type d in tar xz archive test
+	[8fe2183023ac] <support-for-lzma>
+
+	* functional-tests/wrong-file-gid-in-tar-xz-archive/wrong-file-gid-in-
+	tar-xz-archive-list, functional-tests/wrong-file-gid-in-tar-xz-
+	archive/wrong-file-gid-in-tar-xz-archive.conf, functional-tests
+	/wrong-file-gid-in-tar-xz-archive/wrong-file-gid-in-tar-xz-
+	archive.tar.xz, functionaltests.py:
+	add wrong file gid in tar xz archive test
+	[d935f1e9134b] <support-for-lzma>
+
+	* functional-tests/wrong-file-uid-in-tar-xz-archive/wrong-file-uid-in-
+	tar-xz-archive-list, functional-tests/wrong-file-uid-in-tar-xz-
+	archive/wrong-file-uid-in-tar-xz-archive.conf, functional-tests
+	/wrong-file-uid-in-tar-xz-archive/wrong-file-uid-in-tar-xz-
+	archive.tar.xz, functionaltests.py:
+	add wrong file uid in tar xz archive test
+	[864775f2b213] <support-for-lzma>
+
+2013-04-25  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/wrong-file-mode-in-tar-xz-archive/wrong-file-mode-
+	in-tar-xz-archive-list, functional-tests/wrong-file-mode-in-tar-xz-
+	archive/wrong-file-mode-in-tar-xz-archive.conf, functional-tests
+	/wrong-file-mode-in-tar-xz-archive/wrong-file-mode-in-tar-xz-
+	archive.tar.xz, functionaltests.py:
+	add wrong file mode in tar xz archive test
+	[80ef137c28f7] <support-for-lzma>
+
+2013-04-16  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/wrong-bz2-archive-gid/wrong-bz2-archive-gid-list,
+	functional-tests/wrong-bz2-archive-gid/wrong-bz2-archive-gid.bz2,
+	functional-tests/wrong-bz2-archive-gid/wrong-bz2-archive-gid.conf,
+	functionaltests.py:
+	add wrong bzip2 archive gid test
+	[064b24083310] <support-for-lzma>
+
+	* functional-tests/wrong-bz2-archive-uid/wrong-bz2-archive-uid-list,
+	functional-tests/wrong-bz2-archive-uid/wrong-bz2-archive-uid.bz2,
+	functional-tests/wrong-bz2-archive-uid/wrong-bz2-archive-uid.conf,
+	functionaltests.py:
+	add wrong bz2 archive uid test
+	[72ff4ad80b92] <support-for-lzma>
+
+	* functional-tests/wrong-xz-archive-sha512-hash/wrong-xz-archive-
+	sha512-hash-list, functional-tests/wrong-xz-archive-sha512-hash
+	/wrong-xz-archive-sha512-hash.conf, functional-tests/wrong-xz-
+	archive-sha512-hash/wrong-xz-archive-sha512-hash.xz,
+	functionaltests.py:
+	add wrong xz archive sha512 hash test
+	[7cf704ae6631] <support-for-lzma>
+
+	* functional-tests/wrong-xz-archive-sha384-hash/wrong-xz-archive-
+	sha384-hash-list, functional-tests/wrong-xz-archive-sha384-hash
+	/wrong-xz-archive-sha384-hash.conf, functional-tests/wrong-xz-
+	archive-sha384-hash/wrong-xz-archive-sha384-hash.xz,
+	functionaltests.py:
+	add wrong xz archive sha384 hash test
+	[9b70f325cba4] <support-for-lzma>
+
+	* functional-tests/wrong-xz-archive-sha256-hash/wrong-xz-archive-
+	sha256-hash-list, functional-tests/wrong-xz-archive-sha256-hash
+	/wrong-xz-archive-sha256-hash.conf, functional-tests/wrong-xz-
+	archive-sha256-hash/wrong-xz-archive-sha256-hash.xz,
+	functionaltests.py:
+	add wrong xz archive sha256 hash test
+	[fe212036aa56] <support-for-lzma>
+
+	* functional-tests/wrong-xz-archive-sha224-hash/wrong-xz-archive-
+	sha224-hash-list, functional-tests/wrong-xz-archive-sha224-hash
+	/wrong-xz-archive-sha224-hash.conf, functional-tests/wrong-xz-
+	archive-sha224-hash/wrong-xz-archive-sha224-hash.xz,
+	functionaltests.py:
+	add wrong xz archive sha224 hash test
+	[510eb33134ff] <support-for-lzma>
+
+	* functional-tests/wrong-xz-archive-sha1-hash/wrong-xz-archive-sha1
+	-hash-list, functional-tests/wrong-xz-archive-sha1-hash/wrong-xz-
+	archive-sha1-hash.conf, functional-tests/wrong-xz-archive-sha1-hash
+	/wrong-xz-archive-sha1-hash.xz, functionaltests.py:
+	add wrong xz archive sha1 hash test
+	[ddfae809ea50] <support-for-lzma>
+
+	* functional-tests/wrong-xz-archive-md5-hash/wrong-xz-archive-md5
+	-hash-list, functional-tests/wrong-xz-archive-md5-hash/wrong-xz-
+	archive-md5-hash.conf, functional-tests/wrong-xz-archive-md5-hash
+	/wrong-xz-archive-md5-hash.xz, functionaltests.py:
+	add wrong xz archive md5 hash test
+	[ab3d9da8e3d2] <support-for-lzma>
+
+	* functional-tests/wrong-xz-archive-mode/wrong-xz-archive-mode-list,
+	functional-tests/wrong-xz-archive-mode/wrong-xz-archive-mode.conf,
+	functional-tests/wrong-xz-archive-mode/wrong-xz-archive-mode.xz,
+	functionaltests.py:
+	add wrong xz archive mode test
+	[2786e008b811] <support-for-lzma>
+
+	* functional-tests/wrong-xz-archive-gid/wrong-xz-archive-gid-list,
+	functional-tests/wrong-xz-archive-gid/wrong-xz-archive-gid.conf,
+	functional-tests/wrong-xz-archive-gid/wrong-xz-archive-gid.xz,
+	functionaltests.py:
+	add wrong xz archive gid test
+	[3364f0888632] <support-for-lzma>
+
+	* functional-tests/wrong-xz-archive-uid/wrong-xz-archive-uid-list,
+	functional-tests/wrong-xz-archive-uid/wrong-xz-archive-uid.conf,
+	functional-tests/wrong-xz-archive-uid/wrong-xz-archive-uid.xz,
+	functionaltests.py:
+	add wrong xz archive uid test
+	[4c644c3665dd] <support-for-lzma>
+
+2013-04-15  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/wrong-tar-xz-archive-sha512-hash/wrong-tar-xz-
+	archive-sha512-hash-list, functional-tests/wrong-tar-xz-archive-
+	sha512-hash/wrong-tar-xz-archive-sha512-hash.conf, functional-tests
+	/wrong-tar-xz-archive-sha512-hash/wrong-tar-xz-archive-
+	sha512-hash.tar.xz, functionaltests.py:
+	add wrong tar xz archive sha512 hash test
+	[eb0d451c53a3] <support-for-lzma>
+
+	* functional-tests/wrong-tar-xz-archive-sha384-hash/wrong-tar-xz-
+	archive-sha384-hash-list, functional-tests/wrong-tar-xz-archive-
+	sha384-hash/wrong-tar-xz-archive-sha384-hash.conf, functional-tests
+	/wrong-tar-xz-archive-sha384-hash/wrong-tar-xz-archive-
+	sha384-hash.tar.xz, functionaltests.py:
+	add wrong tar xz archive sha384 hash test
+	[5a75120bd4f5] <support-for-lzma>
+
+	* functional-tests/wrong-tar-xz-archive-sha256-hash/wrong-tar-xz-
+	archive-sha256-hash-list, functional-tests/wrong-tar-xz-archive-
+	sha256-hash/wrong-tar-xz-archive-sha256-hash.conf, functional-tests
+	/wrong-tar-xz-archive-sha256-hash/wrong-tar-xz-archive-
+	sha256-hash.tar.xz, functionaltests.py:
+	add wrong tar xz archive sha256 hash test
+	[9d573aa226e9] <support-for-lzma>
+
+	* functional-tests/wrong-tar-xz-archive-sha224-hash/wrong-tar-xz-
+	archive-sha224-hash-list, functional-tests/wrong-tar-xz-archive-
+	sha224-hash/wrong-tar-xz-archive-sha224-hash.conf, functional-tests
+	/wrong-tar-xz-archive-sha224-hash/wrong-tar-xz-archive-
+	sha224-hash.tar.xz, functionaltests.py:
+	add wrong tar xz archive sha224 hash test
+	[66a23e56690f] <support-for-lzma>
+
+	* functional-tests/wrong-tar-xz-archive-sha1-hash/wrong-tar-xz-
+	archive-sha1-hash-list, functional-tests/wrong-tar-xz-archive-
+	sha1-hash/wrong-tar-xz-archive-sha1-hash.conf, functional-tests
+	/wrong-tar-xz-archive-sha1-hash/wrong-tar-xz-archive-
+	sha1-hash.tar.xz:
+	add wrong tar xz archive sha1 hash test
+	[c184e470893f] <support-for-lzma>
+
+	* functionaltests.py:
+	add wrong tar xz archive sha1 hash test
+	[bf7602b7101c] <support-for-lzma>
+
+2013-04-09  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/wrong-tar-xz-archive-md5-hash/wrong-tar-xz-archive-
+	md5-hash-list, functional-tests/wrong-tar-xz-archive-md5-hash/wrong-
+	tar-xz-archive-md5-hash.conf, functional-tests/wrong-tar-xz-archive-
+	md5-hash/wrong-tar-xz-archive-md5-hash.tar.xz, functionaltests.py:
+	add wrong tar xz archive md5 hash test
+	[0af39d438b49] <support-for-lzma>
+
+2013-04-07  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/wrong-tar-xz-archive-mode/wrong-tar-xz-archive-
+	mode-list, functional-tests/wrong-tar-xz-archive-mode/wrong-tar-xz-
+	archive-mode.conf, functional-tests/wrong-tar-xz-archive-mode/wrong-
+	tar-xz-archive-mode.tar.xz, functionaltests.py:
+	add wrong tar xz archive mode test
+	[5d90c3425e92] <support-for-lzma>
+
+2013-04-06  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/wrong-tar-xz-archive-gid/wrong-tar-xz-archive-gid-
+	list, functional-tests/wrong-tar-xz-archive-gid/wrong-tar-xz-
+	archive-gid.conf, functional-tests/wrong-tar-xz-archive-gid/wrong-
+	tar-xz-archive-gid.tar.xz, functional-tests/wrong-tar-xz-archive-uid
+	/wrong-tar-xz-archive-uid-list, functional-tests/wrong-tar-xz-
+	archive-uid/wrong-tar-xz-archive-uid.conf, functional-tests/wrong-
+	tar-xz-archive-uid/wrong-tar-xz-archive-uid.tar.xz,
+	functionaltests.py:
+	add wrong tar xz archive uid and gid tests
+	[8aa912cd7ba1] <support-for-lzma>
+
+	* functional-tests/tar-xz-archive-size-smaller-than-expected-size/tar-
+	xz-archive-size-smaller-than-expected-size-list, functional-tests
+	/tar-xz-archive-size-smaller-than-expected-size/tar-xz-archive-size-
+	smaller-than-expected-size.conf, functional-tests/tar-xz-archive-
+	size-smaller-than-expected-size/tar-xz-archive-size-smaller-than-
+	expected-size.tar.xz, functionaltests.py:
+	add tar xz archive size smaller than expected size test
+	[71c0fa329999] <support-for-lzma>
+
+	* functional-tests/tar-xz-archive-size-not-equals-expected-size/tar-
+	xz-archive-size-not-equals-expected-size-list, functional-tests/tar-
+	xz-archive-size-not-equals-expected-size/tar-xz-archive-size-not-
+	equals-expected-size.conf, functional-tests/tar-xz-archive-size-not-
+	equals-expected-size/tar-xz-archive-size-not-equals-expected-
+	size.tar.xz, functionaltests.py:
+	add tar.xz archive size not equals expected size test
+	[e4e817afa2c8] <support-for-lzma>
+
+2013-04-04  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/full-criteria-multiple-backups/a.out,
+	functionaltests.py:
+	add a test for tar zx archive size bigger than an expected size and
+	removing unexpected a.out file
+	[aa1eafc541b5] <support-for-lzma>
+
+	* functional-tests/tar-xz-archive-size-bigger-than-expected-size/tar-
+	xz-archive-size-bigger-than-expected-size-list, functional-tests
+	/tar-xz-archive-size-bigger-than-expected-size/tar-xz-archive-size-
+	bigger-than-expected-size.conf, functional-tests/tar-xz-archive-
+	size-bigger-than-expected-size/tar-xz-archive-size-bigger-than-
+	expected-size.tar.xz:
+	add test tar-xz archive size bigger than an expected size
+	[f3b7668fdd25] <support-for-lzma>
+
+2012-07-24  Carl Chenet  <chaica@ohmytux.com>
+
+	* .hgignore, brebis/checkbackups/checkbackups.py,
+	brebis/generatelist/generatelistforlzma.py,
+	brebis/generatelist/generatelistfortar.py, brebis/listtype.py,
+	functional-tests/file-missing-in-tar-xz/file-missing-in-tar-xz-list,
+	functional-tests/file-missing-in-tar-xz/file-missing-in-tar-xz.conf,
+	functional-tests/file-missing-in-tar-xz/file-missing-in-tar-
+	xz.tar.xz, functional-tests/full-criteria-multiple-backups/a.out,
+	functional-tests/generate-list-from-xz-archive/generate-list-from-
+	xz-archive.xz, functionaltests.py, tests.py:
+	add support for tar.xz files and add two functional tests for xm
+	format
+	[13c26f403373] <support-for-lzma>
+
+2012-07-23  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis.py, brebis/checkbackups/checkbackups.py,
+	brebis/checkbackups/checklzma.py,
+	brebis/generatelist/generatelistforlzma.py,
+	brebis/identifylimitations.py, brebis/listtype.py, functional-tests
+	/wrong-file-md5-hash-in-lzma-archive/wrong-file-md5-hash-in-lzma-
+	archive-list, functional-tests/wrong-file-md5-hash-in-lzma-archive
+	/wrong-file-md5-hash-in-lzma-archive.conf, functional-tests/wrong-
+	file-md5-hash-in-lzma-archive/wrong-file-md5-hash-in-lzma-
+	archive.xz, functionaltests.py:
+	support for lzma and first functional test
+	[b4775f504955] <support-for-lzma>
+
+2012-07-22  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis2backupchecker.sh:
+	add new tool to convert the brebis repository to backupchecker
+	[804f0361283e] <backupchecker>
+
+2012-02-19  Carl Chenet  <chaica@ohmytux.com>
+
+	* debian/copyright, debian/install, debian/rules:
+	automated building of the debian package
+	[7670c997b223] <debian>
+
+2012-02-17  Carl Chenet  <chaica@ohmytux.com>
+
+	* debian/changelog, debian/compat, debian/control, debian/copyright,
+	debian/rules, debian/source/format, debian/watch:
+	first version of the debian package
+	[c39a39354d12] <debian>
 
 2011-11-21  Carl Chenet  <chaica@ohmytux.com>
 
@@ -130,11 +971,486 @@
 	* merging branch for archive size functional tests
 	[7563d7fed1f8]
 
+	* functional-tests/bzip2-archive-size-smaller-than-expected-size/bzip2
+	-archive-size-smaller-than-expected-size-list, functional-
+	tests/bzip2-archive-size-smaller-than-expected-size/bzip2-archive-
+	size-smaller-than-expected-size.bz2, functional-tests/bzip2-archive-
+	size-smaller-than-expected-size/bzip2-archive-size-smaller-than-
+	expected-size.conf, functional-tests/gzip-archive-size-smaller-than-
+	expected-size/gzip-archive-size-smaller-than-expected-size-list,
+	functional-tests/gzip-archive-size-smaller-than-expected-size/gzip-
+	archive-size-smaller-than-expected-size.conf, functional-tests/gzip-
+	archive-size-smaller-than-expected-size/gzip-archive-size-smaller-
+	than-expected-size.gz, functional-tests/tar-archive-size-smaller-
+	than-expected-size/tar-archive-size-smaller-than-expected-size-list,
+	functional-tests/tar-archive-size-smaller-than-expected-size/tar-
+	archive-size-smaller-than-expected-size.conf, functional-tests/tar-
+	archive-size-smaller-than-expected-size/tar-archive-size-smaller-
+	than-expected-size.tar, functional-tests/tar-bz2-archive-size-
+	smaller-than-expected-size/tar-bz2-archive-size-smaller-than-
+	expected-size-list, functional-tests/tar-bz2-archive-size-smaller-
+	than-expected-size/tar-bz2-archive-size-smaller-than-expected-
+	size.conf, functional-tests/tar-bz2-archive-size-smaller-than-
+	expected-size/tar-bz2-archive-size-smaller-than-expected-
+	size.tar.bz2, functional-tests/tar-gz-archive-size-smaller-than-
+	expected-size/tar-gz-archive-size-smaller-than-expected-size-list,
+	functional-tests/tar-gz-archive-size-smaller-than-expected-size/tar-
+	gz-archive-size-smaller-than-expected-size.conf, functional-tests
+	/tar-gz-archive-size-smaller-than-expected-size/tar-gz-archive-size-
+	smaller-than-expected-size.tar.gz, functional-tests/zip-archive-
+	size-smaller-than-expected-size/zip-archive-size-smaller-than-
+	expected-size-list, functional-tests/zip-archive-size-smaller-than-
+	expected-size/zip-archive-size-smaller-than-expected-size.conf,
+	functional-tests/zip-archive-size-smaller-than-expected-size/zip-
+	archive-size-smaller-than-expected-size.zip, functionaltests.py:
+	adding functional tests for testing smaller than parameter of the
+	size of an archive
+	[f1b24c80fd6a] <functional-tests-for-archive-size>
+
 2011-11-17  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/bzip2-archive-size-bigger-than-expected-size/bzip2
+	-archive-size-bigger-than-expected-size-list, functional-tests/bzip2
+	-archive-size-bigger-than-expected-size/bzip2-archive-size-bigger-
+	than-expected-size.bz2, functional-tests/bzip2-archive-size-bigger-
+	than-expected-size/bzip2-archive-size-bigger-than-expected-
+	size.conf, functional-tests/gzip-archive-size-bigger-than-expected-
+	size/gzip-archive-size-bigger-than-expected-size-list, functional-
+	tests/gzip-archive-size-bigger-than-expected-size/gzip-archive-size-
+	bigger-than-expected-size.conf, functional-tests/gzip-archive-size-
+	bigger-than-expected-size/gzip-archive-size-bigger-than-expected-
+	size.gz, functional-tests/tar-archive-size-bigger-than-expected-size
+	/tar-archive-size-bigger-than-expected-size-list, functional-tests
+	/tar-archive-size-bigger-than-expected-size/tar-archive-size-bigger-
+	than-expected-size.conf, functional-tests/tar-archive-size-bigger-
+	than-expected-size/tar-archive-size-bigger-than-expected-size.tar,
+	functional-tests/tar-bz2-archive-size-bigger-than-expected-size/tar-
+	bz2-archive-size-bigger-than-expected-size-list, functional-tests
+	/tar-bz2-archive-size-bigger-than-expected-size/tar-bz2-archive-
+	size-bigger-than-expected-size.conf, functional-tests/tar-bz2
+	-archive-size-bigger-than-expected-size/tar-bz2-archive-size-bigger-
+	than-expected-size.tar.bz2, functional-tests/tar-gz-archive-size-
+	bigger-than-expected-size/tar-gz-archive-size-bigger-than-expected-
+	size-list, functional-tests/tar-gz-archive-size-bigger-than-
+	expected-size/tar-gz-archive-size-bigger-than-expected-size.conf,
+	functional-tests/tar-gz-archive-size-bigger-than-expected-size/tar-
+	gz-archive-size-bigger-than-expected-size.tar.gz, functional-tests
+	/zip-archive-size-bigger-than-expected-size/zip-archive-size-bigger-
+	than-expected-size-list, functional-tests/zip-archive-size-bigger-
+	than-expected-size/zip-archive-size-bigger-than-expected-size.conf,
+	functional-tests/zip-archive-size-bigger-than-expected-size/zip-
+	archive-size-bigger-than-expected-size.zip, functionaltests.py:
+	adding functional tests for testing bigger than parameter of the
+	size of an archive
+	[77e56cb9e9a0] <functional-tests-for-archive-size>
+
+	* functional-tests/bzip2-archive-size-not-equals-expected-size/bzip2
+	-archive-size-not-equals-expected-size-list, functional-tests/bzip2
+	-archive-size-not-equals-expected-size/bzip2-archive-size-not-
+	equals-expected-size.bz2, functional-tests/bzip2-archive-size-not-
+	equals-expected-size/bzip2-archive-size-not-equals-expected-
+	size.conf, functional-tests/gzip-archive-size-not-equals-expected-
+	size/gzip-archive-size-not-equals-expected-size-list, functional-
+	tests/gzip-archive-size-not-equals-expected-size/gzip-archive-size-
+	not-equals-expected-size.conf, functional-tests/gzip-archive-size-
+	not-equals-expected-size/gzip-archive-size-not-equals-expected-
+	size.gz, functional-tests/tar-archive-size-not-equals-expected-size
+	/tar-archive-size-not-equals-expected-size-list, functional-tests
+	/tar-archive-size-not-equals-expected-size/tar-archive-size-not-
+	equals-expected-size.conf, functional-tests/tar-archive-size-not-
+	equals-expected-size/tar-archive-size-not-equals-expected-size.tar,
+	functional-tests/tar-bz2-archive-size-not-equals-expected-size/tar-
+	bz2-archive-size-not-equals-expected-size-list, functional-tests
+	/tar-bz2-archive-size-not-equals-expected-size/tar-bz2-archive-size-
+	not-equals-expected-size.conf, functional-tests/tar-bz2-archive-
+	size-not-equals-expected-size/tar-bz2-archive-size-not-equals-
+	expected-size.tar.bz2, functional-tests/tar-gz-archive-size-not-
+	equals-expected-size/tar-gz-archive-size-not-equals-expected-size-
+	list, functional-tests/tar-gz-archive-size-not-equals-expected-size
+	/tar-gz-archive-size-not-equals-expected-size.conf, functional-tests
+	/tar-gz-archive-size-not-equals-expected-size/tar-gz-archive-size-
+	not-equals-expected-size.tar.gz, functional-tests/zip-archive-size-
+	not-equals-expected-size/zip-archive-size-not-equals-expected-size-
+	list, functional-tests/zip-archive-size-not-equals-expected-size
+	/zip-archive-size-not-equals-expected-size.conf, functional-tests
+	/zip-archive-size-not-equals-expected-size/zip-archive-size-not-
+	equals-expected-size.zip, functionaltests.py:
+	adding functional tests for testing equality of the size of an
+	archive
+	[903d6d833e61] <functional-tests-for-archive-size>
 
 	* brebis/cliparse.py:
 	merging -g option branch and updating version number
 	[b96d0c55cd5d]
+
+2011-11-14  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/a.out, functional-tests/expected-file-greater-than-
+	file-in-tar-archive/expected-file-greater-than-file-in-tar-archive-
+	list, functional-tests/expected-file-greater-than-file-in-tar-
+	archive/expected-file-greater-than-file-in-tar-archive.conf,
+	functional-tests/expected-file-greater-than-file-in-tar-archive
+	/expected-file-greater-than-file-in-tar-archive.tar, functional-
+	tests/expected-file-not-equals-file-in-tar-archive/expected-file-
+	not-equals-file-in-tar-archive-list, functional-tests/expected-file-
+	not-equals-file-in-tar-archive/expected-file-not-equals-file-in-tar-
+	archive.conf, functional-tests/expected-file-not-equals-file-in-tar-
+	archive/expected-file-not-equals-file-in-tar-archive.tar,
+	functional-tests/expected-file-smaller-than-file-in-tar-archive
+	/expected-file-smaller-than-file-in-tar-archive-list, functional-
+	tests/expected-file-smaller-than-file-in-tar-archive/expected-file-
+	smaller-than-file-in-tar-archive.conf, functional-tests/expected-
+	file-smaller-than-file-in-tar-archive/expected-file-smaller-than-
+	file-in-tar-archive.tar, functional-tests/wrong-file-md5-hash-in-
+	tar-archive/wrong-file-md5-hash-in-tar-archive-list, functional-
+	tests/wrong-file-md5-hash-in-tar-archive/wrong-file-md5-hash-in-tar-
+	archive.conf, functional-tests/wrong-file-md5-hash-in-tar-archive
+	/wrong-file-md5-hash-in-tar-archive.tar, functional-tests/wrong-
+	file-sha1-hash-in-tar-archive/wrong-file-sha1-hash-in-tar-archive-
+	list, functional-tests/wrong-file-sha1-hash-in-tar-archive/wrong-
+	file-sha1-hash-in-tar-archive.conf, functional-tests/wrong-file-sha1
+	-hash-in-tar-archive/wrong-file-sha1-hash-in-tar-archive.tar,
+	functional-tests/wrong-file-sha224-hash-in-tar-archive/wrong-file-
+	sha224-hash-in-tar-archive-list, functional-tests/wrong-file-sha224
+	-hash-in-tar-archive/wrong-file-sha224-hash-in-tar-archive.conf,
+	functional-tests/wrong-file-sha224-hash-in-tar-archive/wrong-file-
+	sha224-hash-in-tar-archive.tar, functional-tests/wrong-file-sha256
+	-hash-in-tar-archive/wrong-file-sha256-hash-in-tar-archive-list,
+	functional-tests/wrong-file-sha256-hash-in-tar-archive/wrong-file-
+	sha256-hash-in-tar-archive.conf, functional-tests/wrong-file-sha256
+	-hash-in-tar-archive/wrong-file-sha256-hash-in-tar-archive.tar,
+	functional-tests/wrong-file-sha384-hash-in-tar-archive/wrong-file-
+	sha384-hash-in-tar-archive-list, functional-tests/wrong-file-sha384
+	-hash-in-tar-archive/wrong-file-sha384-hash-in-tar-archive.conf,
+	functional-tests/wrong-file-sha384-hash-in-tar-archive/wrong-file-
+	sha384-hash-in-tar-archive.tar, functional-tests/wrong-file-sha512
+	-hash-in-tar-archive/wrong-file-sha512-hash-in-tar-archive-list,
+	functional-tests/wrong-file-sha512-hash-in-tar-archive/wrong-file-
+	sha512-hash-in-tar-archive.conf, functional-tests/wrong-file-sha512
+	-hash-in-tar-archive/wrong-file-sha512-hash-in-tar-archive.tar,
+	functionaltests.py:
+	achieved to write functional tests for the tar-only archive
+	[154707c9ce58] <g-option-tuning>
+
+2011-11-13  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/unexpected-file-in-tar-archive/unexpected-file-in-
+	tar-archive-list, functional-tests/unexpected-file-in-tar-archive
+	/unexpected-file-in-tar-archive.conf, functional-tests/unexpected-
+	file-in-tar-archive/unexpected-file-in-tar-archive.tar, functional-
+	tests/wrong-file-gid-in-tar-archive/wrong-file-gid-in-tar-archive-
+	list, functional-tests/wrong-file-gid-in-tar-archive/wrong-file-gid-
+	in-tar-archive.conf, functional-tests/wrong-file-gid-in-tar-archive
+	/wrong-file-gid-in-tar-archive.tar, functional-tests/wrong-file-uid-
+	in-tar-archive/wrong-file-uid-in-tar-archive-list, functional-tests
+	/wrong-file-uid-in-tar-archive/wrong-file-uid-in-tar-archive.conf,
+	functional-tests/wrong-file-uid-in-tar-archive/wrong-file-uid-in-
+	tar-archive.tar, functional-tests/wrong-tar-archive-gid/wrong-tar-
+	archive-gid-list, functional-tests/wrong-tar-archive-gid/wrong-tar-
+	archive-gid.conf, functional-tests/wrong-tar-archive-gid/wrong-tar-
+	archive-gid.tar, functional-tests/wrong-tar-archive-md5-hash/wrong-
+	tar-archive-md5-hash-list, functional-tests/wrong-tar-archive-
+	md5-hash/wrong-tar-archive-md5-hash.conf, functional-tests/wrong-
+	tar-archive-md5-hash/wrong-tar-archive-md5-hash.tar, functional-
+	tests/wrong-tar-archive-mode/wrong-tar-archive-mode-list,
+	functional-tests/wrong-tar-archive-mode/wrong-tar-archive-mode.conf,
+	functional-tests/wrong-tar-archive-mode/wrong-tar-archive-mode.tar,
+	functional-tests/wrong-tar-archive-sha1-hash/wrong-tar-archive-sha1
+	-hash-list, functional-tests/wrong-tar-archive-sha1-hash/wrong-tar-
+	archive-sha1-hash.conf, functional-tests/wrong-tar-archive-sha1-hash
+	/wrong-tar-archive-sha1-hash.tar, functional-tests/wrong-tar-
+	archive-sha224-hash/wrong-tar-archive-sha224-hash-list, functional-
+	tests/wrong-tar-archive-sha224-hash/wrong-tar-archive-
+	sha224-hash.conf, functional-tests/wrong-tar-archive-sha224-hash
+	/wrong-tar-archive-sha224-hash.tar, functional-tests/wrong-tar-
+	archive-sha256-hash/wrong-tar-archive-sha256-hash-list, functional-
+	tests/wrong-tar-archive-sha256-hash/wrong-tar-archive-
+	sha256-hash.conf, functional-tests/wrong-tar-archive-sha256-hash
+	/wrong-tar-archive-sha256-hash.tar, functional-tests/wrong-tar-
+	archive-sha384-hash/wrong-tar-archive-sha384-hash-list, functional-
+	tests/wrong-tar-archive-sha384-hash/wrong-tar-archive-
+	sha384-hash.conf, functional-tests/wrong-tar-archive-sha384-hash
+	/wrong-tar-archive-sha384-hash.tar, functional-tests/wrong-tar-
+	archive-sha512-hash/wrong-tar-archive-sha512-hash-list, functional-
+	tests/wrong-tar-archive-sha512-hash/wrong-tar-archive-
+	sha512-hash.conf, functional-tests/wrong-tar-archive-sha512-hash
+	/wrong-tar-archive-sha512-hash.tar, functional-tests/wrong-tar-
+	archive-uid/wrong-tar-archive-uid-list, functional-tests/wrong-tar-
+	archive-uid/wrong-tar-archive-uid.conf, functional-tests/wrong-tar-
+	archive-uid/wrong-tar-archive-uid.tar, functionaltests.py:
+	added unit tests for tar-only archive type
+	[d68b2ebc3740] <g-option-tuning>
+
+2011-11-09  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/expectedvalues.py, functional-tests/user-specified-delimiter
+	/user-specified-delimiter.conf, functional-tests/user-specified-
+	delimiter/user-specified-delimiter.list, functional-tests/user-
+	specified-delimiter/user-specified-delimiter.tar.gz,
+	functionaltests.py, tests.py, tests/expected_hash/bzip2-list,
+	tests/expected_hash/files-list, tests/expected_hash/filetree-list,
+	tests/expected_hash/gzip-list, tests/expected_hash/zip-list,
+	tests/expected_mode/files-list, tests/expected_mode/treefiles-list,
+	tests/expected_type/files-list, tests/expected_type/filetree-list,
+	tests/expected_uid_gid/files-list, tests/expected_uid_gid
+	/multiplefiles-list, tests/test_conf/archive.conf:
+	support for user-specified delimiter, unit tests and functional
+	tests, removed number for each functional test
+	[81310bbf9ddb] <g-option-tuning>
+
+2011-11-07  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/checkbackups/checkbzip2.py, brebis/checkbackups/checkgzip.py,
+	brebis/checkbackups/checktar.py, brebis/checkbackups/checktree.py,
+	brebis/checkbackups/checkzip.py, brebis/configurations.py,
+	brebis/expectedvalues.py,
+	brebis/generatelist/generatelistforbzip2.py,
+	brebis/generatelist/generatelistforgzip.py,
+	brebis/generatelist/generatelistfortar.py,
+	brebis/generatelist/generatelistfortree.py,
+	brebis/generatelist/generatelistforzip.py, functional-tests
+	/corrupted-bz2-archive/corrupted-bz2-archive-list, functional-tests
+	/corrupted-gz-archive/corrupted-gz-archive-list, functional-tests
+	/corrupted-tar-bz2-archive/corrupted-tar-bz2-archive-list,
+	functional-tests/corrupted-tar-gz-archive/corrupted-tar-gz-archive-
+	list, functional-tests/corrupted-zip-archive/corrupted-zip-archive-
+	list, functional-tests/expected-file-greater-than-file-in-gz-archive
+	/expected-file-greater-than-file-in-gz-archive-list, functional-
+	tests/expected-file-greater-than-file-in-tar-bz2-archive/expected-
+	file-greater-than-file-in-tar-bz2-archive-list, functional-tests
+	/expected-file-greater-than-file-in-tar-gz-archive/expected-file-
+	greater-than-file-in-tar-gz-archive-list, functional-tests/expected-
+	file-greater-than-file-in-tree/expected-file-greater-than-file-in-
+	tree-list, functional-tests/expected-file-greater-than-file-in-zip-
+	archive/expected-file-greater-than-file-in-zip-archive-list,
+	functional-tests/expected-file-not-equals-file-in-gz-archive
+	/expected-file-not-equals-file-in-gz-archive-list, functional-tests
+	/expected-file-not-equals-file-in-tar-bz2-archive/expected-file-not-
+	equals-file-in-tar-bz2-archive-list, functional-tests/expected-file-
+	not-equals-file-in-tar-gz-archive/expected-file-not-equals-file-in-
+	tar-gz-archive-list, functional-tests/expected-file-not-equals-file-
+	in-tree/expected-file-not-equals-file-in-tree-list, functional-tests
+	/expected-file-not-equals-file-in-zip-archive/expected-file-not-
+	equals-file-in-zip-archive-list, functional-tests/expected-file-
+	smaller-than-file-in-gz-archive/expected-file-smaller-than-file-in-
+	gz-archive-list, functional-tests/expected-file-smaller-than-file-
+	in-tar-bz2-archive/expected-file-smaller-than-file-in-tar-bz2
+	-archive-list, functional-tests/expected-file-smaller-than-file-in-
+	tar-gz-archive/expected-file-smaller-than-file-in-tar-gz-archive-
+	list, functional-tests/expected-file-smaller-than-file-in-tree
+	/expected-file-smaller-than-file-in-tree-list, functional-tests
+	/expected-file-smaller-than-file-in-zip-archive/expected-file-
+	smaller-than-file-in-zip-archive-list, functional-tests/expected-
+	generated-list-for-bzip2-archive/expectedlist.list, functional-tests
+	/expected-generated-list-for-gzip-archive/expectedlist.list,
+	functional-tests/expected-generated-list-for-tar-
+	archive/expectedlist.list, functional-tests/expected-generated-list-
+	for-zip-archive/expectedlist.list, functional-tests/file-missing-in-
+	gzip/file-missing-in-gzip-list, functional-tests/file-missing-in-
+	tar-bz2/file-missing-in-tar-bz2-list, functional-tests/file-missing-
+	in-tar-gz/file-missing-in-tar-gz-list, functional-tests/file-
+	missing-in-tar/file-missing-in-tar-list, functional-tests/file-
+	missing-in-tree/file-missing-in-tree-list, functional-tests/file-
+	missing-in-zip/file-missing-in-zip-list, functional-tests/full-
+	criteria-multiple-backups/full-criteria-multiple-backups-gz-list,
+	functional-tests/full-criteria-multiple-backups/full-criteria-
+	multiple-backups-tar-bz2-list, functional-tests/full-criteria-
+	multiple-backups/full-criteria-multiple-backups-tar-gz-list,
+	functional-tests/full-criteria-multiple-backups/full-criteria-
+	multiple-backups-tree-list, functional-tests/full-criteria-multiple-
+	backups/full-criteria-multiple-backups-zip-list, functional-tests
+	/mixing-dir-path-and-archive-type-in-conf/mixing-dir-path-and-
+	archive-type-in-conf-list, functional-tests/name-in-gzip-and-gzip-
+	archive-are-not-the-same/name-in-gzip-and-gzip-archive-are-not-the-
+	same-list, functional-tests/unexpected-file-in-gz-archive
+	/unexpected-file-in-gz-archive-list, functional-tests/unexpected-
+	file-in-tar-bz2-archive/unexpected-file-in-tar-bz2-archive-list,
+	functional-tests/unexpected-file-in-tar-gz-archive/unexpected-file-
+	in-tar-gz-archive-list, functional-tests/unexpected-file-in-tree
+	/unexpected-file-in-tree-list, functional-tests/unexpected-file-in-
+	zip-archive/unexpected-file-in-zip-archive-list, functional-tests
+	/unsupported-parameters-bz2-archive/unsupported-parameters-bz2
+	-archive-list, functional-tests/unsupported-parameters-gz-archive
+	/unsupported-parameters-gz-archive-list, functional-tests/wrong-bz2
+	-archive-md5-hash/wrong-bz2-archive-md5-hash-list, functional-tests
+	/wrong-bz2-archive-sha1-hash/wrong-bz2-archive-sha1-hash-list,
+	functional-tests/wrong-bz2-archive-sha224-hash/wrong-bz2-archive-
+	sha224-hash-list, functional-tests/wrong-bz2-archive-sha256-hash
+	/wrong-bz2-archive-sha256-hash-list, functional-tests/wrong-bz2
+	-archive-sha384-hash/wrong-bz2-archive-sha384-hash-list, functional-
+	tests/wrong-bz2-archive-sha512-hash/wrong-bz2-archive-sha512-hash-
+	list, functional-tests/wrong-file-gid-in-tar-bz2-archive/wrong-file-
+	gid-in-tar-bz2-archive-list, functional-tests/wrong-file-gid-in-tar-
+	gz-archive/wrong-file-gid-in-tar-gz-archive-list, functional-tests
+	/wrong-file-gid-in-tree/wrong-file-gid-in-tree-list, functional-
+	tests/wrong-file-gid-in-zip-archive/wrong-file-gid-in-zip-archive-
+	list, functional-tests/wrong-file-md5-hash-in-bzip2-archive/wrong-
+	file-md5-hash-in-bzip2-archive-list, functional-tests/wrong-file-md5
+	-hash-in-gz-archive/wrong-file-md5-hash-in-gz-archive-list,
+	functional-tests/wrong-file-md5-hash-in-tar-bz2-archive/wrong-file-
+	md5-hash-in-tar-bz2-archive-list, functional-tests/wrong-file-md5
+	-hash-in-tar-gz-archive/wrong-file-md5-hash-in-tar-gz-archive-list,
+	functional-tests/wrong-file-md5-hash-in-tree/wrong-file-md5-hash-in-
+	tree-list, functional-tests/wrong-file-md5-hash-in-zip-archive
+	/wrong-file-md5-hash-in-zip-archive-list, functional-tests/wrong-
+	file-mode-in-tar-bz2-archive/wrong-file-mode-in-tar-bz2-archive-
+	list, functional-tests/wrong-file-mode-in-tar-gz-archive/wrong-file-
+	mode-in-tar-gz-archive-list, functional-tests/wrong-file-mode-in-
+	tree/wrong-file-mode-in-tree-list, functional-tests/wrong-file-mode-
+	in-zip-archive/wrong-file-mode-in-zip-archive-list, functional-tests
+	/wrong-file-sha1-hash-in-bzip2-archive/wrong-file-sha1-hash-in-bzip2
+	-archive-list, functional-tests/wrong-file-sha1-hash-in-gz-archive
+	/wrong-file-sha1-hash-in-gz-archive-list, functional-tests/wrong-
+	file-sha1-hash-in-tar-bz2-archive/wrong-file-sha1-hash-in-tar-bz2
+	-archive-list, functional-tests/wrong-file-sha1-hash-in-tar-gz-
+	archive/wrong-file-sha1-hash-in-tar-gz-archive-list, functional-
+	tests/wrong-file-sha1-hash-in-tree/wrong-file-sha1-hash-in-tree-
+	list, functional-tests/wrong-file-sha1-hash-in-zip-archive/wrong-
+	file-sha1-hash-in-zip-archive-list, functional-tests/wrong-file-
+	sha224-hash-in-bzip2-archive/wrong-file-sha224-hash-in-bzip2
+	-archive-list, functional-tests/wrong-file-sha224-hash-in-gz-archive
+	/wrong-file-sha224-hash-in-gz-archive-list, functional-tests/wrong-
+	file-sha224-hash-in-tar-bz2-archive/wrong-file-sha224-hash-in-tar-
+	bz2-archive-list, functional-tests/wrong-file-sha224-hash-in-tar-gz-
+	archive/wrong-file-sha224-hash-in-tar-gz-archive-list, functional-
+	tests/wrong-file-sha224-hash-in-tree/wrong-file-sha224-hash-in-tree-
+	list, functional-tests/wrong-file-sha224-hash-in-zip-archive/wrong-
+	file-sha224-hash-in-zip-archive-list, functional-tests/wrong-file-
+	sha256-hash-in-bzip2-archive/wrong-file-sha256-hash-in-bzip2
+	-archive-list, functional-tests/wrong-file-sha256-hash-in-gz-archive
+	/wrong-file-sha256-hash-in-gz-archive-list, functional-tests/wrong-
+	file-sha256-hash-in-tar-bz2-archive/wrong-file-sha256-hash-in-tar-
+	bz2-archive-list, functional-tests/wrong-file-sha256-hash-in-tar-gz-
+	archive/wrong-file-sha224-hash-in-tar-gz-archive-list, functional-
+	tests/wrong-file-sha256-hash-in-tree/wrong-file-sha256-hash-in-tree-
+	list, functional-tests/wrong-file-sha256-hash-in-zip-archive/wrong-
+	file-sha256-hash-in-zip-archive-list, functional-tests/wrong-file-
+	sha384-hash-in-bzip2-archive/wrong-file-sha384-hash-in-bzip2
+	-archive-list, functional-tests/wrong-file-sha384-hash-in-gz-archive
+	/wrong-file-sha384-hash-in-gz-archive-list, functional-tests/wrong-
+	file-sha384-hash-in-tar-bz2-archive/wrong-file-sha384-hash-in-tar-
+	bz2-archive-list, functional-tests/wrong-file-sha384-hash-in-tar-gz-
+	archive/wrong-file-sha384-hash-in-tar-gz-archive-list, functional-
+	tests/wrong-file-sha384-hash-in-tree/wrong-file-sha384-hash-in-tree-
+	list, functional-tests/wrong-file-sha384-hash-in-zip-archive/wrong-
+	file-sha384-hash-in-zip-archive-list, functional-tests/wrong-file-
+	sha512-hash-in-bzip2-archive/wrong-file-sha512-hash-in-bzip2
+	-archive-list, functional-tests/wrong-file-sha512-hash-in-gz-archive
+	/wrong-file-sha512-hash-in-gz-archive-list, functional-tests/wrong-
+	file-sha512-hash-in-tar-bz2-archive/wrong-file-sha512-hash-in-tar-
+	bz2-archive-list, functional-tests/wrong-file-sha512-hash-in-tar-gz-
+	archive/wrong-file-sha512-hash-in-tar-gz-archive-list, functional-
+	tests/wrong-file-sha512-hash-in-tree/wrong-file-sha512-hash-in-tree-
+	list, functional-tests/wrong-file-sha512-hash-in-zip-archive/wrong-
+	file-sha512-hash-in-zip-archive-list, functional-tests/wrong-file-
+	type-d-in-tar-bz2-archive/wrong-file-type-d-in-tar-bz2-archive-list,
+	functional-tests/wrong-file-type-d-in-tar-gz-archive/wrong-file-
+	type-d-in-tar-gz-archive-list, functional-tests/wrong-file-type-d
+	-in-tree/wrong-file-type-d-in-tree-list, functional-tests/wrong-
+	file-type-d-in-zip-archive/wrong-file-type-d-in-zip-archive-list,
+	functional-tests/wrong-file-type-f-in-tar-bz2-archive/wrong-file-
+	type-f-in-tar-bz2-archive-list, functional-tests/wrong-file-type-f
+	-in-tar-gz-archive/wrong-file-type-f-in-tar-gz-archive-list,
+	functional-tests/wrong-file-type-f-in-tree/wrong-file-type-f-in-
+	tree-list, functional-tests/wrong-file-type-f-in-zip-archive/wrong-
+	file-type-f-in-zip-archive-list, functional-tests/wrong-file-uid-in-
+	tar-bz2-archive/wrong-file-uid-in-tar-bz2-archive-list, functional-
+	tests/wrong-file-uid-in-tar-gz-archive/wrong-file-uid-in-tar-gz-
+	archive-list, functional-tests/wrong-file-uid-in-tree/wrong-file-
+	uid-in-tree-list, functional-tests/wrong-file-uid-in-zip-archive
+	/wrong-file-uid-in-zip-archive-list, functional-tests/wrong-gz-
+	archive-gid/wrong-gz-archive-gid-list, functional-tests/wrong-gz-
+	archive-md5-hash/wrong-gz-archive-md5-hash-list, functional-tests
+	/wrong-gz-archive-mode/wrong-gz-archive-mode-list, functional-tests
+	/wrong-gz-archive-sha1-hash/wrong-gz-archive-sha1-hash-list,
+	functional-tests/wrong-gz-archive-sha224-hash/wrong-gz-archive-
+	sha224-hash-list, functional-tests/wrong-gz-archive-sha256-hash
+	/wrong-gz-archive-sha256-hash-list, functional-tests/wrong-gz-
+	archive-sha384-hash/wrong-gz-archive-sha384-hash-list, functional-
+	tests/wrong-gz-archive-sha512-hash/wrong-gz-archive-sha512-hash-
+	list, functional-tests/wrong-gz-archive-uid/wrong-gz-archive-uid-
+	list, functional-tests/wrong-tar-bz2-archive-gid/wrong-tar-bz2
+	-archive-gid-list, functional-tests/wrong-tar-bz2-archive-md5-hash
+	/wrong-tar-bz2-archive-md5-hash-list, functional-tests/wrong-tar-bz2
+	-archive-mode/wrong-tar-bz2-archive-mode-list, functional-tests
+	/wrong-tar-bz2-archive-sha1-hash/wrong-tar-bz2-archive-sha1-hash-
+	list, functional-tests/wrong-tar-bz2-archive-sha224-hash/wrong-tar-
+	bz2-archive-sha224-hash-list, functional-tests/wrong-tar-bz2
+	-archive-sha256-hash/wrong-tar-bz2-archive-sha256-hash-list,
+	functional-tests/wrong-tar-bz2-archive-sha384-hash/wrong-tar-bz2
+	-archive-sha384-hash-list, functional-tests/wrong-tar-bz2-archive-
+	sha512-hash/wrong-tar-bz2-archive-sha512-hash-list, functional-tests
+	/wrong-tar-bz2-archive-uid/wrong-tar-bz2-archive-uid-list,
+	functional-tests/wrong-tar-gz-archive-gid/wrong-tar-gz-archive-gid-
+	list, functional-tests/wrong-tar-gz-archive-md5-hash/wrong-tar-gz-
+	archive-md5-hash-list, functional-tests/wrong-tar-gz-archive-mode
+	/wrong-tar-gz-archive-mode-list, functional-tests/wrong-tar-gz-
+	archive-sha1-hash/wrong-tar-gz-archive-sha1-hash-list, functional-
+	tests/wrong-tar-gz-archive-sha224-hash/wrong-tar-gz-archive-sha224
+	-hash-list, functional-tests/wrong-tar-gz-archive-sha256-hash/wrong-
+	tar-gz-archive-sha256-hash-list, functional-tests/wrong-tar-gz-
+	archive-sha384-hash/wrong-tar-gz-archive-sha384-hash-list,
+	functional-tests/wrong-tar-gz-archive-sha512-hash/wrong-tar-gz-
+	archive-sha512-hash-list, functional-tests/wrong-tar-gz-archive-uid
+	/wrong-tar-gz-archive-uid-list, functional-tests/wrong-zip-archive-
+	gid/wrong-zip-archive-gid-list, functional-tests/wrong-zip-archive-
+	md5-hash/wrong-zip-archive-md5-hash-list, functional-tests/wrong-
+	zip-archive-mode/wrong-zip-archive-mode-list, functional-tests
+	/wrong-zip-archive-sha1-hash/wrong-zip-archive-sha1-hash-list,
+	functional-tests/wrong-zip-archive-sha224-hash/wrong-zip-archive-
+	sha224-hash-list, functional-tests/wrong-zip-archive-sha256-hash
+	/wrong-zip-archive-sha256-hash-list, functional-tests/wrong-zip-
+	archive-sha384-hash/wrong-zip-archive-sha384-hash-list, functional-
+	tests/wrong-zip-archive-sha512-hash/wrong-zip-archive-sha512-hash-
+	list, functional-tests/wrong-zip-archive-uid/wrong-zip-archive-uid-
+	list, functionaltests.py, tests.py,
+	tests/checkbzip2_private_methods/mybzip2-list,
+	tests/checkgzip_private_methods/mygzip-list,
+	tests/checktar_private_methods/mytargz/mytargz-list,
+	tests/checktree_private_methods/mytargz/mytargz-list,
+	tests/checktree_private_methods/mytree-list,
+	tests/expected_hash/archash/md5hashtararchive-list,
+	tests/expected_hash/archash/md5hashziparchive-list,
+	tests/expected_hash/archash/sha1hashtararchive-list,
+	tests/expected_hash/archash/sha1hashziparchive-list,
+	tests/expected_hash/archash/sha224hashtararchive-list,
+	tests/expected_hash/archash/sha224hashziparchive-list,
+	tests/expected_hash/archash/sha256hashtararchive-list,
+	tests/expected_hash/archash/sha256hashziparchive-list,
+	tests/expected_hash/archash/sha384hashtararchive-list,
+	tests/expected_hash/archash/sha384hashziparchive-list,
+	tests/expected_hash/archash/sha512hashtararchive-list,
+	tests/expected_hash/archash/sha512hashziparchive-list,
+	tests/expected_hash/bzip2-list, tests/expected_hash/files-list,
+	tests/expected_hash/filetree-list, tests/expected_hash/gzip-list,
+	tests/expected_hash/zip-list,
+	tests/expected_mode/arcmode/tarmode4644-list,
+	tests/expected_mode/arcmode/tarmode644-list,
+	tests/expected_mode/arcmode/tarmode755-list,
+	tests/expected_mode/arcmode/zipmode4644-list,
+	tests/expected_mode/arcmode/zipmode644-list,
+	tests/expected_mode/arcmode/zipmode755-list, tests/expected_mode
+	/files-list, tests/expected_mode/treefiles-list, tests/expected_type
+	/files-list, tests/expected_type/filetree-list,
+	tests/expected_uid_gid/arc_uid_gid/tar-uid-gid-list,
+	tests/expected_uid_gid/arc_uid_gid/zip-uid-gid-list,
+	tests/expected_uid_gid/files-list, tests/expected_uid_gid
+	/multiplefiles-list, tests/file_size/arcsize/biggerthantararcsize-
+	list, tests/file_size/arcsize/biggerthanziparcsize-list,
+	tests/file_size/arcsize/equaltararcsize-list,
+	tests/file_size/arcsize/equalziparcsize-list,
+	tests/file_size/arcsize/smallerthantararcsize-list,
+	tests/file_size/arcsize/smallerthanziparcsize-list, tests/file_size
+	/essai-list, tests/file_size/essai-list2, tests/file_size/missing-
+	bigger-than/mygzip-list, tests/file_size/missing-smaller-than
+	/mygzip-list, tests/file_size/mygzip-list, tests/filetree/filelist,
+	tests/gzip/mygzip-list, tests/tar_bz2_archive_content/essai2-list,
+	tests/tar_gz_archive_content/essai-list, tests/test_conf/essai-list,
+	tests/test_conf/subdir/toto/essai-list, tests/unexpected_files
+	/files-list, tests/zip/myzip-list:
+	intermediate commit for -g option and new delimiter and custom
+	delimiter
+	[45c3b6138ee1] <g-option-tuning>
 
 2011-11-05  Carl Chenet  <chaica@ohmytux.com>
 
@@ -183,8 +1499,164 @@
 	fixed #11
 	[4872d1196f39]
 
+	* brebis/checkarchive.py, brebis/checkbackups.py,
+	brebis/checkbackups/__init__.py,
+	brebis/checkbackups/checkarchive.py,
+	brebis/checkbackups/checkbackups.py,
+	brebis/checkbackups/checkbzip2.py, brebis/checkbackups/checkgzip.py,
+	brebis/checkbackups/checktar.py, brebis/checkbackups/checktree.py,
+	brebis/checkbackups/checkzip.py, brebis/checkbzip2.py,
+	brebis/checkgzip.py, brebis/checktar.py, brebis/checktree.py,
+	brebis/checkzip.py, brebis/main.py:
+	fixed #11 - new package checkbackups
+	[8a97ce3a6797] <adding-module-checkbackups>
+
 	* merging generate-list-files branch and default branch
 	[d8a55579e394]
+
+2011-11-02  Carl Chenet  <chaica@ohmytux.com>
+
+	* .hgignore, functional-tests/generate-list-and-parse-bzip2-archive
+	/generate-list-and-parse-bzip2-archive.bz2, functional-tests
+	/generate-list-and-parse-bzip2-archive/generate-list-and-parse-
+	bzip2-archive.conf, functional-tests/generate-list-and-parse-gzip-
+	archive/generate-list-and-parse-gzip-archive.conf, functional-tests
+	/generate-list-and-parse-gzip-archive/generate-list-and-parse-gzip-
+	archive.gz, functional-tests/generate-list-and-parse-tar-archive
+	/generate-list-and-parse-tar-archive.conf, functional-tests
+	/generate-list-and-parse-tar-archive/generate-list-and-parse-tar-
+	archive.tar.gz, functional-tests/generate-list-and-parse-tree
+	/generate-list-and-parse-tree.conf, functional-tests/generate-list-
+	and-parse-tree/generate-list-and-parse-tree/bar/oof, functional-
+	tests/generate-list-and-parse-tree/generate-list-and-parse-
+	tree/bar/rab, functional-tests/generate-list-and-parse-tree
+	/generate-list-and-parse-tree/foo, functional-tests/generate-list-
+	and-parse-tree/generate-list-and-parse-tree/hello, functional-tests
+	/generate-list-and-parse-zip-archive/generate-list-and-parse-zip-
+	archive.conf, functional-tests/generate-list-and-parse-zip-archive
+	/generate-list-and-parse-zip-archive.zip, functionaltests.py:
+	final tests generate and parse for --gen-list option
+	[27890815cb68] <generate-list-option>
+
+2011-11-01  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/expected-generated-list-for-tree/expected-
+	generated-list-for-tree/bar/oof, functional-tests/expected-
+	generated-list-for-tree/expected-generated-list-for-tree/bar/rab,
+	functional-tests/expected-generated-list-for-tree/expected-
+	generated-list-for-tree/foo, functional-tests/expected-generated-
+	list-for-tree/expected-generated-list-for-tree/hello, functional-
+	tests/expected-generated-list-for-tree/expectedlist.list,
+	functionaltests.py:
+	removing expected-generated-list-for-tree because of lack of
+	portability
+	[cdffb54460d3] <generate-list-option>
+
+	* functional-tests/expected-generated-list-for-bzip2-archive/expected-
+	generated-list-for-bzip2-archive.bz2, functional-tests/expected-
+	generated-list-for-bzip2-archive/expectedlist.list, functional-tests
+	/expected-generated-list-for-gzip-archive/expected-generated-list-
+	for-gzip-archive.gz, functional-tests/expected-generated-list-for-
+	gzip-archive/expectedlist.list, functional-tests/expected-generated-
+	list-for-tar-archive/expected-generated-list-for-tar-archive.tar.gz,
+	functional-tests/expected-generated-list-for-tar-
+	archive/expectedlist.list, functional-tests/expected-generated-list-
+	for-tree/expected-generated-list-for-tree/bar/oof, functional-tests
+	/expected-generated-list-for-tree/expected-generated-list-for-
+	tree/bar/rab, functional-tests/expected-generated-list-for-tree
+	/expected-generated-list-for-tree/foo, functional-tests/expected-
+	generated-list-for-tree/expected-generated-list-for-tree/hello,
+	functional-tests/expected-generated-list-for-tree/expectedlist.list,
+	functional-tests/expected-generated-list-for-zip-archive/expected-
+	generated-list-for-zip-archive.zip, functional-tests/expected-
+	generated-list-for-zip-archive/expectedlist.list, functional-tests
+	/generate-list-from-tar-archive/generate-list-from-tar-archive.list,
+	functionaltests.py:
+	functional tests for expected generated list files
+	[ac5e3ec3cfba] <generate-list-option>
+
+	* brebis/generatelist/generatelistforbzip2.py,
+	brebis/generatelist/generatelistforgzip.py, brebis/listtype.py,
+	functional-tests/generate-list-from-bzip2-archive/generate-list-
+	from-bzip2-archive.bz2, functional-tests/generate-list-from-gzip-
+	archive/generate-list-from-gzip-archive.gz, functionaltests.py:
+	added the support of generation of list of files for gzip archives
+	[d306e478ed1f] <generate-list-option>
+
+2011-10-31  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/generatelist.py, brebis/generatelist/__init__.py,
+	brebis/generatelist/generatelist.py,
+	brebis/generatelist/generatelistforbzip2.py,
+	brebis/generatelist/generatelistforgzip.py,
+	brebis/generatelist/generatelistfortar.py,
+	brebis/generatelist/generatelistfortree.py,
+	brebis/generatelist/generatelistforzip.py,
+	brebis/generatelistforbzip2.py, brebis/generatelistforgzip.py,
+	brebis/generatelistfortar.py, brebis/generatelistfortree.py,
+	brebis/generatelistforzip.py, brebis/listtype.py, functional-tests
+	/generate-list-from-tar-archive/generate-list-from-tar-archive.list,
+	functionaltests.py:
+	complete generated list for tar,zip,tree
+	[a266343fc140] <generate-list-option>
+
+2011-10-25  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/generatelist.py, brebis/generatelistfortree.py,
+	functionaltests.py:
+	added the support of generation of list of files for tree of files
+	[33c62b00eb1c] <generate-list-option>
+
+2011-10-23  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/generate-list-from-zip-archive/generate-list-from-
+	zip-archive.list:
+	removing unwanted file list from hg watched files
+	[9cb0a56240f1] <generate-list-option>
+
+	* brebis/cliparse.py, brebis/generatelist.py,
+	brebis/generatelistfortar.py, brebis/generatelistfortree.py,
+	brebis/generatelistforzip.py, brebis/listtype.py, functional-tests
+	/generate-list-from-tar-archive/generate-list-from-tar-archive.list,
+	functional-tests/generate-list-from-tree/generate-list-from-
+	tree/bar/oof, functional-tests/generate-list-from-tree/generate-
+	list-from-tree/bar/rab, functional-tests/generate-list-from-tree
+	/generate-list-from-tree/foo, functional-tests/generate-list-from-
+	tree/generate-list-from-tree/hello, functional-tests/generate-list-
+	from-zip-archive/generate-list-from-zip-archive.list, functional-
+	tests/generate-list-from-zip-archive/generate-list-from-zip-
+	archive.zip, functionaltests.py:
+	generate list of files for tar and zip archives - tree incoming
+	[84edfbb08578] <generate-list-option>
+
+2011-10-20  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/generatelistfortar.py:
+	seems to begin to work - issue with name of output file and headers
+	of generated list solved
+	[235ec2e83403] <generate-list-option>
+
+	* brebis/cliparse.py, brebis/generatelist.py,
+	brebis/generatelistfortar.py, brebis/listtype.py, brebis/main.py,
+	functional-tests/generate-list-from-tar-archive/generate-list-from-
+	tar-archive.tar.gz:
+	seems to begin to work - a problem remains with the output file
+	named tlist
+	[f613cad61dfb] <generate-list-option>
+
+	* brebis/cliparse.py, brebis/generatelist.py,
+	brebis/generatelistforbzip2.py, brebis/generatelistforgzip.py,
+	brebis/generatelistfortar.py, brebis/generatelistfortree.py,
+	brebis/generatelistforzip.py:
+	added generate list modules for archives and tree
+	[b5ae205bb276] <generate-list-option>
+
+2011-10-17  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/cliparse.py, brebis/generatelist.py, brebis/main.py:
+	first commit with beginning of support to generate list of files in
+	the archives
+	[6321d8ed7c20] <generate-list-option>
 
 2011-10-12  Carl Chenet  <chaica@ohmytux.com>
 
@@ -232,10 +1704,124 @@
 	* merged support for bzip2 only archive in default branch
 	[fe3dd37cb098]
 
+	* brebis/checkbzip2.py:
+	added default parameter type for file inside a bzip2 archive
+	[08588637ed4f] <support-for-bz2>
+
+	* brebis/checkgzip.py, brebis/identifylimitations.py, functional-tests
+	/full-criteria-multiple-backups/a.out, functional-tests/unsupported-
+	parameters-gz-archive/unsupported-parameters-gz-archive-list,
+	functional-tests/unsupported-parameters-gz-archive/unsupported-
+	parameters-gz-archive.conf, functional-tests/unsupported-parameters-
+	gz-archive/unsupported-parameters-gz-archive.gz, functionaltests.py:
+	added support for warning user about current archive limitation
+	[c3fbe4b51334] <test-archive-limitations>
+
+	* functional-tests/wrong-file-md5-hash-in-bzip2-archive/wrong-file-md5
+	-hash-in-bzip2-archive-list, functional-tests/wrong-file-md5-hash-
+	in-bzip2-archive/wrong-file-md5-hash-in-bzip2-archive.bz2,
+	functional-tests/wrong-file-md5-hash-in-bzip2-archive/wrong-file-md5
+	-hash-in-bzip2-archive.conf, functional-tests/wrong-file-sha1-hash-
+	in-bzip2-archive/wrong-file-sha1-hash-in-bzip2-archive-list,
+	functional-tests/wrong-file-sha1-hash-in-bzip2-archive/wrong-file-
+	sha1-hash-in-bzip2-archive.bz2, functional-tests/wrong-file-sha1
+	-hash-in-bzip2-archive/wrong-file-sha1-hash-in-bzip2-archive.conf,
+	functional-tests/wrong-file-sha224-hash-in-bzip2-archive/wrong-file-
+	sha224-hash-in-bzip2-archive-list, functional-tests/wrong-file-
+	sha224-hash-in-bzip2-archive/wrong-file-sha224-hash-in-
+	bzip2-archive.bz2, functional-tests/wrong-file-sha224-hash-in-
+	bzip2-archive/wrong-file-sha224-hash-in-bzip2-archive.conf,
+	functional-tests/wrong-file-sha256-hash-in-bzip2-archive/wrong-file-
+	sha256-hash-in-bzip2-archive-list, functional-tests/wrong-file-
+	sha256-hash-in-bzip2-archive/wrong-file-sha256-hash-in-
+	bzip2-archive.bz2, functional-tests/wrong-file-sha256-hash-in-
+	bzip2-archive/wrong-file-sha256-hash-in-bzip2-archive.conf,
+	functional-tests/wrong-file-sha384-hash-in-bzip2-archive/wrong-file-
+	sha384-hash-in-bzip2-archive-list, functional-tests/wrong-file-
+	sha384-hash-in-bzip2-archive/wrong-file-sha384-hash-in-
+	bzip2-archive.bz2, functional-tests/wrong-file-sha384-hash-in-
+	bzip2-archive/wrong-file-sha384-hash-in-bzip2-archive.conf,
+	functional-tests/wrong-file-sha512-hash-in-bzip2-archive/wrong-file-
+	sha512-hash-in-bzip2-archive-list, functional-tests/wrong-file-
+	sha512-hash-in-bzip2-archive/wrong-file-sha512-hash-in-
+	bzip2-archive.bz2, functional-tests/wrong-file-sha512-hash-in-
+	bzip2-archive/wrong-file-sha512-hash-in-bzip2-archive.conf,
+	functionaltests.py, tests.py, tests/expected_hash/bar.bz2,
+	tests/expected_hash/bar.gz, tests/expected_hash/bzip2-list,
+	tests/expected_hash/gzip-list:
+	added functional tests for file hash in bzip2 files - added unit
+	tests for hash in gzip and bzip2 files
+	[5676167f86c8] <support-for-bz2>
+
+	* functional-tests/wrong-bz2-archive-md5-hash/wrong-bz2-archive-md5
+	-hash-list, functional-tests/wrong-bz2-archive-md5-hash/wrong-bz2
+	-archive-md5-hash.bz2, functional-tests/wrong-bz2-archive-md5-hash
+	/wrong-bz2-archive-md5-hash.conf, functional-tests/wrong-bz2
+	-archive-sha1-hash/wrong-bz2-archive-sha1-hash-list, functional-
+	tests/wrong-bz2-archive-sha1-hash/wrong-bz2-archive-sha1-hash.bz2,
+	functional-tests/wrong-bz2-archive-sha1-hash/wrong-bz2-archive-
+	sha1-hash.conf, functional-tests/wrong-bz2-archive-sha224-hash
+	/wrong-bz2-archive-sha224-hash-list, functional-tests/wrong-bz2
+	-archive-sha224-hash/wrong-bz2-archive-sha224-hash.bz2, functional-
+	tests/wrong-bz2-archive-sha224-hash/wrong-bz2-archive-
+	sha224-hash.conf, functional-tests/wrong-bz2-archive-sha256-hash
+	/wrong-bz2-archive-sha256-hash-list, functional-tests/wrong-bz2
+	-archive-sha256-hash/wrong-bz2-archive-sha256-hash.bz2, functional-
+	tests/wrong-bz2-archive-sha256-hash/wrong-bz2-archive-
+	sha256-hash.conf, functional-tests/wrong-bz2-archive-sha384-hash
+	/wrong-bz2-archive-sha384-hash-list, functional-tests/wrong-bz2
+	-archive-sha384-hash/wrong-bz2-archive-sha384-hash.bz2, functional-
+	tests/wrong-bz2-archive-sha384-hash/wrong-bz2-archive-
+	sha384-hash.conf, functional-tests/wrong-bz2-archive-sha512-hash
+	/wrong-bz2-archive-sha512-hash-list, functional-tests/wrong-bz2
+	-archive-sha512-hash/wrong-bz2-archive-sha512-hash.bz2, functional-
+	tests/wrong-bz2-archive-sha512-hash/wrong-bz2-archive-
+	sha512-hash.conf, functionaltests.py:
+	functional tests for hash of the bzip2 archive
+	[7c4a4ddd2cee] <support-for-bz2>
+
+2011-10-08  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/checkbzip2.py, tests.py,
+	tests/checkbzip2_private_methods/mybz2.bz2,
+	tests/checkbzip2_private_methods/mybzip2-list,
+	tests/checkbzip2_private_methods/mybzip2.conf:
+	Support for missing file and default size - associated unittests
+	[a863b4dd396a] <support-for-bz2>
+
+	* brebis/checkbackups.py, brebis/checkbzip2.py, functional-tests
+	/corrupted-bz2-archive/corrupted-bz2-archive-list, functional-tests
+	/corrupted-bz2-archive/corrupted-bz2-archive.bz2, functional-tests
+	/corrupted-bz2-archive/corrupted-bz2-archive.conf:
+	support for corrupted bz2 archive detection and associated test
+	[80106bf045df] <support-for-bz2>
+
+	* brebis/checkgzip.py:
+	corrected mistakes in docstring
+	[31ae65cc0362] <support-for-bz2>
+
+	* brebis/checkbzip2.py:
+	addes first step for support of bzip2 archive
+	[3b11119e3499] <support-for-bz2>
+
+	* brebis/checkgzip.py:
+	corrected docstrings
+	[c91a599ec01e] <support-for-bz2>
+
 2011-10-07  Carl Chenet  <chaica@ohmytux.com>
 
 	* merging support-for-gzip branch with default branch
 	[73f72221e9a6]
+
+	* brebis/checkgzip.py, functional-tests/corrupted-gz-archive
+	/corrupted-gz-archive-list, functional-tests/corrupted-gz-archive
+	/corrupted-gz-archive.conf, functional-tests/corrupted-gz-archive
+	/corrupted-gz-archive.gz, functionaltests.py:
+	acceptable detection for gzip archive corruption
+	[4faa41801d9a] <support-for-gzip>
+
+	* synchronzed with default branch
+	[11c01cec1d00] <support-for-gzip>
 
 2011-10-06  Carl Chenet  <chaica@ohmytux.com>
 
@@ -245,6 +1831,10 @@
 
 	* fixed #8 support for error detection in gzip archive
 	[2a98399ff73e]
+
+	* brebis/checkgzip.py:
+	added support for error detection on gzip archive
+	[eb976b705a79] <improve-gzip-archive-error-detection>
 
 2011-10-03  Carl Chenet  <chaica@ohmytux.com>
 
@@ -274,6 +1864,175 @@
 
 	* merging support-for-gzip in default - fixes #3 #5
 	[333cde7ecab7]
+
+2011-10-02  Carl Chenet  <chaica@ohmytux.com>
+
+	* tests.py, tests/checkgzip_private_methods/mygzip-list,
+	tests/checkgzip_private_methods/mygzip.conf,
+	tests/checkgzip_private_methods/mygzip.gz, tests/file_size/missing-
+	bigger-than/mygzip-list, tests/file_size/missing-bigger-
+	than/mygzip.conf, tests/file_size/missing-bigger-than/mygzip.gz,
+	tests/file_size/missing-smaller-than/mygzip-list, tests/file_size
+	/missing-smaller-than/mygzip.conf, tests/file_size/missing-smaller-
+	than/mygzip.gz, tests/file_size/mygzip-list,
+	tests/file_size/mygzip.conf, tests/file_size/mygzip.gz, tests/gzip
+	/mygzip-list, tests/gzip/mygzip.conf, tests/gzip/mygzip.gz:
+	added unit tests for the new CheckGzip class private and protected
+	methods
+	[bb8abd56e739] <support-for-gzip>
+
+	* brebis/checkgzip.py:
+	solved an issue with unclosed file object
+	[67ad4fdbf50c] <support-for-gzip>
+
+	* functional-tests/full-criteria-multiple-backups/a.out, functional-
+	tests/full-criteria-multiple-backups/full-criteria-multiple-backups-
+	gz-list, functional-tests/full-criteria-multiple-backups/full-
+	criteria-multiple-backups-gz.conf, functional-tests/full-criteria-
+	multiple-backups/full-criteria-multiple-backups-gz.gz, functional-
+	tests/full-criteria-multiple-backups/full-criteria-multiple-backups-
+	tar-bz2-list, functional-tests/full-criteria-multiple-backups/full-
+	criteria-multiple-backups-tar-gz-list, functional-tests/full-
+	criteria-multiple-backups/full-criteria-multiple-backups-zip-list,
+	functionaltests.py:
+	added gzip archive to full criteria multiple backups functional
+	tests
+	[45dd78f4a722] <support-for-gzip>
+
+	* functional-tests/unexpected-file-in-gz-archive/unexpected-file-in-
+	gz-archive-list, functional-tests/unexpected-file-in-gz-archive
+	/unexpected-file-in-gz-archive.conf, functional-tests/unexpected-
+	file-in-gz-archive/unexpected-file-in-gz-archive.gz,
+	functionaltests.py:
+	added functional test for unexpected file in gzip archive
+	[2a3ce0a36e2e] <support-for-gzip>
+
+	* functional-tests/file-missing-in-gzip/file-missing-in-gzip-list,
+	functional-tests/file-missing-in-gzip/file-missing-in-gzip.conf,
+	functional-tests/file-missing-in-gzip/file-missing-in-gzip.gz,
+	functionaltests.py:
+	added functional test to check a missing file in a gzip archive
+	[03fb014f38bb] <support-for-gzip>
+
+	* merging current branch and add-missing-types branch
+	[431997e9ffe2] <support-for-gzip>
+
+	* brebis/checkgzip.py, functional-tests/wrong-file-md5-hash-in-gz-
+	archive/wrong-file-md5-hash-in-gz-archive-list, functional-tests
+	/wrong-file-md5-hash-in-gz-archive/wrong-file-md5-hash-in-gz-
+	archive.conf, functional-tests/wrong-file-md5-hash-in-gz-archive
+	/wrong-file-md5-hash-in-gz-archive.gz, functional-tests/wrong-file-
+	sha1-hash-in-gz-archive/wrong-file-sha1-hash-in-gz-archive-list,
+	functional-tests/wrong-file-sha1-hash-in-gz-archive/wrong-file-sha1
+	-hash-in-gz-archive.conf, functional-tests/wrong-file-sha1-hash-in-
+	gz-archive/wrong-file-sha1-hash-in-gz-archive.gz, functional-tests
+	/wrong-file-sha224-hash-in-gz-archive/wrong-file-sha224-hash-in-gz-
+	archive-list, functional-tests/wrong-file-sha224-hash-in-gz-archive
+	/wrong-file-sha224-hash-in-gz-archive.conf, functional-tests/wrong-
+	file-sha224-hash-in-gz-archive/wrong-file-sha224-hash-in-gz-
+	archive.gz, functional-tests/wrong-file-sha256-hash-in-gz-archive
+	/wrong-file-sha256-hash-in-gz-archive-list, functional-tests/wrong-
+	file-sha256-hash-in-gz-archive/wrong-file-sha256-hash-in-gz-
+	archive.conf, functional-tests/wrong-file-sha256-hash-in-gz-archive
+	/wrong-file-sha256-hash-in-gz-archive.gz, functional-tests/wrong-
+	file-sha384-hash-in-gz-archive/wrong-file-sha384-hash-in-gz-archive-
+	list, functional-tests/wrong-file-sha384-hash-in-gz-archive/wrong-
+	file-sha384-hash-in-gz-archive.conf, functional-tests/wrong-file-
+	sha384-hash-in-gz-archive/wrong-file-sha384-hash-in-gz-archive.gz,
+	functional-tests/wrong-file-sha512-hash-in-gz-archive/wrong-file-
+	sha512-hash-in-gz-archive-list, functional-tests/wrong-file-sha512
+	-hash-in-gz-archive/wrong-file-sha512-hash-in-gz-archive.conf,
+	functional-tests/wrong-file-sha512-hash-in-gz-archive/wrong-file-
+	sha512-hash-in-gz-archive.gz, functionaltests.py:
+	support for hash checking for file in gzip and associated tests
+	[50370e83c74e] <add-missing-types>
+
+	* brebis/checktar.py:
+	tarfile.CONTYPE -> tarfile.CONTTYPE
+	[51466c04c909] <add-missing-types>
+
+2011-09-29  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/checkgzip.py, functional-tests/expected-file-greater-than-
+	file-in-gz-archive/expected-file-greater-than-file-in-gz-archive-
+	list, functional-tests/expected-file-smaller-than-file-in-gz-archive
+	/expected-file-smaller-than-file-in-gz-archive-list, functional-
+	tests/name-in-gzip-and-gzip-archive-are-not-the-same/name-in-gzip-
+	and-gzip-archive-are-not-the-same-list, functional-tests/name-in-
+	gzip-and-gzip-archive-are-not-the-same/name-in-gzip-and-gzip-
+	archive-are-not-the-same.conf, functional-tests/name-in-gzip-and-
+	gzip-archive-are-not-the-same/name-in-gzip-and-gzip-archive-are-not-
+	the-same.gz, functionaltests.py:
+	added support for initial filename in gzip and associated test with
+	corrections on existing gzip tests
+	[5a1d4d19136f] <support-for-gzip>
+
+2011-09-28  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/expected-file-greater-than-file-in-gz-archive
+	/expected-file-greater-than-file-in-gz-archive-list, functional-
+	tests/expected-file-greater-than-file-in-gz-archive/expected-file-
+	greater-than-file-in-gz-archive.conf, functional-tests/expected-
+	file-greater-than-file-in-gz-archive/expected-file-greater-than-
+	file-in-gz-archive.gz, functional-tests/expected-file-smaller-than-
+	file-in-gz-archive/expected-file-smaller-than-file-in-gz-archive-
+	list, functional-tests/expected-file-smaller-than-file-in-gz-archive
+	/expected-file-smaller-than-file-in-gz-archive.conf, functional-
+	tests/expected-file-smaller-than-file-in-gz-archive/expected-file-
+	smaller-than-file-in-gz-archive.gz, functionaltests.py:
+	added tests bigger than and smaller than for file inside gzip
+	archive
+	[50f54a70e6fc] <support-for-gzip>
+
+	* functional-tests/expected-file-not-equals-file-in-gz-archive
+	/expected-file-not-equals-file-in-gz-archive-list, functional-tests
+	/expected-file-not-equals-file-in-gz-archive/expected-file-not-
+	equals-file-in-gz-archive.conf, functional-tests/expected-file-not-
+	equals-file-in-gz-archive/expected-file-not-equals-file-in-gz-
+	archive.gz:
+	adding files for equality functional test
+	[c69d02dbd625] <support-for-gzip>
+
+	* brebis/checkgzip.py, functionaltests.py:
+	added support for size test on a file inside the gzip archive +
+	equality functional test
+	[b5477ade1ef7] <support-for-gzip>
+
+	* brebis/checkbackups.py, brebis/checkgzip.py, functional-tests/wrong-
+	gz-archive-gid/wrong-gz-archive-gid-list, functional-tests/wrong-gz-
+	archive-gid/wrong-gz-archive-gid.conf, functional-tests/wrong-gz-
+	archive-gid/wrong-gz-archive-gid.gz, functional-tests/wrong-gz-
+	archive-md5-hash/wrong-gz-archive-md5-hash-list, functional-tests
+	/wrong-gz-archive-md5-hash/wrong-gz-archive-md5-hash.conf,
+	functional-tests/wrong-gz-archive-md5-hash/wrong-gz-archive-
+	md5-hash.gz, functional-tests/wrong-gz-archive-mode/wrong-gz-
+	archive-mode-list, functional-tests/wrong-gz-archive-mode/wrong-gz-
+	archive-mode.conf, functional-tests/wrong-gz-archive-mode/wrong-gz-
+	archive-mode.gz, functional-tests/wrong-gz-archive-sha1-hash/wrong-
+	gz-archive-sha1-hash-list, functional-tests/wrong-gz-archive-
+	sha1-hash/wrong-gz-archive-sha1-hash.conf, functional-tests/wrong-
+	gz-archive-sha1-hash/wrong-gz-archive-sha1-hash.gz, functional-tests
+	/wrong-gz-archive-sha224-hash/wrong-gz-archive-sha224-hash-list,
+	functional-tests/wrong-gz-archive-sha224-hash/wrong-gz-archive-
+	sha224-hash.conf, functional-tests/wrong-gz-archive-sha224-hash
+	/wrong-gz-archive-sha224-hash.gz, functional-tests/wrong-gz-archive-
+	sha256-hash/wrong-gz-archive-sha256-hash-list, functional-tests
+	/wrong-gz-archive-sha256-hash/wrong-gz-archive-sha256-hash.conf,
+	functional-tests/wrong-gz-archive-sha256-hash/wrong-gz-archive-
+	sha256-hash.gz, functional-tests/wrong-gz-archive-sha384-hash/wrong-
+	gz-archive-sha384-hash-list, functional-tests/wrong-gz-archive-
+	sha384-hash/wrong-gz-archive-sha384-hash.conf, functional-tests
+	/wrong-gz-archive-sha384-hash/wrong-gz-archive-sha384-hash.gz,
+	functional-tests/wrong-gz-archive-sha512-hash/wrong-gz-archive-
+	sha512-hash-list, functional-tests/wrong-gz-archive-sha512-hash
+	/wrong-gz-archive-sha512-hash.conf, functional-tests/wrong-gz-
+	archive-sha512-hash/wrong-gz-archive-sha512-hash.gz, functional-
+	tests/wrong-gz-archive-uid/wrong-gz-archive-uid-list, functional-
+	tests/wrong-gz-archive-uid/wrong-gz-archive-uid.conf, functional-
+	tests/wrong-gz-archive-uid/wrong-gz-archive-uid.gz,
+	functionaltests.py:
+	added support for gzip file and associated functional tests
+	[e4726295f309] <support-for-gzip>
 
 2011-09-24  Carl Chenet  <chaica@ohmytux.com>
 
@@ -448,6 +2207,10 @@
 	* added changes from shell-variable-in-functionaltests-py branch
 	[0aad1ef4b566]
 
+	* functionaltests.py:
+	functionaltests.py is now supported by buildbot
+	[39e0978c4370] <shell-variable-in-functionaltests-py>
+
 	* AUTHORS, LICENSE, README:
 	added AUTHORS, LICENSE and README files
 	[4eaff21f66de]
@@ -490,6 +2253,14 @@
 	* merged with removed-checkhashes-class in order to removed no more
 	used part of the code
 	[15dffd2d88a6]
+
+	* brebis/checkhashes.py, brebis/checktar.py, brebis/checkzip.py,
+	brebis/cliparse.py, brebis/main.py, tests.py:
+	removing unused CheckHashes classes and associated tests
+	[c4a4e94782dc] <remove-checkhashes-class>
+
+	* created remove-checkhashes branch
+	[ad15974ad44e] <remove-checkhashes-class>
 
 2011-09-17  Carl Chenet  <chaica@ohmytux.com>
 
@@ -814,6 +2585,10 @@
 	functionaltests.py
 	[db22434bf8ca]
 
+	* functionaltests.py:
+	added queue for multiprocessing communication in functionaltests.py
+	[220b09f434e7] <multiprocessing-queue-functional-tests>
+
 	* functional-tests/wrong-file-gid-in-tar-bz2-archive/wrong-file-gid-
 	in-tar-bz2-archive-list, functional-tests/wrong-file-gid-in-tar-
 	bz2-archive/wrong-file-gid-in-tar-bz2-archive.conf, functional-tests
@@ -836,6 +2611,11 @@
 	tests for file inside the archive
 	[5a49fca42a81]
 
+	* functionaltests.py:
+	moving functional tests to functionaltests.py to use introspection
+	in order to simplify the code
+	[776096183e1f] <uniprocess-functional-tests>
+
 	* functional-tests.py, functionaltests.py:
 	moving functional tests to functionaltests.py with introspection to
 	simplify the code
@@ -843,6 +2623,13 @@
 
 	* using multiprocessing for functional tests
 	[39c3bbd3148a]
+
+	* legacy branch with uniprocess for functional tests
+	[c52d7feef098] <uniprocess-functional-tests>
+
+	* functional-tests.py:
+	added multiprocessing to execute functional tests
+	[a4051701856a] <multiprocess-functional-tests>
 
 2011-09-10  Carl Chenet  <chaica@ohmytux.com>
 
@@ -1289,6 +3076,25 @@
 	on
 	[c83b49997410]
 
+	* tests/db_mysql_database_test/mysql-list:
+	added mysql list of objects to check
+	[d557e0a918cd] <database-support>
+
+	* checkdb.py, tests/db_mysql_database_test/mysql.conf,
+	tests/db_mysql_table_test/mysql-list,
+	tests/db_mysql_table_test/mysql.conf, tests/db_mysql_test/mysql-
+	list, tests/db_mysql_test/mysql.conf, tests/db_postgresql_table_test
+	/postgresql-list, tests/db_postgresql_table_test/postgresql.conf,
+	tests/db_postgresql_test/postgresql-list,
+	tests/db_postgresql_test/postgresql.conf,
+	tests/db_sqlite_table_test/mydata.db,
+	tests/db_sqlite_table_test/nothing.db, tests/db_sqlite_table_test
+	/sqlite-list, tests/db_sqlite_table_test/sqlite.conf,
+	tests/db_sqlite_test/mydata.db, tests/db_sqlite_test/nothing.db,
+	tests/db_sqlite_test/sqlite-list, tests/db_sqlite_test/sqlite.conf:
+	created a branch with the database support for further enhancement
+	[607f05119999] <database-support>
+
 2010-12-01  Carl Chenet  <chaica@ohmytux.com>
 
 	* checkbackups.py, tests/db_mysql_test/mysql-list,
@@ -1300,6 +3106,18 @@
 
 	* added support for hash control of a file inside an archive
 	[272ec06690b8]
+
+	* archiveinfomsg.py, checkarchive.py, checkhashes.py, checktar.py,
+	checktree.py, checkzip.py, expectedfiles.py, tests.py,
+	tests/expected_hash/bar.zip, tests/expected_hash/bar/bar1,
+	tests/expected_hash/bar/bar2, tests/expected_hash/bar/bar3,
+	tests/expected_hash/bar/bar4, tests/expected_hash/bar/bar5,
+	tests/expected_hash/bar/bar6, tests/expected_hash/files-list,
+	tests/expected_hash/filetree-list, tests/expected_hash/foos.tar.gz,
+	tests/expected_hash/tar.conf, tests/expected_hash/tree.conf,
+	tests/expected_hash/zip-list, tests/expected_hash/zip.conf:
+	added support for hash control in archives (zip,tar and filetree)
+	[c11ff8b2ab04] <hash-inside-archive>
 
 2010-11-20  Carl Chenet  <chaica@ohmytux.com>
 
@@ -1324,6 +3142,18 @@
 
 	* merge branch dedicated to support for expected modes in filetree
 	[f5b436648582]
+
+	* checktree.py, tests.py, tests/expected_mode/foo/foo1,
+	tests/expected_mode/tree.conf, tests/expected_mode/treefiles-list,
+	tests/filetree/filelist:
+	added support for expected modes for filetree
+	[0855cdec8c17] <permission-support>
+
+	* archiveinfomsg.py, checkarchive.py, checktar.py, expectedfiles.py,
+	tests.py, tests/expected_mode/archive.conf, tests/expected_mode
+	/files-list, tests/expected_mode/foos.tar.gz:
+	adde support for expected file mode for archives
+	[8d5a4bb82617] <permission-support>
 
 2010-11-13  Carl Chenet  <chaica@ohmytux.com>
 
@@ -1412,7 +3242,19 @@
 	* merging default and with-expectedfiles-configparser branches
 	[fbc1bd2be417]
 
+	* archiveinfomsg.py, expectedfiles.py, tests.py,
+	tests/corrupted_archive/essai-list, tests/file_size/essai-list,
+	tests/file_size/essai-list2, tests/filetree/filelist,
+	tests/tar_bz2_archive_content/essai2-list,
+	tests/tar_gz_archive_content/essai-list, tests/zip_content/myzip-
+	list:
+	lists of files now use configparser. tests.py modified accordingly
+	[8cdfd18e3214] <with-expectedfiles-configparser>
+
 2010-07-27  Carl Chenet  <chaica@ohmytux.com>
+
+	* new branch : with expectedfiles.py using configparser
+	[e88830c806ac] <with-expectedfiles-configparser>
 
 	* tests/db_postgresql_test/postgresql-list,
 	tests/db_postgresql_test/postgresql.conf:

@@ -4,7 +4,7 @@ How to install Brebis
 * You need at least Python 3.3.
 * Untar the tarball and go to the source directory with the following commands:
 
-$ tar zxvf brebis-0.5.tar.gz && cd brebis/
+$ tar zxvf brebis-0.6.tar.gz && cd brebis/
 
 To install Brebis on your computer, type the following command with the root user:
 
@@ -13,8 +13,10 @@ or
 # python3.3 setup.py install --install-scripts=/usr/bin
 
 Now the /usr/local/bin/brebis command or /usr/bin/brebis command should trigger the following output:
+
 $ /usr/local/bin/brebis -h
-usage: brebis [-h] [-c DIR] [-v] [-l FILE] [-g] [archives [archives ...]]
+usage: brebis [-h] [-c DIR] [-v] [-l FILE] [-g] [-d DELIMITER]
+              [archives [archives ...]]
 
 Fully automated backup checker
 
@@ -28,6 +30,8 @@ optional arguments:
   -v, --version         print the version of this program and exit
   -l FILE, --log FILE   the log file
   -g, --gen-list        generate a list of files inside a backup
+  -d DELIMITER, --delimiter DELIMITER
+                        delimiter of the fields for the list of files
 
 For more information: http://www.brebisproject.org
 
@@ -64,7 +68,7 @@ Archive checking setup
 Understanding the parameters of the list of files in order to write it by yourself
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The second file you need is the list containing the information about the archive, the tree or the files inside your backups. Here is an example with the full list of the parameters available for now:
-<pre>
+
 [archive]
 size| <5m
 mode| 755
@@ -73,10 +77,8 @@ gid| 5001
 sha1| e0f58dcc57caad2182f701eb63f0c81f347d3fe5
 
  
-[files]
 foos/foo|
 foos/foo1| >105k type|f mode|755 uid|5022 gid|5023 unexpected md5|3718422a0bf93f7fc46cff6b5e660ff8
-</pre>
 
 The [archive] section hosts the parameter for the archive itself. This section is not mandatory if you do not need it.
 size defines what the archive size should be. You can specify <,> or =. Default value is expressed in bytes, also available are (k)ilo, (m)ega, (g)iga, (p)eta,(e)xa, (z)etta and (y)ottabyte.
@@ -99,14 +101,13 @@ foos/foo1| md5|hashsum means the file foos/foo1 is expected to have a md5 hash s
 Generate a list of files within a backup
 ========================================
 
-Starting from 0.5, Brebis is able to generate a list of files within a backup. You only have to reuse this file later, including it in your configuration file.
+Starting from 0.4, Brebis is able to generate a list of files within a backup. You only have to reuse this file later, including it in your configuration file.
 
 Use the following command to generate the list of files:
 
 $ brebis -g mybackup.tar.gz
 $ ls
 mybackup.tar.gz mybackup.list
-</pre>
 
 Unsupported parameters for a given kind of archive
 ==================================================
@@ -120,13 +121,27 @@ You launch Brebis from the command line:
 
 $ brebis -c myconfs/
 
-The parameter -c or --configpath specifies a path to a directory where your Brebis configurations are stored. If any alert is triggered, it will appear in the your current working directory in a file named a.out. Relative or absolute paths are accepted.
+The option -g or --generate parses the archive you give in parameter and returns a list of files inside the archive, allowing you to re-use later this file in order to check the archive.
+
+$ brebis -g myarchive.tar.bz
+
+The option -c or --configpath specifies a path to a directory where your Brebis configurations are stored. If any alert is triggered, it will appear in the your current working directory in a file named a.out. Relative or absolute paths are accepted.
 
 You can also specify your own output file: 
 
 $ brebis -c myconfs/ -l output/brebis.log
 
 The option -l or --log specifies your own output file.
+
+You can also modifiy the default delimiter ('|') that brebis uses and specify your own with the -d or --delimiter option:
+
+$ brebis -d @ -g myarchive.tar.bz
+
+or
+
+$ brebis  --delimiter @ -c myconfs/myconf.conf
+
+We use @ as the default delimiter for the two commands just above.
 
 Links:
 ------
