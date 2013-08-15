@@ -32,7 +32,7 @@ class GenerateListForTar(GenerateList):
         try:
             __tar = tarfile.open(self.__arcpath, 'r')
             self.__main(__tar)
-        except tarfile.TarError as _msg:
+        except (tarfile.TarError, EOFError) as _msg:
             __warn = '. You should investigate for a data corruption.'
             logging.warning('{}: {}{}'.format(self.__arcpath, str(_msg), __warn))
 

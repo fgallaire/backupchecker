@@ -48,7 +48,7 @@ class CheckTar(CheckArchive):
                                     'mode':_tarinfo.mode, 'type': __type}
                     _data = self._check_path(__arcinfo, _data)
                 self._missing_files = [_file['path'] for _file in _data]
-            except tarfile.TarError as _msg:
+            except (tarfile.TarError, EOFError) as _msg:
                 __warn = '. You should investigate for a data corruption.'
                 logging.warning('{}: {}{}'.format(_cfgvalues['path'], str(_msg), __warn))
 
