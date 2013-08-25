@@ -17,6 +17,7 @@
 '''Generate a list of files from a zip archive'''
 
 import logging
+import os.path
 import stat
 import zipfile
 
@@ -26,10 +27,11 @@ from brebis.generatelist.generatelist import GenerateList
 class GenerateListForZip(GenerateList):
     '''Generate a list of files from a zip archive'''
 
-    def __init__(self, __arcpath, __delimiter):
+    def __init__(self, __genparams):
         '''The constructor for the GenerateListForZip class'''
-        self.__arcpath = __arcpath
-        self.__delimiter = __delimiter
+        self.__arcpath = __genparams['arcpath']
+        self.__delimiter = __genparams['delimiter']
+        self._genfull = __genparams['genfull']
         try:
             __zip = zipfile.ZipFile(self.__arcpath, 'r', allowZip64=True)
             self.__main(__zip)
@@ -68,10 +70,19 @@ class GenerateListForZip(GenerateList):
                                                             str(__gid),
                                                             __mode,
                                                             __type))
-        # Compose the name of the generated list
-        self.__arcpath = ''.join([self.__arcpath[:-3], 'list'])
         # call the method to write information in a file
-        self._generate_list(self.__arcpath, __listoffiles)
+        __listconfinfo = {'arclistpath': ''.join([self.__arcpath[:-3], 'list']),
+                            'listoffiles':  __listoffiles}
+        self._generate_list(__listconfinfo)
+        # call the method to write the configuration file if --gen-full was required
+        if self._genfull:
+            __arcname =  os.path.basename(self.__arcpath[:-4])
+            __confinfo = {'arcname': __arcname,
+                            'arcpath': self.__arcpath,
+                            'arcconfpath': ''.join([self.__arcpath[:-3],'conf']),
+                            'arclistpath': __listconfinfo['arclistpath'],
+                            'arctype': 'archive'}
+            self._generate_conf(__confinfo)
 
     def __extract_uid_gid(self, __binary):
         '''Extract uid and gid from a zipinfo.extra object (platform dependant)'''

@@ -27,8 +27,11 @@ from brebis.generatelist.generatelist import GenerateList
 class GenerateListForLzma(GenerateList):
     '''Generate a list of files from a lzma archive'''
 
-    def __init__(self, __arcpath, __delimiter):
+    def __init__(self, __genparams):
         '''The constructor for the GenerateListForlzma class'''
+        __arcpath = __genparams['arcpath']
+        __delimiter = __genparams['delimiter']
+        self._genfull = __genparams['genfull']
         __listoffiles = ['[files]\n']
         __filetype = 'f'
         __filehash = get_hash(lzma.LZMAFile(__arcpath, 'r'), 'md5')
@@ -38,4 +41,15 @@ class GenerateListForLzma(GenerateList):
                                 __filetype,
                                 __filehash))
         # call the method to write information in a file
-        self._generate_list(''.join([__arcpath[:-2], 'list']), __listoffiles)
+        __listconfinfo = {'arclistpath': ''.join([__arcpath[:-2], 'list']),
+                            'listoffiles':  __listoffiles}
+        self._generate_list(__listconfinfo)
+        # call the method to write the configuration file if --gen-full was required
+        if self._genfull:
+            __arcname =  os.path.basename(__arcpath[:-3])
+            __confinfo = {'arcname': __arcname,
+                            'arcpath': __arcpath,
+                            'arcconfpath': ''.join([__arcpath[:-2],'conf']),
+                            'arclistpath': __listconfinfo['arclistpath'],
+                            'arctype': 'archive'}
+            self._generate_conf(__confinfo)

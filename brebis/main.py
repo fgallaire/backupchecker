@@ -34,7 +34,7 @@ class Main(object):
         '''The main for the Main class'''
         __options = CliParse().options
         # no list generation mode, check backups 
-        if not __options.genlist:
+        if not __options.genlist and not __options.genfull:
             __confs = Configurations(__options.confpath)
             CheckBackups(__confs.configs, __options)
         else:

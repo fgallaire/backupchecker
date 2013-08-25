@@ -17,6 +17,7 @@
 '''Generate a list of files from a tar archive'''
 
 import logging
+import os.path
 import tarfile
 
 from brebis.checkhashes import get_hash
@@ -25,10 +26,11 @@ from brebis.generatelist.generatelist import GenerateList
 class GenerateListForTar(GenerateList):
     '''Generate a list of files from a tar archive'''
 
-    def __init__(self, __arcpath, __delimiter):
+    def __init__(self, __genparams):
         '''The constructor for the GenerateListForTar class'''
-        self.__arcpath = __arcpath
-        self.__delimiter = __delimiter
+        self.__arcpath = __genparams['arcpath']
+        self.__delimiter = __genparams['delimiter']
+        self._genfull = __genparams['genfull']
         try:
             __tar = tarfile.open(self.__arcpath, 'r')
             self.__main(__tar)
@@ -70,21 +72,52 @@ class GenerateListForTar(GenerateList):
                                                         __type))
         # Compose the name of the generated list
         if self.__arcpath.lower().endswith('.tar'):
-            self.__arcpath = ''.join([self.__arcpath[:-3], 'list'])
+            self.__arclistpath = ''.join([self.__arcpath[:-3], 'list'])
+            if self._genfull:
+                self.__arcconfpath = ''.join([self.__arcpath[:-3], 'conf'])
+                self.__arcname = os.path.basename(self.__arcpath[:-4])
         elif self.__arcpath.lower().endswith('.tar.gz'): 
-            self.__arcpath = ''.join([self.__arcpath[:-6], 'list'])
+            self.__arclistpath = ''.join([self.__arcpath[:-6], 'list'])
+            if self._genfull:
+                self.__arcconfpath = ''.join([self.__arcpath[:-6], 'conf'])
+                self.__arcname = os.path.basename(self.__arcpath[:-7])
         elif self.__arcpath.lower().endswith('.tar.bz2'):
-            self.__arcpath = ''.join([self.__arcpath[:-7], 'list'])
+            self.__arclistpath = ''.join([self.__arcpath[:-7], 'list'])
+            if self._genfull:
+                self.__arcconfpath = ''.join([self.__arcpath[:-7], 'conf'])
+                self.__arcname = os.path.basename(self.__arcpath[:-8])
         elif self.__arcpath.lower().endswith('.tar.xz'):
-            self.__arcpath = ''.join([self.__arcpath[:-6], 'list'])
+            self.__arclistpath = ''.join([self.__arcpath[:-6], 'list'])
+            if self._genfull:
+                self.__arcconfpath = ''.join([self.__arcpath[:-6], 'conf'])
+                self.__arcname = os.path.basename(self.__arcpath[:-7])
         elif self.__arcpath.lower().endswith('.tgz'):
-            self.__arcpath = ''.join([self.__arcpath[:-3], 'list'])
+            self.__arclistpath = ''.join([self.__arcpath[:-3], 'list'])
+            if self._genfull:
+                self.__arcconfpath = ''.join([self.__arcpath[:-3], 'conf'])
+                self.__arcname = os.path.basename(self.__arcpath[:-4])
         elif self.__arcpath.lower().endswith('.tbz'):
-            self.__arcpath = ''.join([self.__arcpath[:-3], 'list'])
+            self.__arclistpath = ''.join([self.__arcpath[:-3], 'list'])
+            if self._genfull:
+                self.__arcconfpath = ''.join([self.__arcpath[:-3], 'conf'])
+                self.__arcname = os.path.basename(self.__arcpath[:-4])
         elif self.__arcpath.lower().endswith('.tbz2'):
-            self.__arcpath = ''.join([self.__arcpath[:-4], 'list'])
+            self.__arclistpath = ''.join([self.__arcpath[:-4], 'list'])
+            if self._genfull:
+                self.__arcconfpath = ''.join([self.__arcpath[:-4], 'conf'])
+                self.__arcname = os.path.basename(self.__arcpath[:-5])
         # call the method to write information in a file
-        self._generate_list(self.__arcpath, __listoffiles)
+        __listconfinfo = {'arclistpath': self.__arclistpath,
+                                'listoffiles':__listoffiles}
+        self._generate_list(__listconfinfo)
+        # call the method to write the configuration file if --gen-full was required
+        if self._genfull:
+            __confinfo = {'arcname':self.__arcname,
+                            'arcpath':self.__arcpath,
+                            'arcconfpath': self.__arcconfpath,
+                            'arclistpath': self.__arclistpath,
+                            'arctype': 'archive'}
+            self._generate_conf(__confinfo)
 
     def __translate_type(self, __arctype):
         '''Translate the type of the file inside the tar by a generic
