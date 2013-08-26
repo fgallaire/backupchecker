@@ -55,8 +55,14 @@ class Configurations:
                 __currentconf = {}
                 __config = ConfigParser()
                 __fullconfpath = os.path.join('/'.join([__confpath, __conf]))
-                with open(__fullconfpath, 'r') as __file:
-                    __config.read_file(__file)
+                try:
+                    with open(__fullconfpath, 'r') as __file:
+                        __config.read_file(__file)
+                except UnicodeDecodeError as __err:
+                    __msg = 'Error while parsing the configuration file {}:'.format(__fullconfpath)
+                    print(__msg)
+                    print(__err)
+                    sys.exit(1)
                 # Common information for the backups
                 ### The type of the backups
                 __currentconf['type'] = __config.get('main', 'type')
