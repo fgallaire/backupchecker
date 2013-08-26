@@ -1122,7 +1122,7 @@ class TestApp(unittest.TestCase):
         __file = 'tests/generatelist_private_methods/mytar.list'
         __myobj = brebis.generatelist.generatelist.GenerateList()
         __content = ['[files]\n', 'foo:\n']
-        __myobj._generate_list(__file, __content)
+        __myobj._generate_list({'arclistpath': __file, 'listoffiles': __content})
         with open(__file, 'r') as __f:
             self.assertEqual(__f.readlines(), __content)
 
@@ -1135,7 +1135,7 @@ class TestApp(unittest.TestCase):
     def test_listfortar_translate_type_file(self):
         '''test the __translate_type private method from GenerateListForTar - expecting file'''
         __file = 'tests/generatelistfortar_private_methods/mytar.tar.gz'
-        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar(__file, DEFAULTDELIMITER)
+        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False})
         self.__tar = tarfile.open(__file)
         __result = __myobj._GenerateListForTar__translate_type(self.__tar.getmembers()[3].type)
         self.assertEqual('f', __result)
@@ -1143,7 +1143,7 @@ class TestApp(unittest.TestCase):
     def test_listfortar_translate_type_directory(self):
         '''test the __translate_type private method from GenerateListForTar - expecting directory'''
         __file = 'tests/generatelistfortar_private_methods/mytar.tar.gz'
-        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar(__file, DEFAULTDELIMITER)
+        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False})
         self.__tar = tarfile.open(__file)
         __result = __myobj._GenerateListForTar__translate_type(self.__tar.getmembers()[1].type)
         self.assertEqual('d', __result)
@@ -1151,7 +1151,7 @@ class TestApp(unittest.TestCase):
     def test_listfortar_translate_type_symbolic_link(self):
         '''test the __translate_type private method from GenerateListForTar - expecting symbolic link'''
         __file = 'tests/generatelistfortar_private_methods/mytar.tar.gz'
-        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar(__file, DEFAULTDELIMITER)
+        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False})
         self.__tar = tarfile.open(__file)
         __result = __myobj._GenerateListForTar__translate_type(self.__tar.getmembers()[2].type)
         self.assertEqual('s', __result)
@@ -1165,7 +1165,7 @@ class TestApp(unittest.TestCase):
     def test_listforzip_translate_type_file(self):
         '''test the __translate_type private method from GenerateListForZip - expecting file'''
         __file = 'tests/generatelistforzip_private_methods/myzip.zip'
-        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip(__file, DEFAULTDELIMITER)
+        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False})
         __myz = zipfile.ZipFile(__file,'r')
         __myinfo = __myz.infolist()
         __result = __myobj._GenerateListForZip__translate_type(__myinfo[-1].external_attr >> 16)
@@ -1174,7 +1174,7 @@ class TestApp(unittest.TestCase):
     def test_listforzip_translate_type_directory(self):
         '''test the __translate_type private method from GenerateListForZip - expecting directory'''
         __file = 'tests/generatelistforzip_private_methods/myzip.zip'
-        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip(__file, DEFAULTDELIMITER)
+        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False})
         __myz = zipfile.ZipFile(__file,'r')
         __myinfo = __myz.infolist()
         __result = __myobj._GenerateListForZip__translate_type(__myinfo[0].external_attr >> 16)
@@ -1183,7 +1183,7 @@ class TestApp(unittest.TestCase):
     def test_listforzip_extract_uid_gid(self):
         '''test the __extract_uid_gid private method from GenerateListForZip'''
         __file = 'tests/generatelistforzip_private_methods/myzip.zip'
-        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip(__file, DEFAULTDELIMITER)
+        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False})
         __myz = zipfile.ZipFile(__file,'r')
         __myinfo = __myz.infolist()
         __result = __myobj._GenerateListForZip__extract_uid_gid(__myinfo[-1])
@@ -1199,7 +1199,7 @@ class TestApp(unittest.TestCase):
         '''test the __translate_type private method from GenerateListForTree - expecting file'''
         __dir = 'tests/generatelistfortree_private_methods/mydir'
         __file = os.path.join(__dir, 'foo')
-        __myobj = brebis.generatelist.generatelistfortree.GenerateListForTree(__dir, DEFAULTDELIMITER)
+        __myobj = brebis.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False})
         __result = __myobj._GenerateListForTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('f', __result)
 
@@ -1207,7 +1207,7 @@ class TestApp(unittest.TestCase):
         '''test the __translate_type private method from GenerateListForTree - expecting directory'''
         __dir = 'tests/generatelistfortree_private_methods/mydir'
         __file = os.path.join(__dir, 'bar')
-        __myobj = brebis.generatelist.generatelistfortree.GenerateListForTree(__dir, DEFAULTDELIMITER)
+        __myobj = brebis.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False})
         __result = __myobj._GenerateListForTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('d', __result)
 
@@ -1215,7 +1215,7 @@ class TestApp(unittest.TestCase):
         '''test the __translate_type private method from GenerateListForTree - expecting symbolic link'''
         __dir = 'tests/generatelistfortree_private_methods/mydir'
         __file = os.path.join(__dir, 'oof')
-        __myobj = brebis.generatelist.generatelistfortree.GenerateListForTree(__dir, DEFAULTDELIMITER)
+        __myobj = brebis.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False})
         __result = __myobj._GenerateListForTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('s', __result)
 
@@ -1228,13 +1228,13 @@ class TestApp(unittest.TestCase):
     def test_listforgzip_extract_size_from_gzip_archive(self):
         '''test the extraction of a gzip uncompressed file in the gzip archive'''
         __file = 'tests/generatelistforgzip_private_methods/mygzip.gz'
-        __myobj = brebis.generatelist.generatelistforgzip.GenerateListForGzip(__file, DEFAULTDELIMITER)
+        __myobj = brebis.generatelist.generatelistforgzip.GenerateListForGzip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False})
         with open(__file, 'rb') as __myf:
             self.assertEqual(15, __myobj._GenerateListForGzip__extract_size(__myf))
 
     def test_listforgzip_extract_initial_filename_from_gzip_archive(self):
         __file = 'tests/generatelistforgzip_private_methods/mygzip.gz'
-        __myobj = brebis.generatelist.generatelistforgzip.GenerateListForGzip(__file, DEFAULTDELIMITER)
+        __myobj = brebis.generatelist.generatelistforgzip.GenerateListForGzip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False})
         with open(__file, 'rb') as __myf:
             self.assertEqual('mygzip', __myobj._GenerateListForGzip__extract_initial_filename(__myf, 'mygzip'))
 

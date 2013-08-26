@@ -26,8 +26,11 @@ from brebis.checkhashes import get_hash
 class GenerateListForTree(GenerateList):
     '''Generate a list of files from a tree'''
 
-    def __init__(self, __arcpath, __delimiter):
+    def __init__(self, __genparams):
         '''The constructor for the GenerateListForTree class'''
+        __arcpath = __genparams['arcpath']
+        __delimiter = __genparams['delimiter']
+        self._genfull = __genparams['genfull']
         __listoffiles = ['[files]\n']
         __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
         __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
@@ -78,7 +81,20 @@ class GenerateListForTree(GenerateList):
                                             __type))
                                             
         # call the method to write information in a file
-        self._generate_list(''.join([__arcpath, '.list']), __listoffiles)
+        #self._generate_list(''.join([__arcpath, '.list']), __listoffiles)
+        # call the method to write information in a file
+        __listconfinfo = {'arclistpath': ''.join([__arcpath, '.list']),
+                            'listoffiles':  __listoffiles}
+        self._generate_list(__listconfinfo)
+        # call the method to write the configuration file if --gen-full was required
+        if self._genfull:
+            __arcname =  os.path.basename(__arcpath)
+            __confinfo = {'arcname': __arcname,
+                            'arcpath': __arcpath,
+                            'arcconfpath': ''.join([__arcpath,'.conf']),
+                            'arclistpath': __listconfinfo['arclistpath'],
+                            'arctype': 'tree'}
+            self._generate_conf(__confinfo)
 
     def __translate_type(self, __mode):
         '''Translate the type of the file to a generic name'''

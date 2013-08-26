@@ -23,6 +23,9 @@ tests/generatelistforgzip_private_methods/mygzip.list
 tests/generatelistfortar_private_methods/mytar.list
 tests/generatelistfortree_private_methods/mydir.list
 tests/generatelistforzip_private_methods/myzip.list
+tests/generatelistfortree_private_methods/mydir/bar.list
+tests/generatelistfortree_private_methods/mydir/foo.list
+tests/generatelistfortree_private_methods/mydir/oof.list
 functional-tests/generate-list-changing-default-separator/bzip2/generate-list-changing-default-separator-for-bzip2.list
 functional-tests/generate-list-changing-default-separator/gzip/generate-list-changing-default-separator-for-gzip.list
 functional-tests/generate-list-changing-default-separator/tar.bz2/generate-list-changing-default-separator-for-tar-bz2.list
