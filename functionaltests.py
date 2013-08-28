@@ -2842,6 +2842,14 @@ class Test_expecting_hard_link_for_tar_gz(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('is a regular file. Should have been a hard link')
 
+class Test_wrong_target_in_tar_gz_archive(Main):
+    '''Test if the target of a symlink is wrong in a tar gz archive'''
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong_target_in_tar_gz_archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main(' target is')
 
 if __name__ == '__main__':
     processes = []
