@@ -125,7 +125,7 @@ class ExpectedValues(object):
                                 __type =__item.split(__delimiter)[-1]
                                 ### f for file, c for character, d for directory
                                 ### s for symbolink link, b for block, o for fifo,
-                                ### k for socket
+                                ### k for socket, l for hard link
                                 __types = ('f','c','d','s','b','o','k', 'l')
                                 if __type not in __types:
                                     logging.warning('{}: Unknown type {} for file parameter'.format(__data['path'], __type))
@@ -141,6 +141,14 @@ class ExpectedValues(object):
                             ### Test if smaller than is required
                             elif __item.startswith('<'):
                                 __data['smallerthan'] = self.__convert_arg(__item)
+                            # Testing if there is a target for this file
+                            elif __item.startswith('target{}'.format(__delimiter)):
+                                if __data['type'] and (__data['type'] == 'l' or __data['type'] == 's'):
+                                    __data['target'] = __item.split(__delimiter)[-1]
+                                else:
+                                    __errmsg = 'The list of your file contains a target field althoug the file is not a symlink or a hard link'
+                                    print(__errmsg)
+                                    sys.exit(1)
                             # Test if a hash is provided for this file
                             for __hash in algorithms_guaranteed:
                                 if __item.startswith('{}{}'.format(__hash, __delimiter)):

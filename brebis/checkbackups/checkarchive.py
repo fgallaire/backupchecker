@@ -40,6 +40,7 @@ class CheckArchive(object):
         self._mismatched_gids = []
         self._mismatched_modes = []
         self._mismatched_types = []
+        self._mismatched_targets = []
         self._mismatched_hashes = []
         self.__fileinfo = False
         self._main(_cfgvalues, _options)
@@ -68,6 +69,8 @@ class CheckArchive(object):
                 ### Compare the file type and the type of the expected file 
                 if 'type' in __arcinfo and 'type' in _file:
                     self._check_type(__arcinfo['type'], _file)
+                if 'target' in __arcinfo and 'target' in _file:
+                    self._check_target(__arcinfo['target'], _file)
                 ### Compare the hash of the file and the one of the expected file
                 if 'hash' in _file:
                         self._check_hash(__arcinfo['path'], _file)
@@ -173,6 +176,13 @@ class CheckArchive(object):
             self._mismatched_hashes.append({'path': __arcpath,
                 'expectedhash': __expectedhash, 'hash': __archash})
 
+    def _check_target(self, __arctarget, __file):
+        '''Check if the target field in the archive matches the
+        expected one
+        '''
+        if __file['target'] != __arctarget:
+            self._mismatched_targets.append({'path': __file['path'], 'expectedtarget' : __file['target'], 'target': __arctarget})
+
     def _archive_checks(self, __arcdata, __arcpath):
         '''Launch the checks for the archive itself'''
         if __arcdata:
@@ -266,3 +276,10 @@ class CheckArchive(object):
         an unexpected hash
         '''
         return self._mismatched_hashes
+
+    @property
+    def mismatched_targets(self):
+        '''A list containing {target,expectedtarget} of the targets of the links in the 
+        archive with an unexpected target
+        '''
+        return self._mismatched_targets
