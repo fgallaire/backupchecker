@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2011 Carl Chenet <chaica@ohmytux.com>
+# Copyright © 2013 Carl Chenet <chaica@ohmytux.com>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -27,8 +27,11 @@ from brebis.generatelist.generatelist import GenerateList
 class GenerateListForGzip(GenerateList):
     '''Generate a list of files from a gzip archive'''
 
-    def __init__(self, __arcpath):
+    def __init__(self, __genparams):
         '''The constructor for the GenerateListForGzip class'''
+        __arcpath = __genparams['arcpath']
+        __delimiter = __genparams['delimiter']
+        self._genfull = __genparams['genfull']
         __listoffiles = ['[files]\n']
         __fileinfo = os.lstat(__arcpath)
         __filetype = 'f'
@@ -37,14 +40,25 @@ class GenerateListForGzip(GenerateList):
             __filesize = self.__extract_size(__gzip)
             __filename = self.__extract_initial_filename(__gzip,
                         os.path.split(__arcpath)[-1][:-2])
-        __onelinewithhash = '{}| ={} type|{} md5|{}\n'
+        __onelinewithhash = '{value}{delimiter} ={value} type{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
         __listoffiles.append(__onelinewithhash.format(
                                 __filename,
                                 str(__filesize),
                                 __filetype,
                                 __filehash))
         # call the method to write information in a file
-        self._generate_list(''.join([__arcpath[:-2], 'list']), __listoffiles)
+        __listconfinfo = {'arclistpath': ''.join([__arcpath[:-2], 'list']),
+                            'listoffiles':  __listoffiles}
+        self._generate_list(__listconfinfo)
+        # call the method to write the configuration file if --gen-full was required
+        if self._genfull:
+            __arcname =  os.path.basename(__arcpath[:-3])
+            __confinfo = {'arcname': __arcname,
+                            'arcpath': __arcpath,
+                            'arcconfpath': ''.join([__arcpath[:-2],'conf']),
+                            'arclistpath': __listconfinfo['arclistpath'],
+                            'arctype': 'archive'}
+            self._generate_conf(__confinfo)
 
     def __extract_size(self, __binary):
         '''Extract the size of the uncompressed file inside the archive -

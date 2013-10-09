@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2011 Carl Chenet <chaica@ohmytux.com>
+# Copyright © 2013 Carl Chenet <chaica@ohmytux.com>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -47,10 +47,10 @@ class ArchiveInfoMsg(object):
             __msg= 'file'
             if len(__missing) > 1:
                 __msg = 'files'
-            logging.warn('{} {} missing in {}: '.format(
+            logging.warning('{} {} missing in {}: '.format(
                 len(__missing), __msg, __archivepath))
             for __path in __missing:
-                logging.warn('{}'.format(__path))
+                logging.warning('{}'.format(__path))
 
     def __unexpected_files(self, __unexpected, __archivepath):
         '''Warn about the unexpected files in the archive'''
@@ -58,10 +58,10 @@ class ArchiveInfoMsg(object):
             __msg= 'file'
             if len(__unexpected) > 1:
                 __msg = 'files'
-            logging.warn('{} unexpected {} checking {}: '.format(
+            logging.warning('{} unexpected {} checking {}: '.format(
                 len(__unexpected), __msg, __archivepath))
             for __path in __unexpected:
-                logging.warn('{}'.format(__path))
+                logging.warning('{}'.format(__path))
 
     def __classify_differences(self, __bck, __archivepath):
         '''Report differences between expected files and files in the
@@ -89,14 +89,14 @@ class ArchiveInfoMsg(object):
         __fileword = 'file'
         if len(__files) > 1:
             __fileword = 'files'
-        logging.warn(__topic.format(len(__files), __fileword, __archivepath))
+        logging.warning(__topic.format(len(__files), __fileword, __archivepath))
         if __qty:
             for __file in __files:
-                logging.warn('{} size is {}. Should have been {} {}.'.format(
+                logging.warning('{} size is {}. Should have been {} {}.'.format(
                     __file['path'], __file['size'], __qty, __file['expected']))
         else:
             for __file in __files:
-                logging.warn('{} size is {}. Should have been {}.'.format(
+                logging.warning('{} size is {}. Should have been {}.'.format(
                     __file['path'], __file['size'], __file['expected']))
 
     def __uid_gid_mismatches(self, __bck, __archivepath):
@@ -109,9 +109,9 @@ class ArchiveInfoMsg(object):
             if __errnb > 1:
                 __fileword = 'files'
                 __uidword = 'uids'
-            logging.warn('{} {} with unexpected {} while checking {}:'.format(__errnb, __fileword, __uidword, __archivepath))
+            logging.warning('{} {} with unexpected {} while checking {}:'.format(__errnb, __fileword, __uidword, __archivepath))
             for __file in __bck.mismatched_uids:
-                logging.warn('{} uid is {!s}. Should have been {!s}.'.format(__file['path'], __file['uid'], __file['expecteduid']))
+                logging.warning('{} uid is {!s}. Should have been {!s}.'.format(__file['path'], __file['uid'], __file['expecteduid']))
         # Gid
         if __bck.mismatched_gids:
             __errnb = len(__bck.mismatched_gids)
@@ -120,9 +120,9 @@ class ArchiveInfoMsg(object):
             if __errnb > 1:
                 __fileword = 'files'
                 __gidword = 'gids'
-            logging.warn('{} {} with unexpected {} while checking {}:'.format(__errnb, __fileword, __gidword, __archivepath))
+            logging.warning('{} {} with unexpected {} while checking {}:'.format(__errnb, __fileword, __gidword, __archivepath))
             for __file in __bck.mismatched_gids:
-                logging.warn('{} gid is {!s}. Should have been {!s}.'.format(__file['path'], __file['gid'], __file['expectedgid']))
+                logging.warning('{} gid is {!s}. Should have been {!s}.'.format(__file['path'], __file['gid'], __file['expectedgid']))
 
     def __mode_mismatches(self, __bck, __archivepath):
         '''Log the file mode mismatches'''
@@ -133,9 +133,9 @@ class ArchiveInfoMsg(object):
             if __errnb > 1:
                 __fileword = 'files'
                 __modeword = 'modes'
-            logging.warn('{} {} with unexpected {} while checking {}:'.format( __errnb, __fileword, __modeword, __archivepath, ))
+            logging.warning('{} {} with unexpected {} while checking {}:'.format( __errnb, __fileword, __modeword, __archivepath, ))
             for __file in __bck.mismatched_modes:
-                logging.warn('{} mode is {}. Should have been {}.'.format(__file['path'], __file['mode'], __file['expectedmode']))
+                logging.warning('{} mode is {}. Should have been {}.'.format(__file['path'], __file['mode'], __file['expectedmode']))
         
     def __type_mismatches(self, __bck, __archivepath):
         '''Log the file type mismatches'''
@@ -143,6 +143,7 @@ class ArchiveInfoMsg(object):
                     'c': 'character',
                     'd': 'directory',
                     's': 'symbolic link',
+                    'l': 'hard link',
                     'b': 'block',
                     'o': 'fifo',
                     'k': 'socket'}
@@ -153,9 +154,9 @@ class ArchiveInfoMsg(object):
             if __errnb > 1:
                 __fileword = 'files'
                 __typeword = 'types'
-            logging.warn('{} contains {} {} with unexpected {}:'.format(__archivepath, __errnb, __fileword, __typeword))
+            logging.warning('{} contains {} {} with unexpected {}:'.format(__archivepath, __errnb, __fileword, __typeword))
             for __file in __bck.mismatched_types:
-                logging.warn('{} is a {}. Should have been a {}.'.format(__file['path'], __types[__file['type']], __types[__file['expectedtype']]))
+                logging.warning('{} is a {}. Should have been a {}.'.format(__file['path'], __types[__file['type']], __types[__file['expectedtype']]))
 
     def __hash_mismatches(self, __bck, __archivepath):
         '''Log the file hash mismatches'''
@@ -166,6 +167,6 @@ class ArchiveInfoMsg(object):
             if __errnb > 1:
                 __fileword = 'files'
                 __hashword = 'hashes'
-            logging.warn('{} {} with unexpected {} while checking {}:'.format(__errnb, __fileword, __hashword, __archivepath))
+            logging.warning('{} {} with unexpected {} while checking {}:'.format(__errnb, __fileword, __hashword, __archivepath))
             for __file in __bck.mismatched_hashes:
-                logging.warn('{} hash is {}. Should have been {}.'.format(__file['path'], __file['hash'], __file['expectedhash']))
+                logging.warning('{} hash is {}. Should have been {}.'.format(__file['path'], __file['hash'], __file['expectedhash']))

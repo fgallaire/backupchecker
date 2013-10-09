@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2011 Carl Chenet <chaica@ohmytux.com>
+# Copyright © 2013 Carl Chenet <chaica@ohmytux.com>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -48,7 +48,7 @@ class CliParse:
             metavar='DIR')
         __parser.add_argument('-v', '--version',
             action='version',
-            version='%(prog)s 0.4',
+            version='%(prog)s 0.6',
             help='print the version of this program and exit')
         __parser.add_argument('-l', '--log', dest='logfile',
             action='store',
@@ -58,6 +58,14 @@ class CliParse:
         __group.add_argument('-g', '--gen-list', dest='genlist',
             action='store_true',
             help='generate a list of files inside a backup')
+        __group.add_argument('-G', '--gen-full', dest='genfull',
+            action='store_true',
+            help='generate the configuration file and the list of files for the backup')
+        __parser.add_argument('-d', '--delimiter', dest='delimiter',
+            action='store',
+            default='|',
+            help='delimiter of the fields for the list of files',
+            metavar='DELIMITER')
         __parser.add_argument('archives', nargs='*',
             help='archives to check')
         __args = __parser.parse_args()
@@ -92,9 +100,9 @@ class CliParse:
         AppLogger(__options.logfile)
         # Verify if --gen-list option is not invoked before calling configuration path control
         if not __options.genlist:
-            # Check the configuration directory
+            # Check the configuration directory or file
             if not os.path.exists(__options.confpath):
-                logging.info('The configuration directory does not exist')
+                print('The configuration directory or file does not exist: {}'.format(__options.confpath))
                 sys.exit(1)
             __options.confpath = os.path.abspath(__options.confpath)
         self.__options = __options

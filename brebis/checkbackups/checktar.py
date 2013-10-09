@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2011 Carl Chenet <chaica@ohmytux.com>
+# Copyright © 2013 Carl Chenet <chaica@ohmytux.com>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -26,10 +26,10 @@ from brebis.checkbackups.checkarchive import CheckArchive
 class CheckTar(CheckArchive):
     '''Check a tar archive'''
 
-    def _main(self, _cfgvalues):
+    def _main(self, _cfgvalues, _options):
         '''Main for CheckTar'''
         _data = []
-        _data, __arcdata = ExpectedValues(_cfgvalues).data
+        _data, __arcdata = ExpectedValues(_cfgvalues, _options).data
         #########################
         # Test the archive itself
         #########################
@@ -48,9 +48,9 @@ class CheckTar(CheckArchive):
                                     'mode':_tarinfo.mode, 'type': __type}
                     _data = self._check_path(__arcinfo, _data)
                 self._missing_files = [_file['path'] for _file in _data]
-            except tarfile.TarError as _msg:
+            except (tarfile.TarError, EOFError) as _msg:
                 __warn = '. You should investigate for a data corruption.'
-                logging.warn('{}: {}{}'.format(_cfgvalues['path'], str(_msg), __warn))
+                logging.warning('{}: {}{}'.format(_cfgvalues['path'], str(_msg), __warn))
 
     def __translate_type(self, __arctype):
         '''Translate the type of the file inside the tar by a generic

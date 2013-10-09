@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2011 Carl Chenet <chaica@ohmytux.com>
+# Copyright © 2013 Carl Chenet <chaica@ohmytux.com>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -27,11 +27,11 @@ from brebis.checkbackups.checkarchive import CheckArchive
 class CheckZip(CheckArchive):
     '''Check a zip archive'''
 
-    def _main(self, _cfgvalues):
+    def _main(self, _cfgvalues, _options):
         '''Main for CheckZip'''
         _crcerror = ''
         _data = []
-        _data, __arcdata = ExpectedValues(_cfgvalues).data
+        _data, __arcdata = ExpectedValues(_cfgvalues, _options).data
         #########################
         # Test the archive itself
         #########################
@@ -44,7 +44,7 @@ class CheckZip(CheckArchive):
             if _data:
                 _crcerror = self._zip.testzip()
                 if _crcerror:
-                    logging.warn('{} has at least one file corrupted:{}'.format(_cfgvalues['path'], _crcerror))
+                    logging.warning('{} has at least one file corrupted:{}'.format(_cfgvalues['path'], _crcerror))
                 else:
                     _zipinfo = self._zip.infolist()
                     for _fileinfo in _zipinfo:
@@ -58,7 +58,7 @@ class CheckZip(CheckArchive):
                     self._missing_files = [_file['path'] for _file in _data]
         except zipfile.BadZipfile as _msg:
             __warn = '. You should investigate for a data corruption.'
-            logging.warn('{}: {}{}'.format(_cfgvalues['path'], str(_msg), __warn))
+            logging.warning('{}: {}{}'.format(_cfgvalues['path'], str(_msg), __warn))
 
     def _extract_stored_file(self, __arcfilepath):
         '''Extract a file from the archive and return a file object'''

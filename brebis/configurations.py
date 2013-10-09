@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2011 Carl Chenet <chaica@ohmytux.com>
+# Copyright © 2013 Carl Chenet <chaica@ohmytux.com>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -36,14 +36,33 @@ class Configurations:
     def __parse_configurations(self, __confpath):
         '''Parse the different configurations'''
         try:
-            __confs = [__file for __file in os.listdir(__confpath) 
-                if __file.endswith('.conf')]
+            # check if the path to the confs is a directory or a file
+            if os.path.isdir(__confpath):
+                __confs = [__file for __file in os.listdir(__confpath)
+                    if __file.endswith('.conf')]
+            else:
+                __confpath, __conft = os.path.split(__confpath)
+                __confs = [__conft]
+
+            # check if at least one configuration file is availabe
+            if not __confs:
+                __errmsg = 'Could not find any .conf file in {}'
+                print(__errmsg.format(__confpath))
+                sys.exit(1)
+
+            # parse the configuration files
             for __conf in __confs:
                 __currentconf = {}
                 __config = ConfigParser()
                 __fullconfpath = os.path.join('/'.join([__confpath, __conf]))
-                with open(__fullconfpath, 'r') as __file:
-                    __config.read_file(__file)
+                try:
+                    with open(__fullconfpath, 'r') as __file:
+                        __config.read_file(__file)
+                except UnicodeDecodeError as __err:
+                    __msg = 'Error while parsing the configuration file {}:'.format(__fullconfpath)
+                    print(__msg)
+                    print(__err)
+                    sys.exit(1)
                 # Common information for the backups
                 ### The type of the backups
                 __currentconf['type'] = __config.get('main', 'type')

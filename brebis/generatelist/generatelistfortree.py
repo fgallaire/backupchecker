@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2011 Carl Chenet <chaica@ohmytux.com>
+# Copyright © 2013 Carl Chenet <chaica@ohmytux.com>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -26,11 +26,14 @@ from brebis.checkhashes import get_hash
 class GenerateListForTree(GenerateList):
     '''Generate a list of files from a tree'''
 
-    def __init__(self, __arcpath):
+    def __init__(self, __genparams):
         '''The constructor for the GenerateListForTree class'''
+        __arcpath = __genparams['arcpath']
+        __delimiter = __genparams['delimiter']
+        self._genfull = __genparams['genfull']
         __listoffiles = ['[files]\n']
-        __oneline = '{}| ={} uid|{} gid|{} mode|{} type|{}\n'
-        __onelinewithhash = '{}| ={} uid|{} gid|{} mode|{} type|{} md5|{}\n'
+        __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+        __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
         
         for __dirpath, __dirnames, __filenames, in os.walk(__arcpath):
             # ignoring the uppest directory
@@ -78,7 +81,20 @@ class GenerateListForTree(GenerateList):
                                             __type))
                                             
         # call the method to write information in a file
-        self._generate_list(''.join([__arcpath, '.list']), __listoffiles)
+        #self._generate_list(''.join([__arcpath, '.list']), __listoffiles)
+        # call the method to write information in a file
+        __listconfinfo = {'arclistpath': ''.join([__arcpath, '.list']),
+                            'listoffiles':  __listoffiles}
+        self._generate_list(__listconfinfo)
+        # call the method to write the configuration file if --gen-full was required
+        if self._genfull:
+            __arcname =  os.path.basename(__arcpath)
+            __confinfo = {'arcname': __arcname,
+                            'arcpath': __arcpath,
+                            'arcconfpath': ''.join([__arcpath,'.conf']),
+                            'arclistpath': __listconfinfo['arclistpath'],
+                            'arctype': 'tree'}
+            self._generate_conf(__confinfo)
 
     def __translate_type(self, __mode):
         '''Translate the type of the file to a generic name'''
@@ -90,7 +106,7 @@ class GenerateListForTree(GenerateList):
             return 'c'
         elif stat.S_ISLNK(__mode):
             return 's' 
-        elif stat.S_BLK(__mode):
+        elif stat.S_ISBLK(__mode):
             return 'b'
         elif stat.S_ISSOCK(__mode):
             return 'k'

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2011 Carl Chenet <chaica@ohmytux.com>
+# Copyright © 2013 Carl Chenet <chaica@ohmytux.com>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -17,6 +17,7 @@
 '''Generate a list of files from a zip archive'''
 
 import logging
+import os.path
 import stat
 import zipfile
 
@@ -26,24 +27,26 @@ from brebis.generatelist.generatelist import GenerateList
 class GenerateListForZip(GenerateList):
     '''Generate a list of files from a zip archive'''
 
-    def __init__(self, __arcpath):
+    def __init__(self, __genparams):
         '''The constructor for the GenerateListForZip class'''
-        self.__arcpath = __arcpath
+        self.__arcpath = __genparams['arcpath']
+        self.__delimiter = __genparams['delimiter']
+        self._genfull = __genparams['genfull']
         try:
             __zip = zipfile.ZipFile(self.__arcpath, 'r', allowZip64=True)
             self.__main(__zip)
         except zipfile.BadZipfile as _msg:
             __warn = '. You should investigate for a data corruption.'
-            logging.warn('{}: {}{}'.format(__self.arcpath, str(__msg), __warn))
+            logging.warning('{}: {}{}'.format(__self.arcpath, str(__msg), __warn))
 
     def __main(self, __zip):
         '''Main of the GenerateListForZip class'''
         __listoffiles = ['[files]\n']
-        __oneline = '{}| ={} uid|{} gid|{} mode|{} type|{}\n'
-        __onelinewithhash = '{}| ={} uid|{} gid|{} mode|{} type|{} md5|{}\n'
+        __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
+        __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
         __crcerror = __zip.testzip()
         if __crcerror:
-            logging.warn('{} has at least one file corrupted:{}'.format(self.__arcpath, __crcerror))
+            logging.warning('{} has at least one file corrupted:{}'.format(self.__arcpath, __crcerror))
         else:
             __zipinfo = __zip.infolist()
             for __fileinfo in __zipinfo:
@@ -67,10 +70,19 @@ class GenerateListForZip(GenerateList):
                                                             str(__gid),
                                                             __mode,
                                                             __type))
-        # Compose the name of the generated list
-        self.__arcpath = ''.join([self.__arcpath[:-3], 'list'])
         # call the method to write information in a file
-        self._generate_list(self.__arcpath, __listoffiles)
+        __listconfinfo = {'arclistpath': ''.join([self.__arcpath[:-3], 'list']),
+                            'listoffiles':  __listoffiles}
+        self._generate_list(__listconfinfo)
+        # call the method to write the configuration file if --gen-full was required
+        if self._genfull:
+            __arcname =  os.path.basename(self.__arcpath[:-4])
+            __confinfo = {'arcname': __arcname,
+                            'arcpath': self.__arcpath,
+                            'arcconfpath': ''.join([self.__arcpath[:-3],'conf']),
+                            'arclistpath': __listconfinfo['arclistpath'],
+                            'arctype': 'archive'}
+            self._generate_conf(__confinfo)
 
     def __extract_uid_gid(self, __binary):
         '''Extract uid and gid from a zipinfo.extra object (platform dependant)'''

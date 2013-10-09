@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2011 Carl Chenet <chaica@ohmytux.com>
+# Copyright © 2013 Carl Chenet <chaica@ohmytux.com>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -25,7 +25,7 @@ import brebis.checkhashes
 class CheckArchive(object):
     '''Check an archive'''
 
-    def __init__(self, _cfgvalues):
+    def __init__(self, _cfgvalues, _options):
         '''The constructor of the CheckArchive class.
 
         _cfgvalues -- the expected values for the archive
@@ -42,7 +42,7 @@ class CheckArchive(object):
         self._mismatched_types = []
         self._mismatched_hashes = []
         self.__fileinfo = False
-        self._main(_cfgvalues)
+        self._main(_cfgvalues, _options)
 
     def _check_path(self, __arcinfo, _data):
         '''Check if the expected path exists in the archive'''
@@ -81,7 +81,7 @@ class CheckArchive(object):
             try:
                 self.__fileinfo = os.stat(__arcpath)
             except (OSError, IOError) as __msg:
-                logging.warn(__msg)
+                logging.warning(__msg)
         return self.__fileinfo
 
     def __find_archive_size(self, __arcpath):

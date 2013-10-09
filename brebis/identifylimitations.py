@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2011 Carl Chenet <chaica@ohmytux.com>
+# Copyright © 2013 Carl Chenet <chaica@ohmytux.com>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -46,6 +46,14 @@ class IdentifyLimitations:
             if __param in __unsupported_gz:
                 self.__warn(__param)
 
+    def __study_lzma(self):
+        '''Study the required checks for the lzma archive type'''
+        # seems pretty hard to get xz/lzma archive size - maybe in another release
+        __unsupported_gz = {'uid', 'gid', 'mode', 'equals', 'biggerthan', 'smallerthan'}
+        for __param in self.__data:
+            if __param in __unsupported_gz:
+                self.__warn(__param)
+
     def __warn(self, __param):
         '''Warn the user that parameter is not supported by message in logging''' 
-        logging.warn('{}: The required parameter {} is not supported by this type of archive. Ignoring it.'.format(self.__arcpath, __param))
+        logging.warning('{}: The required parameter {} is not supported by this type of archive. Ignoring it.'.format(self.__arcpath, __param))

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2011 Carl Chenet <chaica@ohmytux.com>
+# Copyright © 2013 Carl Chenet <chaica@ohmytux.com>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -28,7 +28,7 @@ class ExpectedValues(object):
     and expected saved files.
     '''
 
-    def __init__(self, __bckconf):
+    def __init__(self, __bckconf, __options):
         '''The constructor of the ExpectedValues class.
         '''
         self.__bckfiles= []
@@ -36,7 +36,7 @@ class ExpectedValues(object):
         __path = __bckconf['files_list']
         # Define delimiter value
         if not __bckconf['delimiter']:
-            __delimiter = '|'
+            __delimiter = __options.delimiter
         else:
             __delimiter = __bckconf['delimiter']
         self.__main(__path, __delimiter)
@@ -75,7 +75,7 @@ class ExpectedValues(object):
             # Test the mode of the archive
             if 'mode' in __config['archive']:
                 if len(__config['archive']['mode']) < 3 or len(__config['archive']['mode']) > 4:
-                    logging.warn('{}: Wrong format for the mode.'.format(__path))
+                    logging.warning('{}: Wrong format for the mode.'.format(__path))
                 else:
                     self.__arcdata['mode'] = __config['archive']['mode']
             try:
@@ -86,7 +86,7 @@ class ExpectedValues(object):
                 if 'gid' in __config['archive']:
                     self.__arcdata['gid'] = int(__config['archive']['gid'])
             except ValueError as __msg:
-                logging.warn(__msg)
+                logging.warning(__msg)
             # Testing the hash of the archive
             for __hash in algorithms_guaranteed:
                 if __hash in __config['archive']:
@@ -117,7 +117,7 @@ class ExpectedValues(object):
                             elif __item.startswith('mode{}'.format(__delimiter)):
                                 __mode =__item.split(__delimiter)[-1]
                                 if len(__mode) < 3 or len(__mode) > 4:
-                                    logging.warn('{}: Wrong format for the mode.'.format(__data['path']))
+                                    logging.warning('{}: Wrong format for the mode.'.format(__data['path']))
                                 else:
                                     __data['mode'] = __mode
                             # Testing the type of the file
@@ -126,9 +126,9 @@ class ExpectedValues(object):
                                 ### f for file, c for character, d for directory
                                 ### s for symbolink link, b for block, o for fifo,
                                 ### k for socket
-                                __types = ('f','c','d','s','b','o','k')
+                                __types = ('f','c','d','s','b','o','k', 'l')
                                 if __type not in __types:
-                                    logging.warn('{}: Unknown type {} for file parameter'.format(__data['path'], __type))
+                                    logging.warning('{}: Unknown type {} for file parameter'.format(__data['path'], __type))
                                 else:
                                     __data['type'] = __type
                             # Testing the size of the file
@@ -147,7 +147,7 @@ class ExpectedValues(object):
                                     __hashtype, __hashvalue = __item.split(__delimiter)
                                     __data['hash'] = {'hashtype':__hashtype, 'hashvalue':__hashvalue}
                         except ValueError as __msg:
-                            logging.warn(__msg)
+                            logging.warning(__msg)
                 self.__bckfiles.append(__data)
 
     def __convert_arg(self, __arg):
@@ -163,7 +163,7 @@ class ExpectedValues(object):
                 __res = int(__arg[1:])
         except ValueError as __msg:
             print(__msg)
-            logging.warn(__msg)
+            logging.warning(__msg)
             __res = 0
         finally:
             return __res

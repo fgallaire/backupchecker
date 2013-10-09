@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2011 Carl Chenet <chaica@ohmytux.com>
+# Copyright © 2013 Carl Chenet <chaica@ohmytux.com>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -28,10 +28,10 @@ from brebis.identifylimitations import IdentifyLimitations
 class CheckBzip2(CheckArchive):
     '''Check a bzip2 archive'''
 
-    def _main(self, _cfgvalues):
+    def _main(self, _cfgvalues, _options):
         '''Main for CheckBzip2'''
         _data = []
-        _data, __arcdata = ExpectedValues(_cfgvalues).data
+        _data, __arcdata = ExpectedValues(_cfgvalues, _options).data
         self.__arcpath = _cfgvalues['path']
         #########################
         # Test the archive itself
@@ -52,7 +52,7 @@ class CheckBzip2(CheckArchive):
                     __bz2.read()
             except IOError as __msg:
                 __warn = '. You should investigate for a data corruption.'
-                logging.warn('{}: {}{}'.format(_cfgvalues['path'], str(__msg), __warn))
+                logging.warning('{}: {}{}'.format(_cfgvalues['path'], str(__msg), __warn))
             else:
                 __name = os.path.split(_cfgvalues['path'])[-1].split('.')[0]
                 # Bzip2 does not allow to know the compressed file size, default to 0
