@@ -2851,6 +2851,24 @@ class Test_wrong_target_in_tar_gz_archive(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main(' target is')
 
+class Test_wrong_target_in_tar_bz2_archive(Main):
+    '''Test if the target of a symlink is wrong in a tar bz2 archive'''
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong_target_in_tar_bz2_archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main(' target is')
+
+class Test_wrong_target_in_tar_xz_archive(Main):
+    '''Test if the target of a symlink is wrong in a tar xz archive'''
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong_target_in_tar_xz_archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main(' target is')
+
 if __name__ == '__main__':
     processes = []
     results = []
