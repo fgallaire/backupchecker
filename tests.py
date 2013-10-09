@@ -1200,6 +1200,7 @@ class TestApp(unittest.TestCase):
         __dir = 'tests/generatelistfortree_private_methods/mydir'
         __file = os.path.join(__dir, 'foo')
         __myobj = brebis.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False})
+        __myobj._GenerateListForTree__fileinfo = os.lstat(__file)
         __result = __myobj._GenerateListForTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('f', __result)
 
