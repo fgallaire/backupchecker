@@ -2847,7 +2847,7 @@ class Test_wrong_target_in_tar_gz_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong_target_in_tar_gz_archive')
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-target-in-tar-gz-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main(' target is')
 
@@ -2856,7 +2856,7 @@ class Test_wrong_target_in_tar_bz2_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong_target_in_tar_bz2_archive')
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-target-in-tar-bz2-archive')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main(' target is')
 
@@ -2865,7 +2865,16 @@ class Test_wrong_target_in_tar_xz_archive(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
-        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong_target_in_tar_xz_archive')
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-target-in-tar-xz-archive')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main(' target is')
+
+class Test_wrong_target_in_tree(Main):
+    '''Test if the target of a symlink is wrong in a tree of files'''
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/wrong-target-in-tree')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main(' target is')
 
