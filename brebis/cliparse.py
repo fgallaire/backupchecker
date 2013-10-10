@@ -48,7 +48,7 @@ class CliParse:
             metavar='DIR')
         __parser.add_argument('-v', '--version',
             action='version',
-            version='%(prog)s 0.6',
+            version='%(prog)s 0.7',
             help='print the version of this program and exit')
         __parser.add_argument('-l', '--log', dest='logfile',
             action='store',
