@@ -146,7 +146,7 @@ class ExpectedValues(object):
                                 if __data['type'] and (__data['type'] == 'l' or __data['type'] == 's'):
                                     __data['target'] = __item.split(__delimiter)[-1]
                                 else:
-                                    __errmsg = 'The list of your file contains a target field althoug the file is not a symlink or a hard link'
+                                    __errmsg = 'The list of your file contains a target field although the file is not a symlink or a hard link'
                                     print(__errmsg)
                                     sys.exit(1)
                             # Test if a hash is provided for this file
