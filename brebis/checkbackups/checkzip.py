@@ -21,8 +21,9 @@ import zipfile
 import logging
 import stat
 
-from brebis.expectedvalues import ExpectedValues
 from brebis.checkbackups.checkarchive import CheckArchive
+from brebis.expectedvalues import ExpectedValues
+from brebis.identifylimitations import IdentifyLimitations
 
 class CheckZip(CheckArchive):
     '''Check a zip archive'''
@@ -42,6 +43,12 @@ class CheckZip(CheckArchive):
             # Test the files in the archive
             ###############################
             if _data:
+                # Identify limitations given the features asked by the user
+                # retrieve every keys of every files in _data
+                configkeys = set()
+                for i in _data:
+                    configkeys = configkeys | set(i.keys())
+                IdentifyLimitations(_cfgvalues['path'], 'zip', configkeys)
                 _crcerror = self._zip.testzip()
                 if _crcerror:
                     logging.warning('{} has at least one file corrupted:{}'.format(_cfgvalues['path'], _crcerror))

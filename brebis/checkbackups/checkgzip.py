@@ -42,7 +42,11 @@ class CheckGzip(CheckArchive):
         ###############################
         if _data:
             # Identify limitations given the features asked by the user
-            IdentifyLimitations(_cfgvalues['path'], 'gz', _data[0].keys())
+            # retrieve every keys of every files in _data
+            configkeys = set()
+            for i in _data:
+                configkeys = configkeys | set(i.keys())
+            IdentifyLimitations(_cfgvalues['path'], 'gz', configkeys)
             ##############################################
             # Looking for data corruption
             # Have to read the whole archive to check CRC

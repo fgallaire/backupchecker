@@ -48,7 +48,7 @@ class IdentifyLimitations:
 
     def __study_zip(self):
         '''Study the required checks for the zip archive type'''
-        __unsupported_zip = {'uid', 'gid', 'mode', 'equals', 'biggerthan', 'smallerthan', 'target'}
+        __unsupported_zip = {'target'}
         for __param in self.__data:
             if __param in __unsupported_zip:
                 self.__warn(__param)
