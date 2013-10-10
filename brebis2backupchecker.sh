@@ -18,7 +18,7 @@ sed -i 's/Brebis/BackupChecker/g' ./setup.py
 sed -i 's/brebis/backupchecker/g' ./generate-archive.sh
 
 # Replace brebis by backupchecker in ./AUTHORS
-sed -i 's/brebisproject.org/backupchecker.com/g' ./setup.py
+sed -i 's/brebisproject.org/backupchecker.com/g' ./AUTHORS
 
 # Replace brebis, Brebis and brebisproject.org in ./README
 sed -i 's/brebisproject.org/backupchecker.com/g' ./README
