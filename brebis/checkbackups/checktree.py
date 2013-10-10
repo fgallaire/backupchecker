@@ -46,20 +46,26 @@ class CheckTree(CheckArchive):
             for __filename in __filenames:
                 __filepath = os.path.join(__dirpath, __filename)
                 __filepath = self._normalize_path(__filepath)
-                self.fileinfo = os.lstat(__filepath)
-                __filemode = stat.S_IMODE(self.fileinfo.st_mode)
-                __type = self.__translate_type(self.fileinfo.st_mode)
-                __arcinfo = {'path': os.path.relpath(__filepath, self.__treepath),
-                            'size': self.fileinfo.st_size, 'uid': self.fileinfo.st_uid,
-                            'gid': self.fileinfo.st_gid, 'mode': __filemode,
-                            'type': __type}
+                self.__fileinfo = os.lstat(__filepath)
+                __filemode = stat.S_IMODE(self.__fileinfo.st_mode)
+                __type = self.__translate_type(self.__fileinfo.st_mode)
+                if __type == 's':
+                    __arcinfo = {'path': os.path.relpath(__filepath, self.__treepath),
+                                'size': self.__fileinfo.st_size, 'uid': self.__fileinfo.st_uid,
+                                'gid': self.__fileinfo.st_gid, 'mode': __filemode,
+                                'type': __type, 'target': os.readlink(__filepath)}
+                else:
+                    __arcinfo = {'path': os.path.relpath(__filepath, self.__treepath),
+                                'size': self.__fileinfo.st_size, 'uid': self.__fileinfo.st_uid,
+                                'gid': self.__fileinfo.st_gid, 'mode': __filemode,
+                                'type': __type}
                 _data = self._check_path(__arcinfo, _data)
         self._missing_files = [_file['path'] for _file in _data]
 
     def __translate_type(self, __mode):
         '''Translate the type of the file to a generic name'''
         if stat.S_ISREG(__mode):
-            if self.fileinfo[stat.ST_NLINK] > 1:
+            if self.__fileinfo[stat.ST_NLINK] > 1:
                 return 'l'
             else:
                 return 'f'

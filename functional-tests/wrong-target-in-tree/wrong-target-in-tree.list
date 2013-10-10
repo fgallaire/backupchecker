@@ -1,0 +1,6 @@
+[files]
+toto| uid|1000 gid|1000 mode|644 type|f md5|ebd7385edfbbb36cd3a7a5dffb134b98
+foo| uid|1000 gid|1000 mode|755 type|d
+foo/bar| uid|1000 gid|1000 mode|777 type|s md5|ebd7385edfbbb36cd3a7a5dffb134b98 target|../zouzou
+foo2| uid|1000 gid|1000 mode|755 type|d
+foo2/toto2| uid|1000 gid|1000 mode|644 type|f md5|ebd7385edfbbb36cd3a7a5dffb134b98

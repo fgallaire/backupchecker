@@ -40,6 +40,7 @@ class ArchiveInfoMsg(object):
             self.__mode_mismatches(__bck, __cfgvalues['path'])
             self.__type_mismatches(__bck, __cfgvalues['path'])
             self.__hash_mismatches(__bck, __cfgvalues['path'])
+            self.__target_mismatches(__bck, __cfgvalues['path'])
 
     def __missing_files(self, __missing, __archivepath):
         '''Warn about the missing files in an archive'''
@@ -136,6 +137,19 @@ class ArchiveInfoMsg(object):
             logging.warning('{} {} with unexpected {} while checking {}:'.format( __errnb, __fileword, __modeword, __archivepath, ))
             for __file in __bck.mismatched_modes:
                 logging.warning('{} mode is {}. Should have been {}.'.format(__file['path'], __file['mode'], __file['expectedmode']))
+        
+    def __target_mismatches(self, __bck, __archivepath):
+        '''Log the targe mismatches'''
+        if __bck.mismatched_targets:
+            __errnb = len(__bck.mismatched_targets)
+            __fileword = 'link'
+            __modeword = 'target'
+            if __errnb > 1:
+                __fileword = 'links'
+                __modeword = 'targets'
+            logging.warning('{} {} with unexpected {} while checking {}:'.format( __errnb, __fileword, __modeword, __archivepath, ))
+            for __file in __bck.mismatched_targets:
+                logging.warning('{} target is {}. Should have been {}.'.format(__file['path'], __file['target'], __file['expectedtarget']))
         
     def __type_mismatches(self, __bck, __archivepath):
         '''Log the file type mismatches'''

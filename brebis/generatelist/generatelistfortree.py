@@ -34,6 +34,7 @@ class GenerateListForTree(GenerateList):
         __listoffiles = ['[files]\n']
         __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
         __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+        __onelinewithtarget = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} md5{delimiter}{value} target{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
         
         for __dirpath, __dirnames, __filenames, in os.walk(__arcpath):
             # ignoring the uppest directory
@@ -55,33 +56,44 @@ class GenerateListForTree(GenerateList):
             for __filename in __filenames:
                 __filepath = os.path.join(__dirpath, __filename)
                 __filepath = self._normalize_path(__filepath)
-                __fileinfo = os.lstat(__filepath)
-                __filemode = oct(stat.S_IMODE(__fileinfo.st_mode)).split('o')[-1]
-                __type = self.__translate_type(__fileinfo.st_mode)
+                self.__fileinfo = os.lstat(__filepath)
+                __filemode = oct(stat.S_IMODE(self.__fileinfo.st_mode)).split('o')[-1]
+                __type = self.__translate_type(self.__fileinfo.st_mode)
                 if __type == 'f': 
                     # extract hash sum of the file inside the archive
                     __hash = get_hash(open(__filepath, 'rb'), 'md5')
                     # extract file data and prepare data
                     __listoffiles.append(__onelinewithhash.format(
                                             os.path.relpath(__filepath, __arcpath),
-                                            str(__fileinfo.st_size),
-                                            str(__fileinfo.st_uid),
-                                            str(__fileinfo.st_gid),
+                                            str(self.__fileinfo.st_size),
+                                            str(self.__fileinfo.st_uid),
+                                            str(self.__fileinfo.st_gid),
                                             __filemode,
                                             __type,
                                             __hash))
+                elif __type == 's':
+                    # extract hash sum of the file inside the archive
+                    __hash = get_hash(open(__filepath, 'rb'), 'md5')
+                    # extract file data and prepare data
+                    __listoffiles.append(__onelinewithtarget.format(
+                                            os.path.relpath(__filepath, __arcpath),
+                                            str(self.__fileinfo.st_size),
+                                            str(self.__fileinfo.st_uid),
+                                            str(self.__fileinfo.st_gid),
+                                            __filemode,
+                                            __type,
+                                            __hash,
+                                            os.readlink(__filepath)))
                 else:
                     # if file is not regular file, ignoring its hash sum
                     __listoffiles.append(__oneline.format(
                                             os.path.relpath(__filepath, __arcpath),
-                                            str(__fileinfo.st_size),
-                                            str(__fileinfo.st_uid),
-                                            str(__fileinfo.st_gid),
+                                            str(self.__fileinfo.st_size),
+                                            str(self.__fileinfo.st_uid),
+                                            str(self.__fileinfo.st_gid),
                                             __filemode,
                                             __type))
                                             
-        # call the method to write information in a file
-        #self._generate_list(''.join([__arcpath, '.list']), __listoffiles)
         # call the method to write information in a file
         __listconfinfo = {'arclistpath': ''.join([__arcpath, '.list']),
                             'listoffiles':  __listoffiles}
@@ -99,7 +111,10 @@ class GenerateListForTree(GenerateList):
     def __translate_type(self, __mode):
         '''Translate the type of the file to a generic name'''
         if stat.S_ISREG(__mode):
-            return 'f'
+            if self.__fileinfo[stat.ST_NLINK] > 1:
+                return 'l'
+            else:
+                return 'f'
         elif stat.S_ISDIR(__mode):
             return 'd'
         elif stat.S_ISCHR(__mode):
