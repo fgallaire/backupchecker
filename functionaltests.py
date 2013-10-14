@@ -3090,6 +3090,51 @@ class Test_generate_conf_and_file_list_tar_xz:
             else:
                 __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
 
+class Test_generate_conf_and_file_list_zip:
+    '''Compare the generated list and the expected list and the configuration file and the expected configuration file for a zip archive'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-conf-and-file-list-zip')
+        __archive = os.path.join(__testdir, 'generate-conf-and-file-list-zip.zip')
+        __conffile = os.path.join(__testdir, 'conf.conf')
+        __listfile = os.path.join(__testdir, 'list.list')
+        __origconffile = os.path.join(__testdir, 'conf.conf.bck')
+        __resultconffile = os.path.join(__testdir, 'generate-conf-and-file-list-zip.conf')
+        __resultlistfile = os.path.join(__testdir, 'generate-conf-and-file-list-zip.list')
+        __newconffile = []
+        # prepare the environment
+        shutil.copyfile(__origconffile, __conffile)
+        # switch flags expected conf and list files to good environment variables
+        with open(__conffile) as __objconf:
+            for __line in __objconf.readlines():
+                if 'PATH' in __line:
+                    __line = __line.replace('PATH', os.path.abspath('functional-tests/generate-conf-and-file-list-zip'))
+                __newconffile.append(__line)
+        with open(__conffile, 'w') as __objconf:
+            __objconf.writelines(__newconffile)
+ 
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
+                __confres = False
+            else:
+                __confres = True
+            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
+                __listres = False
+            else:
+                __listres = True
+            if __confres and __listres:
+                __queue.put('{} - {}'.format(__testname, OKMSG))
+            else:
+                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+
 
 
 if __name__ == '__main__':
