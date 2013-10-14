@@ -53,3 +53,9 @@ functional-tests/generate-conf-and-file-list-tar/conf.conf
 functional-tests/generate-conf-and-file-list-zip/conf.conf
 functional-tests/generate-conf-and-file-list-zip/generate-conf-and-file-list-zip.conf
 functional-tests/generate-conf-and-file-list-zip/generate-conf-and-file-list-zip.list
+functional-tests/generate-conf-and-file-list-bz2/conf.conf
+functional-tests/generate-conf-and-file-list-bz2/generate-conf-and-file-list-bz2.conf
+functional-tests/generate-conf-and-file-list-bz2/generate-conf-and-file-list-bz2.list
+functional-tests/generate-conf-and-file-list-gz/conf.conf
+functional-tests/generate-conf-and-file-list-gz/generate-conf-and-file-list-gz.conf
+functional-tests/generate-conf-and-file-list-gz/generate-conf-and-file-list-gz.list
