@@ -3309,7 +3309,7 @@ class Test_generate_conf_and_file_list_tree:
                     __linechunk = []
                     if 'uid|' in __line:
                         for __chunk in __line.split():
-                            if not __chunk.startswith('uid') and not __chunk.startswith('gid'):
+                            if not __chunk.startswith('uid') and not __chunk.startswith('gid') and not __chunk.startswith('mode'):
                                 __linechunk.append(__chunk)
                     if not __linechunk:
                         __fixfilelist.append(__line)
