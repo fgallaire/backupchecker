@@ -4,7 +4,7 @@ How to install Brebis
 * You need at least Python 3.3.
 * Untar the tarball and go to the source directory with the following commands:
 
-$ tar zxvf brebis-0.6.tar.gz && cd brebis/
+$ tar zxvf brebis-0.7.tar.gz && cd brebis/
 
 To install Brebis on your computer, type the following command with the root user:
 
