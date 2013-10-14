@@ -1,0 +1,5 @@
+[main]
+name=generate-conf-and-file-list-tar-gz
+type=archive
+path=PATH/generate-conf-and-file-list-tar-gz.tar.gz
+files_list=PATH/generate-conf-and-file-list-tar-gz.list
