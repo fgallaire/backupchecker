@@ -62,3 +62,6 @@ functional-tests/generate-conf-and-file-list-gz/generate-conf-and-file-list-gz.l
 functional-tests/generate-conf-and-file-list-xz/conf.conf
 functional-tests/generate-conf-and-file-list-xz/generate-conf-and-file-list-xz.conf
 functional-tests/generate-conf-and-file-list-xz/generate-conf-and-file-list-xz.list
+functional-tests/generate-conf-and-file-list-tree/conf.conf
+functional-tests/generate-conf-and-file-list-tree/generate-conf-and-file-list-tree.conf
+functional-tests/generate-conf-and-file-list-tree/generate-conf-and-file-list-tree.list
