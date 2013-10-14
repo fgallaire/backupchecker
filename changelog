@@ -1,8 +1,283 @@
+2013-10-15  Carl Chenet  <chaica@ohmytux.com>
+
+	* .hgignore:
+	add generate conf and file list for tree of files test temporary
+	files in .hgignore
+	[4688a898220b] [tip]
+
+	* functional-tests/generate-conf-and-file-list-tree/conf.conf.bck,
+	functional-tests/generate-conf-and-file-list-tree/generate-conf-and-
+	file-list-tree/foo/tata, functional-tests/generate-conf-and-file-
+	list-tree/generate-conf-and-file-list-tree/foo2/titi, functional-
+	tests/generate-conf-and-file-list-tree/generate-conf-and-file-list-
+	tree/toto, functional-tests/generate-conf-and-file-list-
+	tree/list.list, functionaltests.py:
+	add generate conf and file list for tree of files test
+	[f74939e01254]
+
+	* .hgignore:
+	add generate conf and file list in xz test temporary files in
+	.hgignore
+	[4e87dfdfc3cb]
+
+	* functional-tests/generate-conf-and-file-list-xz/conf.conf.bck,
+	functional-tests/generate-conf-and-file-list-xz/generate-conf-and-
+	file-list-xz.xz, functional-tests/generate-conf-and-file-list-
+	xz/list.list, functionaltests.py:
+	add generate conf and file list for xz archive test
+	[f662039111f4]
+
+	* .hgignore:
+	add generate conf and file list in gz and bz2 tests temporary files
+	in .hgignore
+	[a1eb2a0ec3bc]
+
+	* functional-tests/generate-conf-and-file-list-bz2/conf.conf.bck,
+	functional-tests/generate-conf-and-file-list-bz2/generate-conf-and-
+	file-list-bz2.bz2, functional-tests/generate-conf-and-file-list-
+	bz2/list.list, functional-tests/generate-conf-and-file-list-
+	gz/conf.conf.bck, functional-tests/generate-conf-and-file-list-gz
+	/generate-conf-and-file-list-gz.gz, functional-tests/generate-conf-
+	and-file-list-gz/list.list, functionaltests.py:
+	add generate conf and file liste for gzip and bzip archives test
+	[2e126b2fadc7]
+
+2013-10-14  Carl Chenet  <chaica@ohmytux.com>
+
+	* .hgignore:
+	ignore temporary files of generate conf and file list for zip
+	archive test
+	[ddfff32c9eee]
+
+	* functional-tests/generate-conf-and-file-list-zip/conf.conf.bck,
+	functional-tests/generate-conf-and-file-list-zip/generate-conf-and-
+	file-list-zip.zip, functional-tests/generate-conf-and-file-list-
+	zip/list.list, functionaltests.py:
+	add generate conf an file list for zip archive test
+	[a14ca97e1672]
+
+	* .hgignore:
+	ignore temporary files for the generate conf and file list for tar
+	archive test
+	[e348ca1dd686]
+
+	* functional-tests/generate-conf-and-file-list-tar/conf.conf.bck,
+	functional-tests/generate-conf-and-file-list-tar/generate-conf-and-
+	file-list-tar.tar, functional-tests/generate-conf-and-file-list-
+	tar/list.list, functionaltests.py:
+	add generate conf and file list for tar archive test
+	[5dbdff67a431]
+
+	* .hgignore:
+	add generate conf and file list in tar xz test temporary files in
+	.hgignore
+	[db6130be1f98]
+
+	* functional-tests/generate-conf-and-file-list-tar-xz/conf.conf.bck,
+	functional-tests/generate-conf-and-file-list-tar-xz/generate-conf-
+	and-file-list-tar-xz.tar.xz, functional-tests/generate-conf-and-
+	file-list-tar-xz/list.list, functionaltests.py:
+	add generate conf and file list tar xz test
+	[07706cd360f8]
+
+	* .hgignore:
+	add generate conf and file list in tar bz2 test temporary files in
+	.hgignore
+	[0b6f2fb596d6]
+
+	* functional-tests/generate-conf-and-file-list-tar-bz2/conf.conf.bck,
+	functional-tests/generate-conf-and-file-list-tar-bz2/generate-conf-
+	and-file-list-tar-bz2.tar.bz2, functional-tests/generate-conf-and-
+	file-list-tar-bz2/list.list, functionaltests.py:
+	add generate conf and file list tar bz2 test
+	[01793a8c7fc9]
+
+	* functional-tests/generate-conf-and-file-list-tar-gz/list.list,
+	functionaltests.py:
+	improve generate conf and file list tar gz test - support list file
+	[dfd26ba8fcbb]
+
+	* functional-tests/generate-conf-and-file-list-tar-gz/conf.conf.bck,
+	functional-tests/generate-conf-and-file-list-tar-gz/generate-conf-
+	and-file-list-tar-gz.tar.gz, functionaltests.py:
+	add generate conf and file list for tar gz archive test
+	[fc9efdca978c]
+
+	* .hgignore:
+	add new files to ignore for genereate conf and file list for tar gz
+	archive test
+	[db5a91d157d2]
+
+	* README:
+	bump 0.6 to 0.7
+	[4ed3bbdff01a]
+
+2013-10-11  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/unsupported-parameters-zip-archive/a.out,
+	functional-tests/unsupported-parameters-zip-archive/unsupported-
+	parameters-zip-archive.conf, functional-tests/unsupported-
+	parameters-zip-archive/unsupported-parameters-zip-archive.list,
+	functional-tests/unsupported-parameters-zip-archive/unsupported-
+	parameters-zip-archive.zip, functionaltests.py:
+	add unsupported parameters for zip archive test
+	[ef5f584db8c5]
+
+	* brebis/checkbackups/checkbzip2.py, brebis/checkbackups/checkgzip.py,
+	brebis/checkbackups/checklzma.py, brebis/checkbackups/checkzip.py,
+	brebis/identifylimitations.py:
+	check every files from the .list files to find unsupported actions
+	for a given kind of archive. fixes #42
+	[020c983a739d]
+
+2013-10-10  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/expectedvalues.py:
+	correct typo in error message
+	[abfe291c3b62]
+
+	* brebis/cliparse.py, setup.py:
+	bump brebis version to 0.7
+	[8c9ecf367651]
+
+	* brebis2backupchecker.sh:
+	uncorrect substitutions for the AUTHORS file while generating
+	backupchecker
+	[83a567d86895] <backupchecker>
+
+	* brebis2backupchecker.sh:
+	upgrade brebis2backupchecker.sh script to follow upstream
+	[13e8f2840a00] <backupchecker>
+
+	* merge check-target-link branch into default branch
+	[cbd930285492] <backupchecker>
+
+	* merge check-target-link branch into default branch
+	[99f9e603a49c]
+
+	* functional-tests/full-criteria-multiple-backups/a.out:
+	merge with current default
+	[6d1f50b4b24b] <backupchecker>
+
+	* functional-tests/wrong-target-in-tar-bz2-archive/wrong-target-in-
+	tar-bz2-archive.conf, functional-tests/wrong-target-in-tar-
+	bz2-archive/wrong-target-in-tar-bz2-archive.list, functional-tests
+	/wrong-target-in-tar-bz2-archive/wrong-target-in-tar-
+	bz2-archive.tar.bz2, functional-tests/wrong-target-in-tar-gz-archive
+	/wrong-target-in-tar-gz-archive.conf, functional-tests/wrong-target-
+	in-tar-gz-archive/wrong-target-in-tar-gz-archive.list, functional-
+	tests/wrong-target-in-tar-gz-archive/wrong-target-in-tar-gz-
+	archive.tar.gz, functional-tests/wrong-target-in-tar-xz-archive
+	/wrong-target-in-tar-xz-archive.conf, functional-tests/wrong-target-
+	in-tar-xz-archive/wrong-target-in-tar-xz-archive.list, functional-
+	tests/wrong-target-in-tar-xz-archive/wrong-target-in-tar-xz-
+	archive.tar.xz, functional-tests/wrong-target-in-tree/test/foo/bar,
+	functional-tests/wrong-target-in-tree/test/foo2/toto2, functional-
+	tests/wrong-target-in-tree/test/toto, functional-tests/wrong-target-
+	in-tree/wrong-target-in-tree.conf, functional-tests/wrong-target-in-
+	tree/wrong-target-in-tree.list, functional-tests/wrong_target_in_tar
+	_bz2_archive/wrong_target_in_tar_bz2_archive.conf, functional-tests/
+	wrong_target_in_tar_bz2_archive/wrong_target_in_tar_bz2_archive.list
+	, functional-tests/wrong_target_in_tar_bz2_archive/wrong_target_in_t
+	ar_bz2_archive.tar.bz2, functional-tests/wrong_target_in_tar_gz_arch
+	ive/wrong_target_in_tar_gz_archive.conf, functional-tests/wrong_targ
+	et_in_tar_gz_archive/wrong_target_in_tar_gz_archive.list,
+	functional-tests/wrong_target_in_tar_gz_archive/wrong_target_in_tar_
+	gz_archive.tar.gz, functional-tests/wrong_target_in_tar_xz_archive/w
+	rong_target_in_tar_xz_archive.conf, functional-tests/wrong_target_in
+	_tar_xz_archive/wrong_target_in_tar_xz_archive.list, functional-test
+	s/wrong_target_in_tar_xz_archive/wrong_target_in_tar_xz_archive.tar.
+	xz, functionaltests.py:
+	rename wrong-target* tests and add wrong target in tree test
+	[6b5470658a5b] <check-target-link>
+
+2013-10-09  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/wrong_target_in_tar_bz2_archive/wrong_target_in_tar
+	_bz2_archive.conf, functional-tests/wrong_target_in_tar_bz2_archive/
+	wrong_target_in_tar_bz2_archive.list, functional-tests/wrong_target_
+	in_tar_bz2_archive/wrong_target_in_tar_bz2_archive.tar.bz2,
+	functional-tests/wrong_target_in_tar_xz_archive/wrong_target_in_tar_
+	xz_archive.conf, functional-tests/wrong_target_in_tar_xz_archive/wro
+	ng_target_in_tar_xz_archive.list, functional-tests/wrong_target_in_t
+	ar_xz_archive/wrong_target_in_tar_xz_archive.tar.xz,
+	functionaltests.py:
+	add wrong targe in tar {bz2,xz} archive tests
+	[061f1cde979a] <check-target-link>
+
+2013-10-07  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/checkbackups/checktree.py,
+	brebis/generatelist/generatelistfortree.py:
+	update the code to use targe in generatelistfortree and checktree
+	[5f549cc662d0] <check-target-link>
+
+	* tests.py:
+	update test_listfortree_translate_type_file test
+	[d60af1213301] <check-target-link>
+
+2013-08-29  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/identifylimitations.py:
+	add target as unsupported feature for gz bz2 zip and lzma archive.
+	rename lists for unsupported features to correct old bug
+	[6cd8df739c2e] <check-target-link>
+
+2013-08-28  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/wrong_target_in_tar_gz_archive/wrong_target_in_tar_
+	gz_archive.conf, functional-tests/wrong_target_in_tar_gz_archive/wro
+	ng_target_in_tar_gz_archive.list, functional-tests/wrong_target_in_t
+	ar_gz_archive/wrong_target_in_tar_gz_archive.tar.gz,
+	functionaltests.py:
+	add wrong target in tar gz archive test
+	[1d650fdc5c54] <check-target-link>
+
+	* brebis/archiveinfomsg.py, brebis/checkbackups/checkarchive.py,
+	brebis/checkbackups/checktar.py, brebis/expectedvalues.py,
+	brebis/generatelist/generatelistfortar.py:
+	add target test on tar gz archive
+	[476e61c1f717] <check-target-link>
+
+2013-08-27  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/configurations.py:
+	control the behaviour when wrong data are in input. fixes #39
+	[5d212623ec78]
+
+	* define option -G to generate the .conf file. fixes #38
+	[4a9dd1ea542f]
+
+2013-08-25  Carl Chenet  <chaica@ohmytux.com>
+
+	* .hgignore, tests.py:
+	modify existing tests for generatelist
+	[03480e9e57c8] <generate-conf-file>
+
+	* brebis/cliparse.py, brebis/generatelist/generatelist.py,
+	brebis/generatelist/generatelistforbzip2.py,
+	brebis/generatelist/generatelistforgzip.py,
+	brebis/generatelist/generatelistforlzma.py,
+	brebis/generatelist/generatelistfortar.py,
+	brebis/generatelist/generatelistfortree.py,
+	brebis/generatelist/generatelistforzip.py, brebis/listtype.py,
+	brebis/main.py:
+	add option -G to generate configuration file
+	[aa30c6b57e19] <generate-conf-file>
+
 2013-08-16  Carl Chenet  <chaica@ohmytux.com>
+
+	* .hgtags:
+	Added tag 0.6 for changeset 3b7e8e691fd0
+	[5a2c6141a10b]
+
+	* changelog:
+	update the changelog for version 0.6
+	[3b7e8e691fd0] [0.6]
 
 	* README, changelog:
 	update the README for the version 0.6
-	[e2f6739dda3b] [tip]
+	[e2f6739dda3b]
 
 	* brebis/cliparse.py, setup.py:
 	bump version to 0.6
