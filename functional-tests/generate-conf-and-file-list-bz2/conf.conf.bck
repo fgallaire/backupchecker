@@ -1,0 +1,5 @@
+[main]
+name=generate-conf-and-file-list-bz2
+type=archive
+path=PATH/generate-conf-and-file-list-bz2.bz2
+files_list=PATH/generate-conf-and-file-list-bz2.list
