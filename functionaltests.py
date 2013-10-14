@@ -2909,367 +2909,367 @@ class MainGenerateParse:
 #        self._resultfile = os.path.join(self._testdir, 'a.out')
 #        self._main(' target is')
 #
-
-class Test_generate_conf_and_file_list_tar:
-    '''Compare the generated list and the expected list and the configuration file and the expected configuration file for a tar archive'''
-    def __init__(self, q):
-        __queue = q
-        __res = True
-        __testname = self.__class__.__name__
-        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-conf-and-file-list-tar')
-        __archive = os.path.join(__testdir, 'generate-conf-and-file-list-tar.tar')
-        __conffile = os.path.join(__testdir, 'conf.conf')
-        __listfile = os.path.join(__testdir, 'list.list')
-        __origconffile = os.path.join(__testdir, 'conf.conf.bck')
-        __resultconffile = os.path.join(__testdir, 'generate-conf-and-file-list-tar.conf')
-        __resultlistfile = os.path.join(__testdir, 'generate-conf-and-file-list-tar.list')
-        __newconffile = []
-        # prepare the environment
-        shutil.copyfile(__origconffile, __conffile)
-        # switch flags expected conf and list files to good environment variables
-        with open(__conffile) as __objconf:
-            for __line in __objconf.readlines():
-                if 'PATH' in __line:
-                    __line = __line.replace('PATH', os.path.abspath('functional-tests/generate-conf-and-file-list-tar'))
-                __newconffile.append(__line)
-        with open(__conffile, 'w') as __objconf:
-            __objconf.writelines(__newconffile)
- 
-        if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
-        else:
-            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
-        if __retcode != 0:
-            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
-        else:
-            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
-                __confres = False
-            else:
-                __confres = True
-            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
-                __listres = False
-            else:
-                __listres = True
-            if __confres and __listres:
-                __queue.put('{} - {}'.format(__testname, OKMSG))
-            else:
-                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
-
-class Test_generate_conf_and_file_list_tar_gz:
-    '''Compare the generated list and the expected list and the configuration file and the expected configuration file for a tar gz archive'''
-    def __init__(self, q):
-        __queue = q
-        __res = True
-        __testname = self.__class__.__name__
-        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-conf-and-file-list-tar-gz')
-        __archive = os.path.join(__testdir, 'generate-conf-and-file-list-tar-gz.tar.gz')
-        __conffile = os.path.join(__testdir, 'conf.conf')
-        __listfile = os.path.join(__testdir, 'list.list')
-        __origconffile = os.path.join(__testdir, 'conf.conf.bck')
-        __resultconffile = os.path.join(__testdir, 'generate-conf-and-file-list-tar-gz.conf')
-        __resultlistfile = os.path.join(__testdir, 'generate-conf-and-file-list-tar-gz.list')
-        __newconffile = []
-        # prepare the environment
-        shutil.copyfile(__origconffile, __conffile)
-        # switch flags expected conf and list files to good environment variables
-        with open(__conffile) as __objconf:
-            for __line in __objconf.readlines():
-                if 'PATH' in __line:
-                    __line = __line.replace('PATH', os.path.abspath('functional-tests/generate-conf-and-file-list-tar-gz'))
-                __newconffile.append(__line)
-        with open(__conffile, 'w') as __objconf:
-            __objconf.writelines(__newconffile)
- 
-        if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
-        else:
-            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
-        if __retcode != 0:
-            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
-        else:
-            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
-                __confres = False
-            else:
-                __confres = True
-            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
-                __listres = False
-            else:
-                __listres = True
-            if __confres and __listres:
-                __queue.put('{} - {}'.format(__testname, OKMSG))
-            else:
-                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
-
-class Test_generate_conf_and_file_list_tar_bz2:
-    '''Compare the generated list and the expected list and the configuration file and the expected configuration file for a tar bz2 archive'''
-    def __init__(self, q):
-        __queue = q
-        __res = True
-        __testname = self.__class__.__name__
-        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-conf-and-file-list-tar-bz2')
-        __archive = os.path.join(__testdir, 'generate-conf-and-file-list-tar-bz2.tar.bz2')
-        __conffile = os.path.join(__testdir, 'conf.conf')
-        __listfile = os.path.join(__testdir, 'list.list')
-        __origconffile = os.path.join(__testdir, 'conf.conf.bck')
-        __resultconffile = os.path.join(__testdir, 'generate-conf-and-file-list-tar-bz2.conf')
-        __resultlistfile = os.path.join(__testdir, 'generate-conf-and-file-list-tar-bz2.list')
-        __newconffile = []
-        # prepare the environment
-        shutil.copyfile(__origconffile, __conffile)
-        # switch flags expected conf and list files to good environment variables
-        with open(__conffile) as __objconf:
-            for __line in __objconf.readlines():
-                if 'PATH' in __line:
-                    __line = __line.replace('PATH', os.path.abspath('functional-tests/generate-conf-and-file-list-tar-bz2'))
-                __newconffile.append(__line)
-        with open(__conffile, 'w') as __objconf:
-            __objconf.writelines(__newconffile)
- 
-        if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
-        else:
-            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
-        if __retcode != 0:
-            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
-        else:
-            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
-                __confres = False
-            else:
-                __confres = True
-            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
-                __listres = False
-            else:
-                __listres = True
-            if __confres and __listres:
-                __queue.put('{} - {}'.format(__testname, OKMSG))
-            else:
-                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
-
-class Test_generate_conf_and_file_list_tar_xz:
-    '''Compare the generated list and the expected list and the configuration file and the expected configuration file for a tar xz archive'''
-    def __init__(self, q):
-        __queue = q
-        __res = True
-        __testname = self.__class__.__name__
-        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-conf-and-file-list-tar-xz')
-        __archive = os.path.join(__testdir, 'generate-conf-and-file-list-tar-xz.tar.xz')
-        __conffile = os.path.join(__testdir, 'conf.conf')
-        __listfile = os.path.join(__testdir, 'list.list')
-        __origconffile = os.path.join(__testdir, 'conf.conf.bck')
-        __resultconffile = os.path.join(__testdir, 'generate-conf-and-file-list-tar-xz.conf')
-        __resultlistfile = os.path.join(__testdir, 'generate-conf-and-file-list-tar-xz.list')
-        __newconffile = []
-        # prepare the environment
-        shutil.copyfile(__origconffile, __conffile)
-        # switch flags expected conf and list files to good environment variables
-        with open(__conffile) as __objconf:
-            for __line in __objconf.readlines():
-                if 'PATH' in __line:
-                    __line = __line.replace('PATH', os.path.abspath('functional-tests/generate-conf-and-file-list-tar-xz'))
-                __newconffile.append(__line)
-        with open(__conffile, 'w') as __objconf:
-            __objconf.writelines(__newconffile)
- 
-        if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
-        else:
-            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
-        if __retcode != 0:
-            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
-        else:
-            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
-                __confres = False
-            else:
-                __confres = True
-            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
-                __listres = False
-            else:
-                __listres = True
-            if __confres and __listres:
-                __queue.put('{} - {}'.format(__testname, OKMSG))
-            else:
-                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
-
-class Test_generate_conf_and_file_list_zip:
-    '''Compare the generated list and the expected list and the configuration file and the expected configuration file for a zip archive'''
-    def __init__(self, q):
-        __queue = q
-        __res = True
-        __testname = self.__class__.__name__
-        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-conf-and-file-list-zip')
-        __archive = os.path.join(__testdir, 'generate-conf-and-file-list-zip.zip')
-        __conffile = os.path.join(__testdir, 'conf.conf')
-        __listfile = os.path.join(__testdir, 'list.list')
-        __origconffile = os.path.join(__testdir, 'conf.conf.bck')
-        __resultconffile = os.path.join(__testdir, 'generate-conf-and-file-list-zip.conf')
-        __resultlistfile = os.path.join(__testdir, 'generate-conf-and-file-list-zip.list')
-        __newconffile = []
-        # prepare the environment
-        shutil.copyfile(__origconffile, __conffile)
-        # switch flags expected conf and list files to good environment variables
-        with open(__conffile) as __objconf:
-            for __line in __objconf.readlines():
-                if 'PATH' in __line:
-                    __line = __line.replace('PATH', os.path.abspath('functional-tests/generate-conf-and-file-list-zip'))
-                __newconffile.append(__line)
-        with open(__conffile, 'w') as __objconf:
-            __objconf.writelines(__newconffile)
- 
-        if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
-        else:
-            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
-        if __retcode != 0:
-            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
-        else:
-            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
-                __confres = False
-            else:
-                __confres = True
-            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
-                __listres = False
-            else:
-                __listres = True
-            if __confres and __listres:
-                __queue.put('{} - {}'.format(__testname, OKMSG))
-            else:
-                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
-
-class Test_generate_conf_and_file_list_gz:
-    '''Compare the generated list and the expected list and the configuration file and the expected configuration file for a gz archive'''
-    def __init__(self, q):
-        __queue = q
-        __res = True
-        __testname = self.__class__.__name__
-        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-conf-and-file-list-gz')
-        __archive = os.path.join(__testdir, 'generate-conf-and-file-list-gz.gz')
-        __conffile = os.path.join(__testdir, 'conf.conf')
-        __listfile = os.path.join(__testdir, 'list.list')
-        __origconffile = os.path.join(__testdir, 'conf.conf.bck')
-        __resultconffile = os.path.join(__testdir, 'generate-conf-and-file-list-gz.conf')
-        __resultlistfile = os.path.join(__testdir, 'generate-conf-and-file-list-gz.list')
-        __newconffile = []
-        # prepare the environment
-        shutil.copyfile(__origconffile, __conffile)
-        # switch flags expected conf and list files to good environment variables
-        with open(__conffile) as __objconf:
-            for __line in __objconf.readlines():
-                if 'PATH' in __line:
-                    __line = __line.replace('PATH', os.path.abspath('functional-tests/generate-conf-and-file-list-gz'))
-                __newconffile.append(__line)
-        with open(__conffile, 'w') as __objconf:
-            __objconf.writelines(__newconffile)
- 
-        if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
-        else:
-            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
-        if __retcode != 0:
-            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
-        else:
-            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
-                __confres = False
-            else:
-                __confres = True
-            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
-                __listres = False
-            else:
-                __listres = True
-            if __confres and __listres:
-                __queue.put('{} - {}'.format(__testname, OKMSG))
-            else:
-                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
-
-class Test_generate_conf_and_file_list_bz2:
-    '''Compare the generated list and the expected list and the configuration file and the expected configuration file for a bz2 archive'''
-    def __init__(self, q):
-        __queue = q
-        __res = True
-        __testname = self.__class__.__name__
-        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-conf-and-file-list-bz2')
-        __archive = os.path.join(__testdir, 'generate-conf-and-file-list-bz2.bz2')
-        __conffile = os.path.join(__testdir, 'conf.conf')
-        __listfile = os.path.join(__testdir, 'list.list')
-        __origconffile = os.path.join(__testdir, 'conf.conf.bck')
-        __resultconffile = os.path.join(__testdir, 'generate-conf-and-file-list-bz2.conf')
-        __resultlistfile = os.path.join(__testdir, 'generate-conf-and-file-list-bz2.list')
-        __newconffile = []
-        # prepare the environment
-        shutil.copyfile(__origconffile, __conffile)
-        # switch flags expected conf and list files to good environment variables
-        with open(__conffile) as __objconf:
-            for __line in __objconf.readlines():
-                if 'PATH' in __line:
-                    __line = __line.replace('PATH', os.path.abspath('functional-tests/generate-conf-and-file-list-bz2'))
-                __newconffile.append(__line)
-        with open(__conffile, 'w') as __objconf:
-            __objconf.writelines(__newconffile)
- 
-        if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
-        else:
-            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
-        if __retcode != 0:
-            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
-        else:
-            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
-                __confres = False
-            else:
-                __confres = True
-            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
-                __listres = False
-            else:
-                __listres = True
-            if __confres and __listres:
-                __queue.put('{} - {}'.format(__testname, OKMSG))
-            else:
-                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
-
-class Test_generate_conf_and_file_list_xz:
-    '''Compare the generated list and the expected list and the configuration file and the expected configuration file for a xz archive'''
-    def __init__(self, q):
-        __queue = q
-        __res = True
-        __testname = self.__class__.__name__
-        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-conf-and-file-list-xz')
-        __archive = os.path.join(__testdir, 'generate-conf-and-file-list-xz.xz')
-        __conffile = os.path.join(__testdir, 'conf.conf')
-        __listfile = os.path.join(__testdir, 'list.list')
-        __origconffile = os.path.join(__testdir, 'conf.conf.bck')
-        __resultconffile = os.path.join(__testdir, 'generate-conf-and-file-list-xz.conf')
-        __resultlistfile = os.path.join(__testdir, 'generate-conf-and-file-list-xz.list')
-        __newconffile = []
-        # prepare the environment
-        shutil.copyfile(__origconffile, __conffile)
-        # switch flags expected conf and list files to good environment variables
-        with open(__conffile) as __objconf:
-            for __line in __objconf.readlines():
-                if 'PATH' in __line:
-                    __line = __line.replace('PATH', os.path.abspath('functional-tests/generate-conf-and-file-list-xz'))
-                __newconffile.append(__line)
-        with open(__conffile, 'w') as __objconf:
-            __objconf.writelines(__newconffile)
- 
-        if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
-        else:
-            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
-        if __retcode != 0:
-            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
-        else:
-            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
-                __confres = False
-            else:
-                __confres = True
-            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
-                __listres = False
-            else:
-                __listres = True
-            if __confres and __listres:
-                __queue.put('{} - {}'.format(__testname, OKMSG))
-            else:
-                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
-
+#
+#class Test_generate_conf_and_file_list_tar:
+#    '''Compare the generated list and the expected list and the configuration file and the expected configuration file for a tar archive'''
+#    def __init__(self, q):
+#        __queue = q
+#        __res = True
+#        __testname = self.__class__.__name__
+#        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-conf-and-file-list-tar')
+#        __archive = os.path.join(__testdir, 'generate-conf-and-file-list-tar.tar')
+#        __conffile = os.path.join(__testdir, 'conf.conf')
+#        __listfile = os.path.join(__testdir, 'list.list')
+#        __origconffile = os.path.join(__testdir, 'conf.conf.bck')
+#        __resultconffile = os.path.join(__testdir, 'generate-conf-and-file-list-tar.conf')
+#        __resultlistfile = os.path.join(__testdir, 'generate-conf-and-file-list-tar.list')
+#        __newconffile = []
+#        # prepare the environment
+#        shutil.copyfile(__origconffile, __conffile)
+#        # switch flags expected conf and list files to good environment variables
+#        with open(__conffile) as __objconf:
+#            for __line in __objconf.readlines():
+#                if 'PATH' in __line:
+#                    __line = __line.replace('PATH', os.path.abspath('functional-tests/generate-conf-and-file-list-tar'))
+#                __newconffile.append(__line)
+#        with open(__conffile, 'w') as __objconf:
+#            __objconf.writelines(__newconffile)
+# 
+#        if 'PYTHONEXE' in environ:
+#            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
+#        else:
+#            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
+#        if __retcode != 0:
+#            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+#        else:
+#            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
+#                __confres = False
+#            else:
+#                __confres = True
+#            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
+#                __listres = False
+#            else:
+#                __listres = True
+#            if __confres and __listres:
+#                __queue.put('{} - {}'.format(__testname, OKMSG))
+#            else:
+#                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+#
+#class Test_generate_conf_and_file_list_tar_gz:
+#    '''Compare the generated list and the expected list and the configuration file and the expected configuration file for a tar gz archive'''
+#    def __init__(self, q):
+#        __queue = q
+#        __res = True
+#        __testname = self.__class__.__name__
+#        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-conf-and-file-list-tar-gz')
+#        __archive = os.path.join(__testdir, 'generate-conf-and-file-list-tar-gz.tar.gz')
+#        __conffile = os.path.join(__testdir, 'conf.conf')
+#        __listfile = os.path.join(__testdir, 'list.list')
+#        __origconffile = os.path.join(__testdir, 'conf.conf.bck')
+#        __resultconffile = os.path.join(__testdir, 'generate-conf-and-file-list-tar-gz.conf')
+#        __resultlistfile = os.path.join(__testdir, 'generate-conf-and-file-list-tar-gz.list')
+#        __newconffile = []
+#        # prepare the environment
+#        shutil.copyfile(__origconffile, __conffile)
+#        # switch flags expected conf and list files to good environment variables
+#        with open(__conffile) as __objconf:
+#            for __line in __objconf.readlines():
+#                if 'PATH' in __line:
+#                    __line = __line.replace('PATH', os.path.abspath('functional-tests/generate-conf-and-file-list-tar-gz'))
+#                __newconffile.append(__line)
+#        with open(__conffile, 'w') as __objconf:
+#            __objconf.writelines(__newconffile)
+# 
+#        if 'PYTHONEXE' in environ:
+#            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
+#        else:
+#            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
+#        if __retcode != 0:
+#            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+#        else:
+#            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
+#                __confres = False
+#            else:
+#                __confres = True
+#            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
+#                __listres = False
+#            else:
+#                __listres = True
+#            if __confres and __listres:
+#                __queue.put('{} - {}'.format(__testname, OKMSG))
+#            else:
+#                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+#
+#class Test_generate_conf_and_file_list_tar_bz2:
+#    '''Compare the generated list and the expected list and the configuration file and the expected configuration file for a tar bz2 archive'''
+#    def __init__(self, q):
+#        __queue = q
+#        __res = True
+#        __testname = self.__class__.__name__
+#        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-conf-and-file-list-tar-bz2')
+#        __archive = os.path.join(__testdir, 'generate-conf-and-file-list-tar-bz2.tar.bz2')
+#        __conffile = os.path.join(__testdir, 'conf.conf')
+#        __listfile = os.path.join(__testdir, 'list.list')
+#        __origconffile = os.path.join(__testdir, 'conf.conf.bck')
+#        __resultconffile = os.path.join(__testdir, 'generate-conf-and-file-list-tar-bz2.conf')
+#        __resultlistfile = os.path.join(__testdir, 'generate-conf-and-file-list-tar-bz2.list')
+#        __newconffile = []
+#        # prepare the environment
+#        shutil.copyfile(__origconffile, __conffile)
+#        # switch flags expected conf and list files to good environment variables
+#        with open(__conffile) as __objconf:
+#            for __line in __objconf.readlines():
+#                if 'PATH' in __line:
+#                    __line = __line.replace('PATH', os.path.abspath('functional-tests/generate-conf-and-file-list-tar-bz2'))
+#                __newconffile.append(__line)
+#        with open(__conffile, 'w') as __objconf:
+#            __objconf.writelines(__newconffile)
+# 
+#        if 'PYTHONEXE' in environ:
+#            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
+#        else:
+#            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
+#        if __retcode != 0:
+#            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+#        else:
+#            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
+#                __confres = False
+#            else:
+#                __confres = True
+#            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
+#                __listres = False
+#            else:
+#                __listres = True
+#            if __confres and __listres:
+#                __queue.put('{} - {}'.format(__testname, OKMSG))
+#            else:
+#                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+#
+#class Test_generate_conf_and_file_list_tar_xz:
+#    '''Compare the generated list and the expected list and the configuration file and the expected configuration file for a tar xz archive'''
+#    def __init__(self, q):
+#        __queue = q
+#        __res = True
+#        __testname = self.__class__.__name__
+#        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-conf-and-file-list-tar-xz')
+#        __archive = os.path.join(__testdir, 'generate-conf-and-file-list-tar-xz.tar.xz')
+#        __conffile = os.path.join(__testdir, 'conf.conf')
+#        __listfile = os.path.join(__testdir, 'list.list')
+#        __origconffile = os.path.join(__testdir, 'conf.conf.bck')
+#        __resultconffile = os.path.join(__testdir, 'generate-conf-and-file-list-tar-xz.conf')
+#        __resultlistfile = os.path.join(__testdir, 'generate-conf-and-file-list-tar-xz.list')
+#        __newconffile = []
+#        # prepare the environment
+#        shutil.copyfile(__origconffile, __conffile)
+#        # switch flags expected conf and list files to good environment variables
+#        with open(__conffile) as __objconf:
+#            for __line in __objconf.readlines():
+#                if 'PATH' in __line:
+#                    __line = __line.replace('PATH', os.path.abspath('functional-tests/generate-conf-and-file-list-tar-xz'))
+#                __newconffile.append(__line)
+#        with open(__conffile, 'w') as __objconf:
+#            __objconf.writelines(__newconffile)
+# 
+#        if 'PYTHONEXE' in environ:
+#            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
+#        else:
+#            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
+#        if __retcode != 0:
+#            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+#        else:
+#            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
+#                __confres = False
+#            else:
+#                __confres = True
+#            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
+#                __listres = False
+#            else:
+#                __listres = True
+#            if __confres and __listres:
+#                __queue.put('{} - {}'.format(__testname, OKMSG))
+#            else:
+#                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+#
+#class Test_generate_conf_and_file_list_zip:
+#    '''Compare the generated list and the expected list and the configuration file and the expected configuration file for a zip archive'''
+#    def __init__(self, q):
+#        __queue = q
+#        __res = True
+#        __testname = self.__class__.__name__
+#        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-conf-and-file-list-zip')
+#        __archive = os.path.join(__testdir, 'generate-conf-and-file-list-zip.zip')
+#        __conffile = os.path.join(__testdir, 'conf.conf')
+#        __listfile = os.path.join(__testdir, 'list.list')
+#        __origconffile = os.path.join(__testdir, 'conf.conf.bck')
+#        __resultconffile = os.path.join(__testdir, 'generate-conf-and-file-list-zip.conf')
+#        __resultlistfile = os.path.join(__testdir, 'generate-conf-and-file-list-zip.list')
+#        __newconffile = []
+#        # prepare the environment
+#        shutil.copyfile(__origconffile, __conffile)
+#        # switch flags expected conf and list files to good environment variables
+#        with open(__conffile) as __objconf:
+#            for __line in __objconf.readlines():
+#                if 'PATH' in __line:
+#                    __line = __line.replace('PATH', os.path.abspath('functional-tests/generate-conf-and-file-list-zip'))
+#                __newconffile.append(__line)
+#        with open(__conffile, 'w') as __objconf:
+#            __objconf.writelines(__newconffile)
+# 
+#        if 'PYTHONEXE' in environ:
+#            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
+#        else:
+#            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
+#        if __retcode != 0:
+#            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+#        else:
+#            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
+#                __confres = False
+#            else:
+#                __confres = True
+#            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
+#                __listres = False
+#            else:
+#                __listres = True
+#            if __confres and __listres:
+#                __queue.put('{} - {}'.format(__testname, OKMSG))
+#            else:
+#                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+#
+#class Test_generate_conf_and_file_list_gz:
+#    '''Compare the generated list and the expected list and the configuration file and the expected configuration file for a gz archive'''
+#    def __init__(self, q):
+#        __queue = q
+#        __res = True
+#        __testname = self.__class__.__name__
+#        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-conf-and-file-list-gz')
+#        __archive = os.path.join(__testdir, 'generate-conf-and-file-list-gz.gz')
+#        __conffile = os.path.join(__testdir, 'conf.conf')
+#        __listfile = os.path.join(__testdir, 'list.list')
+#        __origconffile = os.path.join(__testdir, 'conf.conf.bck')
+#        __resultconffile = os.path.join(__testdir, 'generate-conf-and-file-list-gz.conf')
+#        __resultlistfile = os.path.join(__testdir, 'generate-conf-and-file-list-gz.list')
+#        __newconffile = []
+#        # prepare the environment
+#        shutil.copyfile(__origconffile, __conffile)
+#        # switch flags expected conf and list files to good environment variables
+#        with open(__conffile) as __objconf:
+#            for __line in __objconf.readlines():
+#                if 'PATH' in __line:
+#                    __line = __line.replace('PATH', os.path.abspath('functional-tests/generate-conf-and-file-list-gz'))
+#                __newconffile.append(__line)
+#        with open(__conffile, 'w') as __objconf:
+#            __objconf.writelines(__newconffile)
+# 
+#        if 'PYTHONEXE' in environ:
+#            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
+#        else:
+#            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
+#        if __retcode != 0:
+#            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+#        else:
+#            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
+#                __confres = False
+#            else:
+#                __confres = True
+#            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
+#                __listres = False
+#            else:
+#                __listres = True
+#            if __confres and __listres:
+#                __queue.put('{} - {}'.format(__testname, OKMSG))
+#            else:
+#                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+#
+#class Test_generate_conf_and_file_list_bz2:
+#    '''Compare the generated list and the expected list and the configuration file and the expected configuration file for a bz2 archive'''
+#    def __init__(self, q):
+#        __queue = q
+#        __res = True
+#        __testname = self.__class__.__name__
+#        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-conf-and-file-list-bz2')
+#        __archive = os.path.join(__testdir, 'generate-conf-and-file-list-bz2.bz2')
+#        __conffile = os.path.join(__testdir, 'conf.conf')
+#        __listfile = os.path.join(__testdir, 'list.list')
+#        __origconffile = os.path.join(__testdir, 'conf.conf.bck')
+#        __resultconffile = os.path.join(__testdir, 'generate-conf-and-file-list-bz2.conf')
+#        __resultlistfile = os.path.join(__testdir, 'generate-conf-and-file-list-bz2.list')
+#        __newconffile = []
+#        # prepare the environment
+#        shutil.copyfile(__origconffile, __conffile)
+#        # switch flags expected conf and list files to good environment variables
+#        with open(__conffile) as __objconf:
+#            for __line in __objconf.readlines():
+#                if 'PATH' in __line:
+#                    __line = __line.replace('PATH', os.path.abspath('functional-tests/generate-conf-and-file-list-bz2'))
+#                __newconffile.append(__line)
+#        with open(__conffile, 'w') as __objconf:
+#            __objconf.writelines(__newconffile)
+# 
+#        if 'PYTHONEXE' in environ:
+#            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
+#        else:
+#            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
+#        if __retcode != 0:
+#            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+#        else:
+#            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
+#                __confres = False
+#            else:
+#                __confres = True
+#            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
+#                __listres = False
+#            else:
+#                __listres = True
+#            if __confres and __listres:
+#                __queue.put('{} - {}'.format(__testname, OKMSG))
+#            else:
+#                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+#
+#class Test_generate_conf_and_file_list_xz:
+#    '''Compare the generated list and the expected list and the configuration file and the expected configuration file for a xz archive'''
+#    def __init__(self, q):
+#        __queue = q
+#        __res = True
+#        __testname = self.__class__.__name__
+#        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-conf-and-file-list-xz')
+#        __archive = os.path.join(__testdir, 'generate-conf-and-file-list-xz.xz')
+#        __conffile = os.path.join(__testdir, 'conf.conf')
+#        __listfile = os.path.join(__testdir, 'list.list')
+#        __origconffile = os.path.join(__testdir, 'conf.conf.bck')
+#        __resultconffile = os.path.join(__testdir, 'generate-conf-and-file-list-xz.conf')
+#        __resultlistfile = os.path.join(__testdir, 'generate-conf-and-file-list-xz.list')
+#        __newconffile = []
+#        # prepare the environment
+#        shutil.copyfile(__origconffile, __conffile)
+#        # switch flags expected conf and list files to good environment variables
+#        with open(__conffile) as __objconf:
+#            for __line in __objconf.readlines():
+#                if 'PATH' in __line:
+#                    __line = __line.replace('PATH', os.path.abspath('functional-tests/generate-conf-and-file-list-xz'))
+#                __newconffile.append(__line)
+#        with open(__conffile, 'w') as __objconf:
+#            __objconf.writelines(__newconffile)
+# 
+#        if 'PYTHONEXE' in environ:
+#            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
+#        else:
+#            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
+#        if __retcode != 0:
+#            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+#        else:
+#            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
+#                __confres = False
+#            else:
+#                __confres = True
+#            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
+#                __listres = False
+#            else:
+#                __listres = True
+#            if __confres and __listres:
+#                __queue.put('{} - {}'.format(__testname, OKMSG))
+#            else:
+#                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+#
 class Test_generate_conf_and_file_list_tree:
     '''Compare the generated list and the expected list and the configuration file and the expected configuration file for a tree'''
     def __init__(self, q):
@@ -3302,6 +3302,22 @@ class Test_generate_conf_and_file_list_tree:
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
+            # clean the generate list of files removing uid/gid triggering inconsistencies given different uid/gid of computers
+            __fixfilelist = []
+            with open(__resultlistfile) as __objlist:
+                for __line in __objlist.readlines():
+                    __linechunk = []
+                    if 'uid|' in __line:
+                        for __chunk in __line.split():
+                            if not __chunk.startswith('uid') and not __chunk.startswith('gid'):
+                                __linechunk.append(__chunk)
+                    if not __linechunk:
+                        __fixfilelist.append(__line)
+                    else:
+                        __fixfilelist.append(' '.join(__linechunk)+'\n')
+            with open(__resultlistfile, 'w') as __objlist:
+                __objlist.writelines(__fixfilelist)
+            
             if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
                 __confres = False
             else:
