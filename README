@@ -15,7 +15,7 @@ or
 Now the /usr/local/bin/brebis command or /usr/bin/brebis command should trigger the following output:
 
 $ /usr/local/bin/brebis -h
-usage: brebis [-h] [-c DIR] [-v] [-l FILE] [-g] [-d DELIMITER]
+usage: brebis [-h] [-c DIR] [-v] [-l FILE] [-g] [-G] [-d DELIMITER]
               [archives [archives ...]]
 
 Fully automated backup checker
@@ -30,6 +30,8 @@ optional arguments:
   -v, --version         print the version of this program and exit
   -l FILE, --log FILE   the log file
   -g, --gen-list        generate a list of files inside a backup
+  -G, --gen-full        generate the configuration file and the list of files
+                        for the backup
   -d DELIMITER, --delimiter DELIMITER
                         delimiter of the fields for the list of files
 
@@ -76,7 +78,7 @@ uid| 5000
 gid| 5001
 sha1| e0f58dcc57caad2182f701eb63f0c81f347d3fe5
 
- 
+[files] 
 foos/foo|
 foos/foo1| >105k type|f mode|755 uid|5022 gid|5023 unexpected md5|3718422a0bf93f7fc46cff6b5e660ff8
 
@@ -124,6 +126,12 @@ $ brebis -c myconfs/
 The option -g or --generate parses the archive you give in parameter and returns a list of files inside the archive, allowing you to re-use later this file in order to check the archive.
 
 $ brebis -g myarchive.tar.bz
+
+Starting with the version 0.7, you can use the -G option in order to generate both the configuration file AND the list of files inside your archive or your tree of files:
+
+$ brebis -G logs-05092012.tar.gz
+$ls
+logs-05092012.tar.gz logs-05092012.conf logs-05092012.list
 
 The option -c or --configpath specifies a path to a directory where your Brebis configurations are stored. If any alert is triggered, it will appear in the your current working directory in a file named a.out. Relative or absolute paths are accepted.
 
