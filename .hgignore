@@ -50,3 +50,6 @@ functional-tests/generate-conf-and-file-list-tar-xz/generate-conf-and-file-list-
 functional-tests/generate-conf-and-file-list-tar/generate-conf-and-file-list-tar.conf
 functional-tests/generate-conf-and-file-list-tar/generate-conf-and-file-list-tar.list
 functional-tests/generate-conf-and-file-list-tar/conf.conf
+functional-tests/generate-conf-and-file-list-zip/conf.conf
+functional-tests/generate-conf-and-file-list-zip/generate-conf-and-file-list-zip.conf
+functional-tests/generate-conf-and-file-list-zip/generate-conf-and-file-list-zip.list
