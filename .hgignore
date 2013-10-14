@@ -41,3 +41,6 @@ functional-tests/generate-list-and-parse-tgz-archive/generate-list-and-parse-tgz
 functional-tests/generate-conf-and-file-list-tar-gz/conf.conf
 functional-tests/generate-conf-and-file-list-tar-gz/generate-conf-and-file-list-tar-gz.conf
 functional-tests/generate-conf-and-file-list-tar-gz/generate-conf-and-file-list-tar-gz.list
+functional-tests/generate-conf-and-file-list-tar-bz2/conf.conf
+functional-tests/generate-conf-and-file-list-tar-bz2/generate-conf-and-file-list-tar-bz2.conf
+functional-tests/generate-conf-and-file-list-tar-bz2/generate-conf-and-file-list-tar-bz2.list
