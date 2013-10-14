@@ -1,0 +1,6 @@
+[files]
+toto| =5 uid|1000 gid|1000 mode|644 type|f md5|ebd7385edfbbb36cd3a7a5dffb134b98
+foo| =4096 uid|1000 gid|1000 mode|755 type|d
+foo/tata| =0 uid|1000 gid|1000 mode|644 type|f md5|d41d8cd98f00b204e9800998ecf8427e
+foo2| =4096 uid|1000 gid|1000 mode|755 type|d
+foo2/titi| =0 uid|1000 gid|1000 mode|644 type|f md5|d41d8cd98f00b204e9800998ecf8427e
