@@ -3279,10 +3279,8 @@ class Test_generate_conf_and_file_list_tree:
         __testdir = os.path.join(ABSPATH, 'functional-tests/generate-conf-and-file-list-tree')
         __archive = os.path.join(__testdir, 'generate-conf-and-file-list-tree')
         __conffile = os.path.join(__testdir, 'conf.conf')
-        __listfile = os.path.join(__testdir, 'list.list')
         __origconffile = os.path.join(__testdir, 'conf.conf.bck')
         __resultconffile = os.path.join(__testdir, 'generate-conf-and-file-list-tree.conf')
-        __resultlistfile = os.path.join(__testdir, 'generate-conf-and-file-list-tree.list')
         __newconffile = []
         # prepare the environment
         shutil.copyfile(__origconffile, __conffile)
@@ -3303,30 +3301,11 @@ class Test_generate_conf_and_file_list_tree:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
             # clean the generate list of files removing uid/gid triggering inconsistencies given different uid/gid of computers
-            __fixfilelist = []
-            with open(__resultlistfile) as __objlist:
-                for __line in __objlist.readlines():
-                    __linechunk = []
-                    if 'uid|' in __line:
-                        for __chunk in __line.split():
-                            if not __chunk.startswith('uid') and not __chunk.startswith('gid') and not __chunk.startswith('mode'):
-                                __linechunk.append(__chunk)
-                    if not __linechunk:
-                        __fixfilelist.append(__line)
-                    else:
-                        __fixfilelist.append(' '.join(__linechunk)+'\n')
-            with open(__resultlistfile, 'w') as __objlist:
-                __objlist.writelines(__fixfilelist)
-            
             if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
                 __confres = False
             else:
                 __confres = True
-            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
-                __listres = False
-            else:
-                __listres = True
-            if __confres and __listres:
+            if __confres:
                 __queue.put('{} - {}'.format(__testname, OKMSG))
             else:
                 __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
