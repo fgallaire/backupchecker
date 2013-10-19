@@ -72,7 +72,9 @@ class Configurations:
                 ### The list of the expected files in the archive
                 {'main': 'files_list'},
                 ### The delimiter to use in the list of files
-                {'main': 'delimiter'}
+                {'main': 'delimiter'},
+                ### The hash sum to identify the list of files
+                {'main': 'hash'}
                 ]
                 for __element in __confsettings:
                     __key, __value = __element.popitem()
