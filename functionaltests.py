@@ -3310,6 +3310,22 @@ class Test_generate_conf_and_file_list_tree:
             else:
                 __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
 
+class Test_sha_sum_in_conf(Main):
+    '''Test if the parameter hash in the configuration file is recognized'''
+    def __init__(self, q):
+        self.__queue = q
+        self.__testname = self.__class__.__name__
+        self.__testdir = os.path.join(ABSPATH, 'functional-tests/sha-sum-in-conf')
+        self.__resultfile = os.path.join(self.__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __command = ' '.join([PYTHONEXE, EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        else:
+            __command = ' '.join([EXE, OPTCONFIG, self.__testdir, OPTLOG, self.__resultfile])
+        __result = subprocess.getstatusoutput(__command)
+        if __result[0] != 0:
+            self.__queue.put('{} - {}'.format(self.__testname, OKMSG))
+        else:
+            self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(__result[0])))
 
 if __name__ == '__main__':
     processes = []
