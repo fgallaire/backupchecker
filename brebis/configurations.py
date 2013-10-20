@@ -57,7 +57,9 @@ class Configurations:
                 __fullconfpath = os.path.join('/'.join([__confpath, __conf]))
                 try:
                     with open(__fullconfpath, 'r') as __file:
-                        __config.read_file(__file)
+                        # strip GPG/PGP header and footer if it is a signed file
+                        __stripres = self.strip_gpg_header(__file, __fullconfpath)
+                        __config.read_string(__stripres)
                 except UnicodeDecodeError as __err:
                     __msg = 'Error while parsing the configuration file {}:'.format(__fullconfpath)
                     print(__msg)
@@ -114,6 +116,24 @@ class Configurations:
             print(__err)
             sys.exit(1)
 
+    def strip_gpg_header(self, __file, __confpath):
+        '''strip the GPG/PGP header and footer if it is a signed file'''
+        __pgpheader = '-----BEGIN PGP SIGNED MESSAGE-----\n'
+        __pgpfooter = '-----BEGIN PGP SIGNATURE-----\n'
+        __pgpfootermissing = 'Found PGP header but could not find PGP footer for {}'
+        __pgpheadermissing = 'Found PGP footer but could not find PGP header for {}'
+        __content = __file.read()
+        if __pgpheader in __content and __pgpfooter not in __content:
+            print(__pgpfootermissing.format(__confpath))
+            sys.exit(1)
+        if __pgpheader not in __content and __pgpfooter in __content:
+            print(__pgpheadermissing.format(__confpath))
+            sys.exit(1)
+        if __pgpheader in __content and __pgpfooter:
+            __content = __content[__content.index('[main]'):]
+            __content = __content[0:__content.index(__pgpfooter)]
+        return __content
+                
     @property
     def configs(self):
         '''Return the different configurations parameters'''
