@@ -29,7 +29,7 @@ class CheckFileList(object):
 
     def __main(self, __bckconf):
         '''The main for the CheckFileList class'''
-        if __bckconf['hash']:
+        if __bckconf['sha512']:
             __hashtype = 'sha512'
             with open(__bckconf['files_list'], 'rb') as __conf:
                 __realhash = get_hash(__conf, __hashtype)

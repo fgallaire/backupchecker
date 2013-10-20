@@ -74,7 +74,7 @@ class Configurations:
                 ### The delimiter to use in the list of files
                 {'main': 'delimiter'},
                 ### The hash sum to identify the list of files
-                {'main': 'hash'}
+                {'main': 'sha512'}
                 ]
                 for __element in __confsettings:
                     __key, __value = __element.popitem()
