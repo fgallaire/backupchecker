@@ -22,6 +22,7 @@ import sys
 import configparser
 from configparser import ConfigParser
 from hashlib import algorithms_guaranteed
+from brebis.checkfilelist import CheckFileList
 
 class ExpectedValues(object):
     '''Extract information about the archive (if it is one)
@@ -39,6 +40,9 @@ class ExpectedValues(object):
             __delimiter = __options.delimiter
         else:
             __delimiter = __bckconf['delimiter']
+        # test if the expected value of the hash of the list of file is correct
+        CheckFileList(__bckconf)
+        # launch the main of the class
         self.__main(__path, __delimiter)
 
     def __main(self, __path, __delimiter):
