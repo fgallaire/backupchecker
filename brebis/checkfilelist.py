@@ -29,10 +29,10 @@ class CheckFileList(object):
 
     def __main(self, __bckconf):
         '''The main for the CheckFileList class'''
-        if __bckconf['sha512']:
+        if 'sha512' in __bckconf and __bckconf['sha512'] != None:
             __hashtype = 'sha512'
             with open(__bckconf['files_list'], 'rb') as __conf:
                 __realhash = get_hash(__conf, __hashtype)
-            if __realhash != __bckconf['hash']:
-                print('The list of files {} should have a {} hash sum of {}. Current value: {}'.format(__bckconf['files_list'], __hashtype, __bckconf['hash'], __realhash))
+            if __realhash != __bckconf['sha512']:
+                print('The list of files {} should have a {} hash sum of {}. Current value: {}'.format(__bckconf['files_list'], __hashtype, __bckconf['sha512'], __realhash))
                 sys.exit(1)

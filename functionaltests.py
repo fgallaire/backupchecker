@@ -3327,6 +3327,57 @@ class Test_sha_sum_in_conf(Main):
         else:
             self.__queue.put('{} - {}return code:{}'.format(self.__testname, KOMSG, str(__result[0])))
 
+class Test_missing_gpg_footer(Main):
+    '''Test if the pgp/gpg footer is missing in the configuration file'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/missing-gpg-footer')
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.getstatusoutput(' '.join([PYTHONEXE, EXE, OPTCONFIG, __testdir, OPTLOG, __output]))
+        else:
+            __retcode = subprocess.getstatusoutput(' '.join([EXE, OPTCONFIG, __testdir, OPTLOG, __output]))
+        if __retcode[0] != 0:
+            __queue.put('{} - {}'.format(__testname, OKMSG))
+        else:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode[0])))
+
+class Test_missing_gpg_header(Main):
+    '''Test if the gpg/pgp header is missing in the configuration file'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/missing-gpg-header')
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.getstatusoutput(' '.join([PYTHONEXE, EXE, OPTCONFIG, __testdir, OPTLOG, __output]))
+        else:
+            __retcode = subprocess.getstatusoutput(' '.join([EXE, OPTCONFIG, __testdir, OPTLOG, __output]))
+        if __retcode[0] != 0:
+            __queue.put('{} - {}'.format(__testname, OKMSG))
+        else:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode[0])))
+
+class Test_strip_gpg_header_tar_gz(Main):
+    '''Test if the gpg/pgp header is removed effectively on tar gz archive'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/strip-gpg-header-tar-gz')
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.getstatusoutput(' '.join([PYTHONEXE, EXE, OPTCONFIG, __testdir, OPTLOG, __output]))
+        else:
+            __retcode = subprocess.getstatusoutput(' '.join([EXE, OPTCONFIG, __testdir, OPTLOG, __output]))
+        if __retcode[0] == 0:
+            __queue.put('{} - {}'.format(__testname, OKMSG))
+        else:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode[1])))
+
 if __name__ == '__main__':
     processes = []
     results = []
