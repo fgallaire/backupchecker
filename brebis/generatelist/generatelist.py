@@ -20,6 +20,8 @@ import logging
 import os.path
 import sys
 
+from brebis.checkhashes import get_hash
+
 class GenerateList:
     '''The GenerateList class'''
 
@@ -34,7 +36,7 @@ class GenerateList:
 
     def _generate_conf(self, __confinfo):
         '''Write the configuration file for the archive'''
-        __confcontent = '[main]\nname={name}\ntype={type}\npath={path}\nfiles_list={listoffiles}\n'.format(name=__confinfo['arcname'],type=__confinfo['arctype'],path=__confinfo['arcpath'],listoffiles=__confinfo['arclistpath'])
+        __confcontent = '[main]\nname={name}\ntype={type}\npath={path}\nfiles_list={listoffiles}\nsha512={sha512}\n'.format(name=__confinfo['arcname'],type=__confinfo['arctype'],path=__confinfo['arcpath'],listoffiles=__confinfo['arclistpath'], sha512=__confinfo['sha512'])
         try:
             with open(__confinfo['arcconfpath'], 'w') as __file:
                 __file.write(__confcontent)
@@ -48,3 +50,13 @@ class GenerateList:
             return __path[:-1]
         else:
             return __path
+
+    def _get_list_hash(self, __listpath):
+        '''Get the hash sum of the list of files'''
+        try:
+            with open(__listpath, 'rb') as __file:
+                __listhash = get_hash(__file, 'sha512')
+        except (OSError, IOError) as __msg:
+            print(__msg)
+            sys.exit(1)
+        return __listhash
