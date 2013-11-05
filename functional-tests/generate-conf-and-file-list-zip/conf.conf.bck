@@ -3,3 +3,4 @@ name=generate-conf-and-file-list-zip
 type=archive
 path=PATH/generate-conf-and-file-list-zip.zip
 files_list=PATH/generate-conf-and-file-list-zip.list
+sha512=87d3325d3bb844734c1b011fb0f12a3ae47676153a8b05102a5e1b5347a86096d85b1b239752c3fdc10a8a2226928b64b5f31d8fd09f3e43a8eee3a4228f38b1
