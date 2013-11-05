@@ -3,3 +3,4 @@ name=generate-conf-and-file-list-bz2
 type=archive
 path=PATH/generate-conf-and-file-list-bz2.bz2
 files_list=PATH/generate-conf-and-file-list-bz2.list
+sha512=1ea3b8b4fa9a898c5f97f59c9bbb52efb12e47d52860ffd351d7781d19715c9e8fbf1f12cbf90b6e256dda3ee3709b663f87f3b0e2d2f9b83cbde672c16cfd96
