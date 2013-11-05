@@ -100,12 +100,15 @@ class GenerateListForTree(GenerateList):
         self._generate_list(__listconfinfo)
         # call the method to write the configuration file if --gen-full was required
         if self._genfull:
+            # generate the hash sum of the list of files
+            __listhashsum = self._get_list_hash(__listconfinfo['arclistpath'])
             __arcname =  os.path.basename(__arcpath)
             __confinfo = {'arcname': __arcname,
                             'arcpath': __arcpath,
                             'arcconfpath': ''.join([__arcpath,'.conf']),
                             'arclistpath': __listconfinfo['arclistpath'],
-                            'arctype': 'tree'}
+                            'arctype': 'tree',
+                            'sha512': __listhashsum}
             self._generate_conf(__confinfo)
 
     def __translate_type(self, __mode):
