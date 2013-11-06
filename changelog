@@ -1,9 +1,184 @@
+2013-11-06  Carl Chenet  <chaica@ohmytux.com>
+
+	* README:
+	update README with new information and parameters
+	[86ddf7d51759] [tip]
+
+	* brebis/cliparse.py, setup.py:
+	bump version number to 0.8
+	[7365125121fd]
+
+	* functional-tests/generate-conf-and-file-list-tree/conf.conf.bck,
+	functional-tests/generate-conf-and-file-list-tree/list.list,
+	functionaltests.py:
+	fix Test_generate_conf_and_file_list_tree test by adding sha512 sum
+	of the list of files
+	[17ddb86c1b48]
+
+	* brebis/generatelist/generatelistfortree.py:
+	generate the hash sum of the list of files for zip archive and add
+	it in the conf file when -G is invoked
+	[aa9ecbd1b96d]
+
+	* functional-tests/generate-conf-and-file-list-zip/conf.conf.bck:
+	fix Test_generate_conf_and_file_list_zip test by adding sha512 sum
+	of the list of files
+	[dbe2ebf19998]
+
+	* brebis/generatelist/generatelistforzip.py:
+	generate the hash sum of the list of files for zip archive and add
+	it in the conf file when -G is invoked
+	[3ba9c3173a02]
+
+	* brebis/generatelist/generatelistforlzma.py:
+	generate the hash sum of the list of files for xz archive and add it
+	in the conf file when -G is invoked
+	[53faa3eedfa0]
+
+	* functional-tests/generate-conf-and-file-list-xz/conf.conf.bck:
+	fix Test_generate_conf_and_file_list_xz test by adding sha512 sum of
+	the list of files
+	[e38fe7b910f1]
+
+	* functional-tests/generate-conf-and-file-list-bz2/conf.conf.bck:
+	fix Test_generate_conf_and_file_list_bz2 test by adding sha512 sum
+	of the list of files
+	[ac4201fff23a]
+
+	* brebis/generatelist/generatelistforbzip2.py:
+	generate the hash sum of the list of files for gzip archive and add
+	it in the conf file when -G is invoked
+	[b60d6fb2edc7]
+
+2013-11-05  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/generate-conf-and-file-list-gz/conf.conf.bck:
+	fix Test_generate_conf_and_file_list_gz test by adding sha512 sum of
+	the list of files
+	[674d0c2ee0df]
+
+	* brebis/generatelist/generatelistforgzip.py:
+	generate the hash sum of the list of files for gzip archive and add
+	it in the conf file when -G is invoked
+	[82772eee40d6]
+
+	* functional-tests/generate-conf-and-file-list-tar/conf.conf.bck:
+	fix Test_generate_conf_and_file_list_tar test by adding sha512 sum
+	of the list of files
+	[0462fc3e6c80]
+
+	* functional-tests/generate-conf-and-file-list-tar-xz/conf.conf.bck:
+	fix Test_generate_conf_and_file_list_tar_xz test by adding sha512
+	sum of the list of files
+	[156afdfa9d05]
+
+	* functional-tests/generate-conf-and-file-list-tar-bz2/conf.conf.bck:
+	fix Test_generate_conf_and_file_list_tar_bz2 test by adding sha512
+	sum of the list of files
+	[0ab0850c259d]
+
+	* functional-tests/generate-conf-and-file-list-tar-gz/conf.conf.bck:
+	fix Test_generate_conf_and_file_list_tar_gz test by adding sha512
+	sum of the list of files
+	[253c6e7bfb3c]
+
+	* brebis/generatelist/generatelist.py,
+	brebis/generatelist/generatelistfortar.py:
+	generate the hash sum of the list of files for tar archive and add
+	it in the conf file when -G is invoked
+	[0f3320b85737]
+
+2013-10-22  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/checkfilelist.py, brebis/configurations.py,
+	functionaltests.py:
+	sha512 parameter must be explicitly managed (None value when not
+	defined in the conf file) and strip gpg header and footer of the
+	configuration file. fixes #44
+	[cdfe4bc6b35a]
+
+	* merge to support hashum in the configuration file. fixes #43
+	[20b9567a6f7b]
+
+2013-10-20  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/checkfilelist.py, brebis/configurations.py, functional-tests
+	/sha-sum-in-conf/sha-sum-in-conf.conf:
+	modify the configuration parameter called hash by sha512
+	[50820bead4c2] <hashsum-in-conf>
+
+	* brebis/configurations.py, functional-tests/missing-gpg-footer
+	/missing-gpg-footer.conf, functional-tests/missing-gpg-footer
+	/missing-gpg-footer.list, functional-tests/missing-gpg-footer
+	/missing-gpg-footer.tar.gz, functional-tests/missing-gpg-header
+	/missing-gpg-header.conf, functional-tests/missing-gpg-header
+	/missing-gpg-header.list, functional-tests/missing-gpg-header
+	/missing-gpg-header.tar.gz, functional-tests/strip-gpg-header-tar-gz
+	/strip-gpg-header-tar-gz.conf, functional-tests/strip-gpg-header-
+	tar-gz/strip-gpg-header-tar-gz.list, functional-tests/strip-gpg-
+	header-tar-gz/strip-gpg-header-tar-gz.tar.gz, functionaltests.py:
+	add missing gpg footer test, missing gpg header test and strip gpg
+	header for tar gz archive test
+	[3ec0175cf127] <strip-gpg-header>
+
+	* functional-tests/sha-sum-in-conf/sha-sum-in-conf.conf, functional-
+	tests/sha-sum-in-conf/sha-sum-in-conf.list, functional-tests/sha-
+	sum-in-conf/sha-sum-in-conf.tar.gz, functionaltests.py:
+	add sha sum in configuration file test
+	[442d9fa25fb5] <hashsum-in-conf>
+
+2013-10-19  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/checkfilelist.py, brebis/configurations.py,
+	brebis/expectedvalues.py:
+	support for hash sum of the list of files in the configuration file
+	[5c083053bc76] <hashsum-in-conf>
+
 2013-10-15  Carl Chenet  <chaica@ohmytux.com>
+
+	* .hgtags:
+	Added tag 0.7 for changeset abdba4451b0a
+	[b81180411215]
+
+	* functionaltests.py:
+	uncomment all the test suite
+	[abdba4451b0a] [0.7]
+
+	* functionaltests.py:
+	remove list of files from the scop of the generate conf and file
+	list of a tree of files test
+	[da584ecb19b6]
+
+	* functional-tests/generate-conf-and-file-list-tree/list.list,
+	functionaltests.py:
+	exclude mode from generate conf and file list tree test
+	[6e1970062e0c]
+
+	* functionaltests.py:
+	recompose list file to exclude uid/gid
+	[4586c90847cc]
+
+	* functional-tests/generate-conf-and-file-list-tree/list.list:
+	remove uid/gid because triggers errors for functional tests while
+	executed on a computer not having the sames users
+	[dae83b86ef0e]
+
+	* README:
+	update README for 0.7
+	[36e31ffab9dc]
+
+	* man/brebis.1:
+	update README for 0.7
+	[57d2477722c2]
+
+	* changelog:
+	update the changelog for 0.7
+	[3aca993da51d]
 
 	* .hgignore:
 	add generate conf and file list for tree of files test temporary
 	files in .hgignore
-	[4688a898220b] [tip]
+	[4688a898220b]
 
 	* functional-tests/generate-conf-and-file-list-tree/conf.conf.bck,
 	functional-tests/generate-conf-and-file-list-tree/generate-conf-and-
