@@ -4,7 +4,7 @@ How to install Brebis
 * You need at least Python 3.3.
 * Untar the tarball and go to the source directory with the following commands:
 
-$ tar zxvf brebis-0.7.tar.gz && cd brebis/
+$ tar zxvf brebis-0.8.tar.gz && cd brebis/
 
 To install Brebis on your computer, type the following command with the root user:
 
@@ -55,6 +55,7 @@ type=archive
 path=tests/expected_mode/foos.tar.gz
 files_list=tests/expected_mode/files-list
 delimiter=|
+sha512=87d3325d3bb844734c1b011fb0f12a3ae47676153a8b05102a5e1b5347a86096d85b1b239752c3fdc10a8a2226928b64b5f31d8fd09f3e43a8eee3a4228f38b1
 
 [main] is mandatory.
 name is the name of your backup checking session. If you have several backup checking sessions, they MUST use a different name.
@@ -62,6 +63,7 @@ type is the type of your backup. Currently you only have archive (tar, tar.gz, t
 path is the path to the archive or the top directory of your files tree. Relative or absolute paths are accepted.
 files_list is the path to the file containing the information about the archive, the tree or the files inside your backups. Relative or absolute paths are accepted.
 delimiter (optional field) is the string to use in the list of files to mark the end of the key and the beginning of the value. Default is | (pipe).
+sha512 (optional field) provides the sha512 hash sum of the list of files, in order to check if this file is the expected one.
 
 
 Archive checking setup
@@ -155,3 +157,4 @@ Links:
 ------
 How to install Brebis: http://brebisproject.org/projects/brebis/wiki/How_to_install_Brebis_from_the_official_tarball_(targz_file)
 How to configure and use Brebis: http://brebisproject.org/projects/brebis/wiki/How_to_configure_and_use_Brebis
+Efficiently protect your data with Brebis and GPG : http://brebisproject.org/projects/brebis/wiki/Efficiently_protect_your_data_with_Brebis_and_GPG
