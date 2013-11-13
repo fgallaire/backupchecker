@@ -1273,6 +1273,28 @@ class TestApp(unittest.TestCase):
 #
 #######################################################################################
 
+    def test_archiveinfomsg_main(self):
+        '''test the archivemsginfo.ArchiveMsgInfo__main method'''
+        _logfile = TESTLOG
+        brebis.applogger.AppLogger(TESTLOG)
+        __mydict = MyDict()
+        __mydict.missing_files = ['testarchiveinfomsgmain1']
+        __mydict.unexpected_files = []
+        __mydict.missing_equality = []
+        __mydict.missing_smaller_than = []
+        __mydict.missing_bigger_than = []
+        __mydict.missing_bigger_than = []
+        __mydict.mismatched_uids = []
+        __mydict.mismatched_gids = []
+        __mydict.mismatched_modes = []
+        __mydict.mismatched_types = []
+        __mydict.mismatched_hashes = []
+        __mydict.mismatched_targets = []
+        __myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testarchiveinfomsgmain.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj._ArchiveInfoMsg__main(__mydict, {'path': 'testarchiveinfomsgmain.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        with open(_logfile) as _res:
+            self.assertIn('WARNING:root:1 file missing in testarchiveinfomsgmain.tar.gz: \nWARNING:root:testarchiveinfomsgmain1\n', _res.read())
+
     def test_archiveinfomsg_missing_files(self):
         '''test the __missing_files method'''
         _logfile = TESTLOG
@@ -1290,11 +1312,189 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_types = []
         __mydict.mismatched_hashes = []
         __mydict.mismatched_targets = []
-        #__myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'functional-tests/wrong-file-md5-hash-in-tar-gz-archive/wrong-file-md5-hash-in-tar-gz-archive.tar.gz', 'sha512': None, 'files_list': 'functional-tests/wrong-file-md5-hash-in-tar-gz-archive/wrong-file-md5-hash-in-tar-gz-archive-list', 'type': 'archive', 'delimiter': None})
-        __myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'test.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
-        __myobj._ArchiveInfoMsg__missing_files(['titi'], 'test.tar.gz')
+        __myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testmissingfiles.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj._ArchiveInfoMsg__missing_files(['titi'], 'testmissingfiles.tar.gz')
         with open(_logfile) as _res:
-            self.assertIn('WARNING:root:1 file missing in test.tar.gz: \nWARNING:root:titi\n', _res.read())
+            self.assertIn('WARNING:root:1 file missing in testmissingfiles.tar.gz: \nWARNING:root:titi\n', _res.read())
+
+    def test_archiveinfomsg_unexpected_files(self):
+        '''test the archiveinfomsg.ArchiveInfoMsg__unexpected_files method'''
+        _logfile = TESTLOG
+        brebis.applogger.AppLogger(TESTLOG)
+        __mydict = MyDict()
+        __mydict.missing_files = []
+        __mydict.unexpected_files = []
+        __mydict.missing_equality = []
+        __mydict.missing_smaller_than = []
+        __mydict.missing_bigger_than = []
+        __mydict.missing_bigger_than = []
+        __mydict.mismatched_uids = []
+        __mydict.mismatched_gids = []
+        __mydict.mismatched_modes = []
+        __mydict.mismatched_types = []
+        __mydict.mismatched_hashes = []
+        __mydict.mismatched_targets = []
+        __myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testunexpectedfiles.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj._ArchiveInfoMsg__unexpected_files(['titi'], 'testunexpectedfiles.tar.gz')
+        with open(_logfile) as _res:
+            self.assertIn('WARNING:root:1 unexpected file checking testunexpectedfiles.tar.gz: \nWARNING:root:titi\n', _res.read())
+
+    def test_archiveinfomsg_classify_differences(self):
+        '''test the archiveinfomsg.ArchiveInfoMsg__classify_differences method'''
+        _logfile = TESTLOG
+        brebis.applogger.AppLogger(TESTLOG)
+        __mydict = MyDict()
+        __mydict.missing_files = []
+        __mydict.unexpected_files = []
+        __mydict.missing_equality = [{'path':'classifydifferences1', 'size':'12','expected':'3'}]
+        __mydict.missing_smaller_than = [{'path':'classifydifferences2', 'size':'12','expected':'3'}]
+        __mydict.missing_bigger_than = [{'path':'classifydifferences3', 'size':'12','expected':'3'}]
+        __mydict.mismatched_uids = []
+        __mydict.mismatched_gids = []
+        __mydict.mismatched_modes = []
+        __mydict.mismatched_types = []
+        __mydict.mismatched_hashes = []
+        __mydict.mismatched_targets = []
+        __myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testclassifydifferences.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj._ArchiveInfoMsg__classify_differences(__mydict, 'testclassifydifferences.tar.gz')
+        with open(_logfile) as _res:
+            __testresult = _res.read()
+            self.assertIn('WARNING:root:classifydifferences1 size is 12. Should have been 3.', __testresult)
+            self.assertIn('WARNING:root:classifydifferences2 size is 12. Should have been smaller than 3.', __testresult)
+            self.assertIn('WARNING:root:classifydifferences3 size is 12. Should have been bigger than 3.', __testresult)
+
+    def test_archiveinfomsg_log_differences(self):
+        '''test the archiveinfomsg.ArchiveInfoMsg__log_differences method'''
+        _logfile = TESTLOG
+        brebis.applogger.AppLogger(TESTLOG)
+        __mydict = MyDict()
+        __mydict.missing_files = []
+        __mydict.unexpected_files = []
+        __mydict.missing_equality = [{'path':'classifydifferences4', 'size':'12','expected':'3'}]
+        __mydict.missing_smaller_than = []
+        __mydict.missing_bigger_than = []
+        __mydict.mismatched_uids = []
+        __mydict.mismatched_gids = []
+        __mydict.mismatched_modes = []
+        __mydict.mismatched_types = []
+        __mydict.mismatched_hashes = []
+        __mydict.mismatched_targets = []
+        __myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testlogdifferences.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj._ArchiveInfoMsg__log_differences(__mydict.missing_equality, 'testlogdifferences.tar.gz', '{} {} with unexpected size while checking {}: ')
+        with open(_logfile) as _res:
+            __testresult = _res.read()
+            self.assertIn('WARNING:root:classifydifferences4 size is 12. Should have been 3.', __testresult)
+
+    def test_archiveinfomsg_uid_gid_mismatches(self):
+        '''test the archiveinfomsg.ArchiveInfoMsg__uid_gid_mismatches method'''
+        _logfile = TESTLOG
+        brebis.applogger.AppLogger(TESTLOG)
+        __mydict = MyDict()
+        __mydict.missing_files = []
+        __mydict.unexpected_files = []
+        __mydict.missing_equality = []
+        __mydict.missing_smaller_than = []
+        __mydict.missing_bigger_than = []
+        __mydict.mismatched_uids = [{'path':'classifydifferences5', 'expecteduid':'1010','uid':'1000'}]
+        __mydict.mismatched_gids = [{'path':'classifydifferences6', 'expectedgid':'1010','gid':'1000'}]
+        __mydict.mismatched_modes = []
+        __mydict.mismatched_types = []
+        __mydict.mismatched_hashes = []
+        __mydict.mismatched_targets = []
+        __myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testuidgidmismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj._ArchiveInfoMsg__uid_gid_mismatches(__mydict, 'testuidgidmismatches.tar.gz')
+        with open(_logfile) as _res:
+            __testresult = _res.read()
+            self.assertIn('WARNING:root:classifydifferences5 uid is 1000. Should have been 1010.', __testresult)
+            self.assertIn('WARNING:root:classifydifferences6 gid is 1000. Should have been 1010.', __testresult)
+
+    def test_archiveinfomsg_mode_mismatches(self):
+        '''test the archiveinfomsg.ArchiveInfoMsg__mode_mismatches method'''
+        _logfile = TESTLOG
+        brebis.applogger.AppLogger(TESTLOG)
+        __mydict = MyDict()
+        __mydict.missing_files = []
+        __mydict.unexpected_files = []
+        __mydict.missing_equality = []
+        __mydict.missing_smaller_than = []
+        __mydict.missing_bigger_than = []
+        __mydict.mismatched_uids = []
+        __mydict.mismatched_gids = []
+        __mydict.mismatched_modes = [{'path':'classifydifferences7', 'expectedmode':'644','mode':'777'}]
+        __mydict.mismatched_types = []
+        __mydict.mismatched_hashes = []
+        __mydict.mismatched_targets = []
+        __myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testmodemismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj._ArchiveInfoMsg__mode_mismatches(__mydict, 'testmodemismatches.tar.gz')
+        with open(_logfile) as _res:
+            __testresult = _res.read()
+            self.assertIn('WARNING:root:classifydifferences7 mode is 777. Should have been 644.', __testresult)
+
+    def test_archiveinfomsg_target_mismatches(self):
+        '''test the archiveinfomsg.ArchiveInfoMsg__target_mismatches method'''
+        _logfile = TESTLOG
+        brebis.applogger.AppLogger(TESTLOG)
+        __mydict = MyDict()
+        __mydict.missing_files = []
+        __mydict.unexpected_files = []
+        __mydict.missing_equality = []
+        __mydict.missing_smaller_than = []
+        __mydict.missing_bigger_than = []
+        __mydict.mismatched_uids = []
+        __mydict.mismatched_gids = []
+        __mydict.mismatched_modes = []
+        __mydict.mismatched_types = []
+        __mydict.mismatched_hashes = []
+        __mydict.mismatched_targets = [{'path':'classifydifferences8', 'expectedtarget':'../target1','target':'../target2'}]
+        __myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testtargetmismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj._ArchiveInfoMsg__target_mismatches(__mydict, 'testtargetmismatches.tar.gz')
+        with open(_logfile) as _res:
+            __testresult = _res.read()
+            self.assertIn('WARNING:root:classifydifferences8 target is ../target2. Should have been ../target1.', __testresult)
+
+    def test_archiveinfomsg_type_mismatches(self):
+        '''test the archiveinfomsg.ArchiveInfoMsg__type_mismatches method'''
+        _logfile = TESTLOG
+        brebis.applogger.AppLogger(TESTLOG)
+        __mydict = MyDict()
+        __mydict.missing_files = []
+        __mydict.unexpected_files = []
+        __mydict.missing_equality = []
+        __mydict.missing_smaller_than = []
+        __mydict.missing_bigger_than = []
+        __mydict.mismatched_uids = []
+        __mydict.mismatched_gids = []
+        __mydict.mismatched_modes = []
+        __mydict.mismatched_types = [{'path':'classifydifferences9', 'expectedtype':'s','type':'f'}]
+        __mydict.mismatched_hashes = []
+        __mydict.mismatched_targets = []
+        __myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testtypemismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj._ArchiveInfoMsg__target_mismatches(__mydict, 'testtypemismatches.tar.gz')
+        with open(_logfile) as _res:
+            __testresult = _res.read()
+            self.assertIn('WARNING:root:classifydifferences9 is a regular file. Should have been a symbolic link.', __testresult)
+
+    def test_archiveinfomsg_hash_mismatches(self):
+        '''test the archiveinfomsg.ArchiveInfoMsg__hash_mismatches method'''
+        _logfile = TESTLOG
+        brebis.applogger.AppLogger(TESTLOG)
+        __mydict = MyDict()
+        __mydict.missing_files = []
+        __mydict.unexpected_files = []
+        __mydict.missing_equality = []
+        __mydict.missing_smaller_than = []
+        __mydict.missing_bigger_than = []
+        __mydict.mismatched_uids = []
+        __mydict.mismatched_gids = []
+        __mydict.mismatched_modes = []
+        __mydict.mismatched_types = []
+        __mydict.mismatched_hashes = [{'path':'classifydifferences10', 'expectedhash':'azeraezr','hash':'qdslfmjaze'}]
+        __mydict.mismatched_targets = []
+        __myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testhashmismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj._ArchiveInfoMsg__hash_mismatches(__mydict, 'testhashmismatches.tar.gz')
+        with open(_logfile) as _res:
+            __testresult = _res.read()
+            self.assertIn('WARNING:root:classifydifferences10 hash is qdslfmjaze. Should have been azeraezr.', __testresult)
 
 ################################################################
 #
@@ -1305,7 +1505,7 @@ class TestApp(unittest.TestCase):
     def tearDownClass(TestApp):
         '''clean after the tests'''
         _logfile = TESTLOG
-        os.remove(_logfile)
+        #os.remove(_logfile)
 
 if __name__ == '__main__':
     unittest.main()
