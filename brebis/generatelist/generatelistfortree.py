@@ -32,9 +32,9 @@ class GenerateListForTree(GenerateList):
         __delimiter = __genparams['delimiter']
         self._genfull = __genparams['genfull']
         __listoffiles = ['[files]\n']
-        __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
-        __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
-        __onelinewithtarget = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} md5{delimiter}{value} target{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+        __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+        __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+        __onelinewithtarget = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value} target{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
         
         for __dirpath, __dirnames, __filenames, in os.walk(__arcpath):
             # ignoring the uppest directory
@@ -51,7 +51,8 @@ class GenerateListForTree(GenerateList):
                                         str(__dirinfo.st_uid),
                                         str(__dirinfo.st_gid),
                                         __dirmode,
-                                        __type))
+                                        __type,
+                                        str(__dirinfo.st_mtime)))
             # studying files
             for __filename in __filenames:
                 __filepath = os.path.join(__dirpath, __filename)
@@ -70,6 +71,7 @@ class GenerateListForTree(GenerateList):
                                             str(self.__fileinfo.st_gid),
                                             __filemode,
                                             __type,
+                                            str(self.__fileinfo.st_mtime),
                                             __hash))
                 elif __type == 's':
                     # extract hash sum of the file inside the archive
@@ -83,6 +85,7 @@ class GenerateListForTree(GenerateList):
                                             __filemode,
                                             __type,
                                             __hash,
+                                            str(__fileinfo.st_mtime),
                                             os.readlink(__filepath)))
                 else:
                     # if file is not regular file, ignoring its hash sum
@@ -92,7 +95,8 @@ class GenerateListForTree(GenerateList):
                                             str(self.__fileinfo.st_uid),
                                             str(self.__fileinfo.st_gid),
                                             __filemode,
-                                            __type))
+                                            __type,
+                                            str(__fileinfo.st_mtime)))
                                             
         # call the method to write information in a file
         __listconfinfo = {'arclistpath': ''.join([__arcpath, '.list']),

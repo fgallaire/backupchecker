@@ -1,7 +1,7 @@
 [files]
-generate-conf-and-file-list| =0 uid|1000 gid|1000 mode|755 type|d
-generate-conf-and-file-list/toto| =5 uid|1000 gid|1000 mode|644 type|f md5|ebd7385edfbbb36cd3a7a5dffb134b98
-generate-conf-and-file-list/foo| =0 uid|1000 gid|1000 mode|755 type|d
-generate-conf-and-file-list/foo/tata| =0 uid|1000 gid|1000 mode|644 type|f md5|d41d8cd98f00b204e9800998ecf8427e
-generate-conf-and-file-list/foo2| =0 uid|1000 gid|1000 mode|755 type|d
-generate-conf-and-file-list/foo2/titi| =0 uid|1000 gid|1000 mode|644 type|f md5|d41d8cd98f00b204e9800998ecf8427e
+generate-conf-and-file-list| =0 uid|1000 gid|1000 mode|755 type|d mtime|1377641822.0
+generate-conf-and-file-list/toto| =5 uid|1000 gid|1000 mode|644 type|f mtime|1377641403.0 md5|ebd7385edfbbb36cd3a7a5dffb134b98
+generate-conf-and-file-list/foo| =0 uid|1000 gid|1000 mode|755 type|d mtime|1381589346.0
+generate-conf-and-file-list/foo/tata| =0 uid|1000 gid|1000 mode|644 type|f mtime|1381589346.0 md5|d41d8cd98f00b204e9800998ecf8427e
+generate-conf-and-file-list/foo2| =0 uid|1000 gid|1000 mode|755 type|d mtime|1381589388.0
+generate-conf-and-file-list/foo2/titi| =0 uid|1000 gid|1000 mode|644 type|f mtime|1381589388.0 md5|d41d8cd98f00b204e9800998ecf8427e

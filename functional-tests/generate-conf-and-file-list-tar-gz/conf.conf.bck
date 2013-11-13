@@ -3,4 +3,4 @@ name=generate-conf-and-file-list-tar-gz
 type=archive
 path=PATH/generate-conf-and-file-list-tar-gz.tar.gz
 files_list=PATH/generate-conf-and-file-list-tar-gz.list
-sha512=87d3325d3bb844734c1b011fb0f12a3ae47676153a8b05102a5e1b5347a86096d85b1b239752c3fdc10a8a2226928b64b5f31d8fd09f3e43a8eee3a4228f38b1
+sha512=3a54d58184429619066563610079d1c224323774e6fa2e700924140ee0f250a5adc7a9138ebe8bb09c2b59f2814b24c233eff94f8dd0d31bd14eb0c119339afd

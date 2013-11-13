@@ -1,7 +1,7 @@
 [files]
-generate-list-from-zip-archive| =0 uid|1000 gid|1000 mode|755 type|d
-generate-list-from-zip-archive/hello| =37 uid|1000 gid|1000 mode|644 type|f md5|19413ae249d6b8ee27f97bcd3c473871
-generate-list-from-zip-archive/bar| =0 uid|1000 gid|1000 mode|755 type|d
-generate-list-from-zip-archive/bar/rab| =81 uid|1000 gid|1000 mode|644 type|f md5|d43b83e6a611f73099ec0413e54f642b
-generate-list-from-zip-archive/bar/oof| =50 uid|1000 gid|1000 mode|644 type|f md5|19f3beb0c803d4184c9b54d11fb119b6
-generate-list-from-zip-archive/foo| =34 uid|1000 gid|1000 mode|644 type|f md5|ac2cb3e1f78a1e8576c15623efb6367b
+generate-list-from-zip-archive| =0 uid|1000 gid|1000 mode|755 type|d mtime|1319283440.0
+generate-list-from-zip-archive/hello| =37 uid|1000 gid|1000 mode|644 type|f mtime|1319283424.0 md5|19413ae249d6b8ee27f97bcd3c473871
+generate-list-from-zip-archive/bar| =0 uid|1000 gid|1000 mode|755 type|d mtime|1319283636.0
+generate-list-from-zip-archive/bar/rab| =81 uid|1000 gid|1000 mode|644 type|f mtime|1319283636.0 md5|d43b83e6a611f73099ec0413e54f642b
+generate-list-from-zip-archive/bar/oof| =50 uid|1000 gid|1000 mode|644 type|f mtime|1319283460.0 md5|19f3beb0c803d4184c9b54d11fb119b6
+generate-list-from-zip-archive/foo| =34 uid|1000 gid|1000 mode|644 type|f mtime|1319283438.0 md5|ac2cb3e1f78a1e8576c15623efb6367b

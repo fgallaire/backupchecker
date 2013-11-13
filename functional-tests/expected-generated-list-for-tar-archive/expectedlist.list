@@ -1,7 +1,7 @@
 [files]
-generate-list-from-tar-archive| =0 uid|1000 gid|1000 mode|755 type|d
-generate-list-from-tar-archive/toto| =23 uid|1000 gid|1000 mode|644 type|f md5|b87852310afce39bb56ae8846a70fa9e
-generate-list-from-tar-archive/titi| =14 uid|1000 gid|1000 mode|644 type|f md5|9bdde260205f343bd4357c73ce5cfc90
-generate-list-from-tar-archive/foo| =0 uid|1000 gid|1000 mode|755 type|d
-generate-list-from-tar-archive/foo/oof| =11 uid|1000 gid|1000 mode|644 type|f md5|5c8ee4d9ea5b7d70ccff1d93cdf0ffb4
-generate-list-from-tar-archive/foo/bar| =14 uid|1000 gid|1000 mode|644 type|f md5|edecdbc70eab4fd4df31791687346179
+generate-list-from-tar-archive| =0 uid|1000 gid|1000 mode|755 type|d mtime|1319064974.0
+generate-list-from-tar-archive/toto| =23 uid|1000 gid|1000 mode|644 type|f mtime|1319064970.0 md5|b87852310afce39bb56ae8846a70fa9e
+generate-list-from-tar-archive/titi| =14 uid|1000 gid|1000 mode|644 type|f mtime|1319064953.0 md5|9bdde260205f343bd4357c73ce5cfc90
+generate-list-from-tar-archive/foo| =0 uid|1000 gid|1000 mode|755 type|d mtime|1319064993.0
+generate-list-from-tar-archive/foo/oof| =11 uid|1000 gid|1000 mode|644 type|f mtime|1319064993.0 md5|5c8ee4d9ea5b7d70ccff1d93cdf0ffb4
+generate-list-from-tar-archive/foo/bar| =14 uid|1000 gid|1000 mode|644 type|f mtime|1319064986.0 md5|edecdbc70eab4fd4df31791687346179

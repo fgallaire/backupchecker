@@ -46,7 +46,7 @@ class CheckTar(CheckArchive):
                     __arcinfo = {'path':_tarinfo.name, 'size':_tarinfo.size, 
                                     'uid':_tarinfo.uid, 'gid':_tarinfo.gid,
                                     'mode':_tarinfo.mode, 'type': __type,
-                                    'target':_tarinfo.linkname}
+                                    'target':_tarinfo.linkname, 'mtime':_tarinfo.mtime}
                     _data = self._check_path(__arcinfo, _data)
                 self._missing_files = [_file['path'] for _file in _data]
             except (tarfile.TarError, EOFError) as _msg:

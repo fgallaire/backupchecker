@@ -135,6 +135,13 @@ class ExpectedValues(object):
                                     logging.warning('{}: Unknown type {} for file parameter'.format(__data['path'], __type))
                                 else:
                                     __data['type'] = __type
+                            # Testing the mtime of the file
+                            elif __item.startswith('mtime{}'.format(__delimiter)):
+                                try:
+                                     __data['mtime'] = float(__item.split(__delimiter)[-1])
+                                except ValueError as __msg:
+                                    logging.warning(__msg)
+                                    __data['mtime'] = 0.0
                             # Testing the size of the file
                             ### Test if the equality is required
                             elif __item.startswith('='):
@@ -174,7 +181,6 @@ class ExpectedValues(object):
             if __res == 0:
                 __res = int(__arg[1:])
         except ValueError as __msg:
-            print(__msg)
             logging.warning(__msg)
             __res = 0
         finally:

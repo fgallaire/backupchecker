@@ -16,6 +16,7 @@
 # Generate a list of files from a zip archive
 '''Generate a list of files from a zip archive'''
 
+import datetime
 import logging
 import os.path
 import stat
@@ -42,8 +43,8 @@ class GenerateListForZip(GenerateList):
     def __main(self, __zip):
         '''Main of the GenerateListForZip class'''
         __listoffiles = ['[files]\n']
-        __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
-        __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
+        __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
+        __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
         __crcerror = __zip.testzip()
         if __crcerror:
             logging.warning('{} has at least one file corrupted:{}'.format(self.__arcpath, __crcerror))
@@ -54,6 +55,18 @@ class GenerateListForZip(GenerateList):
                 __uid, __gid = self.__extract_uid_gid(__fileinfo)
                 __type = self.__translate_type(__fileinfo.external_attr >> 16)
                 __mode = oct(stat.S_IMODE((__fileinfo.external_attr >> 16))).split('o')[-1]
+                # Prepare a timestamp for the ctime object
+                __dt = __fileinfo.date_time
+                try:
+                    __mtime = float(datetime.datetime(__dt[0],
+                                                    __dt[1],
+                                                    __dt[2],
+                                                    __dt[3],
+                                                    __dt[4],
+                                                    __dt[5]).timestamp())
+                except ValueError as __msg:
+                    __warn = 'Issue with timestamp while controlling {} in {}'.format(_fileinfo.filename,_cfgvalues['path'])
+                    logging.warning(__warn)
                 if __type == 'f':
                     __hash = get_hash(__zip.open(__fileinfo.filename, 'r'), 'md5')
                     __listoffiles.append(__onelinewithhash.format(__fileinfo.filename,
@@ -62,6 +75,7 @@ class GenerateListForZip(GenerateList):
                                                             str(__gid),
                                                             __mode,
                                                             __type,
+                                                            __mtime,
                                                             __hash))
                 else:
                     __listoffiles.append(__oneline.format(__fileinfo.filename,
@@ -69,7 +83,8 @@ class GenerateListForZip(GenerateList):
                                                             str(__uid),
                                                             str(__gid),
                                                             __mode,
-                                                            __type))
+                                                            __type,
+                                                            __mtime))
         # call the method to write information in a file
         __listconfinfo = {'arclistpath': ''.join([self.__arcpath[:-3], 'list']),
                             'listoffiles':  __listoffiles}
