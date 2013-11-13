@@ -26,6 +26,7 @@ import unittest
 import zipfile
 
 import brebis.applogger
+import brebis.archiveinfomsg
 import brebis.checkbackups.checkarchive
 import brebis.checkbackups.checkbackups
 import brebis.checkbackups.checkbzip2
@@ -50,6 +51,10 @@ class Options:
     def __init__(self):
         self.delimiter = DEFAULTDELIMITER
 
+class MyDict(dict):
+    '''mock object'''
+    pass
+
 class TestApp(unittest.TestCase):
 
     def test_applogger(self):
@@ -63,8 +68,7 @@ class TestApp(unittest.TestCase):
         brebis.applogger.AppLogger(_logfile)
         brebis.checkbackups.checkbackups.CheckBackups({'essai': {'path': 'tests/tar_gz_archive_content/essai.tar.gz', 'files_list': 'tests/tar_gz_archive_content/essai-list', 'type': 'archive','delimiter':''}, 'essai2': {'path': 'tests/tar_bz2_archive_content/titi.tar.bz2', 'files_list': 'tests/tar_bz2_archive_content/essai2-list', 'type': 'archive','delimiter':''}}, Options())
         with open(_logfile) as _res:
-            self.assertEqual(_res.read(), 'WARNING:root:1 file missing in tests/tar_gz_archive_content/essai.tar.gz: \nWARNING:root:essai/dir/titi\n')
-        os.remove(_logfile)
+            self.assertIn('WARNING:root:1 file missing in tests/tar_gz_archive_content/essai.tar.gz: \nWARNING:root:essai/dir/titi\n', _res.read())
 
     def test_checktar_missing_files(self):
         '''Check if the CheckTar class returns a missing file'''
@@ -1263,10 +1267,45 @@ class TestApp(unittest.TestCase):
                 break
         self.assertEqual(setuppyversion, cliparsepyversion)
 
+#######################################################################################
+#
+# Testing the brebis/archiveinfomsg.py
+#
+#######################################################################################
+
+    def test_archiveinfomsg_missing_files(self):
+        '''test the __missing_files method'''
+        _logfile = TESTLOG
+        brebis.applogger.AppLogger(TESTLOG)
+        __mydict = MyDict()
+        __mydict.missing_files = []
+        __mydict.unexpected_files = []
+        __mydict.missing_equality = []
+        __mydict.missing_smaller_than = []
+        __mydict.missing_bigger_than = []
+        __mydict.missing_bigger_than = []
+        __mydict.mismatched_uids = []
+        __mydict.mismatched_gids = []
+        __mydict.mismatched_modes = []
+        __mydict.mismatched_types = []
+        __mydict.mismatched_hashes = []
+        __mydict.mismatched_targets = []
+        #__myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'functional-tests/wrong-file-md5-hash-in-tar-gz-archive/wrong-file-md5-hash-in-tar-gz-archive.tar.gz', 'sha512': None, 'files_list': 'functional-tests/wrong-file-md5-hash-in-tar-gz-archive/wrong-file-md5-hash-in-tar-gz-archive-list', 'type': 'archive', 'delimiter': None})
+        __myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'test.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj._ArchiveInfoMsg__missing_files(['titi'], 'test.tar.gz')
+        with open(_logfile) as _res:
+            self.assertIn('WARNING:root:1 file missing in test.tar.gz: \nWARNING:root:titi\n', _res.read())
+
 ################################################################
 #
 # End of the unit tests
 #
 ################################################################
+    @classmethod
+    def tearDownClass(TestApp):
+        '''clean after the tests'''
+        _logfile = TESTLOG
+        os.remove(_logfile)
+
 if __name__ == '__main__':
     unittest.main()
