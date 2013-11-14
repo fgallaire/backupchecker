@@ -65,3 +65,10 @@ functional-tests/generate-conf-and-file-list-xz/generate-conf-and-file-list-xz.l
 functional-tests/generate-conf-and-file-list-tree/conf.conf
 functional-tests/generate-conf-and-file-list-tree/generate-conf-and-file-list-tree.conf
 functional-tests/generate-conf-and-file-list-tree/generate-conf-and-file-list-tree.list
+functional-tests/check-mtime-tar/check-mtime-tar.conf
+functional-tests/check-mtime-tar/check-mtime-tar.list
+functional-tests/check-mtime-tree/check-mtime-tree.conf
+functional-tests/check-mtime-tree/check-mtime-tree.list
+functional-tests/check-mtime-zip/check-mtime-zip.conf
+functional-tests/check-mtime-zip/check-mtime-zip.list
+.coverage

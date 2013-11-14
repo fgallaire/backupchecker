@@ -31,6 +31,7 @@ import brebis.checkbackups.checkarchive
 import brebis.checkbackups.checkbackups
 import brebis.checkbackups.checkbzip2
 import brebis.checkbackups.checkgzip
+import brebis.checkbackups.checklzma
 import brebis.checkhashes
 import brebis.checkbackups.checktar
 import brebis.checkbackups.checktree
@@ -150,6 +151,12 @@ class TestApp(unittest.TestCase):
              'type': 'tree', 'delimiter': ''}, Options()).missing_smaller_than
         self.assertEqual(__missing_smaller_than[0]['path'], 'bar/foo3')
 
+#######################################################################################
+#
+# Testing the brebis/checkbackup/checkgzip module
+#
+#######################################################################################
+
     def test_checkgzip_missing_files(self):
         '''Check if the CheckGzip class returns a missing file'''
         _missing_files = []
@@ -189,6 +196,28 @@ class TestApp(unittest.TestCase):
                 'tests/file_size/missing-smaller-than/mygzip-list',
              'type': 'archive', 'delimiter': ''}, Options()).missing_smaller_than
         self.assertEqual(__missing_smaller_than[0]['path'], 'mygzip')
+
+#######################################################################################
+#
+# Testing the brebis/checkbackup/checklzma module
+#
+#######################################################################################
+
+    def test_checklzma_missing_files(self):
+        '''Check if the CheckLzma class returns a missing file'''
+        _missing_files = []
+        _missing_files = brebis.checkbackups.checklzma.CheckLzma({'path':
+            'tests/lzma/mylzma.xz',
+             'files_list':
+                'tests/lzma/mylzma-list',
+             'type': 'archive', 'delimiter': ''}, Options()).missing_files
+        self.assertEqual(_missing_files, ['foo'])
+
+#######################################################################################
+#
+# Testing the brebis/checkbackup/checkzip module
+#
+#######################################################################################
 
     def test_checkzip_missing_files(self):
         '''Check if the CheckZip class returns a missing file'''
@@ -496,6 +525,21 @@ class TestApp(unittest.TestCase):
             {'path': 'bar',
             'expectedhash': 'ede',
             'hash': 'ede69eff9660689e65c5e47bb849f152'}])
+
+    def test_lzma_compare_hash(self):
+        '''Compare the hash of a file in the lzma archive and the
+        expected one
+        '''
+        __myobj = brebis.checkbackups.checklzma.CheckLzma({'path':
+            'tests/expected_hash/bar.xz',
+             'files_list':
+                'tests/expected_hash/lzma-list',
+             'type': 'archive', 'delimiter': ''}, Options())
+        __hashes = __myobj.mismatched_hashes
+        self.assertEqual(__hashes, [
+            {'path': 'bar',
+            'expectedhash': 'ede',
+            'hash': '39fe9ceedb3aac1755142e7f425a5961'}])
 
     def test_bzip2_compare_hash(self):
         '''Compare the hash of a file in the bzip2 archive and the
@@ -1505,7 +1549,7 @@ class TestApp(unittest.TestCase):
     def tearDownClass(TestApp):
         '''clean after the tests'''
         _logfile = TESTLOG
-        #os.remove(_logfile)
+        os.remove(_logfile)
 
 if __name__ == '__main__':
     unittest.main()
