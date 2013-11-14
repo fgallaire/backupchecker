@@ -16,10 +16,11 @@
 # Check a zip archive
 '''Check a zip archive'''
 
-import sys
-import zipfile
+import datetime
 import logging
 import stat
+import sys
+import zipfile
 
 from brebis.checkbackups.checkarchive import CheckArchive
 from brebis.expectedvalues import ExpectedValues
@@ -51,19 +52,30 @@ class CheckZip(CheckArchive):
                 IdentifyLimitations(_cfgvalues['path'], 'zip', configkeys)
                 _crcerror = self._zip.testzip()
                 if _crcerror:
+                    # corrupted archive
                     logging.warning('{} has at least one file corrupted:{}'.format(_cfgvalues['path'], _crcerror))
                 else:
                     _zipinfo = self._zip.infolist()
+                    # iterate through the files in the archive
                     for _fileinfo in _zipinfo:
                         _fileinfo.filename = self._normalize_path(_fileinfo.filename)
+                        # Prepare a timestamp for the ctime object
+                        __dt = _fileinfo.date_time
+                        try:
+                            __mtime = int(datetime.datetime(__dt[0],__dt[1],__dt[2],__dt[3],__dt[4],__dt[5]).timestamp())
+                        except ValueError as __msg:
+                            __warn = 'Issue with timestamp while controlling {} in {}'.format(_fileinfo.filename,_cfgvalues['path'])
+                            logging.warning(__warn)
                         __uid, __gid = self.__extract_uid_gid(_fileinfo)
                         __type = self.__translate_type(_fileinfo.external_attr >> 16)
                         __arcinfo = {'path': _fileinfo.filename, 'size': _fileinfo.file_size,
                                         'mode': stat.S_IMODE((_fileinfo.external_attr >> 16)),
-                                        'uid': __uid, 'gid': __gid, 'type': __type}
+                                        'uid': __uid, 'gid': __gid, 'type': __type,
+                                        'mtime': __mtime}
                         _data = self._check_path(__arcinfo, _data)
                     self._missing_files = [_file['path'] for _file in _data]
         except zipfile.BadZipfile as _msg:
+            # corrupted archive
             __warn = '. You should investigate for a data corruption.'
             logging.warning('{}: {}{}'.format(_cfgvalues['path'], str(_msg), __warn))
 

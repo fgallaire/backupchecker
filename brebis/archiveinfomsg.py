@@ -39,6 +39,7 @@ class ArchiveInfoMsg(object):
             self.__uid_gid_mismatches(__bck, __cfgvalues['path'])
             self.__mode_mismatches(__bck, __cfgvalues['path'])
             self.__type_mismatches(__bck, __cfgvalues['path'])
+            self.__mtime_mismatches(__bck, __cfgvalues['path'])
             self.__hash_mismatches(__bck, __cfgvalues['path'])
             self.__target_mismatches(__bck, __cfgvalues['path'])
 
@@ -171,6 +172,20 @@ class ArchiveInfoMsg(object):
             logging.warning('{} contains {} {} with unexpected {}:'.format(__archivepath, __errnb, __fileword, __typeword))
             for __file in __bck.mismatched_types:
                 logging.warning('{} is a {}. Should have been a {}.'.format(__file['path'], __types[__file['type']], __types[__file['expectedtype']]))
+
+    def __mtime_mismatches(self, __bck, __archivepath):
+        '''Log the file mtime mismatches'''
+        if __bck.mismatched_mtimes:
+            __errnb = len(__bck.mismatched_mtimes)
+            __fileword = 'file'
+            __mtimeword = 'mtime'
+            if __errnb > 1:
+                __fileword = 'files'
+                __mtimeword = 'types'
+            logging.warning('{} contains {} {} with unexpected {}:'.format(__archivepath, __errnb, __fileword, __mtimeword))
+            for __file in __bck.mismatched_mtimes:
+                logging.warning('{} mtime is {}. Should have been {}.'.format(__file['path'], __file['mtime'], __file['expectedmtime']))
+
 
     def __hash_mismatches(self, __bck, __archivepath):
         '''Log the file hash mismatches'''

@@ -41,9 +41,9 @@ class GenerateListForTar(GenerateList):
     def __main(self, __tar):
         '''Main for the GenerateListForTar class'''
         __listoffiles = ['[files]\n']
-        __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
-        __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
-        __onelinewithtarget = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} md5{delimiter}{value} target{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
+        __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
+        __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
+        __onelinewithtarget = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value} target{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
         for __tarinfo in __tar:
             # Pick up tar information
             __tarinfo.name = self._normalize_path(__tarinfo.name)
@@ -62,6 +62,7 @@ class GenerateListForTar(GenerateList):
                                                         str(__tarinfo.gid),
                                                         __mode,
                                                         __type,
+                                                        float(__tarinfo.mtime),
                                                         __hash,
                                                         __tarinfo.linkname))
             elif __type == 'l' or __type == 's':
@@ -74,6 +75,7 @@ class GenerateListForTar(GenerateList):
                                                         str(__tarinfo.gid),
                                                         __mode,
                                                         __type,
+                                                        float(__tarinfo.mtime),
                                                         __hash,
                                                         __tarinfo.linkname))
             else:
@@ -83,7 +85,8 @@ class GenerateListForTar(GenerateList):
                                                         str(__tarinfo.uid),
                                                         str(__tarinfo.gid),
                                                         __mode,
-                                                        __type))
+                                                        __type,
+                                                        float(__tarinfo.mtime)))
         # Compose the name of the generated list
         if self.__arcpath.lower().endswith('.tar'):
             self.__arclistpath = ''.join([self.__arcpath[:-3], 'list'])

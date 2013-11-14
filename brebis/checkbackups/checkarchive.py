@@ -40,6 +40,7 @@ class CheckArchive(object):
         self._mismatched_gids = []
         self._mismatched_modes = []
         self._mismatched_types = []
+        self._mismatched_mtimes = []
         self._mismatched_targets = []
         self._mismatched_hashes = []
         self.__fileinfo = False
@@ -71,6 +72,9 @@ class CheckArchive(object):
                     self._check_type(__arcinfo['type'], _file)
                 if 'target' in __arcinfo and 'target' in _file:
                     self._check_target(__arcinfo['target'], _file)
+                ### Compare the file mtime and the mtime of the expected file
+                if 'mtime' in __arcinfo and 'mtime' in _file:
+                    self._check_mtime(__arcinfo['mtime'], _file)
                 ### Compare the hash of the file and the one of the expected file
                 if 'hash' in _file:
                         self._check_hash(__arcinfo['path'], _file)
@@ -160,6 +164,13 @@ class CheckArchive(object):
         '''
         if __file['type'] != __arctype:
             self.mismatched_types.append({'path': __file['path'], 'expectedtype': __file['type'], 'type': __arctype})
+
+    def _check_mtime(self, __arcmtime, __file):
+        '''Check if the file mtime in the archive matches the expected
+        one
+        '''
+        if __file['mtime'] != __arcmtime:
+            self.mismatched_mtimes.append({'path': __file['path'], 'expectedmtime': __file['mtime'], 'mtime': __arcmtime})
 
     def _check_hash(self, __arcpath, __file):
         '''Check if the file hash in the archive matches the expected
@@ -269,6 +280,13 @@ class CheckArchive(object):
         an unexpected type
         '''
         return self._mismatched_types
+
+    @property
+    def mismatched_mtimes(self):
+        '''A list containing {path,mtime,expectedmtime} of the files in the archive with
+        an unexpected mtime
+        '''
+        return self._mismatched_mtimes
 
     @property
     def mismatched_hashes(self):

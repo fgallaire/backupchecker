@@ -3362,6 +3362,91 @@ class Test_strip_gpg_header_tar_gz(Main):
         else:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode[1])))
 
+class Test_generate_list_to_check_mtime_in_tar_archive:
+    '''Generate a list of files to check that mtime in tar archive is written'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/check-mtime-tar')
+        __archive = os.path.join(__testdir, 'check-mtime-tar.tar.gz')
+        __resultfile = os.path.join(__testdir, 'check-mtime-tar.list')
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            # check now the newly modified list of files with the new delimiter
+            if 'PYTHONEXE' in environ:
+                __retcode = subprocess.call([PYTHONEXE, EXE, OPTCONFIG, __testdir, OPTLOG, __output])
+            else:
+                __retcode = subprocess.call([EXE, OPTCONFIG, __testdir, OPTLOG, __output])
+            if __retcode != 0:
+                __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+            else:
+                with open(__resultfile, 'r') as __file:
+                    if ' mtime|' in __file.read():
+                        __queue.put('{} - {}'.format(__testname, OKMSG))
+                    else:
+                        __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+
+class Test_generate_list_to_check_mtime_in_zip_archive:
+    '''Generate a list of files to check that mtime in zip archive is written'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/check-mtime-zip')
+        __archive = os.path.join(__testdir, 'check-mtime-zip.zip')
+        __resultfile = os.path.join(__testdir, 'check-mtime-zip.list')
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            # check now the newly modified list of files with the new delimiter
+            if 'PYTHONEXE' in environ:
+                __retcode = subprocess.call([PYTHONEXE, EXE, OPTCONFIG, __testdir, OPTLOG, __output])
+            else:
+                __retcode = subprocess.call([EXE, OPTCONFIG, __testdir, OPTLOG, __output])
+            if __retcode != 0:
+                __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+            else:
+                with open(__resultfile, 'r') as __file:
+                    if ' mtime|' in __file.read():
+                        __queue.put('{} - {}'.format(__testname, OKMSG))
+                    else:
+                        __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+
+class Test_generate_list_to_check_mtime_in_tree:
+    '''Generate a list of files to check that mtime in tree is written'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/check-mtime-tree')
+        __archive = os.path.join(__testdir, 'check-mtime-tree')
+        __resultfile = os.path.join(__testdir, 'check-mtime-tree.list')
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            with open(__resultfile, 'r') as __file:
+                if ' mtime|' in __file.read():
+                    __queue.put('{} - {}'.format(__testname, OKMSG))
+                else:
+                    __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+
 if __name__ == '__main__':
     processes = []
     results = []
@@ -3384,3 +3469,4 @@ if __name__ == '__main__':
         sys.exit(1)
     else:
         print(linesep.join(results))
+
