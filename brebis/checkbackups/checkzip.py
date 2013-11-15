@@ -62,7 +62,7 @@ class CheckZip(CheckArchive):
                         # Prepare a timestamp for the ctime object
                         __dt = _fileinfo.date_time
                         try:
-                            __mtime = int(datetime.datetime(__dt[0],__dt[1],__dt[2],__dt[3],__dt[4],__dt[5]).timestamp())
+                            __mtime = float(datetime.datetime(__dt[0],__dt[1],__dt[2],__dt[3],__dt[4],__dt[5]).timestamp())
                         except ValueError as __msg:
                             __warn = 'Issue with timestamp while controlling {} in {}'.format(_fileinfo.filename,_cfgvalues['path'])
                             logging.warning(__warn)
