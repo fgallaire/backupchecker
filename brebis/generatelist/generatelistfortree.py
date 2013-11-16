@@ -85,7 +85,7 @@ class GenerateListForTree(GenerateList):
                                             __filemode,
                                             __type,
                                             __hash,
-                                            str(__fileinfo.st_mtime),
+                                            str(self.__fileinfo.st_mtime),
                                             os.readlink(__filepath)))
                 else:
                     # if file is not regular file, ignoring its hash sum
