@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import argparse
 import bz2
 import gzip
 import logging
@@ -40,6 +41,8 @@ import brebis.cliparse
 import brebis.configurations
 from brebis.expectedvalues import ExpectedValues
 import brebis.generatelist.generatelistfortar
+import brebis.generatelist.generatelistforbzip2
+import brebis.listtype
 import brebis.main
 
 # !! logging module uses a single logger for the whole file
@@ -259,18 +262,41 @@ class TestApp(unittest.TestCase):
              'type': 'archive', 'delimiter': ''}, Options()).missing_smaller_than
         self.assertEqual(__missing_smaller_than[0]['path'], 'myzip/toutou')
 
-##    def test_configurations(self):
-##        '''Test the Configurations class'''
-##        __path = os.path.abspath('tests/test_conf/')
-##        __res = brebis.configurations.Configurations(__path).configs
-##        self.assertEqual({'essai': {'path': os.path.normpath(os.path.join(__path,'essai.tar.gz')), 'files_list': os.path.normpath(os.path.join(__path,'essai-list')), 'type': 'archive', 'delimiter': '|'}}, __res)
-##
-##    def test_configurations_with_subdir(self):
-##        '''Test the Configurations class with a subdirectory'''
-##        __path = os.path.abspath('tests/test_conf/subdir/')
-##        __res = brebis.configurations.Configurations(__path).configs
-##        self.assertEqual({'essai2': {'path': os.path.normpath(os.path.join(__path, 'toto/essai.tar.gz')), 'files_list': os.path.normpath(os.path.join(__path, 'toto/essai-list')), 'type': 'archive'}}, __res)
-##
+#######################################################################################
+#
+# Testing the brebis/configurations module
+#
+#######################################################################################
+
+    def test_configurations(self):
+        '''Test the Configurations.configs attribute of the Configurations class'''
+        __path = os.path.abspath('tests/test_conf/')
+        __res = brebis.configurations.Configurations(__path).configs
+        self.assertEqual({'essai': {'path': os.path.normpath(os.path.join(__path,'essai.tar.gz')), 'sha512': None, 'files_list': os.path.normpath(os.path.join(__path,'essai-list')), 'type': 'archive', 'delimiter': '|'}}, __res)
+
+    def test_configurations_with_subdir(self):
+        '''Test the Configurations.configs attribute of the Configurations class'''
+        __path = os.path.abspath('tests/test_conf/subdir/')
+        __res = brebis.configurations.Configurations(__path).configs
+        self.assertEqual({'essai2': {'path': os.path.normpath(os.path.join(__path, 'toto/essai.tar.gz')), 'sha512': None, 'files_list': os.path.normpath(os.path.join(__path, 'toto/essai-list')), 'type': 'archive', 'delimiter': None}}, __res)
+
+    def test_configurations_strip_gpg_header(self):
+        '''Test the Configurations.configs attribute of the Configurations class'''
+        __base = os.path.abspath('tests/test_conf_gpg/')
+        __path = os.path.join(__base, 'archive.conf')
+        __strippedfilepath = os.path.join(__base, 'result')
+        __myobj = brebis.configurations.Configurations(__path)
+        with open(__path) as __myfile:
+            __newfile = __myobj.strip_gpg_header(__myfile, __path)
+        with open(__strippedfilepath) as __good:
+            __goodfile = __good.read()
+        self.assertEqual(__newfile, __goodfile)
+
+#######################################################################################
+#
+# Testing the brebis/expectedvalues module
+#
+#######################################################################################
     def test_expected_values(self):
         '''Check the ExpectedValues class'''
         __data, _ = ExpectedValues({'files_list':'tests/file_size/essai-list','delimiter':''}, Options()).data
@@ -936,6 +962,101 @@ class TestApp(unittest.TestCase):
         __fileuid, __filegid = __fileinfo.st_uid, __fileinfo.st_gid
         self.assertEqual((__arcuid, __arcgid), (__fileuid, __filegid))
 
+    def test_check_uid(self):
+        ''' test checkarchive.CheckArchive__check_uid'''
+        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+            'tests/checkarchive_private_methods/mytar.tar.gz',
+             'files_list':
+                'tests/checkarchive_private_methods/tar-list',
+             'type': 'archive', 'delimiter': ''}, Options())
+        __file = 'tests/checkarchive_private_methods/mytar.tar.gz'
+        __myobj._CheckArchive__check_uid('1000', {'path':'test', 'uid':'999'})
+        self.assertEqual([{'path':'test', 'expecteduid':'999', 'uid':'1000'}], __myobj.mismatched_uids)
+
+    def test_check_gid(self):
+        ''' test checkarchive.CheckArchive__check_gid'''
+        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+            'tests/checkarchive_private_methods/mytar.tar.gz',
+             'files_list':
+                'tests/checkarchive_private_methods/tar-list',
+             'type': 'archive', 'delimiter': ''}, Options())
+        __file = 'tests/checkarchive_private_methods/mytar.tar.gz'
+        __myobj._CheckArchive__check_gid('1000', {'path':'test', 'gid':'999'})
+        self.assertEqual([{'path':'test', 'expectedgid':'999', 'gid':'1000'}], __myobj.mismatched_gids)
+
+#############################################################
+#
+# Testing the protected method from checkarchive.CheckArchive
+#
+#############################################################
+
+    def test_compare_sizes(self):
+        '''test the compare_sizes method from CheckArchive'''
+        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+            'tests/checkarchive_private_methods/mytar.tar.gz',
+             'files_list':
+                'tests/checkarchive_private_methods/tar-list',
+             'type': 'archive', 'delimiter': ''}, Options())
+        __mydict1 = {'equals': 12}
+        __mydict2 = {'biggerthan': 3}
+        __mydict3 = {'smallerthan': 7}
+        __myobj._compare_sizes(13, 'mytar1.tar.gz', __mydict1 )
+        __myobj._compare_sizes(1, 'mytar2.tar.gz', __mydict2 )
+        __myobj._compare_sizes(15, 'mytar3.tar.gz', __mydict3 )
+        self.assertEqual(__myobj.missing_equality, [{'expected': 12, 'path': 'mytar1.tar.gz', 'size': 13}])
+        self.assertEqual(__myobj.missing_bigger_than, [{'expected': 3, 'path': 'mytar2.tar.gz', 'size': 1}])
+        self.assertEqual(__myobj.missing_smaller_than, [{'expected': 7, 'path': 'mytar3.tar.gz', 'size': 15}])
+
+    def test_normalize_path(self):
+        '''test the normalize_path method from CheckArchive'''
+        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+            'tests/checkarchive_private_methods/mytar.tar.gz',
+             'files_list':
+                'tests/checkarchive_private_methods/tar-list',
+             'type': 'archive', 'delimiter': ''}, Options())
+        __res = __myobj._normalize_path('/test/')
+        self.assertEqual(__res, '/test')
+
+    def test_check_unexpected_files(self):
+        '''test the check_unexpected_files method from CheckArchive'''
+        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+            'tests/checkarchive_private_methods/mytar.tar.gz',
+             'files_list':
+                'tests/checkarchive_private_methods/tar-list',
+             'type': 'archive', 'delimiter': ''}, Options())
+        __myobj._check_unexpected_files('test.tar.gz', 'unexpected weird ok')
+        self.assertEqual(__myobj.unexpected_files, ['test.tar.gz'])
+
+    def test_check_mode(self):
+        '''test the check_mode method from CheckArchive'''
+        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+            'tests/checkarchive_private_methods/mytar.tar.gz',
+             'files_list':
+                'tests/checkarchive_private_methods/tar-list',
+             'type': 'archive', 'delimiter': ''}, Options())
+        __myobj._check_mode(777, {'path': 'test.tar.gz', 'mode':'644'})
+        self.assertEqual(__myobj.mismatched_modes, [{'path': 'test.tar.gz', 'mode':'1411', 'expectedmode':'644'}])
+
+    def test_check_type(self):
+        '''test the check_type method from CheckArchive'''
+        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+            'tests/checkarchive_private_methods/mytar.tar.gz',
+             'files_list':
+                'tests/checkarchive_private_methods/tar-list',
+             'type': 'archive', 'delimiter': ''}, Options())
+        __myobj._check_type('s', {'path': 'test.tar.gz', 'type':'f'})
+        self.assertEqual(__myobj.mismatched_types, [{'path': 'test.tar.gz', 'type':'s', 'expectedtype':'f'}])
+
+    def test_check_mtime(self):
+        '''test the check_mtime method from CheckArchive'''
+        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+            'tests/checkarchive_private_methods/mytar.tar.gz',
+             'files_list':
+                'tests/checkarchive_private_methods/tar-list',
+             'type': 'archive', 'delimiter': ''}, Options())
+        __myobj._check_mtime(1383912787.0, {'path': 'test.tar.gz', 'mtime': 1383912786.0})
+        self.assertEqual(__myobj.mismatched_mtimes, [{'path': 'test.tar.gz', 'mtime': 1383912787.0, 'expectedmtime': 1383912786.0}])
+
 ##############################################################
 #
 # Testing the private/protected methods from checkzip.CheckZip 
@@ -1159,6 +1280,25 @@ class TestApp(unittest.TestCase):
             self.assertEqual(type(__result), type(self.__desc))
             __result.close()
 
+######################################################################################
+#
+# Testing the private/protected methods from generatelistforbzip2.GenerateListForBzip2
+#
+######################################################################################
+
+    def test__listconfinfo(self):
+        '''test the GenerateListForBzip2 class'''
+        __myobj = brebis.generatelist.generatelistforbzip2.GenerateListForBzip2({
+            'arcpath': 'tests/checkbzip2_private_methods/mybz2.bz2', 'delimiter': '|', 'genfull': True})
+        self.assertEqual(__myobj._GenerateListForBzip2__lci, {'arclistpath': 'tests/checkbzip2_private_methods/mybz2.list',
+            'listoffiles': ['[files]\n', 'mybz2| type|f md5|f5488b7ce878d89b59ef2752f260354f\n']})
+        self.assertEqual(__myobj._GenerateListForBzip2__ci, {'arcconfpath': 'tests/checkbzip2_private_methods/mybz2.conf',
+            'arclistpath': 'tests/checkbzip2_private_methods/mybz2.list',
+            'arcname': 'mybz2',
+            'arcpath': 'tests/checkbzip2_private_methods/mybz2.bz2',
+            'arctype': 'archive',
+            'sha512': 'b45fa678a2208bfbf457f602b2d3de0c83e82ad9ba042b029b8d37f23bfe2774d1cd25576da880d20bb7f6ffcfc2ecb4bcc80112e880415de82fe63d81f81cb7'})
+
 ###############################################################################################
 #
 # Testing the private/protected methods from generatelist.generatelist.GenerateList 
@@ -1286,6 +1426,31 @@ class TestApp(unittest.TestCase):
         __myobj = brebis.generatelist.generatelistforgzip.GenerateListForGzip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False})
         with open(__file, 'rb') as __myf:
             self.assertEqual('mygzip', __myobj._GenerateListForGzip__extract_initial_filename(__myf, 'mygzip'))
+
+##############################################################
+#
+# Testing the private/protected methods from cliparse.CliParse
+#
+##############################################################
+
+    def test_cliparse_cliparse(self):
+        '''Test the cliparse.CliParse class'''
+        __archivepath = '/tmp/archive.conf'
+        __logpath = '/tmp/a.out'
+        with open(__archivepath, 'w') as __desc:
+            __desc.write('')
+        sys.argv.append('-c')
+        sys.argv.append(__archivepath)
+        sys.argv.append('-l')
+        sys.argv.append(__logpath)
+        __myobj = brebis.cliparse.CliParse()
+        self.assertEqual(vars(__myobj.options), {'archives': [],
+            'confpath': __archivepath,
+            'delimiter': '|',
+            'genfull': False,
+            'genlist': False,
+            'logfile': __logpath})
+        os.remove(__archivepath)
 
 #######################################################################################
 #
@@ -1549,6 +1714,67 @@ class TestApp(unittest.TestCase):
         with open(_logfile) as _res:
             __testresult = _res.read()
             self.assertIn('WARNING:root:classifydifferences10 hash is qdslfmjaze. Should have been azeraezr.', __testresult)
+
+#######################################################################################
+#
+# Testing the brebis.listtype.ListType
+#
+#######################################################################################
+
+    def test_listtype_tar(self):
+        '''test the listtype class with a tar archive'''
+        #__mydict = brebis.listtype.ListType({'arcpath': 'test.tar.gz', 'delimiter': None, 'genfull': True})
+        __mydict = MyDict()
+        __mydict.archives = ['tests/listtype/mytargz.tar.gz']
+        __mydict.delimiter = None
+        __mydict.genfull = True
+        __mydict = brebis.listtype.ListType(__mydict)
+        self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'brebis.generatelist.generatelistfortar.GenerateListForTar'>")
+
+    def test_listtype_tree(self):
+        '''test the listtype class with a tree archive'''
+        __mydict = MyDict()
+        __mydict.archives = ['tests/listtype/mytree']
+        __mydict.delimiter = None
+        __mydict.genfull = True
+        __mydict = brebis.listtype.ListType(__mydict)
+        self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'brebis.generatelist.generatelistfortree.GenerateListForTree'>")
+
+    def test_listtype_zip(self):
+        '''test the listtype class with a zip archive'''
+        __mydict = MyDict()
+        __mydict.archives = ['tests/listtype/myzip.zip']
+        __mydict.delimiter = None
+        __mydict.genfull = True
+        __mydict = brebis.listtype.ListType(__mydict)
+        self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'brebis.generatelist.generatelistforzip.GenerateListForZip'>")
+
+    def test_listtype_gz(self):
+        '''test the listtype class with a gzip archive'''
+        __mydict = MyDict()
+        __mydict.archives = ['tests/listtype/mygzip.gz']
+        __mydict.delimiter = None
+        __mydict.genfull = True
+        __mydict = brebis.listtype.ListType(__mydict)
+        self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'brebis.generatelist.generatelistforgzip.GenerateListForGzip'>")
+
+    def test_listtype_bz2(self):
+        '''test the listtype class with a bzip2 archive'''
+        __mydict = MyDict()
+        __mydict.archives = ['tests/listtype/mybz2.bz2']
+        __mydict.delimiter = None
+        __mydict.genfull = True
+        __mydict = brebis.listtype.ListType(__mydict)
+        self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'brebis.generatelist.generatelistforbzip2.GenerateListForBzip2'>")
+
+    def test_listtype_xz(self):
+        '''test the listtype class with a lzma archive'''
+        __mydict = MyDict()
+        __mydict.archives = ['tests/listtype/mylzma.xz']
+        __mydict.delimiter = None
+        __mydict.genfull = True
+        __mydict = brebis.listtype.ListType(__mydict)
+        self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'brebis.generatelist.generatelistforlzma.GenerateListForLzma'>")
 
 ################################################################
 #

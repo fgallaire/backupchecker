@@ -1,0 +1,5 @@
+[main]
+name=strip-gpg-header-tar-gz
+type=archive
+path=essai.tar.gz
+files_list=essai.list
