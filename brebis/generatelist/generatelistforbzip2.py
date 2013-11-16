@@ -43,6 +43,7 @@ class GenerateListForBzip2(GenerateList):
         # call the method to write information in a file
         __listconfinfo = {'arclistpath': ''.join([__arcpath[:-3], 'list']),
                             'listoffiles':  __listoffiles}
+        self.__lci = __listconfinfo
         self._generate_list(__listconfinfo)
         # call the method to write the configuration file if --gen-full was required
         if self._genfull:
@@ -55,4 +56,5 @@ class GenerateListForBzip2(GenerateList):
                             'arclistpath': __listconfinfo['arclistpath'],
                             'arctype': 'archive',
                             'sha512': __listhashsum}
+            self.__ci = __confinfo
             self._generate_conf(__confinfo)
