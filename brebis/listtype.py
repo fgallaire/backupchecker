@@ -45,7 +45,7 @@ class ListType(object):
             __genparams = {'arcpath': __arcpath, 'delimiter': __delimiter, 'genfull': __genfull} 
             # generate a list of files for a tree
             if os.path.isdir(__arcpath):
-                __bck = GenerateListForTree(__genparams)
+                self.__bck = GenerateListForTree(__genparams)
             # generate a list of files for a tar.gz/bz2 archive
             elif __arcpath.lower().endswith('.tar') or\
                     __arcpath.lower().endswith('.tar.gz') or\
@@ -54,18 +54,17 @@ class ListType(object):
                     __arcpath.lower().endswith('.tgz') or\
                     __arcpath.lower().endswith('.tbz') or\
                     __arcpath.lower().endswith('.tbz2'):
-                __bck = GenerateListForTar(__genparams)
+                self.__bck = GenerateListForTar(__genparams)
             # generate a list of files for a gzip archive
             elif __arcpath.lower().endswith('.gz'):
-                __bck = GenerateListForGzip(__genparams)
+                self.__bck = GenerateListForGzip(__genparams)
             # generate a list of files for a bzip2 archive
             elif __arcpath.lower().endswith('.bz2'):
-                __bck = GenerateListForBzip2(__genparams)
+                self.__bck = GenerateListForBzip2(__genparams)
             # generate a list of files for a lzma archive
             elif __arcpath.lower().endswith('.xz'):
-                __bck = GenerateListForLzma(__genparams)
+                self.__bck = GenerateListForLzma(__genparams)
             # generate a list of files for a zip archive
             elif __arcpath.lower().endswith('.zip'):
-                __bck = GenerateListForZip(__genparams)
+                self.__bck = GenerateListForZip(__genparams)
             # A MESSAGE RESUMING OPERATION FOR GENERATING THE LIST OF FILES IS MISSING HERE
-
