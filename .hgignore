@@ -72,3 +72,15 @@ functional-tests/check-mtime-tree/check-mtime-tree.list
 functional-tests/check-mtime-zip/check-mtime-zip.conf
 functional-tests/check-mtime-zip/check-mtime-zip.list
 .coverage
+tests/listtype/mybz2.conf
+tests/listtype/mybz2.list
+tests/listtype/mygzip.conf
+tests/listtype/mygzip.list
+tests/listtype/mylzma.conf
+tests/listtype/mylzma.list
+tests/listtype/mytargz.conf
+tests/listtype/mytargz.list
+tests/listtype/mytree.conf
+tests/listtype/mytree.list
+tests/listtype/myzip.conf
+tests/listtype/myzip.list
