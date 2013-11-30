@@ -68,4 +68,9 @@ class CheckBackups(object):
             # check a zip file, by name
             elif __cfgvalues['type'] == 'archive' and __cfgvalues['path'].lower().endswith('.zip'):
                 __bck = CheckZip(__cfgvalues, __options)
+            elif __cfgvalues['type'] == 'archive' and __cfgvalues['path'].lower().endswith('.apk'):
+                __bck = CheckZip(__cfgvalues, __options)
+            else:
+                __errmsg = 'The type of the archive is not supported.'
+                sys.exit(1)
             ArchiveInfoMsg(__bck, __cfgvalues)

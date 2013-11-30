@@ -2142,31 +2142,6 @@ class Test_expected_generated_list_for_tar_archive:
             else:
                 __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
 
-class Test_expected_generated_list_for_zip_archive:
-    '''Compare the generated list and the expected list for a zip archive'''
-    def __init__(self, q):
-        __queue = q
-        __res = True
-        __testname = self.__class__.__name__
-        __testdir = os.path.join(ABSPATH, 'functional-tests/expected-generated-list-for-zip-archive')
-        __archive = os.path.join(__testdir, 'expected-generated-list-for-zip-archive.zip')
-        __resultfile = os.path.join(__testdir, 'expected-generated-list-for-zip-archive.list')
-        if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
-        else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
-        if __retcode != 0:
-            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
-        else:
-            if hashlib.md5(open(__resultfile, 'rb').read()).hexdigest() != hashlib.md5(open(os.path.join(__testdir, 'expectedlist.list'), 'rb').read()).hexdigest():
-                __res = False
-            else:
-                __res = True
-            if __res:
-                __queue.put('{} - {}'.format(__testname, OKMSG))
-            else:
-                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
-
 class Test_expected_generated_list_for_gzip_archive:
     '''Compare the generated list and the expected list for a gzip archive'''
     def __init__(self, q):
@@ -2618,7 +2593,7 @@ class Test_bzip2_archive_size_smaller_than_expected_size(Main):
         self._main('1 file smaller than')
 
 class Test_checkarchive_supported_types_equals_listtype_supported_types:
-    '''Test if the supported types in checkarchives.py equals those in
+    '''Test if the supported types in checkarchives.py equals the ones in
        listtype.py
        This is not exactly a functional test but it triggered bug #24 so
        it needs to be tested  
@@ -3090,51 +3065,6 @@ class Test_generate_conf_and_file_list_tar_xz:
             else:
                 __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
 
-class Test_generate_conf_and_file_list_zip:
-    '''Compare the generated list and the expected list and the configuration file and the expected configuration file for a zip archive'''
-    def __init__(self, q):
-        __queue = q
-        __res = True
-        __testname = self.__class__.__name__
-        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-conf-and-file-list-zip')
-        __archive = os.path.join(__testdir, 'generate-conf-and-file-list-zip.zip')
-        __conffile = os.path.join(__testdir, 'conf.conf')
-        __listfile = os.path.join(__testdir, 'list.list')
-        __origconffile = os.path.join(__testdir, 'conf.conf.bck')
-        __resultconffile = os.path.join(__testdir, 'generate-conf-and-file-list-zip.conf')
-        __resultlistfile = os.path.join(__testdir, 'generate-conf-and-file-list-zip.list')
-        __newconffile = []
-        # prepare the environment
-        shutil.copyfile(__origconffile, __conffile)
-        # switch flags expected conf and list files to good environment variables
-        with open(__conffile) as __objconf:
-            for __line in __objconf.readlines():
-                if 'PATH' in __line:
-                    __line = __line.replace('PATH', os.path.abspath('functional-tests/generate-conf-and-file-list-zip'))
-                __newconffile.append(__line)
-        with open(__conffile, 'w') as __objconf:
-            __objconf.writelines(__newconffile)
- 
-        if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
-        else:
-            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
-        if __retcode != 0:
-            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
-        else:
-            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
-                __confres = False
-            else:
-                __confres = True
-            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
-                __listres = False
-            else:
-                __listres = True
-            if __confres and __listres:
-                __queue.put('{} - {}'.format(__testname, OKMSG))
-            else:
-                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
-
 class Test_generate_conf_and_file_list_gz:
     '''Compare the generated list and the expected list and the configuration file and the expected configuration file for a gz archive'''
     def __init__(self, q):
@@ -3447,6 +3377,35 @@ class Test_generate_list_to_check_mtime_in_tree:
                 else:
                     __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
 
+class Test_generate_apk_conf_files:
+    '''Generate a apk archive and verify the result'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-apk-conf-files')
+        __archive = os.path.join(__testdir, 'generate-apk-conf-files.apk')
+        __resultconffile = os.path.join(__testdir, 'generate-apk-conf-files.conf')
+        __resultlistfile = os.path.join(__testdir, 'generate-apk-conf-files.list')
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            with open(__resultconffile, 'r') as __file:
+                if 'name=generate-apk-conf-files' in __file.read():
+                    __queue.put('{} - {}'.format(__testname, OKMSG))
+                else:
+                    __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+            with open(__resultlistfile, 'r') as __file:
+                if 'res/drawable-hdpi/balloons2.png| =7511 uid|0 gid|0 mtime|1329733756.0' in __file.read():
+                    __queue.put('{} - {}'.format(__testname, OKMSG))
+                else:
+                    __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+ 
 if __name__ == '__main__':
     processes = []
     results = []

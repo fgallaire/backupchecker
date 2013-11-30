@@ -84,3 +84,5 @@ tests/listtype/mytree.conf
 tests/listtype/mytree.list
 tests/listtype/myzip.conf
 tests/listtype/myzip.list
+functional-tests/generate-apk-conf-files/generate-apk-conf-files.conf
+functional-tests/generate-apk-conf-files/generate-apk-conf-files.list
