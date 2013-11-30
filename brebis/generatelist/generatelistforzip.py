@@ -20,6 +20,7 @@ import datetime
 import logging
 import os.path
 import stat
+import sys
 import zipfile
 
 from brebis.checkhashes import get_hash
@@ -45,6 +46,7 @@ class GenerateListForZip(GenerateList):
         __listoffiles = ['[files]\n']
         __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
         __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
+        __onelinenoexternalattr = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
         __crcerror = __zip.testzip()
         if __crcerror:
             logging.warning('{} has at least one file corrupted:{}'.format(self.__arcpath, __crcerror))
@@ -53,9 +55,11 @@ class GenerateListForZip(GenerateList):
             for __fileinfo in __zipinfo:
                 __fileinfo.filename = self._normalize_path(__fileinfo.filename)
                 __uid, __gid = self.__extract_uid_gid(__fileinfo)
-                __type = self.__translate_type(__fileinfo.external_attr >> 16)
-                __mode = oct(stat.S_IMODE((__fileinfo.external_attr >> 16))).split('o')[-1]
-                # Prepare a timestamp for the ctime object
+                # check if external_attr is available
+                if __fileinfo.external_attr != 0:
+                    __type = self.__translate_type(__fileinfo.external_attr >> 16)
+                    __mode = oct(stat.S_IMODE((__fileinfo.external_attr >> 16))).split('o')[-1]
+                    # Prepare a timestamp for the ctime object
                 __dt = __fileinfo.date_time
                 try:
                     __mtime = float(datetime.datetime(__dt[0],
@@ -67,7 +71,7 @@ class GenerateListForZip(GenerateList):
                 except ValueError as __msg:
                     __warn = 'Issue with timestamp while controlling {} in {}'.format(_fileinfo.filename,_cfgvalues['path'])
                     logging.warning(__warn)
-                if __type == 'f':
+                if __fileinfo.external_attr != 0 and __type == 'f':
                     __hash = get_hash(__zip.open(__fileinfo.filename, 'r'), 'md5')
                     __listoffiles.append(__onelinewithhash.format(__fileinfo.filename,
                                                             str(__fileinfo.file_size),
@@ -77,13 +81,19 @@ class GenerateListForZip(GenerateList):
                                                             __type,
                                                             __mtime,
                                                             __hash))
-                else:
+                elif __fileinfo.external_attr != 0 and __type == 'd':
                     __listoffiles.append(__oneline.format(__fileinfo.filename,
                                                             str(__fileinfo.file_size),
                                                             str(__uid),
                                                             str(__gid),
                                                             __mode,
                                                             __type,
+                                                            __mtime))
+                else:
+                    __listoffiles.append(__onelinenoexternalattr.format(__fileinfo.filename,
+                                                            str(__fileinfo.file_size),
+                                                            str(__uid),
+                                                            str(__gid),
                                                             __mtime))
         # call the method to write information in a file
         __listconfinfo = {'arclistpath': ''.join([self.__arcpath[:-3], 'list']),
@@ -104,8 +114,8 @@ class GenerateListForZip(GenerateList):
 
     def __extract_uid_gid(self, __binary):
         '''Extract uid and gid from a zipinfo.extra object (platform dependant)'''
-        __uid, __gid = int.from_bytes(__binary.extra[15:17], 'little'), \
-                            int.from_bytes(__binary.extra[20:22], 'little')
+        __uid, __gid = int.from_bytes(__binary.extra[15:17], sys.byteorder), \
+                            int.from_bytes(__binary.extra[20:22], sys.byteorder)
         return (__uid, __gid)
 
     def __translate_type(self, __mode):

@@ -67,4 +67,7 @@ class ListType(object):
             # generate a list of files for a zip archive
             elif __arcpath.lower().endswith('.zip'):
                 self.__bck = GenerateListForZip(__genparams)
+            # generate a list of files for a apk archive
+            elif __arcpath.lower().endswith('.apk'):
+                self.__bck = GenerateListForZip(__genparams)
             # A MESSAGE RESUMING OPERATION FOR GENERATING THE LIST OF FILES IS MISSING HERE
