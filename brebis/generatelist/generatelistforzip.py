@@ -34,6 +34,9 @@ class GenerateListForZip(GenerateList):
         self.__arcpath = __genparams['arcpath']
         self.__delimiter = __genparams['delimiter']
         self._genfull = __genparams['genfull']
+        self.__listoutput = __genparams['listoutput']
+        self.__confoutput = __genparams['confoutput']
+        self.__fulloutput = __genparams['fulloutput']
         try:
             __zip = zipfile.ZipFile(self.__arcpath, 'r', allowZip64=True)
             self.__main(__zip)
@@ -95,18 +98,37 @@ class GenerateListForZip(GenerateList):
                                                             str(__uid),
                                                             str(__gid),
                                                             __mtime))
-        # call the method to write information in a file
-        __listconfinfo = {'arclistpath': ''.join([self.__arcpath[:-3], 'list']),
+        # define the flexible file list path
+        __arcwithext = os.path.split(''.join([self.__arcpath[:-3], 'list']))[1]
+        if self.__listoutput:
+            __arclistpath = os.path.join(self.__listoutput, __arcwithext)
+        elif self.__fulloutput:
+            __arclistpath = os.path.join(self.__fulloutput, __arcwithext)
+        else:
+            # default
+            __arclistpath = ''.join([self.__arcpath[:-3], 'list'])
+            
+        __listconfinfo = {'arclistpath': __arclistpath,
                             'listoffiles':  __listoffiles}
+        # call the method to write the list of files inside the archive
         self._generate_list(__listconfinfo)
         # call the method to write the configuration file if --gen-full was required
         if self._genfull:
             # generate the hash sum of the list of files
             __listhashsum = self._get_list_hash(__listconfinfo['arclistpath'])
+            # define the flexible configuration file path
+            __arcwithext = os.path.split(''.join([self.__arcpath[:-3], 'conf']))[1]
+            if self.__confoutput:
+                __arcconfpath = os.path.join(self.__confoutput, __arcwithext)
+            elif self.__fulloutput:
+                __arcconfpath = os.path.join(self.__fulloutput, __arcwithext)
+            else:
+                # default
+                __arcconfpath = ''.join([self.__arcpath[:-3], 'conf'])
             __arcname =  os.path.basename(self.__arcpath[:-4])
             __confinfo = {'arcname': __arcname,
                             'arcpath': self.__arcpath,
-                            'arcconfpath': ''.join([self.__arcpath[:-3],'conf']),
+                            'arcconfpath': __arcconfpath,
                             'arclistpath': __listconfinfo['arclistpath'],
                             'arctype': 'archive',
                             'sha512': __listhashsum}
