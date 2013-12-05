@@ -1323,7 +1323,7 @@ class TestApp(unittest.TestCase):
     def test_listfortar_translate_type_file(self):
         '''test the __translate_type private method from GenerateListForTar - expecting file'''
         __file = 'tests/generatelistfortar_private_methods/mytar.tar.gz'
-        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False})
+        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
         self.__tar = tarfile.open(__file)
         __result = __myobj._GenerateListForTar__translate_type(self.__tar.getmembers()[3].type)
         self.assertEqual('f', __result)
@@ -1331,7 +1331,7 @@ class TestApp(unittest.TestCase):
     def test_listfortar_translate_type_directory(self):
         '''test the __translate_type private method from GenerateListForTar - expecting directory'''
         __file = 'tests/generatelistfortar_private_methods/mytar.tar.gz'
-        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False})
+        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
         self.__tar = tarfile.open(__file)
         __result = __myobj._GenerateListForTar__translate_type(self.__tar.getmembers()[1].type)
         self.assertEqual('d', __result)
@@ -1339,7 +1339,7 @@ class TestApp(unittest.TestCase):
     def test_listfortar_translate_type_symbolic_link(self):
         '''test the __translate_type private method from GenerateListForTar - expecting symbolic link'''
         __file = 'tests/generatelistfortar_private_methods/mytar.tar.gz'
-        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False})
+        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
         self.__tar = tarfile.open(__file)
         __result = __myobj._GenerateListForTar__translate_type(self.__tar.getmembers()[2].type)
         self.assertEqual('s', __result)
@@ -1449,7 +1449,10 @@ class TestApp(unittest.TestCase):
             'delimiter': '|',
             'genfull': False,
             'genlist': False,
-            'logfile': __logpath})
+            'logfile': __logpath,
+            'fulloutput':'',
+            'confoutput':'',
+            'listoutput':''})
         os.remove(__archivepath)
 
 #######################################################################################
@@ -1728,6 +1731,9 @@ class TestApp(unittest.TestCase):
         __mydict.archives = ['tests/listtype/mytargz.tar.gz']
         __mydict.delimiter = None
         __mydict.genfull = True
+        __mydict.fulloutput = ''
+        __mydict.confoutput = ''
+        __mydict.listoutput = ''
         __mydict = brebis.listtype.ListType(__mydict)
         self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'brebis.generatelist.generatelistfortar.GenerateListForTar'>")
 
@@ -1737,6 +1743,9 @@ class TestApp(unittest.TestCase):
         __mydict.archives = ['tests/listtype/mytree']
         __mydict.delimiter = None
         __mydict.genfull = True
+        __mydict.fulloutput = ''
+        __mydict.confoutput = ''
+        __mydict.listoutput = ''
         __mydict = brebis.listtype.ListType(__mydict)
         self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'brebis.generatelist.generatelistfortree.GenerateListForTree'>")
 
@@ -1746,6 +1755,9 @@ class TestApp(unittest.TestCase):
         __mydict.archives = ['tests/listtype/myzip.zip']
         __mydict.delimiter = None
         __mydict.genfull = True
+        __mydict.fulloutput = ''
+        __mydict.confoutput = ''
+        __mydict.listoutput = ''
         __mydict = brebis.listtype.ListType(__mydict)
         self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'brebis.generatelist.generatelistforzip.GenerateListForZip'>")
 
@@ -1755,6 +1767,9 @@ class TestApp(unittest.TestCase):
         __mydict.archives = ['tests/listtype/mygzip.gz']
         __mydict.delimiter = None
         __mydict.genfull = True
+        __mydict.fulloutput = ''
+        __mydict.confoutput = ''
+        __mydict.listoutput = ''
         __mydict = brebis.listtype.ListType(__mydict)
         self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'brebis.generatelist.generatelistforgzip.GenerateListForGzip'>")
 
@@ -1764,6 +1779,9 @@ class TestApp(unittest.TestCase):
         __mydict.archives = ['tests/listtype/mybz2.bz2']
         __mydict.delimiter = None
         __mydict.genfull = True
+        __mydict.fulloutput = ''
+        __mydict.confoutput = ''
+        __mydict.listoutput = ''
         __mydict = brebis.listtype.ListType(__mydict)
         self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'brebis.generatelist.generatelistforbzip2.GenerateListForBzip2'>")
 
@@ -1773,6 +1791,9 @@ class TestApp(unittest.TestCase):
         __mydict.archives = ['tests/listtype/mylzma.xz']
         __mydict.delimiter = None
         __mydict.genfull = True
+        __mydict.fulloutput = ''
+        __mydict.confoutput = ''
+        __mydict.listoutput = ''
         __mydict = brebis.listtype.ListType(__mydict)
         self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'brebis.generatelist.generatelistforlzma.GenerateListForLzma'>")
 
