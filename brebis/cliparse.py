@@ -46,26 +46,41 @@ class CliParse:
             default=os.getcwd(),
             help='the path to the configurations',
             metavar='DIR')
-        __parser.add_argument('-v', '--version',
-            action='version',
-            version='%(prog)s 0.8',
-            help='print the version of this program and exit')
-        __parser.add_argument('-l', '--log', dest='logfile',
+        __parser.add_argument('-C', '--output-conf-dir', dest='confoutput',
             action='store',
-            default=os.path.join(os.getcwd(), 'a.out'),
-            help='the log file',
-            metavar='FILE')
+            default='',
+            help='the directory to store the configuration file',
+            metavar='DIR')
+        __parser.add_argument('-d', '--delimiter', dest='delimiter',
+            action='store',
+            default='|',
+            help='delimiter of the fields for the list of files',
+            metavar='DELIMITER')
         __group.add_argument('-g', '--gen-list', dest='genlist',
             action='store_true',
             help='generate a list of files inside a backup')
         __group.add_argument('-G', '--gen-full', dest='genfull',
             action='store_true',
             help='generate the configuration file and the list of files for the backup')
-        __parser.add_argument('-d', '--delimiter', dest='delimiter',
+        __parser.add_argument('-l', '--log', dest='logfile',
             action='store',
-            default='|',
-            help='delimiter of the fields for the list of files',
-            metavar='DELIMITER')
+            default=os.path.join(os.getcwd(), 'a.out'),
+            help='the log file',
+            metavar='FILE')
+        __parser.add_argument('-L', '--output-list-dir', dest='listoutput',
+            action='store',
+            default='',
+            help='the directory to store the list of files inside an archive or tree',
+            metavar='DIR')
+        __parser.add_argument('-O', '--output-list-and-conf-dir', dest='fulloutput',
+            action='store',
+            default='',
+            help='the directory to store the configuration file and the list of files inside an archive or tree',
+            metavar='DIR')
+        __parser.add_argument('-v', '--version',
+            action='version',
+            version='%(prog)s 0.8',
+            help='print the version of this program and exit')
         __parser.add_argument('archives', nargs='*',
             help='archives to check')
         __args = __parser.parse_args()
@@ -91,8 +106,22 @@ class CliParse:
         # Check the logfile
         __logdir = os.path.split(__options.logfile)[0]
         if __logdir and not os.path.exists(__logdir):
-            print('split:{}'.format(os.path.split(__options.logfile)[0]))
-            print('The directory where to write the log file does not exist')
+            print('The directory where to write the log file {} does not exist'.format(__logdir))
+            sys.exit(1)
+        # Check the configuration output directory
+        __confoutput = __options.confoutput
+        if __confoutput and not os.path.exists(__confoutput):
+            print('The directory where to write the configuration file {} does not exist'.format(__confoutput))
+            sys.exit(1)
+        # Check the directory where the list of files is written
+        __listoutput= __options.listoutput
+        if __listoutput and not os.path.exists(__listoutput):
+            print('The directory where to write the list of files inside the archive {} does not exist'.format(__listoutput))
+            sys.exit(1)
+        # Check the directory where the list of files and the configuration are written
+        __fulloutput= __options.fulloutput
+        if __fulloutput and not os.path.exists(__fulloutput):
+            print('The directory where to write the list of files inside the archive and the configuration file {} does not exist'.format(__fulloutput))
             sys.exit(1)
         # using absolute path in order to be consistent
         __options.logfile = os.path.abspath(__options.logfile)
