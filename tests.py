@@ -1353,7 +1353,7 @@ class TestApp(unittest.TestCase):
     def test_listforzip_translate_type_file(self):
         '''test the __translate_type private method from GenerateListForZip - expecting file'''
         __file = 'tests/generatelistforzip_private_methods/myzip.zip'
-        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False})
+        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
         __myz = zipfile.ZipFile(__file,'r')
         __myinfo = __myz.infolist()
         __result = __myobj._GenerateListForZip__translate_type(__myinfo[-1].external_attr >> 16)
@@ -1362,7 +1362,7 @@ class TestApp(unittest.TestCase):
     def test_listforzip_translate_type_directory(self):
         '''test the __translate_type private method from GenerateListForZip - expecting directory'''
         __file = 'tests/generatelistforzip_private_methods/myzip.zip'
-        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False})
+        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
         __myz = zipfile.ZipFile(__file,'r')
         __myinfo = __myz.infolist()
         __result = __myobj._GenerateListForZip__translate_type(__myinfo[0].external_attr >> 16)
@@ -1371,7 +1371,7 @@ class TestApp(unittest.TestCase):
     def test_listforzip_extract_uid_gid(self):
         '''test the __extract_uid_gid private method from GenerateListForZip'''
         __file = 'tests/generatelistforzip_private_methods/myzip.zip'
-        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False})
+        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
         __myz = zipfile.ZipFile(__file,'r')
         __myinfo = __myz.infolist()
         __result = __myobj._GenerateListForZip__extract_uid_gid(__myinfo[-1])
