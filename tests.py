@@ -1289,7 +1289,7 @@ class TestApp(unittest.TestCase):
     def test__listconfinfo(self):
         '''test the GenerateListForBzip2 class'''
         __myobj = brebis.generatelist.generatelistforbzip2.GenerateListForBzip2({
-            'arcpath': 'tests/checkbzip2_private_methods/mybz2.bz2', 'delimiter': '|', 'genfull': True})
+            'arcpath': 'tests/checkbzip2_private_methods/mybz2.bz2', 'delimiter': '|', 'genfull': True, 'confoutput':'','listoutput':'','fulloutput':''})
         self.assertEqual(__myobj._GenerateListForBzip2__lci, {'arclistpath': 'tests/checkbzip2_private_methods/mybz2.list',
             'listoffiles': ['[files]\n', 'mybz2| type|f md5|f5488b7ce878d89b59ef2752f260354f\n']})
         self.assertEqual(__myobj._GenerateListForBzip2__ci, {'arcconfpath': 'tests/checkbzip2_private_methods/mybz2.conf',
