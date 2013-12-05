@@ -1387,7 +1387,7 @@ class TestApp(unittest.TestCase):
         '''test the __translate_type private method from GenerateListForTree - expecting file'''
         __dir = 'tests/generatelistfortree_private_methods/mydir'
         __file = os.path.join(__dir, 'foo')
-        __myobj = brebis.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False})
+        __myobj = brebis.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
         __myobj._GenerateListForTree__fileinfo = os.lstat(__file)
         __result = __myobj._GenerateListForTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('f', __result)
@@ -1417,13 +1417,13 @@ class TestApp(unittest.TestCase):
     def test_listforgzip_extract_size_from_gzip_archive(self):
         '''test the extraction of a gzip uncompressed file in the gzip archive'''
         __file = 'tests/generatelistforgzip_private_methods/mygzip.gz'
-        __myobj = brebis.generatelist.generatelistforgzip.GenerateListForGzip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False})
+        __myobj = brebis.generatelist.generatelistforgzip.GenerateListForGzip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
         with open(__file, 'rb') as __myf:
             self.assertEqual(15, __myobj._GenerateListForGzip__extract_size(__myf))
 
     def test_listforgzip_extract_initial_filename_from_gzip_archive(self):
         __file = 'tests/generatelistforgzip_private_methods/mygzip.gz'
-        __myobj = brebis.generatelist.generatelistforgzip.GenerateListForGzip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False})
+        __myobj = brebis.generatelist.generatelistforgzip.GenerateListForGzip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
         with open(__file, 'rb') as __myf:
             self.assertEqual('mygzip', __myobj._GenerateListForGzip__extract_initial_filename(__myf, 'mygzip'))
 
