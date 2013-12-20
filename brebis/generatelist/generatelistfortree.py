@@ -31,6 +31,9 @@ class GenerateListForTree(GenerateList):
         __arcpath = __genparams['arcpath']
         __delimiter = __genparams['delimiter']
         self._genfull = __genparams['genfull']
+        self.__listoutput = __genparams['listoutput']
+        self.__confoutput = __genparams['confoutput']
+        self.__fulloutput = __genparams['fulloutput']
         __listoffiles = ['[files]\n']
         __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
         __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
@@ -98,19 +101,34 @@ class GenerateListForTree(GenerateList):
                                             __type,
                                             str(__fileinfo.st_mtime)))
                                             
-        # call the method to write information in a file
-        __listconfinfo = {'arclistpath': ''.join([__arcpath, '.list']),
+        # include custom paths for output conf files
+        __reparc = os.path.split(__arcpath)[-1]
+        if self.__listoutput:
+            __arclistpath = os.path.join(self.__listoutput, ''.join([__reparc, '.list']))
+        elif self.__fulloutput:
+            __arclistpath = os.path.join(self.__fulloutput, ''.join([__reparc, '.list']))
+        else:
+            __arclistpath = ''.join([__arcpath, '.list'])
+        __listconfinfo = {'arclistpath': __arclistpath,
                             'listoffiles':  __listoffiles}
+        # call the method to write information in a file
         self._generate_list(__listconfinfo)
         # call the method to write the configuration file if --gen-full was required
         if self._genfull:
+            if self.__confoutput:
+                __arcconfpath = os.path.join(self.__confoutput, ''.join([__reparc, '.conf']))
+            elif self.__fulloutput:
+                __arcconfpath = os.path.join(self.__fulloutput, ''.join([__reparc, '.conf']))
+            else:
+                __arcconfpath = ''.join([__arcpath, '.conf'])
             # generate the hash sum of the list of files
             __listhashsum = self._get_list_hash(__listconfinfo['arclistpath'])
             __arcname =  os.path.basename(__arcpath)
+            # include custom paths for output conf files
             __confinfo = {'arcname': __arcname,
                             'arcpath': __arcpath,
-                            'arcconfpath': ''.join([__arcpath,'.conf']),
-                            'arclistpath': __listconfinfo['arclistpath'],
+                            'arcconfpath': __arcconfpath,
+                            'arclistpath':  __arclistpath,
                             'arctype': 'tree',
                             'sha512': __listhashsum}
             self._generate_conf(__confinfo)
