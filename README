@@ -4,7 +4,7 @@ How to install Brebis
 * You need at least Python 3.3.
 * Untar the tarball and go to the source directory with the following commands:
 
-$ tar zxvf brebis-0.8.tar.gz && cd brebis/
+$ tar zxvf brebis-0.9.tar.gz && cd brebis/
 
 To install Brebis on your computer, type the following command with the root user:
 
@@ -15,7 +15,8 @@ or
 Now the /usr/local/bin/brebis command or /usr/bin/brebis command should trigger the following output:
 
 $ /usr/local/bin/brebis -h
-usage: brebis [-h] [-c DIR] [-v] [-l FILE] [-g] [-G] [-d DELIMITER]
+usage: brebis [-h] [-c DIR] [-C DIR] [-d DELIMITER] [-g] [-G] [-l FILE]
+              [-L DIR] [-O DIR] [-v]
               [archives [archives ...]]
 
 Fully automated backup checker
@@ -27,17 +28,23 @@ optional arguments:
   -h, --help            show this help message and exit
   -c DIR, --configpath DIR
                         the path to the configurations
-  -v, --version         print the version of this program and exit
-  -l FILE, --log FILE   the log file
+  -C DIR, --output-conf-dir DIR
+                        the directory to store the configuration file
+  -d DELIMITER, --delimiter DELIMITER
+                        delimiter of the fields for the list of files
   -g, --gen-list        generate a list of files inside a backup
   -G, --gen-full        generate the configuration file and the list of files
                         for the backup
-  -d DELIMITER, --delimiter DELIMITER
-                        delimiter of the fields for the list of files
+  -l FILE, --log FILE   the log file
+  -L DIR, --output-list-dir DIR
+                        the directory to store the list of files inside an
+                        archive or tree
+  -O DIR, --output-list-and-conf-dir DIR
+                        the directory to store the configuration file and the
+                        list of files inside an archive or tree
+  -v, --version         print the version of this program and exit
 
 For more information: http://www.brebisproject.org
-
-Brebis is now installed on your system.
 
 How to configure and use Brebis
 -------------------------------
