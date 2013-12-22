@@ -1,8 +1,224 @@
+2013-12-22  Carl Chenet  <chaica@ohmytux.com>
+
+	* README:
+	update README for 0.9
+	[ed78e933bacf] [tip]
+
+	* README:
+	add doc for -C -L -O options
+	[fc51637d70ae]
+
+	* brebis/cliparse.py, setup.py:
+	update version number to 0.9
+	[9bc1b9a47f85]
+
+	* offer new -C -L -O options to define the directory where to write
+	conf file, filelist or both files. fixes #49
+	[b47228efc5ed]
+
+	* functionaltests.py:
+	put back all tests in functionaltests.py
+	[dda6e072b970] <conf-output>
+
+	* tests.py:
+	unit test support for new generatelisttree parameters
+	[d16cba921f6e] <conf-output>
+
+2013-12-20  Carl Chenet  <chaica@ohmytux.com>
+
+	* .hgignore, brebis/generatelist/generatelistfortree.py, functional-
+	tests/custom-conf-filelist-bzip2/custom-conf-filelist-bzip2.bz2,
+	functional-tests/custom-conf-filelist-gzip/custom-conf-filelist-
+	gzip.gz, functional-tests/custom-conf-filelist-lzma/custom-conf-
+	filelist-lzma.xz, functional-tests/custom-conf-filelist-tar/custom-
+	conf-filelist-tar.tar.gz, functional-tests/custom-conf-filelist-tree
+	/custom-conf-filelist-tree/bar, functional-tests/custom-conf-
+	filelist-tree/custom-conf-filelist-tree/foo, functional-tests
+	/custom-conf-filelist-zip/custom-conf-filelist-zip.zip,
+	functionaltests.py:
+	functional tests for -C -L -O options
+	[8e1a2dda7f6b] <conf-output>
+
+2013-12-05  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/generatelist/generatelistforlzma.py:
+	update unit tests to support new optional conf/list/full output
+	directory for lzma archives
+	[b2f3ba49ab76] <conf-output>
+
+	* tests.py:
+	update unit tests to support new optional conf/list/full output
+	directory for bzip2 archives
+	[5e373f29660d] <conf-output>
+
+	* brebis/generatelist/generatelistforbzip2.py:
+	support to print configuration file and file list to different
+	directories or to swith default output directory for bzip2 archives
+	[4e007c688eeb] <conf-output>
+
+	* tests.py:
+	update unit tests to support new optional conf/list/full output
+	directory for gzip archives
+	[5365b10bf00a] <conf-output>
+
+	* brebis/generatelist/generatelistforgzip.py:
+	support to print configuration file and file list to different
+	directories or to swith default output directory for gzip archives
+	[7d9b78b732b6] <conf-output>
+
+	* tests.py:
+	update unit tests to support new optional conf/list/full output
+	directory
+	[94e614e74914] <conf-output>
+
+	* brebis/generatelist/generatelistforzip.py:
+	support to print configuration file and file list to different
+	directories or to swith default output directory for zip archives
+	[96685daad2dc] <conf-output>
+
+	* brebis/generatelist/generatelistfortar.py:
+	support to print configuration file and file list to different
+	directories or to swith default output directory for tar archives
+	[779554eb43bd] <conf-output>
+
+	* tests.py:
+	update unit tests to support new optional conf/list/full output
+	directory
+	[5ee5fdb8ba04] <conf-output>
+
+	* brebis/cliparse.py, brebis/listtype.py:
+	support to print configuration file and file list to different
+	directories or to swith default output directory
+	[ca08a9bf8be0] <conf-output>
+
+2013-11-30  Carl Chenet  <chaica@ohmytux.com>
+
+	* functional-tests/expected-generated-list-for-zip-archive/expected-
+	generated-list-for-zip-archive.zip, functional-tests/expected-
+	generated-list-for-zip-archive/expectedlist.list, functional-tests
+	/generate-conf-and-file-list-zip/conf.conf.bck, functional-tests
+	/generate-conf-and-file-list-zip/generate-conf-and-file-list-
+	zip.zip, functional-tests/generate-conf-and-file-list-zip/list.list:
+	support apk files. fixes #51
+	[5005d8f2fb2f]
+
+	* .hgignore, brebis/checkbackups/checkbackups.py,
+	brebis/generatelist/generatelistforzip.py, brebis/listtype.py,
+	functional-tests/expected-generated-list-for-zip-archive/expected-
+	generated-list-for-zip-archive.zip, functional-tests/expected-
+	generated-list-for-zip-archive/expectedlist.list, functional-tests
+	/generate-apk-conf-files/generate-apk-conf-files.apk, functional-
+	tests/generate-conf-and-file-list-zip/conf.conf.bck, functional-
+	tests/generate-conf-and-file-list-zip/generate-conf-and-file-list-
+	zip.zip, functional-tests/generate-conf-and-file-list-zip/list.list,
+	functionaltests.py:
+	add support for apk archive, functional test for generating apk
+	archive. correct a bug with functional tests embedding timestamp
+	[a50f38be138f] <apk>
+
+2013-11-16  Carl Chenet  <chaica@ohmytux.com>
+
+	* tests.py, tests/checkbzip2_private_methods/mybz2.conf,
+	tests/checkbzip2_private_methods/mybz2.list,
+	tests/listtype/mybz2.bz2, tests/listtype/mygzip.gz,
+	tests/listtype/mylzma.xz, tests/listtype/mytargz.tar.gz,
+	tests/listtype/mytree/hello, tests/listtype/mytree/riri,
+	tests/listtype/myzip.zip, tests/test_conf_gpg/archive.conf,
+	tests/test_conf_gpg/essai.list, tests/test_conf_gpg/essai.tar.gz,
+	tests/test_conf_gpg/result:
+	add new unit tests
+	[a1adb59fb51e]
+
+	* .hgignore:
+	adding new files to ignore for unit testing
+	[c2558ea465da]
+
+	* brebis/listtype.py:
+	add private variables to self to authorize unit tests
+	[02712124b488]
+
+	* brebis/generatelist/generatelistforbzip2.py:
+	add a private variable to self to authorize unit testing
+	[775e84148d83]
+
+	* brebis/generatelist/generatelistfortree.py:
+	fix uncorrect variable name
+	[2fca6eb74a2a]
+
+2013-11-15  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/checkbackups/checkzip.py, functional-tests/expected-
+	generated-list-for-zip-archive/expectedlist.list, functional-tests
+	/generate-conf-and-file-list-zip/conf.conf.bck, functional-tests
+	/generate-conf-and-file-list-zip/list.list:
+	fixing timestamp int/float related errors
+	[2eee11cb39cd]
+
+2013-11-14  Carl Chenet  <chaica@ohmytux.com>
+
+	* .hgignore, functionaltests.py, tests.py:
+	merge mtime branch with default branch. fixes #46
+	[4fc5c7135a9f]
+
+	* .hgignore, tests.py, tests/expected_hash/bar.xz, tests/expected_hash
+	/lzma-list, tests/lzma/mylzma-list, tests/lzma/mylzma.xz:
+	add unit tests for checklzma module
+	[d5d72fa59e8c]
+
+2013-11-13  Carl Chenet  <chaica@ohmytux.com>
+
+	* tests.py:
+	add unit tests for the module archiveinfomsg
+	[a7c8c2cec153]
+
+	* tests.py:
+	add unit test for archiveinfomsg.ArchiveInfoMsg__missing_files
+	method
+	[99f1eace9b1a]
+
+	* brebis/identifylimitations.py:
+	add limitation mtime for gz,bz2 and lzma
+	[f083e976edb1] <mtime>
+
+	* .hgignore:
+	add new files to ignore
+	[9c416ba245f9] <mtime>
+
+	* brebis/archiveinfomsg.py, brebis/checkbackups/checkarchive.py,
+	brebis/checkbackups/checktar.py, brebis/checkbackups/checkzip.py,
+	brebis/expectedvalues.py, brebis/generatelist/generatelistfortar.py,
+	brebis/generatelist/generatelistfortree.py,
+	brebis/generatelist/generatelistforzip.py, functional-tests/check-
+	mtime-tar/check-mtime-tar.tar.gz, functional-tests/check-mtime-tree
+	/check-mtime-tree/bar, functional-tests/check-mtime-tree/check-
+	mtime-tree/foo, functional-tests/check-mtime-tree/check-mtime-
+	tree/rab/oof, functional-tests/check-mtime-zip/check-mtime-zip.zip,
+	functional-tests/expected-generated-list-for-tar-
+	archive/expectedlist.list, functional-tests/expected-generated-list-
+	for-zip-archive/expectedlist.list, functional-tests/generate-conf-
+	and-file-list-tar-bz2/conf.conf.bck, functional-tests/generate-conf-
+	and-file-list-tar-bz2/list.list, functional-tests/generate-conf-and-
+	file-list-tar-gz/conf.conf.bck, functional-tests/generate-conf-and-
+	file-list-tar-gz/list.list, functional-tests/generate-conf-and-file-
+	list-tar-xz/conf.conf.bck, functional-tests/generate-conf-and-file-
+	list-tar-xz/list.list, functional-tests/generate-conf-and-file-list-
+	tar/conf.conf.bck, functional-tests/generate-conf-and-file-list-
+	tar/list.list, functional-tests/generate-conf-and-file-list-
+	zip/conf.conf.bck, functional-tests/generate-conf-and-file-list-
+	zip/list.list, functionaltests.py:
+	add support for mtime on tar,zip and tree - associated functional
+	tests
+	[caaf4b48c3d9] <mtime>
+
 2013-11-06  Carl Chenet  <chaica@ohmytux.com>
+
+	* changelog:
+	update the changelog
+	[008c44e19317]
 
 	* README:
 	update README with new information and parameters
-	[86ddf7d51759] [tip]
+	[86ddf7d51759]
 
 	* brebis/cliparse.py, setup.py:
 	bump version number to 0.8
