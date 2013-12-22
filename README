@@ -153,6 +153,12 @@ $ brebis  --delimiter @ -c myconfs/myconf.conf
 
 We use @ as the default delimiter for the two commands just above.
 
+By default, the files containing the different parameters of the content of the archive and the configuration file are created in the same directory as the archive itself. From Brebis 0.9, you can specifiy a custom directory for the configuration file (the -C option), for the list of files (the -L option) or both with the -O option.
+
+$ brebis -c /etc/brebis/ -l /var/log/brebis.log -C /etc/brebis/confs/ -L /etc/brebis/lists/
+
+The example above indicates a /etc/brebis/confs directory to store the configuration files of Brebis and a /etc/brebis/lists/ directory to store the list of files of Brebis.
+
 Links:
 ------
 How to install Brebis: http://brebisproject.org/projects/brebis/wiki/How_to_install_Brebis_from_the_official_tarball_(targz_file)
