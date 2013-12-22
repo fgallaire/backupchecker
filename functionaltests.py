@@ -16,7 +16,7 @@
 
 import hashlib
 from multiprocessing import Process, Queue
-from os import linesep, environ, link
+from os import linesep, environ, link, remove
 import subprocess
 import os.path
 import shutil
@@ -3406,6 +3406,307 @@ class Test_generate_apk_conf_files:
                 else:
                     __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
  
+class Test_custom_conf_filelist_tar:
+    '''Test to define a custom location to write conf and listfile files for tar archives'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/custom-conf-filelist-tar')
+        __archive = os.path.join(__testdir, 'custom-conf-filelist-tar.tar.gz')
+        __resultconffile = os.path.join(__testdir, 'conf', 'custom-conf-filelist-tar.conf')
+        __resultlistfile = os.path.join(__testdir, 'list', 'custom-conf-filelist-tar.list')
+        __resultbothconffile = os.path.join(__testdir, 'both', 'custom-conf-filelist-tar.conf')
+        __resultbothlistfile = os.path.join(__testdir, 'both', 'custom-conf-filelist-tar.list')
+        if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-tar.conf')):
+            remove(os.path.join(__testdir, 'custom-conf-filelist-tar.conf'))
+        if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-tar.list')):
+            remove(os.path.join(__testdir, 'custom-conf-filelist-tar.list'))
+        if os.path.exists(__resultconffile):
+            remove(__resultconffile)
+        if os.path.exists(__resultlistfile):
+            remove(__resultlistfile)
+        if os.path.exists(__resultbothconffile):
+            remove(__resultbothconffile)
+        if os.path.exists(__resultbothlistfile):
+            remove(__resultbothlistfile)
+        if 'PYTHONEXE' in environ:
+            __retcode1 = subprocess.call([PYTHONEXE, EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+        else:
+            __retcode1 = subprocess.call([EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+        if 'PYTHONEXE' in environ:
+            __retcode2 = subprocess.call([PYTHONEXE, EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+        else:
+            __retcode2 = subprocess.call([EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+        if 'PYTHONEXE' in environ:
+            __retcode3 = subprocess.call([PYTHONEXE, EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+        else:
+            __retcode3 = subprocess.call([EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+        if __retcode1 != 0 and __retcode2 != 0 and __retcode3 != 0:
+            __queue.put('{} - {}return code:{} {} {}'.format(__testname, KOMSG, str(__retcode1), str(__retcode2), str(__retcode3)))
+        else:
+            if not os.path.exists(__resultconffile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultconffile))
+            elif not os.path.exists(__resultlistfile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultlistfile))
+            elif not os.path.exists(__resultbothconffile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultbothconffile))
+            elif not os.path.exists(__resultbothlistfile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultbothlistfile))
+            else:
+                __queue.put('{} - {}'.format(__testname, OKMSG))
+ 
+class Test_custom_conf_filelist_gzip:
+    '''Test to define a custom location to write conf and listfile files for gzip archives'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/custom-conf-filelist-gzip')
+        __archive = os.path.join(__testdir, 'custom-conf-filelist-gzip.gz')
+        __resultconffile = os.path.join(__testdir, 'conf', 'custom-conf-filelist-gzip.conf')
+        __resultlistfile = os.path.join(__testdir, 'list', 'custom-conf-filelist-gzip.list')
+        __resultbothconffile = os.path.join(__testdir, 'both', 'custom-conf-filelist-gzip.conf')
+        __resultbothlistfile = os.path.join(__testdir, 'both', 'custom-conf-filelist-gzip.list')
+        if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-gzip.conf')):
+            remove(os.path.join(__testdir, 'custom-conf-filelist-gzip.conf'))
+        if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-gzip.list')):
+            remove(os.path.join(__testdir, 'custom-conf-filelist-gzip.list'))
+        if os.path.exists(__resultconffile):
+            remove(__resultconffile)
+        if os.path.exists(__resultlistfile):
+            remove(__resultlistfile)
+        if os.path.exists(__resultbothconffile):
+            remove(__resultbothconffile)
+        if os.path.exists(__resultbothlistfile):
+            remove(__resultbothlistfile)
+        if 'PYTHONEXE' in environ:
+            __retcode1 = subprocess.call([PYTHONEXE, EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+        else:
+            __retcode1 = subprocess.call([EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+        if 'PYTHONEXE' in environ:
+            __retcode2 = subprocess.call([PYTHONEXE, EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+        else:
+            __retcode2 = subprocess.call([EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+        if 'PYTHONEXE' in environ:
+            __retcode3 = subprocess.call([PYTHONEXE, EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+        else:
+            __retcode3 = subprocess.call([EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+        if __retcode1 != 0 and __retcode2 != 0 and __retcode3 != 0:
+            __queue.put('{} - {}return code:{} {} {}'.format(__testname, KOMSG, str(__retcode1), str(__retcode2), str(__retcode3)))
+        else:
+            if not os.path.exists(__resultconffile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultconffile))
+            elif not os.path.exists(__resultlistfile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultlistfile))
+            elif not os.path.exists(__resultbothconffile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultbothconffile))
+            elif not os.path.exists(__resultbothlistfile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultbothlistfile))
+            else:
+                __queue.put('{} - {}'.format(__testname, OKMSG))
+ 
+class Test_custom_conf_filelist_bzip2:
+    '''Test to define a custom location to write conf and listfile files for bzip2 archives'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/custom-conf-filelist-bzip2')
+        __archive = os.path.join(__testdir, 'custom-conf-filelist-bzip2.bz2')
+        __resultconffile = os.path.join(__testdir, 'conf', 'custom-conf-filelist-bzip2.conf')
+        __resultlistfile = os.path.join(__testdir, 'list', 'custom-conf-filelist-bzip2.list')
+        __resultbothconffile = os.path.join(__testdir, 'both', 'custom-conf-filelist-bzip2.conf')
+        __resultbothlistfile = os.path.join(__testdir, 'both', 'custom-conf-filelist-bzip2.list')
+        if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-bzip2.conf')):
+            remove(os.path.join(__testdir, 'custom-conf-filelist-bzip2.conf'))
+        if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-bzip2.list')):
+            remove(os.path.join(__testdir, 'custom-conf-filelist-bzip2.list'))
+        if os.path.exists(__resultconffile):
+            remove(__resultconffile)
+        if os.path.exists(__resultlistfile):
+            remove(__resultlistfile)
+        if os.path.exists(__resultbothconffile):
+            remove(__resultbothconffile)
+        if os.path.exists(__resultbothlistfile):
+            remove(__resultbothlistfile)
+        if 'PYTHONEXE' in environ:
+            __retcode1 = subprocess.call([PYTHONEXE, EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+        else:
+            __retcode1 = subprocess.call([EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+        if 'PYTHONEXE' in environ:
+            __retcode2 = subprocess.call([PYTHONEXE, EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+        else:
+            __retcode2 = subprocess.call([EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+        if 'PYTHONEXE' in environ:
+            __retcode3 = subprocess.call([PYTHONEXE, EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+        else:
+            __retcode3 = subprocess.call([EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+        if __retcode1 != 0 and __retcode2 != 0 and __retcode3 != 0:
+            __queue.put('{} - {}return code:{} {} {}'.format(__testname, KOMSG, str(__retcode1), str(__retcode2), str(__retcode3)))
+        else:
+            if not os.path.exists(__resultconffile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultconffile))
+            elif not os.path.exists(__resultlistfile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultlistfile))
+            elif not os.path.exists(__resultbothconffile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultbothconffile))
+            elif not os.path.exists(__resultbothlistfile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultbothlistfile))
+            else:
+                __queue.put('{} - {}'.format(__testname, OKMSG))
+ 
+class Test_custom_conf_filelist_lzma:
+    '''Test to define a custom location to write conf and listfile files for lzma archives'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/custom-conf-filelist-lzma')
+        __archive = os.path.join(__testdir, 'custom-conf-filelist-lzma.xz')
+        __resultconffile = os.path.join(__testdir, 'conf', 'custom-conf-filelist-lzma.conf')
+        __resultlistfile = os.path.join(__testdir, 'list', 'custom-conf-filelist-lzma.list')
+        __resultbothconffile = os.path.join(__testdir, 'both', 'custom-conf-filelist-lzma.conf')
+        __resultbothlistfile = os.path.join(__testdir, 'both', 'custom-conf-filelist-lzma.list')
+        if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-lzma.conf')):
+            remove(os.path.join(__testdir, 'custom-conf-filelist-lzma.conf'))
+        if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-lzma.list')):
+            remove(os.path.join(__testdir, 'custom-conf-filelist-lzma.list'))
+        if os.path.exists(__resultconffile):
+            remove(__resultconffile)
+        if os.path.exists(__resultlistfile):
+            remove(__resultlistfile)
+        if os.path.exists(__resultbothconffile):
+            remove(__resultbothconffile)
+        if os.path.exists(__resultbothlistfile):
+            remove(__resultbothlistfile)
+        if 'PYTHONEXE' in environ:
+            __retcode1 = subprocess.call([PYTHONEXE, EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+        else:
+            __retcode1 = subprocess.call([EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+        if 'PYTHONEXE' in environ:
+            __retcode2 = subprocess.call([PYTHONEXE, EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+        else:
+            __retcode2 = subprocess.call([EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+        if 'PYTHONEXE' in environ:
+            __retcode3 = subprocess.call([PYTHONEXE, EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+        else:
+            __retcode3 = subprocess.call([EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+        if __retcode1 != 0 and __retcode2 != 0 and __retcode3 != 0:
+            __queue.put('{} - {}return code:{} {} {}'.format(__testname, KOMSG, str(__retcode1), str(__retcode2), str(__retcode3)))
+        else:
+            if not os.path.exists(__resultconffile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultconffile))
+            elif not os.path.exists(__resultlistfile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultlistfile))
+            elif not os.path.exists(__resultbothconffile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultbothconffile))
+            elif not os.path.exists(__resultbothlistfile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultbothlistfile))
+            else:
+                __queue.put('{} - {}'.format(__testname, OKMSG))
+
+class Test_custom_conf_filelist_zip:
+    '''Test to define a custom location to write conf and listfile files for zip archives'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/custom-conf-filelist-zip')
+        __archive = os.path.join(__testdir, 'custom-conf-filelist-zip.zip')
+        __resultconffile = os.path.join(__testdir, 'conf', 'custom-conf-filelist-zip.conf')
+        __resultlistfile = os.path.join(__testdir, 'list', 'custom-conf-filelist-zip.list')
+        __resultbothconffile = os.path.join(__testdir, 'both', 'custom-conf-filelist-zip.conf')
+        __resultbothlistfile = os.path.join(__testdir, 'both', 'custom-conf-filelist-zip.list')
+        if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-zip.conf')):
+            remove(os.path.join(__testdir, 'custom-conf-filelist-zip.conf'))
+        if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-zip.list')):
+            remove(os.path.join(__testdir, 'custom-conf-filelist-zip.list'))
+        if os.path.exists(__resultconffile):
+            remove(__resultconffile)
+        if os.path.exists(__resultlistfile):
+            remove(__resultlistfile)
+        if os.path.exists(__resultbothconffile):
+            remove(__resultbothconffile)
+        if os.path.exists(__resultbothlistfile):
+            remove(__resultbothlistfile)
+        if 'PYTHONEXE' in environ:
+            __retcode1 = subprocess.call([PYTHONEXE, EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+        else:
+            __retcode1 = subprocess.call([EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+        if 'PYTHONEXE' in environ:
+            __retcode2 = subprocess.call([PYTHONEXE, EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+        else:
+            __retcode2 = subprocess.call([EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+        if 'PYTHONEXE' in environ:
+            __retcode3 = subprocess.call([PYTHONEXE, EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+        else:
+            __retcode3 = subprocess.call([EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+        if __retcode1 != 0 and __retcode2 != 0 and __retcode3 != 0:
+            __queue.put('{} - {}return code:{} {} {}'.format(__testname, KOMSG, str(__retcode1), str(__retcode2), str(__retcode3)))
+        else:
+            if not os.path.exists(__resultconffile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultconffile))
+            elif not os.path.exists(__resultlistfile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultlistfile))
+            elif not os.path.exists(__resultbothconffile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultbothconffile))
+            elif not os.path.exists(__resultbothlistfile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultbothlistfile))
+            else:
+                __queue.put('{} - {}'.format(__testname, OKMSG))
+
+class Test_custom_conf_filelist_tree:
+    '''Test to define a custom location to write conf and listfile files for a tree of files'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/custom-conf-filelist-tree')
+        __archive = os.path.join(__testdir, 'custom-conf-filelist-tree')
+        __resultconffile = os.path.join(__testdir, 'conf', 'custom-conf-filelist-tree.conf')
+        __resultlistfile = os.path.join(__testdir, 'list', 'custom-conf-filelist-tree.list')
+        __resultbothconffile = os.path.join(__testdir, 'both', 'custom-conf-filelist-tree.conf')
+        __resultbothlistfile = os.path.join(__testdir, 'both', 'custom-conf-filelist-tree.list')
+        if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-tree.conf')):
+            remove(os.path.join(__testdir, 'custom-conf-filelist-tree.conf'))
+        if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-tree.list')):
+            remove(os.path.join(__testdir, 'custom-conf-filelist-tree.list'))
+        if os.path.exists(__resultconffile):
+            remove(__resultconffile)
+        if os.path.exists(__resultlistfile):
+            remove(__resultlistfile)
+        if os.path.exists(__resultbothconffile):
+            remove(__resultbothconffile)
+        if os.path.exists(__resultbothlistfile):
+            remove(__resultbothlistfile)
+        if 'PYTHONEXE' in environ:
+            __retcode1 = subprocess.call([PYTHONEXE, EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+        else:
+            __retcode1 = subprocess.call([EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+        if 'PYTHONEXE' in environ:
+            __retcode2 = subprocess.call([PYTHONEXE, EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+        else:
+            __retcode2 = subprocess.call([EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+        if 'PYTHONEXE' in environ:
+            __retcode3 = subprocess.call([PYTHONEXE, EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+        else:
+            __retcode3 = subprocess.call([EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+        if __retcode1 != 0 and __retcode2 != 0 and __retcode3 != 0:
+            __queue.put('{} - {}return code:{} {} {}'.format(__testname, KOMSG, str(__retcode1), str(__retcode2), str(__retcode3)))
+        else:
+            if not os.path.exists(__resultconffile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultconffile))
+            elif not os.path.exists(__resultlistfile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultlistfile))
+            elif not os.path.exists(__resultbothconffile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultbothconffile))
+            elif not os.path.exists(__resultbothlistfile):
+                __queue.put('{} - {}missing {}'.format(__testname, KOMSG, __resultbothlistfile))
+            else:
+                __queue.put('{} - {}'.format(__testname, OKMSG))
+
+
 if __name__ == '__main__':
     processes = []
     results = []

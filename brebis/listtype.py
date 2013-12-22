@@ -39,10 +39,15 @@ class ListType(object):
         __arcpaths = __options.archives
         __delimiter = __options.delimiter
         __genfull = __options.genfull
+        __fulloutput= __options.fulloutput
+        __confoutput= __options.confoutput
+        __listoutput= __options.listoutput
         for __arcpath in __arcpaths:
             # create a tuple with the different parameters
             # for the generation of the archives's files
-            __genparams = {'arcpath': __arcpath, 'delimiter': __delimiter, 'genfull': __genfull} 
+            __genparams = {'arcpath': __arcpath, 'delimiter': __delimiter,
+                            'genfull': __genfull, 'confoutput': __confoutput,
+                            'listoutput': __listoutput, 'fulloutput': __fulloutput} 
             # generate a list of files for a tree
             if os.path.isdir(__arcpath):
                 self.__bck = GenerateListForTree(__genparams)

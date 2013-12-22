@@ -31,6 +31,9 @@ class GenerateListForTar(GenerateList):
         self.__arcpath = __genparams['arcpath']
         self.__delimiter = __genparams['delimiter']
         self._genfull = __genparams['genfull']
+        self.__listoutput = __genparams['listoutput']
+        self.__confoutput = __genparams['confoutput']
+        self.__fulloutput = __genparams['fulloutput']
         try:
             __tar = tarfile.open(self.__arcpath, 'r')
             self.__main(__tar)
@@ -87,42 +90,29 @@ class GenerateListForTar(GenerateList):
                                                         __mode,
                                                         __type,
                                                         float(__tarinfo.mtime)))
+
         # Compose the name of the generated list
+        ### for tar archive
         if self.__arcpath.lower().endswith('.tar'):
-            self.__arclistpath = ''.join([self.__arcpath[:-3], 'list'])
-            if self._genfull:
-                self.__arcconfpath = ''.join([self.__arcpath[:-3], 'conf'])
-                self.__arcname = os.path.basename(self.__arcpath[:-4])
+            self.__make_conf_and_list_paths('.tar')
+        ### for tar.gz archive
         elif self.__arcpath.lower().endswith('.tar.gz'): 
-            self.__arclistpath = ''.join([self.__arcpath[:-6], 'list'])
-            if self._genfull:
-                self.__arcconfpath = ''.join([self.__arcpath[:-6], 'conf'])
-                self.__arcname = os.path.basename(self.__arcpath[:-7])
+            self.__make_conf_and_list_paths('.tar.gz')
+        ### for tar.bz2 archive
         elif self.__arcpath.lower().endswith('.tar.bz2'):
-            self.__arclistpath = ''.join([self.__arcpath[:-7], 'list'])
-            if self._genfull:
-                self.__arcconfpath = ''.join([self.__arcpath[:-7], 'conf'])
-                self.__arcname = os.path.basename(self.__arcpath[:-8])
+            self.__make_conf_and_list_paths('.tar.bz2')
+        ### for tar.xz archive
         elif self.__arcpath.lower().endswith('.tar.xz'):
-            self.__arclistpath = ''.join([self.__arcpath[:-6], 'list'])
-            if self._genfull:
-                self.__arcconfpath = ''.join([self.__arcpath[:-6], 'conf'])
-                self.__arcname = os.path.basename(self.__arcpath[:-7])
+            self.__make_conf_and_list_paths('.tar.xz')
+        ### for tgz archive
         elif self.__arcpath.lower().endswith('.tgz'):
-            self.__arclistpath = ''.join([self.__arcpath[:-3], 'list'])
-            if self._genfull:
-                self.__arcconfpath = ''.join([self.__arcpath[:-3], 'conf'])
-                self.__arcname = os.path.basename(self.__arcpath[:-4])
+            self.__make_conf_and_list_paths('.tgz')
+        ### for tbz archive
         elif self.__arcpath.lower().endswith('.tbz'):
-            self.__arclistpath = ''.join([self.__arcpath[:-3], 'list'])
-            if self._genfull:
-                self.__arcconfpath = ''.join([self.__arcpath[:-3], 'conf'])
-                self.__arcname = os.path.basename(self.__arcpath[:-4])
+            self.__make_conf_and_list_paths('.tbz')
+        ### for tbz2 archive
         elif self.__arcpath.lower().endswith('.tbz2'):
-            self.__arclistpath = ''.join([self.__arcpath[:-4], 'list'])
-            if self._genfull:
-                self.__arcconfpath = ''.join([self.__arcpath[:-4], 'conf'])
-                self.__arcname = os.path.basename(self.__arcpath[:-5])
+            self.__make_conf_and_list_paths('.tbz2')
         # call the method to write information in a file
         __listconfinfo = {'arclistpath': self.__arclistpath,
                                 'listoffiles':__listoffiles}
@@ -154,4 +144,26 @@ class GenerateListForTar(GenerateList):
             tarfile.GNUTYPE_SPARSE: 'g',
             tarfile.FIFOTYPE: 'o'}
         return __types[__arctype]
+
+    def __make_conf_and_list_paths(self, __tartype):
+        '''Make conf file path and list file paths'''
+        __arcwithext = os.path.split(self.__arcpath[:-(len(__tartype)-1)])[1]
+        # define custom path for the filelist or use the default one
+        if self.__listoutput:
+            self.__arclistpath = os.path.join(self.__listoutput, ''.join([__arcwithext, 'list']))
+        elif self.__fulloutput:
+            self.__arclistpath = os.path.join(self.__fulloutput, ''.join([__arcwithext, 'list']))
+        else:
+            # default one
+            self.__arclistpath = ''.join([self.__arcpath[:-(len(__tartype)-1)], 'list'])
+        if self._genfull:
+            # define custom path for the conf file or use the default one
+            if self.__confoutput:
+                self.__arcconfpath = os.path.join(self.__confoutput, ''.join([__arcwithext, 'conf']))
+            elif self.__fulloutput:
+                self.__arcconfpath = os.path.join(self.__fulloutput, ''.join([__arcwithext, 'conf']))
+            else:
+                # default one
+                self.__arcconfpath = ''.join([self.__arcpath[:-(len(__tartype)-1)], 'conf'])
+            self.__arcname = os.path.basename(self.__arcpath[:-len(__tartype)])
 

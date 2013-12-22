@@ -32,6 +32,9 @@ class GenerateListForLzma(GenerateList):
         __arcpath = __genparams['arcpath']
         __delimiter = __genparams['delimiter']
         self._genfull = __genparams['genfull']
+        self.__confoutput = __genparams['confoutput']
+        self.__listoutput = __genparams['listoutput']
+        self.__fulloutput  = __genparams['fulloutput']
         __listoffiles = ['[files]\n']
         __filetype = 'f'
         __filehash = get_hash(lzma.LZMAFile(__arcpath, 'r'), 'md5')
@@ -40,18 +43,38 @@ class GenerateListForLzma(GenerateList):
                                 os.path.split(__arcpath)[-1][:-3],
                                 __filetype,
                                 __filehash))
+
+        # define the flexible file list path
+        __arcwithext = os.path.split(''.join([__arcpath[:-2], 'list']))[1]
+        if self.__listoutput:
+            __arclistpath = os.path.join(self.__listoutput, __arcwithext)
+        elif self.__fulloutput:
+            __arclistpath = os.path.join(self.__fulloutput, __arcwithext)
+        else:
+            # default
+            __arclistpath = ''.join([__arcpath[:-2], 'list'])
+
         # call the method to write information in a file
-        __listconfinfo = {'arclistpath': ''.join([__arcpath[:-2], 'list']),
+        __listconfinfo = {'arclistpath': __arclistpath,
                             'listoffiles':  __listoffiles}
         self._generate_list(__listconfinfo)
         # call the method to write the configuration file if --gen-full was required
         if self._genfull:
             # generate the hash sum of the list of files
             __listhashsum = self._get_list_hash(__listconfinfo['arclistpath'])
+            # define the flexible configuration file path
+            __arcwithext = os.path.split(''.join([__arcpath[:-2], 'conf']))[1]
+            if self.__confoutput:
+                __arcconfpath = os.path.join(self.__confoutput, __arcwithext)
+            elif self.__fulloutput:
+                __arcconfpath = os.path.join(self.__fulloutput, __arcwithext)
+            else:
+                # default
+                __arcconfpath = ''.join([__arcpath[:-2], 'conf'])
             __arcname =  os.path.basename(__arcpath[:-3])
             __confinfo = {'arcname': __arcname,
                             'arcpath': __arcpath,
-                            'arcconfpath': ''.join([__arcpath[:-2],'conf']),
+                            'arcconfpath': __arcconfpath,
                             'arclistpath': __listconfinfo['arclistpath'],
                             'arctype': 'archive',
                             'sha512': __listhashsum}
