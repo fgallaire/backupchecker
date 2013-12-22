@@ -42,14 +42,9 @@ Brebis parses backups (archives and file tree) to perform several different chec
 the path to the configurations
 .RE
 .PP
-\fB\-l, \-\-log\fR \fIFILE\fR
+\fB\-C, \-\-output-conf-dir\fR \fIDIR\fR
 .RS 4
-the log file
-.RE
-.PP
-\fB\-g, \-\-gen\-list\fR \fIBACKUP\fR
-.RS 4
-generate a list of files inside a backup
+the directory to store the configuration file
 .RE
 .PP
 \fB\-d, \-\-delimiter\fR
@@ -60,6 +55,26 @@ change the default delimiter identifying the fields in the list of files
 \fB\-G, \-\-gen\-full\fR \fIBACKUP\fR
 .RS 4
 generate the configuration file and the list of files for the backup
+.RE
+.PP
+\fB\-g, \-\-gen\-list\fR \fIBACKUP\fR
+.RS 4
+generate a list of files inside a backup
+.RE
+.PP
+\fB\-l, \-\-log\fR \fIFILE\fR
+.RS 4
+the log file
+.RE
+.PP
+\fB\-L, \-\-output-list-dir\fR \fIDIR\fR
+.RS 4
+the directory to store the list of files inside an archive or tree
+.RE
+.PP
+\fB\-O, \-\-output-list-and-conf-dir\fR \fIDIR\fR
+.RS 4
+the directory to store the configuration file and list of files inside an archive or tree
 .RE
 .SH "EXAMPLES"
 .sp
