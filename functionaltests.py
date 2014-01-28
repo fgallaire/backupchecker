@@ -21,6 +21,7 @@ import subprocess
 import os.path
 import shutil
 import sys
+import time
 
 import functionaltests
 
@@ -3706,7 +3707,6 @@ class Test_custom_conf_filelist_tree:
             else:
                 __queue.put('{} - {}'.format(__testname, OKMSG))
 
-
 if __name__ == '__main__':
     processes = []
     results = []
@@ -3715,8 +3715,17 @@ if __name__ == '__main__':
 
     for element in dir(functionaltests):
         if 'Test' in element:
-            processes.append(Process(target=getattr(functionaltests, element), args=(q,)))
-            processes[-1].start()
+            procqueuefull = True
+            while procqueuefull:
+                if len(processes) >= 4:
+                    time.sleep(0.001)
+                    for i in range(4):
+                        results.append(q.get())
+                        processes.pop().join()
+                else:
+                    procqueuefull = False
+                    processes.append(Process(target=getattr(functionaltests, element), args=(q,)))
+                    processes[-1].start()
     for p in processes:
         results.append(q.get())
         p.join()
