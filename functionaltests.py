@@ -3708,6 +3708,18 @@ class Test_custom_conf_filelist_tree:
                 __queue.put('{} - {}'.format(__testname, OKMSG))
 
 if __name__ == '__main__':
+    # catch the user-defined number of workers
+    if len(sys.argv) >= 2:
+        try:
+            workers = int(sys.argv[1]) 
+        except TypeError as msg:
+            print("The supplied number of workers seems irrelevant")
+            print(msg)
+            sys.exit(1)
+    else:
+        # default value for number of workers
+        workers = 4
+
     processes = []
     results = []
     koresults = []
@@ -3717,9 +3729,9 @@ if __name__ == '__main__':
         if 'Test' in element:
             procqueuefull = True
             while procqueuefull:
-                if len(processes) >= 4:
+                if len(processes) >= workers :
                     time.sleep(0.001)
-                    for i in range(4):
+                    for i in range(workers):
                         results.append(q.get())
                         processes.pop().join()
                 else:
