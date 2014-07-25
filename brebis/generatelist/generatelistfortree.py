@@ -37,7 +37,7 @@ class GenerateListForTree(GenerateList):
         __listoffiles = ['[files]\n']
         __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
         __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
-        __onelinewithtarget = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value} target{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+        __onelinewithtarget = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} target{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
         
         for __dirpath, __dirnames, __filenames, in os.walk(__arcpath):
             # ignoring the uppest directory
@@ -78,7 +78,6 @@ class GenerateListForTree(GenerateList):
                                             __hash))
                 elif __type == 's':
                     # extract hash sum of the file inside the archive
-                    __hash = get_hash(open(__filepath, 'rb'), 'md5')
                     # extract file data and prepare data
                     __listoffiles.append(__onelinewithtarget.format(
                                             os.path.relpath(__filepath, __arcpath),
@@ -87,7 +86,6 @@ class GenerateListForTree(GenerateList):
                                             str(self.__fileinfo.st_gid),
                                             __filemode,
                                             __type,
-                                            __hash,
                                             str(self.__fileinfo.st_mtime),
                                             os.readlink(__filepath)))
                 else:
