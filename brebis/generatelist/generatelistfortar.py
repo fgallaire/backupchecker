@@ -69,8 +69,6 @@ class GenerateListForTar(GenerateList):
                                                         __hash,
                                                         __tarinfo.linkname))
             elif __type == 'l' or __type == 's':
-                # extract hash sum of the file inside the archive
-                __hash = get_hash(__tar.extractfile(__tarinfo.name), 'md5')
                 # format the retrieved information
                 __listoffiles.append(__onelinewithtarget.format(__tarinfo.name,
                                                         str(__tarinfo.size),
