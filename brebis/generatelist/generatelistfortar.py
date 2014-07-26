@@ -46,7 +46,7 @@ class GenerateListForTar(GenerateList):
         __listoffiles = ['[files]\n']
         __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
         __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
-        __onelinewithtarget = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value} target{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
+        __onelinewithtarget = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} target{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
         for __tarinfo in __tar:
             # Pick up tar information
             __tarinfo.name = self._normalize_path(__tarinfo.name)
@@ -69,8 +69,6 @@ class GenerateListForTar(GenerateList):
                                                         __hash,
                                                         __tarinfo.linkname))
             elif __type == 'l' or __type == 's':
-                # extract hash sum of the file inside the archive
-                __hash = get_hash(__tar.extractfile(__tarinfo.name), 'md5')
                 # format the retrieved information
                 __listoffiles.append(__onelinewithtarget.format(__tarinfo.name,
                                                         str(__tarinfo.size),
@@ -79,7 +77,6 @@ class GenerateListForTar(GenerateList):
                                                         __mode,
                                                         __type,
                                                         float(__tarinfo.mtime),
-                                                        __hash,
                                                         __tarinfo.linkname))
             else:
                 # if file is not regular file, ignoring its hash sum
