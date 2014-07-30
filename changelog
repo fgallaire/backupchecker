@@ -1,8 +1,72 @@
+2014-07-30  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/cliparse.py:
+	bump to 0.10
+	[37c1106b2741] [tip]
+
+	* README:
+	bump to python3.4 and update brebis version
+	[aa3ef02df80a]
+
+	* setup.py:
+	bump python3.3 to python 3.4 and bump brebis version
+	[75ead57d9c8b]
+
+	* brebis.py, functionaltests.py, tests.py:
+	bump shebang to python3.4
+	[67a6ff8bfb11]
+
+2014-07-26  Carl Chenet  <chaica@ohmytux.com>
+
+	* remove hash generation for symlinks. closes #61
+	[7cc565eeeb1b]
+
+	* brebis/generatelist/generatelistfortar.py:
+	remove md5 generation for symlink in a tar file
+	[f165429e2b34] <remove-hash-for-symlink>
+
+2014-07-25  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/generatelist/generatelistfortree.py:
+	remove hash for links while parsing a tree of files
+	[1e811378adf4] <remove-hash-for-symlink>
+
+	* brebis/generatelist/generatelistfortar.py:
+	remove hash for links
+	[6c3eb451ca4c] <remove-hash-for-symlink>
+
+2014-01-28  Carl Chenet  <chaica@ohmytux.com>
+
+	* functionaltests.py:
+	add support for user-defined number of workers for
+	functionaltests.py
+	[b400b09b6278] <workers-for-functionaltests>
+
+	* functionaltests.py:
+	add pool of workers to launch tests
+	[a6e46f7cc12d] <workers-for-functionaltests>
+
 2013-12-22  Carl Chenet  <chaica@ohmytux.com>
+
+	* .hgtags:
+	Added tag 0.9 for changeset dc231b2f8d78
+	[95f132e6c34c]
+
+	* .hgtags:
+	Added tag 0.8 for changeset 008c44e19317
+	[dc231b2f8d78] [0.9]
+
+	* man/brebis.1:
+	update man page
+	[2b7008cadc48]
+
+	* changelog:
+	update changelog
+	[1ce81169da4b]
 
 	* README:
 	update README for 0.9
-	[ed78e933bacf] [tip]
+	[ed78e933bacf]
 
 	* README:
 	add doc for -C -L -O options
@@ -214,7 +278,7 @@
 
 	* changelog:
 	update the changelog
-	[008c44e19317]
+	[008c44e19317] [0.8]
 
 	* README:
 	update README with new information and parameters
