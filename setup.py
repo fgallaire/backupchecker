@@ -19,8 +19,8 @@ import platform
 import sys
 
 # Warn the user about the supported Python versions
-if float(platform.python_version()[0:3]) < 3.3:
-    print('You need at least Python 3.3 to use Brebis')
+if float(platform.python_version()[0:3]) < 3.4:
+    print('You need at least Python 3.4 to use Brebis')
     sys.exit(1)
 
 CLASSIFIERS = [
@@ -33,7 +33,7 @@ CLASSIFIERS = [
 ]
 
 setup(name = 'brebis',
-    version = '0.9',
+    version = '0.10',
     license = 'GNU GPL v3',
     description = 'automated backup checker',
     long_description = 'Brebis is a fully automated backup checker.',
