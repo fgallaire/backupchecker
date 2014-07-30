@@ -1,4 +1,4 @@
-#!/usr/bin/python3.3
+#!/usr/bin/python3.4
 # -*- coding: utf-8 -*-
 # Copyright © 2013 Carl Chenet <chaica@ohmytux.com>
 # This program is free software: you can redistribute it and/or modify
