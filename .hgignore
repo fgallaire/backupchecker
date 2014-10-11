@@ -65,11 +65,9 @@ functional-tests/generate-conf-and-file-list-xz/generate-conf-and-file-list-xz.l
 functional-tests/generate-conf-and-file-list-tree/conf.conf
 functional-tests/generate-conf-and-file-list-tree/generate-conf-and-file-list-tree.conf
 functional-tests/generate-conf-and-file-list-tree/generate-conf-and-file-list-tree.list
-functional-tests/check-mtime-tar/check-mtime-tar.conf
 functional-tests/check-mtime-tar/check-mtime-tar.list
 functional-tests/check-mtime-tree/check-mtime-tree.conf
 functional-tests/check-mtime-tree/check-mtime-tree.list
-functional-tests/check-mtime-zip/check-mtime-zip.conf
 functional-tests/check-mtime-zip/check-mtime-zip.list
 .coverage
 tests/listtype/mybz2.conf
@@ -84,7 +82,6 @@ tests/listtype/mytree.conf
 tests/listtype/mytree.list
 tests/listtype/myzip.conf
 tests/listtype/myzip.list
-functional-tests/generate-apk-conf-files/generate-apk-conf-files.conf
 functional-tests/generate-apk-conf-files/generate-apk-conf-files.list
 functional-tests/custom-conf-filelist-bzip2/both/custom-conf-filelist-bzip2.conf
 functional-tests/custom-conf-filelist-bzip2/both/custom-conf-filelist-bzip2.list

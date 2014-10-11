@@ -3413,11 +3413,20 @@ class Test_custom_conf_filelist_tar:
         __res = True
         __testname = self.__class__.__name__
         __testdir = os.path.join(ABSPATH, 'functional-tests/custom-conf-filelist-tar')
+        __confdir = os.path.join(__testdir, 'conf')
+        __listdir = os.path.join(__testdir, 'conf')
+        __bothdir = os.path.join(__testdir, 'conf')
         __archive = os.path.join(__testdir, 'custom-conf-filelist-tar.tar.gz')
         __resultconffile = os.path.join(__testdir, 'conf', 'custom-conf-filelist-tar.conf')
         __resultlistfile = os.path.join(__testdir, 'list', 'custom-conf-filelist-tar.list')
         __resultbothconffile = os.path.join(__testdir, 'both', 'custom-conf-filelist-tar.conf')
         __resultbothlistfile = os.path.join(__testdir, 'both', 'custom-conf-filelist-tar.list')
+        if not os.path.exists(__confdir):
+            os.mkdir(__confdir)
+        if not os.path.exists(__listdir):
+            os.mkdir(__listdir)
+        if not os.path.exists(__bothdir):
+            os.mkdir(__bothdir)
         if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-tar.conf')):
             remove(os.path.join(__testdir, 'custom-conf-filelist-tar.conf'))
         if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-tar.list')):
@@ -3463,11 +3472,20 @@ class Test_custom_conf_filelist_gzip:
         __res = True
         __testname = self.__class__.__name__
         __testdir = os.path.join(ABSPATH, 'functional-tests/custom-conf-filelist-gzip')
+        __confdir = os.path.join(__testdir, 'conf')
+        __listdir = os.path.join(__testdir, 'conf')
+        __bothdir = os.path.join(__testdir, 'conf')
         __archive = os.path.join(__testdir, 'custom-conf-filelist-gzip.gz')
         __resultconffile = os.path.join(__testdir, 'conf', 'custom-conf-filelist-gzip.conf')
         __resultlistfile = os.path.join(__testdir, 'list', 'custom-conf-filelist-gzip.list')
         __resultbothconffile = os.path.join(__testdir, 'both', 'custom-conf-filelist-gzip.conf')
         __resultbothlistfile = os.path.join(__testdir, 'both', 'custom-conf-filelist-gzip.list')
+        if not os.path.exists(__confdir):
+            os.mkdir(__confdir)
+        if not os.path.exists(__listdir):
+            os.mkdir(__listdir)
+        if not os.path.exists(__bothdir):
+            os.mkdir(__bothdir)
         if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-gzip.conf')):
             remove(os.path.join(__testdir, 'custom-conf-filelist-gzip.conf'))
         if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-gzip.list')):
@@ -3513,11 +3531,20 @@ class Test_custom_conf_filelist_bzip2:
         __res = True
         __testname = self.__class__.__name__
         __testdir = os.path.join(ABSPATH, 'functional-tests/custom-conf-filelist-bzip2')
+        __confdir = os.path.join(__testdir, 'conf')
+        __listdir = os.path.join(__testdir, 'conf')
+        __bothdir = os.path.join(__testdir, 'conf')
         __archive = os.path.join(__testdir, 'custom-conf-filelist-bzip2.bz2')
         __resultconffile = os.path.join(__testdir, 'conf', 'custom-conf-filelist-bzip2.conf')
         __resultlistfile = os.path.join(__testdir, 'list', 'custom-conf-filelist-bzip2.list')
         __resultbothconffile = os.path.join(__testdir, 'both', 'custom-conf-filelist-bzip2.conf')
         __resultbothlistfile = os.path.join(__testdir, 'both', 'custom-conf-filelist-bzip2.list')
+        if not os.path.exists(__confdir):
+            os.mkdir(__confdir)
+        if not os.path.exists(__listdir):
+            os.mkdir(__listdir)
+        if not os.path.exists(__bothdir):
+            os.mkdir(__bothdir)
         if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-bzip2.conf')):
             remove(os.path.join(__testdir, 'custom-conf-filelist-bzip2.conf'))
         if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-bzip2.list')):
@@ -3563,11 +3590,20 @@ class Test_custom_conf_filelist_lzma:
         __res = True
         __testname = self.__class__.__name__
         __testdir = os.path.join(ABSPATH, 'functional-tests/custom-conf-filelist-lzma')
+        __confdir = os.path.join(__testdir, 'conf')
+        __listdir = os.path.join(__testdir, 'conf')
+        __bothdir = os.path.join(__testdir, 'conf')
         __archive = os.path.join(__testdir, 'custom-conf-filelist-lzma.xz')
         __resultconffile = os.path.join(__testdir, 'conf', 'custom-conf-filelist-lzma.conf')
         __resultlistfile = os.path.join(__testdir, 'list', 'custom-conf-filelist-lzma.list')
         __resultbothconffile = os.path.join(__testdir, 'both', 'custom-conf-filelist-lzma.conf')
         __resultbothlistfile = os.path.join(__testdir, 'both', 'custom-conf-filelist-lzma.list')
+        if not os.path.exists(__confdir):
+            os.mkdir(__confdir)
+        if not os.path.exists(__listdir):
+            os.mkdir(__listdir)
+        if not os.path.exists(__bothdir):
+            os.mkdir(__bothdir)
         if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-lzma.conf')):
             remove(os.path.join(__testdir, 'custom-conf-filelist-lzma.conf'))
         if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-lzma.list')):
@@ -3613,11 +3649,20 @@ class Test_custom_conf_filelist_zip:
         __res = True
         __testname = self.__class__.__name__
         __testdir = os.path.join(ABSPATH, 'functional-tests/custom-conf-filelist-zip')
+        __confdir = os.path.join(__testdir, 'conf')
+        __listdir = os.path.join(__testdir, 'conf')
+        __bothdir = os.path.join(__testdir, 'conf')
         __archive = os.path.join(__testdir, 'custom-conf-filelist-zip.zip')
         __resultconffile = os.path.join(__testdir, 'conf', 'custom-conf-filelist-zip.conf')
         __resultlistfile = os.path.join(__testdir, 'list', 'custom-conf-filelist-zip.list')
         __resultbothconffile = os.path.join(__testdir, 'both', 'custom-conf-filelist-zip.conf')
         __resultbothlistfile = os.path.join(__testdir, 'both', 'custom-conf-filelist-zip.list')
+        if not os.path.exists(__confdir):
+            os.mkdir(__confdir)
+        if not os.path.exists(__listdir):
+            os.mkdir(__listdir)
+        if not os.path.exists(__bothdir):
+            os.mkdir(__bothdir)
         if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-zip.conf')):
             remove(os.path.join(__testdir, 'custom-conf-filelist-zip.conf'))
         if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-zip.list')):
@@ -3663,11 +3708,20 @@ class Test_custom_conf_filelist_tree:
         __res = True
         __testname = self.__class__.__name__
         __testdir = os.path.join(ABSPATH, 'functional-tests/custom-conf-filelist-tree')
+        __confdir = os.path.join(__testdir, 'conf')
+        __listdir = os.path.join(__testdir, 'conf')
+        __bothdir = os.path.join(__testdir, 'conf')
         __archive = os.path.join(__testdir, 'custom-conf-filelist-tree')
         __resultconffile = os.path.join(__testdir, 'conf', 'custom-conf-filelist-tree.conf')
         __resultlistfile = os.path.join(__testdir, 'list', 'custom-conf-filelist-tree.list')
         __resultbothconffile = os.path.join(__testdir, 'both', 'custom-conf-filelist-tree.conf')
         __resultbothlistfile = os.path.join(__testdir, 'both', 'custom-conf-filelist-tree.list')
+        if not os.path.exists(__confdir):
+            os.mkdir(__confdir)
+        if not os.path.exists(__listdir):
+            os.mkdir(__listdir)
+        if not os.path.exists(__bothdir):
+            os.mkdir(__bothdir)
         if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-tree.conf')):
             remove(os.path.join(__testdir, 'custom-conf-filelist-tree.conf'))
         if os.path.exists(os.path.join(__testdir, 'custom-conf-filelist-tree.list')):
