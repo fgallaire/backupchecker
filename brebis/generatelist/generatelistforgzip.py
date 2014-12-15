@@ -35,6 +35,7 @@ class GenerateListForGzip(GenerateList):
         self.__confoutput = __genparams['confoutput']
         self.__listoutput = __genparams['listoutput']
         self.__fulloutput  = __genparams['fulloutput']
+        self.__getallhashes  = __genparams['getallhashes']
         __listoffiles = ['[files]\n']
         __fileinfo = os.lstat(__arcpath)
         __filetype = 'f'
@@ -43,12 +44,19 @@ class GenerateListForGzip(GenerateList):
             __filesize = self.__extract_size(__gzip)
             __filename = self.__extract_initial_filename(__gzip,
                         os.path.split(__arcpath)[-1][:-2])
-        __onelinewithhash = '{value}{delimiter} ={value} type{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
-        __listoffiles.append(__onelinewithhash.format(
-                                __filename,
-                                str(__filesize),
-                                __filetype,
-                                __filehash))
+        if self.__getallhashes:
+            __onelinewithhash = '{value}{delimiter} ={value} type{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+            __listoffiles.append(__onelinewithhash.format(
+                                    __filename,
+                                    str(__filesize),
+                                    __filetype,
+                                    __filehash))
+        else:
+            __onelinewithouthash = '{value}{delimiter} ={value} type{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+            __listoffiles.append(__onelinewithouthash.format(
+                                    __filename,
+                                    str(__filesize),
+                                    __filetype))
 
         # define the flexible file list path
         __arcwithext = os.path.split(''.join([__arcpath[:-2], 'list']))[1]
