@@ -33,6 +33,10 @@ class GenerateList:
         except (OSError, IOError) as __msg:
             print(__msg)
             sys.exit(1)
+        except UnicodeEncodeError as __msg:
+            print(__msg)
+            print('The encoding of the archive and the one of this system differs.\nThe result will not be reliable. Aborting.')
+            sys.exit(1)
 
     def _generate_conf(self, __confinfo):
         '''Write the configuration file for the archive'''
