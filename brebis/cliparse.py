@@ -62,6 +62,9 @@ class CliParse:
         __group.add_argument('-G', '--gen-full', dest='genfull',
             action='store_true',
             help='generate the configuration file and the list of files for the backup')
+        __parser.add_argument('-H', '--hashes', dest='getallhashes',
+            action='store_true',
+            help='generate the hash sum of each encountered file in the backup')
         __parser.add_argument('-l', '--log', dest='logfile',
             action='store',
             default=os.path.join(os.getcwd(), 'a.out'),

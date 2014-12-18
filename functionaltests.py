@@ -29,6 +29,7 @@ OPTCONFIG = '-c'
 OPTLOG = '-l'
 OPTGEN = '-g'
 OPTFULLGEN = '-G'
+OPTHASHES = '-H'
 OPTDEL = '-d'
 OKMSG = 'ok'
 KOMSG = 'ko - '
@@ -1924,9 +1925,9 @@ class Test_generate_list_for_tar_archive:
         __archive = os.path.join(__testdir, 'generate-list-from-tar-archive.tar.gz')
         __resultfile = os.path.join(__testdir, 'generate-list-from-tar-archive.list')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -1960,9 +1961,9 @@ class Test_generate_list_for_zip_archive:
         __archive = os.path.join(__testdir, 'generate-list-from-zip-archive.zip')
         __resultfile = os.path.join(__testdir, 'generate-list-from-zip-archive.list')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -1995,9 +1996,9 @@ class Test_generate_list_for_tree:
         __archive = os.path.join(__testdir, 'generate-list-from-tree')
         __resultfile = os.path.join(__testdir, 'generate-list-from-tree.list')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2030,9 +2031,9 @@ class Test_generate_list_for_bzip2:
         __archive = os.path.join(__testdir, 'generate-list-from-bzip2-archive.bz2')
         __resultfile = os.path.join(__testdir, 'generate-list-from-bzip2-archive.list')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2062,9 +2063,9 @@ class Test_generate_list_for_xz:
         __archive = os.path.join(__testdir, 'generate-list-from-xz-archive.xz')
         __resultfile = os.path.join(__testdir, 'generate-list-from-xz-archive.list')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2094,9 +2095,9 @@ class Test_generate_list_for_gzip:
         __archive = os.path.join(__testdir, 'generate-list-from-gzip-archive.gz')
         __resultfile = os.path.join(__testdir, 'generate-list-from-gzip-archive.list')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2127,9 +2128,9 @@ class Test_expected_generated_list_for_tar_archive:
         __archive = os.path.join(__testdir, 'expected-generated-list-for-tar-archive.tar.gz')
         __resultfile = os.path.join(__testdir, 'expected-generated-list-for-tar-archive.list')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2152,9 +2153,9 @@ class Test_expected_generated_list_for_gzip_archive:
         __archive = os.path.join(__testdir, 'expected-generated-list-for-gzip-archive.gz')
         __resultfile = os.path.join(__testdir, 'expected-generated-list-for-gzip-archive.list')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2177,9 +2178,9 @@ class Test_expected_generated_list_for_xz_archive:
         __archive = os.path.join(__testdir, 'expected-generated-list-for-xz-archive.xz')
         __resultfile = os.path.join(__testdir, 'expected-generated-list-for-xz-archive.list')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2202,9 +2203,9 @@ class Test_expected_generated_list_for_bzip2_archive:
         __archive = os.path.join(__testdir, 'expected-generated-list-for-bzip2-archive.bz2')
         __resultfile = os.path.join(__testdir, 'expected-generated-list-for-bzip2-archive.list')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2227,9 +2228,9 @@ class Test_generate_list_and_parse_tar_archive(MainGenerateParse):
         __archive = os.path.join(__testdir, 'generate-list-and-parse-tar-archive.tar.gz')
         __resultfile = os.path.join(__testdir, 'generate-list-and-parse-tar-archive.list')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2249,9 +2250,9 @@ class Test_generate_list_and_parse_tgz_archive(MainGenerateParse):
         __archive = os.path.join(__testdir, 'generate-list-and-parse-tgz-archive.tgz')
         __resultfile = os.path.join(__testdir, 'generate-list-and-parse-tgz-archive.list')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2271,9 +2272,9 @@ class Test_generate_list_and_parse_tbz_archive(MainGenerateParse):
         __archive = os.path.join(__testdir, 'generate-list-and-parse-tbz-archive.tbz')
         __resultfile = os.path.join(__testdir, 'generate-list-and-parse-tbz-archive.list')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2293,9 +2294,9 @@ class Test_generate_list_and_parse_tbz2_archive(MainGenerateParse):
         __archive = os.path.join(__testdir, 'generate-list-and-parse-tbz2-archive.tbz2')
         __resultfile = os.path.join(__testdir, 'generate-list-and-parse-tbz2-archive.list')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2315,9 +2316,9 @@ class Test_generate_list_and_parse_zip_archive(MainGenerateParse):
         __archive = os.path.join(__testdir, 'generate-list-and-parse-zip-archive.zip')
         __resultfile = os.path.join(__testdir, 'generate-list-and-parse-zip-archive.list')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2337,9 +2338,9 @@ class Test_generate_list_and_parse_tree(MainGenerateParse):
         __archive = os.path.join(__testdir, 'generate-list-and-parse-tree')
         __resultfile = os.path.join(__testdir, 'generate-list-and-parse-tree.list')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2359,9 +2360,9 @@ class Test_generate_list_and_parse_gzip_archive(MainGenerateParse):
         __archive = os.path.join(__testdir, 'generate-list-and-parse-gzip-archive.gz')
         __resultfile = os.path.join(__testdir, 'generate-list-and-parse-gzip-archive.list')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2381,9 +2382,9 @@ class Test_generate_list_and_parse_bzip2_archive(MainGenerateParse):
         __archive = os.path.join(__testdir, 'generate-list-and-parse-bzip2-archive.bz2')
         __resultfile = os.path.join(__testdir, 'generate-list-and-parse-bzip2-archive.list')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2403,9 +2404,9 @@ class Test_generate_list_and_parse_xz_archive(MainGenerateParse):
         __archive = os.path.join(__testdir, 'generate-list-and-parse-xz-archive.xz')
         __resultfile = os.path.join(__testdir, 'generate-list-and-parse-xz-archive.list')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2633,9 +2634,9 @@ class Test_generate_list_changing_default_separator_for_tar_gz:
         __resultfile = os.path.join(__testdir, 'generate-list-changing-default-separator-for-tar-gz.list')
         __output = os.path.join(__testdir, 'a.out')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2664,9 +2665,9 @@ class Test_generate_list_changing_default_separator_for_tar_bz2:
         __resultfile = os.path.join(__testdir, 'generate-list-changing-default-separator-for-tar-bz2.list')
         __output = os.path.join(__testdir, 'a.out')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2695,9 +2696,9 @@ class Test_generate_list_changing_default_separator_for_tar_xz:
         __resultfile = os.path.join(__testdir, 'generate-list-changing-default-separator-for-tar-xz.list')
         __output = os.path.join(__testdir, 'a.out')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2726,9 +2727,9 @@ class Test_generate_list_changing_default_separator_for_gzip:
         __resultfile = os.path.join(__testdir, 'generate-list-changing-default-separator-for-gzip.list')
         __output = os.path.join(__testdir, 'a.out')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2757,9 +2758,9 @@ class Test_generate_list_changing_default_separator_for_bzip2:
         __resultfile = os.path.join(__testdir, 'generate-list-changing-default-separator-for-bzip2.list')
         __output = os.path.join(__testdir, 'a.out')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2788,9 +2789,9 @@ class Test_generate_list_changing_default_separator_for_zip:
         __resultfile = os.path.join(__testdir, 'generate-list-changing-default-separator-for-zip.list')
         __output = os.path.join(__testdir, 'a.out')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2819,9 +2820,9 @@ class Test_generate_list_changing_default_separator_for_tree:
         __resultfile = os.path.join(__testdir, 'generate-list-changing-default-separator-for-tree.list')
         __output = os.path.join(__testdir, 'a.out')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTDEL, ALTERNATEDELIMITER, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTDEL, ALTERNATEDELIMITER, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2911,9 +2912,9 @@ class Test_generate_conf_and_file_list_tar:
             __objconf.writelines(__newconffile)
  
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTFULLGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -2956,9 +2957,9 @@ class Test_generate_conf_and_file_list_tar_gz:
             __objconf.writelines(__newconffile)
  
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTFULLGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -3001,9 +3002,9 @@ class Test_generate_conf_and_file_list_tar_bz2:
             __objconf.writelines(__newconffile)
  
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTFULLGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -3046,9 +3047,9 @@ class Test_generate_conf_and_file_list_tar_xz:
             __objconf.writelines(__newconffile)
  
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTFULLGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -3091,9 +3092,9 @@ class Test_generate_conf_and_file_list_gz:
             __objconf.writelines(__newconffile)
  
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTFULLGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -3136,9 +3137,9 @@ class Test_generate_conf_and_file_list_bz2:
             __objconf.writelines(__newconffile)
  
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTFULLGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -3181,9 +3182,9 @@ class Test_generate_conf_and_file_list_xz:
             __objconf.writelines(__newconffile)
  
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTFULLGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -3212,9 +3213,9 @@ class Test_generate_conf_and_file_list_tree:
         __resultlistfile = os.path.join(__testdir, 'generate-conf-and-file-list-tree.list')
         __newconffile = []
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTFULLGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTFULLGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTFULLGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -3303,9 +3304,9 @@ class Test_generate_list_to_check_mtime_in_tar_archive:
         __resultfile = os.path.join(__testdir, 'check-mtime-tar.list')
         __output = os.path.join(__testdir, 'a.out')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -3334,9 +3335,9 @@ class Test_generate_list_to_check_mtime_in_zip_archive:
         __resultfile = os.path.join(__testdir, 'check-mtime-zip.list')
         __output = os.path.join(__testdir, 'a.out')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -3365,9 +3366,9 @@ class Test_generate_list_to_check_mtime_in_tree:
         __resultfile = os.path.join(__testdir, 'check-mtime-tree.list')
         __output = os.path.join(__testdir, 'a.out')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -3389,9 +3390,9 @@ class Test_generate_apk_conf_files:
         __resultlistfile = os.path.join(__testdir, 'generate-apk-conf-files.list')
         __output = os.path.join(__testdir, 'a.out')
         if 'PYTHONEXE' in environ:
-            __retcode = subprocess.call([PYTHONEXE, EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTGEN, __archive])
         else:
-            __retcode = subprocess.call([EXE, OPTGEN, __archive])
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTGEN, __archive])
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
@@ -3440,17 +3441,17 @@ class Test_custom_conf_filelist_tar:
         if os.path.exists(__resultbothlistfile):
             remove(__resultbothlistfile)
         if 'PYTHONEXE' in environ:
-            __retcode1 = subprocess.call([PYTHONEXE, EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+            __retcode1 = subprocess.call([PYTHONEXE, EXE, '-C', os.path.join(__testdir, 'conf/'), OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode1 = subprocess.call([EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+            __retcode1 = subprocess.call([EXE, '-C', os.path.join(__testdir, 'conf/'), OPTHASHES, OPTFULLGEN, __archive])
         if 'PYTHONEXE' in environ:
-            __retcode2 = subprocess.call([PYTHONEXE, EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+            __retcode2 = subprocess.call([PYTHONEXE, EXE, '-L', os.path.join(__testdir, 'list/'), OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode2 = subprocess.call([EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+            __retcode2 = subprocess.call([EXE, '-L', os.path.join(__testdir, 'list/'), OPTHASHES, OPTFULLGEN, __archive])
         if 'PYTHONEXE' in environ:
-            __retcode3 = subprocess.call([PYTHONEXE, EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+            __retcode3 = subprocess.call([PYTHONEXE, EXE, '-O', os.path.join(__testdir, 'both/'), OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode3 = subprocess.call([EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+            __retcode3 = subprocess.call([EXE, '-O', os.path.join(__testdir, 'both/'), OPTHASHES, OPTFULLGEN, __archive])
         if __retcode1 != 0 and __retcode2 != 0 and __retcode3 != 0:
             __queue.put('{} - {}return code:{} {} {}'.format(__testname, KOMSG, str(__retcode1), str(__retcode2), str(__retcode3)))
         else:
@@ -3499,17 +3500,17 @@ class Test_custom_conf_filelist_gzip:
         if os.path.exists(__resultbothlistfile):
             remove(__resultbothlistfile)
         if 'PYTHONEXE' in environ:
-            __retcode1 = subprocess.call([PYTHONEXE, EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+            __retcode1 = subprocess.call([PYTHONEXE, EXE, '-C', os.path.join(__testdir, 'conf/'), OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode1 = subprocess.call([EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+            __retcode1 = subprocess.call([EXE, '-C', os.path.join(__testdir, 'conf/'), OPTHASHES, OPTFULLGEN, __archive])
         if 'PYTHONEXE' in environ:
-            __retcode2 = subprocess.call([PYTHONEXE, EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+            __retcode2 = subprocess.call([PYTHONEXE, EXE, '-L', os.path.join(__testdir, 'list/'), OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode2 = subprocess.call([EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+            __retcode2 = subprocess.call([EXE, '-L', os.path.join(__testdir, 'list/'), OPTHASHES, OPTFULLGEN, __archive])
         if 'PYTHONEXE' in environ:
-            __retcode3 = subprocess.call([PYTHONEXE, EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+            __retcode3 = subprocess.call([PYTHONEXE, EXE, '-O', os.path.join(__testdir, 'both/'), OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode3 = subprocess.call([EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+            __retcode3 = subprocess.call([EXE, '-O', os.path.join(__testdir, 'both/'), OPTHASHES, OPTFULLGEN, __archive])
         if __retcode1 != 0 and __retcode2 != 0 and __retcode3 != 0:
             __queue.put('{} - {}return code:{} {} {}'.format(__testname, KOMSG, str(__retcode1), str(__retcode2), str(__retcode3)))
         else:
@@ -3558,17 +3559,17 @@ class Test_custom_conf_filelist_bzip2:
         if os.path.exists(__resultbothlistfile):
             remove(__resultbothlistfile)
         if 'PYTHONEXE' in environ:
-            __retcode1 = subprocess.call([PYTHONEXE, EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+            __retcode1 = subprocess.call([PYTHONEXE, EXE, '-C', os.path.join(__testdir, 'conf/'), OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode1 = subprocess.call([EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+            __retcode1 = subprocess.call([EXE, '-C', os.path.join(__testdir, 'conf/'), OPTHASHES, OPTFULLGEN, __archive])
         if 'PYTHONEXE' in environ:
-            __retcode2 = subprocess.call([PYTHONEXE, EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+            __retcode2 = subprocess.call([PYTHONEXE, EXE, '-L', os.path.join(__testdir, 'list/'), OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode2 = subprocess.call([EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+            __retcode2 = subprocess.call([EXE, '-L', os.path.join(__testdir, 'list/'), OPTHASHES, OPTFULLGEN, __archive])
         if 'PYTHONEXE' in environ:
-            __retcode3 = subprocess.call([PYTHONEXE, EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+            __retcode3 = subprocess.call([PYTHONEXE, EXE, '-O', os.path.join(__testdir, 'both/'), OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode3 = subprocess.call([EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+            __retcode3 = subprocess.call([EXE, '-O', os.path.join(__testdir, 'both/'), OPTHASHES, OPTFULLGEN, __archive])
         if __retcode1 != 0 and __retcode2 != 0 and __retcode3 != 0:
             __queue.put('{} - {}return code:{} {} {}'.format(__testname, KOMSG, str(__retcode1), str(__retcode2), str(__retcode3)))
         else:
@@ -3617,17 +3618,17 @@ class Test_custom_conf_filelist_lzma:
         if os.path.exists(__resultbothlistfile):
             remove(__resultbothlistfile)
         if 'PYTHONEXE' in environ:
-            __retcode1 = subprocess.call([PYTHONEXE, EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+            __retcode1 = subprocess.call([PYTHONEXE, EXE, '-C', os.path.join(__testdir, 'conf/'), OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode1 = subprocess.call([EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+            __retcode1 = subprocess.call([EXE, '-C', os.path.join(__testdir, 'conf/'), OPTHASHES, OPTFULLGEN, __archive])
         if 'PYTHONEXE' in environ:
-            __retcode2 = subprocess.call([PYTHONEXE, EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+            __retcode2 = subprocess.call([PYTHONEXE, EXE, '-L', os.path.join(__testdir, 'list/'), OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode2 = subprocess.call([EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+            __retcode2 = subprocess.call([EXE, '-L', os.path.join(__testdir, 'list/'), OPTHASHES, OPTFULLGEN, __archive])
         if 'PYTHONEXE' in environ:
-            __retcode3 = subprocess.call([PYTHONEXE, EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+            __retcode3 = subprocess.call([PYTHONEXE, EXE, '-O', os.path.join(__testdir, 'both/'), OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode3 = subprocess.call([EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+            __retcode3 = subprocess.call([EXE, '-O', os.path.join(__testdir, 'both/'), OPTHASHES, OPTFULLGEN, __archive])
         if __retcode1 != 0 and __retcode2 != 0 and __retcode3 != 0:
             __queue.put('{} - {}return code:{} {} {}'.format(__testname, KOMSG, str(__retcode1), str(__retcode2), str(__retcode3)))
         else:
@@ -3676,17 +3677,17 @@ class Test_custom_conf_filelist_zip:
         if os.path.exists(__resultbothlistfile):
             remove(__resultbothlistfile)
         if 'PYTHONEXE' in environ:
-            __retcode1 = subprocess.call([PYTHONEXE, EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+            __retcode1 = subprocess.call([PYTHONEXE, EXE, '-C', os.path.join(__testdir, 'conf/'), OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode1 = subprocess.call([EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+            __retcode1 = subprocess.call([EXE, '-C', os.path.join(__testdir, 'conf/'), OPTHASHES, OPTFULLGEN, __archive])
         if 'PYTHONEXE' in environ:
-            __retcode2 = subprocess.call([PYTHONEXE, EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+            __retcode2 = subprocess.call([PYTHONEXE, EXE, '-L', os.path.join(__testdir, 'list/'), OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode2 = subprocess.call([EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+            __retcode2 = subprocess.call([EXE, '-L', os.path.join(__testdir, 'list/'), OPTHASHES, OPTFULLGEN, __archive])
         if 'PYTHONEXE' in environ:
-            __retcode3 = subprocess.call([PYTHONEXE, EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+            __retcode3 = subprocess.call([PYTHONEXE, EXE, '-O', os.path.join(__testdir, 'both/'), OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode3 = subprocess.call([EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+            __retcode3 = subprocess.call([EXE, '-O', os.path.join(__testdir, 'both/'), OPTHASHES, OPTFULLGEN, __archive])
         if __retcode1 != 0 and __retcode2 != 0 and __retcode3 != 0:
             __queue.put('{} - {}return code:{} {} {}'.format(__testname, KOMSG, str(__retcode1), str(__retcode2), str(__retcode3)))
         else:
@@ -3735,17 +3736,17 @@ class Test_custom_conf_filelist_tree:
         if os.path.exists(__resultbothlistfile):
             remove(__resultbothlistfile)
         if 'PYTHONEXE' in environ:
-            __retcode1 = subprocess.call([PYTHONEXE, EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+            __retcode1 = subprocess.call([PYTHONEXE, EXE, '-C', os.path.join(__testdir, 'conf/'), OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode1 = subprocess.call([EXE, '-C', os.path.join(__testdir, 'conf/'), OPTFULLGEN, __archive])
+            __retcode1 = subprocess.call([EXE, '-C', os.path.join(__testdir, 'conf/'), OPTHASHES, OPTFULLGEN, __archive])
         if 'PYTHONEXE' in environ:
-            __retcode2 = subprocess.call([PYTHONEXE, EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+            __retcode2 = subprocess.call([PYTHONEXE, EXE, '-L', os.path.join(__testdir, 'list/'), OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode2 = subprocess.call([EXE, '-L', os.path.join(__testdir, 'list/'), OPTFULLGEN, __archive])
+            __retcode2 = subprocess.call([EXE, '-L', os.path.join(__testdir, 'list/'), OPTHASHES, OPTFULLGEN, __archive])
         if 'PYTHONEXE' in environ:
-            __retcode3 = subprocess.call([PYTHONEXE, EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+            __retcode3 = subprocess.call([PYTHONEXE, EXE, '-O', os.path.join(__testdir, 'both/'), OPTHASHES, OPTFULLGEN, __archive])
         else:
-            __retcode3 = subprocess.call([EXE, '-O', os.path.join(__testdir, 'both/'), OPTFULLGEN, __archive])
+            __retcode3 = subprocess.call([EXE, '-O', os.path.join(__testdir, 'both/'), OPTHASHES, OPTFULLGEN, __archive])
         if __retcode1 != 0 and __retcode2 != 0 and __retcode3 != 0:
             __queue.put('{} - {}return code:{} {} {}'.format(__testname, KOMSG, str(__retcode1), str(__retcode2), str(__retcode3)))
         else:

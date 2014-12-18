@@ -37,6 +37,7 @@ class GenerateListForZip(GenerateList):
         self.__listoutput = __genparams['listoutput']
         self.__confoutput = __genparams['confoutput']
         self.__fulloutput = __genparams['fulloutput']
+        self.__getallhashes  = __genparams['getallhashes']
         try:
             __zip = zipfile.ZipFile(self.__arcpath, 'r', allowZip64=True)
             self.__main(__zip)
@@ -48,7 +49,10 @@ class GenerateListForZip(GenerateList):
         '''Main of the GenerateListForZip class'''
         __listoffiles = ['[files]\n']
         __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
-        __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
+        if self.__getallhashes:
+            __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
+        else:
+            __onelinewithouthash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
         __onelinenoexternalattr = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
         __crcerror = __zip.testzip()
         if __crcerror:
@@ -75,15 +79,24 @@ class GenerateListForZip(GenerateList):
                     __warn = 'Issue with timestamp while controlling {} in {}'.format(_fileinfo.filename,_cfgvalues['path'])
                     logging.warning(__warn)
                 if __fileinfo.external_attr != 0 and __type == 'f':
-                    __hash = get_hash(__zip.open(__fileinfo.filename, 'r'), 'md5')
-                    __listoffiles.append(__onelinewithhash.format(__fileinfo.filename,
-                                                            str(__fileinfo.file_size),
-                                                            str(__uid),
-                                                            str(__gid),
-                                                            __mode,
-                                                            __type,
-                                                            __mtime,
-                                                            __hash))
+                    if self.__getallhashes:
+                        __hash = get_hash(__zip.open(__fileinfo.filename, 'r'), 'md5')
+                        __listoffiles.append(__onelinewithhash.format(__fileinfo.filename,
+                                                                str(__fileinfo.file_size),
+                                                                str(__uid),
+                                                                str(__gid),
+                                                                __mode,
+                                                                __type,
+                                                                __mtime,
+                                                                __hash))
+                    else:
+                        __listoffiles.append(__onelinewithouthash.format(__fileinfo.filename,
+                                                                str(__fileinfo.file_size),
+                                                                str(__uid),
+                                                                str(__gid),
+                                                                __mode,
+                                                                __type,
+                                                                __mtime))
                 elif __fileinfo.external_attr != 0 and __type == 'd':
                     __listoffiles.append(__oneline.format(__fileinfo.filename,
                                                             str(__fileinfo.file_size),
