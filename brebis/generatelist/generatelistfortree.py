@@ -34,9 +34,15 @@ class GenerateListForTree(GenerateList):
         self.__listoutput = __genparams['listoutput']
         self.__confoutput = __genparams['confoutput']
         self.__fulloutput = __genparams['fulloutput']
+        self.__getallhashes  = __genparams['getallhashes']
+        self.__hashtype = __genparams['hashtype']
         __listoffiles = ['[files]\n']
         __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
-        __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+        if self.__getallhashes:
+            if not self.__hashtype:
+                __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+            else:
+                __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} {hashtype}{delimiter}{value}\n'.format(value='{}', hashtype=self.__hashtype, delimiter=__delimiter)
         __onelinewithtarget = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} target{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
         
         for __dirpath, __dirnames, __filenames, in os.walk(__arcpath):
@@ -64,18 +70,32 @@ class GenerateListForTree(GenerateList):
                 __filemode = oct(stat.S_IMODE(self.__fileinfo.st_mode)).split('o')[-1]
                 __type = self.__translate_type(self.__fileinfo.st_mode)
                 if __type == 'f': 
-                    # extract hash sum of the file inside the archive
-                    __hash = get_hash(open(__filepath, 'rb'), 'md5')
-                    # extract file data and prepare data
-                    __listoffiles.append(__onelinewithhash.format(
-                                            os.path.relpath(__filepath, __arcpath),
-                                            str(self.__fileinfo.st_size),
-                                            str(self.__fileinfo.st_uid),
-                                            str(self.__fileinfo.st_gid),
-                                            __filemode,
-                                            __type,
-                                            str(self.__fileinfo.st_mtime),
-                                            __hash))
+                    if self.__getallhashes:
+                        if not self.__hashtype:
+                            # extract hash sum of the file inside the archive
+                            __hash = get_hash(open(__filepath, 'rb'), 'md5')
+                        else:
+                            # extract hash sum of the file inside the archive
+                            __hash = get_hash(open(__filepath, 'rb'), self.__hashtype)
+                        # extract file data and prepare data
+                        __listoffiles.append(__onelinewithhash.format(
+                                                os.path.relpath(__filepath, __arcpath),
+                                                str(self.__fileinfo.st_size),
+                                                str(self.__fileinfo.st_uid),
+                                                str(self.__fileinfo.st_gid),
+                                                __filemode,
+                                                __type,
+                                                str(self.__fileinfo.st_mtime),
+                                                __hash))
+                    else:
+                        __listoffiles.append(__onelinewithhash.format(
+                                                os.path.relpath(__filepath, __arcpath),
+                                                str(self.__fileinfo.st_size),
+                                                str(self.__fileinfo.st_uid),
+                                                str(self.__fileinfo.st_gid),
+                                                __filemode,
+                                                __type,
+                                                str(self.__fileinfo.st_mtime)))
                 elif __type == 's':
                     # extract hash sum of the file inside the archive
                     # extract file data and prepare data

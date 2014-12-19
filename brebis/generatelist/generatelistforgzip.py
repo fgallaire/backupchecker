@@ -36,16 +36,23 @@ class GenerateListForGzip(GenerateList):
         self.__listoutput = __genparams['listoutput']
         self.__fulloutput  = __genparams['fulloutput']
         self.__getallhashes  = __genparams['getallhashes']
+        self.__hashtype = __genparams['hashtype']
         __listoffiles = ['[files]\n']
         __fileinfo = os.lstat(__arcpath)
         __filetype = 'f'
-        __filehash = get_hash(gzip.open(__arcpath, 'rb'), 'md5')
+        if not self.__hashtype:
+            __filehash = get_hash(gzip.open(__arcpath, 'rb'), 'md5')
+        else:
+            __filehash = get_hash(gzip.open(__arcpath, 'rb'), self.__hashtype)
         with open(__arcpath, 'rb') as __gzip:
             __filesize = self.__extract_size(__gzip)
             __filename = self.__extract_initial_filename(__gzip,
                         os.path.split(__arcpath)[-1][:-2])
         if self.__getallhashes:
-            __onelinewithhash = '{value}{delimiter} ={value} type{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+            if not self.__hashtype:
+                __onelinewithhash = '{value}{delimiter} ={value} type{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+            else:
+                __onelinewithhash = '{value}{delimiter} ={value} type{delimiter}{value} {hashtype}{delimiter}{value}\n'.format(value='{}', hashtype=self.__hashtype, delimiter=__delimiter)
             __listoffiles.append(__onelinewithhash.format(
                                     __filename,
                                     str(__filesize),

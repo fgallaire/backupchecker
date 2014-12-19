@@ -36,17 +36,21 @@ class GenerateListForBzip2(GenerateList):
         self.__confoutput = __genparams['confoutput']
         self.__fulloutput = __genparams['fulloutput']
         self.__getallhashes  = __genparams['getallhashes']
+        self.__hashtype = __genparams['hashtype']
         __listoffiles = ['[files]\n']
         __filetype = 'f'
         __filehash = get_hash(bz2.BZ2File(__arcpath, 'r'), 'md5')
         if self.__getallhashes:
-            __onelinewithhash = '{value}{delimiter} type{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+            if not self.__hashtype:
+                __onelinewithhash = '{value}{delimiter} type{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+            else:
+                __onelinewithhash = '{value}{delimiter} type{delimiter}{value} {hashtype}{delimiter}{value}\n'.format(value='{}', hashtype=self.__hashtype, delimiter=__delimiter)
             __listoffiles.append(__onelinewithhash.format(
                                     os.path.split(__arcpath)[-1][:-4],
                                     __filetype,
                                     __filehash))
         else:
-            __onelinewithouthash = '{value}{delimiter} type{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+            __onelinewithouthash = '{value}{delimiter} type{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
             __listoffiles.append(__onelinewithouthash.format(
                                     os.path.split(__arcpath)[-1][:-4],
                                     __filetype))
