@@ -143,8 +143,8 @@ class CliParse:
                 sys.exit(1)
             __options.confpath = os.path.abspath(__options.confpath)
         # Check that the hash type for the option --hashtype is available
-        if __options.hashtype not in algorithms_guaranteed:
-            print('The hash type {} you specified is not available'.format(options.hashtype))
+        if __options.hashtype and (__options.hashtype not in algorithms_guaranteed):
+            print('The hash type {} you specified is not available'.format(__options.hashtype))
             sys.exit(1)
         self.__options = __options
 

@@ -43,6 +43,9 @@ class GenerateListForTree(GenerateList):
                 __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
             else:
                 __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} {hashtype}{delimiter}{value}\n'.format(value='{}', hashtype=self.__hashtype, delimiter=__delimiter)
+        else:
+            __onelinewithouthash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+        # we also need parameters for symbolic links
         __onelinewithtarget = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} target{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
         
         for __dirpath, __dirnames, __filenames, in os.walk(__arcpath):
@@ -88,7 +91,7 @@ class GenerateListForTree(GenerateList):
                                                 str(self.__fileinfo.st_mtime),
                                                 __hash))
                     else:
-                        __listoffiles.append(__onelinewithhash.format(
+                        __listoffiles.append(__onelinewithouthash.format(
                                                 os.path.relpath(__filepath, __arcpath),
                                                 str(self.__fileinfo.st_size),
                                                 str(self.__fileinfo.st_uid),
