@@ -36,11 +36,15 @@ class GenerateListForLzma(GenerateList):
         self.__listoutput = __genparams['listoutput']
         self.__fulloutput  = __genparams['fulloutput']
         self.__getallhashes  = __genparams['getallhashes']
+        self.__hashtype = __genparams['hashtype']
         __listoffiles = ['[files]\n']
         __filetype = 'f'
         __filehash = get_hash(lzma.LZMAFile(__arcpath, 'r'), 'md5')
         if self.__getallhashes:
-            __onelinewithhash = '{value}{delimiter} type{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+            if not self.__hashtype:
+                __onelinewithhash = '{value}{delimiter} type{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+            else:
+                __onelinewithhash = '{value}{delimiter} type{delimiter}{value} {hashtype}{delimiter}{value}\n'.format(value='{}', hashtype=self.__hashtype, delimiter=__delimiter)
             __listoffiles.append(__onelinewithhash.format(
                                     os.path.split(__arcpath)[-1][:-3],
                                     __filetype,

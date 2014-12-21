@@ -35,6 +35,7 @@ class GenerateListForTar(GenerateList):
         self.__confoutput = __genparams['confoutput']
         self.__fulloutput = __genparams['fulloutput']
         self.__getallhashes  = __genparams['getallhashes']
+        self.__hashtype = __genparams['hashtype']
         try:
             __tar = tarfile.open(self.__arcpath, 'r')
             self.__main(__tar)
@@ -47,7 +48,10 @@ class GenerateListForTar(GenerateList):
         __listoffiles = ['[files]\n']
         __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
         if self.__getallhashes:
-            __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
+            if not self.__hashtype:
+                __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
+            else:
+                __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} {hashtype}{delimiter}{value}\n'.format(value='{}', hashtype=self.__hashtype, delimiter=self.__delimiter)
         else:
             __onelinewithouthash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
         __onelinewithtarget = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} target{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
@@ -61,8 +65,11 @@ class GenerateListForTar(GenerateList):
                 __mode = '000'
             if __type == 'f':
                 if self.__getallhashes:
-                    # extract hash sum of the file inside the archive
-                    __hash = get_hash(__tar.extractfile(__tarinfo.name), 'md5')
+                    if not self.__hashtype:
+                        # extract hash sum of the file inside the archive
+                        __hash = get_hash(__tar.extractfile(__tarinfo.name), 'md5')
+                    else:
+                        __hash = get_hash(__tar.extractfile(__tarinfo.name), self.__hashtype)
                     # format the retrieved information
                     __listoffiles.append(__onelinewithhash.format(__tarinfo.name,
                                                             str(__tarinfo.size),

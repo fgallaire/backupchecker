@@ -29,6 +29,7 @@ OPTCONFIG = '-c'
 OPTLOG = '-l'
 OPTGEN = '-g'
 OPTFULLGEN = '-G'
+OPTHASHTYPE = '--hashtype'
 OPTHASHES = '-H'
 OPTDEL = '-d'
 OKMSG = 'ok'
@@ -3761,6 +3762,85 @@ class Test_custom_conf_filelist_tree:
             else:
                 __queue.put('{} - {}'.format(__testname, OKMSG))
 
+class Test_hashtype_option:
+    '''Test the hashtype option'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/hashtype-option')
+        __targzdir = os.path.join(__testdir, 'tar-gz')
+        __gzipdir = os.path.join(__testdir, 'gzip')
+        __bzip2dir = os.path.join(__testdir, 'bzip2')
+        __lzmadir = os.path.join(__testdir, 'lzma')
+        __treedir = os.path.join(__testdir, 'tree')
+        __zipdir = os.path.join(__testdir, 'zip')
+        __resulttargzfile = os.path.join(__targzdir, 'hashtype-option.list')
+        __resultgzipfile = os.path.join(__gzipdir, 'hashtype-option.list')
+        __resultbzip2file = os.path.join(__bzip2dir, 'hashtype-option.list')
+        __resultlzmafile = os.path.join(__lzmadir, 'hashtype-option.list')
+        __resultzipfile = os.path.join(__zipdir, 'hashtype-option.list')
+        __resulttreefile = os.path.join(__treedir, 'hashtype-option.list')
+        __targzarchive = os.path.join(__targzdir, 'hashtype-option.tar.gz')
+        __gziparchive = os.path.join(__gzipdir, 'hashtype-option.gz')
+        __bzip2archive = os.path.join(__bzip2dir, 'hashtype-option.bz2')
+        __lzmaarchive = os.path.join(__lzmadir, 'hashtype-option.xz')
+        __treearchive = os.path.join(__treedir, 'hashtype-option')
+        __ziparchive = os.path.join(__zipdir, 'hashtype-option.zip')
+        if os.path.exists(__resulttargzfile):
+            remove(__resulttargzfile)
+        if os.path.exists(__resultgzipfile):
+            remove(__resultgzipfile)
+        if os.path.exists(__resultbzip2file):
+            remove(__resultbzip2file)
+        if os.path.exists(__resultlzmafile):
+            remove(__resultlzmafile)
+        if os.path.exists(__resultzipfile):
+            remove(__resultzipfile)
+        if os.path.exists(__resulttreefile):
+            remove(__resulttreefile)
+        # sha1
+        if 'PYTHONEXE' in environ:
+            __retcode1 = subprocess.call([PYTHONEXE, EXE, '-O', __targzdir, OPTHASHTYPE, 'sha1', OPTHASHES, OPTFULLGEN, __targzarchive])
+        else:
+            __retcode1 = subprocess.call([EXE, '-O', __targzdir, OPTHASHTYPE, 'sha1', OPTHASHES, OPTFULLGEN, __targzarchive])
+        # sha224
+        if 'PYTHONEXE' in environ:
+            __retcode2 = subprocess.call([PYTHONEXE, EXE, '-O', __gzipdir, OPTHASHTYPE, 'sha224', OPTHASHES, OPTFULLGEN, __gziparchive])
+        else:
+            __retcode2 = subprocess.call([EXE, '-O', __gzipdir, OPTHASHTYPE, 'sha224', OPTHASHES, OPTFULLGEN, __gziparchive])
+        # sha256
+        if 'PYTHONEXE' in environ:
+            __retcode3 = subprocess.call([PYTHONEXE, EXE, '-O', __bzip2dir, OPTHASHTYPE, 'sha256', OPTHASHES, OPTFULLGEN, __bzip2archive])
+        else:
+            __retcode3 = subprocess.call([EXE, '-O', __bzip2dir, OPTHASHTYPE, 'sha256', OPTHASHES, OPTFULLGEN, __bzip2archive])
+        # sha384
+        if 'PYTHONEXE' in environ:
+            __retcode4 = subprocess.call([PYTHONEXE, EXE, '-O', __lzmadir, OPTHASHTYPE, 'sha384', OPTHASHES, OPTFULLGEN, __lzmaarchive])
+        else:
+            __retcode4 = subprocess.call([EXE, '-O', __lzmadir, OPTHASHTYPE, 'sha384', OPTHASHES, OPTFULLGEN, __lzmaarchive])
+        # sha512
+        if 'PYTHONEXE' in environ:
+            __retcode5 = subprocess.call([PYTHONEXE, EXE, '-O', __zipdir, OPTHASHTYPE, 'sha512', OPTHASHES, OPTFULLGEN, __ziparchive])
+        else:
+            __retcode5 = subprocess.call([EXE, '-O', __zipdir, OPTHASHTYPE, 'sha512', OPTHASHES, OPTFULLGEN, __ziparchive])
+        # sha1 again
+        if 'PYTHONEXE' in environ:
+            __retcode6 = subprocess.call([PYTHONEXE, EXE, '-O', __treedir, OPTHASHTYPE, 'sha1', OPTHASHES, OPTFULLGEN, __treearchive])
+        else:
+            __retcode6 = subprocess.call([EXE, '-O', __treedir, OPTHASHTYPE, 'sha1', OPTHASHES, OPTFULLGEN, __treearchive])
+        if __retcode1 != 0 and __retcode2 != 0 and __retcode3 != 0 and __retcode4 != 0 and __retcode5 != 0:
+            __queue.put('{} - {}return code:{} {} {} {} {}'.format(__testname, KOMSG, str(__retcode1), str(__retcode2), str(__retcode3), str(__retcode4), str(__retcode5), str(__retcode6)))
+        else:
+            __returnok = True
+            for __test in [(__resulttargzfile, 'sha1'), (__resultgzipfile, 'sha224'), (__resultbzip2file, 'sha256'), (__resultlzmafile, 'sha384'), (__resultzipfile, 'sha512'), (__resulttreefile, 'sha1')]:
+                with open(__test[0], 'r') as __file: 
+                    __content = __file.read()
+                    if __test[1] not in __content:
+                        returnok = False
+                        __queue.put('{} - {} - {} not in {}'.format(__testname, KOMSG, __test[0], __test[1]))
+            if __returnok:
+                __queue.put('{} - {}'.format(__testname, OKMSG))
 
 if __name__ == '__main__':
     processes = []

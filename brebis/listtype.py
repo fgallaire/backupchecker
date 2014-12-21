@@ -43,13 +43,14 @@ class ListType(object):
         __confoutput = __options.confoutput
         __listoutput = __options.listoutput
         __getallhashes = __options.getallhashes
+        __hashtype = __options.hashtype
         for __arcpath in __arcpaths:
             # create a tuple with the different parameters
             # for the generation of the archives's files
             __genparams = {'arcpath': __arcpath, 'delimiter': __delimiter,
                             'genfull': __genfull, 'confoutput': __confoutput,
                             'listoutput': __listoutput, 'fulloutput': __fulloutput,
-                            'getallhashes': __getallhashes} 
+                            'getallhashes': __getallhashes, 'hashtype': __hashtype} 
             # generate a list of files for a tree
             if os.path.isdir(__arcpath):
                 self.__bck = GenerateListForTree(__genparams)

@@ -119,3 +119,15 @@ functional-tests/custom-conf-filelist-zip/conf/custom-conf-filelist-zip.conf
 functional-tests/custom-conf-filelist-zip/custom-conf-filelist-zip.conf
 functional-tests/custom-conf-filelist-zip/custom-conf-filelist-zip.list
 functional-tests/custom-conf-filelist-zip/list/custom-conf-filelist-zip.list
+functional-tests/hashtype-option/bzip2/hashtype-option.conf
+functional-tests/hashtype-option/bzip2/hashtype-option.list
+functional-tests/hashtype-option/gzip/hashtype-option.conf
+functional-tests/hashtype-option/gzip/hashtype-option.list
+functional-tests/hashtype-option/lzma/hashtype-option.conf
+functional-tests/hashtype-option/lzma/hashtype-option.list
+functional-tests/hashtype-option/tar-gz/hashtype-option.conf
+functional-tests/hashtype-option/tar-gz/hashtype-option.list
+functional-tests/hashtype-option/tree/hashtype-option.conf
+functional-tests/hashtype-option/tree/hashtype-option.list
+functional-tests/hashtype-option/zip/hashtype-option.conf
+functional-tests/hashtype-option/zip/hashtype-option.list

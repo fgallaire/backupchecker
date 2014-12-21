@@ -38,6 +38,7 @@ class GenerateListForZip(GenerateList):
         self.__confoutput = __genparams['confoutput']
         self.__fulloutput = __genparams['fulloutput']
         self.__getallhashes  = __genparams['getallhashes']
+        self.__hashtype = __genparams['hashtype']
         try:
             __zip = zipfile.ZipFile(self.__arcpath, 'r', allowZip64=True)
             self.__main(__zip)
@@ -50,7 +51,10 @@ class GenerateListForZip(GenerateList):
         __listoffiles = ['[files]\n']
         __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
         if self.__getallhashes:
-            __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
+            if not self.__hashtype:
+                __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
+            else:
+                __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} {hashtype}{delimiter}{value}\n'.format(value='{}', hashtype=self.__hashtype, delimiter=self.__delimiter)
         else:
             __onelinewithouthash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
         __onelinenoexternalattr = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
@@ -80,7 +84,10 @@ class GenerateListForZip(GenerateList):
                     logging.warning(__warn)
                 if __fileinfo.external_attr != 0 and __type == 'f':
                     if self.__getallhashes:
-                        __hash = get_hash(__zip.open(__fileinfo.filename, 'r'), 'md5')
+                        if not self.__hashtype:
+                            __hash = get_hash(__zip.open(__fileinfo.filename, 'r'), 'md5')
+                        else:
+                            __hash = get_hash(__zip.open(__fileinfo.filename, 'r'), self.__hashtype)
                         __listoffiles.append(__onelinewithhash.format(__fileinfo.filename,
                                                                 str(__fileinfo.file_size),
                                                                 str(__uid),

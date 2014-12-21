@@ -65,6 +65,11 @@ class CliParse:
         __parser.add_argument('-H', '--hashes', dest='getallhashes',
             action='store_true',
             help='generate the hash sum of each encountered file in the backup')
+        __parser.add_argument('--hashtype', dest='hashtype',
+            action='store',
+            default='',
+            help='the type of the hash sum to use while generating configurations for the archive',
+            metavar='HASHTYPE')
         __parser.add_argument('-l', '--log', dest='logfile',
             action='store',
             default=os.path.join(os.getcwd(), 'a.out'),
@@ -137,6 +142,10 @@ class CliParse:
                 print('The configuration directory or file does not exist: {}'.format(__options.confpath))
                 sys.exit(1)
             __options.confpath = os.path.abspath(__options.confpath)
+        # Check that the hash type for the option --hashtype is available
+        if __options.hashtype and (__options.hashtype not in algorithms_guaranteed):
+            print('The hash type {} you specified is not available'.format(__options.hashtype))
+            sys.exit(1)
         self.__options = __options
 
     @property
