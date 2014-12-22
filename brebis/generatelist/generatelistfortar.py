@@ -103,6 +103,7 @@ class GenerateListForTar(GenerateList):
                                                                         __hash,
                                                                         __tarinfo.linkname))
                             else:
+                                # we use exceptions-file option but the file is not concerned by an exception
                                 __listoffiles.append(__onelinewithouthash.format(__tarinfo.name,
                                                                         str(__tarinfo.size),
                                                                         str(__tarinfo.uid),
@@ -112,7 +113,7 @@ class GenerateListForTar(GenerateList):
                                                                         float(__tarinfo.mtime),
                                                                         __tarinfo.linkname))
                     else:
-                        # format the retrieved information
+                        # we don't use the --exceptions-file option
                         __listoffiles.append(__onelinewithouthash.format(__tarinfo.name,
                                                                 str(__tarinfo.size),
                                                                 str(__tarinfo.uid),
