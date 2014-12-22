@@ -131,3 +131,7 @@ functional-tests/hashtype-option/tree/hashtype-option.conf
 functional-tests/hashtype-option/tree/hashtype-option.list
 functional-tests/hashtype-option/zip/hashtype-option.conf
 functional-tests/hashtype-option/zip/hashtype-option.list
+functional-tests/exceptions-file-option/tar-gz/exceptions-file-option.conf
+functional-tests/exceptions-file-option/tar-gz/exceptions-file-option.list
+functional-tests/exceptions-file-option/zip/exceptions-file-option.conf
+functional-tests/exceptions-file-option/zip/exceptions-file-option.list
