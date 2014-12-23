@@ -3852,16 +3852,40 @@ class Test_exceptions_file_option:
         __testdir = os.path.join(ABSPATH, 'functional-tests/exceptions-file-option')
         __targzdir = os.path.join(__testdir, 'tar-gz')
         __zipdir = os.path.join(__testdir, 'zip')
+        __gzipdir = os.path.join(__testdir, 'gzip')
+        __bzip2dir = os.path.join(__testdir, 'bzip2')
+        __lzmadir = os.path.join(__testdir, 'lzma')
+        __treedir = os.path.join(__testdir, 'tree')
         __resulttargzfile = os.path.join(__targzdir, 'exceptions-file-option.list')
         __resultzipfile = os.path.join(__zipdir, 'exceptions-file-option.list')
+        __resultgzipfile = os.path.join(__gzipdir, 'exceptions-file-option.list')
+        __resultbzip2file = os.path.join(__bzip2dir, 'exceptions-file-option.list')
+        __resultlzmafile = os.path.join(__lzmadir, 'exceptions-file-option.list')
+        __resulttreefile = os.path.join(__treedir, 'exceptions-file-option.list')
         __targzexceptionsfile = os.path.join(__targzdir, 'targzexceptionsfile')
         __zipexceptionsfile = os.path.join(__zipdir, 'zipexceptionsfile')
+        __gzipexceptionsfile = os.path.join(__gzipdir, 'gzipexceptionsfile')
+        __bzip2exceptionsfile = os.path.join(__bzip2dir, 'bzip2exceptionsfile')
+        __lzmaexceptionsfile = os.path.join(__lzmadir, 'lzmaexceptionsfile')
+        __treeexceptionsfile = os.path.join(__treedir, 'treeexceptionsfile')
         __targzarchive = os.path.join(__targzdir, 'exceptions-file-option.tar.gz')
         __ziparchive = os.path.join(__zipdir, 'exceptions-file-option.zip')
+        __gziparchive = os.path.join(__gzipdir, 'exceptions-file-option.gz')
+        __bzip2archive = os.path.join(__bzip2dir, 'exceptions-file-option.bz2')
+        __lzmaarchive = os.path.join(__lzmadir, 'exceptions-file-option.xz')
+        __treearchive = os.path.join(__treedir, 'exceptions-file-option')
         if os.path.exists(__resulttargzfile):
             remove(__resulttargzfile)
         if os.path.exists(__resultzipfile):
             remove(__resultzipfile)
+        if os.path.exists(__resultgzipfile):
+            remove(__resultgzipfile)
+        if os.path.exists(__resultbzip2file):
+            remove(__resultbzip2file)
+        if os.path.exists(__resultlzmafile):
+            remove(__resultlzmafile)
+        if os.path.exists(__resulttreefile):
+            remove(__resulttreefile)
         # tar.gz
         if 'PYTHONEXE' in environ:
             __retcode1 = subprocess.call([PYTHONEXE, EXE, '-O', __targzdir, OPTEXCEPTIONSFILE, __targzexceptionsfile, OPTFULLGEN, __targzarchive])
@@ -3872,13 +3896,31 @@ class Test_exceptions_file_option:
             __retcode2 = subprocess.call([PYTHONEXE, EXE, '-O', __zipdir, OPTEXCEPTIONSFILE, __zipexceptionsfile, OPTFULLGEN, __ziparchive])
         else:
             __retcode2 = subprocess.call([EXE, '-O', __zipdir, OPTEXCEPTIONSFILE, __zipexceptionsfile, OPTFULLGEN, __ziparchive])
-        if __retcode1 != 0 and __retcode2 != 0 : #and __retcode3 != 0 and __retcode4 != 0 and __retcode5 != 0:
-            #__queue.put('{} - {}return code:{} {} {} {} {}'.format(__testname, KOMSG, str(__retcode1), str(__retcode2), str(__retcode3), str(__retcode4), str(__retcode5), str(__retcode6)))
-            __queue.put('{} - {}return code:{} {}'.format(__testname, KOMSG, str(__retcode1), str(__retcode2)))
+        # gzip
+        if 'PYTHONEXE' in environ:
+            __retcode3 = subprocess.call([PYTHONEXE, EXE, '-O', __gzipdir, OPTEXCEPTIONSFILE, __gzipexceptionsfile, OPTFULLGEN, __gziparchive])
+        else:
+            __retcode3 = subprocess.call([EXE, '-O', __gzipdir, OPTEXCEPTIONSFILE, __gzipexceptionsfile, OPTFULLGEN, __gziparchive])
+        # bzip2
+        if 'PYTHONEXE' in environ:
+            __retcode4 = subprocess.call([PYTHONEXE, EXE, '-O', __bzip2dir, OPTEXCEPTIONSFILE, __bzip2exceptionsfile, OPTFULLGEN, __bzip2archive])
+        else:
+            __retcode4 = subprocess.call([EXE, '-O', __bzip2dir, OPTEXCEPTIONSFILE, __bzip2exceptionsfile, OPTFULLGEN, __bzip2archive])
+        # lzma
+        if 'PYTHONEXE' in environ:
+            __retcode5 = subprocess.call([PYTHONEXE, EXE, '-O', __lzmadir, OPTEXCEPTIONSFILE, __lzmaexceptionsfile, OPTFULLGEN, __lzmaarchive])
+        else:
+            __retcode5 = subprocess.call([EXE, '-O', __lzmadir, OPTEXCEPTIONSFILE, __lzmaexceptionsfile, OPTFULLGEN, __lzmaarchive])
+        # tree
+        if 'PYTHONEXE' in environ:
+            __retcode6 = subprocess.call([PYTHONEXE, EXE, '-O', __treedir, OPTEXCEPTIONSFILE, __treeexceptionsfile, OPTFULLGEN, __treearchive])
+        else:
+            __retcode6 = subprocess.call([EXE, '-O', __treedir, OPTEXCEPTIONSFILE, __treeexceptionsfile, OPTFULLGEN, __treearchive])
+        if __retcode1 != 0 and __retcode2 != 0 and __retcode3 != 0 and __retcode4 != 0 and __retcode5 != 0 and __retcode6 != 0 :
+            __queue.put('{} - {}return code:{} {} {} {} {}'.format(__testname, KOMSG, str(__retcode1), str(__retcode2), str(__retcode3), str(__retcode4), str(__retcode5), str(__retcode6)))
         else:
             __returnok = True
-            #for __test in [(__resulttargzfile, 'sha1'), (__resultgzipfile, 'sha224'), (__resultbzip2file, 'sha256'), (__resultlzmafile, 'sha384'), (__resultzipfile, 'sha512'), (__resulttreefile, 'sha1')]:
-            for __test in [(__resulttargzfile, 'sha1'), (__resultzipfile, 'sha224')]:
+            for __test in [(__resulttargzfile, 'sha1'), (__resultgzipfile, 'sha224'), (__resultbzip2file, 'sha384'), (__resultlzmafile, 'sha512'), (__resultzipfile, 'sha224'), (__resulttreefile, 'sha1')]:
                 with open(__test[0], 'r') as __file: 
                     __content = __file.read()
                     if __test[1] not in __content:

@@ -14,6 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import bz2
+import fnmatch
 import os
 import os.path
 import stat
@@ -37,6 +38,7 @@ class GenerateListForBzip2(GenerateList):
         self.__fulloutput = __genparams['fulloutput']
         self.__getallhashes  = __genparams['getallhashes']
         self.__hashtype = __genparams['hashtype']
+        self.__parsingexceptions = __genparams['parsingexceptions']
         __listoffiles = ['[files]\n']
         __filetype = 'f'
         __filehash = get_hash(bz2.BZ2File(__arcpath, 'r'), 'md5')
@@ -50,10 +52,25 @@ class GenerateListForBzip2(GenerateList):
                                     __filetype,
                                     __filehash))
         else:
-            __onelinewithouthash = '{value}{delimiter} type{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
-            __listoffiles.append(__onelinewithouthash.format(
-                                    os.path.split(__arcpath)[-1][:-4],
-                                    __filetype))
+            if self.__parsingexceptions :
+                for __file in self.__parsingexceptions:
+                    if fnmatch.fnmatch(os.path.split(__arcpath)[-1][:-4], __file):
+                        __filehash = get_hash(bz2.BZ2File(__arcpath, 'r'), self.__parsingexceptions[__file])
+                        __onelinewithhash = '{value}{delimiter} type{delimiter}{value} {hashtype}{delimiter}{value}\n'.format(value='{}', hashtype=self.__parsingexceptions[__file], delimiter=__delimiter)
+                        __listoffiles.append(__onelinewithhash.format(
+                                                os.path.split(__arcpath)[-1][:-4],
+                                                __filetype,
+                                                __filehash))
+                    else:
+                        __onelinewithouthash = '{value}{delimiter} type{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+                        __listoffiles.append(__onelinewithouthash.format(
+                                                os.path.split(__arcpath)[-1][:-4],
+                                                __filetype))
+            else:
+                __onelinewithouthash = '{value}{delimiter} type{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+                __listoffiles.append(__onelinewithouthash.format(
+                                        os.path.split(__arcpath)[-1][:-4],
+                                        __filetype))
 
         # define the flexible file list path
         __arcwithext = os.path.split(''.join([__arcpath[:-3], 'list']))[1]
