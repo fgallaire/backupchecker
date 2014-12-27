@@ -29,9 +29,10 @@ from brebis.generatelist.generatelistforzip import GenerateListForZip
 class ListType(object):
     '''The ListType class'''
 
-    def __init__(self, __options):
+    def __init__(self, __options, __parsingexceptions={}):
         '''The constructor for the ListType class.
         '''
+        self.__parsingexceptions = __parsingexceptions
         self.__main(__options)
 
     def __main(self, __options):
@@ -50,7 +51,8 @@ class ListType(object):
             __genparams = {'arcpath': __arcpath, 'delimiter': __delimiter,
                             'genfull': __genfull, 'confoutput': __confoutput,
                             'listoutput': __listoutput, 'fulloutput': __fulloutput,
-                            'getallhashes': __getallhashes, 'hashtype': __hashtype} 
+                            'getallhashes': __getallhashes, 'hashtype': __hashtype,
+                            'parsingexceptions': self.__parsingexceptions} 
             # generate a list of files for a tree
             if os.path.isdir(__arcpath):
                 self.__bck = GenerateListForTree(__genparams)

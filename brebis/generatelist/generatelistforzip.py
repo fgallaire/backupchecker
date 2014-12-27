@@ -17,6 +17,7 @@
 '''Generate a list of files from a zip archive'''
 
 import datetime
+import fnmatch
 import logging
 import os.path
 import stat
@@ -39,6 +40,7 @@ class GenerateListForZip(GenerateList):
         self.__fulloutput = __genparams['fulloutput']
         self.__getallhashes  = __genparams['getallhashes']
         self.__hashtype = __genparams['hashtype']
+        self.__parsingexceptions = __genparams['parsingexceptions']
         try:
             __zip = zipfile.ZipFile(self.__arcpath, 'r', allowZip64=True)
             self.__main(__zip)
@@ -97,13 +99,38 @@ class GenerateListForZip(GenerateList):
                                                                 __mtime,
                                                                 __hash))
                     else:
-                        __listoffiles.append(__onelinewithouthash.format(__fileinfo.filename,
-                                                                str(__fileinfo.file_size),
-                                                                str(__uid),
-                                                                str(__gid),
-                                                                __mode,
-                                                                __type,
-                                                                __mtime))
+                        # check if there are exceptions while parsing
+                        if self.__parsingexceptions:
+                            for __file in self.__parsingexceptions:
+                                if fnmatch.fnmatch(__fileinfo.filename, __file):
+                                    __hash = get_hash(__zip.open(__fileinfo.filename, 'r'), self.__parsingexceptions[__file])
+                                    __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} {hashtype}{delimiter}{value}\n'.format(value='{}', hashtype=self.__parsingexceptions[__file], delimiter=self.__delimiter)
+                                    __listoffiles.append(__onelinewithhash.format(__fileinfo.filename,
+                                                                            str(__fileinfo.file_size),
+                                                                            str(__uid),
+                                                                            str(__gid),
+                                                                            __mode,
+                                                                            __type,
+                                                                            __mtime,
+                                                                            __hash))
+                                else:
+                                    # we use exceptions-file option but the file is not concerned by an exception
+                                    __listoffiles.append(__onelinewithouthash.format(__fileinfo.filename,
+                                                                            str(__fileinfo.file_size),
+                                                                            str(__uid),
+                                                                            str(__gid),
+                                                                            __mode,
+                                                                            __type,
+                                                                            __mtime))
+                        else:
+                            # we don't use the --exceptions-file option
+                            __listoffiles.append(__onelinewithouthash.format(__fileinfo.filename,
+                                                                    str(__fileinfo.file_size),
+                                                                    str(__uid),
+                                                                    str(__gid),
+                                                                    __mode,
+                                                                    __type,
+                                                                    __mtime))
                 elif __fileinfo.external_attr != 0 and __type == 'd':
                     __listoffiles.append(__oneline.format(__fileinfo.filename,
                                                             str(__fileinfo.file_size),

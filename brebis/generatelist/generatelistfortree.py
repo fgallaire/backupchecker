@@ -13,6 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import fnmatch
 import os
 import os.path
 import stat
@@ -36,6 +37,7 @@ class GenerateListForTree(GenerateList):
         self.__fulloutput = __genparams['fulloutput']
         self.__getallhashes  = __genparams['getallhashes']
         self.__hashtype = __genparams['hashtype']
+        self.__parsingexceptions = __genparams['parsingexceptions']
         __listoffiles = ['[files]\n']
         __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
         if self.__getallhashes:
@@ -91,14 +93,41 @@ class GenerateListForTree(GenerateList):
                                                 str(self.__fileinfo.st_mtime),
                                                 __hash))
                     else:
-                        __listoffiles.append(__onelinewithouthash.format(
-                                                os.path.relpath(__filepath, __arcpath),
-                                                str(self.__fileinfo.st_size),
-                                                str(self.__fileinfo.st_uid),
-                                                str(self.__fileinfo.st_gid),
-                                                __filemode,
-                                                __type,
-                                                str(self.__fileinfo.st_mtime)))
+                        # check if there are exceptions while parsing
+                        if self.__parsingexceptions:
+                            for __file in self.__parsingexceptions:
+                                if fnmatch.fnmatch(os.path.relpath(__filepath, __arcpath), __file):
+                                    __hash = get_hash(open(__filepath, 'rb'), self.__parsingexceptions[__file])
+                                    __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} {hashtype}{delimiter}{value}\n'.format(value='{}', hashtype=self.__parsingexceptions[__file], delimiter=__delimiter)
+                                    __listoffiles.append(__onelinewithhash.format(
+                                                            os.path.relpath(__filepath, __arcpath),
+                                                            str(self.__fileinfo.st_size),
+                                                            str(self.__fileinfo.st_uid),
+                                                            str(self.__fileinfo.st_gid),
+                                                            __filemode,
+                                                            __type,
+                                                            str(self.__fileinfo.st_mtime),
+                                                            __hash))
+                                else:
+                                    # we use exceptions-file option but the file is not concerned by an exception
+                                    __listoffiles.append(__onelinewithouthash.format(
+                                                            os.path.relpath(__filepath, __arcpath),
+                                                            str(self.__fileinfo.st_size),
+                                                            str(self.__fileinfo.st_uid),
+                                                            str(self.__fileinfo.st_gid),
+                                                            __filemode,
+                                                            __type,
+                                                            str(self.__fileinfo.st_mtime)))
+                        else:
+                            # we don't use the --exceptions-file option
+                            __listoffiles.append(__onelinewithouthash.format(
+                                                    os.path.relpath(__filepath, __arcpath),
+                                                    str(self.__fileinfo.st_size),
+                                                    str(self.__fileinfo.st_uid),
+                                                    str(self.__fileinfo.st_gid),
+                                                    __filemode,
+                                                    __type,
+                                                    str(self.__fileinfo.st_mtime)))
                 elif __type == 's':
                     # extract hash sum of the file inside the archive
                     # extract file data and prepare data

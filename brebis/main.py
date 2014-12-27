@@ -21,6 +21,7 @@ import sys
 from brebis.checkbackups.checkbackups import CheckBackups
 from brebis.cliparse import CliParse
 from brebis.configurations import Configurations
+from brebis.exceptionsparsing import ExceptionsParsing
 from brebis.listtype import ListType
 
 class Main(object):
@@ -39,4 +40,8 @@ class Main(object):
             CheckBackups(__confs.configs, __options)
         else:
         # Analyze the type of the list to produce
-            ListType(__options)
+            if __options.parsingexceptions:
+                __exps = ExceptionsParsing(__options.parsingexceptions, __options.delimiter)
+                ListType(__options, __exps.exceptions)
+            else:
+                ListType(__options)

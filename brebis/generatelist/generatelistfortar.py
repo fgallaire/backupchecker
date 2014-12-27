@@ -16,6 +16,7 @@
 # Generate a list of files from a tar archive
 '''Generate a list of files from a tar archive'''
 
+import fnmatch
 import logging
 import os.path
 import tarfile
@@ -36,6 +37,7 @@ class GenerateListForTar(GenerateList):
         self.__fulloutput = __genparams['fulloutput']
         self.__getallhashes  = __genparams['getallhashes']
         self.__hashtype = __genparams['hashtype']
+        self.__parsingexceptions = __genparams['parsingexceptions']
         try:
             __tar = tarfile.open(self.__arcpath, 'r')
             self.__main(__tar)
@@ -48,9 +50,11 @@ class GenerateListForTar(GenerateList):
         __listoffiles = ['[files]\n']
         __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
         if self.__getallhashes:
+            # we get all the hash sums of files inside the backup
             if not self.__hashtype:
                 __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
             else:
+                # we switch the default hash sum
                 __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} {hashtype}{delimiter}{value}\n'.format(value='{}', hashtype=self.__hashtype, delimiter=self.__delimiter)
         else:
             __onelinewithouthash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
@@ -65,10 +69,12 @@ class GenerateListForTar(GenerateList):
                 __mode = '000'
             if __type == 'f':
                 if self.__getallhashes:
+                    # extract all hash sums from the archive
                     if not self.__hashtype:
                         # extract hash sum of the file inside the archive
                         __hash = get_hash(__tar.extractfile(__tarinfo.name), 'md5')
                     else:
+                        # switch the default hash sum type
                         __hash = get_hash(__tar.extractfile(__tarinfo.name), self.__hashtype)
                     # format the retrieved information
                     __listoffiles.append(__onelinewithhash.format(__tarinfo.name,
@@ -81,15 +87,41 @@ class GenerateListForTar(GenerateList):
                                                             __hash,
                                                             __tarinfo.linkname))
                 else:
-                    # format the retrieved information
-                    __listoffiles.append(__onelinewithouthash.format(__tarinfo.name,
-                                                            str(__tarinfo.size),
-                                                            str(__tarinfo.uid),
-                                                            str(__tarinfo.gid),
-                                                            __mode,
-                                                            __type,
-                                                            float(__tarinfo.mtime),
-                                                            __tarinfo.linkname))
+                    # check if there are exceptions while parsing
+                    if self.__parsingexceptions:
+                        for __file in self.__parsingexceptions:
+                            if fnmatch.fnmatch(__tarinfo.name, __file):
+                                __hash = get_hash(__tar.extractfile(__tarinfo.name), self.__parsingexceptions[__file])
+                                __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} {hashtype}{delimiter}{value}\n'.format(value='{}', hashtype=self.__parsingexceptions[__file], delimiter=self.__delimiter)
+                                __listoffiles.append(__onelinewithhash.format(__tarinfo.name,
+                                                                        str(__tarinfo.size),
+                                                                        str(__tarinfo.uid),
+                                                                        str(__tarinfo.gid),
+                                                                        __mode,
+                                                                        __type,
+                                                                        float(__tarinfo.mtime),
+                                                                        __hash,
+                                                                        __tarinfo.linkname))
+                            else:
+                                # we use exceptions-file option but the file is not concerned by an exception
+                                __listoffiles.append(__onelinewithouthash.format(__tarinfo.name,
+                                                                        str(__tarinfo.size),
+                                                                        str(__tarinfo.uid),
+                                                                        str(__tarinfo.gid),
+                                                                        __mode,
+                                                                        __type,
+                                                                        float(__tarinfo.mtime),
+                                                                        __tarinfo.linkname))
+                    else:
+                        # we don't use the --exceptions-file option
+                        __listoffiles.append(__onelinewithouthash.format(__tarinfo.name,
+                                                                str(__tarinfo.size),
+                                                                str(__tarinfo.uid),
+                                                                str(__tarinfo.gid),
+                                                                __mode,
+                                                                __type,
+                                                                float(__tarinfo.mtime),
+                                                                __tarinfo.linkname))
             elif __type == 'l' or __type == 's':
                 # format the retrieved information
                 __listoffiles.append(__onelinewithtarget.format(__tarinfo.name,

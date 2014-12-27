@@ -13,6 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import fnmatch
 import gzip
 import os
 import os.path
@@ -37,6 +38,7 @@ class GenerateListForGzip(GenerateList):
         self.__fulloutput  = __genparams['fulloutput']
         self.__getallhashes  = __genparams['getallhashes']
         self.__hashtype = __genparams['hashtype']
+        self.__parsingexceptions = __genparams['parsingexceptions']
         __listoffiles = ['[files]\n']
         __fileinfo = os.lstat(__arcpath)
         __filetype = 'f'
@@ -59,11 +61,28 @@ class GenerateListForGzip(GenerateList):
                                     __filetype,
                                     __filehash))
         else:
-            __onelinewithouthash = '{value}{delimiter} ={value} type{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
-            __listoffiles.append(__onelinewithouthash.format(
-                                    __filename,
-                                    str(__filesize),
-                                    __filetype))
+            if self.__parsingexceptions :
+                for __file in self.__parsingexceptions:
+                    if fnmatch.fnmatch(__filename, __file):
+                        __filehash = get_hash(gzip.open(__arcpath, 'rb'), self.__parsingexceptions[__file])
+                        __onelinewithhash = '{value}{delimiter} ={value} type{delimiter}{value} {hashtype}{delimiter}{value}\n'.format(value='{}', hashtype=self.__parsingexceptions[__file], delimiter=__delimiter)
+                        __listoffiles.append(__onelinewithhash.format(
+                                                __filename,
+                                                str(__filesize),
+                                                __filetype,
+                                                __filehash))
+                    else:
+                        __onelinewithouthash = '{value}{delimiter} ={value} type{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+                        __listoffiles.append(__onelinewithouthash.format(
+                                                __filename,
+                                                str(__filesize),
+                                                __filetype))
+            else:
+                __onelinewithouthash = '{value}{delimiter} ={value} type{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+                __listoffiles.append(__onelinewithouthash.format(
+                                        __filename,
+                                        str(__filesize),
+                                        __filetype))
 
         # define the flexible file list path
         __arcwithext = os.path.split(''.join([__arcpath[:-2], 'list']))[1]

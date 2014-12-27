@@ -56,6 +56,11 @@ class CliParse:
             default='|',
             help='delimiter of the fields for the list of files',
             metavar='DELIMITER')
+        __parser.add_argument('-E', '--exceptions-file', dest='parsingexceptions',
+            action='store',
+            default='',
+            help='the file with exceptions to normal Brebis behaviour while generating configuration files',
+            metavar='FILE')
         __group.add_argument('-g', '--gen-list', dest='genlist',
             action='store_true',
             help='generate a list of files inside a backup')
@@ -115,6 +120,11 @@ class CliParse:
         __logdir = os.path.split(__options.logfile)[0]
         if __logdir and not os.path.exists(__logdir):
             print('The directory where to write the log file {} does not exist'.format(__logdir))
+            sys.exit(1)
+        # Check the exceptions parsing file
+        __parsingexceptions = os.path.split(__options.parsingexceptions)[0]
+        if __parsingexceptions and not os.path.exists(__parsingexceptions):
+            print('The file with exceptions to comply while generating configurations file {} does not exist'.format(__parsingexceptions))
             sys.exit(1)
         # Check the configuration output directory
         __confoutput = __options.confoutput
