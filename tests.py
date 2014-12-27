@@ -357,21 +357,6 @@ class TestApp(unittest.TestCase):
         {'path':'foos/bar/foo3','expectedmode':'4644','mode':'4600'},
         {'path':'foos/foo1','expectedmode':'644','mode':'744'}])
 
-    @unittest.expectedFailure
-    def test_filetree_compare_mode(self):
-        '''Compare the mode of a file in the filetree and the
-        expected one
-        '''
-        __myobj = brebis.checkbackups.checktree.CheckTree({'path':
-            'tests/expected_mode/foo',
-             'files_list':
-                'tests/expected_mode/treefiles-list',
-             'type': 'tree', 'delimiter': ''}, Options())
-        __modes = __myobj.mismatched_modes
-        self.assertEqual(__modes, [
-        {'path':'foo1','expectedmode':'664','mode':'644'},
-        {'path':'bar','expectedmode':'754','mode':'755'}])
-
     def test_extract_types(self):
         '''Extract the expected file types'''
         __data, _ = ExpectedValues({'files_list':'tests/expected_type/files-list','delimiter':''}, Options()).data
@@ -401,27 +386,6 @@ class TestApp(unittest.TestCase):
         {'path':'foos/foo1','expectedtype':'f','type':'d'},
         {'path':'foos/foo5','expectedtype':'b','type':'f'},
         {'path':'foos/foo7','expectedtype':'o','type':'f'}])
-
-    @unittest.expectedFailure
-    def test_filetree_compare_type(self):
-        '''Compare the type of a file in the filetree and the
-        expected one - expecting to fail because of special files
-        '''
-        __myobj = brebis.checkbackups.checktree.CheckTree({'path':
-            'tests/expected_type/foos',
-             'files_list':
-                'tests/expected_type/filetree-list',
-             'type': 'tree', 'delimiter': ''}, Options())
-        __types = __myobj.mismatched_types
-        self.assertEqual(__types, [
-        {'path':'foos/foo2','expectedtype':'c','type':'f'},
-        {'path':'foos/foo1','expectedtype':'d','type':'f'},
-        {'path':'foos/foo3','expectedtype':'d','type':'f'},
-        {'path':'foos/foo4','expectedtype':'s','type':'f'},
-        {'path':'foos/foo6','expectedtype':'k','type':'f'},
-        {'path':'foos/foo5','expectedtype':'b','type':'f'},
-        {'path':'foos/bar','expectedtype':'f','type':'d'},
-        {'path':'foos/bar/bar1','expectedtype':'o','type':'f'}])
 
     def test_extract_hashes(self):
         '''Extract the expected file hashes'''
@@ -476,36 +440,6 @@ class TestApp(unittest.TestCase):
             'expectedhash': '744e19f5c4258a573400b5059747d88797b150c08456e406e6473bd777332c5f66afe66c5bf77820906b97961c124810',
             'hash': '644e19f5c4258a573400b5059747d88797b150c08456e406e6473bd777332c5f66afe66c5bf77820906b97961c124810'}])
 
-    @unittest.expectedFailure
-    def test_filetree_compare_hash(self):
-        '''Compare the hash of a file in the file tree and the
-        expected one - expecting to fail because of special files
-        '''
-        __myobj = brebis.checkbackups.checktree.CheckTree({'path':
-            'tests/expected_hash/bar',
-             'files_list':
-                'tests/expected_hash/filetree-list',
-             'type': 'tree', 'delimiter': ''}, Options())
-        __hashes = __myobj.mismatched_hashes
-        self.assertEqual(__hashes, [
-            {'path': 'bar/bar5', 
-            'expectedhash': '65305af91a511f6d091237f97e5dbccd1427c6f48bcd509acd0a71938bfe9d708cfb93c3d163f96b328f6cabb80b0860',
-            'hash':'55305af91a511f6d091237f97e5dbccd1427c6f48bcd509acd0a71938bfe9d708cfb93c3d163f96b328f6cabb80b0860'},
-            {'path': 'bar/bar4',
-            'expectedhash': 'd67f2596a1ef0893f176b0b68d6e1445a9acd5fda2f5a073f1318ff4b75e5b84',
-            'hash': 'c67f2596a1ef0893f176b0b68d6e1445a9acd5fda2f5a073f1318ff4b75e5b84'},
-            {'path': 'bar/bar6',
-            'expectedhash': 'g0fc5b14ab8b242e4c6462deee58a0a10fabdb4bc792174fdeec92cd12df8d5a7a8fed9545e2c109b3cecd345d970afaea0183ea0dd19371913cb55b23b9fc2e',
-            'hash': 'f0fc5b14ab8b242e4c6462deee58a0a10fabdb4bc792174fdeec92cd12df8d5a7a8fed9545e2c109b3cecd345d970afaea0183ea0dd19371913cb55b23b9fc2e'},
-            {'path': 'bar/bar3',
-            'expectedhash': '33975be818906ec2228074d2a4438ef8f78ec33792aac4d037ad8f95',
-            'hash': '23975be818906ec2228074d2a4438ef8f78ec33792aac4d037ad8f95'},
-            {'path': 'bar/bar1',
-            'expectedhash': '9151b18e6dd21a734890b56b5a15d24b',
-            'hash': '8151b18e6dd21a734890b56b5a15d24b'},
-            {'path': 'bar/bar2',
-            'expectedhash': '3676c9d706eb6f6b02eb5d67ba86a9b3e855c13d',
-            'hash': '2676c9d706eb6f6b02eb5d67ba86a9b3e855c13d'}])
 
     def test_zip_compare_hash(self):
         '''Compare the hash of a file in the zip archive and the
@@ -792,89 +726,6 @@ class TestApp(unittest.TestCase):
             'expectedhash': 'c177ca5b618ca613f27c44991eabb922d589691000fa602a0d2767ba84b317c653e6ed541f5922d201d2e65158eee4cfb7d87665bbe1d31c07f636bb25dac7b2',
             'hash': 'c177ca5b618ca613f27c44991eabb922d589691000fa602a0d2767ba84b317c653e6ed541f5922d201d2e65158eee4cfb7d87665bbe1d31c07f636bb25dac7b3'})
 
-    @unittest.expectedFailure
-    def test_tar_archive_compare_644_mode(self):
-        '''Compare the 644 mode of the tar archive and the
-        expected one
-        '''
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
-            'tests/expected_mode/arcmode/mode644.tar.gz',
-             'files_list':
-                'tests/expected_mode/arcmode/tarmode644-list',
-             'type': 'archive', 'delimiter': ''}, Options())
-        __modes = __myobj.mismatched_modes
-        self.assertEqual(__modes, [
-        {'path':'tests/expected_mode/arcmode/mode644.tar.gz','expectedmode':'654','mode':'644'}])
-
-    @unittest.expectedFailure
-    def test_tar_archive_compare_755_mode(self):
-        '''Compare the 755 mode of the tar archive and the
-        expected one
-        '''
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
-            'tests/expected_mode/arcmode/mode755.tar.gz',
-             'files_list':
-                'tests/expected_mode/arcmode/tarmode755-list',
-             'type': 'archive', 'delimiter': ''}, Options())
-        __modes = __myobj.mismatched_modes
-        self.assertEqual(__modes, [
-        {'path':'tests/expected_mode/arcmode/mode755.tar.gz','expectedmode':'750','mode':'755'}])
-
-    @unittest.expectedFailure
-    def test_tar_archive_compare_4644_mode(self):
-        '''Compare the 4644 mode of the tar archive and the
-        expected one - expecting to fail because of the sticky bit
-        '''
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
-            'tests/expected_mode/arcmode/mode4644.tar.gz',
-             'files_list':
-                'tests/expected_mode/arcmode/tarmode4644-list',
-             'type': 'archive', 'delimiter': ''}, Options())
-        __modes = __myobj.mismatched_modes
-        self.assertEqual(__modes, [
-        {'path':'tests/expected_mode/arcmode/mode4644.tar.gz','expectedmode':'4600','mode':'4644'}])
-
-    @unittest.expectedFailure
-    def test_zip_archive_compare_644_mode(self):
-        '''Compare the 644 mode of the zip archive and the
-        expected one
-        '''
-        __myobj = brebis.checkbackups.checkzip.CheckZip({'path':
-            'tests/expected_mode/arcmode/mode644.zip',
-             'files_list':
-                'tests/expected_mode/arcmode/zipmode644-list',
-             'type': 'archive', 'delimiter': ''}, Options())
-        __modes = __myobj.mismatched_modes
-        self.assertEqual(__modes, [
-        {'path':'tests/expected_mode/arcmode/mode644.zip','expectedmode':'654','mode':'644'}])
-
-    @unittest.expectedFailure
-    def test_zip_archive_compare_755_mode(self):
-        '''Compare the 755 mode of the zip archive and the
-        expected one
-        '''
-        __myobj = brebis.checkbackups.checkzip.CheckZip({'path':
-            'tests/expected_mode/arcmode/mode755.zip',
-             'files_list':
-                'tests/expected_mode/arcmode/zipmode755-list',
-             'type': 'archive', 'delimiter': ''}, Options())
-        __modes = __myobj.mismatched_modes
-        self.assertEqual(__modes, [
-        {'path':'tests/expected_mode/arcmode/mode755.zip','expectedmode':'750','mode':'755'}])
-
-    @unittest.expectedFailure
-    def test_zip_archive_compare_4644_mode(self):
-        '''Compare the 4644 mode of the zip archive and the
-        expected one - expecting to fail because of the sticky bit
-        '''
-        __myobj = brebis.checkbackups.checkzip.CheckZip({'path':
-            'tests/expected_mode/arcmode/mode4644.zip',
-             'files_list':
-                'tests/expected_mode/arcmode/zipmode4644-list',
-             'type': 'archive', 'delimiter': ''}, Options())
-        __modes = __myobj.mismatched_modes
-        self.assertEqual(__modes, [
-        {'path':'tests/expected_mode/arcmode/mode4644.zip','expectedmode':'4600','mode':'4644'}])
 
     def test_compare_tar_archive_uid_gid(self):
         '''Compare the uid and the gid of the tar archive itself
