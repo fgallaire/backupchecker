@@ -47,7 +47,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'brebis'
-copyright = '2014, Carl Chenet <chaica@brebisproject.org>'
+copyright = '2015, Carl Chenet <chaica@brebisproject.org>'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
