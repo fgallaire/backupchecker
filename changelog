@@ -1,8 +1,213 @@
+2014-12-29  Carl Chenet  <chaica@ohmytux.com>
+
+	* docs/source/use.rst:
+	update the doc for new --exceptions-file option
+	[c376e2fd8644] [tip]
+
+2014-12-28  Carl Chenet  <chaica@ohmytux.com>
+
+	* man/brebis.1:
+	update brebis manpage
+	[3de1ec608c64]
+
+	* brebis.py, brebis/applogger.py, brebis/archiveinfomsg.py,
+	brebis/checkbackups/checkarchive.py,
+	brebis/checkbackups/checkbackups.py,
+	brebis/checkbackups/checkbzip2.py, brebis/checkbackups/checkgzip.py,
+	brebis/checkbackups/checklzma.py, brebis/checkbackups/checktar.py,
+	brebis/checkbackups/checktree.py, brebis/checkbackups/checkzip.py,
+	brebis/checkfilelist.py, brebis/checkhashes.py, brebis/cliparse.py,
+	brebis/configurations.py, brebis/exceptionsparsing.py,
+	brebis/expectedvalues.py, brebis/generatelist/generatelist.py,
+	brebis/generatelist/generatelistforbzip2.py,
+	brebis/generatelist/generatelistforgzip.py,
+	brebis/generatelist/generatelistforlzma.py,
+	brebis/generatelist/generatelistfortar.py,
+	brebis/generatelist/generatelistfortree.py,
+	brebis/generatelist/generatelistforzip.py,
+	brebis/identifylimitations.py, brebis/listtype.py, brebis/main.py,
+	docs/source/conf.py, generate-archive.sh, scripts/brebis, setup.py,
+	tests.py:
+	update copyright email addresses and year
+	[9f4f23ff94ae]
+
+	* functionaltests.py:
+	decomment all test
+	[09cbbf9b9d1b]
+
+	* tests.py:
+	removing excpected failure/success tests
+	[106c42b6eac5]
+
+	* README:
+	minimal README indicating readthedocs
+	[cf19aa7d9322]
+
+	* --exceptions-file option allowing to select to generate hash sum
+	only for selected files
+	[1bc529d25ebc]
+
+2014-12-25  Carl Chenet  <chaica@ohmytux.com>
+
+	* tests.py:
+	unit tests work with --exceptions-file option
+	[b4a8b27cd530] <exceptions-file-option>
+
+2014-12-24  Carl Chenet  <chaica@ohmytux.com>
+
+	* .hgignore:
+	new files related to functional tests to ignore
+	[06b3698906da] <exceptions-file-option>
+
+	* brebis/generatelist/generatelistforbzip2.py,
+	brebis/generatelist/generatelistforgzip.py,
+	brebis/generatelist/generatelistforlzma.py,
+	brebis/generatelist/generatelistfortree.py, functional-tests
+	/exceptions-file-option/bzip2/bzip2exceptionsfile, functional-tests
+	/exceptions-file-option/bzip2/exceptions-file-option.bz2,
+	functional-tests/exceptions-file-option/gzip/exceptions-file-
+	option.gz, functional-tests/exceptions-file-
+	option/gzip/gzipexceptionsfile, functional-tests/exceptions-file-
+	option/lzma/exceptions-file-option.xz, functional-tests/exceptions-
+	file-option/lzma/lzmaexceptionsfile, functional-tests/exceptions-
+	file-option/tree/exceptions-file-option/bar/bar2, functional-tests
+	/exceptions-file-option/tree/exceptions-file-option/foo, functional-
+	tests/exceptions-file-option/tree/treeexceptionsfile,
+	functionaltests.py:
+	--exceptions-file works for gzip,bzip2,lzma,tree archive, with
+	functional tests
+	[f001093b4222] <exceptions-file-option>
+
+2014-12-22  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/generatelist/generatelistfortar.py,
+	brebis/generatelist/generatelistforzip.py:
+	--exceptions-file works for zip archive, with functional test
+	[b089ecda8cb3] <exceptions-file-option>
+
+	* .hgignore:
+	ignoring files for --exceptions-file option for both tar.gz and zip
+	archives
+	[a8c91a1fb0b4] <exceptions-file-option>
+
+	* brebis/cliparse.py, brebis/exceptionsparsing.py,
+	brebis/generatelist/generatelistfortar.py, brebis/listtype.py,
+	brebis/main.py, functional-tests/exceptions-file-option/tar-gz
+	/exceptions-file-option.tar.gz, functional-tests/exceptions-file-
+	option/tar-gz/targzexceptionsfile, functional-tests/exceptions-file-
+	option/zip/exceptions-file-option.zip, functional-tests/exceptions-
+	file-option/zip/zipexceptionsfile, functionaltests.py:
+	--exceptions-file works for tar.gz archive, with functional test
+	[ea69ad18d5e4] <exceptions-file-option>
+
+2014-12-21  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/cliparse.py:
+	add -E/--exceptions-file option
+	[c7ae5e48ca9e] <exceptions-file-option>
+
+	* --hashtype option to switch the default hash sum while generating
+	configuration files for an archive. fixes #59
+	[767d953e9f4c]
+
+	* .hgignore:
+	add files to ignore related to functional tests of the hashtype
+	option
+	[2843272e8fdc] <hashtype-option>
+
+2014-12-19  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/cliparse.py, brebis/generatelist/generatelistfortree.py,
+	functional-tests/hashtype-option/bzip2/hashtype-option.bz2,
+	functional-tests/hashtype-option/gzip/hashtype-option.gz,
+	functional-tests/hashtype-option/lzma/hashtype-option.xz,
+	functional-tests/hashtype-option/tar-gz/hashtype-option.tar.gz,
+	functional-tests/hashtype-option/tree/hashtype-option/bar/bar1,
+	functional-tests/hashtype-option/tree/hashtype-option/foo,
+	functional-tests/hashtype-option/tree/hashtype-option/foo2,
+	functional-tests/hashtype-option/zip/hashtype-option.zip,
+	functionaltests.py, tests.py:
+	--hashtype option to change the default hash sum to generate
+	configuration files
+	[f14d6fc2b43a] <hashtype-option>
+
+	* brebis/cliparse.py, brebis/generatelist/generatelistforbzip2.py,
+	brebis/generatelist/generatelistforgzip.py,
+	brebis/generatelist/generatelistforlzma.py,
+	brebis/generatelist/generatelistfortar.py,
+	brebis/generatelist/generatelistfortree.py,
+	brebis/generatelist/generatelistforzip.py, brebis/listtype.py:
+	--hashtype option works with tar.gz archive
+	[31c392a2dcb4] <hashtype-option>
+
+	* option -H or --hashes to explicitly required all hash sums for files
+	in the archive. fixes #64
+	[6db12999cb60]
+
+2014-12-18  Carl Chenet  <chaica@ohmytux.com>
+
+	* docs/source/conf.py:
+	update version number of doc
+	[792321952d70]
+
+	* use sphinx format docs to publish on readthedocs. fixes #45
+	[d930edca77f4]
+
+	* docs/Makefile, docs/source/authors.rst, docs/source/conf.py,
+	docs/source/configure.rst, docs/source/index.rst,
+	docs/source/install.rst, docs/source/license.rst,
+	docs/source/unsupported.rst, docs/source/use.rst:
+	add sphinx format docs to publish on readthedocs
+	[f7fa6b39c35e] <readthedocs>
+
+	* add sphinx format docs to publish on readthedocs
+	[3ba5b400c15a] <readthedocs>
+
+2014-12-16  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/generatelist/generatelist.py:
+	catches unicode exception and exits gracefully. fixes #65
+	[4ad756f09351]
+
+2014-12-15  Carl Chenet  <chaica@ohmytux.com>
+
+	* brebis/cliparse.py, brebis/generatelist/generatelistforbzip2.py,
+	brebis/generatelist/generatelistforgzip.py,
+	brebis/generatelist/generatelistforlzma.py,
+	brebis/generatelist/generatelistfortar.py,
+	brebis/generatelist/generatelistforzip.py, brebis/listtype.py,
+	functionaltests.py, tests.py:
+	option -H or --hashes to explicitly required all hash sums for files
+	in the archive
+	[5cba591d0b08] <no-md5-default-while-generating-conf>
+
+	* create the correct directories for tests using {list,both}
+	directories. fixes #63
+	[8896f1dcbca1]
+
+	* functionaltests.py:
+	create the correct directories for tests using {list,both}
+	directories
+	[b8de46d2803c] <fix-functional-tests>
+
+2014-10-11  Carl Chenet  <chaica@ohmytux.com>
+
+	* .hgignore, functional-tests/check-mtime-tar/check-mtime-tar.conf,
+	functional-tests/check-mtime-zip/check-mtime-zip.conf, functional-
+	tests/generate-apk-conf-files/generate-apk-conf-files.conf,
+	functionaltests.py:
+	fixing issues while switching laptops
+	[e83777833234]
+
 2014-07-30  Carl Chenet  <chaica@ohmytux.com>
+
+	* changelog:
+	update changelog
+	[1f3d990e20a3]
 
 	* brebis/cliparse.py:
 	bump to 0.10
-	[37c1106b2741] [tip]
+	[37c1106b2741]
 
 	* README:
 	bump to python3.4 and update brebis version
@@ -2782,17 +2987,6 @@
 	updating README
 	[95d79ac84890] [0.1]
 
-2011-06-25  Carl Chenet  <chaica@ohmytux.com>
-
-	* merge with most recent branch
-	[61e6084cd409]
-
-2011-05-16  Carl Chenet  <chaica@ohmytux.com>
-
-	* scripts/brebis:
-	added absolute path to main module
-	[8b42fb41f686]
-
 2011-09-22  Carl Chenet  <chaica@ohmytux.com>
 
 	* functional-tests/full-criteria-multiple-backups/a.out, functional-
@@ -3547,6 +3741,11 @@
 	fixed unpleasant syntax for the hash of the expected archive
 	[f7a4c8ab3f5e]
 
+2011-06-25  Carl Chenet  <chaica@ohmytux.com>
+
+	* merge with most recent branch
+	[61e6084cd409]
+
 2011-06-24  Carl Chenet  <chaica@ohmytux.com>
 
 	* brebis/configurations.py, tests.py,
@@ -3585,6 +3784,20 @@
 	hopefully last test for buildbot
 	[3a8c507b908d]
 
+2011-04-26  Carl Chenet  <chaica@ohmytux.com>
+
+	* setup.py:
+	added restrictions on python versions able to install Brebis
+	[d3c7cdf8c4c5]
+
+2011-05-16  Carl Chenet  <chaica@ohmytux.com>
+
+	* scripts/brebis:
+	added absolute path to main module
+	[8b42fb41f686]
+
+2011-05-15  Carl Chenet  <chaica@ohmytux.com>
+
 	* setup.py:
 	again again a test for buildbot
 	[49ac5f02b5f3]
@@ -3596,12 +3809,6 @@
 	* setup.py:
 	simple test for buildbot
 	[da265bc90b79]
-
-2011-04-26  Carl Chenet  <chaica@ohmytux.com>
-
-	* setup.py:
-	added restrictions on python versions able to install Brebis
-	[d3c7cdf8c4c5]
 
 2011-04-22  Carl Chenet  <chaica@ohmytux.com>
 
