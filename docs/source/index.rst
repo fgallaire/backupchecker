@@ -1,7 +1,7 @@
-Documentation for the Brebis project
-====================================
+Documentation for the Backup Checker project
+============================================
 
-You'll find below anything you need to install, configure or run Brebis.
+You'll find below anything you need to install, configure or run Backup Checker.
 
 Guide
 =====

@@ -1,7 +1,7 @@
-Configure Brebis
-================
+Configure Backup Checker
+========================
 
-You need two files in order to use Brebis, a file offering the configuration of the archive and another file giving the detail of what's inside the archive, let's call it the list of files. But don't worry, the option -G allows to generate both files from a given archive. The next sections offer the details of what parameter these files contain.
+You need two files in order to use Backup Checker, a file offering the configuration of the archive and another file giving the detail of what's inside the archive, let's call it the list of files. But don't worry, the option -G allows to generate both files from a given archive. The next sections offer the details of what parameter these files contain.
 
 Configuration of the archive
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
