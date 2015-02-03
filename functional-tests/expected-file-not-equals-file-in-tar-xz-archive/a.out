@@ -1,2 +1,0 @@
-WARNING:root:1 file with unexpected size while checking /home/chaica/progra/python/brebis/functional-tests/expected-file-not-equals-file-in-tar-xz-archive/expected-file-not-equals-file-in-tar-xz-archive.tar.xz: 
-WARNING:root:expected-file-greater-than-file-in-tar-xz-archive/foo size is 175. Should have been 10240.

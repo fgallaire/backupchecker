@@ -1,3 +1,0 @@
-WARNING:root:/home/chaica/progra/python/brebis/functional-tests/unsupported-parameters-zip-archive/unsupported-parameters-zip-archive.zip: The required parameter target is not supported by this type of archive. Ignoring it.
-WARNING:root:/home/chaica/progra/python/brebis/functional-tests/unsupported-parameters-zip-archive/unsupported-parameters-zip-archive.zip contains 1 file with unexpected type:
-WARNING:root:test/foo2/toto2 is a regular file. Should have been a symbolic link.
