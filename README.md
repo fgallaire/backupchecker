@@ -25,3 +25,6 @@ or [read it online](https://backupchecker.readthedocs.org/en/latest/).
 
 Carl Chenet <chaica@backupchecker.com>
 
+### License
+
+This software comes under the terms of the GPLv3+. See the LICENSE file for the complete text of the license.
