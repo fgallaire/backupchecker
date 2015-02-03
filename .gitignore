@@ -1,7 +1,7 @@
 syntax: glob
 
 *.pyc
-**/a.out
+a.out
 functional-tests/expected-generated-list-for-bzip2-archive/expected-generated-list-for-bzip2-archive.list
 functional-tests/expected-generated-list-for-gzip-archive/expected-generated-list-for-gzip-archive.list
 functional-tests/expected-generated-list-for-tar-archive/expected-generated-list-for-tar-archive.list
