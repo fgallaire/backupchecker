@@ -1,6 +1,6 @@
 #!/usr/bin/python3.4
 # -*- coding: utf-8 -*-
-# Copyright © 2015 Carl Chenet <chaica@brebisproject.org>
+# Copyright © 2015 Carl Chenet <chaica@backupcheckerproject.org>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -24,7 +24,7 @@ import sys
 
 import functionaltests
 
-EXE = './brebis.py'
+EXE = './backupchecker.py'
 OPTCONFIG = '-c'
 OPTDEL = '-d'
 OPTEXCEPTIONSFILE = '-E'
@@ -2606,9 +2606,9 @@ class Test_checkarchive_supported_types_equals_listtype_supported_types:
         # store them in sets and compare them
         __queue = q
         __testname = self.__class__.__name__
-        with open('brebis/checkbackups/checkbackups.py') as __f1:
+        with open('backupchecker/checkbackups/checkbackups.py') as __f1:
             __checkarchivescode = __f1.readlines()
-        with open('brebis/listtype.py') as __f2:
+        with open('backupchecker/listtype.py') as __f2:
             __listtypecode = __f2.readlines()
         __checkarchivestypes = set()
         __listtypetypes = set()

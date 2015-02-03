@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2015 Carl Chenet <chaica@brebisproject.org>
+# Copyright © 2015 Carl Chenet <chaica@backupcheckerproject.org>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -20,7 +20,7 @@ import logging
 import os.path
 import sys
 
-from brebis.checkhashes import get_hash
+from backupchecker.checkhashes import get_hash
 
 class GenerateList:
     '''The GenerateList class'''

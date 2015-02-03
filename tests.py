@@ -1,6 +1,6 @@
 #!/usr/bin/python3.4
 # -*- coding: utf-8 -*-
-# Copyright © 2015 Carl Chenet <chaica@brebisproject.org>
+# Copyright © 2015 Carl Chenet <chaica@backupcheckerproject.org>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -26,24 +26,24 @@ import tarfile
 import unittest
 import zipfile
 
-import brebis.applogger
-import brebis.archiveinfomsg
-import brebis.checkbackups.checkarchive
-import brebis.checkbackups.checkbackups
-import brebis.checkbackups.checkbzip2
-import brebis.checkbackups.checkgzip
-import brebis.checkbackups.checklzma
-import brebis.checkhashes
-import brebis.checkbackups.checktar
-import brebis.checkbackups.checktree
-import brebis.checkbackups.checkzip
-import brebis.cliparse
-import brebis.configurations
-from brebis.expectedvalues import ExpectedValues
-import brebis.generatelist.generatelistfortar
-import brebis.generatelist.generatelistforbzip2
-import brebis.listtype
-import brebis.main
+import backupchecker.applogger
+import backupchecker.archiveinfomsg
+import backupchecker.checkbackups.checkarchive
+import backupchecker.checkbackups.checkbackups
+import backupchecker.checkbackups.checkbzip2
+import backupchecker.checkbackups.checkgzip
+import backupchecker.checkbackups.checklzma
+import backupchecker.checkhashes
+import backupchecker.checkbackups.checktar
+import backupchecker.checkbackups.checktree
+import backupchecker.checkbackups.checkzip
+import backupchecker.cliparse
+import backupchecker.configurations
+from backupchecker.expectedvalues import ExpectedValues
+import backupchecker.generatelist.generatelistfortar
+import backupchecker.generatelist.generatelistforbzip2
+import backupchecker.listtype
+import backupchecker.main
 
 # !! logging module uses a single logger for the whole file
 TESTLOG = 'tests/testlog'
@@ -63,21 +63,21 @@ class TestApp(unittest.TestCase):
 
     def test_applogger(self):
         '''Test the AppLoggerclass'''
-        brebis.applogger.AppLogger(TESTLOG)
+        backupchecker.applogger.AppLogger(TESTLOG)
         self.assertEqual(True, str(logging.getLogger('applogger')).startswith('<logging.Logger object at'))
         
     def test_checkbackup(self):
         '''Test the CheckBackup class'''
         _logfile = TESTLOG
-        brebis.applogger.AppLogger(_logfile)
-        brebis.checkbackups.checkbackups.CheckBackups({'essai': {'path': 'tests/tar_gz_archive_content/essai.tar.gz', 'files_list': 'tests/tar_gz_archive_content/essai-list', 'type': 'archive','delimiter':''}, 'essai2': {'path': 'tests/tar_bz2_archive_content/titi.tar.bz2', 'files_list': 'tests/tar_bz2_archive_content/essai2-list', 'type': 'archive','delimiter':''}}, Options())
+        backupchecker.applogger.AppLogger(_logfile)
+        backupchecker.checkbackups.checkbackups.CheckBackups({'essai': {'path': 'tests/tar_gz_archive_content/essai.tar.gz', 'files_list': 'tests/tar_gz_archive_content/essai-list', 'type': 'archive','delimiter':''}, 'essai2': {'path': 'tests/tar_bz2_archive_content/titi.tar.bz2', 'files_list': 'tests/tar_bz2_archive_content/essai2-list', 'type': 'archive','delimiter':''}}, Options())
         with open(_logfile) as _res:
             self.assertIn('WARNING:root:1 file missing in tests/tar_gz_archive_content/essai.tar.gz: \nWARNING:root:essai/dir/titi\n', _res.read())
 
     def test_checktar_missing_files(self):
         '''Check if the CheckTar class returns a missing file'''
         _missingfiles = []
-        _missingfiles = brebis.checkbackups.checktar.CheckTar({'path':
+        _missingfiles = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/tar_gz_archive_content/essai.tar.gz',
              'files_list':
                 'tests/tar_gz_archive_content/essai-list',
@@ -87,7 +87,7 @@ class TestApp(unittest.TestCase):
     def test_checktar_missing_equality(self):
         '''Check if the CheckTar class returns a dictionary with a file whose size should have been equal with the expected size'''
         __missing_equality = []
-        __missing_equality = brebis.checkbackups.checktar.CheckTar({'path':
+        __missing_equality = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/file_size/essai.tar.bz2',
              'files_list':
                 'tests/file_size/essai-list',
@@ -97,7 +97,7 @@ class TestApp(unittest.TestCase):
     def test_checktar_missing_bigger_than(self):
         '''Check if the CheckTar class returns a dictionary with a file whose size should have been bigger than the expected size'''
         __missing_bigger_than = []
-        __missing_bigger_than = brebis.checkbackups.checktar.CheckTar({'path':
+        __missing_bigger_than = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/file_size/essai.tar.bz2',
              'files_list':
                 'tests/file_size/essai-list',
@@ -107,7 +107,7 @@ class TestApp(unittest.TestCase):
     def test_checktar_missing_smaller_than(self):
         '''Check if the CheckTar class returns a dictionary with a file whose size should have been smaller than the expected size'''
         __missing_smaller_than = []
-        __missing_smaller_than = brebis.checkbackups.checktar.CheckTar({'path':
+        __missing_smaller_than = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/file_size/essai.tar.bz2',
              'files_list':
                 'tests/file_size/essai-list',
@@ -117,7 +117,7 @@ class TestApp(unittest.TestCase):
     def test_checktree_missing_files(self):
         '''Check if the CheckTar class returns a missing file'''
         __missing_files = []
-        __missing_files = brebis.checkbackups.checktree.CheckTree({'path':
+        __missing_files = backupchecker.checkbackups.checktree.CheckTree({'path':
             'tests/filetree/foo',
              'files_list':
                 'tests/filetree/filelist',
@@ -127,7 +127,7 @@ class TestApp(unittest.TestCase):
     def test_checktree_missing_equality(self):
         '''Check if the CheckTree class returns a dictionary with a file whose size should have been equal with the expected size'''
         __missing_equality= []
-        __missing_equality = brebis.checkbackups.checktree.CheckTree({'path':
+        __missing_equality = backupchecker.checkbackups.checktree.CheckTree({'path':
             'tests/filetree/foo',
              'files_list':
                 'tests/filetree/filelist',
@@ -137,7 +137,7 @@ class TestApp(unittest.TestCase):
     def test_checktree_missing_bigger_than(self):
         '''Check if the CheckTree class returns a dictionary with a file whose size should have been bigger than the expected size'''
         __missing_bigger_than = []
-        __missing_bigger_than = brebis.checkbackups.checktree.CheckTree({'path':
+        __missing_bigger_than = backupchecker.checkbackups.checktree.CheckTree({'path':
             'tests/filetree/foo',
              'files_list':
                 'tests/filetree/filelist',
@@ -147,7 +147,7 @@ class TestApp(unittest.TestCase):
     def test_checktree_missing_smaller_than(self):
         '''Check if the CheckTree class returns a dictionary with a file whose size should have been smaller than the expected size'''
         __missing_smaller_than = []
-        __missing_smaller_than = brebis.checkbackups.checktree.CheckTree({'path':
+        __missing_smaller_than = backupchecker.checkbackups.checktree.CheckTree({'path':
             'tests/filetree/foo',
              'files_list':
                 'tests/filetree/filelist',
@@ -156,14 +156,14 @@ class TestApp(unittest.TestCase):
 
 #######################################################################################
 #
-# Testing the brebis/checkbackup/checkgzip module
+# Testing the backupchecker/checkbackup/checkgzip module
 #
 #######################################################################################
 
     def test_checkgzip_missing_files(self):
         '''Check if the CheckGzip class returns a missing file'''
         _missing_files = []
-        _missing_files = brebis.checkbackups.checkgzip.CheckGzip({'path':
+        _missing_files = backupchecker.checkbackups.checkgzip.CheckGzip({'path':
             'tests/gzip/mygzip.gz',
              'files_list':
                 'tests/gzip/mygzip-list',
@@ -173,7 +173,7 @@ class TestApp(unittest.TestCase):
     def test_checkgzip_missing_equality(self):
         '''Check if the CheckGzip class returns a dictionary with a file whose size should have been equal with the expected size'''
         __missing_equality = []
-        __missing_equality = brebis.checkbackups.checkgzip.CheckGzip({'path':
+        __missing_equality = backupchecker.checkbackups.checkgzip.CheckGzip({'path':
             'tests/file_size/mygzip.gz',
              'files_list':
                 'tests/file_size/mygzip-list',
@@ -183,7 +183,7 @@ class TestApp(unittest.TestCase):
     def test_checkgzip_missing_bigger_than(self):
         '''Check if the CheckGzip class returns a dictionary with a file whose size should have been bigger than the expected size'''
         __missing_bigger_than= []
-        __missing_bigger_than = brebis.checkbackups.checkgzip.CheckGzip({'path':
+        __missing_bigger_than = backupchecker.checkbackups.checkgzip.CheckGzip({'path':
             'tests/file_size/missing-bigger-than/mygzip.gz',
              'files_list':
                 'tests/file_size/missing-bigger-than/mygzip-list',
@@ -193,7 +193,7 @@ class TestApp(unittest.TestCase):
     def test_checkgzip_missing_smaller_than(self):
         '''Check if the CheckGzip class returns a dictionary with a file whose size should have been smaller than the expected size'''
         __missing_smaller_than= []
-        __missing_smaller_than = brebis.checkbackups.checkgzip.CheckGzip({'path':
+        __missing_smaller_than = backupchecker.checkbackups.checkgzip.CheckGzip({'path':
             'tests/file_size/missing-smaller-than/mygzip.gz',
              'files_list':
                 'tests/file_size/missing-smaller-than/mygzip-list',
@@ -202,14 +202,14 @@ class TestApp(unittest.TestCase):
 
 #######################################################################################
 #
-# Testing the brebis/checkbackup/checklzma module
+# Testing the backupchecker/checkbackup/checklzma module
 #
 #######################################################################################
 
     def test_checklzma_missing_files(self):
         '''Check if the CheckLzma class returns a missing file'''
         _missing_files = []
-        _missing_files = brebis.checkbackups.checklzma.CheckLzma({'path':
+        _missing_files = backupchecker.checkbackups.checklzma.CheckLzma({'path':
             'tests/lzma/mylzma.xz',
              'files_list':
                 'tests/lzma/mylzma-list',
@@ -218,14 +218,14 @@ class TestApp(unittest.TestCase):
 
 #######################################################################################
 #
-# Testing the brebis/checkbackup/checkzip module
+# Testing the backupchecker/checkbackup/checkzip module
 #
 #######################################################################################
 
     def test_checkzip_missing_files(self):
         '''Check if the CheckZip class returns a missing file'''
         _missing_files = []
-        _missing_files = brebis.checkbackups.checkzip.CheckZip({'path':
+        _missing_files = backupchecker.checkbackups.checkzip.CheckZip({'path':
             'tests/zip/myzip.zip',
              'files_list':
                 'tests/zip/myzip-list',
@@ -235,7 +235,7 @@ class TestApp(unittest.TestCase):
     def test_checkzip_missing_equality(self):
         '''Check if the CheckZip class returns a dictionary with a file whose size should have been equal with the expected size'''
         __missing_equality = []
-        __missing_equality = brebis.checkbackups.checkzip.CheckZip({'path':
+        __missing_equality = backupchecker.checkbackups.checkzip.CheckZip({'path':
             'tests/file_size/myzip.zip',
              'files_list':
                 'tests/file_size/essai-list2',
@@ -245,7 +245,7 @@ class TestApp(unittest.TestCase):
     def test_checkzip_missing_bigger_than(self):
         '''Check if the CheckZip class returns a dictionary with a file whose size should have been bigger than the expected size'''
         __missing_bigger_than= []
-        __missing_bigger_than = brebis.checkbackups.checkzip.CheckZip({'path':
+        __missing_bigger_than = backupchecker.checkbackups.checkzip.CheckZip({'path':
             'tests/file_size/myzip.zip',
              'files_list':
                 'tests/file_size/essai-list2',
@@ -255,7 +255,7 @@ class TestApp(unittest.TestCase):
     def test_checkzip_missing_smaller_than(self):
         '''Check if the CheckZip class returns a dictionary with a file whose size should have been smaller than the expected size'''
         __missing_smaller_than= []
-        __missing_smaller_than = brebis.checkbackups.checkzip.CheckZip({'path':
+        __missing_smaller_than = backupchecker.checkbackups.checkzip.CheckZip({'path':
             'tests/file_size/myzip.zip',
              'files_list':
                 'tests/file_size/essai-list2',
@@ -264,20 +264,20 @@ class TestApp(unittest.TestCase):
 
 #######################################################################################
 #
-# Testing the brebis/configurations module
+# Testing the backupchecker/configurations module
 #
 #######################################################################################
 
     def test_configurations(self):
         '''Test the Configurations.configs attribute of the Configurations class'''
         __path = os.path.abspath('tests/test_conf/')
-        __res = brebis.configurations.Configurations(__path).configs
+        __res = backupchecker.configurations.Configurations(__path).configs
         self.assertEqual({'essai': {'path': os.path.normpath(os.path.join(__path,'essai.tar.gz')), 'sha512': None, 'files_list': os.path.normpath(os.path.join(__path,'essai-list')), 'type': 'archive', 'delimiter': '|'}}, __res)
 
     def test_configurations_with_subdir(self):
         '''Test the Configurations.configs attribute of the Configurations class'''
         __path = os.path.abspath('tests/test_conf/subdir/')
-        __res = brebis.configurations.Configurations(__path).configs
+        __res = backupchecker.configurations.Configurations(__path).configs
         self.assertEqual({'essai2': {'path': os.path.normpath(os.path.join(__path, 'toto/essai.tar.gz')), 'sha512': None, 'files_list': os.path.normpath(os.path.join(__path, 'toto/essai-list')), 'type': 'archive', 'delimiter': None}}, __res)
 
     def test_configurations_strip_gpg_header(self):
@@ -285,7 +285,7 @@ class TestApp(unittest.TestCase):
         __base = os.path.abspath('tests/test_conf_gpg/')
         __path = os.path.join(__base, 'archive.conf')
         __strippedfilepath = os.path.join(__base, 'result')
-        __myobj = brebis.configurations.Configurations(__path)
+        __myobj = backupchecker.configurations.Configurations(__path)
         with open(__path) as __myfile:
             __newfile = __myobj.strip_gpg_header(__myfile, __path)
         with open(__strippedfilepath) as __good:
@@ -294,7 +294,7 @@ class TestApp(unittest.TestCase):
 
 #######################################################################################
 #
-# Testing the brebis/expectedvalues module
+# Testing the backupchecker/expectedvalues module
 #
 #######################################################################################
     def test_expected_values(self):
@@ -322,7 +322,7 @@ class TestApp(unittest.TestCase):
         '''
         __uids = []
         __gids = []
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+        __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/expected_uid_gid/foo.tar.gz',
              'files_list':
                 'tests/expected_uid_gid/files-list',
@@ -345,7 +345,7 @@ class TestApp(unittest.TestCase):
         '''Compare the mode of a file in the archive and the
         expected one
         '''
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+        __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/expected_mode/foos.tar.gz',
              'files_list':
                 'tests/expected_mode/files-list',
@@ -372,7 +372,7 @@ class TestApp(unittest.TestCase):
         '''Compare the type of a file in the archive and the
         expected one
         '''
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+        __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/expected_type/foos.tar.gz',
              'files_list':
                 'tests/expected_type/files-list',
@@ -414,7 +414,7 @@ class TestApp(unittest.TestCase):
         '''Compare the hash of a file in the tar archive and the
         expected one
         '''
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+        __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/expected_hash/foos.tar.gz',
              'files_list':
                 'tests/expected_hash/files-list',
@@ -445,7 +445,7 @@ class TestApp(unittest.TestCase):
         '''Compare the hash of a file in the zip archive and the
         expected one
         '''
-        __myobj = brebis.checkbackups.checkzip.CheckZip({'path':
+        __myobj = backupchecker.checkbackups.checkzip.CheckZip({'path':
             'tests/expected_hash/bar.zip',
              'files_list':
                 'tests/expected_hash/zip-list',
@@ -475,7 +475,7 @@ class TestApp(unittest.TestCase):
         '''Compare the hash of a file in the gzip archive and the
         expected one
         '''
-        __myobj = brebis.checkbackups.checkgzip.CheckGzip({'path':
+        __myobj = backupchecker.checkbackups.checkgzip.CheckGzip({'path':
             'tests/expected_hash/bar.gz',
              'files_list':
                 'tests/expected_hash/gzip-list',
@@ -490,7 +490,7 @@ class TestApp(unittest.TestCase):
         '''Compare the hash of a file in the lzma archive and the
         expected one
         '''
-        __myobj = brebis.checkbackups.checklzma.CheckLzma({'path':
+        __myobj = backupchecker.checkbackups.checklzma.CheckLzma({'path':
             'tests/expected_hash/bar.xz',
              'files_list':
                 'tests/expected_hash/lzma-list',
@@ -505,7 +505,7 @@ class TestApp(unittest.TestCase):
         '''Compare the hash of a file in the bzip2 archive and the
         expected one
         '''
-        __myobj = brebis.checkbackups.checkbzip2.CheckBzip2({'path':
+        __myobj = backupchecker.checkbackups.checkbzip2.CheckBzip2({'path':
             'tests/expected_hash/bar.bz2',
              'files_list':
                 'tests/expected_hash/bzip2-list',
@@ -522,7 +522,7 @@ class TestApp(unittest.TestCase):
            to the expected size.
         '''
         __missing_equality = []
-        __missing_equality = brebis.checkbackups.checktar.CheckTar({'path':
+        __missing_equality = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/file_size/essai.tar.bz2',
              'files_list':
                 'tests/file_size/arcsize/equaltararcsize-list',
@@ -535,7 +535,7 @@ class TestApp(unittest.TestCase):
            than the expected size.
         '''
         __missing_smaller_than = []
-        __missing_smaller_than = brebis.checkbackups.checktar.CheckTar({'path':
+        __missing_smaller_than = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/file_size/essai.tar.bz2',
              'files_list':
                 'tests/file_size/arcsize/biggerthantararcsize-list',
@@ -548,7 +548,7 @@ class TestApp(unittest.TestCase):
            than the expected size.
         '''
         __missing_bigger_than = []
-        __missing_bigger_than = brebis.checkbackups.checktar.CheckTar({'path':
+        __missing_bigger_than = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/file_size/essai.tar.bz2',
              'files_list':
                 'tests/file_size/arcsize/smallerthantararcsize-list',
@@ -561,7 +561,7 @@ class TestApp(unittest.TestCase):
            to the expected size.
         '''
         __missing_equality = []
-        __missing_equality = brebis.checkbackups.checkzip.CheckZip({'path':
+        __missing_equality = backupchecker.checkbackups.checkzip.CheckZip({'path':
             'tests/file_size/myzip.zip',
              'files_list':
                 'tests/file_size/arcsize/equalziparcsize-list',
@@ -574,7 +574,7 @@ class TestApp(unittest.TestCase):
            than the expected size.
         '''
         __missing_smaller_than = []
-        __missing_smaller_than = brebis.checkbackups.checkzip.CheckZip({'path':
+        __missing_smaller_than = backupchecker.checkbackups.checkzip.CheckZip({'path':
             'tests/file_size/myzip.zip',
              'files_list':
                 'tests/file_size/arcsize/biggerthanziparcsize-list',
@@ -587,7 +587,7 @@ class TestApp(unittest.TestCase):
            than the expected size.
         '''
         __missing_bigger_than = []
-        __missing_bigger_than = brebis.checkbackups.checkzip.CheckZip({'path':
+        __missing_bigger_than = backupchecker.checkbackups.checkzip.CheckZip({'path':
             'tests/file_size/myzip.zip',
              'files_list':
                 'tests/file_size/arcsize/smallerthanziparcsize-list',
@@ -596,7 +596,7 @@ class TestApp(unittest.TestCase):
 
     def test_checktar_md5_hash_archive(self):
         '''Check the md5 hash of the tar archive itself using CheckTar class'''
-        __mismatchedhashes = brebis.checkbackups.checktar.CheckTar({'path':
+        __mismatchedhashes = backupchecker.checkbackups.checktar.CheckTar({'path':
         'tests/expected_hash/archash/mytar.tar.gz',
          'files_list':
             'tests/expected_hash/archash/md5hashtararchive-list',
@@ -607,7 +607,7 @@ class TestApp(unittest.TestCase):
 
     def test_checktar_sha1_hash_archive(self):
         '''Check the sha1 hash of the tar archive itself using CheckTar class'''
-        __mismatchedhashes = brebis.checkbackups.checktar.CheckTar({'path':
+        __mismatchedhashes = backupchecker.checkbackups.checktar.CheckTar({'path':
         'tests/expected_hash/archash/mytar.tar.gz',
          'files_list':
             'tests/expected_hash/archash/sha1hashtararchive-list',
@@ -618,7 +618,7 @@ class TestApp(unittest.TestCase):
 
     def test_checktar_sha224_hash_archive(self):
         '''Check the sha224 hash of the tar archive itself using CheckTar class'''
-        __mismatchedhashes = brebis.checkbackups.checktar.CheckTar({'path':
+        __mismatchedhashes = backupchecker.checkbackups.checktar.CheckTar({'path':
         'tests/expected_hash/archash/mytar.tar.gz',
          'files_list':
             'tests/expected_hash/archash/sha224hashtararchive-list',
@@ -629,7 +629,7 @@ class TestApp(unittest.TestCase):
 
     def test_checktar_sha256_hash_archive(self):
         '''Check the sha256 hash of the tar archive itself using CheckTar class'''
-        __mismatchedhashes = brebis.checkbackups.checktar.CheckTar({'path':
+        __mismatchedhashes = backupchecker.checkbackups.checktar.CheckTar({'path':
         'tests/expected_hash/archash/mytar.tar.gz',
          'files_list':
             'tests/expected_hash/archash/sha256hashtararchive-list',
@@ -640,7 +640,7 @@ class TestApp(unittest.TestCase):
 
     def test_checktar_sha384_hash_archive(self):
         '''Check the sha384 hash of the tar archive itself using CheckTar class'''
-        __mismatchedhashes = brebis.checkbackups.checktar.CheckTar({'path':
+        __mismatchedhashes = backupchecker.checkbackups.checktar.CheckTar({'path':
         'tests/expected_hash/archash/mytar.tar.gz',
          'files_list':
             'tests/expected_hash/archash/sha384hashtararchive-list',
@@ -651,7 +651,7 @@ class TestApp(unittest.TestCase):
 
     def test_checktar_sha512_hash_archive(self):
         '''Check the sha512 hash of the tar archive itself using CheckTar class'''
-        __mismatchedhashes = brebis.checkbackups.checktar.CheckTar({'path':
+        __mismatchedhashes = backupchecker.checkbackups.checktar.CheckTar({'path':
         'tests/expected_hash/archash/mytar.tar.gz',
          'files_list':
             'tests/expected_hash/archash/sha512hashtararchive-list',
@@ -662,7 +662,7 @@ class TestApp(unittest.TestCase):
 
     def test_checkzip_md5_hash_archive(self):
         '''Check the md5 hash of the zip archive itself using CheckTar class'''
-        __mismatchedhashes = brebis.checkbackups.checkzip.CheckZip({'path':
+        __mismatchedhashes = backupchecker.checkbackups.checkzip.CheckZip({'path':
         'tests/expected_hash/archash/myzip.zip',
          'files_list':
             'tests/expected_hash/archash/md5hashziparchive-list',
@@ -673,7 +673,7 @@ class TestApp(unittest.TestCase):
 
     def test_checkzip_sha1_hash_archive(self):
         '''Check the sha1 hash of the zip archive itself using CheckTar class'''
-        __mismatchedhashes = brebis.checkbackups.checkzip.CheckZip({'path':
+        __mismatchedhashes = backupchecker.checkbackups.checkzip.CheckZip({'path':
         'tests/expected_hash/archash/myzip.zip',
          'files_list':
             'tests/expected_hash/archash/sha1hashziparchive-list',
@@ -684,7 +684,7 @@ class TestApp(unittest.TestCase):
 
     def test_checkzip_sha224_hash_archive(self):
         '''Check the sha224 hash of the zip archive itself using CheckTar class'''
-        __mismatchedhashes = brebis.checkbackups.checkzip.CheckZip({'path':
+        __mismatchedhashes = backupchecker.checkbackups.checkzip.CheckZip({'path':
         'tests/expected_hash/archash/myzip.zip',
          'files_list':
             'tests/expected_hash/archash/sha224hashziparchive-list',
@@ -695,7 +695,7 @@ class TestApp(unittest.TestCase):
 
     def test_checkzip_sha256_hash_archive(self):
         '''Check the sha256 hash of the zip archive itself using CheckZip class'''
-        __mismatchedhashes = brebis.checkbackups.checkzip.CheckZip({'path':
+        __mismatchedhashes = backupchecker.checkbackups.checkzip.CheckZip({'path':
         'tests/expected_hash/archash/myzip.zip',
          'files_list':
             'tests/expected_hash/archash/sha256hashziparchive-list',
@@ -706,7 +706,7 @@ class TestApp(unittest.TestCase):
 
     def test_checkzip_sha384_hash_archive(self):
         '''Check the sha384 hash of the zip archive itself using CheckZip class'''
-        __mismatchedhashes = brebis.checkbackups.checkzip.CheckZip({'path':
+        __mismatchedhashes = backupchecker.checkbackups.checkzip.CheckZip({'path':
         'tests/expected_hash/archash/myzip.zip',
          'files_list':
             'tests/expected_hash/archash/sha384hashziparchive-list',
@@ -717,7 +717,7 @@ class TestApp(unittest.TestCase):
 
     def test_checkzip_sha512_hash_archive(self):
         '''Check the sha512 hash of the zip archive itself using CheckZip class'''
-        __mismatchedhashes = brebis.checkbackups.checkzip.CheckZip({'path':
+        __mismatchedhashes = backupchecker.checkbackups.checkzip.CheckZip({'path':
         'tests/expected_hash/archash/myzip.zip',
          'files_list':
             'tests/expected_hash/archash/sha512hashziparchive-list',
@@ -733,7 +733,7 @@ class TestApp(unittest.TestCase):
         '''
         __uids = []
         __gids = []
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+        __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/expected_uid_gid/arc_uid_gid/uid-gid.tar.gz',
              'files_list':
                 'tests/expected_uid_gid/arc_uid_gid/tar-uid-gid-list',
@@ -750,7 +750,7 @@ class TestApp(unittest.TestCase):
         '''
         __uids = []
         __gids = []
-        __myobj = brebis.checkbackups.checkzip.CheckZip({'path':
+        __myobj = backupchecker.checkbackups.checkzip.CheckZip({'path':
             'tests/expected_uid_gid/arc_uid_gid/uid-gid.zip',
              'files_list':
                 'tests/expected_uid_gid/arc_uid_gid/zip-uid-gid-list',
@@ -769,7 +769,7 @@ class TestApp(unittest.TestCase):
 
     def test_extract_archive_info(self):
         '''test the extract_archive_info private method from CheckArchive'''
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+        __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/checkarchive_private_methods/mytar.tar.gz',
              'files_list':
                 'tests/checkarchive_private_methods/tar-list',
@@ -780,7 +780,7 @@ class TestApp(unittest.TestCase):
 
     def test_find_archive_size(self):
         '''test the find_archive_size private method from CheckArchive'''
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+        __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/checkarchive_private_methods/mytar.tar.gz',
              'files_list':
                 'tests/checkarchive_private_methods/tar-list',
@@ -791,7 +791,7 @@ class TestApp(unittest.TestCase):
 
     def test_find_archive_mode(self):
         '''test the find_archive_mode private method from CheckArchive'''
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+        __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/checkarchive_private_methods/mytar.tar.gz',
              'files_list':
                 'tests/checkarchive_private_methods/tar-list',
@@ -802,7 +802,7 @@ class TestApp(unittest.TestCase):
 
     def test_find_archive_uid_gid(self):
         '''test the find_archive_uid_gid private method from CheckArchive'''
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+        __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/checkarchive_private_methods/mytar.tar.gz',
              'files_list':
                 'tests/checkarchive_private_methods/tar-list',
@@ -815,7 +815,7 @@ class TestApp(unittest.TestCase):
 
     def test_check_uid(self):
         ''' test checkarchive.CheckArchive__check_uid'''
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+        __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/checkarchive_private_methods/mytar.tar.gz',
              'files_list':
                 'tests/checkarchive_private_methods/tar-list',
@@ -826,7 +826,7 @@ class TestApp(unittest.TestCase):
 
     def test_check_gid(self):
         ''' test checkarchive.CheckArchive__check_gid'''
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+        __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/checkarchive_private_methods/mytar.tar.gz',
              'files_list':
                 'tests/checkarchive_private_methods/tar-list',
@@ -843,7 +843,7 @@ class TestApp(unittest.TestCase):
 
     def test_compare_sizes(self):
         '''test the compare_sizes method from CheckArchive'''
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+        __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/checkarchive_private_methods/mytar.tar.gz',
              'files_list':
                 'tests/checkarchive_private_methods/tar-list',
@@ -860,7 +860,7 @@ class TestApp(unittest.TestCase):
 
     def test_normalize_path(self):
         '''test the normalize_path method from CheckArchive'''
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+        __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/checkarchive_private_methods/mytar.tar.gz',
              'files_list':
                 'tests/checkarchive_private_methods/tar-list',
@@ -870,7 +870,7 @@ class TestApp(unittest.TestCase):
 
     def test_check_unexpected_files(self):
         '''test the check_unexpected_files method from CheckArchive'''
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+        __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/checkarchive_private_methods/mytar.tar.gz',
              'files_list':
                 'tests/checkarchive_private_methods/tar-list',
@@ -880,7 +880,7 @@ class TestApp(unittest.TestCase):
 
     def test_check_mode(self):
         '''test the check_mode method from CheckArchive'''
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+        __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/checkarchive_private_methods/mytar.tar.gz',
              'files_list':
                 'tests/checkarchive_private_methods/tar-list',
@@ -890,7 +890,7 @@ class TestApp(unittest.TestCase):
 
     def test_check_type(self):
         '''test the check_type method from CheckArchive'''
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+        __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/checkarchive_private_methods/mytar.tar.gz',
              'files_list':
                 'tests/checkarchive_private_methods/tar-list',
@@ -900,7 +900,7 @@ class TestApp(unittest.TestCase):
 
     def test_check_mtime(self):
         '''test the check_mtime method from CheckArchive'''
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+        __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/checkarchive_private_methods/mytar.tar.gz',
              'files_list':
                 'tests/checkarchive_private_methods/tar-list',
@@ -916,7 +916,7 @@ class TestApp(unittest.TestCase):
 
     def test_zip_extract_stored_file(self):
         '''test the _extract_stored_file protected method from checkzip.CheckZip'''
-        __myobj = brebis.checkbackups.checkzip.CheckZip({'path':
+        __myobj = backupchecker.checkbackups.checkzip.CheckZip({'path':
             'tests/checkzip_private_methods/myzip.zip',
              'files_list':
                 'tests/checkzip_private_methods/myzip-list',
@@ -928,7 +928,7 @@ class TestApp(unittest.TestCase):
 
     def test_zip_extract_uid_gid(self):
         '''test the __extract_uid_gid private method from checkzip.CheckZip'''
-        __myobj = brebis.checkbackups.checkzip.CheckZip({'path':
+        __myobj = backupchecker.checkbackups.checkzip.CheckZip({'path':
             'tests/checkzip_private_methods/myzip.zip',
              'files_list':
                 'tests/checkzip_private_methods/myzip-list',
@@ -941,7 +941,7 @@ class TestApp(unittest.TestCase):
 
     def test_zip_translate_type_file(self):
         '''test the __translate_type private method from checkzip.CheckZip - expecting file'''
-        __myobj = brebis.checkbackups.checkzip.CheckZip({'path':
+        __myobj = backupchecker.checkbackups.checkzip.CheckZip({'path':
             'tests/checkzip_private_methods/myzip.zip',
              'files_list':
                 'tests/checkzip_private_methods/myzip-list',
@@ -954,7 +954,7 @@ class TestApp(unittest.TestCase):
 
     def test_zip_translate_type_directory(self):
         '''test the __translate_type private method from checkzip.CheckZip - expecting directory'''
-        __myobj = brebis.checkbackups.checkzip.CheckZip({'path':
+        __myobj = backupchecker.checkbackups.checkzip.CheckZip({'path':
             'tests/checkzip_private_methods/myzip.zip',
              'files_list':
                 'tests/checkzip_private_methods/myzip-list',
@@ -973,7 +973,7 @@ class TestApp(unittest.TestCase):
 
     def test_tar_extract_stored_file(self):
         '''test the _extract_stored_file protected method from checktar.CheckTar'''
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+        __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/checktar_private_methods/mytargz/mytargz.tar.gz',
              'files_list':
                 'tests/checktar_private_methods/mytargz/mytargz-list',
@@ -985,7 +985,7 @@ class TestApp(unittest.TestCase):
 
     def test_tar_translate_type_file(self):
         '''test the __translate_type private method from checktar.CheckTar - expecting file'''
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+        __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/checktar_private_methods/mytargz/mytargz.tar.gz',
              'files_list':
                 'tests/checktar_private_methods/mytargz/mytargz-list',
@@ -997,7 +997,7 @@ class TestApp(unittest.TestCase):
 
     def test_tar_translate_type_directory(self):
         '''test the __translate_type private method from checktar.CheckTar - expecting directory'''
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+        __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/checktar_private_methods/mytargz/mytargz.tar.gz',
              'files_list':
                 'tests/checktar_private_methods/mytargz/mytargz-list',
@@ -1009,7 +1009,7 @@ class TestApp(unittest.TestCase):
 
     def test_tar_translate_type_symbolic_link(self):
         '''test the __translate_type private method from checktar.CheckTar - expecting symbolic link'''
-        __myobj = brebis.checkbackups.checktar.CheckTar({'path':
+        __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/checktar_private_methods/mytargz/mytargz.tar.gz',
              'files_list':
                 'tests/checktar_private_methods/mytargz/mytargz-list',
@@ -1027,7 +1027,7 @@ class TestApp(unittest.TestCase):
 
     def test_tree_extract_stored_file(self):
         '''test the _extract_stored_file protected method from checktree.CheckTree'''
-        __myobj = brebis.checkbackups.checktree.CheckTree({'path':
+        __myobj = backupchecker.checkbackups.checktree.CheckTree({'path':
             'tests/checktree_private_methods/mytree',
              'files_list':
                 'tests/checktree_private_methods/mytree-list',
@@ -1040,7 +1040,7 @@ class TestApp(unittest.TestCase):
 
     def test_tree_translate_type_file(self):
         '''test the __translate_type private method from checktree.CheckTree - expecting file'''
-        __myobj = brebis.checkbackups.checktree.CheckTree({'path':
+        __myobj = backupchecker.checkbackups.checktree.CheckTree({'path':
             'tests/checktree_private_methods/mytree',
              'files_list':
                 'tests/checktree_private_methods/mytree-list',
@@ -1051,7 +1051,7 @@ class TestApp(unittest.TestCase):
 
     def test_tree_translate_type_directory(self):
         '''test the __translate_type private method from checktree.CheckTree - expecting directory'''
-        __myobj = brebis.checkbackups.checktree.CheckTree({'path':
+        __myobj = backupchecker.checkbackups.checktree.CheckTree({'path':
             'tests/checktree_private_methods/mytree',
              'files_list':
                 'tests/checktree_private_methods/mytree-list',
@@ -1062,7 +1062,7 @@ class TestApp(unittest.TestCase):
 
     def test_tree_translate_type_symbolic_link(self):
         '''test the __translate_type private method from checktree.CheckTree - expecting symbolic link'''
-        __myobj = brebis.checkbackups.checktree.CheckTree({'path':
+        __myobj = backupchecker.checkbackups.checktree.CheckTree({'path':
             'tests/checktree_private_methods/mytree',
              'files_list':
                 'tests/checktree_private_methods/mytree-list',
@@ -1079,7 +1079,7 @@ class TestApp(unittest.TestCase):
 
     def test_gzip_extract_stored_file(self):
         '''test the _extract_stored_file protected method from checkgzip.CheckGzip'''
-        __myobj = brebis.checkbackups.checkgzip.CheckGzip({'path':
+        __myobj = backupchecker.checkbackups.checkgzip.CheckGzip({'path':
             'tests/checkgzip_private_methods/mygzip.gz',
              'files_list':
                 'tests/checkgzip_private_methods/mygzip-list',
@@ -1093,7 +1093,7 @@ class TestApp(unittest.TestCase):
     def test_extract_size_from_gzip_archive(self):
         '''test the extraction of a gzip uncompressed file in the gzip archive'''
         __arcpath = 'tests/checkgzip_private_methods/mygzip.gz'
-        __myobj = brebis.checkbackups.checkgzip.CheckGzip({'path':
+        __myobj = backupchecker.checkbackups.checkgzip.CheckGzip({'path':
             __arcpath,
              'files_list':
                 'tests/checkgzip_private_methods/mygzip-list',
@@ -1104,7 +1104,7 @@ class TestApp(unittest.TestCase):
     def test_extract_initial_filename_from_gzip_archive(self):
         '''test the extraction of the initial name of an uncompressed file'''
         __arcpath = 'tests/checkgzip_private_methods/mygzip.gz'
-        __myobj = brebis.checkbackups.checkgzip.CheckGzip({'path':
+        __myobj = backupchecker.checkbackups.checkgzip.CheckGzip({'path':
             __arcpath,
              'files_list':
                 'tests/checkgzip_private_methods/mygzip-list',
@@ -1120,7 +1120,7 @@ class TestApp(unittest.TestCase):
 
     def test_bzip2_extract_stored_file(self):
         '''test the _extract_stored_file protected method from checkbzip2.CheckBzip2'''
-        __myobj = brebis.checkbackups.checkbzip2.CheckBzip2({'path':
+        __myobj = backupchecker.checkbackups.checkbzip2.CheckBzip2({'path':
             'tests/checkbzip2_private_methods/mybz2.bz2',
              'files_list':
                 'tests/checkbzip2_private_methods/mybzip2-list',
@@ -1139,7 +1139,7 @@ class TestApp(unittest.TestCase):
 
     def test__listconfinfo(self):
         '''test the GenerateListForBzip2 class'''
-        __myobj = brebis.generatelist.generatelistforbzip2.GenerateListForBzip2({
+        __myobj = backupchecker.generatelist.generatelistforbzip2.GenerateListForBzip2({
             'arcpath': 'tests/checkbzip2_private_methods/mybz2.bz2', 'delimiter': '|', 'hashtype': '', 'parsingexceptions' : '', 'getallhashes': True, 'genfull': True, 'confoutput':'','listoutput':'','fulloutput':''})
         self.assertEqual(__myobj._GenerateListForBzip2__lci, {'arclistpath': 'tests/checkbzip2_private_methods/mybz2.list',
             'listoffiles': ['[files]\n', 'mybz2| type|f md5|f5488b7ce878d89b59ef2752f260354f\n']})
@@ -1159,7 +1159,7 @@ class TestApp(unittest.TestCase):
     def test_generatelist_generate_list(self):
         '''test the _generate_list protected method from GenerateList'''
         __file = 'tests/generatelist_private_methods/mytar.list'
-        __myobj = brebis.generatelist.generatelist.GenerateList()
+        __myobj = backupchecker.generatelist.generatelist.GenerateList()
         __content = ['[files]\n', 'foo:\n']
         __myobj._generate_list({'arclistpath': __file, 'listoffiles': __content})
         with open(__file, 'r') as __f:
@@ -1174,7 +1174,7 @@ class TestApp(unittest.TestCase):
     def test_listfortar_translate_type_file(self):
         '''test the __translate_type private method from GenerateListForTar - expecting file'''
         __file = 'tests/generatelistfortar_private_methods/mytar.tar.gz'
-        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
         self.__tar = tarfile.open(__file)
         __result = __myobj._GenerateListForTar__translate_type(self.__tar.getmembers()[3].type)
         self.assertEqual('f', __result)
@@ -1182,7 +1182,7 @@ class TestApp(unittest.TestCase):
     def test_listfortar_translate_type_directory(self):
         '''test the __translate_type private method from GenerateListForTar - expecting directory'''
         __file = 'tests/generatelistfortar_private_methods/mytar.tar.gz'
-        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
         self.__tar = tarfile.open(__file)
         __result = __myobj._GenerateListForTar__translate_type(self.__tar.getmembers()[1].type)
         self.assertEqual('d', __result)
@@ -1190,7 +1190,7 @@ class TestApp(unittest.TestCase):
     def test_listfortar_translate_type_symbolic_link(self):
         '''test the __translate_type private method from GenerateListForTar - expecting symbolic link'''
         __file = 'tests/generatelistfortar_private_methods/mytar.tar.gz'
-        __myobj = brebis.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
         self.__tar = tarfile.open(__file)
         __result = __myobj._GenerateListForTar__translate_type(self.__tar.getmembers()[2].type)
         self.assertEqual('s', __result)
@@ -1204,7 +1204,7 @@ class TestApp(unittest.TestCase):
     def test_listforzip_translate_type_file(self):
         '''test the __translate_type private method from GenerateListForZip - expecting file'''
         __file = 'tests/generatelistforzip_private_methods/myzip.zip'
-        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistforzip.GenerateListForZip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
         __myz = zipfile.ZipFile(__file,'r')
         __myinfo = __myz.infolist()
         __result = __myobj._GenerateListForZip__translate_type(__myinfo[-1].external_attr >> 16)
@@ -1213,7 +1213,7 @@ class TestApp(unittest.TestCase):
     def test_listforzip_translate_type_directory(self):
         '''test the __translate_type private method from GenerateListForZip - expecting directory'''
         __file = 'tests/generatelistforzip_private_methods/myzip.zip'
-        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistforzip.GenerateListForZip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
         __myz = zipfile.ZipFile(__file,'r')
         __myinfo = __myz.infolist()
         __result = __myobj._GenerateListForZip__translate_type(__myinfo[0].external_attr >> 16)
@@ -1222,7 +1222,7 @@ class TestApp(unittest.TestCase):
     def test_listforzip_extract_uid_gid(self):
         '''test the __extract_uid_gid private method from GenerateListForZip'''
         __file = 'tests/generatelistforzip_private_methods/myzip.zip'
-        __myobj = brebis.generatelist.generatelistforzip.GenerateListForZip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistforzip.GenerateListForZip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
         __myz = zipfile.ZipFile(__file,'r')
         __myinfo = __myz.infolist()
         __result = __myobj._GenerateListForZip__extract_uid_gid(__myinfo[-1])
@@ -1238,7 +1238,7 @@ class TestApp(unittest.TestCase):
         '''test the __translate_type private method from GenerateListForTree - expecting file'''
         __dir = 'tests/generatelistfortree_private_methods/mydir'
         __file = os.path.join(__dir, 'foo')
-        __myobj = brebis.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
         __myobj._GenerateListForTree__fileinfo = os.lstat(__file)
         __result = __myobj._GenerateListForTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('f', __result)
@@ -1247,7 +1247,7 @@ class TestApp(unittest.TestCase):
         '''test the __translate_type private method from GenerateListForTree - expecting directory'''
         __dir = 'tests/generatelistfortree_private_methods/mydir'
         __file = os.path.join(__dir, 'bar')
-        __myobj = brebis.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
         __result = __myobj._GenerateListForTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('d', __result)
 
@@ -1255,7 +1255,7 @@ class TestApp(unittest.TestCase):
         '''test the __translate_type private method from GenerateListForTree - expecting symbolic link'''
         __dir = 'tests/generatelistfortree_private_methods/mydir'
         __file = os.path.join(__dir, 'oof')
-        __myobj = brebis.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
         __result = __myobj._GenerateListForTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('s', __result)
 
@@ -1268,13 +1268,13 @@ class TestApp(unittest.TestCase):
     def test_listforgzip_extract_size_from_gzip_archive(self):
         '''test the extraction of a gzip uncompressed file in the gzip archive'''
         __file = 'tests/generatelistforgzip_private_methods/mygzip.gz'
-        __myobj = brebis.generatelist.generatelistforgzip.GenerateListForGzip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistforgzip.GenerateListForGzip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
         with open(__file, 'rb') as __myf:
             self.assertEqual(15, __myobj._GenerateListForGzip__extract_size(__myf))
 
     def test_listforgzip_extract_initial_filename_from_gzip_archive(self):
         __file = 'tests/generatelistforgzip_private_methods/mygzip.gz'
-        __myobj = brebis.generatelist.generatelistforgzip.GenerateListForGzip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistforgzip.GenerateListForGzip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
         with open(__file, 'rb') as __myf:
             self.assertEqual('mygzip', __myobj._GenerateListForGzip__extract_initial_filename(__myf, 'mygzip'))
 
@@ -1294,7 +1294,7 @@ class TestApp(unittest.TestCase):
         sys.argv.append(__archivepath)
         sys.argv.append('-l')
         sys.argv.append(__logpath)
-        __myobj = brebis.cliparse.CliParse()
+        __myobj = backupchecker.cliparse.CliParse()
         self.assertEqual(vars(__myobj.options), {'archives': [],
             'confpath': __archivepath,
             'delimiter': '|',
@@ -1321,7 +1321,7 @@ class TestApp(unittest.TestCase):
         '''
         with open('setup.py') as __setuppy:
             __setuppycode = __setuppy.readlines()
-        with open('brebis/cliparse.py') as __cliparsepy:
+        with open('backupchecker/cliparse.py') as __cliparsepy:
             __cliparsepycode = __cliparsepy.readlines()
         for line in __setuppycode:
             if 'version = ' in line:
@@ -1335,14 +1335,14 @@ class TestApp(unittest.TestCase):
 
 #######################################################################################
 #
-# Testing the brebis/archiveinfomsg.py
+# Testing the backupchecker/archiveinfomsg.py
 #
 #######################################################################################
 
     def test_archiveinfomsg_main(self):
         '''test the archivemsginfo.ArchiveMsgInfo__main method'''
         _logfile = TESTLOG
-        brebis.applogger.AppLogger(TESTLOG)
+        backupchecker.applogger.AppLogger(TESTLOG)
         __mydict = MyDict()
         __mydict.missing_files = ['testarchiveinfomsgmain1']
         __mydict.unexpected_files = []
@@ -1357,7 +1357,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_hashes = []
         __mydict.mismatched_targets = []
         __mydict.mismatched_mtimes = []
-        __myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testarchiveinfomsgmain.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testarchiveinfomsgmain.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
         __myobj._ArchiveInfoMsg__main(__mydict, {'path': 'testarchiveinfomsgmain.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
         with open(_logfile) as _res:
             self.assertIn('WARNING:root:1 file missing in testarchiveinfomsgmain.tar.gz: \nWARNING:root:testarchiveinfomsgmain1\n', _res.read())
@@ -1365,7 +1365,7 @@ class TestApp(unittest.TestCase):
     def test_archiveinfomsg_missing_files(self):
         '''test the __missing_files method'''
         _logfile = TESTLOG
-        brebis.applogger.AppLogger(TESTLOG)
+        backupchecker.applogger.AppLogger(TESTLOG)
         __mydict = MyDict()
         __mydict.missing_files = []
         __mydict.unexpected_files = []
@@ -1380,7 +1380,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_hashes = []
         __mydict.mismatched_targets = []
         __mydict.mismatched_mtimes = []
-        __myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testmissingfiles.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testmissingfiles.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
         __myobj._ArchiveInfoMsg__missing_files(['titi'], 'testmissingfiles.tar.gz')
         with open(_logfile) as _res:
             self.assertIn('WARNING:root:1 file missing in testmissingfiles.tar.gz: \nWARNING:root:titi\n', _res.read())
@@ -1388,7 +1388,7 @@ class TestApp(unittest.TestCase):
     def test_archiveinfomsg_unexpected_files(self):
         '''test the archiveinfomsg.ArchiveInfoMsg__unexpected_files method'''
         _logfile = TESTLOG
-        brebis.applogger.AppLogger(TESTLOG)
+        backupchecker.applogger.AppLogger(TESTLOG)
         __mydict = MyDict()
         __mydict.missing_files = []
         __mydict.unexpected_files = []
@@ -1403,7 +1403,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_hashes = []
         __mydict.mismatched_targets = []
         __mydict.mismatched_mtimes = []
-        __myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testunexpectedfiles.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testunexpectedfiles.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
         __myobj._ArchiveInfoMsg__unexpected_files(['titi'], 'testunexpectedfiles.tar.gz')
         with open(_logfile) as _res:
             self.assertIn('WARNING:root:1 unexpected file checking testunexpectedfiles.tar.gz: \nWARNING:root:titi\n', _res.read())
@@ -1411,7 +1411,7 @@ class TestApp(unittest.TestCase):
     def test_archiveinfomsg_classify_differences(self):
         '''test the archiveinfomsg.ArchiveInfoMsg__classify_differences method'''
         _logfile = TESTLOG
-        brebis.applogger.AppLogger(TESTLOG)
+        backupchecker.applogger.AppLogger(TESTLOG)
         __mydict = MyDict()
         __mydict.missing_files = []
         __mydict.unexpected_files = []
@@ -1425,7 +1425,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_hashes = []
         __mydict.mismatched_targets = []
         __mydict.mismatched_mtimes = []
-        __myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testclassifydifferences.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testclassifydifferences.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
         __myobj._ArchiveInfoMsg__classify_differences(__mydict, 'testclassifydifferences.tar.gz')
         with open(_logfile) as _res:
             __testresult = _res.read()
@@ -1436,7 +1436,7 @@ class TestApp(unittest.TestCase):
     def test_archiveinfomsg_log_differences(self):
         '''test the archiveinfomsg.ArchiveInfoMsg__log_differences method'''
         _logfile = TESTLOG
-        brebis.applogger.AppLogger(TESTLOG)
+        backupchecker.applogger.AppLogger(TESTLOG)
         __mydict = MyDict()
         __mydict.missing_files = []
         __mydict.unexpected_files = []
@@ -1450,7 +1450,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_hashes = []
         __mydict.mismatched_targets = []
         __mydict.mismatched_mtimes = []
-        __myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testlogdifferences.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testlogdifferences.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
         __myobj._ArchiveInfoMsg__log_differences(__mydict.missing_equality, 'testlogdifferences.tar.gz', '{} {} with unexpected size while checking {}: ')
         with open(_logfile) as _res:
             __testresult = _res.read()
@@ -1459,7 +1459,7 @@ class TestApp(unittest.TestCase):
     def test_archiveinfomsg_uid_gid_mismatches(self):
         '''test the archiveinfomsg.ArchiveInfoMsg__uid_gid_mismatches method'''
         _logfile = TESTLOG
-        brebis.applogger.AppLogger(TESTLOG)
+        backupchecker.applogger.AppLogger(TESTLOG)
         __mydict = MyDict()
         __mydict.missing_files = []
         __mydict.unexpected_files = []
@@ -1473,7 +1473,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_hashes = []
         __mydict.mismatched_targets = []
         __mydict.mismatched_mtimes = []
-        __myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testuidgidmismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testuidgidmismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
         __myobj._ArchiveInfoMsg__uid_gid_mismatches(__mydict, 'testuidgidmismatches.tar.gz')
         with open(_logfile) as _res:
             __testresult = _res.read()
@@ -1483,7 +1483,7 @@ class TestApp(unittest.TestCase):
     def test_archiveinfomsg_mode_mismatches(self):
         '''test the archiveinfomsg.ArchiveInfoMsg__mode_mismatches method'''
         _logfile = TESTLOG
-        brebis.applogger.AppLogger(TESTLOG)
+        backupchecker.applogger.AppLogger(TESTLOG)
         __mydict = MyDict()
         __mydict.missing_files = []
         __mydict.unexpected_files = []
@@ -1497,7 +1497,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_hashes = []
         __mydict.mismatched_targets = []
         __mydict.mismatched_mtimes = []
-        __myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testmodemismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testmodemismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
         __myobj._ArchiveInfoMsg__mode_mismatches(__mydict, 'testmodemismatches.tar.gz')
         with open(_logfile) as _res:
             __testresult = _res.read()
@@ -1506,7 +1506,7 @@ class TestApp(unittest.TestCase):
     def test_archiveinfomsg_target_mismatches(self):
         '''test the archiveinfomsg.ArchiveInfoMsg__target_mismatches method'''
         _logfile = TESTLOG
-        brebis.applogger.AppLogger(TESTLOG)
+        backupchecker.applogger.AppLogger(TESTLOG)
         __mydict = MyDict()
         __mydict.missing_files = []
         __mydict.unexpected_files = []
@@ -1520,7 +1520,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_hashes = []
         __mydict.mismatched_targets = [{'path':'classifydifferences8', 'expectedtarget':'../target1','target':'../target2'}]
         __mydict.mismatched_mtimes = []
-        __myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testtargetmismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testtargetmismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
         __myobj._ArchiveInfoMsg__target_mismatches(__mydict, 'testtargetmismatches.tar.gz')
         with open(_logfile) as _res:
             __testresult = _res.read()
@@ -1529,7 +1529,7 @@ class TestApp(unittest.TestCase):
     def test_archiveinfomsg_type_mismatches(self):
         '''test the archiveinfomsg.ArchiveInfoMsg__type_mismatches method'''
         _logfile = TESTLOG
-        brebis.applogger.AppLogger(TESTLOG)
+        backupchecker.applogger.AppLogger(TESTLOG)
         __mydict = MyDict()
         __mydict.missing_files = []
         __mydict.unexpected_files = []
@@ -1543,7 +1543,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_hashes = []
         __mydict.mismatched_targets = []
         __mydict.mismatched_mtimes = []
-        __myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testtypemismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testtypemismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
         __myobj._ArchiveInfoMsg__target_mismatches(__mydict, 'testtypemismatches.tar.gz')
         with open(_logfile) as _res:
             __testresult = _res.read()
@@ -1552,7 +1552,7 @@ class TestApp(unittest.TestCase):
     def test_archiveinfomsg_hash_mismatches(self):
         '''test the archiveinfomsg.ArchiveInfoMsg__hash_mismatches method'''
         _logfile = TESTLOG
-        brebis.applogger.AppLogger(TESTLOG)
+        backupchecker.applogger.AppLogger(TESTLOG)
         __mydict = MyDict()
         __mydict.missing_files = []
         __mydict.unexpected_files = []
@@ -1566,7 +1566,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_hashes = [{'path':'classifydifferences10', 'expectedhash':'azeraezr','hash':'qdslfmjaze'}]
         __mydict.mismatched_targets = []
         __mydict.mismatched_mtimes = []
-        __myobj = brebis.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testhashmismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testhashmismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
         __myobj._ArchiveInfoMsg__hash_mismatches(__mydict, 'testhashmismatches.tar.gz')
         with open(_logfile) as _res:
             __testresult = _res.read()
@@ -1574,13 +1574,13 @@ class TestApp(unittest.TestCase):
 
 #######################################################################################
 #
-# Testing the brebis.listtype.ListType
+# Testing the backupchecker.listtype.ListType
 #
 #######################################################################################
 
     def test_listtype_tar(self):
         '''test the listtype class with a tar archive'''
-        #__mydict = brebis.listtype.ListType({'arcpath': 'test.tar.gz', 'delimiter': None, 'genfull': True})
+        #__mydict = backupchecker.listtype.ListType({'arcpath': 'test.tar.gz', 'delimiter': None, 'genfull': True})
         __mydict = MyDict()
         __mydict.archives = ['tests/listtype/mytargz.tar.gz']
         __mydict.delimiter = None
@@ -1590,8 +1590,8 @@ class TestApp(unittest.TestCase):
         __mydict.fulloutput = ''
         __mydict.confoutput = ''
         __mydict.listoutput = ''
-        __mydict = brebis.listtype.ListType(__mydict)
-        self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'brebis.generatelist.generatelistfortar.GenerateListForTar'>")
+        __mydict = backupchecker.listtype.ListType(__mydict)
+        self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'backupchecker.generatelist.generatelistfortar.GenerateListForTar'>")
 
     def test_listtype_tree(self):
         '''test the listtype class with a tree archive'''
@@ -1604,8 +1604,8 @@ class TestApp(unittest.TestCase):
         __mydict.fulloutput = ''
         __mydict.confoutput = ''
         __mydict.listoutput = ''
-        __mydict = brebis.listtype.ListType(__mydict)
-        self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'brebis.generatelist.generatelistfortree.GenerateListForTree'>")
+        __mydict = backupchecker.listtype.ListType(__mydict)
+        self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'backupchecker.generatelist.generatelistfortree.GenerateListForTree'>")
 
     def test_listtype_zip(self):
         '''test the listtype class with a zip archive'''
@@ -1618,8 +1618,8 @@ class TestApp(unittest.TestCase):
         __mydict.fulloutput = ''
         __mydict.confoutput = ''
         __mydict.listoutput = ''
-        __mydict = brebis.listtype.ListType(__mydict)
-        self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'brebis.generatelist.generatelistforzip.GenerateListForZip'>")
+        __mydict = backupchecker.listtype.ListType(__mydict)
+        self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'backupchecker.generatelist.generatelistforzip.GenerateListForZip'>")
 
     def test_listtype_gz(self):
         '''test the listtype class with a gzip archive'''
@@ -1632,8 +1632,8 @@ class TestApp(unittest.TestCase):
         __mydict.fulloutput = ''
         __mydict.confoutput = ''
         __mydict.listoutput = ''
-        __mydict = brebis.listtype.ListType(__mydict)
-        self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'brebis.generatelist.generatelistforgzip.GenerateListForGzip'>")
+        __mydict = backupchecker.listtype.ListType(__mydict)
+        self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'backupchecker.generatelist.generatelistforgzip.GenerateListForGzip'>")
 
     def test_listtype_bz2(self):
         '''test the listtype class with a bzip2 archive'''
@@ -1646,8 +1646,8 @@ class TestApp(unittest.TestCase):
         __mydict.fulloutput = ''
         __mydict.confoutput = ''
         __mydict.listoutput = ''
-        __mydict = brebis.listtype.ListType(__mydict)
-        self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'brebis.generatelist.generatelistforbzip2.GenerateListForBzip2'>")
+        __mydict = backupchecker.listtype.ListType(__mydict)
+        self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'backupchecker.generatelist.generatelistforbzip2.GenerateListForBzip2'>")
 
     def test_listtype_xz(self):
         '''test the listtype class with a lzma archive'''
@@ -1660,8 +1660,8 @@ class TestApp(unittest.TestCase):
         __mydict.fulloutput = ''
         __mydict.confoutput = ''
         __mydict.listoutput = ''
-        __mydict = brebis.listtype.ListType(__mydict)
-        self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'brebis.generatelist.generatelistforlzma.GenerateListForLzma'>")
+        __mydict = backupchecker.listtype.ListType(__mydict)
+        self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'backupchecker.generatelist.generatelistforlzma.GenerateListForLzma'>")
 
 ################################################################
 #

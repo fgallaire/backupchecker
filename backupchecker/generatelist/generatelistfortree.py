@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2015 Carl Chenet <chaica@brebisproject.org>
+# Copyright © 2015 Carl Chenet <chaica@backupcheckerproject.org>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -18,8 +18,8 @@ import os
 import os.path
 import stat
 
-from brebis.generatelist.generatelist import GenerateList
-from brebis.checkhashes import get_hash
+from backupchecker.generatelist.generatelist import GenerateList
+from backupchecker.checkhashes import get_hash
 
 # Generate a list of files from a tree
 '''Generate a list of files from a tree'''
@@ -56,7 +56,7 @@ class GenerateListForTree(GenerateList):
                 # studying directories
                 __dirinfo = os.lstat(__dirpath)
                 __dirmode = oct(stat.S_IMODE(__dirinfo.st_mode)).split('o')[-1]
-                # translate file type in brebis intern file type
+                # translate file type in backupchecker intern file type
                 __type = self.__translate_type(__dirinfo.st_mode)
                 # extract file data
                 __listoffiles.append(__oneline.format(

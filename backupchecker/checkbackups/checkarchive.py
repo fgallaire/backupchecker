@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2015 Carl Chenet <chaica@brebisproject.org>
+# Copyright © 2015 Carl Chenet <chaica@backupcheckerproject.org>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -20,7 +20,7 @@ import os
 import stat
 from logging import warn
 
-import brebis.checkhashes
+import backupchecker.checkhashes
 
 class CheckArchive(object):
     '''Check an archive'''
@@ -177,7 +177,7 @@ class CheckArchive(object):
         one
         '''
         __arcfile = self._extract_stored_file(__arcpath)
-        __arcfilehash = brebis.checkhashes.get_hash(__arcfile, __file['hash']['hashtype'])
+        __arcfilehash = backupchecker.checkhashes.get_hash(__arcfile, __file['hash']['hashtype'])
         self._report_hash(__file['path'], __file['hash']['hashvalue'],
             __arcfilehash)
 
@@ -206,7 +206,7 @@ class CheckArchive(object):
             # archive hash
             if 'hash' in __arcdata:
                 with open(__arcdata['path'], 'rb') as __archive:
-                    __archash = brebis.checkhashes.get_hash(__archive, __arcdata['hash']['hashtype'])
+                    __archash = backupchecker.checkhashes.get_hash(__archive, __arcdata['hash']['hashtype'])
                     self._report_hash(__arcdata['path'], __arcdata['hash']['hashvalue'], __archash)
             # archive mode
             if 'mode' in __arcdata:

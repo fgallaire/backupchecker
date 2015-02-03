@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2015 Carl Chenet <chaica@brebisproject.org>
+# Copyright © 2015 Carl Chenet <chaica@backupcheckerproject.org>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -22,7 +22,7 @@ import os
 import sys
 from hashlib import algorithms_guaranteed
 
-from brebis.applogger import AppLogger
+from backupchecker.applogger import AppLogger
 
 class CliParse:
     '''Retrieve the command line options'''
@@ -30,11 +30,11 @@ class CliParse:
     def __init__(self):
         '''The constructor for the CliParse class.'''
         self._options = ()
-        brebisdescription = 'Fully automated backup checker'
-        brebisepilog = 'For more information: http://www.brebisproject.org'
-        __parser = ArgumentParser(prog='brebis',
-                                    description=brebisdescription,
-                                    epilog=brebisepilog)
+        backupcheckerdescription = 'Fully automated backup checker'
+        backupcheckerepilog = 'For more information: http://www.backupcheckerproject.org'
+        __parser = ArgumentParser(prog='backupchecker',
+                                    description=backupcheckerdescription,
+                                    epilog=backupcheckerepilog)
         self.__define_options(__parser)
 
     def __define_options(self, __parser):

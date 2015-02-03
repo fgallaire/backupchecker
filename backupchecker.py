@@ -1,5 +1,6 @@
+#!/usr/bin/python3.4
 # -*- coding: utf-8 -*-
-# Copyright © 2015 Carl Chenet <chaica@brebisproject.org>
+# Copyright © 2015 Carl Chenet <chaica@backupcheckerproject.org>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -13,14 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Get the hash of a file
-'''Get the hash of a file'''
+from backupchecker.main import Main
 
-import hashlib
-
-def get_hash(__arcfile, __hashtype):
-    '''return the hash of a file.'''
-    __res = getattr(hashlib, __hashtype)(__arcfile.read()).hexdigest()
-    __arcfile.close()
-    return __res
-    
+if __name__ == '__main__':
+    Main()

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2015 Carl Chenet <chaica@brebisproject.org>
+# Copyright © 2015 Carl Chenet <chaica@backupcheckerproject.org>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -22,7 +22,7 @@ import sys
 import configparser
 from configparser import ConfigParser
 from hashlib import algorithms_guaranteed
-from brebis.checkfilelist import CheckFileList
+from backupchecker.checkfilelist import CheckFileList
 
 class ExpectedValues(object):
     '''Extract information about the archive (if it is one)

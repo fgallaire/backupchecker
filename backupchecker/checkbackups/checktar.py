@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2015 Carl Chenet <chaica@brebisproject.org>
+# Copyright © 2015 Carl Chenet <chaica@backupcheckerproject.org>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -20,8 +20,8 @@ import sys
 import tarfile
 import logging
 
-from brebis.expectedvalues import ExpectedValues
-from brebis.checkbackups.checkarchive import CheckArchive
+from backupchecker.expectedvalues import ExpectedValues
+from backupchecker.checkbackups.checkarchive import CheckArchive
 
 class CheckTar(CheckArchive):
     '''Check a tar archive'''

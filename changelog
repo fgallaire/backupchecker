@@ -6,27 +6,27 @@
 
 2014-12-28  Carl Chenet  <chaica@ohmytux.com>
 
-	* man/brebis.1:
-	update brebis manpage
+	* man/backupchecker.1:
+	update backupchecker manpage
 	[3de1ec608c64]
 
-	* brebis.py, brebis/applogger.py, brebis/archiveinfomsg.py,
-	brebis/checkbackups/checkarchive.py,
-	brebis/checkbackups/checkbackups.py,
-	brebis/checkbackups/checkbzip2.py, brebis/checkbackups/checkgzip.py,
-	brebis/checkbackups/checklzma.py, brebis/checkbackups/checktar.py,
-	brebis/checkbackups/checktree.py, brebis/checkbackups/checkzip.py,
-	brebis/checkfilelist.py, brebis/checkhashes.py, brebis/cliparse.py,
-	brebis/configurations.py, brebis/exceptionsparsing.py,
-	brebis/expectedvalues.py, brebis/generatelist/generatelist.py,
-	brebis/generatelist/generatelistforbzip2.py,
-	brebis/generatelist/generatelistforgzip.py,
-	brebis/generatelist/generatelistforlzma.py,
-	brebis/generatelist/generatelistfortar.py,
-	brebis/generatelist/generatelistfortree.py,
-	brebis/generatelist/generatelistforzip.py,
-	brebis/identifylimitations.py, brebis/listtype.py, brebis/main.py,
-	docs/source/conf.py, generate-archive.sh, scripts/brebis, setup.py,
+	* backupchecker.py, backupchecker/applogger.py, backupchecker/archiveinfomsg.py,
+	backupchecker/checkbackups/checkarchive.py,
+	backupchecker/checkbackups/checkbackups.py,
+	backupchecker/checkbackups/checkbzip2.py, backupchecker/checkbackups/checkgzip.py,
+	backupchecker/checkbackups/checklzma.py, backupchecker/checkbackups/checktar.py,
+	backupchecker/checkbackups/checktree.py, backupchecker/checkbackups/checkzip.py,
+	backupchecker/checkfilelist.py, backupchecker/checkhashes.py, backupchecker/cliparse.py,
+	backupchecker/configurations.py, backupchecker/exceptionsparsing.py,
+	backupchecker/expectedvalues.py, backupchecker/generatelist/generatelist.py,
+	backupchecker/generatelist/generatelistforbzip2.py,
+	backupchecker/generatelist/generatelistforgzip.py,
+	backupchecker/generatelist/generatelistforlzma.py,
+	backupchecker/generatelist/generatelistfortar.py,
+	backupchecker/generatelist/generatelistfortree.py,
+	backupchecker/generatelist/generatelistforzip.py,
+	backupchecker/identifylimitations.py, backupchecker/listtype.py, backupchecker/main.py,
+	docs/source/conf.py, generate-archive.sh, scripts/backupchecker, setup.py,
 	tests.py:
 	update copyright email addresses and year
 	[9f4f23ff94ae]
@@ -59,10 +59,10 @@
 	new files related to functional tests to ignore
 	[06b3698906da] <exceptions-file-option>
 
-	* brebis/generatelist/generatelistforbzip2.py,
-	brebis/generatelist/generatelistforgzip.py,
-	brebis/generatelist/generatelistforlzma.py,
-	brebis/generatelist/generatelistfortree.py, functional-tests
+	* backupchecker/generatelist/generatelistforbzip2.py,
+	backupchecker/generatelist/generatelistforgzip.py,
+	backupchecker/generatelist/generatelistforlzma.py,
+	backupchecker/generatelist/generatelistfortree.py, functional-tests
 	/exceptions-file-option/bzip2/bzip2exceptionsfile, functional-tests
 	/exceptions-file-option/bzip2/exceptions-file-option.bz2,
 	functional-tests/exceptions-file-option/gzip/exceptions-file-
@@ -80,8 +80,8 @@
 
 2014-12-22  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/generatelist/generatelistfortar.py,
-	brebis/generatelist/generatelistforzip.py:
+	* backupchecker/generatelist/generatelistfortar.py,
+	backupchecker/generatelist/generatelistforzip.py:
 	--exceptions-file works for zip archive, with functional test
 	[b089ecda8cb3] <exceptions-file-option>
 
@@ -90,9 +90,9 @@
 	archives
 	[a8c91a1fb0b4] <exceptions-file-option>
 
-	* brebis/cliparse.py, brebis/exceptionsparsing.py,
-	brebis/generatelist/generatelistfortar.py, brebis/listtype.py,
-	brebis/main.py, functional-tests/exceptions-file-option/tar-gz
+	* backupchecker/cliparse.py, backupchecker/exceptionsparsing.py,
+	backupchecker/generatelist/generatelistfortar.py, backupchecker/listtype.py,
+	backupchecker/main.py, functional-tests/exceptions-file-option/tar-gz
 	/exceptions-file-option.tar.gz, functional-tests/exceptions-file-
 	option/tar-gz/targzexceptionsfile, functional-tests/exceptions-file-
 	option/zip/exceptions-file-option.zip, functional-tests/exceptions-
@@ -102,7 +102,7 @@
 
 2014-12-21  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/cliparse.py:
+	* backupchecker/cliparse.py:
 	add -E/--exceptions-file option
 	[c7ae5e48ca9e] <exceptions-file-option>
 
@@ -117,7 +117,7 @@
 
 2014-12-19  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/cliparse.py, brebis/generatelist/generatelistfortree.py,
+	* backupchecker/cliparse.py, backupchecker/generatelist/generatelistfortree.py,
 	functional-tests/hashtype-option/bzip2/hashtype-option.bz2,
 	functional-tests/hashtype-option/gzip/hashtype-option.gz,
 	functional-tests/hashtype-option/lzma/hashtype-option.xz,
@@ -131,12 +131,12 @@
 	configuration files
 	[f14d6fc2b43a] <hashtype-option>
 
-	* brebis/cliparse.py, brebis/generatelist/generatelistforbzip2.py,
-	brebis/generatelist/generatelistforgzip.py,
-	brebis/generatelist/generatelistforlzma.py,
-	brebis/generatelist/generatelistfortar.py,
-	brebis/generatelist/generatelistfortree.py,
-	brebis/generatelist/generatelistforzip.py, brebis/listtype.py:
+	* backupchecker/cliparse.py, backupchecker/generatelist/generatelistforbzip2.py,
+	backupchecker/generatelist/generatelistforgzip.py,
+	backupchecker/generatelist/generatelistforlzma.py,
+	backupchecker/generatelist/generatelistfortar.py,
+	backupchecker/generatelist/generatelistfortree.py,
+	backupchecker/generatelist/generatelistforzip.py, backupchecker/listtype.py:
 	--hashtype option works with tar.gz archive
 	[31c392a2dcb4] <hashtype-option>
 
@@ -165,17 +165,17 @@
 
 2014-12-16  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/generatelist/generatelist.py:
+	* backupchecker/generatelist/generatelist.py:
 	catches unicode exception and exits gracefully. fixes #65
 	[4ad756f09351]
 
 2014-12-15  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/cliparse.py, brebis/generatelist/generatelistforbzip2.py,
-	brebis/generatelist/generatelistforgzip.py,
-	brebis/generatelist/generatelistforlzma.py,
-	brebis/generatelist/generatelistfortar.py,
-	brebis/generatelist/generatelistforzip.py, brebis/listtype.py,
+	* backupchecker/cliparse.py, backupchecker/generatelist/generatelistforbzip2.py,
+	backupchecker/generatelist/generatelistforgzip.py,
+	backupchecker/generatelist/generatelistforlzma.py,
+	backupchecker/generatelist/generatelistfortar.py,
+	backupchecker/generatelist/generatelistforzip.py, backupchecker/listtype.py,
 	functionaltests.py, tests.py:
 	option -H or --hashes to explicitly required all hash sums for files
 	in the archive
@@ -205,19 +205,19 @@
 	update changelog
 	[1f3d990e20a3]
 
-	* brebis/cliparse.py:
+	* backupchecker/cliparse.py:
 	bump to 0.10
 	[37c1106b2741]
 
 	* README:
-	bump to python3.4 and update brebis version
+	bump to python3.4 and update backupchecker version
 	[aa3ef02df80a]
 
 	* setup.py:
-	bump python3.3 to python 3.4 and bump brebis version
+	bump python3.3 to python 3.4 and bump backupchecker version
 	[75ead57d9c8b]
 
-	* brebis.py, functionaltests.py, tests.py:
+	* backupchecker.py, functionaltests.py, tests.py:
 	bump shebang to python3.4
 	[67a6ff8bfb11]
 
@@ -226,17 +226,17 @@
 	* remove hash generation for symlinks. closes #61
 	[7cc565eeeb1b]
 
-	* brebis/generatelist/generatelistfortar.py:
+	* backupchecker/generatelist/generatelistfortar.py:
 	remove md5 generation for symlink in a tar file
 	[f165429e2b34] <remove-hash-for-symlink>
 
 2014-07-25  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/generatelist/generatelistfortree.py:
+	* backupchecker/generatelist/generatelistfortree.py:
 	remove hash for links while parsing a tree of files
 	[1e811378adf4] <remove-hash-for-symlink>
 
-	* brebis/generatelist/generatelistfortar.py:
+	* backupchecker/generatelist/generatelistfortar.py:
 	remove hash for links
 	[6c3eb451ca4c] <remove-hash-for-symlink>
 
@@ -261,7 +261,7 @@
 	Added tag 0.8 for changeset 008c44e19317
 	[dc231b2f8d78] [0.9]
 
-	* man/brebis.1:
+	* man/backupchecker.1:
 	update man page
 	[2b7008cadc48]
 
@@ -277,7 +277,7 @@
 	add doc for -C -L -O options
 	[fc51637d70ae]
 
-	* brebis/cliparse.py, setup.py:
+	* backupchecker/cliparse.py, setup.py:
 	update version number to 0.9
 	[9bc1b9a47f85]
 
@@ -295,7 +295,7 @@
 
 2013-12-20  Carl Chenet  <chaica@ohmytux.com>
 
-	* .hgignore, brebis/generatelist/generatelistfortree.py, functional-
+	* .hgignore, backupchecker/generatelist/generatelistfortree.py, functional-
 	tests/custom-conf-filelist-bzip2/custom-conf-filelist-bzip2.bz2,
 	functional-tests/custom-conf-filelist-gzip/custom-conf-filelist-
 	gzip.gz, functional-tests/custom-conf-filelist-lzma/custom-conf-
@@ -310,7 +310,7 @@
 
 2013-12-05  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/generatelist/generatelistforlzma.py:
+	* backupchecker/generatelist/generatelistforlzma.py:
 	update unit tests to support new optional conf/list/full output
 	directory for lzma archives
 	[b2f3ba49ab76] <conf-output>
@@ -320,7 +320,7 @@
 	directory for bzip2 archives
 	[5e373f29660d] <conf-output>
 
-	* brebis/generatelist/generatelistforbzip2.py:
+	* backupchecker/generatelist/generatelistforbzip2.py:
 	support to print configuration file and file list to different
 	directories or to swith default output directory for bzip2 archives
 	[4e007c688eeb] <conf-output>
@@ -330,7 +330,7 @@
 	directory for gzip archives
 	[5365b10bf00a] <conf-output>
 
-	* brebis/generatelist/generatelistforgzip.py:
+	* backupchecker/generatelist/generatelistforgzip.py:
 	support to print configuration file and file list to different
 	directories or to swith default output directory for gzip archives
 	[7d9b78b732b6] <conf-output>
@@ -340,12 +340,12 @@
 	directory
 	[94e614e74914] <conf-output>
 
-	* brebis/generatelist/generatelistforzip.py:
+	* backupchecker/generatelist/generatelistforzip.py:
 	support to print configuration file and file list to different
 	directories or to swith default output directory for zip archives
 	[96685daad2dc] <conf-output>
 
-	* brebis/generatelist/generatelistfortar.py:
+	* backupchecker/generatelist/generatelistfortar.py:
 	support to print configuration file and file list to different
 	directories or to swith default output directory for tar archives
 	[779554eb43bd] <conf-output>
@@ -355,7 +355,7 @@
 	directory
 	[5ee5fdb8ba04] <conf-output>
 
-	* brebis/cliparse.py, brebis/listtype.py:
+	* backupchecker/cliparse.py, backupchecker/listtype.py:
 	support to print configuration file and file list to different
 	directories or to swith default output directory
 	[ca08a9bf8be0] <conf-output>
@@ -371,8 +371,8 @@
 	support apk files. fixes #51
 	[5005d8f2fb2f]
 
-	* .hgignore, brebis/checkbackups/checkbackups.py,
-	brebis/generatelist/generatelistforzip.py, brebis/listtype.py,
+	* .hgignore, backupchecker/checkbackups/checkbackups.py,
+	backupchecker/generatelist/generatelistforzip.py, backupchecker/listtype.py,
 	functional-tests/expected-generated-list-for-zip-archive/expected-
 	generated-list-for-zip-archive.zip, functional-tests/expected-
 	generated-list-for-zip-archive/expectedlist.list, functional-tests
@@ -402,21 +402,21 @@
 	adding new files to ignore for unit testing
 	[c2558ea465da]
 
-	* brebis/listtype.py:
+	* backupchecker/listtype.py:
 	add private variables to self to authorize unit tests
 	[02712124b488]
 
-	* brebis/generatelist/generatelistforbzip2.py:
+	* backupchecker/generatelist/generatelistforbzip2.py:
 	add a private variable to self to authorize unit testing
 	[775e84148d83]
 
-	* brebis/generatelist/generatelistfortree.py:
+	* backupchecker/generatelist/generatelistfortree.py:
 	fix uncorrect variable name
 	[2fca6eb74a2a]
 
 2013-11-15  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/checkbackups/checkzip.py, functional-tests/expected-
+	* backupchecker/checkbackups/checkzip.py, functional-tests/expected-
 	generated-list-for-zip-archive/expectedlist.list, functional-tests
 	/generate-conf-and-file-list-zip/conf.conf.bck, functional-tests
 	/generate-conf-and-file-list-zip/list.list:
@@ -445,7 +445,7 @@
 	method
 	[99f1eace9b1a]
 
-	* brebis/identifylimitations.py:
+	* backupchecker/identifylimitations.py:
 	add limitation mtime for gz,bz2 and lzma
 	[f083e976edb1] <mtime>
 
@@ -453,11 +453,11 @@
 	add new files to ignore
 	[9c416ba245f9] <mtime>
 
-	* brebis/archiveinfomsg.py, brebis/checkbackups/checkarchive.py,
-	brebis/checkbackups/checktar.py, brebis/checkbackups/checkzip.py,
-	brebis/expectedvalues.py, brebis/generatelist/generatelistfortar.py,
-	brebis/generatelist/generatelistfortree.py,
-	brebis/generatelist/generatelistforzip.py, functional-tests/check-
+	* backupchecker/archiveinfomsg.py, backupchecker/checkbackups/checkarchive.py,
+	backupchecker/checkbackups/checktar.py, backupchecker/checkbackups/checkzip.py,
+	backupchecker/expectedvalues.py, backupchecker/generatelist/generatelistfortar.py,
+	backupchecker/generatelist/generatelistfortree.py,
+	backupchecker/generatelist/generatelistforzip.py, functional-tests/check-
 	mtime-tar/check-mtime-tar.tar.gz, functional-tests/check-mtime-tree
 	/check-mtime-tree/bar, functional-tests/check-mtime-tree/check-
 	mtime-tree/foo, functional-tests/check-mtime-tree/check-mtime-
@@ -489,7 +489,7 @@
 	update README with new information and parameters
 	[86ddf7d51759]
 
-	* brebis/cliparse.py, setup.py:
+	* backupchecker/cliparse.py, setup.py:
 	bump version number to 0.8
 	[7365125121fd]
 
@@ -500,7 +500,7 @@
 	of the list of files
 	[17ddb86c1b48]
 
-	* brebis/generatelist/generatelistfortree.py:
+	* backupchecker/generatelist/generatelistfortree.py:
 	generate the hash sum of the list of files for zip archive and add
 	it in the conf file when -G is invoked
 	[aa9ecbd1b96d]
@@ -510,12 +510,12 @@
 	of the list of files
 	[dbe2ebf19998]
 
-	* brebis/generatelist/generatelistforzip.py:
+	* backupchecker/generatelist/generatelistforzip.py:
 	generate the hash sum of the list of files for zip archive and add
 	it in the conf file when -G is invoked
 	[3ba9c3173a02]
 
-	* brebis/generatelist/generatelistforlzma.py:
+	* backupchecker/generatelist/generatelistforlzma.py:
 	generate the hash sum of the list of files for xz archive and add it
 	in the conf file when -G is invoked
 	[53faa3eedfa0]
@@ -530,7 +530,7 @@
 	of the list of files
 	[ac4201fff23a]
 
-	* brebis/generatelist/generatelistforbzip2.py:
+	* backupchecker/generatelist/generatelistforbzip2.py:
 	generate the hash sum of the list of files for gzip archive and add
 	it in the conf file when -G is invoked
 	[b60d6fb2edc7]
@@ -542,7 +542,7 @@
 	the list of files
 	[674d0c2ee0df]
 
-	* brebis/generatelist/generatelistforgzip.py:
+	* backupchecker/generatelist/generatelistforgzip.py:
 	generate the hash sum of the list of files for gzip archive and add
 	it in the conf file when -G is invoked
 	[82772eee40d6]
@@ -567,15 +567,15 @@
 	sum of the list of files
 	[253c6e7bfb3c]
 
-	* brebis/generatelist/generatelist.py,
-	brebis/generatelist/generatelistfortar.py:
+	* backupchecker/generatelist/generatelist.py,
+	backupchecker/generatelist/generatelistfortar.py:
 	generate the hash sum of the list of files for tar archive and add
 	it in the conf file when -G is invoked
 	[0f3320b85737]
 
 2013-10-22  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/checkfilelist.py, brebis/configurations.py,
+	* backupchecker/checkfilelist.py, backupchecker/configurations.py,
 	functionaltests.py:
 	sha512 parameter must be explicitly managed (None value when not
 	defined in the conf file) and strip gpg header and footer of the
@@ -587,12 +587,12 @@
 
 2013-10-20  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/checkfilelist.py, brebis/configurations.py, functional-tests
+	* backupchecker/checkfilelist.py, backupchecker/configurations.py, functional-tests
 	/sha-sum-in-conf/sha-sum-in-conf.conf:
 	modify the configuration parameter called hash by sha512
 	[50820bead4c2] <hashsum-in-conf>
 
-	* brebis/configurations.py, functional-tests/missing-gpg-footer
+	* backupchecker/configurations.py, functional-tests/missing-gpg-footer
 	/missing-gpg-footer.conf, functional-tests/missing-gpg-footer
 	/missing-gpg-footer.list, functional-tests/missing-gpg-footer
 	/missing-gpg-footer.tar.gz, functional-tests/missing-gpg-header
@@ -614,8 +614,8 @@
 
 2013-10-19  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/checkfilelist.py, brebis/configurations.py,
-	brebis/expectedvalues.py:
+	* backupchecker/checkfilelist.py, backupchecker/configurations.py,
+	backupchecker/expectedvalues.py:
 	support for hash sum of the list of files in the configuration file
 	[5c083053bc76] <hashsum-in-conf>
 
@@ -652,7 +652,7 @@
 	update README for 0.7
 	[36e31ffab9dc]
 
-	* man/brebis.1:
+	* man/backupchecker.1:
 	update README for 0.7
 	[57d2477722c2]
 
@@ -783,30 +783,30 @@
 	add unsupported parameters for zip archive test
 	[ef5f584db8c5]
 
-	* brebis/checkbackups/checkbzip2.py, brebis/checkbackups/checkgzip.py,
-	brebis/checkbackups/checklzma.py, brebis/checkbackups/checkzip.py,
-	brebis/identifylimitations.py:
+	* backupchecker/checkbackups/checkbzip2.py, backupchecker/checkbackups/checkgzip.py,
+	backupchecker/checkbackups/checklzma.py, backupchecker/checkbackups/checkzip.py,
+	backupchecker/identifylimitations.py:
 	check every files from the .list files to find unsupported actions
 	for a given kind of archive. fixes #42
 	[020c983a739d]
 
 2013-10-10  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/expectedvalues.py:
+	* backupchecker/expectedvalues.py:
 	correct typo in error message
 	[abfe291c3b62]
 
-	* brebis/cliparse.py, setup.py:
-	bump brebis version to 0.7
+	* backupchecker/cliparse.py, setup.py:
+	bump backupchecker version to 0.7
 	[8c9ecf367651]
 
-	* brebis2backupchecker.sh:
+	* backupchecker2backupchecker.sh:
 	uncorrect substitutions for the AUTHORS file while generating
 	backupchecker
 	[83a567d86895] <backupchecker>
 
-	* brebis2backupchecker.sh:
-	upgrade brebis2backupchecker.sh script to follow upstream
+	* backupchecker2backupchecker.sh:
+	upgrade backupchecker2backupchecker.sh script to follow upstream
 	[13e8f2840a00] <backupchecker>
 
 	* merge check-target-link branch into default branch
@@ -867,8 +867,8 @@
 
 2013-10-07  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/checkbackups/checktree.py,
-	brebis/generatelist/generatelistfortree.py:
+	* backupchecker/checkbackups/checktree.py,
+	backupchecker/generatelist/generatelistfortree.py:
 	update the code to use targe in generatelistfortree and checktree
 	[5f549cc662d0] <check-target-link>
 
@@ -878,7 +878,7 @@
 
 2013-08-29  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/identifylimitations.py:
+	* backupchecker/identifylimitations.py:
 	add target as unsupported feature for gz bz2 zip and lzma archive.
 	rename lists for unsupported features to correct old bug
 	[6cd8df739c2e] <check-target-link>
@@ -893,15 +893,15 @@
 	add wrong target in tar gz archive test
 	[1d650fdc5c54] <check-target-link>
 
-	* brebis/archiveinfomsg.py, brebis/checkbackups/checkarchive.py,
-	brebis/checkbackups/checktar.py, brebis/expectedvalues.py,
-	brebis/generatelist/generatelistfortar.py:
+	* backupchecker/archiveinfomsg.py, backupchecker/checkbackups/checkarchive.py,
+	backupchecker/checkbackups/checktar.py, backupchecker/expectedvalues.py,
+	backupchecker/generatelist/generatelistfortar.py:
 	add target test on tar gz archive
 	[476e61c1f717] <check-target-link>
 
 2013-08-27  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/configurations.py:
+	* backupchecker/configurations.py:
 	control the behaviour when wrong data are in input. fixes #39
 	[5d212623ec78]
 
@@ -914,14 +914,14 @@
 	modify existing tests for generatelist
 	[03480e9e57c8] <generate-conf-file>
 
-	* brebis/cliparse.py, brebis/generatelist/generatelist.py,
-	brebis/generatelist/generatelistforbzip2.py,
-	brebis/generatelist/generatelistforgzip.py,
-	brebis/generatelist/generatelistforlzma.py,
-	brebis/generatelist/generatelistfortar.py,
-	brebis/generatelist/generatelistfortree.py,
-	brebis/generatelist/generatelistforzip.py, brebis/listtype.py,
-	brebis/main.py:
+	* backupchecker/cliparse.py, backupchecker/generatelist/generatelist.py,
+	backupchecker/generatelist/generatelistforbzip2.py,
+	backupchecker/generatelist/generatelistforgzip.py,
+	backupchecker/generatelist/generatelistforlzma.py,
+	backupchecker/generatelist/generatelistfortar.py,
+	backupchecker/generatelist/generatelistfortree.py,
+	backupchecker/generatelist/generatelistforzip.py, backupchecker/listtype.py,
+	backupchecker/main.py:
 	add option -G to generate configuration file
 	[aa30c6b57e19] <generate-conf-file>
 
@@ -939,13 +939,13 @@
 	update the README for the version 0.6
 	[e2f6739dda3b]
 
-	* brebis/cliparse.py, setup.py:
+	* backupchecker/cliparse.py, setup.py:
 	bump version to 0.6
 	[d8564da2454d]
 
 2013-08-15  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/generatelist/generatelistfortree.py:
+	* backupchecker/generatelist/generatelistfortree.py:
 	give the good name to a (rather unused) stat module function
 	S_ISBLK. fixes #28
 	[0db0fc6ccd3e]
@@ -954,17 +954,17 @@
 	tar archive. fixes #36
 	[930679aa1b85]
 
-	* brebis/checkbackups/checktar.py:
+	* backupchecker/checkbackups/checktar.py:
 	catch EOFError while checking tar file because it is a sign of
 	corruption of the file
 	[e9d4ccf7e267] <uncatched-exception-related-to-archive-corruption-36>
 
-	* brebis/generatelist/generatelistfortar.py:
+	* backupchecker/generatelist/generatelistfortar.py:
 	catch EOFError while manipulating tar file because it is a sign of
 	corruption of the file
 	[530aeab6b84e] <uncatched-exception-related-to-archive-corruption-36>
 
-	* brebis.py:
+	* backupchecker.py:
 	update shebang with debian python3.3
 	[9d688bba150c]
 
@@ -980,20 +980,20 @@
 	add generate list and parse tgz and tbz2 archive tests. fixes #31
 	[cb312c17bc0a]
 
-	* brebis/generatelist/generatelistfortar.py:
+	* backupchecker/generatelist/generatelistfortar.py:
 	fix code error about support for tbz2
 	[e47e51b36a00]
 
 2013-08-11  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/cliparse.py, brebis/configurations.py:
+	* backupchecker/cliparse.py, backupchecker/configurations.py:
 	check if configuration paths exist. fixes #34
 	[fe980e6b5de2]
 
 	* provide only one configuration file on the cli. fixes #21
 	[acd7acce000a]
 
-	* brebis/configurations.py:
+	* backupchecker/configurations.py:
 	merge to check if only one conf file feature works with latest
 	version in head
 	[2ff4690b5da6] <conf-option-takes-one-conf-file>
@@ -1021,7 +1021,7 @@
 	activate wrong file type hard link in tree test
 	[1eb2e4f05ff0] <detect-hard-link-with-stat>
 
-	* brebis/checkbackups/checktree.py:
+	* backupchecker/checkbackups/checktree.py:
 	detect hard link for uncompressed tree of files
 	[c890198c8588] <detect-hard-link-with-stat>
 
@@ -1080,13 +1080,13 @@
 	add expecting hard link for tar gz archive functional test
 	[5bcd6ff974a2]
 
-	* brebis/archiveinfomsg.py:
+	* backupchecker/archiveinfomsg.py:
 	add hard link type support for the error message. fixes #32
 	[12b43f07b4df]
 
 2013-08-08  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/expectedvalues.py:
+	* backupchecker/expectedvalues.py:
 	add type l for hard link. fixes #29
 	[be47033ae68b]
 
@@ -1100,12 +1100,12 @@
 	add generate list and parse tbz archive functional test
 	[3448660d6e6c] <support-for-tbz-archive>
 
-	* brebis/checkbackups/checkbackups.py,
-	brebis/generatelist/generatelistfortar.py, brebis/listtype.py:
+	* backupchecker/checkbackups/checkbackups.py,
+	backupchecker/generatelist/generatelistfortar.py, backupchecker/listtype.py:
 	add support for tbz archive
 	[781123901dae] <support-for-tbz-archive>
 
-	* brebis/cliparse.py:
+	* backupchecker/cliparse.py:
 	bump to good current version in cli help message
 	[9fd289298b41]
 
@@ -1118,7 +1118,7 @@
 	configuration files exist at the user-specified path. fixes #27
 	[fac205eee4fc]
 
-	* brebis/configurations.py:
+	* backupchecker/configurations.py:
 	check if configuration files exist at the user-specified path. fixes
 	#27
 	[49007100a873] <alert-message-for-no-conf-files>
@@ -1132,7 +1132,7 @@
 
 2013-08-05  Carl Chenet  <chaica@ohmytux.com>
 
-	* man/brebis.1:
+	* man/backupchecker.1:
 	update the manual page
 	[b2c24310faac] <escape-unescape-separator>
 
@@ -1175,24 +1175,24 @@
 	delimiter
 	[37981c869489] <escape-unescape-separator>
 
-	* brebis/checkbackups/checkarchive.py,
-	brebis/checkbackups/checkbackups.py,
-	brebis/checkbackups/checkbzip2.py, brebis/checkbackups/checkgzip.py,
-	brebis/checkbackups/checklzma.py, brebis/checkbackups/checktar.py,
-	brebis/checkbackups/checktree.py, brebis/checkbackups/checkzip.py,
-	brebis/cliparse.py, brebis/expectedvalues.py,
-	brebis/generatelist/generatelistforbzip2.py,
-	brebis/generatelist/generatelistforgzip.py,
-	brebis/generatelist/generatelistforlzma.py,
-	brebis/generatelist/generatelistfortar.py,
-	brebis/generatelist/generatelistfortree.py,
-	brebis/generatelist/generatelistforzip.py, brebis/listtype.py,
-	brebis/main.py:
+	* backupchecker/checkbackups/checkarchive.py,
+	backupchecker/checkbackups/checkbackups.py,
+	backupchecker/checkbackups/checkbzip2.py, backupchecker/checkbackups/checkgzip.py,
+	backupchecker/checkbackups/checklzma.py, backupchecker/checkbackups/checktar.py,
+	backupchecker/checkbackups/checktree.py, backupchecker/checkbackups/checkzip.py,
+	backupchecker/cliparse.py, backupchecker/expectedvalues.py,
+	backupchecker/generatelist/generatelistforbzip2.py,
+	backupchecker/generatelist/generatelistforgzip.py,
+	backupchecker/generatelist/generatelistforlzma.py,
+	backupchecker/generatelist/generatelistfortar.py,
+	backupchecker/generatelist/generatelistfortree.py,
+	backupchecker/generatelist/generatelistforzip.py, backupchecker/listtype.py,
+	backupchecker/main.py:
 	add delimiter option to replace default delimiter in the list of
 	files, both working to generate lists and check backups
 	[1794e768849b] <escape-unescape-separator>
 
-	* brebis/expectedvalues.py:
+	* backupchecker/expectedvalues.py:
 	saving the current wip, going another way
 	[19d87c89a871] <escape-separator>
 
@@ -1208,13 +1208,13 @@
 	separator test
 	[62d2d7cd39c8] <escape-separator>
 
-	* brebis/generatelist/generatelist.py,
-	brebis/generatelist/generatelistforbzip2.py,
-	brebis/generatelist/generatelistforgzip.py,
-	brebis/generatelist/generatelistforlzma.py,
-	brebis/generatelist/generatelistfortar.py,
-	brebis/generatelist/generatelistfortree.py,
-	brebis/generatelist/generatelistforzip.py:
+	* backupchecker/generatelist/generatelist.py,
+	backupchecker/generatelist/generatelistforbzip2.py,
+	backupchecker/generatelist/generatelistforgzip.py,
+	backupchecker/generatelist/generatelistforlzma.py,
+	backupchecker/generatelist/generatelistfortar.py,
+	backupchecker/generatelist/generatelistfortree.py,
+	backupchecker/generatelist/generatelistforzip.py:
 	escape the default separator when it appears in the name of a file
 	in an archive or a treefile
 	[2e67a26a20f1] <escape-separator>
@@ -1230,13 +1230,13 @@
 	checkbackups.py
 	[9518468cdeba] <listtype-checklist-bug24>
 
-	* brebis/checkbackups/checkbackups.py:
+	* backupchecker/checkbackups/checkbackups.py:
 	add missing support for tbz2
 	[421b5ed1e816] <listtype-checklist-bug24>
 
 2013-07-30  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/configurations.py:
+	* backupchecker/configurations.py:
 	-c option now manages a single configuration file
 	[d642b5a62a69] <conf-option-takes-one-conf-file>
 
@@ -1253,7 +1253,7 @@
 	[f71f6bd25d81]
 
 	* changelog:
-	add the brebis changelog
+	add the backupchecker changelog
 	[1616effdc58d] [0.5]
 
 	* generate-archive.sh:
@@ -1267,13 +1267,13 @@
 	switch the shebang to system path for python3.3 on debian linux
 	[72eeeab125b0]
 
-	* brebis/archiveinfomsg.py, brebis/checkbackups/checkarchive.py,
-	brebis/checkbackups/checkbzip2.py, brebis/checkbackups/checkgzip.py,
-	brebis/checkbackups/checklzma.py, brebis/checkbackups/checktar.py,
-	brebis/checkbackups/checkzip.py, brebis/expectedvalues.py,
-	brebis/generatelist/generatelistfortar.py,
-	brebis/generatelist/generatelistforzip.py,
-	brebis/identifylimitations.py:
+	* backupchecker/archiveinfomsg.py, backupchecker/checkbackups/checkarchive.py,
+	backupchecker/checkbackups/checkbzip2.py, backupchecker/checkbackups/checkgzip.py,
+	backupchecker/checkbackups/checklzma.py, backupchecker/checkbackups/checktar.py,
+	backupchecker/checkbackups/checkzip.py, backupchecker/expectedvalues.py,
+	backupchecker/generatelist/generatelistfortar.py,
+	backupchecker/generatelist/generatelistforzip.py,
+	backupchecker/identifylimitations.py:
 	replace logging.warn (deprecated) by logging.warning
 	[b80be56716e5]
 
@@ -1281,50 +1281,50 @@
 	switch the shebang to system path for python3.3 on debian linux
 	[5ef18e59dbab]
 
-	* brebis.py, brebis/applogger.py, brebis/archiveinfomsg.py,
-	brebis/checkbackups/checkarchive.py,
-	brebis/checkbackups/checkbackups.py,
-	brebis/checkbackups/checkbzip2.py, brebis/checkbackups/checkgzip.py,
-	brebis/checkbackups/checklzma.py, brebis/checkbackups/checktar.py,
-	brebis/checkbackups/checktree.py, brebis/checkbackups/checkzip.py,
-	brebis/checkhashes.py, brebis/cliparse.py, brebis/configurations.py,
-	brebis/expectedvalues.py, brebis/generatelist/generatelist.py,
-	brebis/generatelist/generatelistforbzip2.py,
-	brebis/generatelist/generatelistforgzip.py,
-	brebis/generatelist/generatelistforlzma.py,
-	brebis/generatelist/generatelistfortar.py,
-	brebis/generatelist/generatelistfortree.py,
-	brebis/generatelist/generatelistforzip.py,
-	brebis/identifylimitations.py, brebis/listtype.py, brebis/main.py,
-	functionaltests.py, scripts/brebis, tests.py:
+	* backupchecker.py, backupchecker/applogger.py, backupchecker/archiveinfomsg.py,
+	backupchecker/checkbackups/checkarchive.py,
+	backupchecker/checkbackups/checkbackups.py,
+	backupchecker/checkbackups/checkbzip2.py, backupchecker/checkbackups/checkgzip.py,
+	backupchecker/checkbackups/checklzma.py, backupchecker/checkbackups/checktar.py,
+	backupchecker/checkbackups/checktree.py, backupchecker/checkbackups/checkzip.py,
+	backupchecker/checkhashes.py, backupchecker/cliparse.py, backupchecker/configurations.py,
+	backupchecker/expectedvalues.py, backupchecker/generatelist/generatelist.py,
+	backupchecker/generatelist/generatelistforbzip2.py,
+	backupchecker/generatelist/generatelistforgzip.py,
+	backupchecker/generatelist/generatelistforlzma.py,
+	backupchecker/generatelist/generatelistfortar.py,
+	backupchecker/generatelist/generatelistfortree.py,
+	backupchecker/generatelist/generatelistforzip.py,
+	backupchecker/identifylimitations.py, backupchecker/listtype.py, backupchecker/main.py,
+	functionaltests.py, scripts/backupchecker, tests.py:
 	bump the date of the copyright to 2013
 	[b79d117a249f]
 
-	* brebis.py, brebis/applogger.py, brebis/archiveinfomsg.py,
-	brebis/checkbackups/checkarchive.py,
-	brebis/checkbackups/checkbackups.py,
-	brebis/checkbackups/checkbzip2.py, brebis/checkbackups/checkgzip.py,
-	brebis/checkbackups/checklzma.py, brebis/checkbackups/checktar.py,
-	brebis/checkbackups/checktree.py, brebis/checkbackups/checkzip.py,
-	brebis/checkhashes.py, brebis/cliparse.py, brebis/configurations.py,
-	brebis/expectedvalues.py, brebis/generatelist/generatelist.py,
-	brebis/generatelist/generatelistforbzip2.py,
-	brebis/generatelist/generatelistforgzip.py,
-	brebis/generatelist/generatelistforlzma.py,
-	brebis/generatelist/generatelistfortar.py,
-	brebis/generatelist/generatelistfortree.py,
-	brebis/generatelist/generatelistforzip.py,
-	brebis/identifylimitations.py, brebis/listtype.py, brebis/main.py,
+	* backupchecker.py, backupchecker/applogger.py, backupchecker/archiveinfomsg.py,
+	backupchecker/checkbackups/checkarchive.py,
+	backupchecker/checkbackups/checkbackups.py,
+	backupchecker/checkbackups/checkbzip2.py, backupchecker/checkbackups/checkgzip.py,
+	backupchecker/checkbackups/checklzma.py, backupchecker/checkbackups/checktar.py,
+	backupchecker/checkbackups/checktree.py, backupchecker/checkbackups/checkzip.py,
+	backupchecker/checkhashes.py, backupchecker/cliparse.py, backupchecker/configurations.py,
+	backupchecker/expectedvalues.py, backupchecker/generatelist/generatelist.py,
+	backupchecker/generatelist/generatelistforbzip2.py,
+	backupchecker/generatelist/generatelistforgzip.py,
+	backupchecker/generatelist/generatelistforlzma.py,
+	backupchecker/generatelist/generatelistfortar.py,
+	backupchecker/generatelist/generatelistfortree.py,
+	backupchecker/generatelist/generatelistforzip.py,
+	backupchecker/identifylimitations.py, backupchecker/listtype.py, backupchecker/main.py,
 	functionaltests.py, setup.py, tests.py:
 	bump to 2013 the date of the copyright
 	[9e967f038496] <debian>
 
 	* debian/manpage:
-	add support of the manual page for the debian package of Brebis
+	add support of the manual page for the debian package of BackupChecker
 	[9b4177cec4b7] <debian>
 
-	* man/brebis.1, setup.py:
-	add a manual page for brebis. fixes #23
+	* man/backupchecker.1, setup.py:
+	add a manual page for backupchecker. fixes #23
 	[e9ae6bb524b3]
 
 2013-07-28  Carl Chenet  <chaica@ohmytux.com>
@@ -1337,17 +1337,17 @@
 2013-07-27  Carl Chenet  <chaica@ohmytux.com>
 
 	* README:
-	update the README for python 3.3 and brebis 0.5
+	update the README for python 3.3 and backupchecker 0.5
 	[b97acbc23bb3]
 
 2013-07-21  Carl Chenet  <chaica@ohmytux.com>
 
-	* scripts/brebis, setup.py:
-	update to python 3.3 and brebis 0.5
+	* scripts/backupchecker, setup.py:
+	update to python 3.3 and backupchecker 0.5
 	[db5f5dc17542]
 
 	* debian/changelog, debian/control, debian/install, debian/rules:
-	upgrade to python 3.3 and brebis 0.5
+	upgrade to python 3.3 and backupchecker 0.5
 	[a02c4973299d] <debian>
 
 2013-07-19  Carl Chenet  <chaica@ohmytux.com>
@@ -1372,7 +1372,7 @@
 	add expected generated list for xz archive test
 	[97f04c8ee099] <support-for-lzma>
 
-	* brebis/generatelist/generatelistforlzma.py, functional-tests
+	* backupchecker/generatelist/generatelistforlzma.py, functional-tests
 	/generate-list-and-parse-xz-archive/a.out, functional-tests
 	/generate-list-and-parse-xz-archive/generate-list-and-parse-xz-
 	archive-list, functional-tests/generate-list-and-parse-xz-archive
@@ -1402,12 +1402,12 @@
 	add file missing in xz test
 	[e86a4b65689b] <support-for-lzma>
 
-	* brebis/identifylimitations.py:
+	* backupchecker/identifylimitations.py:
 	not easily possible to get lzma/xz uncompressed file size - maybe
 	later
 	[1f998d4a0954] <support-for-lzma>
 
-	* brebis/checkbackups/checklzma.py, functional-tests/corrupted-xz-
+	* backupchecker/checkbackups/checklzma.py, functional-tests/corrupted-xz-
 	archive/a.out, functional-tests/corrupted-xz-archive/corrupted-xz-
 	archive-list, functional-tests/corrupted-xz-archive/corrupted-xz-
 	archive.conf, functional-tests/corrupted-xz-archive/corrupted-xz-
@@ -1807,9 +1807,9 @@
 
 2012-07-24  Carl Chenet  <chaica@ohmytux.com>
 
-	* .hgignore, brebis/checkbackups/checkbackups.py,
-	brebis/generatelist/generatelistforlzma.py,
-	brebis/generatelist/generatelistfortar.py, brebis/listtype.py,
+	* .hgignore, backupchecker/checkbackups/checkbackups.py,
+	backupchecker/generatelist/generatelistforlzma.py,
+	backupchecker/generatelist/generatelistfortar.py, backupchecker/listtype.py,
 	functional-tests/file-missing-in-tar-xz/file-missing-in-tar-xz-list,
 	functional-tests/file-missing-in-tar-xz/file-missing-in-tar-xz.conf,
 	functional-tests/file-missing-in-tar-xz/file-missing-in-tar-
@@ -1822,10 +1822,10 @@
 
 2012-07-23  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis.py, brebis/checkbackups/checkbackups.py,
-	brebis/checkbackups/checklzma.py,
-	brebis/generatelist/generatelistforlzma.py,
-	brebis/identifylimitations.py, brebis/listtype.py, functional-tests
+	* backupchecker.py, backupchecker/checkbackups/checkbackups.py,
+	backupchecker/checkbackups/checklzma.py,
+	backupchecker/generatelist/generatelistforlzma.py,
+	backupchecker/identifylimitations.py, backupchecker/listtype.py, functional-tests
 	/wrong-file-md5-hash-in-lzma-archive/wrong-file-md5-hash-in-lzma-
 	archive-list, functional-tests/wrong-file-md5-hash-in-lzma-archive
 	/wrong-file-md5-hash-in-lzma-archive.conf, functional-tests/wrong-
@@ -1836,8 +1836,8 @@
 
 2012-07-22  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis2backupchecker.sh:
-	add new tool to convert the brebis repository to backupchecker
+	* backupchecker2backupchecker.sh:
+	add new tool to convert the backupchecker repository to backupchecker
 	[804f0361283e] <backupchecker>
 
 2012-02-19  Carl Chenet  <chaica@ohmytux.com>
@@ -1868,8 +1868,8 @@
 	[955e902e51c8] [v0.4]
 
 	* setup.py:
-	modify setup.py in order to manage new packages brebis.checkbackups
-	and brebis.generatelist while installing
+	modify setup.py in order to manage new packages backupchecker.checkbackups
+	and backupchecker.generatelist while installing
 	[06d381967008]
 
 	* README:
@@ -1878,25 +1878,25 @@
 
 2011-11-20  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/generatelist/generatelistfortar.py:
+	* backupchecker/generatelist/generatelistfortar.py:
 	fixing issue with no perm, in generatelist part
 	[6eeabda9dcc9]
 
 2011-11-19  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/expectedvalues.py:
+	* backupchecker/expectedvalues.py:
 	fixes #14, size unit can now be lower or upper case
 	[24cdaca722a3]
 
-	* brebis/checkbackups/checkarchive.py:
+	* backupchecker/checkbackups/checkarchive.py:
 	fixes #15 managing special cas when mode == '0' -> transforming into
 	'000'
 	[88c8e0409605]
 
-	* brebis/generatelist/generatelistforgzip.py,
-	brebis/generatelist/generatelistfortar.py,
-	brebis/generatelist/generatelistfortree.py,
-	brebis/generatelist/generatelistforzip.py, functional-tests
+	* backupchecker/generatelist/generatelistforgzip.py,
+	backupchecker/generatelist/generatelistfortar.py,
+	backupchecker/generatelist/generatelistfortree.py,
+	backupchecker/generatelist/generatelistforzip.py, functional-tests
 	/expected-generated-list-for-gzip-archive/expectedlist.list,
 	functional-tests/expected-generated-list-for-tar-
 	archive/expectedlist.list, functional-tests/expected-generated-list-
@@ -2018,7 +2018,7 @@
 	archive
 	[903d6d833e61] <functional-tests-for-archive-size>
 
-	* brebis/cliparse.py:
+	* backupchecker/cliparse.py:
 	merging -g option branch and updating version number
 	[b96d0c55cd5d]
 
@@ -2122,7 +2122,7 @@
 
 2011-11-09  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/expectedvalues.py, functional-tests/user-specified-delimiter
+	* backupchecker/expectedvalues.py, functional-tests/user-specified-delimiter
 	/user-specified-delimiter.conf, functional-tests/user-specified-
 	delimiter/user-specified-delimiter.list, functional-tests/user-
 	specified-delimiter/user-specified-delimiter.tar.gz,
@@ -2139,15 +2139,15 @@
 
 2011-11-07  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/checkbackups/checkbzip2.py, brebis/checkbackups/checkgzip.py,
-	brebis/checkbackups/checktar.py, brebis/checkbackups/checktree.py,
-	brebis/checkbackups/checkzip.py, brebis/configurations.py,
-	brebis/expectedvalues.py,
-	brebis/generatelist/generatelistforbzip2.py,
-	brebis/generatelist/generatelistforgzip.py,
-	brebis/generatelist/generatelistfortar.py,
-	brebis/generatelist/generatelistfortree.py,
-	brebis/generatelist/generatelistforzip.py, functional-tests
+	* backupchecker/checkbackups/checkbzip2.py, backupchecker/checkbackups/checkgzip.py,
+	backupchecker/checkbackups/checktar.py, backupchecker/checkbackups/checktree.py,
+	backupchecker/checkbackups/checkzip.py, backupchecker/configurations.py,
+	backupchecker/expectedvalues.py,
+	backupchecker/generatelist/generatelistforbzip2.py,
+	backupchecker/generatelist/generatelistforgzip.py,
+	backupchecker/generatelist/generatelistfortar.py,
+	backupchecker/generatelist/generatelistfortree.py,
+	backupchecker/generatelist/generatelistforzip.py, functional-tests
 	/corrupted-bz2-archive/corrupted-bz2-archive-list, functional-tests
 	/corrupted-gz-archive/corrupted-gz-archive-list, functional-tests
 	/corrupted-tar-bz2-archive/corrupted-tar-bz2-archive-list,
@@ -2397,7 +2397,7 @@
 	adding directory for unit tests
 	[bb1fed78389b]
 
-	* .hgignore, brebis/generatelist/generatelist.py, tests.py,
+	* .hgignore, backupchecker/generatelist/generatelist.py, tests.py,
 	tests/generatelist_private_methods/mytar.list,
 	tests/generatelistforgzip_private_methods/mygzip.gz,
 	tests/generatelistfortar_private_methods/mytar.tar.gz,
@@ -2417,7 +2417,7 @@
 	upgrading version number in README
 	[7c6454aff706]
 
-	* brebis/cliparse.py:
+	* backupchecker/cliparse.py:
 	upgrading version number
 	[f0b83a833dbc]
 
@@ -2425,28 +2425,28 @@
 	correctiong unit tests to manage new check modules organization
 	[cc5b9a3d1e79]
 
-	* brebis/checkbackups/checkbackups.py, functional-tests/file-missing-
+	* backupchecker/checkbackups/checkbackups.py, functional-tests/file-missing-
 	in-tar/file-missing-in-tar-list, functional-tests/file-missing-in-
 	tar/file-missing-in-tar.conf, functional-tests/file-missing-in-tar
 	/file-missing-in-tar.tar, functionaltests.py:
 	fixed #9 - support for tar-only file
 	[9be52e2e4a8c]
 
-	* brebis/checkarchive.py, brebis/checkbackups.py,
-	brebis/checkbzip2.py, brebis/checkgzip.py, brebis/checktar.py,
-	brebis/checktree.py, brebis/checkzip.py:
+	* backupchecker/checkarchive.py, backupchecker/checkbackups.py,
+	backupchecker/checkbzip2.py, backupchecker/checkgzip.py, backupchecker/checktar.py,
+	backupchecker/checktree.py, backupchecker/checkzip.py:
 	fixed #11
 	[4872d1196f39]
 
-	* brebis/checkarchive.py, brebis/checkbackups.py,
-	brebis/checkbackups/__init__.py,
-	brebis/checkbackups/checkarchive.py,
-	brebis/checkbackups/checkbackups.py,
-	brebis/checkbackups/checkbzip2.py, brebis/checkbackups/checkgzip.py,
-	brebis/checkbackups/checktar.py, brebis/checkbackups/checktree.py,
-	brebis/checkbackups/checkzip.py, brebis/checkbzip2.py,
-	brebis/checkgzip.py, brebis/checktar.py, brebis/checktree.py,
-	brebis/checkzip.py, brebis/main.py:
+	* backupchecker/checkarchive.py, backupchecker/checkbackups.py,
+	backupchecker/checkbackups/__init__.py,
+	backupchecker/checkbackups/checkarchive.py,
+	backupchecker/checkbackups/checkbackups.py,
+	backupchecker/checkbackups/checkbzip2.py, backupchecker/checkbackups/checkgzip.py,
+	backupchecker/checkbackups/checktar.py, backupchecker/checkbackups/checktree.py,
+	backupchecker/checkbackups/checkzip.py, backupchecker/checkbzip2.py,
+	backupchecker/checkgzip.py, backupchecker/checktar.py, backupchecker/checktree.py,
+	backupchecker/checkzip.py, backupchecker/main.py:
 	fixed #11 - new package checkbackups
 	[8a97ce3a6797] <adding-module-checkbackups>
 
@@ -2514,8 +2514,8 @@
 	functional tests for expected generated list files
 	[ac5e3ec3cfba] <generate-list-option>
 
-	* brebis/generatelist/generatelistforbzip2.py,
-	brebis/generatelist/generatelistforgzip.py, brebis/listtype.py,
+	* backupchecker/generatelist/generatelistforbzip2.py,
+	backupchecker/generatelist/generatelistforgzip.py, backupchecker/listtype.py,
 	functional-tests/generate-list-from-bzip2-archive/generate-list-
 	from-bzip2-archive.bz2, functional-tests/generate-list-from-gzip-
 	archive/generate-list-from-gzip-archive.gz, functionaltests.py:
@@ -2524,16 +2524,16 @@
 
 2011-10-31  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/generatelist.py, brebis/generatelist/__init__.py,
-	brebis/generatelist/generatelist.py,
-	brebis/generatelist/generatelistforbzip2.py,
-	brebis/generatelist/generatelistforgzip.py,
-	brebis/generatelist/generatelistfortar.py,
-	brebis/generatelist/generatelistfortree.py,
-	brebis/generatelist/generatelistforzip.py,
-	brebis/generatelistforbzip2.py, brebis/generatelistforgzip.py,
-	brebis/generatelistfortar.py, brebis/generatelistfortree.py,
-	brebis/generatelistforzip.py, brebis/listtype.py, functional-tests
+	* backupchecker/generatelist.py, backupchecker/generatelist/__init__.py,
+	backupchecker/generatelist/generatelist.py,
+	backupchecker/generatelist/generatelistforbzip2.py,
+	backupchecker/generatelist/generatelistforgzip.py,
+	backupchecker/generatelist/generatelistfortar.py,
+	backupchecker/generatelist/generatelistfortree.py,
+	backupchecker/generatelist/generatelistforzip.py,
+	backupchecker/generatelistforbzip2.py, backupchecker/generatelistforgzip.py,
+	backupchecker/generatelistfortar.py, backupchecker/generatelistfortree.py,
+	backupchecker/generatelistforzip.py, backupchecker/listtype.py, functional-tests
 	/generate-list-from-tar-archive/generate-list-from-tar-archive.list,
 	functionaltests.py:
 	complete generated list for tar,zip,tree
@@ -2541,7 +2541,7 @@
 
 2011-10-25  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/generatelist.py, brebis/generatelistfortree.py,
+	* backupchecker/generatelist.py, backupchecker/generatelistfortree.py,
 	functionaltests.py:
 	added the support of generation of list of files for tree of files
 	[33c62b00eb1c] <generate-list-option>
@@ -2553,9 +2553,9 @@
 	removing unwanted file list from hg watched files
 	[9cb0a56240f1] <generate-list-option>
 
-	* brebis/cliparse.py, brebis/generatelist.py,
-	brebis/generatelistfortar.py, brebis/generatelistfortree.py,
-	brebis/generatelistforzip.py, brebis/listtype.py, functional-tests
+	* backupchecker/cliparse.py, backupchecker/generatelist.py,
+	backupchecker/generatelistfortar.py, backupchecker/generatelistfortree.py,
+	backupchecker/generatelistforzip.py, backupchecker/listtype.py, functional-tests
 	/generate-list-from-tar-archive/generate-list-from-tar-archive.list,
 	functional-tests/generate-list-from-tree/generate-list-from-
 	tree/bar/oof, functional-tests/generate-list-from-tree/generate-
@@ -2570,29 +2570,29 @@
 
 2011-10-20  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/generatelistfortar.py:
+	* backupchecker/generatelistfortar.py:
 	seems to begin to work - issue with name of output file and headers
 	of generated list solved
 	[235ec2e83403] <generate-list-option>
 
-	* brebis/cliparse.py, brebis/generatelist.py,
-	brebis/generatelistfortar.py, brebis/listtype.py, brebis/main.py,
+	* backupchecker/cliparse.py, backupchecker/generatelist.py,
+	backupchecker/generatelistfortar.py, backupchecker/listtype.py, backupchecker/main.py,
 	functional-tests/generate-list-from-tar-archive/generate-list-from-
 	tar-archive.tar.gz:
 	seems to begin to work - a problem remains with the output file
 	named tlist
 	[f613cad61dfb] <generate-list-option>
 
-	* brebis/cliparse.py, brebis/generatelist.py,
-	brebis/generatelistforbzip2.py, brebis/generatelistforgzip.py,
-	brebis/generatelistfortar.py, brebis/generatelistfortree.py,
-	brebis/generatelistforzip.py:
+	* backupchecker/cliparse.py, backupchecker/generatelist.py,
+	backupchecker/generatelistforbzip2.py, backupchecker/generatelistforgzip.py,
+	backupchecker/generatelistfortar.py, backupchecker/generatelistfortree.py,
+	backupchecker/generatelistforzip.py:
 	added generate list modules for archives and tree
 	[b5ae205bb276] <generate-list-option>
 
 2011-10-17  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/cliparse.py, brebis/generatelist.py, brebis/main.py:
+	* backupchecker/cliparse.py, backupchecker/generatelist.py, backupchecker/main.py:
 	first commit with beginning of support to generate list of files in
 	the archives
 	[6321d8ed7c20] <generate-list-option>
@@ -2617,17 +2617,17 @@
 	updated README
 	[ab724add4338]
 
-	* brebis/cliparse.py:
+	* backupchecker/cliparse.py:
 	setting version to 0.3
 	[f93e0a22da5d]
 
-	* brebis/identifylimitations.py:
+	* backupchecker/identifylimitations.py:
 	replacing parameters tuples by sets
 	[93a94a327d00]
 
 2011-10-09  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/checkbzip2.py, functional-tests/unsupported-parameters-
+	* backupchecker/checkbzip2.py, functional-tests/unsupported-parameters-
 	bz2-archive/unsupported-parameters-bz2-archive-list, functional-
 	tests/unsupported-parameters-bz2-archive/unsupported-parameters-
 	bz2-archive.bz2, functional-tests/unsupported-parameters-bz2-archive
@@ -2636,18 +2636,18 @@
 	archive
 	[6717d879453f]
 
-	* brebis/checkbzip2.py, brebis/checkgzip.py, functionaltests.py:
+	* backupchecker/checkbzip2.py, backupchecker/checkgzip.py, functionaltests.py:
 	merging the branch for test limitations for archive and default
 	[db6650bf145c]
 
 	* merged support for bzip2 only archive in default branch
 	[fe3dd37cb098]
 
-	* brebis/checkbzip2.py:
+	* backupchecker/checkbzip2.py:
 	added default parameter type for file inside a bzip2 archive
 	[08588637ed4f] <support-for-bz2>
 
-	* brebis/checkgzip.py, brebis/identifylimitations.py, functional-tests
+	* backupchecker/checkgzip.py, backupchecker/identifylimitations.py, functional-tests
 	/full-criteria-multiple-backups/a.out, functional-tests/unsupported-
 	parameters-gz-archive/unsupported-parameters-gz-archive-list,
 	functional-tests/unsupported-parameters-gz-archive/unsupported-
@@ -2721,29 +2721,29 @@
 
 2011-10-08  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/checkbzip2.py, tests.py,
+	* backupchecker/checkbzip2.py, tests.py,
 	tests/checkbzip2_private_methods/mybz2.bz2,
 	tests/checkbzip2_private_methods/mybzip2-list,
 	tests/checkbzip2_private_methods/mybzip2.conf:
 	Support for missing file and default size - associated unittests
 	[a863b4dd396a] <support-for-bz2>
 
-	* brebis/checkbackups.py, brebis/checkbzip2.py, functional-tests
+	* backupchecker/checkbackups.py, backupchecker/checkbzip2.py, functional-tests
 	/corrupted-bz2-archive/corrupted-bz2-archive-list, functional-tests
 	/corrupted-bz2-archive/corrupted-bz2-archive.bz2, functional-tests
 	/corrupted-bz2-archive/corrupted-bz2-archive.conf:
 	support for corrupted bz2 archive detection and associated test
 	[80106bf045df] <support-for-bz2>
 
-	* brebis/checkgzip.py:
+	* backupchecker/checkgzip.py:
 	corrected mistakes in docstring
 	[31ae65cc0362] <support-for-bz2>
 
-	* brebis/checkbzip2.py:
+	* backupchecker/checkbzip2.py:
 	addes first step for support of bzip2 archive
 	[3b11119e3499] <support-for-bz2>
 
-	* brebis/checkgzip.py:
+	* backupchecker/checkgzip.py:
 	corrected docstrings
 	[c91a599ec01e] <support-for-bz2>
 
@@ -2752,7 +2752,7 @@
 	* merging support-for-gzip branch with default branch
 	[73f72221e9a6]
 
-	* brebis/checkgzip.py, functional-tests/corrupted-gz-archive
+	* backupchecker/checkgzip.py, functional-tests/corrupted-gz-archive
 	/corrupted-gz-archive-list, functional-tests/corrupted-gz-archive
 	/corrupted-gz-archive.conf, functional-tests/corrupted-gz-archive
 	/corrupted-gz-archive.gz, functionaltests.py:
@@ -2764,14 +2764,14 @@
 
 2011-10-06  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/checkgzip.py:
+	* backupchecker/checkgzip.py:
 	reverting last fix -not the good way to do it
 	[0bca77eb0e85]
 
 	* fixed #8 support for error detection in gzip archive
 	[2a98399ff73e]
 
-	* brebis/checkgzip.py:
+	* backupchecker/checkgzip.py:
 	added support for error detection on gzip archive
 	[eb976b705a79] <improve-gzip-archive-error-detection>
 
@@ -2785,7 +2785,7 @@
 	Added tag 0.2 for changeset b746a25ea5dc
 	[d6302792f021]
 
-	* README, brebis/cliparse.py, setup.py:
+	* README, backupchecker/cliparse.py, setup.py:
 	fixed version id
 	[b746a25ea5dc] [0.2]
 
@@ -2820,7 +2820,7 @@
 	methods
 	[bb8abd56e739] <support-for-gzip>
 
-	* brebis/checkgzip.py:
+	* backupchecker/checkgzip.py:
 	solved an issue with unclosed file object
 	[67ad4fdbf50c] <support-for-gzip>
 
@@ -2856,7 +2856,7 @@
 	* merging current branch and add-missing-types branch
 	[431997e9ffe2] <support-for-gzip>
 
-	* brebis/checkgzip.py, functional-tests/wrong-file-md5-hash-in-gz-
+	* backupchecker/checkgzip.py, functional-tests/wrong-file-md5-hash-in-gz-
 	archive/wrong-file-md5-hash-in-gz-archive-list, functional-tests
 	/wrong-file-md5-hash-in-gz-archive/wrong-file-md5-hash-in-gz-
 	archive.conf, functional-tests/wrong-file-md5-hash-in-gz-archive
@@ -2886,13 +2886,13 @@
 	support for hash checking for file in gzip and associated tests
 	[50370e83c74e] <add-missing-types>
 
-	* brebis/checktar.py:
+	* backupchecker/checktar.py:
 	tarfile.CONTYPE -> tarfile.CONTTYPE
 	[51466c04c909] <add-missing-types>
 
 2011-09-29  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/checkgzip.py, functional-tests/expected-file-greater-than-
+	* backupchecker/checkgzip.py, functional-tests/expected-file-greater-than-
 	file-in-gz-archive/expected-file-greater-than-file-in-gz-archive-
 	list, functional-tests/expected-file-smaller-than-file-in-gz-archive
 	/expected-file-smaller-than-file-in-gz-archive-list, functional-
@@ -2932,12 +2932,12 @@
 	adding files for equality functional test
 	[c69d02dbd625] <support-for-gzip>
 
-	* brebis/checkgzip.py, functionaltests.py:
+	* backupchecker/checkgzip.py, functionaltests.py:
 	added support for size test on a file inside the gzip archive +
 	equality functional test
 	[b5477ade1ef7] <support-for-gzip>
 
-	* brebis/checkbackups.py, brebis/checkgzip.py, functional-tests/wrong-
+	* backupchecker/checkbackups.py, backupchecker/checkgzip.py, functional-tests/wrong-
 	gz-archive-gid/wrong-gz-archive-gid-list, functional-tests/wrong-gz-
 	archive-gid/wrong-gz-archive-gid.conf, functional-tests/wrong-gz-
 	archive-gid/wrong-gz-archive-gid.gz, functional-tests/wrong-gz-
@@ -3025,7 +3025,7 @@
 	written test for multiple backups with several criterias
 	[418e5e0409d0]
 
-	* brebis/expectedvalues.py:
+	* backupchecker/expectedvalues.py:
 	fixed a bug with double entries in list file - configparser error
 	not catched
 	[bf2f93e7e579]
@@ -3044,7 +3044,7 @@
 	test93
 	[acadc5156d99]
 
-	* brebis/configurations.py, functional-tests/mixing-dir-path-and-
+	* backupchecker/configurations.py, functional-tests/mixing-dir-path-and-
 	archive-type-in-conf/mixing-dir-path-and-archive-type-in-conf-list,
 	functional-tests/mixing-dir-path-and-archive-type-in-conf/mixing-
 	dir-path-and-archive-type-in-conf.conf, functional-tests/mixing-dir-
@@ -3145,12 +3145,12 @@
 
 2011-09-19  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/applogger.py:
-	corrected a permission denied bug while creating the logging brebis
+	* backupchecker/applogger.py:
+	corrected a permission denied bug while creating the logging backupchecker
 	file in unauthorized directories
 	[52bd7970786a]
 
-	* brebis.py, functionaltests.py, scripts/brebis, setup.py:
+	* backupchecker.py, functionaltests.py, scripts/backupchecker, setup.py:
 	modified root directory structure in order to ease developement
 	process
 	[83c3f9f2b023]
@@ -3182,8 +3182,8 @@
 	used part of the code
 	[15dffd2d88a6]
 
-	* brebis/checkhashes.py, brebis/checktar.py, brebis/checkzip.py,
-	brebis/cliparse.py, brebis/main.py, tests.py:
+	* backupchecker/checkhashes.py, backupchecker/checktar.py, backupchecker/checkzip.py,
+	backupchecker/cliparse.py, backupchecker/main.py, tests.py:
 	removing unused CheckHashes classes and associated tests
 	[c4a4e94782dc] <remove-checkhashes-class>
 
@@ -3199,7 +3199,7 @@
 	added functional tests to identify corrupted zip archive
 	[58fde8cf9d92]
 
-	* brebis/checkzip.py:
+	* backupchecker/checkzip.py:
 	added cleare warning message about zip archive corruption
 	[e6f2e6a07e7f]
 
@@ -3217,7 +3217,7 @@
 	added functional test for tar.gz corrupted archive
 	[948f52e189c2]
 
-	* brebis/checkbackups.py, brebis/checktar.py:
+	* backupchecker/checkbackups.py, backupchecker/checktar.py:
 	discriminating archives by their extensions
 	[a9bc5a09ef3b]
 
@@ -3230,7 +3230,7 @@
 	checktree.CheckTree
 	[a8e07bafbbd8]
 
-	* brebis/checktree.py:
+	* backupchecker/checktree.py:
 	switched from os.stat() to os.lstat() to identify symbolic link
 	[d0d9e16fd8e5]
 
@@ -3261,14 +3261,14 @@
 
 2011-09-16  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/checkarchive.py, brebis/checktar.py, brebis/checktree.py,
-	brebis/checkzip.py, brebis/expectedvalues.py, functional-tests/file-
+	* backupchecker/checkarchive.py, backupchecker/checktar.py, backupchecker/checktree.py,
+	backupchecker/checkzip.py, backupchecker/expectedvalues.py, functional-tests/file-
 	missing-in-tar-bz2/file-missing-in-tar-bz2-list, functionaltests.py:
 	corrected bug on directory, normalizing in striping the trailing
 	slash because of possible wrong user input
 	[c1882d39c088]
 
-	* brebis/checkzip.py, functional-tests/wrong-file-gid-in-zip-archive
+	* backupchecker/checkzip.py, functional-tests/wrong-file-gid-in-zip-archive
 	/wrong-file-gid-in-zip-archive-list, functional-tests/wrong-file-
 	gid-in-zip-archive/wrong-file-gid-in-zip-archive.conf, functional-
 	tests/wrong-file-gid-in-zip-archive/wrong-file-gid-in-zip-
@@ -3296,7 +3296,7 @@
 
 2011-09-14  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/checkzip.py, functionaltests.py:
+	* backupchecker/checkzip.py, functionaltests.py:
 	added support for mode checking in zip archive and associated
 	functional tests
 	[1d9472d64758]
@@ -3709,23 +3709,23 @@
 
 2011-09-07  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/checktree.py, tests.py, tests/expected_hash/filetree-list,
+	* backupchecker/checktree.py, tests.py, tests/expected_hash/filetree-list,
 	tests/expected_mode/treefiles-list, tests/expected_type/filetree-
 	list, tests/filetree/filelist:
 	improved the syntax of the list of files for tree
 	[8f77dec4298d]
 
-	* brebis/expectedvalues.py:
+	* backupchecker/expectedvalues.py:
 	catch correctly ConfigParser errors from the expected values file
 	[1cc0f941da3f]
 
-	* brebis/checkbackups.py, brebis/checkzip.py:
+	* backupchecker/checkbackups.py, backupchecker/checkzip.py:
 	fixed corrupted zip detection
 	[29a5882881ac]
 
 2011-09-06  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/configurations.py, brebis/expectedvalues.py,
+	* backupchecker/configurations.py, backupchecker/expectedvalues.py,
 	tests/expected_hash/archash/md5hashtararchive-list,
 	tests/expected_hash/archash/md5hashziparchive-list,
 	tests/expected_hash/archash/sha1hashtararchive-list,
@@ -3748,7 +3748,7 @@
 
 2011-06-24  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/configurations.py, tests.py,
+	* backupchecker/configurations.py, tests.py,
 	tests/test_conf/subdir/archive2.conf, tests/test_conf/subdir/toto
 	/essai-list, tests/test_conf/subdir/toto/essai.tar.gz:
 	issues with relative links fixed thanks to absolute links use
@@ -3756,16 +3756,16 @@
 
 2011-06-23  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/configurations.py, tests.py, tests/test_conf/archive.conf,
+	* backupchecker/configurations.py, tests.py, tests/test_conf/archive.conf,
 	tests/test_conf/essai-list, tests/test_conf/essai.tar.gz:
 	relative paths issues
 	[56f61a0425bd]
 
-	* scripts/brebis:
+	* scripts/backupchecker:
 	correct error in the call of the main module
 	[da5f396fdf2d]
 
-	* brebis/configurations.py:
+	* backupchecker/configurations.py:
 	stop execution when two configurations have the same name
 	[3ed2f003b131]
 
@@ -3787,12 +3787,12 @@
 2011-04-26  Carl Chenet  <chaica@ohmytux.com>
 
 	* setup.py:
-	added restrictions on python versions able to install Brebis
+	added restrictions on python versions able to install BackupChecker
 	[d3c7cdf8c4c5]
 
 2011-05-16  Carl Chenet  <chaica@ohmytux.com>
 
-	* scripts/brebis:
+	* scripts/backupchecker:
 	added absolute path to main module
 	[8b42fb41f686]
 
@@ -3812,27 +3812,27 @@
 
 2011-04-22  Carl Chenet  <chaica@ohmytux.com>
 
-	* brebis/applogger.py, brebis/archiveinfomsg.py,
-	brebis/checkarchive.py, brebis/checkbackups.py,
-	brebis/checkhashes.py, brebis/checktar.py, brebis/checktree.py,
-	brebis/checkzip.py, brebis/cliparse.py, brebis/configurations.py,
-	brebis/expectedvalues.py, brebis/main.py, tests.py:
+	* backupchecker/applogger.py, backupchecker/archiveinfomsg.py,
+	backupchecker/checkarchive.py, backupchecker/checkbackups.py,
+	backupchecker/checkhashes.py, backupchecker/checktar.py, backupchecker/checktree.py,
+	backupchecker/checkzip.py, backupchecker/cliparse.py, backupchecker/configurations.py,
+	backupchecker/expectedvalues.py, backupchecker/main.py, tests.py:
 	updated copyright mentions
 	[f738e3d3bac6]
 
 	* setup.py:
-	good path to brebis script
+	good path to backupchecker script
 	[4d0283251e5a]
 
-	* applogger.py, archiveinfomsg.py, brebis, brebis/__init__.py,
-	brebis/applogger.py, brebis/archiveinfomsg.py,
-	brebis/checkarchive.py, brebis/checkbackups.py,
-	brebis/checkhashes.py, brebis/checktar.py, brebis/checktree.py,
-	brebis/checkzip.py, brebis/cliparse.py, brebis/configurations.py,
-	brebis/expectedvalues.py, brebis/main.py, checkarchive.py,
+	* applogger.py, archiveinfomsg.py, backupchecker, backupchecker/__init__.py,
+	backupchecker/applogger.py, backupchecker/archiveinfomsg.py,
+	backupchecker/checkarchive.py, backupchecker/checkbackups.py,
+	backupchecker/checkhashes.py, backupchecker/checktar.py, backupchecker/checktree.py,
+	backupchecker/checkzip.py, backupchecker/cliparse.py, backupchecker/configurations.py,
+	backupchecker/expectedvalues.py, backupchecker/main.py, checkarchive.py,
 	checkbackups.py, checkhashes.py, checktar.py, checktree.py,
 	checkzip.py, cliparse.py, configurations.py, expectedvalues.py,
-	main.py, scripts/brebis, tests.py:
+	main.py, scripts/backupchecker, tests.py:
 	modified package structure
 	[4ed132adb9bb]
 
@@ -3963,7 +3963,7 @@
 	itself is now available - tests and uniitests also ready
 	[9caf898e3c52]
 
-	* brebis:
+	* backupchecker:
 	bump shebang to python3.2
 	[f7bfb55d457d]
 
@@ -4256,8 +4256,8 @@
 	fixed a mispelled word
 	[6720446d8225]
 
-	* applogger.py, brebislogger.py, cliparse.py, main.py, tests.py:
-	removed the brebis name
+	* applogger.py, backupcheckerlogger.py, cliparse.py, main.py, tests.py:
+	removed the backupchecker name
 	[b4b5249424be]
 
 	* tests.py:
@@ -4406,7 +4406,7 @@
 	single quote
 	[87924434c5b0]
 
-	* brebislogger.py:
+	* backupcheckerlogger.py:
 	Style improvement: switched from docstrings with double quotes to
 	single quote
 	[0f547a3eaaa6]
@@ -4474,7 +4474,7 @@
 	Added support for file trees as a backup
 	[639d0319d400]
 
-	* brebislogger.py:
+	* backupcheckerlogger.py:
 	Switched level logging from INFO to WARNING
 	[ceb0190fc3b5]
 
@@ -4526,7 +4526,7 @@
 	Fixed a small typo. Improved the hashtype option help message.
 	[f73c327503b2]
 
-	* brebislogger.py, checkhashes.py, checktar.py, checkzip.py,
+	* backupcheckerlogger.py, checkhashes.py, checktar.py, checkzip.py,
 	cliparse.py, configurations.py, expectedfiles.py, main.py:
 	Fixed variables visibility issues. Paths from cliparse are now
 	absolute paths
@@ -4578,7 +4578,7 @@
 	tests/corrupted_archive/corrupted.tar.gz, tests/corrupted_archive
 	/essai-list, tests/corrupted_archive/essai.tar.gz, tests/myzip-list,
 	tests/myzip.conf, tests/myzip.zip:
-	Some files to test Brebis
+	Some files to test BackupChecker
 	[ff33893ed54c]
 
 	* checkbackups.py, checkhashes.py, checktar.py, checkzip.py,
@@ -4603,9 +4603,9 @@
 	archive
 	[581ab67e4c66]
 
-	* brebislogger.py, checkbackups.py, checktar.py, cliparse.py,
+	* backupcheckerlogger.py, checkbackups.py, checktar.py, cliparse.py,
 	configurations.py, main.py, tests/archive.conf, tests/archive2.conf:
-	brebislogger.py defines a logger for the Brebis events
+	backupcheckerlogger.py defines a logger for the BackupChecker events
 	[e30d0846a24c]
 
 2009-11-23  Carl Chenet  <chaica@ohmytux.com>
@@ -4634,10 +4634,10 @@
 	[b12493006c30]
 
 	* main.py:
-	Added main.py which provides the Main class of Brebis.
+	Added main.py which provides the Main class of BackupChecker.
 	[28c2b982e5a0]
 
-	* brebis:
-	Added brebis file to call the main.
+	* backupchecker:
+	Added backupchecker file to call the main.
 	[11f5fc6b4bfc]
 

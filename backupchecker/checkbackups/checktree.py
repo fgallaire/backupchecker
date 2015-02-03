@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2015 Carl Chenet <chaica@brebisproject.org>
+# Copyright © 2015 Carl Chenet <chaica@backupcheckerproject.org>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -19,8 +19,8 @@
 import os
 import stat
 
-from brebis.expectedvalues import ExpectedValues
-from brebis.checkbackups.checkarchive import CheckArchive
+from backupchecker.expectedvalues import ExpectedValues
+from backupchecker.checkbackups.checkarchive import CheckArchive
 
 class CheckTree(CheckArchive):
     '''Check a file tree'''
@@ -35,7 +35,7 @@ class CheckTree(CheckArchive):
         for __dirpath, __dirnames, __filenames, in os.walk(_cfgvalues['path']):
             __dirinfo = os.lstat(__dirpath)
             __dirmode = stat.S_IMODE(__dirinfo.st_mode)
-            # Translate file type in brebis intern file type
+            # Translate file type in backupchecker intern file type
             __type = self.__translate_type(__dirinfo.st_mode)
             # Extract file data
             __arcinfo = {'path': os.path.relpath(__dirpath, self.__treepath),

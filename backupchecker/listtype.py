@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2015 Carl Chenet <chaica@brebisproject.org>
+# Copyright © 2015 Carl Chenet <chaica@backupcheckerproject.org>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -19,12 +19,12 @@
 import logging
 import os.path
 
-from brebis.generatelist.generatelistforbzip2 import GenerateListForBzip2
-from brebis.generatelist.generatelistforlzma import GenerateListForLzma
-from brebis.generatelist.generatelistforgzip import GenerateListForGzip
-from brebis.generatelist.generatelistfortar import GenerateListForTar
-from brebis.generatelist.generatelistfortree import GenerateListForTree
-from brebis.generatelist.generatelistforzip import GenerateListForZip
+from backupchecker.generatelist.generatelistforbzip2 import GenerateListForBzip2
+from backupchecker.generatelist.generatelistforlzma import GenerateListForLzma
+from backupchecker.generatelist.generatelistforgzip import GenerateListForGzip
+from backupchecker.generatelist.generatelistfortar import GenerateListForTar
+from backupchecker.generatelist.generatelistfortree import GenerateListForTree
+from backupchecker.generatelist.generatelistforzip import GenerateListForZip
 
 class ListType(object):
     '''The ListType class'''

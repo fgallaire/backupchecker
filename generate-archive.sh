@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright © 2015 Carl Chenet <chaica@brebisproject.org>
+# Copyright © 2015 Carl Chenet <chaica@backupcheckerproject.org>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -14,4 +14,4 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 VERSION=`grep "version = " setup.py |cut -d"'" -f2`
-hg archive -X ".hg*" -X "generate-archive.sh" brebis-$VERSION.tar.gz
+hg archive -X ".hg*" -X "generate-archive.sh" backupchecker-$VERSION.tar.gz

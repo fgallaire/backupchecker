@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2015 Carl Chenet <chaica@brebisproject.org>
+# Copyright © 2015 Carl Chenet <chaica@backupcheckerproject.org>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -20,13 +20,13 @@ import logging
 from tarfile import is_tarfile
 from zipfile import is_zipfile
 
-from brebis.archiveinfomsg import ArchiveInfoMsg
-from brebis.checkbackups.checktar import CheckTar
-from brebis.checkbackups.checkgzip import CheckGzip
-from brebis.checkbackups.checkbzip2 import CheckBzip2
-from brebis.checkbackups.checklzma import CheckLzma
-from brebis.checkbackups.checkzip import CheckZip
-from brebis.checkbackups.checktree import CheckTree
+from backupchecker.archiveinfomsg import ArchiveInfoMsg
+from backupchecker.checkbackups.checktar import CheckTar
+from backupchecker.checkbackups.checkgzip import CheckGzip
+from backupchecker.checkbackups.checkbzip2 import CheckBzip2
+from backupchecker.checkbackups.checklzma import CheckLzma
+from backupchecker.checkbackups.checkzip import CheckZip
+from backupchecker.checkbackups.checktree import CheckTree
 
 class CheckBackups(object):
     '''The backup checker class'''

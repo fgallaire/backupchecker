@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2015 Carl Chenet <chaica@brebisproject.org>
+# Copyright © 2015 Carl Chenet <chaica@backupcheckerproject.org>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -18,11 +18,11 @@
 
 import sys
 
-from brebis.checkbackups.checkbackups import CheckBackups
-from brebis.cliparse import CliParse
-from brebis.configurations import Configurations
-from brebis.exceptionsparsing import ExceptionsParsing
-from brebis.listtype import ListType
+from backupchecker.checkbackups.checkbackups import CheckBackups
+from backupchecker.cliparse import CliParse
+from backupchecker.configurations import Configurations
+from backupchecker.exceptionsparsing import ExceptionsParsing
+from backupchecker.listtype import ListType
 
 class Main(object):
     '''The main class'''

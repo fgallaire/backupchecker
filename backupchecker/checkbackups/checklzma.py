@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright © 2015 Carl Chenet <chaica@brebisproject.org>
+# Copyright © 2015 Carl Chenet <chaica@backupcheckerproject.org>
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -13,23 +13,23 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Check a bzip2 archive
-'''Check a bzip2 archive'''
+# Check a lzma archive
+'''Check a lzma archive'''
 
 import sys
 import logging
 import os.path
-import bz2
+import lzma
 
-from brebis.checkbackups.checkarchive import CheckArchive
-from brebis.expectedvalues import ExpectedValues
-from brebis.identifylimitations import IdentifyLimitations
+from backupchecker.checkbackups.checkarchive import CheckArchive
+from backupchecker.expectedvalues import ExpectedValues
+from backupchecker.identifylimitations import IdentifyLimitations
 
-class CheckBzip2(CheckArchive):
-    '''Check a bzip2 archive'''
+class CheckLzma(CheckArchive):
+    '''Check a lzma archive'''
 
     def _main(self, _cfgvalues, _options):
-        '''Main for CheckBzip2'''
+        '''Main for CheckLzma'''
         _data = []
         _data, __arcdata = ExpectedValues(_cfgvalues, _options).data
         self.__arcpath = _cfgvalues['path']
@@ -46,26 +46,26 @@ class CheckBzip2(CheckArchive):
             configkeys = set()
             for i in _data:
                 configkeys = configkeys | set(i.keys())
-            IdentifyLimitations(_cfgvalues['path'], 'bz2', configkeys)
+            IdentifyLimitations(_cfgvalues['path'], 'lzma', configkeys)
             ##############################################
             # Looking for data corruption
             # Have to read the whole archive to check CRC
             ##############################################
             try:
-                with bz2.BZ2File(_cfgvalues['path'], 'r') as __bz2:
-                    __bz2.read()
-            except IOError as __msg:
+                with lzma.LZMAFile(_cfgvalues['path'], 'r') as __lzma:
+                    __lzma.read()
+            except (lzma.LZMAError, IOError) as __msg:
                 __warn = '. You should investigate for a data corruption.'
                 logging.warning('{}: {}{}'.format(_cfgvalues['path'], str(__msg), __warn))
             else:
                 __name = os.path.split(_cfgvalues['path'])[-1].split('.')[0]
-                # Bzip2 does not allow to know the compressed file size, default to 0
+                # lzma does not allow to know the compressed file size, default to 0
                 __arcinfo = {'path': __name, 'type': 'f', 'size': 0}
                 _data = self._check_path(__arcinfo, _data)
                 self._missing_files = [_file['path'] for _file in _data]
 
     def _extract_stored_file(self, __nouse):
         '''Extract a file from the archive and return a file object'''
-        __fileobj = bz2.BZ2File(self.__arcpath, 'r')
+        __fileobj = lzma.LZMAFile(self.__arcpath, 'r')
         return __fileobj
 
