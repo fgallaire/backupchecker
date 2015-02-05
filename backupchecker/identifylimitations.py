@@ -34,21 +34,21 @@ class IdentifyLimitations:
 
     def __study_gz(self):
         '''Study the required checks for the gzip archive type'''
-        __unsupported_gz = {'uid', 'gid', 'mode', 'target', 'mtime'}
+        __unsupported_gz = {'uid', 'gid', 'uname', 'gname', 'mode', 'target', 'mtime'}
         for __param in self.__data:
             if __param in __unsupported_gz:
                 self.__warn(__param)
 
     def __study_bz2(self):
         '''Study the required checks for the gzip archive type'''
-        __unsupported_bz2 = {'uid', 'gid', 'mode', 'equals', 'biggerthan', 'smallerthan', 'target' 'mtime'}
+        __unsupported_bz2 = {'uid', 'gid', 'uname', 'gname', 'mode', 'equals', 'biggerthan', 'smallerthan', 'target' 'mtime'}
         for __param in self.__data:
             if __param in __unsupported_bz2:
                 self.__warn(__param)
 
     def __study_zip(self):
         '''Study the required checks for the zip archive type'''
-        __unsupported_zip = {'target'}
+        __unsupported_zip = {'uname', 'gname', 'target'}
         for __param in self.__data:
             if __param in __unsupported_zip:
                 self.__warn(__param)
@@ -56,7 +56,7 @@ class IdentifyLimitations:
     def __study_lzma(self):
         '''Study the required checks for the lzma archive type'''
         # seems pretty hard to get xz/lzma archive size - maybe in another release
-        __unsupported_lzma = {'uid', 'gid', 'mode', 'equals', 'biggerthan', 'smallerthan', 'target', 'mtime'}
+        __unsupported_lzma = {'uid', 'gid', 'uname', 'gname', 'mode', 'equals', 'biggerthan', 'smallerthan', 'target', 'mtime'}
         for __param in self.__data:
             if __param in __unsupported_lzma:
                 self.__warn(__param)
