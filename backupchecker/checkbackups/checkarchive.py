@@ -38,6 +38,8 @@ class CheckArchive(object):
         self._unexpected_files = []
         self._mismatched_uids = []
         self._mismatched_gids = []
+        self._mismatched_unames = []
+        self._mismatched_gnames = []
         self._mismatched_modes = []
         self._mismatched_types = []
         self._mismatched_mtimes = []
@@ -64,6 +66,14 @@ class CheckArchive(object):
                 ### expected one
                 if 'gid' in __arcinfo and 'gid' in _file:
                     self.__check_gid(__arcinfo['gid'], _file)
+                ### Compare the uname of the file in the archive and the
+                ### expected one
+                if 'uname' in __arcinfo and 'uname' in _file:
+                    self.__check_uname(__arcinfo['uname'], _file)
+                ### Compare the gname of the file in the archive and the
+                ### expected one
+                if 'gname' in __arcinfo and 'gname' in _file:
+                    self.__check_gname(__arcinfo['gname'], _file)
                 ### Compare the filemode and the mode of the expected file
                 if 'mode' in __arcinfo and 'mode' in _file:
                     self._check_mode(__arcinfo['mode'], _file)
@@ -147,6 +157,20 @@ class CheckArchive(object):
         if __file['gid'] != __arcgid:
             self.mismatched_gids.append({'path':__file['path'], 'expectedgid':__file['gid'], 'gid':__arcgid})
 
+    def __check_uname(self, __arcuname, __file):
+        '''Check if the file uname in the archive matches the expected
+        one
+        '''
+        if __file['uname'] != __arcuname:
+            self.mismatched_unames.append({'path':__file['path'], 'expecteduname':__file['uname'], 'uname':__arcuname})
+
+    def __check_gname(self, __arcgname, __file):
+        '''Check if the file gname in the archive matches the expected
+        one
+        '''
+        if __file['gname'] != __arcgname:
+            self.mismatched_gnames.append({'path':__file['path'], 'expectedgname':__file['gname'], 'gname':__arcgname})
+
     def _check_mode(self, __arcmode, __file):
         '''Check if the file mode in the archive matches the expected
         one
@@ -219,6 +243,13 @@ class CheckArchive(object):
             if 'gid' in __arcdata:
                 _, __arcgid = self.__find_archive_uid_gid(__arcdata['path'])
                 self.__check_gid(__arcgid, __arcdata)
+            # archive uname and gname
+            if 'uname' in __arcdata:
+                __arcuname, _ = self.__find_archive_uname_gname(__arcdata['path'])
+                self.__check_uname(__arcuname, __arcdata)
+            if 'gname' in __arcdata:
+                _, __arcgname = self.__find_archive_uname_gname(__arcdata['path'])
+                self.__check_gname(__arcgname, __arcdata)
 
     @property
     def missing_equality(self):
@@ -266,6 +297,20 @@ class CheckArchive(object):
         an unexpected gid
         '''
         return self._mismatched_gids
+
+    @property
+    def mismatched_unames(self):
+        '''A list containing a {path,uname,expecteduname} of the files in the archive with
+        an unexpected uname
+        '''
+        return self._mismatched_unames
+
+    @property
+    def mismatched_gnames(self):
+        '''A list containing a {path,gname,expectedgname} of the files in the archive with
+        an unexpected gname
+        '''
+        return self._mismatched_gnames
 
     @property
     def mismatched_modes(self):

@@ -1,5 +1,6 @@
 syntax: glob
 
+*.log
 *.pyc
 a.out
 functional-tests/expected-generated-list-for-bzip2-archive/expected-generated-list-for-bzip2-archive.list

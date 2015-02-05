@@ -89,6 +89,12 @@ class ExpectedValues(object):
                 # Testing the gid of the archive
                 if 'gid' in __config['archive']:
                     self.__arcdata['gid'] = int(__config['archive']['gid'])
+                # Testing the owner of the archive
+                if 'uname' in __config['archive']:
+                    self.__arcdata['uname'] = int(__config['archive']['uname'])
+                # Testing the group owner of the archive
+                if 'gname' in __config['archive']:
+                    self.__arcdata['gname'] = int(__config['archive']['gname'])
             except ValueError as __msg:
                 logging.warning(__msg)
             # Testing the hash of the archive
@@ -117,6 +123,12 @@ class ExpectedValues(object):
                             # The gid of the expected file
                             elif __item.startswith('gid{}'.format(__delimiter)):
                                 __data['gid'] = int(__item.split(__delimiter)[-1])
+                            # The owner name of the expected file
+                            elif __item.startswith('owner{}'.format(__delimiter)):
+                                __data['uname'] = __item.split(__delimiter)[-1]
+                            # The gname of the expected file
+                            elif __item.startswith('group{}'.format(__delimiter)):
+                                __data['gname'] = __item.split(__delimiter)[-1]
                             # The mode of the expected file
                             elif __item.startswith('mode{}'.format(__delimiter)):
                                 __mode =__item.split(__delimiter)[-1]
