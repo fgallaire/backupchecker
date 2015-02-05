@@ -14,4 +14,5 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 VERSION=`grep "version = " setup.py |cut -d"'" -f2`
+rm -f a.out backupchecker.log
 hg archive -X ".hg*" -X "generate-archive.sh" backupchecker-$VERSION.tar.gz
