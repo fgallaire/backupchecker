@@ -14,8 +14,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import fnmatch
+import grp
 import os
 import os.path
+import pwd
 import stat
 
 from backupchecker.generatelist.generatelist import GenerateList
@@ -39,16 +41,16 @@ class GenerateListForTree(GenerateList):
         self.__hashtype = __genparams['hashtype']
         self.__parsingexceptions = __genparams['parsingexceptions']
         __listoffiles = ['[files]\n']
-        __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+        __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} owner{delimiter}{value} group{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
         if self.__getallhashes:
             if not self.__hashtype:
-                __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+                __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} owner{delimiter}{value} group{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
             else:
-                __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} {hashtype}{delimiter}{value}\n'.format(value='{}', hashtype=self.__hashtype, delimiter=__delimiter)
+                __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} owner{delimiter}{value} group{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} {hashtype}{delimiter}{value}\n'.format(value='{}', hashtype=self.__hashtype, delimiter=__delimiter)
         else:
-            __onelinewithouthash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+            __onelinewithouthash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} owner{delimiter}{value} group{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
         # we also need parameters for symbolic links
-        __onelinewithtarget = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} target{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
+        __onelinewithtarget = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} owner{delimiter}{value} group{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} target{delimiter}{value}\n'.format(value='{}', delimiter=__delimiter)
         
         for __dirpath, __dirnames, __filenames, in os.walk(__arcpath):
             # ignoring the uppest directory
@@ -64,6 +66,8 @@ class GenerateListForTree(GenerateList):
                                         str(__dirinfo.st_size),
                                         str(__dirinfo.st_uid),
                                         str(__dirinfo.st_gid),
+                                        pwd.getpwuid(__dirinfo.st_uid).pw_name,
+                                        grp.getgrgid(__dirinfo.st_gid).gr_name,
                                         __dirmode,
                                         __type,
                                         str(__dirinfo.st_mtime)))
@@ -88,6 +92,8 @@ class GenerateListForTree(GenerateList):
                                                 str(self.__fileinfo.st_size),
                                                 str(self.__fileinfo.st_uid),
                                                 str(self.__fileinfo.st_gid),
+                                                pwd.getpwuid(self.__fileinfo.st_uid).pw_name,
+                                                grp.getgrgid(self.__fileinfo.st_gid).gr_name,
                                                 __filemode,
                                                 __type,
                                                 str(self.__fileinfo.st_mtime),
@@ -98,12 +104,14 @@ class GenerateListForTree(GenerateList):
                             for __file in self.__parsingexceptions:
                                 if fnmatch.fnmatch(os.path.relpath(__filepath, __arcpath), __file):
                                     __hash = get_hash(open(__filepath, 'rb'), self.__parsingexceptions[__file])
-                                    __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} {hashtype}{delimiter}{value}\n'.format(value='{}', hashtype=self.__parsingexceptions[__file], delimiter=__delimiter)
+                                    __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} owner{delimiter}{value} group{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} {hashtype}{delimiter}{value}\n'.format(value='{}', hashtype=self.__parsingexceptions[__file], delimiter=__delimiter)
                                     __listoffiles.append(__onelinewithhash.format(
                                                             os.path.relpath(__filepath, __arcpath),
                                                             str(self.__fileinfo.st_size),
                                                             str(self.__fileinfo.st_uid),
                                                             str(self.__fileinfo.st_gid),
+                                                            pwd.getpwuid(self.__fileinfo.st_uid).pw_name,
+                                                            grp.getgrgid(self.__fileinfo.st_gid).gr_name,
                                                             __filemode,
                                                             __type,
                                                             str(self.__fileinfo.st_mtime),
@@ -115,6 +123,8 @@ class GenerateListForTree(GenerateList):
                                                             str(self.__fileinfo.st_size),
                                                             str(self.__fileinfo.st_uid),
                                                             str(self.__fileinfo.st_gid),
+                                                            pwd.getpwuid(self.__fileinfo.st_uid).pw_name,
+                                                            grp.getgrgid(self.__fileinfo.st_gid).gr_name,
                                                             __filemode,
                                                             __type,
                                                             str(self.__fileinfo.st_mtime)))
@@ -125,6 +135,8 @@ class GenerateListForTree(GenerateList):
                                                     str(self.__fileinfo.st_size),
                                                     str(self.__fileinfo.st_uid),
                                                     str(self.__fileinfo.st_gid),
+                                                    pwd.getpwuid(self.__fileinfo.st_uid).pw_name,
+                                                    grp.getgrgid(self.__fileinfo.st_gid).gr_name,
                                                     __filemode,
                                                     __type,
                                                     str(self.__fileinfo.st_mtime)))
@@ -136,6 +148,8 @@ class GenerateListForTree(GenerateList):
                                             str(self.__fileinfo.st_size),
                                             str(self.__fileinfo.st_uid),
                                             str(self.__fileinfo.st_gid),
+                                            pwd.getpwuid(self.__fileinfo.st_uid).pw_name,
+                                            grp.getgrgid(self.__fileinfo.st_gid).gr_name,
                                             __filemode,
                                             __type,
                                             str(self.__fileinfo.st_mtime),
@@ -147,6 +161,8 @@ class GenerateListForTree(GenerateList):
                                             str(self.__fileinfo.st_size),
                                             str(self.__fileinfo.st_uid),
                                             str(self.__fileinfo.st_gid),
+                                            pwd.getpwuid(self.__fileinfo.st_uid).pw_name,
+                                            grp.getgrgid(self.__fileinfo.st_gid).gr_name,
                                             __filemode,
                                             __type,
                                             str(__fileinfo.st_mtime)))
