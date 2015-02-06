@@ -1,0 +1,5 @@
+[files]
+foo1| =5 uid|1000 gid|1000 owner|chaica group|chaica mode|644 type|f mtime|1423152141.4285686 md5|d8e8fca2dc0f896fd7cb4cb0031ba249
+foo2| =15 uid|1000 gid|1000 owner|chaica group|chaica mode|644 type|f mtime|1423152146.8365133 md5|e19c1283c925b3206685ff522acfe3e6
+bar| =4096 uid|1000 gid|1000 owner|chaica group|chaica mode|755 type|d mtime|1423152158.0243986
+bar/bar1| =13 uid|1000 gid|1000 owner|chaica group|chaica mode|644 type|f mtime|1423152158.0203986 md5|7d980e6be82dd33893f39d652d8a99a1

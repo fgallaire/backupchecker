@@ -3991,6 +3991,68 @@ class Test_generate_list_to_check_gname_in_tar_gz_archive:
                     else:
                         __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
 
+class Test_generate_list_to_check_uname_in_tree:
+    '''Generate a list of files to check that uname in tree is written'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/check-uname-tree')
+        __archive = os.path.join(__testdir, 'check-uname-tree')
+        __resultfile = os.path.join(__testdir, 'check-uname-tree.list')
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTFULLGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTFULLGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            # check now the newly modified list of files with the new delimiter
+            if 'PYTHONEXE' in environ:
+                __retcode = subprocess.call([PYTHONEXE, EXE, OPTCONFIG, __testdir, OPTLOG, __output])
+            else:
+                __retcode = subprocess.call([EXE, OPTCONFIG, __testdir, OPTLOG, __output])
+            if __retcode != 0:
+                __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+            else:
+                with open(__resultfile, 'r') as __file:
+                    if ' owner|' in __file.read():
+                        __queue.put('{} - {}'.format(__testname, OKMSG))
+                    else:
+                        __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+
+class Test_generate_list_to_check_gname_in_tree:
+    '''Generate a list of files to check that gname in tree is written'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/check-gname-tree')
+        __archive = os.path.join(__testdir, 'check-gname-tree')
+        __resultfile = os.path.join(__testdir, 'check-gname-tree.list')
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTHASHES, OPTFULLGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTHASHES, OPTFULLGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            # check now the newly modified list of files with the new delimiter
+            if 'PYTHONEXE' in environ:
+                __retcode = subprocess.call([PYTHONEXE, EXE, OPTCONFIG, __testdir, OPTLOG, __output])
+            else:
+                __retcode = subprocess.call([EXE, OPTCONFIG, __testdir, OPTLOG, __output])
+            if __retcode != 0:
+                __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+            else:
+                with open(__resultfile, 'r') as __file:
+                    if ' group|' in __file.read():
+                        __queue.put('{} - {}'.format(__testname, OKMSG))
+                    else:
+                        __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+
 if __name__ == '__main__':
     processes = []
     results = []

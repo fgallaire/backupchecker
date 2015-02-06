@@ -333,6 +333,40 @@ class TestApp(unittest.TestCase):
         {'path':'foo/foo1','expecteduid':1001,'uid':1000},
         {'path':'foo/foo1','expectedgid':1001,'gid':1000}))
 
+    def test_compare_uname_gname_tar_gz(self):
+        '''Compare the uname and the gname of a file in the archive
+        and the expected one
+        '''
+        __unames = []
+        __gnames = []
+        __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
+            'tests/expected_uname_gname/foo.tar.gz',
+             'files_list':
+                'tests/expected_uname_gname/files-list',
+             'type': 'archive', 'delimiter': ''}, Options())
+        __unames = __myobj.mismatched_unames
+        __gnames = __myobj.mismatched_gnames
+        self.assertEqual((__unames[0],__gnames[0]), (
+        {'path':'foo/foo1','expecteduname':'titi','uname':'chaica'},
+        {'path':'foo/foo1','expectedgname':'titi','gname':'chaica'}))
+
+    def test_compare_uname_gname_tree(self):
+        '''Compare the uname and the gname of a file in the tree
+        and the expected one
+        '''
+        __unames = []
+        __gnames = []
+        __myobj = backupchecker.checkbackups.checktree.CheckTree({'path':
+            'tests/expected_uname_gname/foo',
+             'files_list':
+                'tests/expected_uname_gname/files-list',
+             'type': 'tree', 'delimiter': ''}, Options())
+        __unames = __myobj.mismatched_unames
+        __gnames = __myobj.mismatched_gnames
+        self.assertEqual((__unames[0],__gnames[0]), (
+        {'path':'foo/foo1','expecteduname':'titi','uname':'chaica'},
+        {'path':'foo/foo1','expectedgname':'titi','gname':'chaica'}))
+
     def test_extract_modes(self):
         '''Extract the expected file modes'''
         __data, _ = ExpectedValues({'files_list':'tests/expected_mode/files-list','delimiter':''}, Options()).data
