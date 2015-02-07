@@ -145,3 +145,7 @@ functional-tests/exceptions-file-option/lzma/exceptions-file-option.conf
 functional-tests/exceptions-file-option/lzma/exceptions-file-option.list
 functional-tests/exceptions-file-option/tree/exceptions-file-option.conf
 functional-tests/exceptions-file-option/tree/exceptions-file-option.list
+functional-tests/check-gname-tree/check-gname-tree.conf
+functional-tests/check-gname-tree/check-gname-tree.list
+functional-tests/check-uname-tree/check-uname-tree.conf
+functional-tests/check-uname-tree/check-uname-tree.list
