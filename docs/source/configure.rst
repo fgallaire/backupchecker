@@ -33,17 +33,21 @@ The second file you need is the list containing the information about the archiv
     mode| 755
     uid| 5000
     gid| 5001
+    owner| chaica
+    group| sysadmin
     sha1| e0f58dcc57caad2182f701eb63f0c81f347d3fe5
     
     [files]
     foos/foo|
-    foos/foo1| >105k type|f mode|755 uid|5022 gid|5023 unexpected md5|3718422a0bf93f7fc46cff6b5e660ff8
+    foos/foo1| >105k type|f mode|755 uid|5022 gid|5023 owner|chaica group|sysadmin unexpected md5|3718422a0bf93f7fc46cff6b5e660ff8
 
 * **[archive]** section hosts the parameter for the archive itself. This section is not mandatory if you do not need it.
 * **size** defines what the archive size should be. You can specify <,> or =. Default value is expressed in bytes, also available are (k)ilo, (m)ega, (g)iga, (p)eta,(e)xa, (z)etta and (y)ottabyte.
 * **mode** is for the expected mode of the archive.
 * **uid** is for the expected uid of the archive.
 * **gid** is for the expected gid of the archive.
+* **owner** is the name of the owner of this file in the archive.
+* **group** is the name of the owner group of this file in the archive.
 * **sha1** is for the expected md5 hash sum of the archive. Also available is sha1, sha224, sha256, sha384, sha512.
 
 * **[files]** section stands for the files inside the archive or the tree of directories and files. This section is not mandatory if you do not need it.
@@ -53,5 +57,7 @@ The second file you need is the list containing the information about the archiv
 * **foos/foo1| mode|755** means the file foos/foo1 is expected to have the mode 755 (meaning read, write and execute for the owner, read and execute for the group owner, read and execute for the others). All values respecting this octal representation (including values with setuid bit on four digits) is allowed.
 * **foos/foo1| uid|5022** means the file foos/foo1 is expected to have a uid of 5022.
 * **foos/foo1| gid|5023** means the file foos/foo1 is expected to have a gid of 5023.
+* **foos/foo1| owner|chaica** means the file foos/foo1 is expected to be owned by the user with the name chaica.
+* **foos/foo1| group|sysadmin** means the file foos/foo1 is expected to be owned by the owner group with the name sysadmin.
 * **foo/bar| unexpected** means that foo/bar is unexpected in this archive of tree of directories and files and that an alert should be launched about it.
 * **foos/foo1| md5|hashsum** means the file foos/foo1 is expected to have a md5 hash sum of "hashsum". Also available is sha1, sha224, sha256, sha384, sha512.
