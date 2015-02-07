@@ -29,11 +29,11 @@ CLASSIFIERS = [
     'Environment :: Console',
     'License :: OSI Approved :: GNU General Public License (GPL)',
     'Operating System :: POSIX :: Linux',
-    'Programming Language :: Python :: 3.3'
+    'Programming Language :: Python :: 3.4'
 ]
 
 setup(name = 'backupchecker',
-    version = '0.10',
+    version = '1.0',
     license = 'GNU GPL v3',
     description = 'automated backup checker',
     long_description = 'BackupChecker is a fully automated backup checker.',
