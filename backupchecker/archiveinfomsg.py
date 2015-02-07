@@ -37,6 +37,7 @@ class ArchiveInfoMsg(object):
             self.__unexpected_files(__bck.unexpected_files, __cfgvalues['path'])
             self.__classify_differences(__bck, __cfgvalues['path'])
             self.__uid_gid_mismatches(__bck, __cfgvalues['path'])
+            self.__uname_gname_mismatches(__bck, __cfgvalues['path'])
             self.__mode_mismatches(__bck, __cfgvalues['path'])
             self.__type_mismatches(__bck, __cfgvalues['path'])
             self.__mtime_mismatches(__bck, __cfgvalues['path'])
@@ -125,6 +126,31 @@ class ArchiveInfoMsg(object):
             logging.warning('{} {} with unexpected {} while checking {}:'.format(__errnb, __fileword, __gidword, __archivepath))
             for __file in __bck.mismatched_gids:
                 logging.warning('{} gid is {!s}. Should have been {!s}.'.format(__file['path'], __file['gid'], __file['expectedgid']))
+
+    def __uname_gname_mismatches(self, __bck, __archivepath):
+        '''Log the unames and gnames mismatches'''
+        # uname
+        if __bck.mismatched_unames:
+            __errnb = len(__bck.mismatched_unames)
+            __fileword = 'file'
+            __unameword = 'owner'
+            if __errnb > 1:
+                __fileword = 'files'
+                __unameword = 'owners'
+            logging.warning('{} {} with unexpected {} while checking {}:'.format(__errnb, __fileword, __unameword, __archivepath))
+            for __file in __bck.mismatched_unames:
+                logging.warning('{} owner is {!s}. Should have been {!s}.'.format(__file['path'], __file['uname'], __file['expecteduname']))
+        # gname
+        if __bck.mismatched_gnames:
+            __errnb = len(__bck.mismatched_gnames)
+            __fileword = 'file'
+            __gnameword = 'group owner'
+            if __errnb > 1:
+                __fileword = 'files'
+                __gnameword = 'group owners'
+            logging.warning('{} {} with unexpected {} while checking {}:'.format(__errnb, __fileword, __gnameword, __archivepath))
+            for __file in __bck.mismatched_gnames:
+                logging.warning('{} group owner is {!s}. Should have been {!s}.'.format(__file['path'], __file['gname'], __file['expectedgname']))
 
     def __mode_mismatches(self, __bck, __archivepath):
         '''Log the file mode mismatches'''

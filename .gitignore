@@ -1,5 +1,6 @@
 syntax: glob
 
+*.log
 *.pyc
 *.log
 a.out

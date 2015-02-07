@@ -48,17 +48,17 @@ class GenerateListForTar(GenerateList):
     def __main(self, __tar):
         '''Main for the GenerateListForTar class'''
         __listoffiles = ['[files]\n']
-        __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
+        __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} owner{delimiter}{value} group{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
         if self.__getallhashes:
             # we get all the hash sums of files inside the backup
             if not self.__hashtype:
-                __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
+                __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} owner{delimiter}{value} group{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} md5{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
             else:
                 # we switch the default hash sum
-                __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} {hashtype}{delimiter}{value}\n'.format(value='{}', hashtype=self.__hashtype, delimiter=self.__delimiter)
+                __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} owner{delimiter}{value} group{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} {hashtype}{delimiter}{value}\n'.format(value='{}', hashtype=self.__hashtype, delimiter=self.__delimiter)
         else:
-            __onelinewithouthash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
-        __onelinewithtarget = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} target{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
+            __onelinewithouthash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} owner{delimiter}{value} group{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
+        __onelinewithtarget = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} owner{delimiter}{value} group{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} target{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
         for __tarinfo in __tar:
             # Pick up tar information
             __tarinfo.name = self._normalize_path(__tarinfo.name)
@@ -81,6 +81,8 @@ class GenerateListForTar(GenerateList):
                                                             str(__tarinfo.size),
                                                             str(__tarinfo.uid),
                                                             str(__tarinfo.gid),
+                                                            str(__tarinfo.uname),
+                                                            str(__tarinfo.gname),
                                                             __mode,
                                                             __type,
                                                             float(__tarinfo.mtime),
@@ -92,11 +94,13 @@ class GenerateListForTar(GenerateList):
                         for __file in self.__parsingexceptions:
                             if fnmatch.fnmatch(__tarinfo.name, __file):
                                 __hash = get_hash(__tar.extractfile(__tarinfo.name), self.__parsingexceptions[__file])
-                                __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} {hashtype}{delimiter}{value}\n'.format(value='{}', hashtype=self.__parsingexceptions[__file], delimiter=self.__delimiter)
+                                __onelinewithhash = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} owner{delimiter}{value} group{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value} {hashtype}{delimiter}{value}\n'.format(value='{}', hashtype=self.__parsingexceptions[__file], delimiter=self.__delimiter)
                                 __listoffiles.append(__onelinewithhash.format(__tarinfo.name,
                                                                         str(__tarinfo.size),
                                                                         str(__tarinfo.uid),
                                                                         str(__tarinfo.gid),
+                                                                        str(__tarinfo.uname),
+                                                                        str(__tarinfo.gname),
                                                                         __mode,
                                                                         __type,
                                                                         float(__tarinfo.mtime),
@@ -108,6 +112,8 @@ class GenerateListForTar(GenerateList):
                                                                         str(__tarinfo.size),
                                                                         str(__tarinfo.uid),
                                                                         str(__tarinfo.gid),
+                                                                        str(__tarinfo.uname),
+                                                                        str(__tarinfo.gname),
                                                                         __mode,
                                                                         __type,
                                                                         float(__tarinfo.mtime),
@@ -118,6 +124,8 @@ class GenerateListForTar(GenerateList):
                                                                 str(__tarinfo.size),
                                                                 str(__tarinfo.uid),
                                                                 str(__tarinfo.gid),
+                                                                str(__tarinfo.uname),
+                                                                str(__tarinfo.gname),
                                                                 __mode,
                                                                 __type,
                                                                 float(__tarinfo.mtime),
@@ -128,6 +136,8 @@ class GenerateListForTar(GenerateList):
                                                         str(__tarinfo.size),
                                                         str(__tarinfo.uid),
                                                         str(__tarinfo.gid),
+                                                        str(__tarinfo.uname),
+                                                        str(__tarinfo.gname),
                                                         __mode,
                                                         __type,
                                                         float(__tarinfo.mtime),
@@ -138,6 +148,8 @@ class GenerateListForTar(GenerateList):
                                                         str(__tarinfo.size),
                                                         str(__tarinfo.uid),
                                                         str(__tarinfo.gid),
+                                                        str(__tarinfo.uname),
+                                                        str(__tarinfo.gname),
                                                         __mode,
                                                         __type,
                                                         float(__tarinfo.mtime)))
