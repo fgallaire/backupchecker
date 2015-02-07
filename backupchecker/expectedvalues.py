@@ -91,10 +91,10 @@ class ExpectedValues(object):
                     self.__arcdata['gid'] = int(__config['archive']['gid'])
                 # Testing the owner of the archive
                 if 'uname' in __config['archive']:
-                    self.__arcdata['uname'] = int(__config['archive']['uname'])
+                    self.__arcdata['uname'] = __config['archive']['uname']
                 # Testing the group owner of the archive
                 if 'gname' in __config['archive']:
-                    self.__arcdata['gname'] = int(__config['archive']['gname'])
+                    self.__arcdata['gname'] = __config['archive']['gname']
             except ValueError as __msg:
                 logging.warning(__msg)
             # Testing the hash of the archive
