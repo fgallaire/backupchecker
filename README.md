@@ -5,9 +5,13 @@ or [read it online](https://backupchecker.readthedocs.org/en/latest/).
 
 ### Quick Start
 
-* Install Backup Checker
+* Install Backup Checker from PyPI
 
-        # tar zxvf backupchecker-1.0.tar.gz
+        # pip install backupchecker
+
+* Install Backup Checker from sources
+
+        # tar zxvf backupchecker-1.1.tar.gz
         # cd backupchecker
         # python3.4 setup.py install
         # # or
