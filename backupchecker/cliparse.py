@@ -92,7 +92,7 @@ class CliParse:
             metavar='DIR')
         __parser.add_argument('-v', '--version',
             action='version',
-            version='%(prog)s 1.0',
+            version='%(prog)s 1.1',
             help='print the version of this program and exit')
         __parser.add_argument('archives', nargs='*',
             help='archives to check')

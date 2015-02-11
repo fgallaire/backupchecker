@@ -1,3 +1,13 @@
+commit 6c624a6ea644ea556084fc923a16d5cc4bf4378d
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    rename brebis to backupchecker. fixes #2
+
+commit e498c7ac7414a7c5f80582c2cfef3b7a1fc2b4bd
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    update changelog
+
 commit e3eda8f86cbd5d4b6c169b4e0cf17a645e69f08f
 Author: Carl Chenet <chaica@ohmytux.com>
 
