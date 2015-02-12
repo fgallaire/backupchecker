@@ -19,6 +19,7 @@
 import fnmatch
 import logging
 import os.path
+import sys
 import tarfile
 
 from backupchecker.generatelist.generatelist import GenerateList
@@ -38,8 +39,15 @@ class GenerateListForTar(GenerateList):
         self.__getallhashes  = __genparams['getallhashes']
         self.__hashtype = __genparams['hashtype']
         self.__parsingexceptions = __genparams['parsingexceptions']
+        self.__isastream = __genparams['isastream']
+        print('arcpath:{}'.format(self.__arcpath))
         try:
-            __tar = tarfile.open(self.__arcpath, 'r')
+            if self.__isastream:
+                self.__tarstreamname = 'tarstream'
+                self.__streampath = ''.join([self.__arcpath, '.', self.__tarstreamname])
+                __tar = tarfile.open(mode='r|', fileobj=sys.stdin.buffer)
+            else:
+                __tar = tarfile.open(self.__arcpath, 'r')
             self.__main(__tar)
         except (tarfile.TarError, EOFError) as _msg:
             __warn = '. You should investigate for a data corruption.'
@@ -176,6 +184,13 @@ class GenerateListForTar(GenerateList):
         ### for tbz2 archive
         elif self.__arcpath.lower().endswith('.tbz2'):
             self.__make_conf_and_list_paths('.tbz2')
+        ### for tar stream
+        elif self.__isastream:
+            self.__arcconfpath = ''.join([self.__streampath, '.conf'])
+            self.__arclistpath = ''.join([self.__streampath, '.list'])
+            if self._genfull:
+                self.__arcname = self.__tarstreamname
+
         # call the method to write information in a file
         __listconfinfo = {'arclistpath': self.__arclistpath,
                                 'listoffiles':__listoffiles}
@@ -190,6 +205,7 @@ class GenerateListForTar(GenerateList):
                             'arclistpath': self.__arclistpath,
                             'arctype': 'archive',
                             'sha512': __listhashsum}
+            print(__confinfo)
             self._generate_conf(__confinfo)
 
     def __translate_type(self, __arctype):

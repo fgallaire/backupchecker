@@ -103,19 +103,32 @@ class CliParse:
         '''Verify the options given on the command line'''
         # check if the archives exist
         for __i, __path in enumerate(__options.archives):
-            if not os.path.exists(__path):
-                print('{} : no file or directory at this path. Exiting.'.format(__path))
-                sys.exit(1)
+            print('path:{}'.format(__path))
+            # the input is a stream
+            if __path == '-':
+                __isastream = True
             else:
+                __isastream = False
+            if not os.path.exists(__path):
+                if not __isastream:
+                    print('{} : no file or directory at this path. Exiting.'.format(__path))
+                    sys.exit(1)
+            # if the input is a stream
+            if __isastream:
+                __path = os.path.abspath(os.getcwd())
+                print('path:{}'.format(__path))
+                __options.isastream = True
+            else:
+                __options.isastream = False
                 # using absolute path in order to be consistent
                 __path = os.path.abspath(__path)
-                # if the path exists, check if it is a regular file, a link or
-                # a directory otherwise exits
-                if not os.path.isfile(__path) and not os.path.isdir(__path):
-                    print('{}: not a file or a directory. Exiting.'.format(__path))
-                    sys.exit(1)
-                else:
-                    __options.archives[__i] = __path
+            # if the path exists, check if it is a regular file, a link or
+            # a directory otherwise exits
+            if not os.path.isfile(__path) and not os.path.isdir(__path):
+                print('{}: not a file or a directory. Exiting.'.format(__path))
+                sys.exit(1)
+            else:
+                __options.archives[__i] = __path
         # Check the logfile
         __logdir = os.path.split(__options.logfile)[0]
         if __logdir and not os.path.exists(__logdir):
