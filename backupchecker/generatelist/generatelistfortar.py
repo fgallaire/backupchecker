@@ -44,7 +44,7 @@ class GenerateListForTar(GenerateList):
         try:
             if self.__isastream:
                 self.__tarstreamname = 'tarstream'
-                self.__streampath = ''.join([self.__arcpath, '.', self.__tarstreamname])
+                self.__streampath = os.path.join(self.__arcpath, self.__tarstreamname)
                 __tar = tarfile.open(mode='r|', fileobj=sys.stdin.buffer)
             else:
                 __tar = tarfile.open(self.__arcpath, 'r')
