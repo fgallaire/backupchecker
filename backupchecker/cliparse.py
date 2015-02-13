@@ -103,7 +103,6 @@ class CliParse:
         '''Verify the options given on the command line'''
         # check if the archives exist
         for __i, __path in enumerate(__options.archives):
-            print('path:{}'.format(__path))
             # the input is a stream
             if __path == '-':
                 __isastream = True

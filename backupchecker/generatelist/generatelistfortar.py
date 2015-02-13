@@ -40,7 +40,6 @@ class GenerateListForTar(GenerateList):
         self.__hashtype = __genparams['hashtype']
         self.__parsingexceptions = __genparams['parsingexceptions']
         self.__isastream = __genparams['isastream']
-        print('arcpath:{}'.format(self.__arcpath))
         try:
             if self.__isastream:
                 self.__tarstreamname = 'tarstream'
