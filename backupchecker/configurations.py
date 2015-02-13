@@ -97,7 +97,7 @@ class Configurations:
                     if not os.path.isabs(__path):
                         __path = os.path.normpath(os.path.join(os.path.abspath(__confpath), __path))
                         __currentconf[__confkey] = __path
-                    if not os.path.exists(__path):
+                    if not os.path.exists(__path) and __currentconf['type'] != 'stream':
                         print('{} does not exist.'.format(__path))
                         sys.exit(1)
 

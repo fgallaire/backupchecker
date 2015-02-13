@@ -16,9 +16,9 @@
 # Check a tar archive
 '''Check a tar archive'''
 
+import logging
 import sys
 import tarfile
-import logging
 
 from backupchecker.expectedvalues import ExpectedValues
 from backupchecker.checkbackups.checkarchive import CheckArchive
@@ -30,16 +30,29 @@ class CheckTar(CheckArchive):
         '''Main for CheckTar'''
         _data = []
         _data, __arcdata = ExpectedValues(_cfgvalues, _options).data
+        print(_data)
+        if _cfgvalues['type'] == 'stream':
+            __isastream = True
+        else:
+            __isastream = False
+        print(_cfgvalues)
+        print(_options)
+        print(__isastream)
         #########################
         # Test the archive itself
         #########################
-        self._archive_checks(__arcdata, _cfgvalues['path'])
+        if  not __isastream:
+            self._archive_checks(__arcdata, _cfgvalues['path'])
         ###############################
         # Test the files in the archive
         ###############################
         if _data:
             try:
-                self._tar = tarfile.open(_cfgvalues['path'], 'r')
+                if __isastream:
+                    self._tar = tarfile.open(mode='r|',fileobj=sys.stdin.buffer)
+                else:
+                    self._tar = tarfile.open(_cfgvalues['path'], 'r')
+                print(self._tar)
                 for _tarinfo in self._tar:
                     _tarinfo.name = self._normalize_path(_tarinfo.name)
                     __type = self.__translate_type(_tarinfo.type)

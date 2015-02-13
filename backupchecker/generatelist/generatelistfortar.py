@@ -199,13 +199,20 @@ class GenerateListForTar(GenerateList):
         if self._genfull:
             # generate the hash sum of the list of files
             __listhashsum = self._get_list_hash(__listconfinfo['arclistpath'])
-            __confinfo = {'arcname':self.__arcname,
-                            'arcpath':self.__arcpath,
-                            'arcconfpath': self.__arcconfpath,
-                            'arclistpath': self.__arclistpath,
-                            'arctype': 'archive',
-                            'sha512': __listhashsum}
-            print(__confinfo)
+            if self.__isastream:
+                __confinfo = {'arcname':self.__arcname,
+                                'arcpath':self.__arcpath,
+                                'arcconfpath': self.__arcconfpath,
+                                'arclistpath': self.__arclistpath,
+                                'arctype': 'stream',
+                                'sha512': __listhashsum}
+            else:
+                __confinfo = {'arcname':self.__arcname,
+                                'arcpath':self.__arcpath,
+                                'arcconfpath': self.__arcconfpath,
+                                'arclistpath': self.__arclistpath,
+                                'arctype': 'archive',
+                                'sha512': __listhashsum}
             self._generate_conf(__confinfo)
 
     def __translate_type(self, __arctype):

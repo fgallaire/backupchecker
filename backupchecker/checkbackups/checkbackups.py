@@ -17,6 +17,7 @@
 '''Check the given backups'''
 
 import logging
+import sys
 from tarfile import is_tarfile
 from zipfile import is_zipfile
 
@@ -55,6 +56,8 @@ class CheckBackups(object):
                 or __cfgvalues['path'].lower().endswith('.tgz') \
                 or __cfgvalues['path'].lower().endswith('.tbz') \
                 or __cfgvalues['path'].lower().endswith('.tbz2')):
+                __bck = CheckTar(__cfgvalues, __options)
+            elif __cfgvalues['type'] == 'stream':
                 __bck = CheckTar(__cfgvalues, __options)
             # check a gzip file, by name
             elif __cfgvalues['type'] == 'archive' and __cfgvalues['path'].lower().endswith('.gz'):
