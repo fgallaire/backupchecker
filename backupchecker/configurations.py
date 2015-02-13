@@ -90,16 +90,19 @@ class Configurations:
                 ### Check the paths in the configuration
                 __confkeys= ('path', 'files_list')
                 for __confkey in __confkeys:
-                    __path = __currentconf[__confkey]
-                    if not __path:
-                        print('A path is missing in {}.'.format(__config.get('main', 'name')))
-                        sys.exit(1)
-                    if not os.path.isabs(__path):
-                        __path = os.path.normpath(os.path.join(os.path.abspath(__confpath), __path))
-                        __currentconf[__confkey] = __path
-                    if not os.path.exists(__path) and __currentconf['type'] != 'stream':
-                        print('{} does not exist.'.format(__path))
-                        sys.exit(1)
+                    if __confkey == 'path' and __currentconf['type'] == 'stream':
+                        break
+                    else:
+                        __path = __currentconf[__confkey]
+                        if not __path:
+                            print('A path is missing in {}.'.format(__config.get('main', 'name')))
+                            sys.exit(1)
+                        if not os.path.isabs(__path):
+                            __path = os.path.normpath(os.path.join(os.path.abspath(__confpath), __path))
+                            __currentconf[__confkey] = __path
+                        if not os.path.exists(__path):
+                            print('{} does not exist.'.format(__path))
+                            sys.exit(1)
 
                 # If the backup type is archive, path must not be a directory
                 if __currentconf['type'] == 'archive' and os.path.isdir(__currentconf['path']):

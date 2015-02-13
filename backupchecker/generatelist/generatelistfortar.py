@@ -200,7 +200,6 @@ class GenerateListForTar(GenerateList):
             __listhashsum = self._get_list_hash(__listconfinfo['arclistpath'])
             if self.__isastream:
                 __confinfo = {'arcname':self.__arcname,
-                                'arcpath':self.__arcpath,
                                 'arcconfpath': self.__arcconfpath,
                                 'arclistpath': self.__arclistpath,
                                 'arctype': 'stream',
@@ -212,7 +211,7 @@ class GenerateListForTar(GenerateList):
                                 'arclistpath': self.__arclistpath,
                                 'arctype': 'archive',
                                 'sha512': __listhashsum}
-            self._generate_conf(__confinfo)
+            self._generate_conf(__confinfo,self.__isastream)
 
     def __translate_type(self, __arctype):
         '''Translate the type of the file inside the tar by a generic

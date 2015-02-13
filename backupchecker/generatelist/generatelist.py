@@ -38,9 +38,12 @@ class GenerateList:
             print('The encoding of the archive and the one of this system differs.\nThe result will not be reliable. Aborting.')
             sys.exit(1)
 
-    def _generate_conf(self, __confinfo):
+    def _generate_conf(self, __confinfo, __isastream=False):
         '''Write the configuration file for the archive'''
-        __confcontent = '[main]\nname={name}\ntype={type}\npath={path}\nfiles_list={listoffiles}\nsha512={sha512}\n'.format(name=__confinfo['arcname'],type=__confinfo['arctype'],path=__confinfo['arcpath'],listoffiles=__confinfo['arclistpath'], sha512=__confinfo['sha512'])
+        if __isastream:
+            __confcontent = '[main]\nname={name}\ntype={type}\nfiles_list={listoffiles}\nsha512={sha512}\n'.format(name=__confinfo['arcname'],type=__confinfo['arctype'],listoffiles=__confinfo['arclistpath'], sha512=__confinfo['sha512'])
+        else:
+            __confcontent = '[main]\nname={name}\ntype={type}\npath={path}\nfiles_list={listoffiles}\nsha512={sha512}\n'.format(name=__confinfo['arcname'],type=__confinfo['arctype'],path=__confinfo['arcpath'],listoffiles=__confinfo['arclistpath'], sha512=__confinfo['sha512'])
         try:
             with open(__confinfo['arcconfpath'], 'w') as __file:
                 __file.write(__confcontent)

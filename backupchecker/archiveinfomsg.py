@@ -33,6 +33,8 @@ class ArchiveInfoMsg(object):
     def __main(self, __bck, __cfgvalues):
         '''The main for the ArchiveInfoMsg class'''
         if __cfgvalues['type'] == 'archive' or __cfgvalues['type'] == 'tree' or __cfgvalues['type'] == 'stream':
+            if __cfgvalues['type'] == 'stream':
+                __cfgvalues['path'] = 'tarstream'
             self.__missing_files(__bck.missing_files, __cfgvalues['path'])
             self.__unexpected_files(__bck.unexpected_files, __cfgvalues['path'])
             self.__classify_differences(__bck, __cfgvalues['path'])
