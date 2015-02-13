@@ -30,14 +30,10 @@ class CheckTar(CheckArchive):
         '''Main for CheckTar'''
         _data = []
         _data, __arcdata = ExpectedValues(_cfgvalues, _options).data
-        print(_data)
         if _cfgvalues['type'] == 'stream':
             __isastream = True
         else:
             __isastream = False
-        print(_cfgvalues)
-        print(_options)
-        print(__isastream)
         #########################
         # Test the archive itself
         #########################
@@ -52,7 +48,6 @@ class CheckTar(CheckArchive):
                     self._tar = tarfile.open(mode='r|',fileobj=sys.stdin.buffer)
                 else:
                     self._tar = tarfile.open(_cfgvalues['path'], 'r')
-                print(self._tar)
                 for _tarinfo in self._tar:
                     _tarinfo.name = self._normalize_path(_tarinfo.name)
                     __type = self.__translate_type(_tarinfo.type)
