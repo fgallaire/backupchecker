@@ -115,7 +115,6 @@ class CliParse:
             # if the input is a stream
             if __isastream:
                 __path = os.path.abspath(os.getcwd())
-                print('path:{}'.format(__path))
                 __options.isastream = True
             else:
                 __options.isastream = False
