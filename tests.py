@@ -1208,7 +1208,7 @@ class TestApp(unittest.TestCase):
     def test_listfortar_translate_type_file(self):
         '''test the __translate_type private method from GenerateListForTar - expecting file'''
         __file = 'tests/generatelistfortar_private_methods/mytar.tar.gz'
-        __myobj = backupchecker.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':'', 'isastream':False})
         self.__tar = tarfile.open(__file)
         __result = __myobj._GenerateListForTar__translate_type(self.__tar.getmembers()[3].type)
         self.assertEqual('f', __result)
@@ -1216,7 +1216,7 @@ class TestApp(unittest.TestCase):
     def test_listfortar_translate_type_directory(self):
         '''test the __translate_type private method from GenerateListForTar - expecting directory'''
         __file = 'tests/generatelistfortar_private_methods/mytar.tar.gz'
-        __myobj = backupchecker.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':'', 'isastream':False})
         self.__tar = tarfile.open(__file)
         __result = __myobj._GenerateListForTar__translate_type(self.__tar.getmembers()[1].type)
         self.assertEqual('d', __result)
@@ -1224,7 +1224,7 @@ class TestApp(unittest.TestCase):
     def test_listfortar_translate_type_symbolic_link(self):
         '''test the __translate_type private method from GenerateListForTar - expecting symbolic link'''
         __file = 'tests/generatelistfortar_private_methods/mytar.tar.gz'
-        __myobj = backupchecker.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':'', 'isastream':False})
         self.__tar = tarfile.open(__file)
         __result = __myobj._GenerateListForTar__translate_type(self.__tar.getmembers()[2].type)
         self.assertEqual('s', __result)
@@ -1644,6 +1644,7 @@ class TestApp(unittest.TestCase):
         __mydict.fulloutput = ''
         __mydict.confoutput = ''
         __mydict.listoutput = ''
+        __mydict.isastream = False
         __mydict = backupchecker.listtype.ListType(__mydict)
         self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'backupchecker.generatelist.generatelistfortar.GenerateListForTar'>")
 
@@ -1658,6 +1659,7 @@ class TestApp(unittest.TestCase):
         __mydict.fulloutput = ''
         __mydict.confoutput = ''
         __mydict.listoutput = ''
+        __mydict.isastream = False
         __mydict = backupchecker.listtype.ListType(__mydict)
         self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'backupchecker.generatelist.generatelistfortree.GenerateListForTree'>")
 
@@ -1672,6 +1674,7 @@ class TestApp(unittest.TestCase):
         __mydict.fulloutput = ''
         __mydict.confoutput = ''
         __mydict.listoutput = ''
+        __mydict.isastream = False
         __mydict = backupchecker.listtype.ListType(__mydict)
         self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'backupchecker.generatelist.generatelistforzip.GenerateListForZip'>")
 
@@ -1686,6 +1689,7 @@ class TestApp(unittest.TestCase):
         __mydict.fulloutput = ''
         __mydict.confoutput = ''
         __mydict.listoutput = ''
+        __mydict.isastream = False
         __mydict = backupchecker.listtype.ListType(__mydict)
         self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'backupchecker.generatelist.generatelistforgzip.GenerateListForGzip'>")
 
@@ -1700,6 +1704,7 @@ class TestApp(unittest.TestCase):
         __mydict.fulloutput = ''
         __mydict.confoutput = ''
         __mydict.listoutput = ''
+        __mydict.isastream = False
         __mydict = backupchecker.listtype.ListType(__mydict)
         self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'backupchecker.generatelist.generatelistforbzip2.GenerateListForBzip2'>")
 
@@ -1714,6 +1719,7 @@ class TestApp(unittest.TestCase):
         __mydict.fulloutput = ''
         __mydict.confoutput = ''
         __mydict.listoutput = ''
+        __mydict.isastream = False
         __mydict = backupchecker.listtype.ListType(__mydict)
         self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'backupchecker.generatelist.generatelistforlzma.GenerateListForLzma'>")
 
