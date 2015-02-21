@@ -4053,6 +4053,39 @@ class Test_generate_list_to_check_gname_in_tree:
                     else:
                         __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
 
+class Test_generate_confs_for_stream_from_tar_gz:
+    '''Generate configuration files for a stream from a tar.gz file'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/conf-files-from-tar-gz')
+        __archive = os.path.join(__testdir, 'conf-files-from-tar-gz.tar.gz')
+        __resultconffile = os.path.join(__testdir, 'conf-files-from-tar-gz.conf')
+        __resultlistfile = os.path.join(__testdir, 'conf-files-from-tar-gz.list')
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call('cat {} | {} {} {} {}'.format(__archive, PYTHONEXE, EXE, OPTFULLGEN, __archive), shell=True)
+        else:
+            __retcode = subprocess.call('cat {} | {} {} {}'.format(__archive, EXE, OPTFULLGEN, __archive), shell=True)
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            with open(__resultconffile, 'r') as __file:
+                if '[main]\nname=conf-files-from-tar-gz\ntype=archive' in __file.read():
+                    test1 = True
+                else:
+                    test1 = False
+            with open(__resultlistfile, 'r') as __file:
+                if '[files]' in __file.read():
+                    test2 = True
+                else:
+                    test2 = False
+            if not test1 or not test2:
+                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+            else:
+                __queue.put('{} - {}'.format(__testname, OKMSG))
+
 if __name__ == '__main__':
     processes = []
     results = []

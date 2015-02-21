@@ -149,3 +149,5 @@ functional-tests/check-gname-tree/check-gname-tree.conf
 functional-tests/check-gname-tree/check-gname-tree.list
 functional-tests/check-uname-tree/check-uname-tree.conf
 functional-tests/check-uname-tree/check-uname-tree.list
+functional-tests/conf-files-from-tar-gz/conf-files-from-tar-gz.conf
+functional-tests/conf-files-from-tar-gz/conf-files-from-tar-gz.list
