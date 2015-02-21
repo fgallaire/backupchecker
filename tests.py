@@ -1302,13 +1302,13 @@ class TestApp(unittest.TestCase):
     def test_listforgzip_extract_size_from_gzip_archive(self):
         '''test the extraction of a gzip uncompressed file in the gzip archive'''
         __file = 'tests/generatelistforgzip_private_methods/mygzip.gz'
-        __myobj = backupchecker.generatelist.generatelistforgzip.GenerateListForGzip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistforgzip.GenerateListForGzip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':'', 'confname':'', 'genlist': False, 'isastream': False})
         with open(__file, 'rb') as __myf:
             self.assertEqual(15, __myobj._GenerateListForGzip__extract_size(__myf))
 
     def test_listforgzip_extract_initial_filename_from_gzip_archive(self):
         __file = 'tests/generatelistforgzip_private_methods/mygzip.gz'
-        __myobj = backupchecker.generatelist.generatelistforgzip.GenerateListForGzip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistforgzip.GenerateListForGzip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':'', 'confname':'', 'genlist': False, 'isastream': False})
         with open(__file, 'rb') as __myf:
             self.assertEqual('mygzip', __myobj._GenerateListForGzip__extract_initial_filename(__myf, 'mygzip'))
 
