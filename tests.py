@@ -1272,7 +1272,7 @@ class TestApp(unittest.TestCase):
         '''test the __translate_type private method from GenerateListForTree - expecting file'''
         __dir = 'tests/generatelistfortree_private_methods/mydir'
         __file = os.path.join(__dir, 'foo')
-        __myobj = backupchecker.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':'', 'confname':'', 'genlist': False, 'isastream': False})
         __myobj._GenerateListForTree__fileinfo = os.lstat(__file)
         __result = __myobj._GenerateListForTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('f', __result)
@@ -1281,7 +1281,7 @@ class TestApp(unittest.TestCase):
         '''test the __translate_type private method from GenerateListForTree - expecting directory'''
         __dir = 'tests/generatelistfortree_private_methods/mydir'
         __file = os.path.join(__dir, 'bar')
-        __myobj = backupchecker.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':'', 'confname':'', 'genlist': False, 'isastream': False})
         __result = __myobj._GenerateListForTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('d', __result)
 
@@ -1289,7 +1289,7 @@ class TestApp(unittest.TestCase):
         '''test the __translate_type private method from GenerateListForTree - expecting symbolic link'''
         __dir = 'tests/generatelistfortree_private_methods/mydir'
         __file = os.path.join(__dir, 'oof')
-        __myobj = backupchecker.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':'', 'confname':'', 'genlist': False, 'isastream': False})
         __result = __myobj._GenerateListForTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('s', __result)
 
