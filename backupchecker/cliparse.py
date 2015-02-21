@@ -90,6 +90,9 @@ class CliParse:
             default='',
             help='the directory to store the configuration file and the list of files inside an archive or tree',
             metavar='DIR')
+        __parser.add_argument('-s', '--configuration-name', dest='confname',
+            action='store',
+            help='the name of the configuration files')
         __parser.add_argument('-v', '--version',
             action='version',
             version='%(prog)s 1.1',

@@ -32,6 +32,7 @@ class GenerateListForTar(GenerateList):
         '''The constructor for the GenerateListForTar class'''
         self.__arcpath = __genparams['arcpath']
         self.__delimiter = __genparams['delimiter']
+        self._genlist = __genparams['genlist']
         self._genfull = __genparams['genfull']
         self.__listoutput = __genparams['listoutput']
         self.__confoutput = __genparams['confoutput']
@@ -40,6 +41,7 @@ class GenerateListForTar(GenerateList):
         self.__hashtype = __genparams['hashtype']
         self.__parsingexceptions = __genparams['parsingexceptions']
         self.__isastream = __genparams['isastream']
+        self.__confname = __genparams['confname']
         try:
             if self.__isastream:
                 self.__tarstreamname = 'tarstream'
@@ -185,10 +187,15 @@ class GenerateListForTar(GenerateList):
             self.__make_conf_and_list_paths('.tbz2')
         ### for tar stream
         elif self.__isastream:
-            self.__arcconfpath = ''.join([self.__streampath, '.conf'])
-            self.__arclistpath = ''.join([self.__streampath, '.list'])
             if self._genfull:
                 self.__arcname = self.__tarstreamname
+            if self.__confname:
+                self.__arcname = self.__confname
+                self.__arcconfpath = ''.join([self.__confname, '.conf'])
+                self.__arclistpath = ''.join([self.__confname, '.list'])
+            else:
+                self.__arcconfpath = ''.join([self.__streampath, '.conf'])
+                self.__arclistpath = ''.join([self.__streampath, '.list'])
 
         # call the method to write information in a file
         __listconfinfo = {'arclistpath': self.__arclistpath,
@@ -232,22 +239,61 @@ class GenerateListForTar(GenerateList):
     def __make_conf_and_list_paths(self, __tartype):
         '''Make conf file path and list file paths'''
         __arcwithext = os.path.split(self.__arcpath[:-(len(__tartype)-1)])[1]
+        # behaviour for --gen-list option
         # define custom path for the filelist or use the default one
         if self.__listoutput:
-            self.__arclistpath = os.path.join(self.__listoutput, ''.join([__arcwithext, 'list']))
-        elif self.__fulloutput:
-            self.__arclistpath = os.path.join(self.__fulloutput, ''.join([__arcwithext, 'list']))
-        else:
-            # default one
-            self.__arclistpath = ''.join([self.__arcpath[:-(len(__tartype)-1)], 'list'])
-        if self._genfull:
-            # define custom path for the conf file or use the default one
-            if self.__confoutput:
-                self.__arcconfpath = os.path.join(self.__confoutput, ''.join([__arcwithext, 'conf']))
-            elif self.__fulloutput:
-                self.__arcconfpath = os.path.join(self.__fulloutput, ''.join([__arcwithext, 'conf']))
+            # --gen-list and --output-list-dir and --configuration-name
+            if self.__confname:
+                self.__arclistpath = os.path.join(self.__listoutput, ''.join([self.__confname, '.', 'list']))
+            # --gen-list and --output-list-dir
             else:
-                # default one
-                self.__arcconfpath = ''.join([self.__arcpath[:-(len(__tartype)-1)], 'conf'])
-            self.__arcname = os.path.basename(self.__arcpath[:-len(__tartype)])
+                self.__arclistpath = os.path.join(self.__listoutput, ''.join([__arcwithext, 'list']))
+        # define custom path for both filelist and conflist
+        elif self.__fulloutput:
+            # --gen-list and --output-list-and-conf-dir and --configuration-name
+            if self.__confname:
+                self.__arclistpath = os.path.join(self.__fulloutput, ''.join([self.__confname, '.', 'list']))
+            else:
+                # --gen-list and --ouput-list-and-conf-dir
+                self.__arclistpath = os.path.join(self.__fulloutput, ''.join([__arcwithext, 'list']))
+        else:
+            # only --configuration-name
+            if self.__confname:
+                __arcpath = os.path.dirname(self.__arcpath)
+                __arcpath = os.path.join(__arcpath, self.__confname)
+                self.__arclistpath = ''.join([__arcpath, '.', 'list'])
+            # default behaviour
+            else:
+                self.__arclistpath = ''.join([self.__arcpath[:-(len(__tartype)-1)], 'list'])
+        # behaviour for --gen-full option
+        if self._genfull:
+            # define custom path for the conf file
+            if self.__confoutput:
+                if self.__confname:
+                    # --gen-full and --output-conf-dir and --configuration-name
+                    self.__arcconfpath = os.path.join(self.__confoutput, ''.join([self.__confname, '.', 'conf']))
+                else:
+                    # --gen-full and --output-conf-dir
+                    self.__arcconfpath = os.path.join(self.__confoutput, ''.join([__arcwithext, 'conf']))
+            elif self.__fulloutput:
+                # --gen-full and --output-list-and-conf-dir and --configuration-name
+                if self.__confname:
+                    self.__arcconfpath = os.path.join(self.__fulloutput, ''.join([self.__confname, '.', 'conf']))
+                else:
+                    # --gen-full and --output-list-and-conf-dir
+                    self.__arcconfpath = os.path.join(self.__fulloutput, ''.join([__arcwithext, 'conf']))
+            else:
+                # --gen-full and --configuration-name
+                if self.__confname:
+                    __arcpath = os.path.dirname(self.__arcpath)
+                    __arcpath = os.path.join(__arcpath, self.__confname)
+                    self.__arcconfpath = ''.join([__arcpath, '.', 'conf'])
+                else:
+                    # only --gen-full
+                    self.__arcconfpath = ''.join([self.__arcpath[:-(len(__tartype)-1)], 'conf'])
+            # user-defined name of the archive/stream
+            if self.__confname:
+                self.__arcname = self.__confname
+            else:
+                self.__arcname = os.path.basename(self.__arcpath[:-len(__tartype)])
 
