@@ -186,7 +186,11 @@ class GenerateListForTree(GenerateList):
                 __arclistpath = os.path.join(self.__fulloutput, '.'.join([__reparc, 'list']))
         else:
             # --gen-list only
-            __arclistpath = ''.join([__arcpath, '.list'])
+            if self.__confname:
+                __arc = os.path.dirname(__arcpath)
+                __arclistpath =  os.path.join(__arc, '.'.join([self.__confname, 'list']))
+            else:
+                __arclistpath = ''.join([__arcpath, '.list'])
         __listconfinfo = {'arclistpath': __arclistpath,
                             'listoffiles':  __listoffiles}
         # call the method to write information in a file
@@ -215,7 +219,11 @@ class GenerateListForTree(GenerateList):
                     __arcconfpath = '.'.join([__arc, 'conf'])
                 else:
                     # --gen-full only
-                    __arcconfpath = '.'.join([__arcpath, 'conf'])
+                    if self.__confname:
+                        __arc = os.path.dirname(__arcpath)
+                        __arcconfpath =  os.path.join(__arc, '.'.join([self.__confname, 'conf']))
+                    else:
+                        __arcconfpath = '.'.join([__arcpath, 'conf'])
             # generate the hash sum of the list of files
             __listhashsum = self._get_list_hash(__listconfinfo['arclistpath'])
             __arcname =  os.path.basename(__arcpath)

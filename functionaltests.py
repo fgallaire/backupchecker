@@ -4189,6 +4189,81 @@ class Test_configuration_name_option_with_zip:
             else:
                 __queue.put('{} - {}'.format(__testname, OKMSG))
 
+class Test_configuration_name_option_with_tree:
+    '''Generate configuration files and check if switching configuration names was successful with a tree of files'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/configuration-name-option-with-tree')
+        __archive = os.path.join(__testdir, 'configuration-name-option-with-tree')
+        __newname = 'newname'
+        __resultconffile = os.path.join(__testdir, 'newname.conf')
+        __resultlistfile = os.path.join(__testdir, 'newname.list')
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call('{} {} {} {} {} {}'.format(PYTHONEXE, EXE, OPTCONFNAME, __newname, OPTFULLGEN, __archive), shell=True)
+        else:
+           __retcode = subprocess.call('{} {} {} {} {}'.format(EXE, OPTCONFNAME, __newname, OPTFULLGEN, __archive), shell=True)
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            if os.path.exists(__resultconffile):
+                test1 = True
+            else:
+                test1 = False
+            if os.path.exists(__resultlistfile):
+                test2 = True
+            else:
+                test2 = False
+            with open(__resultconffile, 'r') as __file:
+                if '[main]\nname=newname' in __file.read():
+                    test3 = True
+                else:
+                    test3 = False
+            if not test1 or not test2 or not test3:
+                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+            else:
+                __queue.put('{} - {}'.format(__testname, OKMSG))
+
+class Test_configuration_name_option_with_gzip:
+    '''Generate configuration files and check if switching configuration names was successful with gzip archive'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/configuration-name-option-with-gzip')
+        __archive = os.path.join(__testdir, 'configuration-name-option-with-gzip.gz')
+        __newname = 'newname'
+        __resultconffile = os.path.join(__testdir, 'newname.conf')
+        __resultlistfile = os.path.join(__testdir, 'newname.list')
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call('{} {} {} {} {} {}'.format(PYTHONEXE, EXE, OPTCONFNAME, __newname, OPTFULLGEN, __archive), shell=True)
+        else:
+           __retcode = subprocess.call('{} {} {} {} {}'.format(EXE, OPTCONFNAME, __newname, OPTFULLGEN, __archive), shell=True)
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            if os.path.exists(__resultconffile):
+                test1 = True
+            else:
+                test1 = False
+            if os.path.exists(__resultlistfile):
+                test2 = True
+            else:
+                test2 = False
+            with open(__resultconffile, 'r') as __file:
+                if '[main]\nname=newname' in __file.read():
+                    test3 = True
+                else:
+                    test3 = False
+            if not test1 or not test2 or not test3:
+                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+            else:
+                __queue.put('{} - {}'.format(__testname, OKMSG))
+
+
 if __name__ == '__main__':
     processes = []
     results = []

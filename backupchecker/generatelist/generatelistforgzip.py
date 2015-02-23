@@ -103,7 +103,11 @@ class GenerateListForGzip(GenerateList):
                 __arclistpath = os.path.join(self.__fulloutput, __arcwithext)
         else:
             # --gen-list only
-            __arclistpath = ''.join([__arcpath[:-2], 'list'])
+            if self.__confname:
+                __arc = os.path.dirname(__arcpath)
+                __arclistpath =  os.path.join(__arc, '.'.join([self.__confname, 'list']))
+            else:
+                __arclistpath = ''.join([__arcpath[:-2], 'list'])
 
         # call the method to write information in a file
         __listconfinfo = {'arclistpath': __arclistpath,
@@ -131,7 +135,11 @@ class GenerateListForGzip(GenerateList):
                     __arcconfpath = os.path.join(self.__fulloutput, __arcwithext)
             else:
                 # --gen-full only
-                __arcconfpath = ''.join([__arcpath[:-2], 'conf'])
+                if self.__confname:
+                    __arc = os.path.dirname(__arcpath)
+                    __arcconfpath =  os.path.join(__arc, '.'.join([self.__confname, 'conf']))
+                else:
+                    __arcconfpath = ''.join([__arcpath[:-2], 'conf'])
             # the name of the backup inside the configuration file
             if self.__confname:
                 __arcname =  self.__confname

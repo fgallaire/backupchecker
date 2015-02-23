@@ -3,6 +3,8 @@ syntax: glob
 *.log
 *.pyc
 *.log
+newname.conf
+newname.list
 a.out
 functional-tests/expected-generated-list-for-bzip2-archive/expected-generated-list-for-bzip2-archive.list
 functional-tests/expected-generated-list-for-gzip-archive/expected-generated-list-for-gzip-archive.list
@@ -153,5 +155,8 @@ functional-tests/conf-files-from-tar-gz/conf-files-from-tar-gz.conf
 functional-tests/conf-files-from-tar-gz/conf-files-from-tar-gz.list
 functional-tests/generate-and-check-tar-stream-from-tar-gz/generate-and-check-tar-stream-from-tar-gz.conf
 functional-tests/generate-and-check-tar-stream-from-tar-gz/generate-and-check-tar-stream-from-tar-gz.list
-functional-tests/configuration-name-option-with-tar-gz/newname.conf
-functional-tests/configuration-name-option-with-tar-gz/newname.list
+functional-tests/configuration-name-option-with-tree/configuration-name-option-with-tree.list
+functional-tests/configuration-name-option-with-zip/configuration-name-option-with-zip.conf
+functional-tests/configuration-name-option-with-zip/configuration-name-option-with-zip.list
+functional-tests/configuration-name-option-with-gzip/configuration-name-option-with-gzip.conf
+functional-tests/configuration-name-option-with-gzip/configuration-name-option-with-gzip.list

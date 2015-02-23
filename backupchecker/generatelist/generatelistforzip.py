@@ -164,7 +164,11 @@ class GenerateListForZip(GenerateList):
                 __arclistpath = os.path.join(self.__fulloutput, __arcwithext)
         else:
             # --gen-list
-            __arclistpath = ''.join([self.__arcpath[:-3], 'list'])
+                if self.__confname:
+                    __arc = os.path.dirname(self.__arcpath)
+                    __arclistpath = os.path.join(__arc, '.'.join([self.__confname, 'list']))
+                else:
+                    __arclistpath = ''.join([self.__arcpath[:-3], 'list'])
             
         __listconfinfo = {'arclistpath': __arclistpath,
                             'listoffiles':  __listoffiles}
@@ -192,7 +196,11 @@ class GenerateListForZip(GenerateList):
                     __arcconfpath = os.path.join(self.__fulloutput, __arcwithext)
             else:
                 # --gen-full only
-                __arcconfpath = ''.join([self.__arcpath[:-3], 'conf'])
+                if self.__confname:
+                    __arc = os.path.dirname(self.__arcpath)
+                    __arcconfpath = os.path.join(__arc, '.'.join([self.__confname, 'conf']))
+                else:
+                    __arcconfpath = ''.join([self.__arcpath[:-3], 'conf'])
             # name of the archive in the configuration file
             if self.__confname:
                 __arcname = self.__confname
