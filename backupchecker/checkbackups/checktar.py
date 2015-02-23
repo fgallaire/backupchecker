@@ -45,7 +45,7 @@ class CheckTar(CheckArchive):
         if _data:
             try:
                 if __isastream:
-                    self._tar = tarfile.open(mode='r|',fileobj=sys.stdin.buffer)
+                    self._tar = tarfile.open(mode='r|*',fileobj=sys.stdin.buffer)
                 else:
                     self._tar = tarfile.open(_cfgvalues['path'], 'r')
                 for _tarinfo in self._tar:
