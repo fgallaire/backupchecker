@@ -4531,6 +4531,102 @@ class Test_configuration_name_option_and_conf_list_output_with_gzip:
             else:
                 __queue.put('{} - {}'.format(__testname, OKMSG))
 
+class Test_configuration_name_option_and_conf_list_output_with_bzip2:
+    '''Generate configuration files and check if switching configuration names was successful with bzip2 archive.
+       This test also uses the output-conf-dir and -output-list-dir options.'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/configuration-name-option-and-conf-list-ouput-option-with-bzip2')
+        __archive = os.path.join(__testdir, 'configuration-name-option-and-conf-list-ouput-option-with-bzip2.bz2')
+        __newname = 'newname2'
+        __resultconffile = os.path.join(__testdir, 'conf/newname2.conf')
+        if os.path.exists(__resultconffile):
+            remove(__resultconffile)
+        __resultconfdir = os.path.dirname(__resultconffile)
+        if not os.path.exists(__resultconfdir):
+            os.mkdir(__resultconfdir)
+        __resultlistfile = os.path.join(__testdir, 'list/newname2.list')
+        if os.path.exists(__resultlistfile):
+            remove(__resultlistfile)
+        __resultlistdir = os.path.dirname(__resultlistfile)
+        if not os.path.exists(__resultlistdir):
+            os.mkdir(__resultlistdir)
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTOUTPUTCONFDIR, __resultconfdir, OPTOUTPUTLISTDIR, __resultlistdir, OPTCONFNAME, __newname, OPTFULLGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTOUTPUTCONFDIR, __resultconfdir, OPTOUTPUTLISTDIR, __resultlistdir, OPTCONFNAME, __newname, OPTFULLGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            if os.path.exists(__resultconffile):
+                test1 = True
+            else:
+                test1 = False
+            if os.path.exists(__resultlistfile):
+                test2 = True
+            else:
+                test2 = False
+            with open(__resultconffile, 'r') as __file:
+                if '[main]\nname=newname' in __file.read():
+                    test3 = True
+                else:
+                    test3 = False
+            if not test1 or not test2 or not test3:
+                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+            else:
+                __queue.put('{} - {}'.format(__testname, OKMSG))
+
+
+class Test_configuration_name_option_and_conf_list_output_with_lzma:
+    '''Generate configuration files and check if switching configuration names was successful with lzma archive.
+       This test also uses the output-conf-dir and -output-list-dir options.'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/configuration-name-option-and-conf-list-ouput-option-with-lzma')
+        __archive = os.path.join(__testdir, 'configuration-name-option-and-conf-list-ouput-option-with-lzma.xz')
+        __newname = 'newname2'
+        __resultconffile = os.path.join(__testdir, 'conf/newname2.conf')
+        if os.path.exists(__resultconffile):
+            remove(__resultconffile)
+        __resultconfdir = os.path.dirname(__resultconffile)
+        if not os.path.exists(__resultconfdir):
+            os.mkdir(__resultconfdir)
+        __resultlistfile = os.path.join(__testdir, 'list/newname2.list')
+        if os.path.exists(__resultlistfile):
+            remove(__resultlistfile)
+        __resultlistdir = os.path.dirname(__resultlistfile)
+        if not os.path.exists(__resultlistdir):
+            os.mkdir(__resultlistdir)
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTOUTPUTCONFDIR, __resultconfdir, OPTOUTPUTLISTDIR, __resultlistdir, OPTCONFNAME, __newname, OPTFULLGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTOUTPUTCONFDIR, __resultconfdir, OPTOUTPUTLISTDIR, __resultlistdir, OPTCONFNAME, __newname, OPTFULLGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            if os.path.exists(__resultconffile):
+                test1 = True
+            else:
+                test1 = False
+            if os.path.exists(__resultlistfile):
+                test2 = True
+            else:
+                test2 = False
+            with open(__resultconffile, 'r') as __file:
+                if '[main]\nname=newname' in __file.read():
+                    test3 = True
+                else:
+                    test3 = False
+            if not test1 or not test2 or not test3:
+                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+            else:
+                __queue.put('{} - {}'.format(__testname, OKMSG))
 
 if __name__ == '__main__':
     processes = []

@@ -168,3 +168,7 @@ functional-tests/configuration-name-option-and-conf-list-ouput-option-with-zip/c
 functional-tests/configuration-name-option-and-conf-list-ouput-option-with-zip/list/
 functional-tests/configuration-name-option-and-conf-list-ouput-option-with-gzip/conf/
 functional-tests/configuration-name-option-and-conf-list-ouput-option-with-gzip/list/
+functional-tests/configuration-name-option-and-conf-list-ouput-option-with-bzip2/conf/
+functional-tests/configuration-name-option-and-conf-list-ouput-option-with-bzip2/list/
+functional-tests/configuration-name-option-and-conf-list-ouput-option-with-lzma/conf/
+functional-tests/configuration-name-option-and-conf-list-ouput-option-with-lzma/list/
