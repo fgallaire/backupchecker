@@ -166,3 +166,5 @@ functional-tests/configuration-name-option-and-conf-list-ouput-option-with-tree/
 functional-tests/configuration-name-option-and-conf-list-ouput-option-with-tree/list/
 functional-tests/configuration-name-option-and-conf-list-ouput-option-with-zip/conf/
 functional-tests/configuration-name-option-and-conf-list-ouput-option-with-zip/list/
+functional-tests/configuration-name-option-and-conf-list-ouput-option-with-gzip/conf/
+functional-tests/configuration-name-option-and-conf-list-ouput-option-with-gzip/list/
