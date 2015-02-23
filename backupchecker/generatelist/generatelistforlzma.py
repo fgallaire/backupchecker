@@ -86,8 +86,12 @@ class GenerateListForLzma(GenerateList):
             else:
                 __arclistpath = os.path.join(self.__fulloutput, __arcwithext)
         else:
-            # default
-            __arclistpath = ''.join([__arcpath[:-2], 'list'])
+            # --gen-list only
+            if self.__confname:
+                __arc = os.path.dirname(__arcpath)
+                __arclistpath = os.path.join(__arc, '.'.join([self.__confname, 'list']) )
+            else:
+                __arclistpath = ''.join([__arcpath[:-2], 'list'])
 
         # call the method to write information in a file
         __listconfinfo = {'arclistpath': __arclistpath,
@@ -111,7 +115,12 @@ class GenerateListForLzma(GenerateList):
                     __arcconfpath = os.path.join(self.__fulloutput, __arcwithext)
             else:
                 # --gen-full only
-                __arcconfpath = ''.join([__arcpath[:-2], 'conf'])
+                if self.__confname:
+                    __arc = os.path.dirname(__arcpath)
+                    __arcconfpath = os.path.join(__arc, '.'.join([self.__confname, 'conf']) )
+                else:
+                    __arcconfpath = ''.join([__arcpath[:-2], 'conf'])
+            # user-define change of the name of the archive
             if self.__confname:
                 __arcname =  self.__confname
             else:
