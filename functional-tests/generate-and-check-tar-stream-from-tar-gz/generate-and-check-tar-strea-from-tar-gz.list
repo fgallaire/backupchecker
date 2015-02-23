@@ -1,0 +1,4 @@
+[files]
+tests| =0 uid|1000 gid|1000 owner|chaica group|chaica mode|755 type|d mtime|1423826125.0
+tests/foo| =0 uid|1000 gid|1000 owner|chaica group|chaica mode|755 type|d mtime|1423695408.0
+tests/foo/bar| =12 uid|1000 gid|1000 owner|chaica group|chaica mode|644 type|f mtime|1423695408.0

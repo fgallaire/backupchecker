@@ -4086,6 +4086,34 @@ class Test_generate_confs_for_stream_from_tar_gz:
             else:
                 __queue.put('{} - {}'.format(__testname, OKMSG))
 
+class Test_generate_and_check_for_stream_from_tar_gz:
+    '''Generate configuration files and after check the archive for a tar.gz stream'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-and-check-tar-stream-from-tar-gz')
+        __archive = os.path.join(__testdir, 'generate-and-check-tar-stream-from-tar-gz.tar.gz')
+        __resultconffile = os.path.join(__testdir, 'generate-and-check-tar-stream-from-tar-gz.conf')
+        __resultlistfile = os.path.join(__testdir, 'generate-and-check-tar-stream-from-tar-gz.list')
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call('cat {} | {} {} {} {}'.format(__archive, PYTHONEXE, EXE, OPTFULLGEN, __archive), shell=True)
+        else:
+           __retcode = subprocess.call('cat {} | {} {} {}'.format(__archive, EXE, OPTFULLGEN, __archive), shell=True)
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            # check now the newly created configuration files
+            if 'PYTHONEXE' in environ:
+                __retcode = subprocess.call('cat {} | {} {} {} {} {} {}'.format(__archive, PYTHONEXE, EXE, OPTCONFIG, __testdir, OPTLOG, __output), shell=True)
+            else:
+                __retcode = subprocess.call('cat {} | {} {} {} {} {}'.format(__archive, EXE, OPTCONFIG, __testdir, OPTLOG, __output), shell=True)
+            if __retcode != 0:
+                __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+            else:
+                __queue.put('{} - {}'.format(__testname, OKMSG))
+
 if __name__ == '__main__':
     processes = []
     results = []
