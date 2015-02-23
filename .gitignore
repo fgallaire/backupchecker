@@ -151,3 +151,7 @@ functional-tests/check-uname-tree/check-uname-tree.conf
 functional-tests/check-uname-tree/check-uname-tree.list
 functional-tests/conf-files-from-tar-gz/conf-files-from-tar-gz.conf
 functional-tests/conf-files-from-tar-gz/conf-files-from-tar-gz.list
+functional-tests/generate-and-check-tar-stream-from-tar-gz/generate-and-check-tar-stream-from-tar-gz.conf
+functional-tests/generate-and-check-tar-stream-from-tar-gz/generate-and-check-tar-stream-from-tar-gz.list
+functional-tests/configuration-name-option-with-tar-gz/newname.conf
+functional-tests/configuration-name-option-with-tar-gz/newname.list
