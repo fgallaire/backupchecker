@@ -160,3 +160,6 @@ functional-tests/configuration-name-option-with-zip/configuration-name-option-wi
 functional-tests/configuration-name-option-with-zip/configuration-name-option-with-zip.list
 functional-tests/configuration-name-option-with-gzip/configuration-name-option-with-gzip.conf
 functional-tests/configuration-name-option-with-gzip/configuration-name-option-with-gzip.list
+functional-tests/configuration-name-option-and-conf-list-ouput-option-with-tar-gz/conf/
+functional-tests/configuration-name-option-and-conf-list-ouput-option-with-tar-gz/list/
+

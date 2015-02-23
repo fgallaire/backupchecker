@@ -172,6 +172,10 @@ class CliParse:
             sys.exit(1)
         if __options.confname:
             __options.confname = __options.confname.strip()
+        if __options.listoutput:
+            __options.listoutput = __options.listoutput.strip()
+        if __options.confoutput:
+            __options.confoutput = __options.confoutput.strip()
         self.__options = __options
 
     @property
