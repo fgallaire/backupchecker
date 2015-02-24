@@ -31,11 +31,11 @@ or [read it online](https://backupchecker.readthedocs.org/en/latest/).
 
 * Generate the configuration files for a remote archive through FTP
 
-        $ wget --quiet -O - ftp://user:pass@ftpserver.com/backup.tar.gz | ./backupchecker.py -G -
+        $ wget --quiet -O - ftp://user:pass@server/backup.tar.gz | ./backupchecker.py -G -
 
 * Verify an archive on a remote server through SSH
 
-        $ ssh -q requesttracker "cat /tmp/backup.tar.gz" | ./backupchecker.py -c . -
+        $ ssh -q server "cat /tmp/backup.tar.gz" | ./backupchecker.py -c . -
 
 ### Authors
 
