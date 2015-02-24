@@ -104,25 +104,19 @@ class CliParse:
 
     def __verify_options(self, __options):
         '''Verify the options given on the command line'''
+        __options.isastream = False
         # check if the archives exist
         for __i, __path in enumerate(__options.archives):
             # the input is a stream
-            if __path == '-':
-                __isastream = True
-            else:
-                __isastream = False
-            if not os.path.exists(__path):
-                if not __isastream:
-                    print('{} : no file or directory at this path. Exiting.'.format(__path))
-                    sys.exit(1)
-            # if the input is a stream
-            if __isastream:
-                __path = os.path.abspath(os.getcwd())
+            if  __i == 0 and __path == '-':
                 __options.isastream = True
-            else:
-                __options.isastream = False
-                # using absolute path in order to be consistent
-                __path = os.path.abspath(__path)
+                __options.archives[__i] = os.path.abspath(os.getcwd())
+                break
+            if not os.path.exists(__path):
+                print('{} : no file or directory at this path. Exiting.'.format(__path))
+                sys.exit(1)
+            # using absolute path in order to be consistent
+            __path = os.path.abspath(__path)
             # if the path exists, check if it is a regular file, a link or
             # a directory otherwise exits
             if not os.path.isfile(__path) and not os.path.isdir(__path):
@@ -170,6 +164,7 @@ class CliParse:
         if __options.hashtype and (__options.hashtype not in algorithms_guaranteed):
             print('The hash type {} you specified is not available'.format(__options.hashtype))
             sys.exit(1)
+        # strip blank space leading some fields from the command line using python subprocess
         if __options.confname:
             __options.confname = __options.confname.strip()
         if __options.listoutput:

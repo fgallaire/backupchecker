@@ -24,16 +24,16 @@ import os
 class Configurations:
     '''Retrieve the different configurations'''
 
-    def __init__(self, __confpath):
+    def __init__(self, __confpath, __isastream):
         '''The constructor of the Configurations class.
 
         __confpath -- the path to the directory with the configuration files
 
         '''
         self.__configs = {}
-        self.__parse_configurations(__confpath)
+        self.__parse_configurations(__confpath, __isastream)
 
-    def __parse_configurations(self, __confpath):
+    def __parse_configurations(self, __confpath, __isastream):
         '''Parse the different configurations'''
         try:
             # check if the path to the confs is a directory or a file
@@ -90,7 +90,7 @@ class Configurations:
                 ### Check the paths in the configuration
                 __confkeys= ('path', 'files_list')
                 for __confkey in __confkeys:
-                    if __confkey == 'path' and __currentconf['type'] == 'stream':
+                    if __confkey == 'path' and __isastream:
                         break
                     else:
                         __path = __currentconf[__confkey]

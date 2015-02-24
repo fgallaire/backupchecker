@@ -54,6 +54,7 @@ class Options:
     '''Mock the object produced by argparse, useful for lots of unittests'''
     def __init__(self):
         self.delimiter = DEFAULTDELIMITER
+        self.isastream = False
 
 class MyDict(dict):
     '''mock object'''
@@ -271,13 +272,13 @@ class TestApp(unittest.TestCase):
     def test_configurations(self):
         '''Test the Configurations.configs attribute of the Configurations class'''
         __path = os.path.abspath('tests/test_conf/')
-        __res = backupchecker.configurations.Configurations(__path).configs
+        __res = backupchecker.configurations.Configurations(__path, False).configs
         self.assertEqual({'essai': {'path': os.path.normpath(os.path.join(__path,'essai.tar.gz')), 'sha512': None, 'files_list': os.path.normpath(os.path.join(__path,'essai-list')), 'type': 'archive', 'delimiter': '|'}}, __res)
 
     def test_configurations_with_subdir(self):
         '''Test the Configurations.configs attribute of the Configurations class'''
         __path = os.path.abspath('tests/test_conf/subdir/')
-        __res = backupchecker.configurations.Configurations(__path).configs
+        __res = backupchecker.configurations.Configurations(__path, False).configs
         self.assertEqual({'essai2': {'path': os.path.normpath(os.path.join(__path, 'toto/essai.tar.gz')), 'sha512': None, 'files_list': os.path.normpath(os.path.join(__path, 'toto/essai-list')), 'type': 'archive', 'delimiter': None}}, __res)
 
     def test_configurations_strip_gpg_header(self):
@@ -285,7 +286,7 @@ class TestApp(unittest.TestCase):
         __base = os.path.abspath('tests/test_conf_gpg/')
         __path = os.path.join(__base, 'archive.conf')
         __strippedfilepath = os.path.join(__base, 'result')
-        __myobj = backupchecker.configurations.Configurations(__path)
+        __myobj = backupchecker.configurations.Configurations(__path, False)
         with open(__path) as __myfile:
             __newfile = __myobj.strip_gpg_header(__myfile, __path)
         with open(__strippedfilepath) as __good:
@@ -1341,6 +1342,7 @@ class TestApp(unittest.TestCase):
             'logfile': __logpath,
             'fulloutput':'',
             'confoutput':'',
+            'isastream': False,
             'listoutput':''})
         os.remove(__archivepath)
 
@@ -1394,8 +1396,8 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_mtimes = []
         __mydict.mismatched_unames = []
         __mydict.mismatched_gnames = []
-        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testarchiveinfomsgmain.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
-        __myobj._ArchiveInfoMsg__main(__mydict, {'path': 'testarchiveinfomsgmain.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testarchiveinfomsgmain.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None}, False)
+        __myobj._ArchiveInfoMsg__main(__mydict, {'path': 'testarchiveinfomsgmain.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None}, False)
         with open(_logfile) as _res:
             self.assertIn('WARNING:root:1 file missing in testarchiveinfomsgmain.tar.gz: \nWARNING:root:testarchiveinfomsgmain1\n', _res.read())
 
@@ -1419,7 +1421,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_mtimes = []
         __mydict.mismatched_unames = []
         __mydict.mismatched_gnames = []
-        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testmissingfiles.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testmissingfiles.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None}, False)
         __myobj._ArchiveInfoMsg__missing_files(['titi'], 'testmissingfiles.tar.gz')
         with open(_logfile) as _res:
             self.assertIn('WARNING:root:1 file missing in testmissingfiles.tar.gz: \nWARNING:root:titi\n', _res.read())
@@ -1444,7 +1446,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_mtimes = []
         __mydict.mismatched_unames = []
         __mydict.mismatched_gnames = []
-        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testunexpectedfiles.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testunexpectedfiles.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None}, False)
         __myobj._ArchiveInfoMsg__unexpected_files(['titi'], 'testunexpectedfiles.tar.gz')
         with open(_logfile) as _res:
             self.assertIn('WARNING:root:1 unexpected file checking testunexpectedfiles.tar.gz: \nWARNING:root:titi\n', _res.read())
@@ -1468,7 +1470,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_mtimes = []
         __mydict.mismatched_unames = []
         __mydict.mismatched_gnames = []
-        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testclassifydifferences.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testclassifydifferences.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None}, False)
         __myobj._ArchiveInfoMsg__classify_differences(__mydict, 'testclassifydifferences.tar.gz')
         with open(_logfile) as _res:
             __testresult = _res.read()
@@ -1495,7 +1497,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_mtimes = []
         __mydict.mismatched_unames = []
         __mydict.mismatched_gnames = []
-        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testlogdifferences.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testlogdifferences.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None}, False)
         __myobj._ArchiveInfoMsg__log_differences(__mydict.missing_equality, 'testlogdifferences.tar.gz', '{} {} with unexpected size while checking {}: ')
         with open(_logfile) as _res:
             __testresult = _res.read()
@@ -1520,7 +1522,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_mtimes = []
         __mydict.mismatched_unames = []
         __mydict.mismatched_gnames = []
-        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testuidgidmismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testuidgidmismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None}, False)
         __myobj._ArchiveInfoMsg__uid_gid_mismatches(__mydict, 'testuidgidmismatches.tar.gz')
         with open(_logfile) as _res:
             __testresult = _res.read()
@@ -1546,7 +1548,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_mtimes = []
         __mydict.mismatched_unames = []
         __mydict.mismatched_gnames = []
-        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testmodemismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testmodemismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None}, False)
         __myobj._ArchiveInfoMsg__mode_mismatches(__mydict, 'testmodemismatches.tar.gz')
         with open(_logfile) as _res:
             __testresult = _res.read()
@@ -1571,7 +1573,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_mtimes = []
         __mydict.mismatched_unames = []
         __mydict.mismatched_gnames = []
-        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testtargetmismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testtargetmismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None}, False)
         __myobj._ArchiveInfoMsg__target_mismatches(__mydict, 'testtargetmismatches.tar.gz')
         with open(_logfile) as _res:
             __testresult = _res.read()
@@ -1596,7 +1598,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_mtimes = []
         __mydict.mismatched_unames = []
         __mydict.mismatched_gnames = []
-        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testtypemismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testtypemismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None}, False)
         __myobj._ArchiveInfoMsg__target_mismatches(__mydict, 'testtypemismatches.tar.gz')
         with open(_logfile) as _res:
             __testresult = _res.read()
@@ -1621,7 +1623,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_mtimes = []
         __mydict.mismatched_unames = []
         __mydict.mismatched_gnames = []
-        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testhashmismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testhashmismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None}, False)
         __myobj._ArchiveInfoMsg__hash_mismatches(__mydict, 'testhashmismatches.tar.gz')
         with open(_logfile) as _res:
             __testresult = _res.read()

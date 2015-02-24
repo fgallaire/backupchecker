@@ -209,7 +209,7 @@ class GenerateListForTar(GenerateList):
                 __confinfo = {'arcname':self.__arcname,
                                 'arcconfpath': self.__arcconfpath,
                                 'arclistpath': self.__arclistpath,
-                                'arctype': 'stream',
+                                'arctype': 'archive',
                                 'sha512': __listhashsum}
             else:
                 __confinfo = {'arcname':self.__arcname,

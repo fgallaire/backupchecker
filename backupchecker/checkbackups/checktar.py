@@ -30,7 +30,7 @@ class CheckTar(CheckArchive):
         '''Main for CheckTar'''
         _data = []
         _data, __arcdata = ExpectedValues(_cfgvalues, _options).data
-        if _cfgvalues['type'] == 'stream':
+        if _options.isastream:
             __isastream = True
         else:
             __isastream = False

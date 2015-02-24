@@ -76,4 +76,4 @@ class CheckBackups(object):
             else:
                 __errmsg = 'The type of the archive is not supported.'
                 sys.exit(1)
-            ArchiveInfoMsg(__bck, __cfgvalues)
+            ArchiveInfoMsg(__bck, __cfgvalues, __options.isastream)
