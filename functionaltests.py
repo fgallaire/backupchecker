@@ -28,6 +28,7 @@ EXE = './backupchecker.py'
 OPTCONFIG = '-c'
 OPTOUTPUTCONFDIR = '-C'
 OPTOUTPUTLISTDIR = '-L'
+OPTOUTPUTFULLDIR = '-O'
 OPTCONFNAME = '-n'
 OPTDEL = '-d'
 OPTEXCEPTIONSFILE = '-E'
@@ -4620,6 +4621,53 @@ class Test_configuration_name_option_and_conf_list_output_with_lzma:
                 test2 = False
             with open(__resultconffile, 'r') as __file:
                 if '[main]\nname=newname' in __file.read():
+                    test3 = True
+                else:
+                    test3 = False
+            if not test1 or not test2 or not test3:
+                __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+            else:
+                __queue.put('{} - {}'.format(__testname, OKMSG))
+
+class Test_full_conf_output_with_stream_tar_gz:
+    '''Generate configuration files with stream using --output-list-and-conf-dir option with stream of tar.gz'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/generate-full-conf-output-option-with-stream-tar-gz')
+        __archive = os.path.join(__testdir, 'generate-full-conf-output-option-with-stream-tar-gz.tar.gz')
+        __newname = 'tarstream'
+        __resultconffile = os.path.join(__testdir, 'fullconf/tarstream.conf')
+        if os.path.exists(__resultconffile):
+            remove(__resultconffile)
+        __resultconfdir = os.path.dirname(__resultconffile)
+        if not os.path.exists(__resultconfdir):
+            os.mkdir(__resultconfdir)
+        __resultlistfile = os.path.join(__testdir, 'fullconf/tarstream.list')
+        if os.path.exists(__resultlistfile):
+            remove(__resultlistfile)
+        __resultlistdir = os.path.dirname(__resultlistfile)
+        if not os.path.exists(__resultlistdir):
+            os.mkdir(__resultlistdir)
+        __output = os.path.join(__testdir, 'a.out')
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call([PYTHONEXE, EXE, OPTOUTPUTFULLDIR, __resultconfdir, OPTCONFNAME, __newname, OPTFULLGEN, __archive])
+        else:
+            __retcode = subprocess.call([EXE, OPTOUTPUTFULLDIR, __resultconfdir, OPTCONFNAME, __newname, OPTFULLGEN, __archive])
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            if os.path.exists(__resultconffile):
+                test1 = True
+            else:
+                test1 = False
+            if os.path.exists(__resultlistfile):
+                test2 = True
+            else:
+                test2 = False
+            with open(__resultconffile, 'r') as __file:
+                if '[main]\nname=tarstream' in __file.read():
                     test3 = True
                 else:
                     test3 = False

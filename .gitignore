@@ -172,3 +172,4 @@ functional-tests/configuration-name-option-and-conf-list-ouput-option-with-bzip2
 functional-tests/configuration-name-option-and-conf-list-ouput-option-with-bzip2/list/
 functional-tests/configuration-name-option-and-conf-list-ouput-option-with-lzma/conf/
 functional-tests/configuration-name-option-and-conf-list-ouput-option-with-lzma/list/
+functional-tests/generate-full-conf-output-option-with-stream-tar-gz/fullconf/

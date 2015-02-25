@@ -171,6 +171,8 @@ class CliParse:
             __options.listoutput = __options.listoutput.strip()
         if __options.confoutput:
             __options.confoutput = __options.confoutput.strip()
+        if __options.fulloutput:
+            __options.fulloutput = __options.fulloutput.strip()
         self.__options = __options
 
     @property
