@@ -124,6 +124,10 @@ class CliParse:
                 sys.exit(1)
             else:
                 __options.archives[__i] = __path
+        # verify option compatibilites
+        if __options.isastream and __options.getallhashes:
+            print('Options are not compatible, not possible to compute the hash of files within an archive from a stream')
+            sys.exit(1)
         # Check the logfile
         __options.logfile = __options.logfile.strip()
         __logdir = os.path.split(__options.logfile)[0]
