@@ -49,7 +49,7 @@ class CheckBackups(object):
             if __cfgvalues['type'] == 'tree':
                 __bck = CheckTree(__cfgvalues, __options)
             # check a tar file, by name
-            elif __cfgvalues['type'] == 'archive' and (__cfgvalues['path'].lower().endswith('.tar') \
+            elif not __options.isastream and __cfgvalues['type'] == 'archive' and (__cfgvalues['path'].lower().endswith('.tar') \
                 or __cfgvalues['path'].lower().endswith('.tar.gz') \
                 or __cfgvalues['path'].lower().endswith('.tar.bz2') \
                 or __cfgvalues['path'].lower().endswith('.tar.xz') \
@@ -57,7 +57,7 @@ class CheckBackups(object):
                 or __cfgvalues['path'].lower().endswith('.tbz') \
                 or __cfgvalues['path'].lower().endswith('.tbz2')):
                 __bck = CheckTar(__cfgvalues, __options)
-            elif __cfgvalues['type'] == 'stream':
+            elif __options.isastream:
                 __bck = CheckTar(__cfgvalues, __options)
             # check a gzip file, by name
             elif __cfgvalues['type'] == 'archive' and __cfgvalues['path'].lower().endswith('.gz'):
@@ -76,4 +76,4 @@ class CheckBackups(object):
             else:
                 __errmsg = 'The type of the archive is not supported.'
                 sys.exit(1)
-            ArchiveInfoMsg(__bck, __cfgvalues, __options.isastream)
+            ArchiveInfoMsg(__bck, __cfgvalues, __options.isastream, __options.confname)

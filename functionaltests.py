@@ -4676,6 +4676,30 @@ class Test_full_conf_output_with_stream_tar_gz:
             else:
                 __queue.put('{} - {}'.format(__testname, OKMSG))
 
+class Test_scan_archive_for_stream_from_tar_gz:
+    '''Scan archive for a stream from a tar.gz file'''
+    def __init__(self, q):
+        __queue = q
+        __res = True
+        __testname = self.__class__.__name__
+        __testdir = os.path.join(ABSPATH, 'functional-tests/scan-archive-for-stream-from-tar-gz')
+        __archive = os.path.join(__testdir, 'scan-archive-for-stream-from-tar-gz.tar.gz')
+        __output = os.path.join(__testdir, 'a.out')
+        if os.path.exists(__output):
+            remove(__output)
+        if 'PYTHONEXE' in environ:
+            __retcode = subprocess.call('cat {} | {} {} {} {} {} {} -'.format(__archive, PYTHONEXE, EXE, OPTCONFIG, __testdir, OPTLOG, __output), shell=True)
+        else:
+            __retcode = subprocess.call('cat {} | {} {} {} {} {} -'.format(__archive, EXE, OPTCONFIG, __testdir, OPTLOG, __output), shell=True)
+        if __retcode != 0:
+            __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
+        else:
+            with open(__output, 'r') as __file:
+                if  '1 file with unexpected uid' not in __file.read():
+                    __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+                else:
+                    __queue.put('{} - {}'.format(__testname, OKMSG))
+
 if __name__ == '__main__':
     processes = []
     results = []

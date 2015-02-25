@@ -66,6 +66,8 @@ class Configurations:
                     print(__err)
                     sys.exit(1)
                 # Common information for the backups
+                # The name of the backup
+                __currentconf['name'] = __config.get('main', 'name')
                 ### The type of the backups
                 __currentconf['type'] = __config.get('main', 'type')
                 # Common information for the archives
@@ -105,7 +107,7 @@ class Configurations:
                             sys.exit(1)
 
                 # If the backup type is archive, path must not be a directory
-                if __currentconf['type'] == 'archive' and os.path.isdir(__currentconf['path']):
+                if not __isastream and __currentconf['type'] == 'archive' and os.path.isdir(__currentconf['path']):
                     __errmsg = '{} is a directory but appears as an archive in configuration {}.'
                     print(__errmsg.format(__currentconf['path'], 
                         __config.get('main', 'name')))

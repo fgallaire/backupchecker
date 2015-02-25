@@ -125,6 +125,7 @@ class CliParse:
             else:
                 __options.archives[__i] = __path
         # Check the logfile
+        __options.logfile = __options.logfile.strip()
         __logdir = os.path.split(__options.logfile)[0]
         if __logdir and not os.path.exists(__logdir):
             print('The directory where to write the log file {} does not exist'.format(__logdir))
