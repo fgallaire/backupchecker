@@ -41,6 +41,7 @@ class GenerateListForZip(GenerateList):
         self.__getallhashes  = __genparams['getallhashes']
         self.__hashtype = __genparams['hashtype']
         self.__parsingexceptions = __genparams['parsingexceptions']
+        self.__confname = __genparams['confname']
         try:
             __zip = zipfile.ZipFile(self.__arcpath, 'r', allowZip64=True)
             self.__main(__zip)
@@ -148,12 +149,26 @@ class GenerateListForZip(GenerateList):
         # define the flexible file list path
         __arcwithext = os.path.split(''.join([self.__arcpath[:-3], 'list']))[1]
         if self.__listoutput:
-            __arclistpath = os.path.join(self.__listoutput, __arcwithext)
+            if self.__confname:
+                # --gen-list and --output-list-dir and --configuration-name
+                __arclistpath = os.path.join(self.__listoutput, '.'.join([self.__confname, 'list']))
+            else:
+                # --gen-list and --output-list-dir
+                __arclistpath = os.path.join(self.__listoutput, __arcwithext)
         elif self.__fulloutput:
-            __arclistpath = os.path.join(self.__fulloutput, __arcwithext)
+            if self.__confname:
+                # --gen-list and --output-conf-and-list-dir and --configuration-name
+                __arclistpath = os.path.join(self.__fulloutput, '.'.join([self.__confname, 'list']))
+            else:
+                # --gen-list and --output-conf-and-list-dir
+                __arclistpath = os.path.join(self.__fulloutput, __arcwithext)
         else:
-            # default
-            __arclistpath = ''.join([self.__arcpath[:-3], 'list'])
+            # --gen-list
+                if self.__confname:
+                    __arc = os.path.dirname(self.__arcpath)
+                    __arclistpath = os.path.join(__arc, '.'.join([self.__confname, 'list']))
+                else:
+                    __arclistpath = ''.join([self.__arcpath[:-3], 'list'])
             
         __listconfinfo = {'arclistpath': __arclistpath,
                             'listoffiles':  __listoffiles}
@@ -166,13 +181,31 @@ class GenerateListForZip(GenerateList):
             # define the flexible configuration file path
             __arcwithext = os.path.split(''.join([self.__arcpath[:-3], 'conf']))[1]
             if self.__confoutput:
-                __arcconfpath = os.path.join(self.__confoutput, __arcwithext)
+                if self.__confname:
+                    # --gen-full and --output-conf-dir and --configuration-name
+                    __arcconfpath = os.path.join(self.__confoutput, '.'.join([self.__confname, 'conf']))
+                else:
+                    # --gen-full and --output-conf-dir
+                    __arcconfpath = os.path.join(self.__confoutput, __arcwithext)
             elif self.__fulloutput:
-                __arcconfpath = os.path.join(self.__fulloutput, __arcwithext)
+                if self.__confname:
+                    # --gen-full and --output-conf-and-list-dir and --configuration-name
+                    __arcconfpath = os.path.join(self.__fulloutput, '.'.join([self.__confname, 'conf']))
+                else:
+                    # --gen-full and --output-conf-and-list-dir
+                    __arcconfpath = os.path.join(self.__fulloutput, __arcwithext)
             else:
-                # default
-                __arcconfpath = ''.join([self.__arcpath[:-3], 'conf'])
-            __arcname =  os.path.basename(self.__arcpath[:-4])
+                # --gen-full only
+                if self.__confname:
+                    __arc = os.path.dirname(self.__arcpath)
+                    __arcconfpath = os.path.join(__arc, '.'.join([self.__confname, 'conf']))
+                else:
+                    __arcconfpath = ''.join([self.__arcpath[:-3], 'conf'])
+            # name of the archive in the configuration file
+            if self.__confname:
+                __arcname = self.__confname
+            else:
+                __arcname =  os.path.basename(self.__arcpath[:-4])
             __confinfo = {'arcname': __arcname,
                             'arcpath': self.__arcpath,
                             'arcconfpath': __arcconfpath,

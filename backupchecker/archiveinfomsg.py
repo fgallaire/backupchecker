@@ -17,22 +17,29 @@
 '''Generate the information message about an archive'''
 
 import logging
+import os.path
 
 class ArchiveInfoMsg(object):
     '''Generate the information message about an archive'''
 
-    def __init__(self, __bck, __cfgvalues):
+    def __init__(self, __bck, __cfgvalues, __isastream, __confname):
         '''The constructor for the ArchiveInfoMsg class.
 
         __bck -- the retrieved value for the archive
         __cfgvalues -- the expected values for the archive
+        __isastream -- is the archive coming from a stream or not
 
         '''
-        self.__main(__bck, __cfgvalues)
+        self.__main(__bck, __cfgvalues, __isastream, __confname)
 
-    def __main(self, __bck, __cfgvalues):
+    def __main(self, __bck, __cfgvalues, __isastream, __confname):
         '''The main for the ArchiveInfoMsg class'''
         if __cfgvalues['type'] == 'archive' or __cfgvalues['type'] == 'tree':
+            if __isastream:
+                if __confname:
+                    __cfgvalues['path'] = __confname
+                else:
+                    __cfgvalues['path'] = __cfgvalues['name']
             self.__missing_files(__bck.missing_files, __cfgvalues['path'])
             self.__unexpected_files(__bck.unexpected_files, __cfgvalues['path'])
             self.__classify_differences(__bck, __cfgvalues['path'])

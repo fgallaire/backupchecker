@@ -24,16 +24,16 @@ import os
 class Configurations:
     '''Retrieve the different configurations'''
 
-    def __init__(self, __confpath):
+    def __init__(self, __confpath, __isastream):
         '''The constructor of the Configurations class.
 
         __confpath -- the path to the directory with the configuration files
 
         '''
         self.__configs = {}
-        self.__parse_configurations(__confpath)
+        self.__parse_configurations(__confpath, __isastream)
 
-    def __parse_configurations(self, __confpath):
+    def __parse_configurations(self, __confpath, __isastream):
         '''Parse the different configurations'''
         try:
             # check if the path to the confs is a directory or a file
@@ -66,6 +66,8 @@ class Configurations:
                     print(__err)
                     sys.exit(1)
                 # Common information for the backups
+                # The name of the backup
+                __currentconf['name'] = __config.get('main', 'name')
                 ### The type of the backups
                 __currentconf['type'] = __config.get('main', 'type')
                 # Common information for the archives
@@ -90,19 +92,22 @@ class Configurations:
                 ### Check the paths in the configuration
                 __confkeys= ('path', 'files_list')
                 for __confkey in __confkeys:
-                    __path = __currentconf[__confkey]
-                    if not __path:
-                        print('A path is missing in {}.'.format(__config.get('main', 'name')))
-                        sys.exit(1)
-                    if not os.path.isabs(__path):
-                        __path = os.path.normpath(os.path.join(os.path.abspath(__confpath), __path))
-                        __currentconf[__confkey] = __path
-                    if not os.path.exists(__path):
-                        print('{} does not exist.'.format(__path))
-                        sys.exit(1)
+                    if __confkey == 'path' and __isastream:
+                        break
+                    else:
+                        __path = __currentconf[__confkey]
+                        if not __path:
+                            print('A path is missing in {}.'.format(__config.get('main', 'name')))
+                            sys.exit(1)
+                        if not os.path.isabs(__path):
+                            __path = os.path.normpath(os.path.join(os.path.abspath(__confpath), __path))
+                            __currentconf[__confkey] = __path
+                        if not os.path.exists(__path):
+                            print('{} does not exist.'.format(__path))
+                            sys.exit(1)
 
                 # If the backup type is archive, path must not be a directory
-                if __currentconf['type'] == 'archive' and os.path.isdir(__currentconf['path']):
+                if not __isastream and __currentconf['type'] == 'archive' and os.path.isdir(__currentconf['path']):
                     __errmsg = '{} is a directory but appears as an archive in configuration {}.'
                     print(__errmsg.format(__currentconf['path'], 
                         __config.get('main', 'name')))

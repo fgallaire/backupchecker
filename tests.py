@@ -54,6 +54,8 @@ class Options:
     '''Mock the object produced by argparse, useful for lots of unittests'''
     def __init__(self):
         self.delimiter = DEFAULTDELIMITER
+        self.isastream = False
+        self.confname = ''
 
 class MyDict(dict):
     '''mock object'''
@@ -271,21 +273,21 @@ class TestApp(unittest.TestCase):
     def test_configurations(self):
         '''Test the Configurations.configs attribute of the Configurations class'''
         __path = os.path.abspath('tests/test_conf/')
-        __res = backupchecker.configurations.Configurations(__path).configs
-        self.assertEqual({'essai': {'path': os.path.normpath(os.path.join(__path,'essai.tar.gz')), 'sha512': None, 'files_list': os.path.normpath(os.path.join(__path,'essai-list')), 'type': 'archive', 'delimiter': '|'}}, __res)
+        __res = backupchecker.configurations.Configurations(__path, False).configs
+        self.assertEqual({'essai': {'path': os.path.normpath(os.path.join(__path,'essai.tar.gz')), 'sha512': None, 'files_list': os.path.normpath(os.path.join(__path,'essai-list')), 'type': 'archive', 'delimiter': '|', 'name': 'essai'}}, __res)
 
     def test_configurations_with_subdir(self):
         '''Test the Configurations.configs attribute of the Configurations class'''
         __path = os.path.abspath('tests/test_conf/subdir/')
-        __res = backupchecker.configurations.Configurations(__path).configs
-        self.assertEqual({'essai2': {'path': os.path.normpath(os.path.join(__path, 'toto/essai.tar.gz')), 'sha512': None, 'files_list': os.path.normpath(os.path.join(__path, 'toto/essai-list')), 'type': 'archive', 'delimiter': None}}, __res)
+        __res = backupchecker.configurations.Configurations(__path, False).configs
+        self.assertEqual({'essai2': {'path': os.path.normpath(os.path.join(__path, 'toto/essai.tar.gz')), 'sha512': None, 'files_list': os.path.normpath(os.path.join(__path, 'toto/essai-list')), 'type': 'archive', 'delimiter': None, 'name': 'essai2'}}, __res)
 
     def test_configurations_strip_gpg_header(self):
         '''Test the Configurations.configs attribute of the Configurations class'''
         __base = os.path.abspath('tests/test_conf_gpg/')
         __path = os.path.join(__base, 'archive.conf')
         __strippedfilepath = os.path.join(__base, 'result')
-        __myobj = backupchecker.configurations.Configurations(__path)
+        __myobj = backupchecker.configurations.Configurations(__path, False)
         with open(__path) as __myfile:
             __newfile = __myobj.strip_gpg_header(__myfile, __path)
         with open(__strippedfilepath) as __good:
@@ -1174,7 +1176,7 @@ class TestApp(unittest.TestCase):
     def test__listconfinfo(self):
         '''test the GenerateListForBzip2 class'''
         __myobj = backupchecker.generatelist.generatelistforbzip2.GenerateListForBzip2({
-            'arcpath': 'tests/checkbzip2_private_methods/mybz2.bz2', 'delimiter': '|', 'hashtype': '', 'parsingexceptions' : '', 'getallhashes': True, 'genfull': True, 'confoutput':'','listoutput':'','fulloutput':''})
+            'arcpath': 'tests/checkbzip2_private_methods/mybz2.bz2', 'delimiter': '|', 'hashtype': '', 'parsingexceptions' : '', 'getallhashes': True, 'genfull': True, 'confoutput':'','listoutput':'','fulloutput':'', 'confname':'', 'genlist': False, 'isastream': False})
         self.assertEqual(__myobj._GenerateListForBzip2__lci, {'arclistpath': 'tests/checkbzip2_private_methods/mybz2.list',
             'listoffiles': ['[files]\n', 'mybz2| type|f md5|f5488b7ce878d89b59ef2752f260354f\n']})
         self.assertEqual(__myobj._GenerateListForBzip2__ci, {'arcconfpath': 'tests/checkbzip2_private_methods/mybz2.conf',
@@ -1208,7 +1210,7 @@ class TestApp(unittest.TestCase):
     def test_listfortar_translate_type_file(self):
         '''test the __translate_type private method from GenerateListForTar - expecting file'''
         __file = 'tests/generatelistfortar_private_methods/mytar.tar.gz'
-        __myobj = backupchecker.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':'', 'confname':'', 'genlist': False, 'isastream': False})
         self.__tar = tarfile.open(__file)
         __result = __myobj._GenerateListForTar__translate_type(self.__tar.getmembers()[3].type)
         self.assertEqual('f', __result)
@@ -1216,7 +1218,7 @@ class TestApp(unittest.TestCase):
     def test_listfortar_translate_type_directory(self):
         '''test the __translate_type private method from GenerateListForTar - expecting directory'''
         __file = 'tests/generatelistfortar_private_methods/mytar.tar.gz'
-        __myobj = backupchecker.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':'', 'confname':'', 'genlist': False, 'isastream': False})
         self.__tar = tarfile.open(__file)
         __result = __myobj._GenerateListForTar__translate_type(self.__tar.getmembers()[1].type)
         self.assertEqual('d', __result)
@@ -1224,7 +1226,7 @@ class TestApp(unittest.TestCase):
     def test_listfortar_translate_type_symbolic_link(self):
         '''test the __translate_type private method from GenerateListForTar - expecting symbolic link'''
         __file = 'tests/generatelistfortar_private_methods/mytar.tar.gz'
-        __myobj = backupchecker.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistfortar.GenerateListForTar({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':'', 'confname':'', 'genlist': False, 'isastream': False})
         self.__tar = tarfile.open(__file)
         __result = __myobj._GenerateListForTar__translate_type(self.__tar.getmembers()[2].type)
         self.assertEqual('s', __result)
@@ -1238,7 +1240,7 @@ class TestApp(unittest.TestCase):
     def test_listforzip_translate_type_file(self):
         '''test the __translate_type private method from GenerateListForZip - expecting file'''
         __file = 'tests/generatelistforzip_private_methods/myzip.zip'
-        __myobj = backupchecker.generatelist.generatelistforzip.GenerateListForZip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistforzip.GenerateListForZip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':'', 'confname':'', 'genlist': False, 'isastream': False})
         __myz = zipfile.ZipFile(__file,'r')
         __myinfo = __myz.infolist()
         __result = __myobj._GenerateListForZip__translate_type(__myinfo[-1].external_attr >> 16)
@@ -1247,7 +1249,7 @@ class TestApp(unittest.TestCase):
     def test_listforzip_translate_type_directory(self):
         '''test the __translate_type private method from GenerateListForZip - expecting directory'''
         __file = 'tests/generatelistforzip_private_methods/myzip.zip'
-        __myobj = backupchecker.generatelist.generatelistforzip.GenerateListForZip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistforzip.GenerateListForZip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':'', 'confname':'', 'genlist': False, 'isastream': False})
         __myz = zipfile.ZipFile(__file,'r')
         __myinfo = __myz.infolist()
         __result = __myobj._GenerateListForZip__translate_type(__myinfo[0].external_attr >> 16)
@@ -1256,7 +1258,7 @@ class TestApp(unittest.TestCase):
     def test_listforzip_extract_uid_gid(self):
         '''test the __extract_uid_gid private method from GenerateListForZip'''
         __file = 'tests/generatelistforzip_private_methods/myzip.zip'
-        __myobj = backupchecker.generatelist.generatelistforzip.GenerateListForZip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistforzip.GenerateListForZip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER, 'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':'', 'confname':'', 'genlist': False, 'isastream': False})
         __myz = zipfile.ZipFile(__file,'r')
         __myinfo = __myz.infolist()
         __result = __myobj._GenerateListForZip__extract_uid_gid(__myinfo[-1])
@@ -1272,7 +1274,7 @@ class TestApp(unittest.TestCase):
         '''test the __translate_type private method from GenerateListForTree - expecting file'''
         __dir = 'tests/generatelistfortree_private_methods/mydir'
         __file = os.path.join(__dir, 'foo')
-        __myobj = backupchecker.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':'', 'confname':'', 'genlist': False, 'isastream': False})
         __myobj._GenerateListForTree__fileinfo = os.lstat(__file)
         __result = __myobj._GenerateListForTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('f', __result)
@@ -1281,7 +1283,7 @@ class TestApp(unittest.TestCase):
         '''test the __translate_type private method from GenerateListForTree - expecting directory'''
         __dir = 'tests/generatelistfortree_private_methods/mydir'
         __file = os.path.join(__dir, 'bar')
-        __myobj = backupchecker.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':'', 'confname':'', 'genlist': False, 'isastream': False})
         __result = __myobj._GenerateListForTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('d', __result)
 
@@ -1289,7 +1291,7 @@ class TestApp(unittest.TestCase):
         '''test the __translate_type private method from GenerateListForTree - expecting symbolic link'''
         __dir = 'tests/generatelistfortree_private_methods/mydir'
         __file = os.path.join(__dir, 'oof')
-        __myobj = backupchecker.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistfortree.GenerateListForTree({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':'', 'confname':'', 'genlist': False, 'isastream': False})
         __result = __myobj._GenerateListForTree__translate_type(os.lstat(__file).st_mode)
         self.assertEqual('s', __result)
 
@@ -1302,13 +1304,13 @@ class TestApp(unittest.TestCase):
     def test_listforgzip_extract_size_from_gzip_archive(self):
         '''test the extraction of a gzip uncompressed file in the gzip archive'''
         __file = 'tests/generatelistforgzip_private_methods/mygzip.gz'
-        __myobj = backupchecker.generatelist.generatelistforgzip.GenerateListForGzip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistforgzip.GenerateListForGzip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':'', 'confname':'', 'genlist': False, 'isastream': False})
         with open(__file, 'rb') as __myf:
             self.assertEqual(15, __myobj._GenerateListForGzip__extract_size(__myf))
 
     def test_listforgzip_extract_initial_filename_from_gzip_archive(self):
         __file = 'tests/generatelistforgzip_private_methods/mygzip.gz'
-        __myobj = backupchecker.generatelist.generatelistforgzip.GenerateListForGzip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':''})
+        __myobj = backupchecker.generatelist.generatelistforgzip.GenerateListForGzip({'arcpath':__file, 'delimiter':DEFAULTDELIMITER,  'hashtype': '', 'parsingexceptions': '', 'getallhashes': False, 'genfull':False, 'confoutput':'','listoutput':'','fulloutput':'', 'confname':'', 'genlist': False, 'isastream': False})
         with open(__file, 'rb') as __myf:
             self.assertEqual('mygzip', __myobj._GenerateListForGzip__extract_initial_filename(__myf, 'mygzip'))
 
@@ -1331,6 +1333,7 @@ class TestApp(unittest.TestCase):
         __myobj = backupchecker.cliparse.CliParse()
         self.assertEqual(vars(__myobj.options), {'archives': [],
             'confpath': __archivepath,
+            'confname': None,
             'delimiter': '|',
             'hashtype': '',
             'parsingexceptions': '',
@@ -1340,6 +1343,7 @@ class TestApp(unittest.TestCase):
             'logfile': __logpath,
             'fulloutput':'',
             'confoutput':'',
+            'isastream': False,
             'listoutput':''})
         os.remove(__archivepath)
 
@@ -1393,8 +1397,8 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_mtimes = []
         __mydict.mismatched_unames = []
         __mydict.mismatched_gnames = []
-        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testarchiveinfomsgmain.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
-        __myobj._ArchiveInfoMsg__main(__mydict, {'path': 'testarchiveinfomsgmain.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testarchiveinfomsgmain.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None}, False, '')
+        __myobj._ArchiveInfoMsg__main(__mydict, {'path': 'testarchiveinfomsgmain.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None}, False, '')
         with open(_logfile) as _res:
             self.assertIn('WARNING:root:1 file missing in testarchiveinfomsgmain.tar.gz: \nWARNING:root:testarchiveinfomsgmain1\n', _res.read())
 
@@ -1418,7 +1422,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_mtimes = []
         __mydict.mismatched_unames = []
         __mydict.mismatched_gnames = []
-        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testmissingfiles.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testmissingfiles.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None}, False, '')
         __myobj._ArchiveInfoMsg__missing_files(['titi'], 'testmissingfiles.tar.gz')
         with open(_logfile) as _res:
             self.assertIn('WARNING:root:1 file missing in testmissingfiles.tar.gz: \nWARNING:root:titi\n', _res.read())
@@ -1443,7 +1447,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_mtimes = []
         __mydict.mismatched_unames = []
         __mydict.mismatched_gnames = []
-        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testunexpectedfiles.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testunexpectedfiles.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None}, False, '')
         __myobj._ArchiveInfoMsg__unexpected_files(['titi'], 'testunexpectedfiles.tar.gz')
         with open(_logfile) as _res:
             self.assertIn('WARNING:root:1 unexpected file checking testunexpectedfiles.tar.gz: \nWARNING:root:titi\n', _res.read())
@@ -1467,7 +1471,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_mtimes = []
         __mydict.mismatched_unames = []
         __mydict.mismatched_gnames = []
-        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testclassifydifferences.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testclassifydifferences.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None}, False, '')
         __myobj._ArchiveInfoMsg__classify_differences(__mydict, 'testclassifydifferences.tar.gz')
         with open(_logfile) as _res:
             __testresult = _res.read()
@@ -1494,7 +1498,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_mtimes = []
         __mydict.mismatched_unames = []
         __mydict.mismatched_gnames = []
-        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testlogdifferences.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testlogdifferences.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None}, False, '')
         __myobj._ArchiveInfoMsg__log_differences(__mydict.missing_equality, 'testlogdifferences.tar.gz', '{} {} with unexpected size while checking {}: ')
         with open(_logfile) as _res:
             __testresult = _res.read()
@@ -1519,7 +1523,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_mtimes = []
         __mydict.mismatched_unames = []
         __mydict.mismatched_gnames = []
-        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testuidgidmismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testuidgidmismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None}, False, '')
         __myobj._ArchiveInfoMsg__uid_gid_mismatches(__mydict, 'testuidgidmismatches.tar.gz')
         with open(_logfile) as _res:
             __testresult = _res.read()
@@ -1545,7 +1549,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_mtimes = []
         __mydict.mismatched_unames = []
         __mydict.mismatched_gnames = []
-        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testmodemismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testmodemismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None}, False, '')
         __myobj._ArchiveInfoMsg__mode_mismatches(__mydict, 'testmodemismatches.tar.gz')
         with open(_logfile) as _res:
             __testresult = _res.read()
@@ -1570,7 +1574,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_mtimes = []
         __mydict.mismatched_unames = []
         __mydict.mismatched_gnames = []
-        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testtargetmismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testtargetmismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None}, False, '')
         __myobj._ArchiveInfoMsg__target_mismatches(__mydict, 'testtargetmismatches.tar.gz')
         with open(_logfile) as _res:
             __testresult = _res.read()
@@ -1595,7 +1599,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_mtimes = []
         __mydict.mismatched_unames = []
         __mydict.mismatched_gnames = []
-        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testtypemismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testtypemismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None}, False, '')
         __myobj._ArchiveInfoMsg__target_mismatches(__mydict, 'testtypemismatches.tar.gz')
         with open(_logfile) as _res:
             __testresult = _res.read()
@@ -1620,7 +1624,7 @@ class TestApp(unittest.TestCase):
         __mydict.mismatched_mtimes = []
         __mydict.mismatched_unames = []
         __mydict.mismatched_gnames = []
-        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testhashmismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None})
+        __myobj = backupchecker.archiveinfomsg.ArchiveInfoMsg(__mydict, {'path': 'testhashmismatches.tar.gz', 'sha512': None, 'files_list': '', 'type': 'archive', 'delimiter': None}, False, '')
         __myobj._ArchiveInfoMsg__hash_mismatches(__mydict, 'testhashmismatches.tar.gz')
         with open(_logfile) as _res:
             __testresult = _res.read()
@@ -1639,11 +1643,14 @@ class TestApp(unittest.TestCase):
         __mydict.archives = ['tests/listtype/mytargz.tar.gz']
         __mydict.delimiter = None
         __mydict.hashtype = ''
+        __mydict.genlist = False
         __mydict.genfull = True
         __mydict.getallhashes = True
         __mydict.fulloutput = ''
         __mydict.confoutput = ''
+        __mydict.confname = ''
         __mydict.listoutput = ''
+        __mydict.isastream = False
         __mydict = backupchecker.listtype.ListType(__mydict)
         self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'backupchecker.generatelist.generatelistfortar.GenerateListForTar'>")
 
@@ -1653,11 +1660,14 @@ class TestApp(unittest.TestCase):
         __mydict.archives = ['tests/listtype/mytree']
         __mydict.delimiter = None
         __mydict.hashtype = ''
+        __mydict.genlist = False
         __mydict.genfull = True
         __mydict.getallhashes = True
         __mydict.fulloutput = ''
         __mydict.confoutput = ''
+        __mydict.confname = ''
         __mydict.listoutput = ''
+        __mydict.isastream = False
         __mydict = backupchecker.listtype.ListType(__mydict)
         self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'backupchecker.generatelist.generatelistfortree.GenerateListForTree'>")
 
@@ -1667,11 +1677,14 @@ class TestApp(unittest.TestCase):
         __mydict.archives = ['tests/listtype/myzip.zip']
         __mydict.delimiter = None
         __mydict.hashtype = ''
+        __mydict.genlist = False
         __mydict.genfull = True
         __mydict.getallhashes = True
         __mydict.fulloutput = ''
         __mydict.confoutput = ''
+        __mydict.confname = ''
         __mydict.listoutput = ''
+        __mydict.isastream = False
         __mydict = backupchecker.listtype.ListType(__mydict)
         self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'backupchecker.generatelist.generatelistforzip.GenerateListForZip'>")
 
@@ -1681,11 +1694,14 @@ class TestApp(unittest.TestCase):
         __mydict.archives = ['tests/listtype/mygzip.gz']
         __mydict.delimiter = None
         __mydict.hashtype = ''
+        __mydict.genlist = False
         __mydict.genfull = True
         __mydict.getallhashes = True
         __mydict.fulloutput = ''
         __mydict.confoutput = ''
+        __mydict.confname = ''
         __mydict.listoutput = ''
+        __mydict.isastream = False
         __mydict = backupchecker.listtype.ListType(__mydict)
         self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'backupchecker.generatelist.generatelistforgzip.GenerateListForGzip'>")
 
@@ -1695,11 +1711,14 @@ class TestApp(unittest.TestCase):
         __mydict.archives = ['tests/listtype/mybz2.bz2']
         __mydict.delimiter = None
         __mydict.hashtype = ''
+        __mydict.genlist = False
         __mydict.genfull = True
         __mydict.getallhashes = True
         __mydict.fulloutput = ''
         __mydict.confoutput = ''
+        __mydict.confname = ''
         __mydict.listoutput = ''
+        __mydict.isastream = False
         __mydict = backupchecker.listtype.ListType(__mydict)
         self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'backupchecker.generatelist.generatelistforbzip2.GenerateListForBzip2'>")
 
@@ -1709,11 +1728,14 @@ class TestApp(unittest.TestCase):
         __mydict.archives = ['tests/listtype/mylzma.xz']
         __mydict.delimiter = None
         __mydict.hashtype = ''
+        __mydict.genlist = False
         __mydict.genfull = True
         __mydict.getallhashes = True
         __mydict.fulloutput = ''
         __mydict.confoutput = ''
+        __mydict.confname = ''
         __mydict.listoutput = ''
+        __mydict.isastream = False
         __mydict = backupchecker.listtype.ListType(__mydict)
         self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'backupchecker.generatelist.generatelistforlzma.GenerateListForLzma'>")
 

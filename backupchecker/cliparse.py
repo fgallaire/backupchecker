@@ -90,6 +90,9 @@ class CliParse:
             default='',
             help='the directory to store the configuration file and the list of files inside an archive or tree',
             metavar='DIR')
+        __parser.add_argument('-n', '--configuration-name', dest='confname',
+            action='store',
+            help='the name of the configuration files')
         __parser.add_argument('-v', '--version',
             action='version',
             version='%(prog)s 1.1',
@@ -101,22 +104,32 @@ class CliParse:
 
     def __verify_options(self, __options):
         '''Verify the options given on the command line'''
+        __options.isastream = False
         # check if the archives exist
         for __i, __path in enumerate(__options.archives):
+            # the input is a stream
+            if  __i == 0 and __path == '-':
+                __options.isastream = True
+                __options.archives[__i] = os.path.abspath(os.getcwd())
+                break
             if not os.path.exists(__path):
                 print('{} : no file or directory at this path. Exiting.'.format(__path))
                 sys.exit(1)
+            # using absolute path in order to be consistent
+            __path = os.path.abspath(__path)
+            # if the path exists, check if it is a regular file, a link or
+            # a directory otherwise exits
+            if not os.path.isfile(__path) and not os.path.isdir(__path):
+                print('{}: not a file or a directory. Exiting.'.format(__path))
+                sys.exit(1)
             else:
-                # using absolute path in order to be consistent
-                __path = os.path.abspath(__path)
-                # if the path exists, check if it is a regular file, a link or
-                # a directory otherwise exits
-                if not os.path.isfile(__path) and not os.path.isdir(__path):
-                    print('{}: not a file or a directory. Exiting.'.format(__path))
-                    sys.exit(1)
-                else:
-                    __options.archives[__i] = __path
+                __options.archives[__i] = __path
+        # verify option compatibilites
+        if __options.isastream and __options.getallhashes:
+            print('Options are not compatible, not possible to compute the hash of files within an archive from a stream')
+            sys.exit(1)
         # Check the logfile
+        __options.logfile = __options.logfile.strip()
         __logdir = os.path.split(__options.logfile)[0]
         if __logdir and not os.path.exists(__logdir):
             print('The directory where to write the log file {} does not exist'.format(__logdir))
@@ -156,6 +169,15 @@ class CliParse:
         if __options.hashtype and (__options.hashtype not in algorithms_guaranteed):
             print('The hash type {} you specified is not available'.format(__options.hashtype))
             sys.exit(1)
+        # strip blank space leading some fields from the command line using python subprocess
+        if __options.confname:
+            __options.confname = __options.confname.strip()
+        if __options.listoutput:
+            __options.listoutput = __options.listoutput.strip()
+        if __options.confoutput:
+            __options.confoutput = __options.confoutput.strip()
+        if __options.fulloutput:
+            __options.fulloutput = __options.fulloutput.strip()
         self.__options = __options
 
     @property

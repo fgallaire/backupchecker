@@ -40,24 +40,28 @@ class ListType(object):
         __arcpaths = __options.archives
         __delimiter = __options.delimiter
         __genfull = __options.genfull
+        __genlist = __options.genlist
         __fulloutput = __options.fulloutput
         __confoutput = __options.confoutput
         __listoutput = __options.listoutput
         __getallhashes = __options.getallhashes
         __hashtype = __options.hashtype
+        __isastream = __options.isastream
+        __confname = __options.confname
         for __arcpath in __arcpaths:
             # create a tuple with the different parameters
             # for the generation of the archives's files
             __genparams = {'arcpath': __arcpath, 'delimiter': __delimiter,
-                            'genfull': __genfull, 'confoutput': __confoutput,
+                            'genfull': __genfull, 'genlist': __genlist, 'confoutput': __confoutput,
                             'listoutput': __listoutput, 'fulloutput': __fulloutput,
                             'getallhashes': __getallhashes, 'hashtype': __hashtype,
-                            'parsingexceptions': self.__parsingexceptions} 
+                            'parsingexceptions': self.__parsingexceptions,
+                            'isastream': __isastream, 'confname': __confname} 
             # generate a list of files for a tree
-            if os.path.isdir(__arcpath):
+            if not __isastream and os.path.isdir(__arcpath):
                 self.__bck = GenerateListForTree(__genparams)
             # generate a list of files for a tar.gz/bz2 archive
-            elif __arcpath.lower().endswith('.tar') or\
+            elif __arcpath.lower().endswith('.tar') or __isastream or\
                     __arcpath.lower().endswith('.tar.gz') or\
                     __arcpath.lower().endswith('.tar.bz2') or\
                     __arcpath.lower().endswith('.tar.xz') or\

@@ -17,6 +17,7 @@
 '''Check the given backups'''
 
 import logging
+import sys
 from tarfile import is_tarfile
 from zipfile import is_zipfile
 
@@ -48,13 +49,15 @@ class CheckBackups(object):
             if __cfgvalues['type'] == 'tree':
                 __bck = CheckTree(__cfgvalues, __options)
             # check a tar file, by name
-            elif __cfgvalues['type'] == 'archive' and (__cfgvalues['path'].lower().endswith('.tar') \
+            elif not __options.isastream and __cfgvalues['type'] == 'archive' and (__cfgvalues['path'].lower().endswith('.tar') \
                 or __cfgvalues['path'].lower().endswith('.tar.gz') \
                 or __cfgvalues['path'].lower().endswith('.tar.bz2') \
                 or __cfgvalues['path'].lower().endswith('.tar.xz') \
                 or __cfgvalues['path'].lower().endswith('.tgz') \
                 or __cfgvalues['path'].lower().endswith('.tbz') \
                 or __cfgvalues['path'].lower().endswith('.tbz2')):
+                __bck = CheckTar(__cfgvalues, __options)
+            elif __options.isastream:
                 __bck = CheckTar(__cfgvalues, __options)
             # check a gzip file, by name
             elif __cfgvalues['type'] == 'archive' and __cfgvalues['path'].lower().endswith('.gz'):
@@ -73,4 +76,4 @@ class CheckBackups(object):
             else:
                 __errmsg = 'The type of the archive is not supported.'
                 sys.exit(1)
-            ArchiveInfoMsg(__bck, __cfgvalues)
+            ArchiveInfoMsg(__bck, __cfgvalues, __options.isastream, __options.confname)
