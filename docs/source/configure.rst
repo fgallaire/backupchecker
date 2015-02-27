@@ -4,7 +4,7 @@ You need two files in order to use Backup Checker, a file offering the configura
 
 Configuration of the archive
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The first one contains general information about the backup checking session. It is mandatory your configuration file uses the .conf extension. Here is an example with all the currently supported parameters:::
+The first one contains general information about the backup checking session. It is mandatory your configuration file uses the .conf extension. Here is an example with all the currently supported parameters::
 
     [main]
     name=mybackup-checking-session
@@ -24,7 +24,7 @@ The first one contains general information about the backup checking session. It
 
 Understanding the parameters of the list of files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The second file you need is the list containing the information about the archive, the tree or the files inside your backups. Here is an example with the full list of the parameters available for now:::
+The second file you need is the list containing the information about the archive, the tree or the files inside your backups. Here is an example with the full list of the parameters available for now::
 
     [archive]
     size| <5m

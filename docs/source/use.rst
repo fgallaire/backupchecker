@@ -22,7 +22,7 @@ Use the following command to generate the list of files::
 
 Generate the configuration files through SSH for a remote archive
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-:
+
     $ ssh -q server "cat /tmp/backup.tar.gz" | ./backupchecker -G -
 
 Again, don't forget the last - character in order to trigger the stream mode. By the very nature of the Unix stream, some options are not available using the stream mode. The most annoying one is the feature allowing to compute the hash sums of files inside an archive.
@@ -37,7 +37,7 @@ Backup Checker is able to compute the hash sums of all files inside an archive. 
 
 Specify that backupchecker need to compute the hash sums of some files inside the archive
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Backup Checker starting from the version 0.10 by default does not compute any more the hash sum of every files inside an archive except if you use the ``--hashes`` option (heavy compute time for big archives). But you can specify to compute the hash sums of some files - either using the path or a glob syntax - in a list of files you provide thanks to the --exceptions-file option::
+Backup Checker starting from the version 0.10 by default does not compute any more the hash sum of every files inside an archive except if you use the ``--hashes`` option (heavy compute time for big archives). But you can specify to compute the hash sums of some files - either using the path or a glob syntax - in a list of files you provide thanks to the ``--exceptions-file`` option::
 
     $ cat archive-exceptions.list
     [files]
