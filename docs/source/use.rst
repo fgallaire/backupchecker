@@ -22,6 +22,7 @@ Use the following command to generate the list of files::
 
 Generate the configuration files through SSH for a remote archive
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Generate the configuration files for an archive located on a remote server through SSH::
 
     $ ssh -q server "cat /tmp/backup.tar.gz" | ./backupchecker -G -
 
@@ -84,16 +85,17 @@ The option ``-l`` or ``--log`` specifies your own output file.
 
 Verify a remote archive
 ^^^^^^^^^^^^^^^^^^^^^^^
-Verify an archive on a remote server from a FTP server::
+Verify an archive located on a remote server from a FTP server::
 
     $ wget --quiet -O - ftp://user:pass@server/backup.tar.gz | ./backupchecker -c /path/to/conf/dir -
 
 Don't forget the last - character, triggering the stream mode of Backup Checker.
 
 Change the path to the configuration file and the list of files for a given archive
-
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 By default, the files containing the different parameters of the content of the archive and the configuration file are created in the same directory as the archive itself. From Backup Checker 0.9, you can specifiy a custom directory for the configuration file (the ``-C`` option), for the list of files (the ``-L`` option) or both with the ``-O`` option::
 
     $ backupchecker -c /etc/backupchecker/ -l /var/log/backupchecker.log -C /etc/backupchecker/confs/ -L /etc/backupchecker/lists/
 
 The example above indicates a /etc/backupchecker/confs directory to store the configuration files of Backup Checker and a /etc/backupchecker/lists/ directory to store the list of files of Backup Checker.
+
