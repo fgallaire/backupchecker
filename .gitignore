@@ -6,6 +6,7 @@ syntax: glob
 newname.conf
 newname.list
 a.out
+docs/build/
 functional-tests/expected-generated-list-for-bzip2-archive/expected-generated-list-for-bzip2-archive.list
 functional-tests/expected-generated-list-for-gzip-archive/expected-generated-list-for-gzip-archive.list
 functional-tests/expected-generated-list-for-tar-archive/expected-generated-list-for-tar-archive.list
