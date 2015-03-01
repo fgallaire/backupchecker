@@ -1,3 +1,235 @@
+commit ff160c4bd293dedbec0c32f1bbc8855c3e1cae9b
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    fix syntax of the restructuredtext documentation
+
+commit 1804690e5fa549f574f2065e00ab7e0460f4b017
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    fix restructuredtext documentation
+
+commit 695bc9a61276621d9b80571bd1971cbf7edd4d3b
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    update the documentation (online doc, manpage, setup.py fields)
+
+commit ef0eed1cd70499cb0d0686499939d282e2b4b4c2
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    bump version
+
+commit f017c6a90a0ba9f9a708ca26973ec781f3021f28
+Merge: be9e988 94d1c6c
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    Tar stream now works with backup checker. fixes #3 fixes#6
+
+commit 94d1c6c901a91c19742e8284c72407f77aed891c
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    specify not possible to compute hash sums inside an archive with a stream
+
+commit 1387535322502c35b5b8a8c5ff520bf49b28dafa
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    fix issue with name of the archive while scanning a stream. add unit test for it. secure the user-defined logfile from the cli.
+
+commit 4c5f7d2116a4d126733410d0ea29dba7a639337b
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    --output-list-and-conf-dir option now works with tar stream.
+
+commit 4477cfe948791e1e63c905c18ae41ad4301c9eb1
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    fix for README.md
+
+commit a43ac45a2959c3e47b6669f4dfce98a699ee4409
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    reorganize call to stdin from both generate and check mode
+
+commit d74e5ec7e0573ec6af8ddaf10d9a22ae94335361
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    add universal compression for tar files
+
+commit bd6f0509e0d476291c8df5566bd40431075b8980
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    add Test_configuration_name_option_and_conf_list_output_with_lzma test and Test_configuration_name_option_and_conf_list_output_with_bzip2 test
+
+commit 1b66fc577e607fea2c64f8569eb932e3d029966c
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    Test_configuration_name_option_and_conf_list_output_with_gzip test
+
+commit 6a68afbcb630d24782a165cdb366fce408c224fe
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    added Test_configuration_name_option_and_conf_list_output_with_tar_gz test and Test_configuration_name_option_and_conf_list_output_with_zip test
+
+commit d344fe842664a2f91a15618574e619de984fcaae
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    write Test_configuration_name_option_and_conf_list_output_with_tar_gz unit tests
+
+commit 27512f04875a491c0c43b6e3ac8a427ca5e89cf1
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    fix --configuration-name for lzma archive. write unit test Test_configuration_name_option_with_lzma
+
+commit 8f5571993b983aebafd25ef5e01eaee90bc0d0f4
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    fix --gen-full option with --configuration-name option with bzip2 archive
+
+commit 107f5de8aca2d7458a392804275d4b7d9c1c1b60
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    fix --gen-full with --configuration-name with gzip, tree, zip archives
+
+commit 4eb36edbb4349ee2a063137d82ff39a3c779dc6d
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    add configuration-name-option-with-zip test
+
+commit 5425df2cded416848b23726110c09cba3f71f2d3
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    update .gitignore with new files to ignore
+
+commit 3b7de4db4b5fecf521237d3cd115e0c9811cc10e
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    add configuration-name-option-with-tar-gz test
+
+commit a9539854138e0de4841db63b343eadc6803752a5
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    fix check-mtime-tar/zip and add Test_generate_and_check_for_stream_from_tar_gz test
+
+commit a8a5ea3a4af68d9a1c72ff8d2dff2889d88cd102
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    add functional test to check stream from a tar.gz file
+
+commit 4ac6fa5b7d6ae23a033fcaaa721321ebea59181e
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    --configuration-name option for lzma archive
+
+commit 17df1b07f2cff9739535f1e96126731b29292bee
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    --configuration-name option for bzip2 archive
+
+commit b57b0a392390e912d0459ce749384c996c5cf631
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    --configuration-name option for gzip archive
+
+commit 3f8c7a1ad91862fe03917d900523620f9480157d
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    --configuration-name for zip archive
+
+commit 6c235a3d651f2f4b64453e49e4b41efcee78081e
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    --configuration-name option for tree backup
+
+commit ba09349383ab329e1eb1c74dba22762057d24545
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    switch from -s to -n for short option name --configuration-name
+
+commit 7c0df2a4391f695a56780e6a5edf15824e6ebf7e
+Merge: e1731f9 f3d4f18
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    fix conflict for unit tests
+
+commit e1731f92cc3aa3ee8d567ac69769547871abc421
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    fix unit tests for --conf-name option
+
+commit fdd718e7755dadc5843018a48300fa22eedea5c8
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    --conf-name now defines a user-defined name used in configuration files
+
+commit f3d4f1826392f69ecb1b5d0b1e734ba5767988ec
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    fix unit tests
+
+commit be9e98878c15ebe936f54cac753563afee56bb8c
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    remove syntax errors in man page. fixes #4
+
+commit e3f54892306a739f59c93036735014fa705a9971
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    improve output while checking tar streams
+
+commit 263ccd42203f79922a64bb3bb679d4cff9991a2a
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    improve accepted stream types
+
+commit d9e86191f754ecf387241460a7efde3b600a6473
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    remove unused print
+
+commit ae7c68949a34683c984438aa1ab21e2238b9bc90
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    remove unused print
+
+commit 796f5f337f5bdb9f356a7946b4fc6e22e716ba5b
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    verifying stream works
+
+commit 8827d353a288bcfe49383451da32cfadcd00f333
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    verify data from a stream almost work
+
+commit 4d8ea3b4649635d093dc0b3444ecd72ae8c12eef
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    name of the conf files of a tar stream
+
+commit fdd588a0732b72ac38fd1975a95c9075bd2793cb
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    generation of full conf files almost works for streams
+
+commit 8639d246cae79f0b3b433f0b4bf9c9481769e6f3
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    bump to 1.1
+
+commit 174da989ea5dbb75be9824f69b717218c9545ac2
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    remove old unused generate-archive.sh script
+
+commit 71c9eedcc87def45f76935a9fb25abf1e2e0d2b0
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    add pip install way in README.md
+
+commit 6f7ca7d8441237c853ddd1477a13fbbca7040bf4
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    update to 1.1 version
+
 commit 6c624a6ea644ea556084fc923a16d5cc4bf4378d
 Author: Carl Chenet <chaica@ohmytux.com>
 
