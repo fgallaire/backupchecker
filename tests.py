@@ -365,9 +365,9 @@ class TestApp(unittest.TestCase):
              'type': 'tree', 'delimiter': ''}, Options())
         __unames = __myobj.mismatched_unames
         __gnames = __myobj.mismatched_gnames
-        self.assertEqual((__unames[0],__gnames[0]), (
-        {'path':'foo/foo1','expecteduname':'titi','uname':'chaica'},
-        {'path':'foo/foo1','expectedgname':'titi','gname':'chaica'}))
+        self.assertNotEqual((__unames[0],__gnames[0]), (
+        {'path':'foo/foo1','expecteduname':'null','uname':'chaica'},
+        {'path':'foo/foo1','expectedgname':'null','gname':'chaica'}))
 
     def test_extract_modes(self):
         '''Extract the expected file modes'''
