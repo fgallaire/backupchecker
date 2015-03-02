@@ -25,6 +25,9 @@ import sys
 import functionaltests
 
 EXE = './backupchecker.py'
+if len(sys.argv) == 2:
+    if sys.argv[1]  == 'travis':
+        EXE = '/home/travis/build/backupchecker/backupchecker/backupchecker.py'
 OPTCONFIG = '-c'
 OPTOUTPUTCONFDIR = '-C'
 OPTOUTPUTLISTDIR = '-L'
@@ -54,7 +57,7 @@ class Main:
         if 'PYTHONEXE' in environ:
             __retcode = subprocess.call([PYTHONEXE, EXE, OPTCONFIG, self._testdir, OPTLOG, self._resultfile])
         else:
-            __retcode = subprocess.call([EXE, OPTCONFIG, self._testdir, OPTLOG, self._resultfile], cwd=os.getcwd())
+            __retcode = subprocess.call([EXE, OPTCONFIG, self._testdir, OPTLOG, self._resultfile])
         if __retcode != 0:
             self._queue.put('{} - {}return code:{}'.format(self._testname, KOMSG, str(__retcode)))
         else:
