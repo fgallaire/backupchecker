@@ -27,7 +27,7 @@ import functionaltests
 EXE = './backupchecker.py'
 if len(sys.argv) == 2:
     if sys.argv[1]  == 'travis':
-        EXE = 'backupchecker'
+        EXE = '/home/travis/backupchecker/backupchecker/backupchecker.py'
 OPTCONFIG = '-c'
 OPTOUTPUTCONFDIR = '-C'
 OPTOUTPUTLISTDIR = '-L'
@@ -43,13 +43,16 @@ OPTLOG = '-l'
 OKMSG = 'ok'
 KOMSG = 'ko - '
 PYTHONEXE =''
+if len(sys.argv) == 2:
+    if sys.argv[1]  == 'travis':
+        PYTHONEXE = '/home/travis/virtualenv/python3.4/bin/python3.4'
 ABSPATH = ''
 ALTERNATEDELIMITER = '('
 
 # To correctly use the tests with buildbot
-if 'PYTHONEXE' in environ:
-    PYTHONEXE = environ['PYTHONEXE']
-    ABSPATH = environ['PWD']
+#if 'PYTHONEXE' in environ:
+#    PYTHONEXE = environ['PYTHONEXE']
+#    ABSPATH = environ['PWD']
 
 class Main:
     '''Main of all the Test* classes'''
