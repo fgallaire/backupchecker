@@ -47,6 +47,7 @@ ALTERNATEDELIMITER = '('
 if 'PYTHONEXE' in environ:
     PYTHONEXE = environ['PYTHONEXE']
     ABSPATH = environ['PWD']
+print('listdir virtualenv:{}'.format(os.listdir('/home/travis/virtualenv/python3.4.2/lib/python3.4/site-packages/backupchecker')))
 print('listdir:{}'.format(os.listdir(os.getcwd())))
 print('CWD:{}'.format(os.getcwd()))
 print('exe:{}'.format(EXE))
@@ -59,7 +60,11 @@ class Main:
         if 'PYTHONEXE' in environ:
             __retcode = subprocess.call([PYTHONEXE, EXE, OPTCONFIG, self._testdir, OPTLOG, self._resultfile])
         else:
-            __retcode = subprocess.call([EXE, OPTCONFIG, self._testdir, OPTLOG, self._resultfile])
+            try:
+                __retcode = subprocess.call([EXE, OPTCONFIG, self._testdir, OPTLOG, self._resultfile])
+            except FileNotFoundError as e:
+                print('CWD:{}'.format(os.getcwd()))
+                print(e)
         if __retcode != 0:
             self._queue.put('{} - {}return code:{}'.format(self._testname, KOMSG, str(__retcode)))
         else:
