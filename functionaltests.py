@@ -24,7 +24,7 @@ import sys
 
 import functionaltests
 
-EXE = './backupchecker.py'
+EXE = '/home/travis/build/backupchecker/backupchecker/backupchecker.py'
 OPTCONFIG = '-c'
 OPTOUTPUTCONFDIR = '-C'
 OPTOUTPUTLISTDIR = '-L'
