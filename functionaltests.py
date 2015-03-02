@@ -47,7 +47,7 @@ ALTERNATEDELIMITER = '('
 if 'PYTHONEXE' in environ:
     PYTHONEXE = environ['PYTHONEXE']
     ABSPATH = environ['PWD']
-print('listdir virtualenv:{}'.format(os.listdir('/home/travis/virtualenv/python3.4.2/lib/python3.4/site-packages/backupchecker')))
+print('listdir virtualenv:{}'.format(os.listdir('/home/travis/virtualenv/python3.4.2/lib/python3.4/site-packages')))
 print('listdir:{}'.format(os.listdir(os.getcwd())))
 print('CWD:{}'.format(os.getcwd()))
 print('exe:{}'.format(EXE))
