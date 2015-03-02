@@ -54,9 +54,7 @@ class Main:
         if 'PYTHONEXE' in environ:
             __retcode = subprocess.call([PYTHONEXE, EXE, OPTCONFIG, self._testdir, OPTLOG, self._resultfile])
         else:
-            print('cwd: {}'.format(os.getcwd()))
-            __retcode = subprocess.call(["echo", "$PWD"])
-            __retcode = subprocess.call([EXE, OPTCONFIG, self._testdir, OPTLOG, self._resultfile])
+            __retcode = subprocess.call([EXE, OPTCONFIG, self._testdir, OPTLOG, self._resultfile], cwd=os.getcwd())
         if __retcode != 0:
             self._queue.put('{} - {}return code:{}'.format(self._testname, KOMSG, str(__retcode)))
         else:
