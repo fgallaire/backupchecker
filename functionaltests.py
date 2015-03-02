@@ -27,7 +27,7 @@ import functionaltests
 EXE = './backupchecker.py'
 if len(sys.argv) == 2:
     if sys.argv[1]  == 'travis':
-        EXE = '/home/travis/build/backupchecker/backupchecker/backupchecker.py'
+        EXE = 'backupchecker'
 OPTCONFIG = '-c'
 OPTOUTPUTCONFDIR = '-C'
 OPTOUTPUTLISTDIR = '-L'
