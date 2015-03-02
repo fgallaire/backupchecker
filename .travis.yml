@@ -4,7 +4,8 @@ python:
 # command to run tests
 script:
   - "./tests.py"
-  - "/usr/bin/env python3.4 ./functionaltests.py"
+  - "echo $PWD"
+  - "./functionaltests.py"
 notifications:
   email:
     - chaica@backupchecker.com
