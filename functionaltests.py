@@ -47,6 +47,7 @@ ALTERNATEDELIMITER = '('
 if 'PYTHONEXE' in environ:
     PYTHONEXE = environ['PYTHONEXE']
     ABSPATH = environ['PWD']
+print('listdir:{}'.format(os.listdir(os.getcwd())))
 print('CWD:{}'.format(os.getcwd()))
 print('exe:{}'.format(EXE))
 print('pythonexe:{}'.format(PYTHONEXE))
