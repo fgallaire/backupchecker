@@ -25,9 +25,6 @@ import sys
 import functionaltests
 
 EXE = './backupchecker.py'
-if len(sys.argv) == 2:
-    if sys.argv[1]  == 'travis':
-        EXE = '/home/travis/build/backupchecker/backupchecker/backupchecker.py'
 OPTCONFIG = '-c'
 OPTOUTPUTCONFDIR = '-C'
 OPTOUTPUTLISTDIR = '-L'
@@ -50,6 +47,10 @@ ALTERNATEDELIMITER = '('
 if 'PYTHONEXE' in environ:
     PYTHONEXE = environ['PYTHONEXE']
     ABSPATH = environ['PWD']
+print('CWD:{}'.format(os.getcwd()))
+print('exe:{}'.format(EXE))
+print('pythonexe:{}'.format(PYTHONEXE))
+print('abspath:{}'.format(PYTHONEXE))
 
 class Main:
     '''Main of all the Test* classes'''
