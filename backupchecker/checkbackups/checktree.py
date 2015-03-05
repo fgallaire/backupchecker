@@ -43,7 +43,7 @@ class CheckTree(CheckArchive):
             __arcinfo = {'path': os.path.relpath(__dirpath, self.__treepath),
                         'size': __dirinfo.st_size, 'uid': __dirinfo.st_uid,
                         'gid': __dirinfo.st_gid, 'mode': __dirmode,
-                        'uname': pwd.getpwuid(__dirinfo.st_gid).pw_name,
+                        'uname': pwd.getpwuid(__dirinfo.st_uid).pw_name,
                         'gname': grp.getgrgid(__dirinfo.st_gid).gr_name,
                         'type': __type}
             _data = self._check_path(__arcinfo, _data)
@@ -57,14 +57,14 @@ class CheckTree(CheckArchive):
                     __arcinfo = {'path': os.path.relpath(__filepath, self.__treepath),
                                 'size': self.__fileinfo.st_size, 'uid': self.__fileinfo.st_uid,
                                 'gid': self.__fileinfo.st_gid, 'mode': __filemode,
-                                'uname': pwd.getpwuid(self.__fileinfo.st_gid).pw_name,
+                                'uname': pwd.getpwuid(self.__fileinfo.st_uid).pw_name,
                                 'gname': grp.getgrgid(self.__fileinfo.st_gid).gr_name,
                                 'type': __type, 'target': os.readlink(__filepath)}
                 else:
                     __arcinfo = {'path': os.path.relpath(__filepath, self.__treepath),
                                 'size': self.__fileinfo.st_size, 'uid': self.__fileinfo.st_uid,
                                 'gid': self.__fileinfo.st_gid, 'mode': __filemode,
-                                'uname': pwd.getpwuid(self.__fileinfo.st_gid).pw_name,
+                                'uname': pwd.getpwuid(self.__fileinfo.st_uid).pw_name,
                                 'gname': grp.getgrgid(self.__fileinfo.st_gid).gr_name,
                                 'type': __type}
                 _data = self._check_path(__arcinfo, _data)
