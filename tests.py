@@ -335,6 +335,23 @@ class TestApp(unittest.TestCase):
         {'path':'foo/foo1','expecteduid':1001,'uid':1000},
         {'path':'foo/foo1','expectedgid':1001,'gid':1000}))
 
+    def test_compare_uid_gid_tree(self):
+        '''Compare the uid and the gid of a file of a tree of files
+        and the expected one
+        '''
+        __uids = []
+        __gids = []
+        __myobj = backupchecker.checkbackups.checktree.CheckTree({'path':
+            'tests/expected_uid_gid/tree_expected_uid_gid',
+             'files_list':
+                'tests/expected_uid_gid/tree_expected_uid_gid-list',
+             'type': 'tree', 'delimiter': ''}, Options())
+        __uids = __myobj.mismatched_uids
+        __gids = __myobj.mismatched_gids
+        self.assertEqual((__uids[0],__gids[0]), (
+        {'path':'tree_expected_uid_gid/foo1','expecteduid':1001,'uid':1000},
+        {'path':'tree_expected_uid_gid/foo1','expectedgid':1001,'gid':1000}))
+
     def test_compare_uname_gname_tar_gz(self):
         '''Compare the uname and the gname of a file in the archive
         and the expected one
@@ -849,8 +866,8 @@ class TestApp(unittest.TestCase):
         __fileuid, __filegid = __fileinfo.st_uid, __fileinfo.st_gid
         self.assertEqual((__arcuid, __arcgid), (__fileuid, __filegid))
 
-    def test_check_uid(self):
-        ''' test checkarchive.CheckArchive__check_uid'''
+    def test_check_uid_tar_archive(self):
+        ''' test checkarchive.CheckArchive__check_uid for tar archive'''
         __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/checkarchive_private_methods/mytar.tar.gz',
              'files_list':
@@ -860,14 +877,102 @@ class TestApp(unittest.TestCase):
         __myobj._CheckArchive__check_uid('1000', {'path':'test', 'uid':'999'})
         self.assertEqual([{'path':'test', 'expecteduid':'999', 'uid':'1000'}], __myobj.mismatched_uids)
 
-    def test_check_gid(self):
-        ''' test checkarchive.CheckArchive__check_gid'''
+    def test_check_gid_tar_archive(self):
+        ''' test checkarchive.CheckArchive__check_gid for tar archive'''
         __myobj = backupchecker.checkbackups.checktar.CheckTar({'path':
             'tests/checkarchive_private_methods/mytar.tar.gz',
              'files_list':
                 'tests/checkarchive_private_methods/tar-list',
              'type': 'archive', 'delimiter': ''}, Options())
         __file = 'tests/checkarchive_private_methods/mytar.tar.gz'
+        __myobj._CheckArchive__check_gid('1000', {'path':'test', 'gid':'999'})
+        self.assertEqual([{'path':'test', 'expectedgid':'999', 'gid':'1000'}], __myobj.mismatched_gids)
+
+    def test_check_uid_zip_archive(self):
+        ''' test checkarchive.CheckArchive__check_uid for zip archive'''
+        __myobj = backupchecker.checkbackups.checkzip.CheckZip({'path':
+            'tests/checkarchive_private_methods/myzip.zip',
+             'files_list':
+                'tests/checkarchive_private_methods/zip-list',
+             'type': 'archive', 'delimiter': ''}, Options())
+        __file = 'tests/checkarchive_private_methods/myzip.zip'
+        __myobj._CheckArchive__check_uid('1000', {'path':'test', 'uid':'999'})
+        self.assertEqual([{'path':'test', 'expecteduid':'999', 'uid':'1000'}], __myobj.mismatched_uids)
+
+    def test_check_gid_zip_archive(self):
+        ''' test checkarchive.CheckArchive__check_gid for zip archive'''
+        __myobj = backupchecker.checkbackups.checkzip.CheckZip({'path':
+            'tests/checkarchive_private_methods/myzip.zip',
+             'files_list':
+                'tests/checkarchive_private_methods/zip-list',
+             'type': 'archive', 'delimiter': ''}, Options())
+        __file = 'tests/checkarchive_private_methods/myzip.zip'
+        __myobj._CheckArchive__check_gid('1000', {'path':'test', 'gid':'999'})
+        self.assertEqual([{'path':'test', 'expectedgid':'999', 'gid':'1000'}], __myobj.mismatched_gids)
+
+    def test_check_uid_gzip_archive(self):
+        ''' test checkarchive.CheckArchive__check_uid for gzip archive'''
+        __myobj = backupchecker.checkbackups.checkgzip.CheckGzip({'path':
+            'tests/checkarchive_private_methods/mygzip.gz',
+             'files_list':
+                'tests/checkarchive_private_methods/gzip-list',
+             'type': 'archive', 'delimiter': ''}, Options())
+        __file = 'tests/checkarchive_private_methods/mygzip.gz'
+        __myobj._CheckArchive__check_uid('1000', {'path':'test', 'uid':'999'})
+        self.assertEqual([{'path':'test', 'expecteduid':'999', 'uid':'1000'}], __myobj.mismatched_uids)
+
+    def test_check_gid_gzip_archive(self):
+        ''' test checkarchive.CheckArchive__check_gid for gzip archive'''
+        __myobj = backupchecker.checkbackups.checkgzip.CheckGzip({'path':
+            'tests/checkarchive_private_methods/mygzip.gz',
+             'files_list':
+                'tests/checkarchive_private_methods/gzip-list',
+             'type': 'archive', 'delimiter': ''}, Options())
+        __file = 'tests/checkarchive_private_methods/mygzip.gz'
+        __myobj._CheckArchive__check_gid('1000', {'path':'test', 'gid':'999'})
+        self.assertEqual([{'path':'test', 'expectedgid':'999', 'gid':'1000'}], __myobj.mismatched_gids)
+
+    def test_check_uid_bzip2_archive(self):
+        ''' test checkarchive.CheckArchive__check_uid for gzip archive'''
+        __myobj = backupchecker.checkbackups.checkbzip2.CheckBzip2({'path':
+            'tests/checkarchive_private_methods/mybzip2.gz',
+             'files_list':
+                'tests/checkarchive_private_methods/bzip2-list',
+             'type': 'archive', 'delimiter': ''}, Options())
+        __file = 'tests/checkarchive_private_methods/mygbzip2.bz2'
+        __myobj._CheckArchive__check_uid('1000', {'path':'test', 'uid':'999'})
+        self.assertEqual([{'path':'test', 'expecteduid':'999', 'uid':'1000'}], __myobj.mismatched_uids)
+
+    def test_check_gid_bzip2_archive(self):
+        ''' test checkarchive.CheckArchive__check_gid for bzip2 archive'''
+        __myobj = backupchecker.checkbackups.checkbzip2.CheckBzip2({'path':
+            'tests/checkarchive_private_methods/mybzip2.bz2',
+             'files_list':
+                'tests/checkarchive_private_methods/bzip2-list',
+             'type': 'archive', 'delimiter': ''}, Options())
+        __file = 'tests/checkarchive_private_methods/mybzip2.bz2'
+        __myobj._CheckArchive__check_gid('1000', {'path':'test', 'gid':'999'})
+        self.assertEqual([{'path':'test', 'expectedgid':'999', 'gid':'1000'}], __myobj.mismatched_gids)
+
+    def test_check_uid_lzma_archive(self):
+        ''' test checkarchive.CheckArchive__check_uid for lzma archive'''
+        __myobj = backupchecker.checkbackups.checklzma.CheckLzma({'path':
+            'tests/checkarchive_private_methods/mylzma.xz',
+             'files_list':
+                'tests/checkarchive_private_methods/lzma-list',
+             'type': 'archive', 'delimiter': ''}, Options())
+        __file = 'tests/checkarchive_private_methods/mylzma.xz'
+        __myobj._CheckArchive__check_uid('1000', {'path':'test', 'uid':'999'})
+        self.assertEqual([{'path':'test', 'expecteduid':'999', 'uid':'1000'}], __myobj.mismatched_uids)
+
+    def test_check_gid_lzma_archive(self):
+        ''' test checkarchive.CheckArchive__check_gid for lzma archive'''
+        __myobj = backupchecker.checkbackups.checklzma.CheckLzma({'path':
+            'tests/checkarchive_private_methods/mylzma.xz',
+             'files_list':
+                'tests/checkarchive_private_methods/lzma-list',
+             'type': 'archive', 'delimiter': ''}, Options())
+        __file = 'tests/checkarchive_private_methods/mylzma.xz'
         __myobj._CheckArchive__check_gid('1000', {'path':'test', 'gid':'999'})
         self.assertEqual([{'path':'test', 'expectedgid':'999', 'gid':'1000'}], __myobj.mismatched_gids)
 
