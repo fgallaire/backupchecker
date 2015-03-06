@@ -33,7 +33,7 @@ CLASSIFIERS = [
 ]
 
 setup(name = 'backupchecker',
-    version = '1.2',
+    version = '1.3',
     license = 'GNU GPL v3',
     description = 'automated backup checker',
     long_description = 'Backup Checker is a fully automated backup checker.',
