@@ -318,8 +318,8 @@ class TestApp(unittest.TestCase):
         __data, _ = ExpectedValues({'files_list':'tests/expected_uid_gid/files-list','delimiter':''}, Options()).data
         self.assertEqual([{'path':'foo/foo1', 'uid':1001, 'gid':1001}], __data)
 
-    def test_compare_uid_gid(self):
-        '''Compare the uid and the gid of a file in the archive
+    def test_compare_uid_gid_tar_gz(self):
+        '''Compare the uid and the gid of a file in the archive tar.gz
         and the expected one
         '''
         __uids = []
@@ -328,6 +328,23 @@ class TestApp(unittest.TestCase):
             'tests/expected_uid_gid/foo.tar.gz',
              'files_list':
                 'tests/expected_uid_gid/files-list',
+             'type': 'archive', 'delimiter': ''}, Options())
+        __uids = __myobj.mismatched_uids
+        __gids = __myobj.mismatched_gids
+        self.assertEqual((__uids[0],__gids[0]), (
+        {'path':'foo/foo1','expecteduid':1001,'uid':1000},
+        {'path':'foo/foo1','expectedgid':1001,'gid':1000}))
+
+    def test_compare_uid_gid_zip(self):
+        '''Compare the uid and the gid of a file in the archive zip
+        and the expected one
+        '''
+        __uids = []
+        __gids = []
+        __myobj = backupchecker.checkbackups.checkzip.CheckZip({'path':
+            'tests/expected_uid_gid/foo.zip',
+             'files_list':
+                'tests/expected_uid_gid/zip-files-list',
              'type': 'archive', 'delimiter': ''}, Options())
         __uids = __myobj.mismatched_uids
         __gids = __myobj.mismatched_gids
