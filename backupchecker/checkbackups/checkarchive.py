@@ -117,6 +117,11 @@ class CheckArchive(object):
         __fileinfo = self.__extract_archive_info(__arcpath)
         return __fileinfo.st_uid, __fileinfo.st_gid
 
+    def __find_archive_mtime(self, __arcpath):
+        '''Find the mtime of the archive'''
+        __arcstat = os.stat(__arcpath)
+        return __arcstat.st_mtime
+
     def _compare_sizes(self, _arcsize, _arcname, _file):
         '''Compare the sizes of the files in the archive and the expected
         files
@@ -243,13 +248,18 @@ class CheckArchive(object):
             if 'gid' in __arcdata:
                 _, __arcgid = self.__find_archive_uid_gid(__arcdata['path'])
                 self.__check_gid(__arcgid, __arcdata)
-            # archive uname and gname
+            # archive uname
             if 'uname' in __arcdata:
                 __arcuname, _ = self.__find_archive_uname_gname(__arcdata['path'])
                 self.__check_uname(__arcuname, __arcdata)
+            # archive gname
             if 'gname' in __arcdata:
                 _, __arcgname = self.__find_archive_uname_gname(__arcdata['path'])
                 self.__check_gname(__arcgname, __arcdata)
+            # mtime of the archive
+            if 'mtime' in __arcdata:
+                __arcmtime = self.__find_archive_mtime(__arcdata['path'])
+                self._check_mtime(__arcmtime, __arcdata)
 
     @property
     def missing_equality(self):

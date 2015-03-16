@@ -18,6 +18,7 @@
 
 import fnmatch
 import logging
+import os
 import os.path
 import sys
 import tarfile
@@ -56,7 +57,12 @@ class GenerateListForTar(GenerateList):
 
     def __main(self, __tar):
         '''Main for the GenerateListForTar class'''
-        __listoffiles = ['[files]\n']
+        # extract mtime of the archive
+        if not self.__isastream:
+            __arcstat = os.stat(self.__arcpath)
+            __listoffiles = ['[archive]\nmtime: {}\n\n[files]\n'.format(__arcstat.st_mtime)]
+        else:
+            __listoffiles = ['[files]\n']
         __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} owner{delimiter}{value} group{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
         if self.__getallhashes:
             # we get all the hash sums of files inside the backup

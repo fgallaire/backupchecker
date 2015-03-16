@@ -65,6 +65,9 @@ class ExpectedValues(object):
         #########################
         if __config.has_section('archive'):
             __archive = __config.items('archive')
+            # Testing the mtime of the archive
+            if 'mtime' in __config['archive']:
+                self.__arcdata['mtime'] = float(__config['archive']['mtime'])
             # Testing the size of the archive
             if 'size' in __config['archive']:
                 ### Test if the equality is required
