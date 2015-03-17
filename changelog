@@ -1,3 +1,54 @@
+commit fb6e432cd677040318603789c944a4a2860002dd
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    add missing files
+
+commit 805810f1d2de8cd1fdc8c1fd5b6359a5f305e663
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    add unit tests for expected uid/gid
+
+commit 4cc8581ba34b1859d4a154435d42583425272a71
+Merge: 5c0cf46 2035250
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    :Merge branch 'master' of https://github.com/backupchecker/backupchecker
+
+commit 5c0cf46334774377ab0cf7df74ac4fd47ae277c8
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    add unit tests related to expected uid/gid
+
+commit 5473aa9b757bdb3bc9d67bc12a021bf939837ea4
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    fix uid used for group
+
+commit 20352500d276cac84de4e57494d3cefca62b8aa4
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    add travis-ci status bar
+
+commit ec86f9ec8cb42efe5f8ddc84049d40d3c52abf96
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    fix test for CI
+
+commit 69adb692d7e299d00ef7a5e72956231bedd81143
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    update shebang of tests.py
+
+commit 8ad9724c6f718bee64ad1d7424e6710935890523
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    add .travis.yml
+
+commit cbcc848c35627c2ff082f563f276024b785a1703
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    update changelog
+
 commit ff160c4bd293dedbec0c32f1bbc8855c3e1cae9b
 Author: Carl Chenet <chaica@ohmytux.com>
 
