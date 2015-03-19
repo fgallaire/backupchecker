@@ -3,4 +3,3 @@ name=generate-conf-and-file-list-tar-bz2
 type=archive
 path=PATH/generate-conf-and-file-list-tar-bz2.tar.bz2
 files_list=PATH/generate-conf-and-file-list-tar-bz2.list
-sha512=7e86fdfa1ad7b884a444ff45e88c867aea922fa69605810fecb82796ebe8d848956878134e069569b942f930023d066f78540ad0201de6f750a2ed56d09ba724

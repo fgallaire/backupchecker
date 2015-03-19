@@ -2140,7 +2140,7 @@ class Test_expected_generated_list_for_tar_archive:
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
-            if hashlib.md5(open(__resultfile, 'rb').read()).hexdigest() != hashlib.md5(open(os.path.join(__testdir, 'expectedlist.list'), 'rb').read()).hexdigest():
+            if open(os.path.join(__testdir, 'expectedlist.list'), 'rb').read() not in open(__resultfile, 'rb').read():
                 __res = False
             else:
                 __res = True
@@ -2924,11 +2924,11 @@ class Test_generate_conf_and_file_list_tar:
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
-            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
+            if open(__conffile, 'rb').read() not in open(__resultconffile, 'rb').read():
                 __confres = False
             else:
                 __confres = True
-            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
+            if open(__listfile, 'rb').read() not in open(__resultlistfile, 'rb').read():
                 __listres = False
             else:
                 __listres = True
@@ -2969,11 +2969,11 @@ class Test_generate_conf_and_file_list_tar_gz:
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
-            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
+            if open(__conffile, 'rb').read() not in open(__resultconffile, 'rb').read():
                 __confres = False
             else:
                 __confres = True
-            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
+            if open(__listfile, 'rb').read() not in open(__resultlistfile, 'rb').read():
                 __listres = False
             else:
                 __listres = True
@@ -3014,11 +3014,11 @@ class Test_generate_conf_and_file_list_tar_bz2:
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
-            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
+            if open(__conffile, 'rb').read() not in open(__resultconffile, 'rb').read():
                 __confres = False
             else:
                 __confres = True
-            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
+            if open(__listfile, 'rb').read() not in open(__resultlistfile, 'rb').read():
                 __listres = False
             else:
                 __listres = True
@@ -3059,11 +3059,11 @@ class Test_generate_conf_and_file_list_tar_xz:
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
-            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
+            if open(__conffile, 'rb').read() not in open(__resultconffile, 'rb').read():
                 __confres = False
             else:
                 __confres = True
-            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
+            if open(__listfile, 'rb').read() not in open(__resultlistfile, 'rb').read():
                 __listres = False
             else:
                 __listres = True
