@@ -19,6 +19,7 @@
 import datetime
 import fnmatch
 import logging
+import os
 import os.path
 import stat
 import sys
@@ -51,7 +52,8 @@ class GenerateListForZip(GenerateList):
 
     def __main(self, __zip):
         '''Main of the GenerateListForZip class'''
-        __listoffiles = ['[files]\n']
+        __arcstat = os.stat(self.__arcpath)
+        __listoffiles = ['[archive]\nmtime{} {}\n\n[files]\n'.format(self.__delimiter,__arcstat.st_mtime)]
         __oneline = '{value}{delimiter} ={value} uid{delimiter}{value} gid{delimiter}{value} mode{delimiter}{value} type{delimiter}{value} mtime{delimiter}{value}\n'.format(value='{}', delimiter=self.__delimiter)
         if self.__getallhashes:
             if not self.__hashtype:
