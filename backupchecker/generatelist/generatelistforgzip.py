@@ -17,7 +17,6 @@ import fnmatch
 import gzip
 import os
 import os.path
-import stat
 
 from backupchecker.checkhashes import get_hash
 from backupchecker.generatelist.generatelist import GenerateList
@@ -40,7 +39,8 @@ class GenerateListForGzip(GenerateList):
         self.__hashtype = __genparams['hashtype']
         self.__parsingexceptions = __genparams['parsingexceptions']
         self.__confname = __genparams['confname']
-        __listoffiles = ['[files]\n']
+        __arcstat = os.stat(__arcpath)
+        __listoffiles = ['[archive]\nmtime{} {}\n\n[files]\n'.format(__delimiter,__arcstat.st_mtime)]
         __fileinfo = os.lstat(__arcpath)
         __filetype = 'f'
         if not self.__hashtype:
