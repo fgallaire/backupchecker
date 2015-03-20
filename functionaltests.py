@@ -2924,11 +2924,13 @@ class Test_generate_conf_and_file_list_tar:
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
-            if open(__conffile, 'rb').read() not in open(__resultconffile, 'rb').read():
+            __conffilecontent = open(__conffile, 'r').readlines()
+            __resultconffilecontent =  open(__resultconffile, 'r').readlines()
+            if __conffilecontent[:-1] != __resultconffilecontent[:-1]:
                 __confres = False
             else:
                 __confres = True
-            if open(__listfile, 'rb').read() not in open(__resultlistfile, 'rb').read():
+            if open(__listfile, 'r').read() != open(__resultlistfile, 'r').read():
                 __listres = False
             else:
                 __listres = True
@@ -2969,11 +2971,13 @@ class Test_generate_conf_and_file_list_tar_gz:
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
-            if open(__conffile, 'rb').read() not in open(__resultconffile, 'rb').read():
+            __conffilecontent = open(__conffile, 'r').readlines()
+            __resultconffilecontent =  open(__resultconffile, 'r').readlines()
+            if __conffilecontent[:-1] != __resultconffilecontent[:-1]:
                 __confres = False
             else:
                 __confres = True
-            if open(__listfile, 'rb').read() not in open(__resultlistfile, 'rb').read():
+            if open(__listfile, 'r').read() != open(__resultlistfile, 'r').read():
                 __listres = False
             else:
                 __listres = True
@@ -3059,11 +3063,13 @@ class Test_generate_conf_and_file_list_tar_xz:
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
-            if open(__conffile, 'rb').read() not in open(__resultconffile, 'rb').read():
+            __conffilecontent = open(__conffile, 'r').readlines()
+            __resultconffilecontent =  open(__resultconffile, 'r').readlines()
+            if __conffilecontent[:-1] != __resultconffilecontent[:-1]:
                 __confres = False
             else:
                 __confres = True
-            if open(__listfile, 'rb').read() not in open(__resultlistfile, 'rb').read():
+            if open(__listfile, 'r').read() != open(__resultlistfile, 'r').read():
                 __listres = False
             else:
                 __listres = True
@@ -3104,11 +3110,13 @@ class Test_generate_conf_and_file_list_gz:
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
-            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
+            __conffilecontent = open(__conffile, 'r').readlines()
+            __resultconffilecontent =  open(__resultconffile, 'r').readlines()
+            if __conffilecontent[:-1] != __resultconffilecontent[:-1]:
                 __confres = False
             else:
                 __confres = True
-            if open(__listfile, 'r').read() not in open(__resultlistfile, 'r').read():
+            if open(__listfile, 'r').read() != open(__resultlistfile, 'r').read():
                 __listres = False
             else:
                 __listres = True
@@ -3149,11 +3157,13 @@ class Test_generate_conf_and_file_list_bz2:
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
-            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
+            __conffilecontent = open(__conffile, 'r').readlines()
+            __resultconffilecontent =  open(__resultconffile, 'r').readlines()
+            if __conffilecontent[:-1] != __resultconffilecontent[:-1]:
                 __confres = False
             else:
                 __confres = True
-            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
+            if open(__listfile, 'r').read() != open(__resultlistfile, 'r').read():
                 __listres = False
             else:
                 __listres = True

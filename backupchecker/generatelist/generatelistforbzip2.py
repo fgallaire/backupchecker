@@ -40,7 +40,8 @@ class GenerateListForBzip2(GenerateList):
         self.__hashtype = __genparams['hashtype']
         self.__parsingexceptions = __genparams['parsingexceptions']
         self.__confname = __genparams['confname']
-        __listoffiles = ['[files]\n']
+        __arcstat = os.stat(__arcpath)
+        __listoffiles = ['[archive]\nmtime{} {}\n\n[files]\n'.format(__delimiter,__arcstat.st_mtime)]
         __filetype = 'f'
         __filehash = get_hash(bz2.BZ2File(__arcpath, 'r'), 'md5')
         if self.__getallhashes:

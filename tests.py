@@ -1300,13 +1300,13 @@ class TestApp(unittest.TestCase):
         __myobj = backupchecker.generatelist.generatelistforbzip2.GenerateListForBzip2({
             'arcpath': 'tests/checkbzip2_private_methods/mybz2.bz2', 'delimiter': '|', 'hashtype': '', 'parsingexceptions' : '', 'getallhashes': True, 'genfull': True, 'confoutput':'','listoutput':'','fulloutput':'', 'confname':'', 'genlist': False, 'isastream': False})
         self.assertEqual(__myobj._GenerateListForBzip2__lci, {'arclistpath': 'tests/checkbzip2_private_methods/mybz2.list',
-            'listoffiles': ['[files]\n', 'mybz2| type|f md5|f5488b7ce878d89b59ef2752f260354f\n']})
+            'listoffiles': ['[archive]\nmtime| 1422899141.0758824\n\n[files]\n', 'mybz2| type|f md5|f5488b7ce878d89b59ef2752f260354f\n']})
         self.assertEqual(__myobj._GenerateListForBzip2__ci, {'arcconfpath': 'tests/checkbzip2_private_methods/mybz2.conf',
             'arclistpath': 'tests/checkbzip2_private_methods/mybz2.list',
             'arcname': 'mybz2',
             'arcpath': 'tests/checkbzip2_private_methods/mybz2.bz2',
             'arctype': 'archive',
-            'sha512': 'b45fa678a2208bfbf457f602b2d3de0c83e82ad9ba042b029b8d37f23bfe2774d1cd25576da880d20bb7f6ffcfc2ecb4bcc80112e880415de82fe63d81f81cb7'})
+            'sha512': '020d9e9605679ace8484490516cf3c17ecd245b16069c57a6a90e828801bbb40949b29a9383453ebfe2e77282daf71a63c8bfe18a492bdddb980605cf9192dff'})
 
 ###############################################################################################
 #
