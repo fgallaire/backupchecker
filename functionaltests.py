@@ -3204,11 +3204,13 @@ class Test_generate_conf_and_file_list_xz:
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
-            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
+            __conffilecontent = open(__conffile, 'r').readlines()
+            __resultconffilecontent =  open(__resultconffile, 'r').readlines()
+            if __conffilecontent[:-1] != __resultconffilecontent[:-1]:
                 __confres = False
             else:
                 __confres = True
-            if hashlib.md5(open(__resultlistfile, 'rb').read()).hexdigest() != hashlib.md5(open(__listfile, 'rb').read()).hexdigest():
+            if open(__listfile, 'r').read() != open(__resultlistfile, 'r').read():
                 __listres = False
             else:
                 __listres = True
@@ -3216,6 +3218,7 @@ class Test_generate_conf_and_file_list_xz:
                 __queue.put('{} - {}'.format(__testname, OKMSG))
             else:
                 __queue.put('{} - {}value in result file not expected'.format(__testname, KOMSG))
+
 
 class Test_generate_conf_and_file_list_tree:
     '''Compare the generated list and the expected list and the configuration file and the expected configuration file for a tree'''
