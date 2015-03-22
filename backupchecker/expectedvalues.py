@@ -68,6 +68,8 @@ class ExpectedValues(object):
             # Testing the mtime of the archive
             if 'mtime' in __config['archive']:
                 self.__arcdata['mtime'] = float(__config['archive']['mtime'])
+            if 'outdated' in __config['archive']:
+                self.__arcdata['outdated'] = __config['archive']['outdated']
             # Testing the size of the archive
             if 'size' in __config['archive']:
                 ### Test if the equality is required

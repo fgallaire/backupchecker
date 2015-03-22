@@ -18,9 +18,11 @@
 
 import os
 import stat
+from datetime import datetime, timedelta
 from logging import warn
 
 import backupchecker.checkhashes
+from backupchecker.duration import Duration
 
 class CheckArchive(object):
     '''Check an archive'''
@@ -45,6 +47,7 @@ class CheckArchive(object):
         self._mismatched_mtimes = []
         self._mismatched_targets = []
         self._mismatched_hashes = []
+        self._mismatched_outdated = {}
         self.__fileinfo = False
         self._main(_cfgvalues, _options)
 
@@ -223,6 +226,13 @@ class CheckArchive(object):
         if __file['target'] != __arctarget:
             self._mismatched_targets.append({'path': __file['path'], 'expectedtarget' : __file['target'], 'target': __arctarget})
 
+    def _check_outdated(self, __arcmtime, __file):
+        '''Check if the archive is outdated'''
+        __arcduration = Duration(__file['outdated'])
+        __maxduration = datetime.now() - __arcduration.durationdelta
+        if datetime.fromtimestamp(__file['mtime']) < __maxduration:
+            self._mismatched_outdated = { 'path': __file['path'], 'timenow': datetime.now(), 'max': __maxduration}
+
     def _archive_checks(self, __arcdata, __arcpath):
         '''Launch the checks for the archive itself'''
         if __arcdata:
@@ -260,6 +270,9 @@ class CheckArchive(object):
             if 'mtime' in __arcdata:
                 __arcmtime = self.__find_archive_mtime(__arcdata['path'])
                 self._check_mtime(__arcmtime, __arcdata)
+            # check if the archive is outdated
+            if 'outdated' in __arcdata:
+                self._check_outdated(__arcmtime, __arcdata)
 
     @property
     def missing_equality(self):
@@ -356,3 +369,10 @@ class CheckArchive(object):
         archive with an unexpected target
         '''
         return self._mismatched_targets
+
+    @property
+    def mismatched_outdated(self):
+        '''A list containing {target,expectedtarget} of the targets of the links in the 
+        archive with an unexpected target
+        '''
+        return self._mismatched_outdated

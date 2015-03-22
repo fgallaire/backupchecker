@@ -50,6 +50,7 @@ class ArchiveInfoMsg(object):
             self.__mtime_mismatches(__bck, __cfgvalues['path'])
             self.__hash_mismatches(__bck, __cfgvalues['path'])
             self.__target_mismatches(__bck, __cfgvalues['path'])
+            self.__outdated_mismatches(__bck, __cfgvalues['path'])
 
     def __missing_files(self, __missing, __archivepath):
         '''Warn about the missing files in an archive'''
@@ -214,11 +215,18 @@ class ArchiveInfoMsg(object):
             __mtimeword = 'mtime'
             if __errnb > 1:
                 __fileword = 'files'
-                __mtimeword = 'types'
+                __mtimeword = 'mtimes'
             logging.warning('{} contains {} {} with unexpected {}:'.format(__archivepath, __errnb, __fileword, __mtimeword))
             for __file in __bck.mismatched_mtimes:
                 logging.warning('{} mtime is {}. Should have been {}.'.format(__file['path'], __file['mtime'], __file['expectedmtime']))
 
+    def __outdated_mismatches(self, __bck, __archivepath):
+        '''Log the outdated archive'''
+        __path = __bck.mismatched_outdated['path']
+        __max = __bck.mismatched_outdated['max']
+        __timenow = __bck.mismatched_outdated['timenow']
+        if __bck.mismatched_outdated:
+                logging.warning('{path} is outdated. Was good until {max} - now {now}'.format(path=__path, max=__max.strftime("%d/%m/%y %H:%M:%S"), now=__timenow.strftime("%d/%m/%y %H:%M:%S")))
 
     def __hash_mismatches(self, __bck, __archivepath):
         '''Log the file hash mismatches'''
