@@ -222,11 +222,11 @@ class ArchiveInfoMsg(object):
 
     def __outdated_mismatches(self, __bck, __archivepath):
         '''Log the outdated archive'''
-        __path = __bck.mismatched_outdated['path']
-        __max = __bck.mismatched_outdated['max']
-        __timenow = __bck.mismatched_outdated['timenow']
         if __bck.mismatched_outdated:
-                logging.warning('{path} is outdated. Was good until {max} - now {now}'.format(path=__path, max=__max.strftime("%d/%m/%y %H:%M:%S"), now=__timenow.strftime("%d/%m/%y %H:%M:%S")))
+            __path = __bck.mismatched_outdated['path']
+            __max = __bck.mismatched_outdated['max']
+            __timenow = __bck.mismatched_outdated['timenow']
+            logging.warning('{path} is outdated. Was good until {max} - now {now}'.format(path=__path, max=__max.strftime("%d/%m/%y %H:%M:%S"), now=__timenow.strftime("%d/%m/%y %H:%M:%S")))
 
     def __hash_mismatches(self, __bck, __archivepath):
         '''Log the file hash mismatches'''

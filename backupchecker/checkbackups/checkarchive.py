@@ -229,8 +229,8 @@ class CheckArchive(object):
     def _check_outdated(self, __arcmtime, __file):
         '''Check if the archive is outdated'''
         __arcduration = Duration(__file['outdated'])
-        __maxduration = datetime.now() - __arcduration.durationdelta
-        if datetime.fromtimestamp(__file['mtime']) < __maxduration:
+        __maxduration = datetime.fromtimestamp(__file['mtime']) + __arcduration.durationdelta
+        if __maxduration < datetime.now():
             self._mismatched_outdated = { 'path': __file['path'], 'timenow': datetime.now(), 'max': __maxduration}
 
     def _archive_checks(self, __arcdata, __arcpath):
