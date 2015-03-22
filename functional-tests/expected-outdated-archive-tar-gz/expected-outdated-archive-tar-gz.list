@@ -1,0 +1,8 @@
+[archive]
+mtime| 1427044034.022476
+outdated| 3 seconds
+
+[files]
+expected-outdated-archive-tar-gz| =0 uid|1000 gid|1000 owner|chaica group|chaica mode|755 type|d mtime|1427044016.0
+expected-outdated-archive-tar-gz/bar| =17 uid|1000 gid|1000 owner|chaica group|chaica mode|644 type|f mtime|1427044016.0
+expected-outdated-archive-tar-gz/foo| =17 uid|1000 gid|1000 owner|chaica group|chaica mode|644 type|f mtime|1427044001.0

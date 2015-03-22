@@ -1,0 +1,8 @@
+[archive]
+mtime| 1427055809.6366613
+outdated| 3 seconds
+
+[files]
+expected-outdated-archive-zip| =0 uid|1000 gid|1000 mode|755 type|d mtime|1427055798.0
+expected-outdated-archive-zip/bar| =16 uid|1000 gid|1000 mode|644 type|f mtime|1427055798.0
+expected-outdated-archive-zip/foo| =22 uid|1000 gid|1000 mode|644 type|f mtime|1427055792.0

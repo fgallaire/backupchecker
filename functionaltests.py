@@ -1739,11 +1739,43 @@ class Test_expected_file_not_equals_file_in_tree(Main):
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('1 file with unexpected size')
             
-class Test_expected_outdated_archive_ta_gz(Main):
+class Test_expected_outdated_archive_tar_gz(Main):
     def __init__(self, q):
         self._queue = q
         self._testname = self.__class__.__name__
         self._testdir = os.path.join(ABSPATH, 'functional-tests/expected-outdated-archive-tar-gz')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('is outdated. Was good until')
+            
+class Test_expected_outdated_archive_zip(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/expected-outdated-archive-zip')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('is outdated. Was good until')
+            
+class Test_expected_outdated_archive_gzip(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/expected-outdated-archive-gzip')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('is outdated. Was good until')
+            
+class Test_expected_outdated_archive_bzip2(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/expected-outdated-archive-bzip2')
+        self._resultfile = os.path.join(self._testdir, 'a.out')
+        self._main('is outdated. Was good until')
+            
+class Test_expected_outdated_archive_lzma(Main):
+    def __init__(self, q):
+        self._queue = q
+        self._testname = self.__class__.__name__
+        self._testdir = os.path.join(ABSPATH, 'functional-tests/expected-outdated-archive-lzma')
         self._resultfile = os.path.join(self._testdir, 'a.out')
         self._main('is outdated. Was good until')
             
