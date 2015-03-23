@@ -34,6 +34,7 @@ The second file you need is the list containing the information about the archiv
     owner| chaica
     group| sysadmin
     sha1| e0f58dcc57caad2182f701eb63f0c81f347d3fe5
+    mtime| 1425890843.0
     outdated| 2 months
     
     [files]
