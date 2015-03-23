@@ -95,7 +95,7 @@ class CliParse:
             help='the name of the configuration files')
         __parser.add_argument('-v', '--version',
             action='version',
-            version='%(prog)s 1.3',
+            version='%(prog)s 1.4',
             help='print the version of this program and exit')
         __parser.add_argument('archives', nargs='*',
             help='archives to check')

@@ -34,6 +34,7 @@ The second file you need is the list containing the information about the archiv
     owner| chaica
     group| sysadmin
     sha1| e0f58dcc57caad2182f701eb63f0c81f347d3fe5
+    outdated| 2 months
     
     [files]
     foos/foo|
@@ -47,6 +48,8 @@ The second file you need is the list containing the information about the archiv
 * **owner** is the name of the owner of this file in the archive.
 * **group** is the name of the owner group of this file in the archive.
 * **sha1** is for the expected md5 hash sum of the archive. Also available is sha1, sha224, sha256, sha384, sha512.
+* **mtime** it is the posix timestamp of the last modification of the archive. It is usually automatically generated.
+* **outdated** takes a duration starting from the mtime of the archive. Afther this duration, a warning is triggered to warn that the archive is outdated.
 
 * **[files]** section stands for the files inside the archive or the tree of directories and files. This section is not mandatory if you do not need it.
 * **foos/foo|** means this file has to exist in the backup, whatever it is.
