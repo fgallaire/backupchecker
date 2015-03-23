@@ -13,7 +13,7 @@ or [read it online](https://backupchecker.readthedocs.org/en/latest/).
 
 * Install Backup Checker from sources
 
-        # tar zxvf backupchecker-1.3.tar.gz
+        # tar zxvf backupchecker-1.4.tar.gz
         # cd backupchecker
         # python3.4 setup.py install
         # # or
