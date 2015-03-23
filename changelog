@@ -1,3 +1,54 @@
+commit 6de9fc734af116f1d8cf2f18c75180849bff9899
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    update version number in README.md
+
+commit 957742d25019250b8b08a7cd742a7ddbfe15f792
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    update version && update doc
+
+commit dfb439418f2690cf2ec32521ee23763992385359
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    activate mtime for gzip and dedicated functionaltests
+
+commit b1c6aeb92fc37ed0f6f90b77ca29916b9d5a8c81
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    mtime for zip archive
+
+commit cea8e88ba848f04a1e4a97cbebfab49ac59207a8
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    update functionaltests for mtime archive
+
+commit b93a43a1553db2693ea2734e1a359393d1a1cd13
+Merge: 04fe435 345c1a5
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    Merge branch 'master' of https://github.com/backupchecker/backupchecker into outdated-archive
+
+commit 04fe4352ed49d3b4f24744979844c757e65aa441
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    wip
+
+commit 45f30a96b1da8f7e943b4a486390e19421acf97b
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    add/check mtime for the archive itself
+
+commit 345c1a50a15b3822d299499b4c7fc0f5385edf44
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    switch to python 3.4 for scripts/backupchecker
+
+commit 145d2c192757aee436230aa5f8979015d96836b8
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    ready for 1.3 bugfix. fixes #7
+
 commit fb6e432cd677040318603789c944a4a2860002dd
 Author: Carl Chenet <chaica@ohmytux.com>
 
