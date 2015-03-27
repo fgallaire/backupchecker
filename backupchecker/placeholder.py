@@ -33,21 +33,34 @@ class PlaceHolder(object):
 
     def __main(self):
         '''Main of the PlaceHolder class'''
-        __year, __shortyear, __month, __day, __hour, __minute, __second = datetime.now().strftime('%Y %y %m %d %H %M %S').split()
+        __year, __shortyear, __month, __weeknumber, __monthday, __weekday, __hour, __minute, __second = datetime.now().strftime('%Y %y %m %W %d %w %H %M %S').split()
+        # year
         if '%Y' in self.__path:
             self.__path = self.__path.replace('%Y', __year)
+        # year in two-digit format
         if '%y' in self.__path:
-            self.__path = self.__path.replace('%y', __year)
+            self.__path = self.__path.replace('%y', __shortyear)
+        # month (1..12)
         if '%m' in self.__path:
-            self.__path = self.__path.replace('%m', __year)
+            self.__path = self.__path.replace('%m', __month)
+        # week number in year (1..52)
+        if '%W' in self.__path:
+            self.__path = self.__path.replace('%W', __weeknumber)
+        # monthday (1..31)
         if '%d' in self.__path:
-            self.__path = self.__path.replace('%d', __year)
+            self.__path = self.__path.replace('%d', __monthday)
+        # weekday first monday (1..7)
+        if '%w' in self.__path:
+            self.__path = self.__path.replace('%w', __weekday)
+        # hour (00..24)
         if '%H' in self.__path:
-            self.__path = self.__path.replace('%H', __year)
+            self.__path = self.__path.replace('%H', __hour)
+        # minute (00..59)
         if '%M' in self.__path:
-            self.__path = self.__path.replace('%M', __year)
+            self.__path = self.__path.replace('%M', __minute)
+        # second (00..59)
         if '%S' in self.__path:
-            self.__path = self.__path.replace('%S', __year)
+            self.__path = self.__path.replace('%S', __second)
 
     @property
     def realpath(self):
