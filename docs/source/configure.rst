@@ -22,6 +22,20 @@ The first one contains general information about the backup checking session. It
 * **delimiter** (optional field) is the string to use in the list of files to mark the end of the key and the beginning of the value. Default is | (pipe).
 * **sha512** (optional field) provides the sha512 hash sum of the list of files, in order to check if this file is the expected one.
 
+Placeholders
+------------
+
+The **path** and **files_list** values both support some placeholders. Using a value like **/backups/backup-%d-%m-%Y.tar.gz** will see **%m** being replaced by the current monthday, **%m** by the current month number and **%Y** being replace by the current year. The available placeholders are:
+
+* **%Y** for current year
+* **%y** for current two-digit year (2015->15)
+* **%m** for current month number (1..12)
+* **%d** for current monthday (1..31)
+* **%w** for current weekday, monday first (1..7)
+* **%H** for current hour (00..23)
+* **%M** for current minute (00..59)
+* **%S** for current second (00..59)
+
 Understanding the parameters of the list of files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The second file you need is the list containing the information about the archive, the tree or the files inside your backups. Here is an example with the full list of the parameters available for now::
