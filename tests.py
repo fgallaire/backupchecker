@@ -16,6 +16,7 @@
 
 import argparse
 import bz2
+from datetime import datetime
 import gzip
 import logging
 import os
@@ -39,11 +40,12 @@ import backupchecker.checkbackups.checktree
 import backupchecker.checkbackups.checkzip
 import backupchecker.cliparse
 import backupchecker.configurations
-from backupchecker.expectedvalues import ExpectedValues
 import backupchecker.generatelist.generatelistfortar
 import backupchecker.generatelist.generatelistforbzip2
 import backupchecker.listtype
 import backupchecker.main
+from backupchecker.expectedvalues import ExpectedValues
+from backupchecker.placeholder import PlaceHolder
 
 # !! logging module uses a single logger for the whole file
 TESTLOG = 'tests/testlog'
@@ -1860,6 +1862,18 @@ class TestApp(unittest.TestCase):
         __mydict.isastream = False
         __mydict = backupchecker.listtype.ListType(__mydict)
         self.assertEqual(str(type(__mydict._ListType__bck)), "<class 'backupchecker.generatelist.generatelistforlzma.GenerateListForLzma'>")
+
+#######################################################################################
+#
+# Testing the backupchecker.placeholder.PlaceHolder
+#
+#######################################################################################
+
+    def test_placeholder(self):
+        '''test the PlaceHolder class'''
+        plh = PlaceHolder('/backups/backup-%Y-%y-%m-%W-%d-%w-%H-%M-%S.tar.gz')
+        expectedresult = '/backups/backup-{}-{}-{}-{}-{}-{}-{}-{}-{}.tar.gz'.format(*(datetime.now().strftime('%Y %y %m %W %d %w %H %M %S').split()))
+        self.assertEqual(plh.realpath, expectedresult)
 
 ################################################################
 #
