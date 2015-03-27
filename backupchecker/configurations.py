@@ -17,9 +17,11 @@
 '''Parse the configurations'''
 
 import sys
-from configparser import ConfigParser
+from configparser import RawConfigParser
 from configparser import ParsingError, NoSectionError, NoOptionError
 import os
+
+from backupchecker.placeholder import PlaceHolder
 
 class Configurations:
     '''Retrieve the different configurations'''
@@ -53,7 +55,7 @@ class Configurations:
             # parse the configuration files
             for __conf in __confs:
                 __currentconf = {}
-                __config = ConfigParser()
+                __config = RawConfigParser()
                 __fullconfpath = os.path.join('/'.join([__confpath, __conf]))
                 try:
                     with open(__fullconfpath, 'r') as __file:
@@ -102,7 +104,11 @@ class Configurations:
                         if not os.path.isabs(__path):
                             __path = os.path.normpath(os.path.join(os.path.abspath(__confpath), __path))
                             __currentconf[__confkey] = __path
-                        if not os.path.exists(__path):
+                        # placeholder should be here
+                        plh = PlaceHolder(__currentconf[__confkey])
+                        __currentconf[__confkey] = plh.realpath
+                        # test if the path exists
+                        if not os.path.exists(__currentconf[__confkey]):
                             print('{} does not exist.'.format(__path))
                             sys.exit(1)
 
