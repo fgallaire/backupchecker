@@ -1,3 +1,63 @@
+commit 782f1e944ed98fbf5121040506d5adcf6d6a4703
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    bump version
+
+commit 126dda138ed309d5a5f259d0bd95ab194abe52cd
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    fix functional tests for placeholders. fix #10
+
+commit ae6e67fcd36e637c69bb7a27df9c1075b73c1771
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    simplify tests
+
+commit 18911fe2b9c8e127188ef11f4f4317362ba56536
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    simplify test
+
+commit 9aec0f75322c139d5fa5fc1284f429486c1f584e
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    simplify test
+
+commit 3281e3f567b92b70cae3bcbdc20a8af439f93a30
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    explain placeholders
+
+commit 79c466ad0c523922fb04d6ce91f6ffea8e545cf1
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    unittest for placeholder
+
+commit 813fe8174e5a6410966c7bea2477dd01b629cc01
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    manage placeholder in configuration file
+
+commit 3e2b7b43f913958e38841a7ee7f4b02ddabb7210
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    add placeholder.py
+
+commit e3418df8217855daa7e77cd1cd631bc036fee33f
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    wip
+
+commit ff65df3bdc4412cb3ecf94a0dd9510489549b3fc
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    fix missing mtim in the doc
+
+commit 42a028188d3e5d6bd6e7422d56bba85bfcda5367
+Author: Carl Chenet <chaica@ohmytux.com>
+
+    update changelog
+
 commit 6de9fc734af116f1d8cf2f18c75180849bff9899
 Author: Carl Chenet <chaica@ohmytux.com>
 
