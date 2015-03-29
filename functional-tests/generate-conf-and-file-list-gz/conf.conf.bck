@@ -3,4 +3,3 @@ name=generate-conf-and-file-list-gz
 type=archive
 path=PATH/generate-conf-and-file-list-gz.gz
 files_list=PATH/generate-conf-and-file-list-gz.list
-sha512=766b2056d5e281c51e67678a0052549ea7a9b89dd9d1332e50defe8f75f23e2521bbc912abe5e296cd58e5ce0ed062dae73e20a04c748bbb0a558d469a110fee

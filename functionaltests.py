@@ -3104,7 +3104,7 @@ class Test_generate_conf_and_file_list_gz:
         if __retcode != 0:
             __queue.put('{} - {}return code:{}'.format(__testname, KOMSG, str(__retcode)))
         else:
-            if hashlib.md5(open(__resultconffile, 'rb').read()).hexdigest() != hashlib.md5(open(__conffile, 'rb').read()).hexdigest():
+            if open(__conffile, 'r').read() not in open(__resultconffile, 'r').read():
                 __confres = False
             else:
                 __confres = True
