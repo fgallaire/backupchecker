@@ -35,6 +35,7 @@ The **path** and **files_list** values both support some placeholders. Using a v
 * **%H** for current hour (00..23)
 * **%M** for current minute (00..59)
 * **%S** for current second (00..59)
+* **%i** for the highest integer found in a filename (/backups/backup.%i.tar.gz will return /backups/backup.2.tar.gz if you have backup.1.tar.gz and backup.2.tar.gz in the /backups directory.
 
 Understanding the parameters of the list of files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
