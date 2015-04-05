@@ -17,6 +17,9 @@
 '''Identify and replace placeholder in a path'''
 
 from datetime import datetime
+import os
+import os.path
+import re
 
 class PlaceHolder(object):
     '''Identify and replace placeholder in a path'''
@@ -61,6 +64,23 @@ class PlaceHolder(object):
         # second (00..59)
         if '%S' in self.__path:
             self.__path = self.__path.replace('%S', __second)
+
+        # biggest integer for the same path in the same directory
+        if '%i' in self.__path:
+            self.__path = self.__biggestinteger()
+
+    def __biggestinteger(self):
+        '''return the path with the biggest integer in the same directory for the placeholder'''
+        __result = {}
+        __head, __tail = os.path.split(self.__path)
+        __tail = __tail.replace('%i', "([\d]+)")
+        for __file in os.listdir(__head):
+            if re.search(__tail, __file):
+                __res = re.search(__tail, __file)
+                __result[__res.group(1)] = os.path.join(__head, __res.group(0))
+        # get the max value
+        __maxvalue = max(__result)
+        return __result[__maxvalue]
 
     @property
     def realpath(self):
