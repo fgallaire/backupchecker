@@ -1869,10 +1869,16 @@ class TestApp(unittest.TestCase):
 #
 #######################################################################################
 
-    def test_placeholder(self):
-        '''test the PlaceHolder class'''
+    def test_placeholder_time_units(self):
+        '''test the PlaceHolder class for time units'''
         plh = PlaceHolder('/backups/backup-%Y-%y-%m-%W-%d-%w-%H-%M-%S.tar.gz')
         expectedresult = '/backups/backup-{}-{}-{}-{}-{}-{}-{}-{}-{}.tar.gz'.format(*(datetime.now().strftime('%Y %y %m %W %d %w %H %M %S').split()))
+        self.assertEqual(plh.realpath, expectedresult)
+
+    def test_placeholder_max_int(self):
+        '''test the PlaceHolder class for biggest int'''
+        plh = PlaceHolder('tests/placeholders/hourly.%i')
+        expectedresult = 'tests/placeholders/hourly.3'
         self.assertEqual(plh.realpath, expectedresult)
 
 ################################################################
