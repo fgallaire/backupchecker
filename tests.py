@@ -1875,10 +1875,16 @@ class TestApp(unittest.TestCase):
         expectedresult = '/backups/backup-{}-{}-{}-{}-{}-{}-{}-{}-{}.tar.gz'.format(*(datetime.now().strftime('%Y %y %m %W %d %w %H %M %S').split()))
         self.assertEqual(plh.realpath, expectedresult)
 
-    def test_placeholder_max_int(self):
+    def test_placeholder_max_int_position_right(self):
         '''test the PlaceHolder class for biggest int'''
-        plh = PlaceHolder('tests/placeholders/hourly.%i')
-        expectedresult = 'tests/placeholders/hourly.3'
+        plh = PlaceHolder(os.path.abspath(os.path.join(os.path.dirname(__file__), 'tests/placeholders/hourly.%i')))
+        expectedresult = os.path.abspath(os.path.join(os.path.dirname(__file__), 'tests/placeholders/hourly.3'))
+        self.assertEqual(plh.realpath, expectedresult)
+
+    def test_placeholder_max_int_position_right(self):
+        '''test the PlaceHolder class for biggest int'''
+        plh = PlaceHolder(os.path.abspath(os.path.join(os.path.dirname(__file__), 'tests/placeholders/weekly.%i/foo')))
+        expectedresult = os.path.abspath(os.path.join(os.path.dirname(__file__), 'tests/placeholders/weekly.2/foo'))
         self.assertEqual(plh.realpath, expectedresult)
 
 ################################################################

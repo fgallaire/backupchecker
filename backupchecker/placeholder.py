@@ -72,6 +72,17 @@ class PlaceHolder(object):
     def __biggestinteger(self):
         '''return the path with the biggest integer in the same directory for the placeholder'''
         __result = {}
+        __newpath = []
+        __missingpath = []
+        __found = False
+        for __chunk in self.__path.split('/'):
+            if not __found:
+                __newpath.append(__chunk)
+            else:
+                __missingpath.append(__chunk)
+            if '%i' in __chunk:
+                __found = True
+        self.__path = '/'.join(__newpath)
         __head, __tail = os.path.split(self.__path)
         __tail = __tail.replace('%i', "([\d]+)")
         for __file in os.listdir(__head):
@@ -80,7 +91,11 @@ class PlaceHolder(object):
                 __result[__res.group(1)] = os.path.join(__head, __res.group(0))
         # get the max value
         __maxvalue = max(__result)
-        return __result[__maxvalue]
+        # join the modified path and the original left apart part
+        if '/'.join(__missingpath):
+            return os.path.join(__result[__maxvalue], '/'.join(__missingpath))
+        else:
+            return __result[__maxvalue]
 
     @property
     def realpath(self):
