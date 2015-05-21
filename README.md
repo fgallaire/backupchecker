@@ -1,7 +1,5 @@
 ### BackupChecker 
 
-[![Build Status](https://travis-ci.org/backupchecker/backupchecker.svg?branch=master)](https://travis-ci.org/backupchecker/backupchecker)
-
 BackupChecker is an automated backup checker. Read the documentation in docs/
 or [read it online](https://backupchecker.readthedocs.org/en/latest/).
 

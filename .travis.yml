@@ -1,9 +1,0 @@
-language: python
-python:
-  - "3.4"
-# command to run tests
-script:
-  - "./tests.py"
-notifications:
-  email:
-    - chaica@backupchecker.com
