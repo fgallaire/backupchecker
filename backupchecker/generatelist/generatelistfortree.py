@@ -166,7 +166,7 @@ class GenerateListForTree(GenerateList):
                                             grp.getgrgid(self.__fileinfo.st_gid).gr_name,
                                             __filemode,
                                             __type,
-                                            str(__fileinfo.st_mtime)))
+                                            str(self.__fileinfo.st_mtime)))
                                             
         # include custom paths for output conf files
         __reparc = os.path.split(__arcpath)[-1]
