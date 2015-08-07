@@ -1,3288 +1,3960 @@
+commit 94ca3ace016a7def42756d6cd71281677b27abea
+Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Aug 7 14:36:03 2015 +0200
+
+    bump version number
+
+commit ee6fb32abcf202dfb61269c465905ba6f62a3fe7
+Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Aug 5 15:04:04 2015 +0200
+
+    typo in manipulating non-regular files in tree of files. fixes #15
+
+commit ba29166b8c361f3e0dec7198154699a3e5876d3b
+Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu May 21 22:51:21 2015 +0200
+
+    remove travis
+
+commit 62a1c0226fd92810010903b87b3b5edd01dd8c2f
+Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Apr 6 03:30:27 2015 +0200
+
+    update changelog
+
 commit 962f3f34d2114003db686554e3f5ff41377a63cc
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Apr 6 03:30:15 2015 +0200
 
     bump version
 
 commit 2cb54e3897529e8c9d79558bc7207fbece990d30
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Apr 6 03:25:56 2015 +0200
 
     fix bug in biggest int placeholder and consolidate unit tests
 
 commit d830428f9133b7c602fe63d427e57cbc17221f76
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Apr 5 21:10:15 2015 +0200
 
     update changelog
 
 commit 2710f233b2d6b341fe00ef0422a6b8ecc18d63e7
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Apr 5 21:08:55 2015 +0200
 
     update version
 
 commit 0f184caeb054deeb76b4cf39c1a81d79d9aa863c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Apr 5 20:53:47 2015 +0200
 
     update doc for %i placeholder
 
 commit c5a4e7e5572d98b2a281126fbb9570d00e00e94c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Apr 5 19:53:09 2015 +0200
 
     add test files for biggest placeholder unit test
 
 commit 97f41f31c8fa061a4532e04d4c1c6c8c28ee889d
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Apr 5 19:52:32 2015 +0200
 
     unit test for biggest int placeholder
 
 commit bbe13ee243c5c667135dd08c4017bc595c2950b5
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Apr 5 19:04:34 2015 +0200
 
     placeholder %i to get the max int in a configuration path
 
 commit 652486ea38dd4b994ac95220f7dd6bb03577307e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Mar 29 14:01:41 2015 +0200
 
     update changelog
 
 commit 782f1e944ed98fbf5121040506d5adcf6d6a4703
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Mar 29 13:57:57 2015 +0200
 
     bump version
 
 commit 126dda138ed309d5a5f259d0bd95ab194abe52cd
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Mar 29 13:55:34 2015 +0200
 
     fix functional tests for placeholders. fix #10
 
 commit ae6e67fcd36e637c69bb7a27df9c1075b73c1771
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Mar 29 13:44:32 2015 +0200
 
     simplify tests
 
 commit 18911fe2b9c8e127188ef11f4f4317362ba56536
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Mar 29 13:41:42 2015 +0200
 
     simplify test
 
 commit 9aec0f75322c139d5fa5fc1284f429486c1f584e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Mar 29 13:41:03 2015 +0200
 
     simplify test
 
 commit 3281e3f567b92b70cae3bcbdc20a8af439f93a30
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Mar 27 18:33:12 2015 +0100
 
     explain placeholders
 
 commit 79c466ad0c523922fb04d6ce91f6ffea8e545cf1
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Mar 27 18:05:56 2015 +0100
 
     unittest for placeholder
 
 commit 813fe8174e5a6410966c7bea2477dd01b629cc01
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Mar 27 18:05:44 2015 +0100
 
     manage placeholder in configuration file
 
 commit 3e2b7b43f913958e38841a7ee7f4b02ddabb7210
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Mar 27 16:42:54 2015 +0100
 
     add placeholder.py
 
 commit e3418df8217855daa7e77cd1cd631bc036fee33f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Mar 27 16:23:23 2015 +0100
 
     wip
 
 commit ff65df3bdc4412cb3ecf94a0dd9510489549b3fc
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Mar 23 17:13:44 2015 +0100
 
     fix missing mtim in the doc
 
 commit 42a028188d3e5d6bd6e7422d56bba85bfcda5367
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Mar 23 16:42:10 2015 +0100
 
     update changelog
 
 commit 6de9fc734af116f1d8cf2f18c75180849bff9899
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Mar 23 16:41:20 2015 +0100
 
     update version number in README.md
 
 commit 957742d25019250b8b08a7cd742a7ddbfe15f792
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Mar 23 16:18:02 2015 +0100
 
     update version && update doc
 
 commit dfb439418f2690cf2ec32521ee23763992385359
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Mar 19 18:45:23 2015 +0100
 
     activate mtime for gzip and dedicated functionaltests
 
 commit b1c6aeb92fc37ed0f6f90b77ca29916b9d5a8c81
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Mar 19 18:21:21 2015 +0100
 
     mtime for zip archive
 
 commit cea8e88ba848f04a1e4a97cbebfab49ac59207a8
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Mar 19 14:21:17 2015 +0100
 
     update functionaltests for mtime archive
 
 commit b93a43a1553db2693ea2734e1a359393d1a1cd13
 Merge: 04fe435 345c1a5
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Mar 17 13:57:11 2015 +0100
 
     Merge branch 'master' of https://github.com/backupchecker/backupchecker into outdated-archive
 
 commit 04fe4352ed49d3b4f24744979844c757e65aa441
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Mar 17 13:56:49 2015 +0100
 
     wip
 
 commit 45f30a96b1da8f7e943b4a486390e19421acf97b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Mar 16 17:20:24 2015 +0100
 
     add/check mtime for the archive itself
 
 commit 345c1a50a15b3822d299499b4c7fc0f5385edf44
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Mar 7 12:49:05 2015 +0100
 
     switch to python 3.4 for scripts/backupchecker
 
 commit 145d2c192757aee436230aa5f8979015d96836b8
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Mar 6 08:46:05 2015 +0100
 
     ready for 1.3 bugfix. fixes #7
 
 commit fb6e432cd677040318603789c944a4a2860002dd
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Mar 6 08:31:14 2015 +0100
 
     add missing files
 
 commit 805810f1d2de8cd1fdc8c1fd5b6359a5f305e663
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Mar 6 08:28:52 2015 +0100
 
     add unit tests for expected uid/gid
 
 commit 4cc8581ba34b1859d4a154435d42583425272a71
 Merge: 5c0cf46 2035250
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Mar 5 16:57:08 2015 +0100
 
     :Merge branch 'master' of https://github.com/backupchecker/backupchecker
 
 commit 5c0cf46334774377ab0cf7df74ac4fd47ae277c8
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Mar 5 16:16:49 2015 +0100
 
     add unit tests related to expected uid/gid
 
 commit 5473aa9b757bdb3bc9d67bc12a021bf939837ea4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Mar 5 12:18:34 2015 +0100
 
     fix uid used for group
 
 commit 20352500d276cac84de4e57494d3cefca62b8aa4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Mar 2 20:00:38 2015 +0100
 
     add travis-ci status bar
 
 commit ec86f9ec8cb42efe5f8ddc84049d40d3c52abf96
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Mar 2 19:38:54 2015 +0100
 
     fix test for CI
 
 commit 69adb692d7e299d00ef7a5e72956231bedd81143
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Mar 2 19:36:39 2015 +0100
 
     update shebang of tests.py
 
 commit 8ad9724c6f718bee64ad1d7424e6710935890523
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Mar 2 18:57:42 2015 +0100
 
     add .travis.yml
 
 commit cbcc848c35627c2ff082f563f276024b785a1703
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Mar 1 22:33:19 2015 +0100
 
     update changelog
 
 commit ff160c4bd293dedbec0c32f1bbc8855c3e1cae9b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Feb 28 00:51:54 2015 +0100
 
     fix syntax of the restructuredtext documentation
 
 commit 1804690e5fa549f574f2065e00ab7e0460f4b017
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Feb 27 20:13:08 2015 +0100
 
     fix restructuredtext documentation
 
 commit 695bc9a61276621d9b80571bd1971cbf7edd4d3b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Feb 27 18:27:16 2015 +0100
 
     update the documentation (online doc, manpage, setup.py fields)
 
 commit ef0eed1cd70499cb0d0686499939d282e2b4b4c2
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Feb 26 18:27:11 2015 +0100
 
     bump version
 
 commit f017c6a90a0ba9f9a708ca26973ec781f3021f28
 Merge: be9e988 94d1c6c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Feb 26 18:22:13 2015 +0100
 
     Tar stream now works with backup checker. fixes #3 fixes#6
 
 commit 94d1c6c901a91c19742e8284c72407f77aed891c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Feb 25 18:58:46 2015 +0100
 
     specify not possible to compute hash sums inside an archive with a stream
 
 commit 1387535322502c35b5b8a8c5ff520bf49b28dafa
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Feb 25 16:34:05 2015 +0100
 
     fix issue with name of the archive while scanning a stream. add unit test for it. secure the user-defined logfile from the cli.
 
 commit 4c5f7d2116a4d126733410d0ea29dba7a639337b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Feb 25 12:35:27 2015 +0100
 
     --output-list-and-conf-dir option now works with tar stream.
 
 commit 4477cfe948791e1e63c905c18ae41ad4301c9eb1
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Feb 24 19:11:29 2015 +0100
 
     fix for README.md
 
 commit a43ac45a2959c3e47b6669f4dfce98a699ee4409
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Feb 24 19:09:46 2015 +0100
 
     reorganize call to stdin from both generate and check mode
 
 commit d74e5ec7e0573ec6af8ddaf10d9a22ae94335361
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Feb 24 00:39:04 2015 +0100
 
     add universal compression for tar files
 
 commit bd6f0509e0d476291c8df5566bd40431075b8980
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Feb 23 23:52:54 2015 +0100
 
     add Test_configuration_name_option_and_conf_list_output_with_lzma test and Test_configuration_name_option_and_conf_list_output_with_bzip2 test
 
 commit 1b66fc577e607fea2c64f8569eb932e3d029966c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Feb 23 23:42:54 2015 +0100
 
     Test_configuration_name_option_and_conf_list_output_with_gzip test
 
 commit 6a68afbcb630d24782a165cdb366fce408c224fe
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Feb 23 23:37:45 2015 +0100
 
     added Test_configuration_name_option_and_conf_list_output_with_tar_gz test and Test_configuration_name_option_and_conf_list_output_with_zip test
 
 commit d344fe842664a2f91a15618574e619de984fcaae
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Feb 23 18:44:13 2015 +0100
 
     write Test_configuration_name_option_and_conf_list_output_with_tar_gz unit tests
 
 commit 27512f04875a491c0c43b6e3ac8a427ca5e89cf1
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Feb 23 17:32:23 2015 +0100
 
     fix --configuration-name for lzma archive. write unit test Test_configuration_name_option_with_lzma
 
 commit 8f5571993b983aebafd25ef5e01eaee90bc0d0f4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Feb 23 17:25:01 2015 +0100
 
     fix --gen-full option with --configuration-name option with bzip2 archive
 
 commit 107f5de8aca2d7458a392804275d4b7d9c1c1b60
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Feb 23 17:15:40 2015 +0100
 
     fix --gen-full with --configuration-name with gzip, tree, zip archives
 
 commit 4eb36edbb4349ee2a063137d82ff39a3c779dc6d
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Feb 23 15:34:06 2015 +0100
 
     add configuration-name-option-with-zip test
 
 commit 5425df2cded416848b23726110c09cba3f71f2d3
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Feb 23 15:23:16 2015 +0100
 
     update .gitignore with new files to ignore
 
 commit 3b7de4db4b5fecf521237d3cd115e0c9811cc10e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Feb 23 14:54:15 2015 +0100
 
     add configuration-name-option-with-tar-gz test
 
 commit a9539854138e0de4841db63b343eadc6803752a5
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Feb 23 14:00:37 2015 +0100
 
     fix check-mtime-tar/zip and add Test_generate_and_check_for_stream_from_tar_gz test
 
 commit a8a5ea3a4af68d9a1c72ff8d2dff2889d88cd102
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Feb 22 00:39:16 2015 +0100
 
     add functional test to check stream from a tar.gz file
 
 commit 4ac6fa5b7d6ae23a033fcaaa721321ebea59181e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Feb 22 00:01:44 2015 +0100
 
     --configuration-name option for lzma archive
 
 commit 17df1b07f2cff9739535f1e96126731b29292bee
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Feb 21 19:59:48 2015 +0100
 
     --configuration-name option for bzip2 archive
 
 commit b57b0a392390e912d0459ce749384c996c5cf631
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Feb 21 19:40:38 2015 +0100
 
     --configuration-name option for gzip archive
 
 commit 3f8c7a1ad91862fe03917d900523620f9480157d
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Feb 21 14:21:52 2015 +0100
 
     --configuration-name for zip archive
 
 commit 6c235a3d651f2f4b64453e49e4b41efcee78081e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Feb 21 13:58:07 2015 +0100
 
     --configuration-name option for tree backup
 
 commit ba09349383ab329e1eb1c74dba22762057d24545
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Feb 21 13:57:34 2015 +0100
 
     switch from -s to -n for short option name --configuration-name
 
 commit 7c0df2a4391f695a56780e6a5edf15824e6ebf7e
 Merge: e1731f9 f3d4f18
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Feb 21 12:25:18 2015 +0100
 
     fix conflict for unit tests
 
 commit e1731f92cc3aa3ee8d567ac69769547871abc421
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Feb 21 12:22:22 2015 +0100
 
     fix unit tests for --conf-name option
 
 commit fdd718e7755dadc5843018a48300fa22eedea5c8
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Feb 21 12:21:57 2015 +0100
 
     --conf-name now defines a user-defined name used in configuration files
 
 commit f3d4f1826392f69ecb1b5d0b1e734ba5767988ec
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Feb 16 13:39:43 2015 +0100
 
     fix unit tests
 
 commit be9e98878c15ebe936f54cac753563afee56bb8c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Feb 16 00:55:35 2015 +0100
 
     remove syntax errors in man page. fixes #4
 
 commit e3f54892306a739f59c93036735014fa705a9971
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Feb 13 23:51:22 2015 +0100
 
     improve output while checking tar streams
 
 commit 263ccd42203f79922a64bb3bb679d4cff9991a2a
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Feb 13 23:13:31 2015 +0100
 
     improve accepted stream types
 
 commit d9e86191f754ecf387241460a7efde3b600a6473
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Feb 13 23:12:56 2015 +0100
 
     remove unused print
 
 commit ae7c68949a34683c984438aa1ab21e2238b9bc90
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Feb 13 18:21:27 2015 +0100
 
     remove unused print
 
 commit 796f5f337f5bdb9f356a7946b4fc6e22e716ba5b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Feb 13 18:04:04 2015 +0100
 
     verifying stream works
 
 commit 8827d353a288bcfe49383451da32cfadcd00f333
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Feb 13 01:44:21 2015 +0100
 
     verify data from a stream almost work
 
 commit 4d8ea3b4649635d093dc0b3444ecd72ae8c12eef
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Feb 13 00:58:25 2015 +0100
 
     name of the conf files of a tar stream
 
 commit fdd588a0732b72ac38fd1975a95c9075bd2793cb
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Feb 13 00:40:27 2015 +0100
 
     generation of full conf files almost works for streams
 
 commit 8639d246cae79f0b3b433f0b4bf9c9481769e6f3
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Feb 11 11:22:41 2015 +0100
 
     bump to 1.1
 
 commit 174da989ea5dbb75be9824f69b717218c9545ac2
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Feb 11 11:12:27 2015 +0100
 
     remove old unused generate-archive.sh script
 
 commit 71c9eedcc87def45f76935a9fb25abf1e2e0d2b0
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Feb 11 11:11:36 2015 +0100
 
     add pip install way in README.md
 
 commit 6f7ca7d8441237c853ddd1477a13fbbca7040bf4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Feb 11 11:11:09 2015 +0100
 
     update to 1.1 version
 
 commit 6c624a6ea644ea556084fc923a16d5cc4bf4378d
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Feb 11 11:06:15 2015 +0100
 
     rename brebis to backupchecker. fixes #2
 
 commit e498c7ac7414a7c5f80582c2cfef3b7a1fc2b4bd
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Feb 7 16:16:55 2015 +0100
 
     update changelog
 
 commit e3eda8f86cbd5d4b6c169b4e0cf17a645e69f08f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Feb 7 15:53:18 2015 +0100
 
     update the documentation
 
 commit 9c3ddc8df4b3a00044aa26755bde7d292b30528a
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Feb 7 15:50:23 2015 +0100
 
     activate uname/gname for the archive itself
 
 commit 44b3c1600f8932f9c6143845f590d8da7afdf3a7
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Feb 7 15:46:05 2015 +0100
 
     files should be ignored
 
 commit 68b7a01812c6cf714e14c275f1d5a91e90beaa44
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Feb 7 15:45:21 2015 +0100
 
     update version
 
 commit 6bf54ef09e547dac9fcf21dcb25a876bcc2875bf
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Feb 7 15:44:21 2015 +0100
 
     files should not be versioned
 
 commit 3bf73aa8bb5a24f26eeeeeb465917b724df23cfe
 Merge: f2a1984 5095c3d
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Feb 7 15:37:01 2015 +0100
 
     Merge branch 'uname-gname'
     integrate support for uname/gname while generating/controling archives
 
 commit 5095c3d39a10cd212e1221d0508e8ef974ac525c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Feb 6 15:16:08 2015 +0100
 
     unit tests for uname/gname features
 
 commit 95110de07de17f66aa673075dc61fa9a6135be3a
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Feb 6 14:24:02 2015 +0100
 
     functional tests for uname/gname for tar.gz archives
 
 commit b7870ab7bbe8bce47d2e4da6b88610d7ba792a3f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Feb 6 12:11:49 2015 +0100
 
     fix unit tests for uname/gname
 
 commit ef167319ff7eb40bb64c02fd1e6c8c16b16f0f4a
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Feb 6 11:36:20 2015 +0100
 
     uname/gname for tree backups
 
 commit 34f5ab79b850e21e9e1be80f7546cb96fc2c7c2c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Feb 5 17:58:49 2015 +0100
 
     add limitations for owner/group owner
 
 commit f2a1984038a2bd9e44ea41f0f946402affc28efb
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Feb 5 17:40:14 2015 +0100
 
     clean directory before creating the archive
 
 commit a81439a314c228add58c05ee88b24c4bd003df00
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Feb 5 17:39:35 2015 +0100
 
     ignore log files
 
 commit 1284ab9a2c219b8bedbcbf54f13240ab850424e9
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Feb 5 17:31:24 2015 +0100
 
     owner name and group owner now work with tar archives
 
 commit 736a7f293f869b5458a55c2cbd1a564c4764c5d8
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Feb 3 16:52:48 2015 +0100
 
     add license in README.md file
 
 commit b30e05f1ed305efd1b3557e28a26a0e96785bd37
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Feb 3 15:03:21 2015 +0100
 
     remove .hgsigs file
 
 commit d5d878f6bbc9bf44e260296d1b092f9f8283466e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Feb 3 14:52:13 2015 +0100
 
     remove following files a.out
 
 commit dcfdb70e4f546229bb9dccf6e01f099bfbe7dc8b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Feb 3 14:50:17 2015 +0100
 
     remove a.out files
 
 commit 377d9047d961f34bc063d964bbc12b8b1cd5a91f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Feb 3 14:46:22 2015 +0100
 
     remove a.out files
 
 commit a4b386228a964d769f80aea6bfb9eccd8d7618c4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Feb 3 14:26:33 2015 +0100
 
     update documentation
 
 commit 8f69804145ec21c72ea3842884fcab72a2e89387
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Feb 3 13:37:17 2015 +0100
 
     switch README to a README.md file
 
 commit 48029a3fed314abded9485867ac2dfe3838faafe
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Feb 3 13:36:54 2015 +0100
 
     switch to a markdown README
 
 commit 8c92e88dfe33b55ab450284881377fa180b830a8
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Feb 3 12:07:58 2015 +0100
 
     convert brebis to backupchecker
 
 commit 6fefbc79acd47b0ea83d2f84c052a546991eddc4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Jan 30 00:13:54 2015 +0100
 
     Added signature for changeset 099d1115bb69
 
 commit ccd3032b4fd319658782b6c5c9dc9a503bea5d37
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Jan 30 00:12:07 2015 +0100
 
     Added tag 0.10 for changeset 0f621bea2374
 
 commit c70f1e453dc8d3b8bddcee3bea5931412f5e86d8
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Jan 30 00:02:19 2015 +0100
 
     update the changelog
 
 commit b24fefc0d7b4e04964f4cc0981d51c6750891f23
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Dec 29 00:35:41 2014 +0100
 
     update the doc for new --exceptions-file option
 
 commit 0381778556f0135beb4c4314aad2482db729ef47
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 28 12:05:01 2014 +0100
 
     update brebis manpage
 
 commit 5c90688c20a7aa905289d5f574751010e46bc339
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 28 00:39:57 2014 +0100
 
     update copyright email addresses and year
 
 commit 497baf4cd9435e0e302207714bc2cb5c271fb66a
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 28 00:38:57 2014 +0100
 
     decomment all test
 
 commit 3e9915e4e5f9201adda726d38efcaa18be0a50d6
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 28 00:15:45 2014 +0100
 
     removing excpected failure/success tests
 
 commit 4141d7c3f700fbdd45364c742cd3c17279c82d34
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 28 00:13:37 2014 +0100
 
     minimal README indicating readthedocs
 
 commit d5b8464797d4c9616331c5c590cba6df583a87f1
 Merge: abad836 5d4f76c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 28 00:02:53 2014 +0100
 
     --exceptions-file option allowing to select to generate hash sum only for selected files
 
 commit 5d4f76c9f148c0136bef43b1370d1b3372c26f25
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Dec 25 13:11:54 2014 +0100
 
     unit tests work with --exceptions-file option
 
 commit fb045497198e34bbde02a2efe6731a46f8eaa84b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Dec 24 00:07:41 2014 +0100
 
     new files related to functional tests to ignore
 
 commit 2e55a99b8d7d4bd3cdfab3fc48912343213bba58
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Dec 24 00:06:52 2014 +0100
 
     --exceptions-file works for gzip,bzip2,lzma,tree archive, with functional tests
 
 commit 74bc83c31b61a1ae263ce787aa1599359f75e929
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Dec 22 02:00:27 2014 +0100
 
     --exceptions-file works for zip archive, with functional test
 
 commit d033c16a7d72a1e5e9c0d0310a51506ea9e57140
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Dec 22 01:41:13 2014 +0100
 
     ignoring files for --exceptions-file option for both tar.gz and zip archives
 
 commit 028b0db8de7ef41245f73dc5f5a8681d9f231113
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Dec 22 01:40:09 2014 +0100
 
     --exceptions-file works for tar.gz archive, with functional test
 
 commit af51bbf5997fb6a586375067a0112b0fcacfa01f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 21 16:59:53 2014 +0100
 
     add -E/--exceptions-file option
 
 commit abad836ca458d0a6cab630d232f1972b6ad92fb3
 Merge: 331ffbe 9ed2465
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 21 16:24:06 2014 +0100
 
     --hashtype option to switch the default hash sum while generating configuration files for an archive. fixes #59
 
 commit 9ed2465d9cef651c7ec5fbe141a46e4c1265ddc5
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 21 16:22:08 2014 +0100
 
     add files to ignore related to functional tests of the hashtype option
 
 commit 172553decf1955f58ec6f050e57ccdfe2abf2fdc
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Dec 19 18:57:23 2014 +0100
 
     --hashtype option to change the default hash sum to generate configuration files
 
 commit 8fb7d8239ded5008e0563899b89601ab758ce676
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Dec 19 01:27:47 2014 +0100
 
     --hashtype option works with tar.gz archive
 
 commit 331ffbec5b8f2ef9fd63f83a95d8407b4d6eb317
 Merge: 379780d 55b79ea
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Dec 19 00:01:58 2014 +0100
 
     option -H or --hashes to explicitly required all hash sums for files in the archive. fixes #64
 
 commit 379780d74916b730daf618cb61760433f7e85fdb
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Dec 18 12:54:18 2014 +0100
 
     update version number of doc
 
 commit 1cde752773339b40d43124358b00e82bccf3de89
 Merge: 7b434e7 85e0343
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Dec 18 12:21:02 2014 +0100
 
     use sphinx format docs to publish on readthedocs. fixes #45
 
 commit 85e0343725d2517d58d76db9997985e2774c975f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Dec 18 12:19:12 2014 +0100
 
     add sphinx format docs to publish on readthedocs
 
 commit 9717464154a22f5f63148f7ee5bebcae4dad5415
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Dec 18 12:18:25 2014 +0100
 
     add sphinx format docs to publish on readthedocs
 
 commit 7b434e7a565363f60a96dd52baf86bde3101720a
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Dec 16 01:19:40 2014 +0100
 
     catches unicode exception and exits gracefully. fixes #65
 
 commit 55b79ea0ae64ae06f1c2c9dff6cf12bad2e16043
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Dec 15 18:14:44 2014 +0100
 
     option -H or --hashes to explicitly required all hash sums for files in the archive
 
 commit d1ce39258b92e838accf53003e2ce430bce51011
 Merge: 3f9309b 0071bd0
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Dec 15 15:47:01 2014 +0100
 
     create the correct directories for tests using {list,both} directories. fixes #63
 
 commit 0071bd00cb7d1edcac014556206222f2cda48295
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Dec 15 15:45:53 2014 +0100
 
     create the correct directories for tests using {list,both} directories
 
 commit 3f9309beb3cc86fa50813959d2897ed996afc670
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Oct 11 19:58:52 2014 +0200
 
     fixing issues while switching laptops
 
 commit b716973f313751ccaf26192e5fd29090eb46d45a
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Jul 30 15:46:55 2014 +0200
 
     update changelog
 
 commit fb2ddfe7adb6945c20aee38171bed1bbeff0e4d8
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Jul 30 15:35:59 2014 +0200
 
     bump to 0.10
 
 commit 855cc831a33e9d8fa8ca5bf9cfff818d664a3af0
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Jul 30 15:35:04 2014 +0200
 
     bump to python3.4 and update brebis version
 
 commit 89e786726764394582abd7701071b9483fc9b561
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Jul 30 15:32:59 2014 +0200
 
     bump python3.3 to python 3.4 and bump brebis version
 
 commit 1d01d968c50c025a03ce50dd63adfa909540fcfb
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Jul 30 15:29:38 2014 +0200
 
     bump shebang to python3.4
 
 commit dc0b419947d20a7e38b1e4b66fa52fd671e23d00
 Merge: 3834b4f 79221f8
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Jul 26 18:29:39 2014 +0200
 
     remove hash generation for symlinks. closes #61
 
 commit 79221f85df99169d6afcbfcc373001b4426ad35f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Jul 26 18:25:53 2014 +0200
 
     remove md5 generation for symlink in a tar file
 
 commit 659e136b5b5b2ee26ca2c2d94eaa80d95cc23e8e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Jul 25 13:12:21 2014 +0200
 
     remove hash for links while parsing a tree of files
 
 commit 36adc9bd8871f1e79b5d73689476a6cd824571ff
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Jul 25 13:06:43 2014 +0200
 
     remove hash for links
 
 commit 3834b4f0dc6298bbaaf750e05ecb933955e3ecb4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 22 19:05:38 2013 +0100
 
     Added tag 0.9 for changeset dc231b2f8d78
 
 commit b37162dc7a521952019fa4505e4b5d2747e01205
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 22 19:04:23 2013 +0100
 
     Added tag 0.8 for changeset 008c44e19317
 
 commit 9f9d28ab84c14ed20c81d1f86658a4d6be3118d2
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 22 19:02:10 2013 +0100
 
     update man page
 
 commit 7e7641e1260f4acfbcf80132448e043587a55544
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 22 18:04:15 2013 +0100
 
     update changelog
 
 commit 1dfdd6836c443b43e6c2bcce928c5c066a491615
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 22 18:02:03 2013 +0100
 
     update README for 0.9
 
 commit 6b6551287112d3b5aeda8bc9dcd4152501803794
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 22 17:53:05 2013 +0100
 
     add doc for -C -L -O options
 
 commit 1b610ce2836b713c86515cae47b6c62a83288d7f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 22 17:39:40 2013 +0100
 
     update version number to 0.9
 
 commit 45593d99654e91303f1ede7f7d46f70b156a4c39
 Merge: fc2002d 74d557d
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 22 17:27:33 2013 +0100
 
     offer new -C -L -O options to define the directory where to write conf file, filelist or both files. fixes #49
 
 commit 74d557dc1431b0b340f5022bf48d29b21b8a3403
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 22 17:20:32 2013 +0100
 
     put back all tests in functionaltests.py
 
 commit c98f793e96502693818f7d290d9abd19673fe6c3
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 22 17:07:39 2013 +0100
 
     unit test support for new generatelisttree parameters
 
 commit c348600e4bf55989bb2bd142aeda5b583ae1ff25
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Dec 20 15:55:26 2013 +0100
 
     functional tests for -C -L -O options
 
 commit 261e11f0236085a4920d92ebb41e4141e3bde73f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Dec 5 18:10:12 2013 +0100
 
     update unit tests to support new optional conf/list/full output directory for lzma archives
 
 commit 138a29881771e7c657e99f90d681e2a3b0edfe12
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Dec 5 17:58:41 2013 +0100
 
     update unit tests to support new optional conf/list/full output directory for bzip2 archives
 
 commit 60f39c006b09f9d73dbbe72945c6d642d6db0f46
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Dec 5 17:57:37 2013 +0100
 
     support to print configuration file and file list to different directories or to swith default output directory for bzip2 archives
 
 commit 623a286de22fde895745ee35e0b47ad391db29e7
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Dec 5 17:26:36 2013 +0100
 
     update unit tests to support new optional conf/list/full output directory for gzip archives
 
 commit c4400999bbc6ffc5d02d4e11e9f5c7464e441923
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Dec 5 17:24:44 2013 +0100
 
     support to print configuration file and file list to different directories or to swith default output directory for gzip archives
 
 commit 5494f607f4bdc6ece0598af32cf4427335d9327d
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Dec 5 01:43:31 2013 +0100
 
     update unit tests to support new optional conf/list/full output directory
 
 commit 2978376970e4be9d4c50f891f0191fd680ab7adb
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Dec 5 01:43:11 2013 +0100
 
     support to print configuration file and file list to different directories or to swith default output directory for zip archives
 
 commit 44fb7a82f06b214602bbcf6e21840c175d40195c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Dec 5 01:10:11 2013 +0100
 
     support to print configuration file and file list to different directories or to swith default output directory for tar archives
 
 commit 260dddb173b0d0c42e0140cbb98fffe7e943871c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Dec 5 01:09:20 2013 +0100
 
     update unit tests to support new optional conf/list/full output directory
 
 commit 8a662ad4702fdb74f82d5dd718eee720a69a7f55
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Dec 5 01:08:38 2013 +0100
 
     support to print configuration file and file list to different directories or to swith default output directory
 
 commit fc2002d28a38ecf9d8de5c23c1af7753d5aba213
 Merge: ab2aa89 2d4d24d
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Nov 30 15:13:49 2013 +0100
 
     support apk files. fixes #51
 
 commit 2d4d24de339baccf3a42168ef865bdbe52880fe5
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Nov 30 12:04:49 2013 +0100
 
     add support for apk archive, functional test for generating apk archive. correct a bug with functional tests embedding timestamp
 
 commit ab2aa898a75681a649181de6f23dd86306bbc0e3
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Nov 16 16:49:35 2013 +0000
 
     add new unit tests
 
 commit 9274e958fa49fd2933ce11c62ae14f40a767912b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Nov 16 16:49:22 2013 +0000
 
     adding new files to ignore for unit testing
 
 commit f7356ce783cac9ab6beaedff261ccaa6b2c08b3e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Nov 16 16:47:39 2013 +0000
 
     add private variables to self to authorize unit tests
 
 commit b98ad28625c27692d8c334f1c92be2b751be8435
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Nov 16 16:46:49 2013 +0000
 
     add a private variable to self to authorize unit testing
 
 commit 3a19106608f76f43ec2b46320493937946d91c4c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Nov 16 16:29:49 2013 +0000
 
     fix uncorrect variable name
 
 commit 9592221dc0a3962d46b5ae2da7686f6d2e62a1a3
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Nov 15 14:20:32 2013 +0000
 
     fixing timestamp int/float related errors
 
 commit 7ec227c6242aa247a1c5410927391a7be9c399c8
 Merge: 8a36f14 1672e57
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Nov 14 01:17:09 2013 +0100
 
     merge mtime branch with default branch. fixes #46
 
 commit 8a36f14bf790b5f7c1bdb144aba17aa965718f28
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Nov 14 01:01:09 2013 +0100
 
     add unit tests for checklzma module
 
 commit 4c829577eda3a9646100425d16cb473c8e21c998
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 13 23:52:05 2013 +0100
 
     add unit tests for the module archiveinfomsg
 
 commit 74f4d763aa4cf415f1588161cc453ea537483e1d
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 13 20:21:38 2013 +0100
 
     add unit test for archiveinfomsg.ArchiveInfoMsg__missing_files method
 
 commit 1672e572b9a875ffa62f6eb6b9328a42cf828d75
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 13 01:40:09 2013 +0100
 
     add limitation mtime for gz,bz2 and lzma
 
 commit ee57a5e24c6ab5afe550799827b6f43a5cba80b1
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 13 01:37:07 2013 +0100
 
     add new files to ignore
 
 commit 199f9c10da751af987322a6b1a93db1d052469bf
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 13 01:35:51 2013 +0100
 
     add support for mtime on tar,zip and tree - associated functional tests
 
 commit ccb611306e79d970857e1cfa11473673ca3202c1
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 6 21:50:53 2013 +0100
 
     update the changelog
 
 commit 85577693d1f393e9109fe392fd25827e82b44dcb
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 6 01:18:55 2013 +0100
 
     update README with new information and parameters
 
 commit 0afae1eb4dc5825ebe8b399e9728db5986cca764
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 6 00:54:19 2013 +0100
 
     bump version number to 0.8
 
 commit e6b6ef10d43ff14f33feb03995dfbcd0260af8d2
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 6 00:37:09 2013 +0100
 
     fix Test_generate_conf_and_file_list_tree test by adding sha512 sum of the list of files
 
 commit e4352c1c97f4cb9ded8a4796b1213095852e52dc
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 6 00:36:39 2013 +0100
 
     generate the hash sum of the list of files for zip archive and add it in the conf file when -G is invoked
 
 commit ce0f5afa022393137f28b9ccf1cb92f455d482b2
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 6 00:17:38 2013 +0100
 
     fix Test_generate_conf_and_file_list_zip test by adding sha512 sum of the list of files
 
 commit 62fab6fc103ad92d7859073af2a9e9b1bffe8375
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 6 00:17:22 2013 +0100
 
     generate the hash sum of the list of files for zip archive and add it in the conf file when -G is invoked
 
 commit fa65cde7a94ccc3b35898acfb0337d54e2d2b429
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 6 00:12:43 2013 +0100
 
     generate the hash sum of the list of files for xz archive and add it in the conf file when -G is invoked
 
 commit 520e180dbdc61bb1d1a1061c565046eed3173e58
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 6 00:11:41 2013 +0100
 
     fix Test_generate_conf_and_file_list_xz test by adding sha512 sum of the list of files
 
 commit 49b73ce7f67f3c33ff99065fea17f18f0535017a
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 6 00:07:28 2013 +0100
 
     fix Test_generate_conf_and_file_list_bz2 test by adding sha512 sum of the list of files
 
 commit fca115b9dfd7214cba05e5a7eb097ce8fdd6394d
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 6 00:06:59 2013 +0100
 
     generate the hash sum of the list of files for gzip archive and add it in the conf file when -G is invoked
 
 commit e8d51d2c9cc5688420c388800095443a16a7e2af
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Nov 5 23:56:07 2013 +0100
 
     fix Test_generate_conf_and_file_list_gz test by adding sha512 sum of the list of files
 
 commit edd322efc32448a7c45077574ea33dda42e47223
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Nov 5 23:55:05 2013 +0100
 
     generate the hash sum of the list of files for gzip archive and add it in the conf file when -G is invoked
 
 commit 918d2c728ea0891a50405c89552fd1d0ba490cab
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Nov 5 23:45:13 2013 +0100
 
     fix  Test_generate_conf_and_file_list_tar test by adding sha512 sum of the list of files
 
 commit 7552003a7b28c39d8e1bf419da23d6e33c344a49
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Nov 5 23:45:01 2013 +0100
 
     fix  Test_generate_conf_and_file_list_tar_xz test by adding sha512 sum of the list of files
 
 commit 446205fc3f63db77976089c9de881a9b2dbf0b9b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Nov 5 23:44:45 2013 +0100
 
     fix  Test_generate_conf_and_file_list_tar_bz2 test  by adding sha512 sum of the list of files
 
 commit 37b19ba5555ab981ce796602bd16f9478174d2e4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Nov 5 23:32:18 2013 +0100
 
     fix Test_generate_conf_and_file_list_tar_gz test by adding sha512 sum of the list of files
 
 commit 46aea6c4a3b48ae65e46d0990efb352da239272b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Nov 5 23:27:57 2013 +0100
 
     generate the hash sum of the list of files for tar archive and add it in the conf file when -G is invoked
 
 commit 0d4549c95ff4e3770e5fc8db052c2db37d6c567a
 Merge: 6b2418a 45eed2c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Oct 22 23:21:10 2013 +0200
 
     sha512 parameter must be explicitly managed (None value when not defined in the conf file) and strip gpg header and footer of the configuration file. fixes #44
 
 commit 6b2418a7c7a47c8607c55a40233a412df698f6ca
 Merge: 2eefed6 628e61a
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Oct 22 22:37:24 2013 +0200
 
     merge to support hashum in the configuration file. fixes #43
 
 commit 628e61ac4acf73ae2eb7b4919cc4ded4506fe14e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Oct 20 22:16:56 2013 +0200
 
     modify the configuration parameter called hash by sha512
 
 commit 45eed2c3fcc901aee7ff401f309dd01f96df7a5b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Oct 20 22:09:56 2013 +0200
 
     add missing gpg footer test, missing gpg header test and strip gpg header for tar gz archive test
 
 commit bfb17fd0fb01fb2e103afbd104e6ecbb207d30bb
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Oct 20 00:49:20 2013 +0200
 
     add sha sum in configuration file test
 
 commit 05bbccaf2b961a1b11fcf0ad4f86cbb22be27080
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Oct 19 16:03:25 2013 +0200
 
     support for hash sum of the list of files in the configuration file
 
 commit 2eefed69d52209ae1e4ae950a36b60978daf3bfa
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Oct 15 02:45:08 2013 +0200
 
     Added tag 0.7 for changeset abdba4451b0a
 
 commit 2a498b5e7328f49ca3cbc09934382aaf773a144f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Oct 15 02:16:15 2013 +0200
 
     uncomment all the test suite
 
 commit 00778d5fcc06d1f25256a4baba87062e405d5898
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Oct 15 02:14:41 2013 +0200
 
     remove list of files from the scop of the generate conf and file list of a tree of files test
 
 commit fa4e869a8f31f3f184529ad892d525795fbb76c4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Oct 15 01:56:39 2013 +0200
 
     exclude mode from generate conf and file list tree test
 
 commit 1e9f686f9cb673100d6f63004fa15715da4cd2c3
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Oct 15 01:51:08 2013 +0200
 
     recompose list file to exclude uid/gid
 
 commit 2e41a3cea79dff53766eaa60c1547b79c540e810
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Oct 15 01:24:26 2013 +0200
 
     remove uid/gid because triggers errors for functional tests while executed on a computer not having the sames users
 
 commit 556dbb94db7bfd6fedd79ff3b342f7b2bf3b5e58
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Oct 15 01:04:33 2013 +0200
 
     update README for 0.7
 
 commit a882ec02471a2fb3e287ca3545fff7c95b9341a4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Oct 15 01:04:12 2013 +0200
 
     update README for 0.7
 
 commit 00da8d426f94df4c1666d525daf5c0188651be37
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Oct 15 00:48:29 2013 +0200
 
     update the changelog for 0.7
 
 commit aa7fdd17cf6b88ae55e2397d599ea6555e9bf4b6
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Oct 15 00:38:25 2013 +0200
 
     add generate conf and file list for tree of files test temporary files in .hgignore
 
 commit 8558b370b3a364359760c0b70c5f593872db1e10
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Oct 15 00:37:30 2013 +0200
 
     add generate conf and file list for tree of files test
 
 commit 45984abe93d4c3d8425e35b3703c23565b7b966f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Oct 15 00:26:59 2013 +0200
 
     add generate conf and file list in xz test temporary files in .hgignore
 
 commit d4dbb146e676984c2cf3bbe2f6682549a7dd61b3
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Oct 15 00:25:39 2013 +0200
 
     add generate conf and file list for xz archive test
 
 commit 3e1d9977679707fdfd67408fb478311ede091967
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Oct 15 00:18:11 2013 +0200
 
     add generate conf and file list in gz and bz2 tests temporary files in .hgignore
 
 commit dc56cfaad07e07ba833080d836fa65af5e59049c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Oct 15 00:16:38 2013 +0200
 
     add generate conf and file liste for gzip and bzip archives test
 
 commit f68ccf1c6888494cacc0c592fb1a2e8fab5c49ec
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 14 23:41:07 2013 +0200
 
     ignore temporary files of generate conf and file list for zip archive test
 
 commit 5656957b56b09ddbe9b6b71b0ef323aabc046c4e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 14 23:39:02 2013 +0200
 
     add generate conf an file list for zip archive test
 
 commit 9316db554c427e4f6ba65b9e31b832ff33d924a8
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 14 23:27:23 2013 +0200
 
     ignore temporary files for the generate conf and file list for tar archive test
 
 commit 58aff0af69f24e42af920e009d0fa0ad6b49fd59
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 14 23:26:24 2013 +0200
 
     add generate conf and file list for tar archive test
 
 commit e50beb84a7c6de2c86c5fe0fcfd1c9ba59b9dc96
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 14 14:48:11 2013 +0200
 
     add generate conf and file list in tar xz test temporary files in .hgignore
 
 commit 7488656317dddf4d2b5c78843a2036adbe4b83c3
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 14 14:47:17 2013 +0200
 
     add generate conf and file list tar xz test
 
 commit c257add3c5f0225ccea544d92bc14928b079f074
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 14 14:38:48 2013 +0200
 
     add generate conf and file list in tar bz2 test temporary files in .hgignore
 
 commit abdb05ee9774b87a1fba96a9cd285d08f7b03c21
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 14 14:33:02 2013 +0200
 
     add generate conf and file list tar bz2 test
 
 commit 86d208e7edd1c9a0dad5ffc890e17859b521e8a7
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 14 14:28:26 2013 +0200
 
     improve generate conf and file list tar gz test - support list file
 
 commit 983897fe5ff285b57049cc02e714eaed445f98fa
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 14 12:30:32 2013 +0200
 
     add generate conf and file list for tar gz archive test
 
 commit d2ac28f208af973541c70897b4c128a10e46ac52
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 14 12:28:50 2013 +0200
 
     add new files to ignore for genereate conf and file list for tar gz archive test
 
 commit 49ef75d180948f5b01a0c4330ad2f8e07889ee35
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 14 12:28:03 2013 +0200
 
     bump 0.6 to 0.7
 
 commit 52073f3ce0b79e69da3dfc30acbbe14138f3acb2
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Oct 11 01:31:14 2013 +0200
 
     add unsupported parameters for zip archive test
 
 commit 5aac0ee04e824822f52c5099953e29bdc413e182
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Oct 11 01:15:09 2013 +0200
 
     check every files from the .list files to find unsupported actions for a given kind of archive. fixes #42
 
 commit 81dfd07664f7c652db0d06082dc1f9eba7d13fce
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Oct 10 23:43:55 2013 +0200
 
     correct typo in error message
 
 commit c78d764db212064046507dacd3a8986a5351b49c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Oct 10 23:19:38 2013 +0200
 
     bump brebis version to 0.7
 
 commit d414e444280c245148b0b6664ad1ee805da8b854
 Merge: 784412b b5d9695
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Oct 10 00:57:59 2013 +0200
 
     merge check-target-link branch into default branch
 
 commit b5d9695a068998387ea288c0f0f00831468da917
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Oct 10 00:35:34 2013 +0200
 
     rename wrong-target* tests and add wrong target in tree test
 
 commit 8d44037e7d321e1238fd2cc4c474b0724f8f913a
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Oct 9 23:49:43 2013 +0200
 
     add wrong targe in tar {bz2,xz} archive tests
 
 commit a2ec7b17ca1cb52d6349ca9c163f337d070cd252
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 7 23:57:39 2013 +0200
 
     update the code to use targe in generatelistfortree and checktree
 
 commit 53c2165e7d93fd5a062fd73e82b94987e1599d5c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 7 23:55:33 2013 +0200
 
     update test_listfortree_translate_type_file test
 
 commit 2fe35d8a0bec19d77563a6578ea40ba4e83d6af6
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Aug 29 00:12:55 2013 +0200
 
     add  target as unsupported feature for gz bz2 zip and lzma archive. rename lists for unsupported features to correct old bug
 
 commit 7610151f4b906879531e156c25013654b6e7606f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Aug 28 23:52:15 2013 +0200
 
     add wrong target in tar gz archive test
 
 commit f7ce0e8ac501fc1d1943dc46c6b173095ad92cfb
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Aug 28 23:48:32 2013 +0200
 
     add target test on tar gz archive
 
 commit 784412bc1d10c2eace7eb2ada7b01adccf75b54e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Aug 27 01:34:44 2013 +0200
 
     control the behaviour when wrong data are in input. fixes #39
 
 commit dbb753a542761b1b449bd4dc2cd204f2bc493b1f
 Merge: 83f2086 2c7ffef
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Aug 27 01:25:11 2013 +0200
 
     define option -G to generate the .conf file. fixes #38
 
 commit 2c7ffefd0df9f8184f51541b015554cba5989d18
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Aug 25 15:20:33 2013 +0200
 
     modify existing tests for generatelist
 
 commit c7a9679042d09c536a6a3c70d6bd205630b330ee
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Aug 25 15:19:24 2013 +0200
 
     add option -G to generate configuration file
 
 commit 83f2086b346d5acc6d1cbc53aad50f17e2a61869
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Aug 16 00:59:02 2013 +0200
 
     Added tag 0.6 for changeset 3b7e8e691fd0
 
 commit 8f96de40908688e9ac48f386e44e137af390d3dd
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Aug 16 00:54:36 2013 +0200
 
     update the changelog for version 0.6
 
 commit 2783040ceda2911c5198e8ec7d8787097a746991
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Aug 16 00:49:39 2013 +0200
 
     update the README for the version 0.6
 
 commit ae2b3740da4037b9685708a27ab7a5d174d4c442
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Aug 16 00:38:38 2013 +0200
 
     bump version to 0.6
 
 commit 115db58ff0b5f2e9e9c825b103ba22aa09ede4a5
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Aug 15 22:02:40 2013 +0200
 
     give the good name to a (rather unused) stat module function S_ISBLK. fixes #28
 
 commit 521f4a106faa61e271d3473db8f99f2b6ae0cb7f
 Merge: 0f0a4a3 d0eb8ab
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Aug 15 02:38:27 2013 +0200
 
     catch EOFError exception triggered while generating/checking a (big) tar archive. fixes #36
 
 commit d0eb8ab10f70c2c13ff16dee3c8d9a37f907c8fc
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Aug 15 02:35:33 2013 +0200
 
     catch EOFError while checking tar file because it is a sign of corruption of the file
 
 commit ed4c8b7d3614b5e5bbb9b2e69dae3c3025f9ad2c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Aug 15 02:16:04 2013 +0200
 
     catch EOFError while manipulating tar file because it is a sign of corruption of the file
 
 commit 0f0a4a3a9c1e646afd076e002fb4c8d570827c32
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Aug 15 01:20:10 2013 +0200
 
     update shebang with debian python3.3
 
 commit ecf3d56a43582c2b599e1e7de7dd87feb3f57275
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Aug 13 01:08:21 2013 +0200
 
     add generate list and parse tgz and tbz2 archive tests. fixes #31
 
 commit 12d9bdd979ee0385ce894cd42924e17927102840
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Aug 13 01:03:01 2013 +0200
 
     fix code error about support for tbz2
 
 commit 971e61ed46480cc5ca337cef793def728db8839b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Aug 11 10:44:42 2013 +0200
 
     check if configuration paths exist. fixes #34
 
 commit db468d6e2c901b6856fef66e279033e2bd1a40d8
 Merge: fd87da5 7f7cbad
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Aug 11 09:56:22 2013 +0200
 
     provide only one configuration file on the cli. fixes #21
 
 commit 7f7cbad82cf255e9573866cd9db5739f5460ede3
 Merge: f7607c7 fd87da5
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Aug 11 09:54:03 2013 +0200
 
     merge to check if only one conf file feature works with latest version in head
 
 commit fd87da579c70f8033eb60e8fea345dc275ae92a4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Aug 10 19:10:51 2013 +0200
 
     create the need directory for wrong file type (hard link) in tree test
 
 commit b3e95c697b284e024e16924d1dd44b781365922f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Aug 10 18:52:44 2013 +0200
 
     update to wrong file type (hard link) to generate the needed hard link  itself
 
 commit a1fba115ae4de2b3cc0fd9e1c0d87e861db15ad0
 Merge: 8fd3397 fa646fe
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Aug 10 13:52:20 2013 +0200
 
     detect hard link with stat. fixes #33
 
 commit fa646feb661bd3c863c59295d12bbe05ca1d81a8
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Aug 10 13:50:42 2013 +0200
 
     activate wrong file type hard link in tree test
 
 commit 41fe3686ad885b6f1802e4f0f7cb338aa9652d03
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Aug 10 13:50:23 2013 +0200
 
     detect hard link for uncompressed tree of files
 
 commit 8fd33973e2c2215f8911f4f93c7fe4df40bf3662
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Aug 10 13:04:52 2013 +0200
 
     add wrong file type hard link in tree - test is useless for now, need #33 to be solved
 
 commit 5fbd86891bfdcc7fad87690a4e725f152db36cd0
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Aug 10 13:00:58 2013 +0200
 
     add wrong file type (hard link and symbolic link) detection tests in tar.gz, tar.bz2, tar.xe and tree of files
 
 commit b7ca15baca6df3867822e21f418adc2c328b6082
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Aug 9 01:26:46 2013 +0200
 
     add expecting hard link for tar gz archive functional test
 
 commit 35535d4d456176e0aa03f1ee6a2499e91e552c12
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Aug 9 01:20:54 2013 +0200
 
     add hard link type support for the error message. fixes #32
 
 commit 93803613b56b627eea9d092de49392275a6f8c87
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Aug 8 01:53:59 2013 +0200
 
     add type l for hard link. fixes #29
 
 commit 43054b62cb94eccb140c12953795adaa1d86a55b
 Merge: 62b2b1e 4f7f571
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Aug 8 01:52:16 2013 +0200
 
     merge support for tbz archive. fixes #25
 
 commit 4f7f5715505e18b921cc54bd7a18b782f3656ea4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Aug 8 01:47:04 2013 +0200
 
     add generate list and parse tbz archive functional test
 
 commit 1ba2cec4d02d2cbe54d8505bbbe6f8bbe1457c00
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Aug 8 01:46:29 2013 +0200
 
     add support for tbz archive
 
 commit 62b2b1eec2dc84855d16720c7170123433b5a56f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Aug 8 00:48:32 2013 +0200
 
     bump to good current version in cli help message
 
 commit 2d687a08c0bf9f0be4bed16955ab2784615379cb
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Aug 8 00:47:20 2013 +0200
 
     add a test for version consistency in setup.py and cliparse.py. fixes #26
 
 commit 88188657f6e9cbb61282efcaff38c940946a9710
 Merge: e5cbe1b b57effd
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Aug 8 00:20:37 2013 +0200
 
     merge alert-message-for-no-conf-files branch to check if configuration files exist at the user-specified path. fixes #27
 
 commit b57effd88abb30a4733d2e0c115eb7011a8d8edf
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Aug 8 00:18:58 2013 +0200
 
     check if configuration files exist at the user-specified path. fixes #27
 
 commit e5cbe1b235b44100b03c63ed43362c2ffefd5159
 Merge: abc1727 97a617e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Aug 7 23:46:50 2013 +0200
 
     add new option to globally switch the default delimiter to a user-defined delimiter to generate the list of files of an archive/path and to check an archive/patch. fixes #22
 
 commit 97a617ec16332b10f817682382e0985e62671a8d
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Aug 5 00:30:15 2013 +0200
 
     update the manual page
 
 commit 9f06844e5022299e18fb1ddf6ae6b7d8d4396219
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Aug 3 23:05:51 2013 +0200
 
     add generate list changing default separator for {tar.gz,tar.bz2,tar.xz,gzip,bz2,zip,tree} tests
 
 commit fcc746e231123e86b36a65be349559f45933e840
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Aug 3 15:52:49 2013 +0200
 
     fix broken tests by the changes for adding the option to swith the delimiter
 
 commit 3ebee399b6928af739fae5b20caaca4014eb586b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Aug 3 15:51:52 2013 +0200
 
     add delimiter option to replace default delimiter in the list of files, both working to generate lists and check backups
 
 commit abc1727ee695a931f612f765ffd01ae26ba623d0
 Merge: 476555b 6838428
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Aug 2 08:34:13 2013 +0200
 
     check if supported archives in listtype.py and checkbackups.py are consistent.fixes #24
 
 commit 6838428e0aa915c437e198e8796f25a5513f6ab3
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Aug 1 20:04:22 2013 +0200
 
     add a test to detect missing archive types between listtype.py and checkbackups.py
 
 commit 65b463ed843c853174d19d5c86e049458afcf7fd
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Aug 1 20:03:38 2013 +0200
 
     add missing support for tbz2
 
 commit f7607c711c488153bf334be40da0e73ad59dda40
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Jul 30 20:10:19 2013 +0200
 
     -c option now manages a single configuration file
 
 commit 476555b8f47bd90e06213cde1a5fbd44fcf837e4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Jul 30 10:54:55 2013 +0200
 
     Added tag 0.5 for changeset 1616effdc58d
 
 commit f90760577f8d0739975d6dde9d40697c67523b31
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Jul 30 09:51:01 2013 +0200
 
     add the brebis changelog
 
 commit 326eb631c6ff8a0f468a6e4155e92800834f237c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Jul 30 09:30:01 2013 +0200
 
     add a small script to generate archive given the current version in setup.py
 
 commit 0461db94e8edba20910480900ce768d953f7f1e2
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Jul 29 20:05:22 2013 +0200
 
     switch the shebang to system path for python3.3 on debian linux
 
 commit 746b53d7a27a58f9773f02d75ade06927df50204
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Jul 29 20:04:42 2013 +0200
 
     replace logging.warn (deprecated) by logging.warning
 
 commit bce51296f148798be59152ae2d41d5069d84e883
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Jul 29 19:47:39 2013 +0200
 
     switch the shebang to system path for python3.3 on debian linux
 
 commit 113d8d52d830bc4c26a69011b3ee1b99c5c87d88
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Jul 29 19:43:22 2013 +0200
 
     bump the date of the copyright to 2013
 
 commit 0d617089db5f2ea2d59c59d796bb5c87b061eec1
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Jul 29 00:13:53 2013 +0200
 
     add a manual page for brebis. fixes #23
 
 commit a6d1a3ba45891ddcf7feba0cdfa0cb5afe8de5d0
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Jul 28 19:43:07 2013 +0200
 
     add in the README that using .conf for the configuration file is mandatory. fixes #19
 
 commit d8c801a9051eec8f2419b684a584ae411ff627dc
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Jul 27 14:36:35 2013 +0200
 
     update the README for python 3.3 and brebis 0.5
 
 commit 89e63989174bba33e90aa989feffbe6a4e3147f7
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Jul 21 14:49:27 2013 +0200
 
     update to python 3.3 and brebis 0.5
 
 commit d21b99f1266b17a843a25b0c0f5e4fa64df107de
 Merge: 54e7037 e3267f4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Jul 19 12:06:01 2013 +0200
 
     merge support for lzma in the default branch
 
 commit e3267f4015dfd203b1f7c164a8f3b7a965e300aa
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Jul 19 00:31:15 2013 +0200
 
     add expected generated list for xz archive test
 
 commit 9a91ee21e3495293c9f28637a58c3ad7efea22eb
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Jul 19 00:04:58 2013 +0200
 
     fix bug with the filename in the .list of a xz generated archive & add generate liste and parse parameters xz archive test
 
 commit 73e72f050a1e937269bf8e42d694b012853317c5
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Jul 18 23:31:34 2013 +0200
 
     add unsupported parameters xz archive test
 
 commit 684ae13c2e14b98423bf612de0820a1d593736fb
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Jul 18 23:19:49 2013 +0200
 
     add file missing in xz test
 
 commit 9f779953dcb2f1cab07765171040f1b2fcdb3dd0
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Jul 18 20:34:59 2013 +0200
 
     not easily possible to get lzma/xz uncompressed file size - maybe later
 
 commit e039382848c266ef9ac61d4a76df1411850d9aa6
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Jul 18 19:58:02 2013 +0200
 
     add corrupted xz archive test
 
 commit 64e1e5f33ee01cb8f09ffff96f85bea673a99a09
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Jul 18 19:27:22 2013 +0200
 
     add expected file smaller than file in tar xz archive test
 
 commit ad0c27c61937641570b2171cabb5078222956735
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Jul 18 19:20:06 2013 +0200
 
     add expected file not equals file in tar xz archive test
 
 commit c4c10ef0aef5075ee4b4f91f02825ae46623c42a
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Jul 18 19:09:25 2013 +0200
 
     add expected file greater than file in tar xz archive test
 
 commit cddde8df44e84676c4783c2e90878b0dc91d9075
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Jul 18 14:16:55 2013 +0200
 
     add corrupted tar xz archive test
 
 commit 756ea60fa5eb45b7e3493cb5c6b73b6521ecc1dd
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Jul 18 14:00:04 2013 +0200
 
     add unexpected file in tar xz archive test
 
 commit d153e6c477f7e02be0f0608899893c54f2bb2707
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Apr 27 18:45:11 2013 +0200
 
     add wrong file sha512 in xz archive test
 
 commit 67be34bcef4bdffcc052daf09765065b7845491f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Apr 27 18:37:37 2013 +0200
 
     add wrong file sha384 hash in xz archive test
 
 commit 86b5ec691f08809df0ebc2218301e3fc08c1bcc9
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Apr 27 18:29:45 2013 +0200
 
     add wrong file sha256 hash in xz archive test
 
 commit c6d0cd0e87eaa4a05552b0ebeb1d00553c76f3dc
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Apr 27 18:23:25 2013 +0200
 
     add wrong file sha224 in xz archive test
 
 commit ba906f5c5e9cb68d24c9c24fab6e9a4b71a4c1f6
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Apr 27 18:17:11 2013 +0200
 
     add wrong file sha1 in xz archive test
 
 commit 78048a5b2b4b6f3155dfd738531f616a9095ea3a
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Apr 27 16:53:39 2013 +0200
 
     add wrong file md5 hash in xz archive test
 
 commit 4664eedea2c02603d43ec8a9771c8439bdc93473
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Apr 27 16:32:05 2013 +0200
 
     add wrong file sha512 hash in tar xz archive test
 
 commit 1c1104ed0687735462b24fe0edc7faf4c5af2a3c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Apr 27 16:20:34 2013 +0200
 
     add wrong file sha384 hash in tar xz archive test
 
 commit 9b7ce7d3409c99f53ba88f1d282983561116a3ca
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Apr 27 16:13:43 2013 +0200
 
     add wrong file sha256 hash in tar xz archive test
 
 commit 6cc21a420e4f9238e458d8a9ded30456ce8b57d4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Apr 26 13:24:28 2013 +0200
 
     add wrong file sha224 hash in tar xz archive test
 
 commit 685aa731e8cffcb1caf1b247a92fdfc078678a1f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Apr 26 13:04:41 2013 +0200
 
     add wrong file sha1 hash in tar xz archive test
 
 commit a9f9fb0d2a6155054326f771e7e2fb0440f56a24
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Apr 26 12:58:42 2013 +0200
 
     add wrong file md5 hash in tar xz archive test
 
 commit 7586b2fdc8a9c8ff63f26d8862be6dfb3b48bd33
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Apr 26 12:45:44 2013 +0200
 
     add wrong file type f in tar xz archive test
 
 commit ed3b14b6f442c971ed8ea3610b8e7df746277356
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Apr 26 12:33:54 2013 +0200
 
     add wrong file type d in tar xz archive test
 
 commit 2408fc545ae18864eeda5c4543b6f1ecf06e4638
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Apr 26 12:15:33 2013 +0200
 
     add wrong file gid in tar xz archive test
 
 commit 2c02d490a3a41ed556232d368e55a1e3c5a6992f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Apr 26 12:08:44 2013 +0200
 
     add wrong file uid in tar xz archive test
 
 commit d7e9d83797b859683b239a908fcdf362a22d62e1
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Apr 25 21:05:39 2013 +0200
 
     add wrong file mode in tar xz archive test
 
 commit a2ad59835c84afa9398c7e89b8eecf737702fcba
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Apr 16 01:10:54 2013 +0200
 
     add wrong bzip2 archive gid test
 
 commit bb7988233f935fe4de0e4028e76fb3d88c67326d
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Apr 16 01:01:33 2013 +0200
 
     add wrong bz2 archive uid test
 
 commit c6b4d4f8ba95e6b2fd690deeac6ad8310cacc2df
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Apr 16 00:53:26 2013 +0200
 
     add wrong xz archive sha512 hash test
 
 commit f8c642d12aeb413067373c0dbe5412ba3f35df13
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Apr 16 00:47:55 2013 +0200
 
     add wrong xz archive sha384 hash test
 
 commit 0a3462f80c26f94d7f8f4d16a2dbef4ae0fcacaa
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Apr 16 00:42:14 2013 +0200
 
     add wrong xz archive sha256 hash test
 
 commit 0476f5fd54a686c961830fec5ddc3b936ea6ac8c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Apr 16 00:36:02 2013 +0200
 
     add wrong xz archive sha224 hash test
 
 commit 2291bff870e17d15457ee470b6fa68c2816af638
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Apr 16 00:31:02 2013 +0200
 
     add wrong xz archive sha1 hash test
 
 commit 6921cc10797c1968c4856f3a13dd27d3df194926
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Apr 16 00:24:54 2013 +0200
 
     add wrong xz archive md5 hash test
 
 commit a36fb0017ec222ed540c5edb27a3d8f65e9273ce
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Apr 16 00:18:56 2013 +0200
 
     add wrong xz archive mode test
 
 commit c73a1b098bc50c245a3f46154380cc7c60a318f5
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Apr 16 00:13:30 2013 +0200
 
     add wrong xz archive gid test
 
 commit 61c3783b45f23e217ac1f434660aaadda68ff18d
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Apr 16 00:09:15 2013 +0200
 
     add wrong xz archive uid test
 
 commit fd34302503d7bccc5fc7998a37bd8c5348eb8393
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Apr 15 00:33:21 2013 +0200
 
     add wrong tar xz archive sha512 hash test
 
 commit f54d47a47867f1b3f2a5939716af3d268591dabd
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Apr 15 00:29:27 2013 +0200
 
     add wrong tar xz archive sha384 hash test
 
 commit 831e61dce4c044353f8ea88ee24b916c75c75cea
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Apr 15 00:22:02 2013 +0200
 
     add wrong tar xz archive sha256 hash test
 
 commit 43b7845ba168c699b335eb57e9f8540c4b04476e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Apr 15 00:14:09 2013 +0200
 
     add wrong tar xz archive sha224 hash test
 
 commit e156d8083da648b232048c400ec463891bdddab5
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Apr 15 00:02:48 2013 +0200
 
     add wrong tar xz archive sha1 hash test
 
 commit a9aa52074278f0c8db91d5c447729aa0e1d24bc8
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Apr 15 00:02:27 2013 +0200
 
     add wrong tar xz archive sha1 hash test
 
 commit c3190b853886380fdbb725bdf7344be976979d6a
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Apr 9 23:55:33 2013 +0200
 
     add wrong tar xz archive md5 hash test
 
 commit b60d02d159d00d1045cc8ae6a2bcba95deed0944
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Apr 7 01:45:46 2013 +0200
 
     add wrong tar xz archive mode test
 
 commit 51526e5d9ff557aacde8be0dbd9f7c5d42e19ad4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Apr 6 18:25:15 2013 +0200
 
     add wrong tar xz archive uid and gid tests
 
 commit ad512854cb6b87688b34f1a61ae47f83e5792af5
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Apr 6 17:52:34 2013 +0200
 
     add tar xz archive size smaller than expected size test
 
 commit 12e0f953c8f27696705cab3b3670abc4d8d679f5
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Apr 6 01:27:07 2013 +0200
 
     add tar.xz archive size not equals expected size test
 
 commit 5293912d6a7adfc4779f829976d282f40e011a98
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Apr 4 08:22:49 2013 +0200
 
     add a test for tar zx archive size bigger than an expected size and removing unexpected a.out file
 
 commit 6e1acb22028ac77f9dc16f0e20d73d461966918b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Apr 4 08:15:26 2013 +0200
 
     add test tar-xz archive size bigger than an expected size
 
 commit 1d4f753c001c003be3fa5e9fc08603ba73fa2873
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Jul 24 01:12:41 2012 +0200
 
     add support for tar.xz files and add two functional tests for xm format
 
 commit 5b3814683eaf7fa347a28ee53b0bbd715cc978d1
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Jul 23 01:16:03 2012 +0200
 
     support for lzma and first functional test
 
 commit 54e703767f6e9c321063f08aa849b89b15d1be00
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Nov 21 21:30:24 2011 +0100
 
     Added signature for changeset 955e902e51c8
 
 commit 495a72baee17bf2dddefdacd423ba99c7a6640fe
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Nov 21 21:29:44 2011 +0100
 
     Added tag v0.4 for changeset 955e902e51c8
 
 commit 0bcf32dffe6a57a0ea09f7c1e0939a4f9d0a4b66
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Nov 21 21:24:08 2011 +0100
 
     add comment about delimiter optional field
 
 commit 5a3cfae47e7d540eb9f1469f9966fd228c2e3b36
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Nov 21 01:30:13 2011 +0100
 
     modify setup.py in order to manage new packages brebis.checkbackups and brebis.generatelist while installing
 
 commit c7cf1ecb4e1bbd036feb5520d6683e7d082d29c2
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Nov 21 01:15:13 2011 +0100
 
     update for version 0.4
 
 commit f01876c52e14841cb9adde5b9a55e4d2dc4bc8e3
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Nov 20 13:41:28 2011 +0100
 
     fixing issue with no perm, in generatelist part
 
 commit d2fb241cd3d1cda55a6f65239f00e3affcfc109c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Nov 19 17:50:42 2011 +0100
 
     fixes #14, size unit can now be lower or upper case
 
 commit fcf49db55f81bda3e258de338365a427af31ecc0
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Nov 19 17:32:35 2011 +0100
 
     fixes #15 managing special cas when mode == '0' -> transforming into '000'
 
 commit 5b2f7de772964d60dfcefef773ac3660a78c5337
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Nov 19 16:50:55 2011 +0100
 
     fixed #16 correcting a bad format using non-existing keyword size (should have been =)
 
 commit a5794664d74a91aff485bf713d6b11ab04f68e34
 Merge: 60f1957 5711a7b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Nov 18 00:23:29 2011 +0100
 
     merging branch for archive size functional tests
 
 commit 5711a7bce2a9f404d730577a25a5c7447720cab7
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Nov 18 00:22:00 2011 +0100
 
     adding functional tests for testing smaller than parameter of the size of an archive
 
 commit 20028ca3184271bf2646eacc3ca696d3c5dbb938
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Nov 17 23:53:22 2011 +0100
 
     adding functional tests for testing bigger than parameter of the size of an archive
 
 commit 3685aaf3c42f91f5c276a3798f45434972807f60
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Nov 17 23:11:02 2011 +0100
 
     adding functional tests for testing equality of the size of an archive
 
 commit 60f19570bf88793316fa20b2ca909fa4807b5dee
 Merge: b9b6ea5 bb7b6a0
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Nov 17 22:12:15 2011 +0100
 
     merging -g option branch and updating version number
 
 commit bb7b6a0d798babec03b440c0b3a326bef807e6c7
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Nov 14 23:58:06 2011 +0100
 
     achieved to write functional tests for the tar-only archive
 
 commit cd4a793945d9adea10783188c881b1fbb75f46bd
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Nov 13 23:53:12 2011 +0100
 
     added unit tests for tar-only archive type
 
 commit beedce2bbef19e8e62a2fbcd84a2a545f4792d03
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 9 00:51:47 2011 +0100
 
     support for user-specified delimiter, unit tests and functional tests, removed number for each functional test
 
 commit 4cb7dcaeb3d9f1172531f0b22e10a37f5c078514
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Nov 7 03:19:40 2011 +0100
 
     intermediate commit for -g option and new delimiter and custom delimiter
 
 commit b9b6ea5ce93ed668eb701e56b4037970e7a2293d
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Nov 5 02:42:48 2011 +0100
 
     adding directory for unit tests
 
 commit e285701e75f3d426eff0c411b57424240081a737
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Nov 5 01:31:10 2011 +0100
 
     adding unit tests for private/protected methods
 
 commit 7bb988455e3fa2c05238bb03f1264604774cf228
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Nov 4 23:31:12 2011 +0100
 
     upgrading version number in setup.py
 
 commit a22d39d402a850b88eae3f5b02ec32d2efa620cc
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Nov 4 23:30:19 2011 +0100
 
     upgrading version number in README
 
 commit 7fe63b27a24f194f4744138704162f9391edfefc
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Nov 4 23:28:24 2011 +0100
 
     upgrading version number
 
 commit c9dccae4825fedc93fe1313c6e471add9d1f4fab
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Nov 4 23:22:20 2011 +0100
 
     correctiong unit tests to manage new check modules organization
 
 commit 323b61dfc85114aa0e739b81bfc0f0bb41e89bd7
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Nov 4 23:08:06 2011 +0100
 
     fixed #9 - support for tar-only file
 
 commit 524fafb31b06abcf8c10d5fbef0a5a1b4ce1f76e
 Merge: 0fb7337 525959c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Nov 4 10:15:39 2011 +0100
 
     fixed #11
 
 commit 525959c366cab81ea0dd5ecad81a1227ab7d9dbe
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Nov 4 10:14:48 2011 +0100
 
     fixed #11 - new package checkbackups
 
 commit 0fb73371177abd0779779c0a70ebb57b29a11da9
 Merge: 93ce6ba 75041ac
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Nov 4 09:59:18 2011 +0100
 
     merging generate-list-files branch and default branch
 
 commit 75041ac4c793f146683d5c0acc8b749ebd084712
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 2 00:03:05 2011 +0100
 
     final tests generate and parse for --gen-list option
 
 commit 59c5ff5156458e258f81d6479876ce6c6bef4aee
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Nov 1 22:54:46 2011 +0100
 
     removing expected-generated-list-for-tree because of lack of portability
 
 commit dcd1583a9917226ecb1966f7f40cd097e39ba57a
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Nov 1 17:37:11 2011 +0100
 
     functional tests for expected generated list files
 
 commit 4da23acbde4ab36414f2423fa739f1f5e99592e1
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Nov 1 15:57:08 2011 +0100
 
     added the support of generation of list of files for gzip archives
 
 commit 6f02a0f02f45b174e94603bea44ed8ebee51baff
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 31 01:48:28 2011 +0100
 
     complete generated list for tar,zip,tree
 
 commit ebe30e99a673deb202b21a2fb0923af84751b074
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Oct 25 23:41:36 2011 +0200
 
     added the support of generation of list of files for tree of files
 
 commit 028139303627c34bf81e43f4177ec77e425a4232
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Oct 23 01:01:55 2011 +0200
 
     removing unwanted file list from hg watched files
 
 commit 01a803c07717277403e41eaed1920a1bc64bca29
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Oct 23 01:00:16 2011 +0200
 
     generate list of files for tar and zip archives - tree incoming
 
 commit c6163c01ec1b5c160f87eee84b9c42214fb464bd
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Oct 20 02:12:20 2011 +0200
 
     seems to begin to work - issue with name of output file and headers of generated list solved
 
 commit 5a94ba7718544010cf56c288fe8d86b199c5f075
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Oct 20 02:07:30 2011 +0200
 
     seems to begin to work - a problem remains with the output file named tlist
 
 commit e4cc245e805a6b6a896d8bea65978ccf6975def4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Oct 20 01:25:10 2011 +0200
 
     added generate list modules for archives and tree
 
 commit 9aa5be9895d90d57732bb92b06515185430619f4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 17 02:03:16 2011 +0200
 
     first commit with beginning of support to generate list of files in the archives
 
 commit 93ce6ba543eb7e0281019e0e2d1b65dc4f10da36
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Oct 12 22:09:27 2011 +0200
 
     Added signature for changeset 5a1340cb05cf
 
 commit a9ecff88f5be55929e42830c1e9db01db2ac5ee2
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Oct 12 22:07:37 2011 +0200
 
     Added tag v0.3 for changeset 986f90788294
 
 commit 3d9a66149f542ba916a14c29be9887510f100b6a
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 10 22:25:46 2011 +0200
 
     updating version field
 
 commit b7e3e6cf4fbb0851ac4fbe0a09b1bd25ace1d87c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 10 22:22:58 2011 +0200
 
     updated README
 
 commit 7dffc0a91041190630e0a1638a168fd60d21f3fd
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 10 22:10:20 2011 +0200
 
     setting version to 0.3
 
 commit 8cf238ef552049445df699abc630d0e100717a3a
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 10 22:09:19 2011 +0200
 
     replacing parameters tuples by sets
 
 commit 4621fc33b61adadbbb119f444e8a21f5c63c2940
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Oct 9 22:35:20 2011 +0200
 
     adding support for warning about archive limitation for bzip2 archive
 
 commit eae5ac0263e735b5dcfb08e246dadd461eeba0b1
 Merge: 74b386b fa065fb
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Oct 9 22:28:15 2011 +0200
 
     merging the branch for test limitations for archive and default
 
 commit 74b386bc712521658f3e40ac209c6644f5b619dc
 Merge: a430b52 2632166
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Oct 9 22:21:23 2011 +0200
 
     merged support for bzip2 only archive in default branch
 
 commit 2632166adbe395508ab488202c8b289286430503
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Oct 9 22:18:48 2011 +0200
 
     added default parameter type for file inside a bzip2 archive
 
 commit fa065fb610ade4e6d5053256c71c0c6023fff502
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Oct 9 22:09:35 2011 +0200
 
     added support for warning user about current archive limitation
 
 commit 543e30411c7befc87b536dcc2609dc2851501e1e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Oct 9 12:52:18 2011 +0200
 
     added functional tests for file hash in bzip2 files - added unit tests for hash in gzip and bzip2 files
 
 commit 5bb71daea4030dd0393f0ffb12c725e5793cc5ef
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Oct 9 11:40:31 2011 +0200
 
     functional tests for hash of the bzip2 archive
 
 commit 56b8c877dd75ce8e6d3d2ac01d79d05bd3938810
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Oct 8 19:21:30 2011 +0200
 
     Support for missing file and default size - associated unittests
 
 commit 996e143ee306877ed3264e16d6e3f8b259c98428
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Oct 8 18:16:07 2011 +0200
 
     support for corrupted bz2 archive detection and associated test
 
 commit 81a245cfeab36c21f610d282d261482bf2f938f5
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Oct 8 16:55:34 2011 +0200
 
     corrected mistakes in docstring
 
 commit d34822549f0727e9c9426d4cc70b05d863c8910b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Oct 8 16:41:11 2011 +0200
 
     corrected docstrings
 
 commit a430b5221665c96386403d6bda41b08b07ec6f71
 Merge: 37ee442 6d02301
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Oct 7 20:29:37 2011 +0200
 
     merging support-for-gzip branch with default branch
 
 commit 6d0230199d5ea37959bcfc7c32f5d4dd9557defc
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Oct 7 20:28:28 2011 +0200
 
     acceptable detection for gzip archive corruption
 
 commit e824dcda21b4053b83d5a5dd4064c5f47e8eb0d3
 Merge: 3edb894 37ee442
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Oct 7 19:46:22 2011 +0200
 
     synchronzed with default branch
 
 commit 37ee4423fb112ed4185af199c637c61e9faee9aa
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Oct 6 23:54:05 2011 +0200
 
     reverting last fix -not the good way to do it
 
 commit 4c2f669dfb3ee33e650b93e933bb112ff7f52499
 Merge: 3d08e49 74f302a
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Oct 6 22:57:11 2011 +0200
 
     fixed #8 support for error detection in gzip archive
 
 commit 74f302aed83744dab96f67e05a7e51a217ecaa4e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Oct 6 22:51:29 2011 +0200
 
     added support for error detection on gzip archive
 
 commit 3d08e49a3f01f7f58974d0661158e46d716098aa
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 3 22:23:21 2011 +0200
 
     Added signature for changeset b746a25ea5dc
 
 commit 107ada589f0901be511fa21af303aae81ad28012
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 3 22:22:57 2011 +0200
 
     Added tag 0.2 for changeset b746a25ea5dc
 
 commit 518d3fd1fe7049b25e849ca2ef9233195b35314b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 3 22:22:12 2011 +0200
 
     fixed version id
 
 commit 850697cc986994445db28315794e4038e52161c2
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 3 22:19:42 2011 +0200
 
     Removed tag 0.2
 
 commit 5444a2c10247a8b302278389d35026f537158ba5
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 3 22:13:17 2011 +0200
 
     Added signature for changeset 333cde7ecab7
 
 commit 542713ed8642dd0909cd2406066afec2938209d9
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 3 22:09:05 2011 +0200
 
     Added tag 0.2 for changeset 333cde7ecab7
 
 commit 6ea81bafa4462be9ad9fe9478c147c3ed1e0ce33
 Merge: 1f3b04f 3edb894
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Oct 3 21:38:43 2011 +0200
 
     merging support-for-gzip in default - fixes #3 #5
 
 commit 3edb894c5e94ff187aca9b864506e6a7bd34a120
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Oct 2 23:27:58 2011 +0200
 
     added unit tests for the new CheckGzip class private and protected methods
 
 commit 87fa08d2a0788026c887dd2c5b6a00665101cc83
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Oct 2 23:26:53 2011 +0200
 
     solved an issue with unclosed file object
 
 commit 88d83284f03b2736744412aa8e3987fc26521c9a
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Oct 2 21:42:22 2011 +0200
 
     added gzip archive to full criteria multiple backups functional tests
 
 commit 4369578345154a3109a34cd825d46c10e6044e8b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Oct 2 21:06:46 2011 +0200
 
     added functional test for unexpected file in gzip archive
 
 commit 79d82c49e94b57e97a30462943d173ba3522bdf4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Oct 2 14:16:06 2011 +0200
 
     added functional test to check a missing file in a gzip archive
 
 commit a4dac2d552903f864c8376974fcdd3977072db8a
 Merge: ae6eab8 7d12ee5
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Oct 2 14:07:01 2011 +0200
 
     merging current branch and add-missing-types branch
 
 commit 7d12ee5ab3fe4fedbf4bf77c8d5d62465fa8667e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Oct 2 14:04:35 2011 +0200
 
     support for hash checking for file in gzip and associated tests
 
 commit 97ea9b1f36e78e1d8422d43d453ef7507aef6d19
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Oct 2 14:04:15 2011 +0200
 
     tarfile.CONTYPE -> tarfile.CONTTYPE
 
 commit ae6eab8077d8401cfd650f1b6a8edb51ac8fb730
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Sep 29 02:27:18 2011 +0200
 
     added support for initial filename in gzip and associated test with corrections on existing gzip tests
 
 commit e6930f9ef462c462cc307b93e3d1286c396e3d46
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Sep 28 23:13:59 2011 +0200
 
     added tests bigger than and smaller than for file inside gzip archive
 
 commit 4bda1595c8f9e43a260402cdb508be9ba39a7788
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Sep 28 01:50:24 2011 +0200
 
     adding files for equality functional test
 
 commit b2e19f08f217c9e6e0bf125fbdb688caa60acc03
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Sep 28 01:47:00 2011 +0200
 
     added support for size test on a file inside the gzip archive + equality functional test
 
 commit b7018793e59f55857bb3c47b78d28fc2411e60c5
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Sep 28 00:32:10 2011 +0200
 
     added support for gzip file and associated functional tests
 
 commit 1f3b04f1c3f4092fbdeef5af8bfe223123b88b7f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Sep 24 11:43:10 2011 +0200
 
     Added signature for changeset ec91cf3e3652
 
 commit 76c133b3ffc6eb247c62d02ad934eb43223e29ef
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Sep 24 11:21:29 2011 +0200
 
     Added tag 0.1 for changeset 95d79ac84890
 
 commit 78d0344d70075bd79aaec01fad4b6390d9ba76d9
 Merge: 9951ea9 8505eaa
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Sep 24 11:14:02 2011 +0200
 
     updating README
 
 commit 8505eaa3edf478244c05593b9bac76a52b3a6fce
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Sep 22 23:42:20 2011 +0200
 
     fixed issues with multiple backups/criterias test
 
 commit e7aac4ebfcf936ff0ac747d6ee34e3378bbd9f2f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Sep 22 23:21:55 2011 +0200
 
     written test for multiple backups with several criterias
 
 commit 0dced8f3495658c4f2057a1adbad88a76e69e5ab
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Sep 22 01:21:40 2011 +0200
 
     fixed a bug with double entries in list file - configparser error not catched
 
 commit d71bdc2d682ef5c9bc0e8abbadbdfcc5eaff0da1
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Sep 22 01:14:26 2011 +0200
 
     writing a functional test with all the criterias for several backups in one launch
 
 commit 7a78f39597bbecfc4d222ef8048767357e4e13b3
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Sep 22 00:38:33 2011 +0200
 
     empty directory made mercurial skips the repertory and fails the test93
 
 commit 5ccffbb90945270a45188f6f9d857d7a1a52ec2e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Sep 22 00:06:09 2011 +0200
 
     fixed a bug when in configuration type is archive and a path to a directory is given - also wrote functional tests
 
 commit a2dd80ca29d24823f2d18f3278ead39d2e527b32
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Sep 21 23:03:48 2011 +0200
 
     added functional tests on the size of the files inside the archive
 
 commit 24c35c2bbdee6bb8ec0399a44885f187a2ac6565
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Sep 21 21:40:50 2011 +0200
 
     added test2 docstring in functionaltests.py
 
 commit f20d3bf6e82dcc319d5df81bf7508b882d67c2c5
 Merge: 2a9387c 4cb8b94
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Sep 21 21:24:25 2011 +0200
 
     added changes from shell-variable-in-functionaltests-py branch
 
 commit 4cb8b9470a1104ae5999e592ba2b3fde6912e71d
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Sep 21 21:23:40 2011 +0200
 
     functionaltests.py is now supported by buildbot
 
 commit 2a9387c0390cfa72d7a9a3ecf2d89de9a716a6f4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Sep 21 00:43:56 2011 +0200
 
     added AUTHORS, LICENSE and README files
 
 commit 27a35830db2438207f468e2314b31cd26cfa9e07
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Sep 19 23:52:52 2011 +0200
 
     corrected a permission denied bug while creating the logging brebis file in unauthorized directories
 
 commit 38261a61bc878b60a8d06a9ad0b2d2f337e1e696
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Sep 19 21:56:52 2011 +0200
 
     modified root directory structure in order to ease developement process
 
 commit bef5ba6ccd2f215e15b44d14808496162d213a73
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Sep 19 21:24:31 2011 +0200
 
     functionaltests.py provides error output and error status
 
 commit 26cd32d12ca02f50fa1496c5b56d6bb531cb4263
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Sep 19 21:06:13 2011 +0200
 
     added a test to check if two config files with the same names are rejected
 
 commit 313c06f75842006514c347746f62c795e2b88679
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Sep 18 20:03:52 2011 +0200
 
     fixed unit tests in order to be portable
 
 commit 99be963629c19193dd831b37ed46c09153252d54
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Sep 18 19:31:28 2011 +0200
 
     added comment on functional test1
 
 commit e8e034eda54e8b1288a057a4d607de19f4547a0f
 Merge: 1e0481c f3da1fb
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Sep 18 00:18:26 2011 +0200
 
     merged with removed-checkhashes-class in order to removed no more used part of the code
 
 commit f3da1fbaf3c4f5cd7c623e530b63f080470b7eac
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Sep 18 00:16:41 2011 +0200
 
     removing unused CheckHashes classes and associated tests
 
 commit 3254fe187391206284a4db8e5bdf0f0d885acd1c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Sep 18 00:04:24 2011 +0200
 
     created remove-checkhashes branch
 
 commit 1e0481c5f4762d5603c1886c8182e95bfbb367fe
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Sep 17 23:31:33 2011 +0200
 
     added functional tests to identify corrupted zip archive
 
 commit b422523f6db8b471f633d8c68b66368ba3d34611
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Sep 17 23:31:07 2011 +0200
 
     added cleare warning message about zip archive corruption
 
 commit 835a66127e88a24bfe1dc2418f4493960a969030
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Sep 17 23:14:05 2011 +0200
 
     added functional test to identify corrupted tar.bz2 archive
 
 commit f1e7a2ee14e7027073805a999c849c4f97b66edf
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Sep 17 22:53:41 2011 +0200
 
     added functional test for tar.gz corrupted archive
 
 commit a0483bdfcea3044f89c3de36238ac459d8cf820b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Sep 17 22:52:40 2011 +0200
 
     discriminating archives by their extensions
 
 commit 7abaccb4a3f8f0fe0f33766a3b248db096aeb1a0
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Sep 17 19:11:40 2011 +0200
 
     added unit tests for private/protected methods in checktree.CheckTree
 
 commit 5803c090db9b5c3193d97e1e09f86542488c78ac
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Sep 17 19:10:42 2011 +0200
 
     switched from os.stat() to os.lstat() to identify symbolic link
 
 commit c44761b0c7b6f69a863892171feda2425d8d9517
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Sep 17 17:18:21 2011 +0200
 
     added unit tests for private/protected methods in checktar.CheckTar
 
 commit b1d8e622c1274560c2ef8088dc4a9792e67d0661
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Sep 17 15:24:27 2011 +0200
 
     added unit test for checkzip.CheckZip__extract_uid_gid private method
 
 commit 4b24065f7e5cc6965197fbbf05df84ed37fdd019
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Sep 17 15:09:45 2011 +0200
 
     added unit test for checkzip.CheckZip__extract_uid_gid private method
 
 commit 020b8a391035600722103e772dd1bd4dde7aa572
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Sep 17 15:01:40 2011 +0200
 
     added unit tests to check checkzip.CheckZip.__translate_type method
 
 commit b97320171ad94d860b7a3ab9ad488efd87096f11
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Sep 17 01:33:02 2011 +0200
 
     simplify functional tests by cutting in half the number of lines of code
 
 commit 342e4230d9c8f30f6321759a938e63975da237a1
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Sep 16 01:33:01 2011 +0200
 
     corrected bug on directory, normalizing in striping the trailing slash because of possible wrong user input
 
 commit 1d2c649c361bdf97fbdbe21df3191aa7de4074a7
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Sep 16 01:02:43 2011 +0200
 
     added tests for wrong file mode in zip, wrong file type directory and file for zip archives and wrong uid and gid for files in zip archive
 
 commit 6cb00105241729ded0275260a301e2b405710c14
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Sep 14 23:59:18 2011 +0200
 
     added support for mode checking in zip archive and associated functional tests
 
 commit 5d5b16b9d3aeff84f81ed83a2d1d0bec38a3592d
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Sep 13 23:01:07 2011 +0200
 
     added tests for file mode and type (f,d) in the archives and trees
 
 commit d103d5776fc8e46fc79b6f99d903784751bb1675
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Sep 13 03:44:29 2011 +0200
 
     functional tests to check hash in tar.gz,tar.bz2,zip and tree
 
 commit 1eec1c8525c247be27666ef22dffb24d62a90a00
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Sep 12 02:33:49 2011 +0200
 
     added functional tests for wrong hashes for files inside tar.gz and tar.bz2
 
 commit b4dd930cba386972ca5ca459facd385ea4d5f0c8
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Sep 11 15:15:13 2011 +0200
 
     added tests for unexpected files and for wrong uid/gid for files inside archives and tree
 
 commit e95672f48b2c8589865d1a57a47506e3b65dee68
 Merge: 8e0460e 0503522
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Sep 11 04:09:16 2011 +0200
 
     merge queue use for multiprocessing communication in functionaltests.py
 
 commit 0503522e85554153de4c8c4b5c8fc7e3d3d152ae
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Sep 11 04:07:53 2011 +0200
 
     added queue for multiprocessing communication in functionaltests.py
 
 commit 8e0460e5b57590e7057cc279eb1568da9eada0b5
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Sep 11 02:50:31 2011 +0200
 
     added locks for functional tests access to print and wrote uid/gid tests for file inside the archive
 
 commit e6c9f131dbbb95930c7b0073a354df1b626e310c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Sep 11 00:47:38 2011 +0200
 
     moving functional tests to functionaltests.py with introspection to simplify the code
 
 commit 2548cd8b7b0dd99e3e178a48bd5439c183a6afad
 Merge: bab9e54 29b7f6f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Sep 11 00:23:50 2011 +0200
 
     using multiprocessing for functional tests
 
 commit 29b7f6fe87fc62c59d5ce57360dda33d0292a48e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Sep 11 00:09:26 2011 +0200
 
     added multiprocessing to execute functional tests
 
 commit bab9e54382cbf14adde093f96fae31f3c81bd5f4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Sep 10 23:28:25 2011 +0200
 
     added functional tests to check the hashes of zip archives
 
 commit c92779ca25d0e90bce514b023c5a081484ecdd91
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Sep 10 18:14:39 2011 +0200
 
     added functional tests to check the hashes of tar.gz and tar.bz2 archives
 
 commit 4785b64e3c0604ee0bc19de13ca19c82bf019491
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Sep 10 15:48:14 2011 +0200
 
     added functional test to check the gid of an archive
 
 commit 760ab2132d6496c04823c8051b7b88ea1bfe535f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Sep 10 15:31:25 2011 +0200
 
     added functional test to check the uid of an archive
 
 commit eb68547ed33a38e54bfbc9456c4dbcf8a50c9d35
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Sep 10 15:13:54 2011 +0200
 
     added functional test to check the mode of an archive
 
 commit a3f24c2b08297d62cb8472116b64c95eb772aea0
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Sep 10 14:37:00 2011 +0200
 
     added functional test to check file missing in tree
 
 commit b0f7552c552fd1548240b83383ccc1be695112fa
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Sep 9 00:23:34 2011 +0200
 
     adding functional tests to complete unittests
 
 commit 4bbe19c31d7259e955cddbf7c228f9f1afdb0f0e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Sep 7 23:29:15 2011 +0200
 
     improved the syntax of the list of files for tree
 
 commit 7431b2926bf1827902d02f92688ffa592e8cb77a
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Sep 7 22:33:07 2011 +0200
 
     catch correctly ConfigParser errors from the expected values file
 
 commit 563325bbb637b23ab6f726b1c04ddb172fffcbb9
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Sep 7 00:21:11 2011 +0200
 
     fixed corrupted zip detection
 
 commit bb725b5d2bf9b6114d678b0589f1870064540622
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Sep 6 23:24:32 2011 +0200
 
     fixed unpleasant syntax for the hash of the expected archive
 
 commit 9951ea92469410b6cf8c83c3b63a95cc2aaacd4b
 Merge: cb479cd 01ccfd8
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Jun 25 16:26:25 2011 +0200
 
     merge with most recent branch
 
 commit 01ccfd82392e35837e321dcce80c66ec56d01d36
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Jun 24 15:54:08 2011 +0200
 
     issues with relative links fixed thanks to absolute links use
 
 commit 4b24e89aa8df4627b14fc341de23d6a9a2a4b72e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Jun 23 18:20:03 2011 +0200
 
     relative paths issues
 
 commit d034a5b5f048f074a70d5ac5ea0d84edb66bfa74
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Jun 23 15:32:29 2011 +0200
 
     correct error in the call of the main module
 
 commit eed953339a712399c5d618ab0aaf6e4db3e010ae
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Jun 23 15:31:54 2011 +0200
 
     stop execution when two configurations have the same name
 
 commit ccc17b0ead2ddf93d2099f4762e495b702ffa2c3
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Jun 23 14:28:41 2011 +0200
 
     added expectFailure for tests with sticky bits and special files (user should fix it by himself after checking out the repository)
 
 commit 0386c39f628a2d70e50c73b534048e9de9f2c497
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Jun 23 11:24:23 2011 +0200
 
     added missing file bar with 755 rights
 
 commit cb479cd603d4a34c031d684cb11d8e0cd0a6d597
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon May 16 02:00:09 2011 +0000
 
     added absolute path to main module
 
 commit 6c593556bf6d58c7738d835fb3ef395502b7e24e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun May 15 02:05:09 2011 +0000
 
     again again a test for buildbot
 
 commit 7e8aa36eb03bbfd5e88fb9ef7b6378de78454fdd
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun May 15 01:58:08 2011 +0000
 
     again a simple test
 
 commit 9f85543a7f1d4149b1616984cd16556ac6716c70
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun May 15 01:53:20 2011 +0000
 
     simple test for buildbot
 
 commit 82fbdf0cce1394dc356d28c33c8d716fe9cfb316
 Merge: 5f3a28f 6c59355
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun May 15 02:38:47 2011 +0200
 
     hopefully last test for buildbot
 
 commit 5f3a28f5c254181acb862058fa9a0bc5495e8ec4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Apr 26 16:21:17 2011 +0200
 
     added restrictions on python versions able to install Brebis
 
 commit 5bda9e81e2201bc98e538c41b531c57504217e75
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Apr 22 17:24:41 2011 +0200
 
     updated copyright mentions
 
 commit 2521e402a8644358c756b9fed8be8291575ac154
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Apr 22 17:17:58 2011 +0200
 
     good path to brebis script
 
 commit 7b5e32d80457a721846c16128e7348d55b22d5f6
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Apr 22 17:16:42 2011 +0200
 
     modified package structure
 
 commit 88d53e42d3bfe0bbd9303fca4c9d4d17ab874416
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Apr 22 16:51:09 2011 +0200
 
     using distutils with setup.py
 
 commit eb5a018f9d4560a437616dfea390bebe96afc029
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Apr 22 16:38:48 2011 +0200
 
     corrected an error in setup.py
 
 commit 75a0952a4715c781bbd71073be3399244daeb1f5
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Apr 22 16:36:41 2011 +0200
 
     added setup.py
 
 commit c6273064873be881d25e554d8701ddd2090afc26
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Apr 9 02:07:32 2011 +0200
 
     added unit tests for private methods of CheckArchive and uid-gid of the archive itself
 
 commit cf0e6a2462ab0b821c9f3b0dd58ff914af5c5cc4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Apr 8 17:10:09 2011 +0200
 
     added support for checking uid gid of the archive itself
 
 commit 482eecd93c13c93f10be5a7bb550be470ede3d2d
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Apr 7 16:22:41 2011 +0200
 
     added support for checking the mode of the archive itself
 
 commit 9b590341a3e49effcb665d656aa30240d56a9607
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Apr 6 15:40:03 2011 +0200
 
     moved archive checks to checkarchive.py
 
 commit 4f948e6720d56f7ece3563de1fe92a212dcaee87
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Apr 6 15:29:13 2011 +0200
 
     added support for hash checking for the archive itself
 
 commit 9b511c311518859d4b60a85304f728e9e38cce77
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Apr 6 15:27:49 2011 +0200
 
     modified messages to cope with the check results for the archive itself
 
 commit cc9192295b32a0154b39b9e56eea75b60443d8bc
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Apr 5 17:45:36 2011 +0200
 
     using : instead of = with configparser in attribute lists
 
 commit a2380bacf2e0e98b45ddfa425bc5954ca1574847
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Apr 5 17:34:43 2011 +0200
 
     checking the size (equal/biggerthan/smallerthan) of the archive itself is now available - tests and uniitests also ready
 
 commit 88bfce07f0b926e355061e4ea560f5fb93d9e288
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Apr 5 17:28:25 2011 +0200
 
     bump shebang to python3.2
 
 commit d595a947851fa4f1b3b5b7724bf3314e37958231
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Apr 5 17:28:02 2011 +0200
 
     modified equal/bigger/smaller messages to cope with the archives themselves
 
 commit f72a783187ba6034eb677af3cf90516cf151591f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Apr 5 01:47:34 2011 +0200
 
     resized the test archive and fixed the associated value
 
 commit f3ce089f3c96ea646993f2246e2117137b6a15f9
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Apr 4 01:10:16 2011 +0200
 
     replaced expectedfiles class and module by expectedvalues
 
 commit 1170e66142f5a68f5647d30a8ea9c161ce83a700
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Apr 4 01:09:21 2011 +0200
 
     fixed a ResourceWarning warning
 
 commit 485a92afca629271662ff19c314444330ca4add8
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Apr 4 01:08:40 2011 +0200
 
     using hashlib.algorithms_guaranteed starting with python3.2
 
 commit 01388b7d11637ba8b1d0255f6b92e0090f749e92
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Apr 4 01:07:30 2011 +0200
 
     changed expectedfiles class and module by expectedvalues
 
 commit ff6582bfd793e675e4fc47da30d41e8a62bf8798
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Apr 4 01:05:47 2011 +0200
 
     fixed descriptor issue triggering a ResourceWarning with python 3.2
 
 commit 70003d407b241568b37ab401007cccbe3ddebf2a
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Dec 6 22:41:59 2010 +0100
 
     added information in the docstrings
 
 commit 07afee16429aa40d75292cfc8f16983fd50439e5
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Dec 6 21:23:37 2010 +0100
 
     got rid of database controls - see database support branch from now on
 
 commit dd032825f241e9581fcec7ee3df486845db7748e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Dec 1 22:26:08 2010 +0100
 
     added tests for existing table in mysql and postgresql databases
 
 commit 214454fc084a42b1e201c2e24fd51c062977fe5f
 Merge: 0d9d842 73b119c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Nov 22 01:47:09 2010 +0100
 
     added support for hash control of a file inside an archive
 
 commit 73b119cfe3a0ac99fdabc68bfc49cda3b0472084
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Nov 22 01:44:46 2010 +0100
 
     added support for hash control in archives (zip,tar and filetree)
 
 commit 0d9d842523da9dbbfbc13ac5cf58a9850a342ab3
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Nov 20 13:55:48 2010 +0100
 
     changed the string required to identify the mode parameter
 
 commit 9bf018e3de5aea5e3c41029599eaa769048950ef
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Nov 18 00:46:30 2010 +0100
 
     support for expected types for both tarfiles and filetree
 
 commit 84c053bb31bf67f8008b097e641671126d0f978b
 Merge: 4c44a3e 50f526e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Nov 14 01:38:55 2010 +0100
 
     merge branch dedicated to support for expected modes in filetree
 
 commit 50f526e4794bd1e723b0ab1be0f3ac04eee1f556
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Nov 14 01:37:01 2010 +0100
 
     added support for expected modes for filetree
 
 commit 5af2ba717b0e8f6a186ca170a159207618e2894c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Nov 14 00:23:53 2010 +0100
 
     adde support for expected file mode for archives
 
 commit 4c44a3ef34e233c0a7482765007adb0c03e734fe
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Nov 13 01:48:53 2010 +0100
 
     added support for uid/gid parameter for filetree
 
 commit e74c04932995a45b945829a712a66a670e36f345
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Nov 13 01:47:57 2010 +0100
 
     added support for zip64 (zip files > 4G)
 
 commit 03461c6e64d9264888742ee9ef2c95c9327118c8
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Nov 13 01:47:10 2010 +0100
 
     catch uid/gid wrong parameters with ValueError exception
 
 commit ab67ab273abcf92249c3c8618f982f5842fabd4e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Nov 12 23:01:01 2010 +0100
 
     added support for uid/gid checks
 
 commit 9cf9dc70a6ee85a54e55cf292aea699b12a38aae
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Nov 11 00:35:15 2010 +0100
 
     added support for unexpected files
 
 commit 176d03880bbbff1e3be1a1b549c0a896a3d36c81
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 10 00:32:35 2010 +0100
 
     added support for multiple items for a file
 
 commit 25f7eb59153ab6c01f70fdca6cb7afb96176069c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Nov 9 02:51:40 2010 +0100
 
     added good test for ExpectedFiles class
 
 commit 1da162e8a1d127d1100fabc26ad75825ebeb3d1f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Nov 9 02:51:26 2010 +0100
 
     corrected a runtime error
 
 commit d20d6b942359b017ecc452d6e709527500daf650
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Nov 8 23:59:47 2010 +0100
 
     conforming to pep008
 
 commit 77d859d7e1125a81d48ddd4c6cf2c53bc9c667d1
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Nov 8 02:17:29 2010 +0100
 
     added unittests for md5,sha1,sha224,sha256,sha384 and sha512 sums
 
 commit f3e5841f83221ef9f180413590d9d59b00477844
 Merge: 0ac670a 0d4996c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Nov 7 17:16:42 2010 +0100
 
     merging default and with-expectedfiles-configparser branches
 
 commit 0d4996cda292779990136cde431e0b9d3ff8f6bf
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Nov 7 17:02:28 2010 +0100
 
     lists of files now use configparser. tests.py modified accordingly
 
 commit f671b774c7a3accdd81ffc230ebb809046069782
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Jul 27 18:14:09 2010 +0200
 
     new branch : with expectedfiles.py using configparser
 
 commit 0ac670a3337c193b42d610e478181f218bf995e9
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Jul 27 18:11:39 2010 +0200
 
     added files for postgresql support
 
 commit 7ef0a32bde90b96fb573664ca4092fd5c06e8070
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Jul 27 18:10:14 2010 +0200
 
     correcting a regression
 
 commit 7a1a42bb558a0fc34f59147ccbcbe2949e3ba9cb
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Jun 14 18:15:59 2010 +0200
 
     personalizing the error message depending if you use sqlite or other databases
 
 commit 074f205ceaf1d43e509330a0bc754170242e56cc
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Jun 14 18:15:06 2010 +0200
 
     using a table which does not exist
 
 commit 5c52f26dd85def1d150369992458e9dcc58bab96
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Jun 14 18:03:33 2010 +0200
 
     updated the path to mysql-list
 
 commit 911921d8917d184024dcfbcd4df31e748166e27c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Jun 14 17:58:52 2010 +0200
 
     splitting db_test/ in db_mysql_test/ and db_sqlite_test/
 
 commit 51e303777a851f008c037c88894e8fa59701a50b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Jun 14 17:57:58 2010 +0200
 
     using 127.0.0.1 as default for dbhost
 
 commit cd9adf6da1461da22da04fcd1f94d7a333e28851
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Jun 14 17:10:29 2010 +0200
 
     restricting database types allowed to be specified by users
 
 commit ae16b6a711cab9192af26c5b09478eccf007e57a
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Jun 11 19:11:45 2010 +0200
 
     added support for mysql database and postgresql database
 
 commit 2d468f0172714ad67add8c5cbe89fc6d80acbc22
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue May 18 18:13:58 2010 +0200
 
     switch from double quotes to single quotes for comments
 
 commit 97123f6b63bdeddb69941f29a37c0eb002552b9b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue May 18 16:28:20 2010 +0200
 
     fixed a mispelled word
 
 commit 9723e3e1c6d2b7aed528556e48184f7bc1a27edc
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue May 18 16:21:06 2010 +0200
 
     removed the brebis name
 
 commit b4db6080b66d8bfe023374808bddd8ae2fa6a0b8
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue May 18 16:02:25 2010 +0200
 
     removed absolute paths in zip test
 
 commit 65fb155d82e419a2f233e561f7c55cebe96fd0c0
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue May 18 15:39:16 2010 +0200
 
     added a new zip_content directory in the test directory
 
 commit 1a0ddc3b83befb66f88af0370c770aeb9c7aa39e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue May 18 15:38:49 2010 +0200
 
     modifying zip test to follow the new test directory structure
 
 commit 8e202d9f4ded59467f48ee05de25ca72e6195fad
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue May 18 15:37:22 2010 +0200
 
     removed mysql broken support for 1.0
 
 commit ed25b7365c03100edb63181603575139faadb6eb
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon May 17 00:37:03 2010 +0200
 
     ugly moves to reorganize the test directory
 
 commit d5c5b522e9cbaec15765d2a4820e6e08925ec08d
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon May 17 00:36:29 2010 +0200
 
     loop for kilo, mega, giga, whatever
 
 commit a5f9f2f3cac33dc8c1be14b5f2584c01c8eba4d9
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Jan 5 15:43:44 2010 +0100
 
     Removing tests on mysql until it's supported by mysql driver from sqlalchemy
 
 commit 41805d3812b94f4cb68d6549519814a4083058de
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Jan 5 15:42:43 2010 +0100
 
     Added test on dbname value in the database test
 
 commit db422c4dcf80e5f7aaa9f63584d076ad8b2efd19
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Jan 5 15:41:00 2010 +0100
 
     Removed useless comments
 
 commit df8012b1e34718ef4087ecab44991310ac143f2f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Jan 5 15:39:46 2010 +0100
 
     Removed a false comment
 
 commit fa9eef1d19134dda8b69b40ddf46f3b3884d1faf
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Dec 19 16:05:23 2009 +0100
 
     Modifying the checks for db to be more flexible
 
 commit 69a50db3160c9264ac55035399fda5592c5125c3
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Dec 16 13:28:21 2009 +0100
 
     Remove useless files
 
 commit 5ad22f8344b3124891410f3e8ea9e837dfe9c315
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Dec 16 13:27:59 2009 +0100
 
     Configuration for mysql
 
 commit 36ef8cefe26b627c5abb0152136f23c9b668df75
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Dec 16 13:26:53 2009 +0100
 
     Added support for dbname
 
 commit bbfb74a4378ca7c5dbb5e49c76df97de9f376dfb
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Dec 16 13:04:16 2009 +0100
 
     files to test mysql
 
 commit d80569e111e42f565b87bf22c9449330007ff8c4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Dec 16 13:03:04 2009 +0100
 
     Suppressed data relative to sqlite3
 
 commit ca4e360fe9b062f902a0766ae7cd8ee633bef0a2
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Dec 16 12:57:46 2009 +0100
 
     Removed useless comments
 
 commit 7809305be4e413561bdaf70ef6add365565e730d
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Dec 15 13:38:46 2009 +0100
 
     Modifying according to the new keyword sqlite to identify a sqlite database
 
 commit cfdc070b2ce954d6b799900cc4abdaf628f334ed
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Dec 15 13:38:01 2009 +0100
 
     Splitting checkbackups.py
 
 commit 28457dd4c4aea822a496559ebf7b4a560686d2ab
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Dec 15 13:36:44 2009 +0100
 
     Style improvement: switched from docstrings with double quotes to single quote.
 
 commit 60b19e3531d8bca112d119847361f1c1b26c468e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Dec 15 13:36:30 2009 +0100
 
     Style improvement: switched from docstrings with double quotes to single quote.
 
 commit 8a6b890ad84b9a5471ef1bd011c07f8ed2c213b9
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Dec 15 13:36:06 2009 +0100
 
     Style improvement: switched from docstrings with double quotes to single quote.
 
 commit f2aaa8b767e2acc44a1c2b1312f1632a256306cd
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Dec 15 13:35:30 2009 +0100
 
     Simplifying the process to check a database
 
 commit e0473345542310b3ff8b08a39d589060b0a3ef4b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Dec 15 13:13:45 2009 +0100
 
     Style improvement: switched from docstrings with double quotes to single quote.
 
 commit 4e1108eceddc1889532bcd3053626d79cd494f1d
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Dec 15 13:08:06 2009 +0100
 
     Style improvement: switched from docstrings with double quotes to single quote. Old comments also removed.
 
 commit eb82f665a893927421c93314b5c1b86dff85f620
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Dec 15 13:06:07 2009 +0100
 
     Style improvement: switched from docstrings with double quotes to single quote
 
 commit 9b53d8ec8c96dc9b95e01b76a2b24ebc53dc861b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Dec 15 13:05:07 2009 +0100
 
     Style improvement: switched from docstrings with double quotes to single quote
 
 commit b9d753e1c0986c1e0a64fcfb255dbbca6efc4960
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Dec 15 13:03:50 2009 +0100
 
     Style improvement: switched from docstrings with double quotes to single quote
 
 commit 37c4329616ac52781158bc187e1916ab7f1ddd53
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Dec 15 13:01:51 2009 +0100
 
     Style improvement: switched from docstrings with double quotes to single quote
 
 commit bde28dcc3406b00211dde5e3b74a9d4eab2a81d2
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Tue Dec 15 13:00:11 2009 +0100
 
     Style improvement: switched from docstrings with double quotes to single quote
 
 commit 5ff85a3a86071841f44ea641efd1940f56969c52
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 13 22:25:41 2009 +0100
 
     Support for sqlite databases
 
 commit 99d01d749eedad343f0bb19d159d27cd6e8c5b03
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 13 22:25:19 2009 +0100
 
     expectedobjects.py provides useful methods regarding the expected objects (files, database objects) we need
 
 commit 5428ac48360493a7c2b57edc27a0b4ccbf0f4f96
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 13 22:23:38 2009 +0100
 
     A file to test what database object exists
 
 commit a647504c02d22eeea2346b8fede1dcf591acec98
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 13 22:22:33 2009 +0100
 
     checkbackups.py now supports databases. Also some style improvements
 
 commit 7c5d42002cdb9bea6c5e5355d2e9af5416832596
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 13 22:18:31 2009 +0100
 
     The Configuration class now manages sqlite databases
 
 commit d2c01b312e3fab218bf2315d0f6fd4c6720dabf1
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sun Dec 13 12:53:16 2009 +0100
 
     Modified the configuration class test
 
 commit 28ed6f29c94ba30d0bdac9581c8bde79dfe10dce
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Dec 11 13:34:47 2009 +0100
 
     Added files to test sqlite3 db integrity
 
 commit ecc1188ccb9740915f27ee8aab102a713549ba8f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Dec 11 01:38:21 2009 +0100
 
     Added complete series of tests for archive backups
 
 commit 781c83770eddd72fd14cf0ae1b60e391318d1e32
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Dec 9 13:43:32 2009 +0100
 
     Added unit tests for checktree module
 
 commit f8f09c589e79f2721d21774f41193979a0720a95
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Dec 9 13:43:02 2009 +0100
 
     Modified the tests/filetree/filelist for checking equality
 
 commit 5ad9b7305ed112de9798cd4acc0e844d8c1d105b
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Dec 9 13:42:02 2009 +0100
 
     Removed a useless print
 
 commit be0afc388c88db87a2b1e6ab2a9fdaad2176e37d
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Dec 9 13:30:40 2009 +0100
 
     Added some files to test the tree file backups
 
 commit 54d4972223d005dcc55a346bc052ffcb643699b4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Dec 9 13:29:49 2009 +0100
 
     Added support for file trees as a backup
 
 commit 621ffc7638642e72431a5ee18fa3b07499f0c5fe
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Dec 9 13:26:59 2009 +0100
 
     Switched level logging from INFO to WARNING
 
 commit 2434436718eb792c91168a63c51ed4a76809f2b2
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Dec 5 16:44:31 2009 +0100
 
     Added some files for tests
 
 commit 9a454a3c2126c2afda11e0d70a72e39ce1f7b6f0
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Dec 5 16:43:22 2009 +0100
 
     Check if the backup path from the configuration exists
 
 commit 530a0b7cd7d4e597f286ce084a66a16c356628e2
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Dec 5 16:26:31 2009 +0100
 
     Removed a useless print
 
 commit d74181db72e765010760af740cea1541d826667f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Dec 5 16:25:36 2009 +0100
 
     Removed useless error messages
 
 commit 25bf1638b3da7bb82669ffdb75aefe6c6dfbf951
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Dec 5 16:17:15 2009 +0100
 
     Switched logging level from info to warn
 
 commit 572bdfb8fe7ff2273a87c47b6bec4554cbcdac16
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Dec 5 15:48:23 2009 +0100
 
     Addes a docstring for __main
 
 commit de367ab7b46043886f48d7e255970d14c9be4c9c
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Dec 4 13:42:42 2009 +0100
 
     Fixed a typo
 
 commit 9c47485b15c4c97f4fdf06db14593c06e4ff3c00
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Dec 4 13:42:21 2009 +0100
 
     Fixed an issue with managing exceptions
 
 commit 719d1163d864f60a815b9ffa760f116e10756ceb
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Dec 4 13:41:39 2009 +0100
 
     Added a default for logfile and confpath
 
 commit ed1dc3d65807bbcd1798e9e9967f8275a569261d
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Dec 4 13:24:41 2009 +0100
 
     Fixed a small typo. Improved the hashtype option help message.
 
 commit 533de88ffb41a463ae3164964e828dd600c95033
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Dec 4 13:19:16 2009 +0100
 
     Fixed variables visibility issues. Paths from cliparse are now absolute paths
 
 commit 9f9ee8fab419464dbb9f4ba17c8a51d301919cd5
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Dec 3 18:48:55 2009 +0100
 
     Both zip and tar archive types are supported. The code has been efficiently reduced.
 
 commit ead528b3ced53150470d2cb6918ab3cebb8854dc
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Dec 3 17:09:22 2009 +0100
 
     Reducing redundant code
 
 commit 1273863622e38f41bd484287d505d6257b94d8ca
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Dec 3 02:37:24 2009 +0100
 
     Ignoring files named a.out
 
 commit 346719ee48a2586f31e34b1f86af10fd1e2a21eb
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Dec 3 02:36:17 2009 +0100
 
     These files help to test the new code for conditions on file sizes
 
 commit b02b74489331984050294447bd281ce0498bb669
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Thu Dec 3 02:35:00 2009 +0100
 
     checkarchive.py will factorize checktar.py and checkzip.py
 
 commit af0f5fc78e92808c6e0c95c7fa2f9a6504879f5e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Sat Nov 28 18:59:58 2009 +0100
 
     new unit tests
 
 commit 4c5e2a36eca88926f0cd6012d9d7c82568dda81e
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Nov 27 17:09:17 2009 +0100
 
     .hgignore to get rid of *.pyc
 
 commit 597a27c38c3c68f2b8ce67c4a49f5cc5c43fe458
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Nov 27 17:04:20 2009 +0100
 
     Some files to test Brebis
 
 commit 3837d096ff79be8e80176a0cafca74e67b1f1b14
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Fri Nov 27 16:47:47 2009 +0100
 
     checkzip.py provides checks for zip files, checkhashes.py provides md5 sums checks for backups before proceeding
 
 commit 2df74f80785a3ff2b442edce6661f77a91b2c1a7
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 25 17:57:32 2009 +0100
 
     some files for the unit tests
 
 commit 395ff2707c08ec7e50fc99b7b42d879efe1982df
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 25 17:56:53 2009 +0100
 
     tests.py provides unit tests for Belier - 89% of code coverage for now
 
 commit 8c268a3acc130c40a3289467e0bb422589f36208
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 25 17:55:57 2009 +0100
 
     expectedfiles.py provides the paths for expected files inside the archive
 
 commit 10a8335bb94a1c1b5ef1736ab0605df8159efa71
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Wed Nov 25 17:55:15 2009 +0100
 
     brebislogger.py defines a logger for the Brebis events
 
 commit 2a84469efbb90bcceb6ae7e1edaad95c6ec29dbb
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Nov 23 00:58:06 2009 +0100
 
     Added the test directory and some test elements under it.
 
 commit c40881e61432319bc46a741b2cdd44f4007eea39
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Nov 23 00:56:21 2009 +0100
 
     Added checktar.py which checks tar files.
 
 commit 8ea992231dd15689a715fe280c55d51322b251d4
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Nov 23 00:55:45 2009 +0100
 
     Added checkbackups.py which knows what to do with each kind of backup we meet.
 
 commit 782c4a52fa572ffd0fda4da4deaa34fcce1fbe82
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Nov 23 00:54:35 2009 +0100
 
     Added configurations.py which extracts the different information about archives and (in the future) dumps we have to check.
 
 commit 99f0aca983b4607d37b8a73f7f7c51e1541e9f9f
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Nov 23 00:53:23 2009 +0100
 
     Added cliparse.py which parses the command line options and args.
 
 commit 684709fa81da6f035cc992f6070cbd4ac99be6dd
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Nov 23 00:52:28 2009 +0100
 
     Added main.py which provides the Main class of Brebis.
 
 commit 57e3ab2c70a6e6af9132fe10cb82c3fb395068a7
 Author: Carl Chenet <chaica@ohmytux.com>
+Date:   Mon Nov 23 00:51:31 2009 +0100
 
     Added brebis file to call the main.
