@@ -9,7 +9,7 @@ From sources
 * You need at least Python 3.4.
 * Untar the tarball and go to the source directory with the following commands::
 
-    $ tar zxvf backupchecker-1.7.tar.gz
+    $ tar zxvf backupchecker-1.8.tar.gz
     $ cd backupchecker
 
 * Next, to install Backup Checker on your computer, type the following command with the root user::
