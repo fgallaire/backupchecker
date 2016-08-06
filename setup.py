@@ -18,11 +18,6 @@ import os.path
 import platform
 import sys
 
-# Warn the user about the supported Python versions
-if float(platform.python_version()[0:3]) < 3.4:
-    print('You need at least Python 3.4 to use BackupChecker')
-    sys.exit(1)
-
 CLASSIFIERS = [
     'Intended Audience :: System Administrators',
     'Development Status :: 5 - Production/Stable',
