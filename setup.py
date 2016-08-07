@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-from distutils.core import setup
+from setuptools import setup
 import os.path
 import platform
 import sys
@@ -44,5 +44,7 @@ setup(name = 'backupchecker',
     download_url = 'https://github.com/backupchecker/backupchecker',
     packages = ['backupchecker', 'backupchecker.checkbackups', 'backupchecker.generatelist'],
     data_files=[(os.path.join('share','man','man1'), ['man/backupchecker.1'])],
-    scripts = ['scripts/backupchecker']
+    entry_points={
+        "console_scripts": ['backupchecker = backupchecker.main:main']
+    },
 )

@@ -45,3 +45,7 @@ class Main(object):
                 ListType(__options, __exps.exceptions)
             else:
                 ListType(__options)
+
+def main():
+    '''Entry point for setup.py'''
+    Main()
