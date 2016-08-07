@@ -14,6 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 from distutils.core import setup
+from backupchecker import __version__ as version
 import os.path
 import platform
 import sys
@@ -33,7 +34,7 @@ CLASSIFIERS = [
 ]
 
 setup(name = 'backupchecker',
-    version = '1.8',
+    version = version,
     license = 'GNU GPL v3',
     description = 'automated backup checker',
     long_description = 'Backup Checker is a fully automated backup checker.',
