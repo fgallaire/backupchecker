@@ -23,6 +23,7 @@ import sys
 from hashlib import algorithms_guaranteed
 
 from backupchecker.applogger import AppLogger
+from backupchecker import __version__ as version
 
 class CliParse:
     '''Retrieve the command line options'''
@@ -95,7 +96,7 @@ class CliParse:
             help='the name of the configuration files')
         __parser.add_argument('-v', '--version',
             action='version',
-            version='%(prog)s 1.8',
+            version='%(prog)s ' + version,
             help='print the version of this program and exit')
         __parser.add_argument('archives', nargs='*',
             help='archives to check')
